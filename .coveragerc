@@ -1,0 +1,5 @@
+[run]
+include = radical_translations/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin
