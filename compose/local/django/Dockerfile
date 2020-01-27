@@ -15,7 +15,9 @@ RUN apt-get update \
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
+RUN pip install -U pip
 RUN pip install pip-tools \
+  && pip-compile --annotate --quiet /requirements/base.in \
   && pip-compile --annotate --quiet /requirements/local.in \
   && pip-compile --annotate --quiet /requirements/production.in
 RUN pip install -r /requirements/local.txt
