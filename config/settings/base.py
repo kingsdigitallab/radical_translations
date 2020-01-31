@@ -2,6 +2,7 @@
 Base settings to build other settings files upon.
 """
 
+from controlled_vocabulary import defaults
 import environ
 
 ROOT_DIR = (
@@ -83,11 +84,16 @@ THIRD_PARTY_APPS = [
     "modelcluster",
     "taggit",
     "kdl_wagtail.core",
+    "controlled_vocabulary",
+    "geonames_place.apps.GeonamesPlaceConfig",
 ]
 
 LOCAL_APPS = [
     "radical_translations.users.apps.UsersConfig",
+    "radical_translations.utils.apps.UtilsConfig",
     # Your stuff: custom apps go here
+    "radical_translations.core.apps.CoreConfig",
+    "radical_translations.agents.apps.AgentsConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -285,3 +291,16 @@ WAGTAIL_SITE_NAME = "Radical Translations"
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# django-controlled-vocabulary
+# ------------------------------------------------------------------------------
+# https://github.com/kingsdigitallab/django-controlled-vocabulary#enabling-specific-vocabulary-plug-ins-optional
+CONTROLLED_VOCABULARY_VOCABULARIES = defaults.CONTROLLED_VOCABULARY_VOCABULARIES + [
+    "radical_translations.core.vocabularies"
+]
+
+# django-geonames-place
+# https://github.com/kingsdigitallab/django-geonames-place
+# ------------------------------------------------------------------------------
+GEONAMES_KEY = env("GEONAMES_KEY")
+GEONAMES_MAX_RESULTS = 3

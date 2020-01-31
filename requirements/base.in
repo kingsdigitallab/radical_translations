@@ -19,6 +19,10 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 
 # KDL
 # ------------------------------------------------------------------------------
+django-controlled-vocabulary  # https://github.com/kingsdigitallab/django-controlled-vocabulary/
+django-geonames-place  # https://github.com/kingsdigitallab/django-geonames-place
+django-polymorphic  # https://github.com/django-polymorphic/django-polymorphic
+edtf  # https://github.com/ixc/python-edtf
 elasticsearch-dsl>=7.0.0,<8.0.0  # https://github.com/elastic/elasticsearch-dsl-py
 
 wagtail==2.7.1  # https://github.com/wagtail/wagtail

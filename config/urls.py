@@ -19,9 +19,12 @@ urlpatterns = [
     # User management
     path("users/", include("radical_translations.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
+    # Wagtail
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("pages/", include(wagtail_urls)),
+    # Django controlled vocabulary
+    path("vocabularies/", include("controlled_vocabulary.urls")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
