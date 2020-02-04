@@ -15,6 +15,7 @@ from radical_translations.core.models import (
     Title,
     Work,
 )
+from radical_translations.events.models import Event
 
 
 class ClassificationInline(admin.TabularInline):
@@ -31,13 +32,21 @@ class ContributionInline(admin.TabularInline):
     fk_name = "resource"
 
 
+class EventInline(admin.TabularInline):
+    model = Event.related_to.through
+    autocomplete_fields = ["event"]
+    extra = 1
+    verbose_name = "Event related to this resource"
+    verbose_name_plural = "Events related to this resource"
+
+
 class ResourceRelationshipInline(admin.TabularInline):
     model = ResourceRelationship
     autocomplete_fields = ["relationship_type", "related_to"]
     extra = 1
     fk_name = "resource"
-    verbose_name = "Resource relationship from this resource"
-    verbose_name_plural = "Resource relationships from this resource"
+    verbose_name = "Relationship from this resource"
+    verbose_name_plural = "Relationships from this resource"
 
 
 class ResourceRelationshipInverseInline(admin.TabularInline):
@@ -45,8 +54,8 @@ class ResourceRelationshipInverseInline(admin.TabularInline):
     autocomplete_fields = ["resource", "relationship_type"]
     extra = 1
     fk_name = "related_to"
-    verbose_name = "Resource relationship to this resource"
-    verbose_name_plural = "Resource relationships to this resource"
+    verbose_name = "Relationship to this resource"
+    verbose_name_plural = "Relationships to this resource"
 
 
 @admin.register(Title)
@@ -76,6 +85,7 @@ class ResourceChildAdmin(PolymorphicChildModelAdmin):
         ContributionInline,
         ResourceRelationshipInline,
         ResourceRelationshipInverseInline,
+        EventInline,
     ]
     list_display = ["title", "date"]
     search_fields = ["title", "title_variant"]
