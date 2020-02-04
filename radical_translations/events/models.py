@@ -27,7 +27,10 @@ class Event(TimeStampedModel):
     )
 
     related_to = models.ManyToManyField(
-        Resource, blank=True, help_text="Resources that are related to this  Event."
+        Resource,
+        blank=True,
+        related_name="events",
+        help_text="Resources that are related to this  Event.",
     )
 
     def __str__(self) -> str:
