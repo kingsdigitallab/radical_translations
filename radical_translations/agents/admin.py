@@ -6,6 +6,7 @@ from polymorphic.admin import (
 )
 
 from radical_translations.agents.models import Agent, Organisation, Person
+from radical_translations.core.models import Contribution
 
 
 @admin.register(Agent)
@@ -16,8 +17,16 @@ class AgentAdmin(PolymorphicParentModelAdmin):
     search_fields = ["name"]
 
 
+class ContributionInline(admin.TabularInline):
+    model = Contribution
+    autocomplete_fields = ["resource"]
+    extra = 1
+    fk_field = "contributed_to"
+
+
 class AgentChildAdmin(PolymorphicChildModelAdmin):
     autocomplete_fields = ["based_near"]
+    inlines = [ContributionInline]
     search_fields = ["name"]
     show_in_index = True
 
@@ -34,3 +43,7 @@ class PersonAdmin(AgentChildAdmin):
         "date_death",
         "knows",
     ]
+
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        return fields + ["member_of"]

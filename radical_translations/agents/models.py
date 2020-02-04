@@ -25,7 +25,11 @@ class Agent(PolymorphicModel, TimeStampedModel):
     )
 
     page = ControlledTermsField(
-        ["viaf"], blank=True, help_text="A page or document about this Agent.",
+        ["viaf"], blank=True, help_text="A page or document about this Agent."
+    )
+
+    roles = ControlledTermsField(
+        ["wikidata"], blank=True, help_text="Roles performed by this Agent."
     )
 
     def __str__(self) -> str:
@@ -72,6 +76,12 @@ class Person(Agent):
         on_delete=models.CASCADE,
         related_name="person_death",
         help_text="The date of death of this Person.",
+    )
+
+    languages = ControlledTermsField(
+        ["iso639-2"],
+        blank=True,
+        help_text="The languages this person spoke or worked with.",
     )
 
     knows = models.ManyToManyField(
