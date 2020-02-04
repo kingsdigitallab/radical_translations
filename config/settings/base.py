@@ -86,6 +86,7 @@ THIRD_PARTY_APPS = [
     "kdl_wagtail.core",
     "controlled_vocabulary",
     "geonames_place.apps.GeonamesPlaceConfig",
+    "polymorphic",
 ]
 
 LOCAL_APPS = [
@@ -94,6 +95,7 @@ LOCAL_APPS = [
     # Your stuff: custom apps go here
     "radical_translations.core.apps.CoreConfig",
     "radical_translations.agents.apps.AgentsConfig",
+    "radical_translations.events.apps.EventsConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -296,7 +298,8 @@ WAGTAIL_SITE_NAME = "Radical Translations"
 # ------------------------------------------------------------------------------
 # https://github.com/kingsdigitallab/django-controlled-vocabulary#enabling-specific-vocabulary-plug-ins-optional
 CONTROLLED_VOCABULARY_VOCABULARIES = defaults.CONTROLLED_VOCABULARY_VOCABULARIES + [
-    "radical_translations.core.vocabularies"
+    "radical_translations.agents.vocabularies",
+    "radical_translations.core.vocabularies",
 ]
 
 # django-geonames-place
