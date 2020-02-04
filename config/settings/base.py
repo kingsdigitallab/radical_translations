@@ -4,6 +4,7 @@ Base settings to build other settings files upon.
 
 from controlled_vocabulary import defaults
 import environ
+import os
 
 ROOT_DIR = (
     environ.Path(__file__) - 3
@@ -178,6 +179,9 @@ STATICFILES_FINDERS = [
 MEDIA_ROOT = str(APPS_DIR("media"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
+
+if not os.path.exists(MEDIA_ROOT):
+    os.makedirs(MEDIA_ROOT)
 
 # TEMPLATES
 # ------------------------------------------------------------------------------
