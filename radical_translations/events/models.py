@@ -6,7 +6,7 @@ from radical_translations.core.models import Resource
 from radical_translations.utils.models import Date
 
 # These models are based on the BIBFRAME 2.0 Event model
-# http://xmlns.com/foaf/spec/#term_Event
+# http://id.loc.gov/ontologies/bibframe.html#c_Event
 
 
 class Event(TimeStampedModel):
