@@ -37,4 +37,4 @@ class Event(TimeStampedModel):
         ordering = ["date"]
 
     def __str__(self) -> str:
-        return self.title
+        return f"{self.date}: {self.title}"
