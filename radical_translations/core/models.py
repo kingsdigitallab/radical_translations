@@ -1,8 +1,8 @@
 from controlled_vocabulary.models import ControlledTermField, ControlledTermsField
 from django.db import models
+from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
-
 from radical_translations.agents.models import Agent
 from radical_translations.utils.models import Date
 
@@ -10,110 +10,7 @@ from radical_translations.utils.models import Date
 # https://www.loc.gov/bibframe/docs/bibframe2-model.html
 
 
-class Source(TimeStampedModel):
-    """Resource from which value or label came or was derived, such as the formal
-    source/scheme from which a classification number is taken or derived, list from
-    which an agent name is taken or derived, source within which an identifier is
-    unique. """
-
-    source = models.CharField(
-        max_length=32,
-        help_text="Resource from which value or label came or was derived",
-    )
-
-    def __str__(self) -> str:
-        return self.source
-
-
-class SourcedModel(models.Model):
-    source = models.ManyToManyField(Source, blank=True)
-
-    class Meta:
-        abstract = True
-
-
-class Classification(SourcedModel, TimeStampedModel):
-    """System of coding and organizing materials according to their subject."""
-
-    edition = models.CharField(
-        max_length=64,
-        help_text=(
-            "Edition of the classification scheme, such as full, abridged or a number, "
-            "when a classification scheme designates editions."
-        ),
-    )
-
-    def __str__(self) -> str:
-        return self.edition
-
-
-class Note(TimeStampedModel):
-    """Information, usually in textual form, on attributes of a resource or some aspect
-    of a resource."""
-
-    note = models.TextField()
-
-    def __str__(self) -> str:
-        return self.note
-
-
-class NotesModel(models.Model):
-    notes = models.ManyToManyField(
-        Note,
-        blank=True,
-        help_text=(
-            "Information, usually in textual form, on attributes of a resource or some "
-            "aspect of a resource."
-        ),
-    )
-
-    class Meta:
-        abstract = True
-
-
-class Role(TimeStampedModel):
-    """Function played or provided by a contributor, e.g., author, illustrator, etc."""
-
-    role = models.CharField(max_length=256, unique=True)
-
-    def __str__(self) -> str:
-        return self.role
-
-
-class Contribution(NotesModel, TimeStampedModel):
-    """Agent and role with respect to the resource being described."""
-
-    agent = models.ForeignKey(
-        Agent,
-        on_delete=models.CASCADE,
-        help_text=(
-            "Entity associated with a resource or element of description, such as the "
-            "name of the entity responsible for the content or of the publication, "
-            "printing, distribution, issue, release or production of a resource."
-        ),
-    )
-    role = models.ForeignKey(
-        Role,
-        on_delete=models.CASCADE,
-        help_text="Function provided by a contributor, e.g., author, illustrator, etc.",
-    )
-
-    def __str__(self) -> str:
-        return f"{self.role}: {self.agent}"
-
-
-class ContributionsModel(models.Model):
-    contributions = models.ManyToManyField(
-        Contribution,
-        blank=True,
-        help_text="Agent and role with respect to the resource being described.",
-    )
-
-    class Meta:
-        abstract = True
-
-
-class Title(NotesModel, TimeStampedModel):
+class Title(TimeStampedModel):
     """Title information relating to a resource: work title, preferred title, instance
     title, transcribed title, translated title, variant form of title, etc."""
 
@@ -137,7 +34,7 @@ class Title(NotesModel, TimeStampedModel):
         return self.main_title
 
 
-class Resource(PolymorphicModel, NotesModel, TimeStampedModel):
+class Resource(PolymorphicModel, TimeStampedModel):
     title = models.ForeignKey(
         Title,
         on_delete=models.CASCADE,
@@ -147,14 +44,18 @@ class Resource(PolymorphicModel, NotesModel, TimeStampedModel):
             "title, etc."
         ),
     )
-
-    classifications = models.ManyToManyField(
-        Classification,
+    title_variant = models.ForeignKey(
+        Title,
         blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="variants",
         help_text=(
-            "System of coding and organizing materials according to their subject."
+            "Title associated with the resource that is different from the Work or "
+            "Instance title (titles in another language and/or script etc.)."
         ),
     )
+
     languages = ControlledTermsField(
         ["iso639-2"],
         blank=True,
@@ -164,8 +65,94 @@ class Resource(PolymorphicModel, NotesModel, TimeStampedModel):
         ["fast-topic"], blank=True, help_text="Subject term(s) describing a resource",
     )
 
+    date = models.OneToOneField(
+        Date,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        help_text=(
+            "Date designation associated with a resource or element of description, "
+            "such as date of title variation; year a degree was awarded; date "
+            "associated with the publication, printing, distribution, issue, release "
+            "or production of a resource. May be date typed."
+        ),
+    )
+    places = models.ManyToManyField(
+        Place,
+        blank=True,
+        help_text=(
+            "Geographic location or place entity associated with a resource or element "
+            "of description, such as the place associated with the publication, "
+            "printing, distribution, issue, release or production of a resource, place "
+            "of an event."
+        ),
+    )
+
+    notes = models.TextField(
+        blank=True,
+        null=True,
+        help_text=(
+            "Information, usually in textual form, on attributes of a resource or some "
+            "aspect of a resource."
+        ),
+    )
+
     def __str__(self) -> str:
         return self.title.main_title
+
+
+class Classification(TimeStampedModel):
+    """System of coding and organizing materials according to their subject."""
+
+    resource = models.ForeignKey(
+        Resource, on_delete=models.CASCADE, related_name="classifications"
+    )
+
+    edition = models.CharField(
+        max_length=64,
+        help_text=(
+            "Edition of the classification scheme, such as full, abridged or a number, "
+            "when a classification scheme designates editions."
+        ),
+    )
+    source = models.ForeignKey(
+        Resource,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="sources",
+        help_text="Resource from which value or label came or was derived.",
+    )
+
+    def __str__(self) -> str:
+        return self.edition
+
+
+class Contribution(TimeStampedModel):
+    """Agent and role with respect to the resource being described."""
+
+    resource = models.ForeignKey(
+        Resource, on_delete=models.CASCADE, related_name="contributions"
+    )
+
+    agent = models.ForeignKey(
+        Agent,
+        on_delete=models.CASCADE,
+        related_name="contributed_to",
+        help_text=(
+            "Entity associated with a resource or element of description, such as the "
+            "name of the entity responsible for the content or of the publication, "
+            "printing, distribution, issue, release or production of a resource."
+        ),
+    )
+    roles = ControlledTermsField(
+        ["wikidata"],
+        blank=True,
+        help_text="Function provided by a contributor, e.g., author, illustrator, etc.",
+    )
+
+    def __str__(self) -> str:
+        return f"{self.agent}: {', '.join([role.label for role in self.roles.all()])}"
 
 
 class ResourceRelationship(TimeStampedModel):
@@ -174,28 +161,29 @@ class ResourceRelationship(TimeStampedModel):
     resource = models.ForeignKey(
         Resource, on_delete=models.CASCADE, related_name="relationships"
     )
-    relationship_type = ControlledTermField(["bf-crr"], on_delete=models.CASCADE)
-    related_to = models.ForeignKey(Resource, on_delete=models.CASCADE)
+
+    relationship_type = ControlledTermField(
+        ["bf-crr"],
+        on_delete=models.CASCADE,
+        help_text="Any relationship between Work, Instance, and Item resources.",
+    )
+    related_to = models.ForeignKey(
+        Resource, on_delete=models.CASCADE, help_text="Related resource."
+    )
 
     def __str__(self):
         return f"{self.resource} -> {self.relationship_type} -> {self.related_to}"
 
 
-class Work(Resource, ContributionsModel):
+class Work(Resource):
     """The highest level of abstraction, a Work, in the BIBFRAME context, reflects the
     conceptual essence of the cataloged resource: authors, languages, and what it is
     about (subjects). """
 
-    origin_date = models.OneToOneField(
-        Date,
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        help_text="Date or date range associated with the creation of a Work.",
-    )
+    pass
 
 
-class Instance(Resource, ContributionsModel):
+class Instance(Resource):
     """A Work may have one or more individual, material embodiments, for example, a
     particular published form. These are Instances of the Work. An Instance reflects
     information such as its publisher, place and date of publication, and format."""
