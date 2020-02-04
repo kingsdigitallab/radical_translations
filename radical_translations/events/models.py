@@ -33,5 +33,8 @@ class Event(TimeStampedModel):
         help_text="Resources that are related to this  Event.",
     )
 
+    class Meta:
+        ordering = ["date__date_sort_ascending"]
+
     def __str__(self) -> str:
         return self.title
