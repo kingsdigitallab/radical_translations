@@ -36,8 +36,8 @@ class ResourceRelationshipInline(admin.TabularInline):
     autocomplete_fields = ["relationship_type", "related_to"]
     extra = 1
     fk_name = "resource"
-    verbose_name = "Resource relationship from the resource"
-    verbose_name_plural = "Resource relationships from the resource"
+    verbose_name = "Resource relationship from this resource"
+    verbose_name_plural = "Resource relationships from this resource"
 
 
 class ResourceRelationshipInverseInline(admin.TabularInline):
@@ -45,8 +45,8 @@ class ResourceRelationshipInverseInline(admin.TabularInline):
     autocomplete_fields = ["resource", "relationship_type"]
     extra = 1
     fk_name = "related_to"
-    verbose_name = "Resource relationship to the resource"
-    verbose_name_plural = "Resource relationships to the resource"
+    verbose_name = "Resource relationship to this resource"
+    verbose_name_plural = "Resource relationships to this resource"
 
 
 @admin.register(Title)
