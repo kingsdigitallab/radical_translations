@@ -34,7 +34,7 @@ class Event(TimeStampedModel):
     )
 
     class Meta:
-        ordering = ["date__date_sort_ascending"]
+        ordering = ["date"]
 
     def __str__(self) -> str:
         return self.title

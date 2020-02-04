@@ -34,5 +34,8 @@ class Date(TimeStampedModel):
     date_sort_ascending = models.FloatField(blank=True, null=True)
     date_sort_descending = models.FloatField(blank=True, null=True)
 
+    class Meta:
+        ordering = ["date_sort_ascending", "date_sort_descending"]
+
     def __str__(self) -> str:
         return self.date_display
