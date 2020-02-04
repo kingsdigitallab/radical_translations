@@ -108,8 +108,9 @@ class Classification(TimeStampedModel):
         Resource, on_delete=models.CASCADE, related_name="classifications"
     )
 
-    edition = models.CharField(
-        max_length=64,
+    edition = ControlledTermField(
+        ["fast-topic"],
+        on_delete=models.CASCADE,
         help_text=(
             "Edition of the classification scheme, such as full, abridged or a number, "
             "when a classification scheme designates editions."
