@@ -298,7 +298,6 @@ WAGTAIL_SITE_NAME = "Radical Translations"
 # ------------------------------------------------------------------------------
 # https://github.com/kingsdigitallab/django-controlled-vocabulary#enabling-specific-vocabulary-plug-ins-optional
 CONTROLLED_VOCABULARY_VOCABULARIES = defaults.CONTROLLED_VOCABULARY_VOCABULARIES + [
-    "radical_translations.agents.vocabularies",
     "radical_translations.core.vocabularies",
 ]
 
