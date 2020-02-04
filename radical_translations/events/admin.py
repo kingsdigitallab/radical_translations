@@ -5,4 +5,5 @@ from radical_translations.events.models import Event
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    pass
+    autocomplete_fields = ["date", "places", "related_to"]
+    search_fields = ["title", "date", "places"]

@@ -2,6 +2,7 @@ from django.db import models
 from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
 
+from radical_translations.core.models import Resource
 from radical_translations.utils.models import Date
 
 # These models are based on the BIBFRAME 2.0 Event model
@@ -23,6 +24,10 @@ class Event(TimeStampedModel):
     )
     places = models.ManyToManyField(
         Place, blank=True, help_text="The location the Event took place at.",
+    )
+
+    related_to = models.ManyToManyField(
+        Resource, blank=True, help_text="Resources that are related to this  Event."
     )
 
     def __str__(self) -> str:
