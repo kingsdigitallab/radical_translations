@@ -9,6 +9,7 @@ Agents (Persons, Organisations).
     :align: center
     :alt: Django models
     :figclass: align-center
+    :width: 100%
 
     Django models
 
