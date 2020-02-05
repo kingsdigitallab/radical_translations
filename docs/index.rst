@@ -9,9 +9,11 @@ Radical Translations Project Documentation
 Table of Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   models
+    readme
+    models
+    history
 
 
 Indices & Tables
