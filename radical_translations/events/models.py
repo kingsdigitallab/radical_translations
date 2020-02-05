@@ -22,10 +22,13 @@ class Event(TimeStampedModel):
         on_delete=models.CASCADE,
         help_text="The date of the Event.",
     )
-    places = models.ManyToManyField(
-        Place, blank=True, help_text="The location the Event took place at.",
+    place = models.ForeignKey(
+        Place,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        help_text="The location the Event took place at.",
     )
-
     related_to = models.ManyToManyField(
         Resource,
         blank=True,
