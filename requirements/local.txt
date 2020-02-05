@@ -28,7 +28,7 @@ coveralls==1.10.0
 decorator==4.4.1          # via ipython, ratelim, traitlets
 defusedxml==0.6.0         # via python3-openid
 django-allauth==0.41.0
-django-controlled-vocabulary==0.4.0
+django-controlled-vocabulary==0.4.1
 django-coverage-plugin==1.7.0
 django-crispy-forms==1.8.1
 django-debug-toolbar==2.1
@@ -64,7 +64,7 @@ imagesize==1.2.0          # via sphinx
 importlib-metadata==1.5.0  # via pluggy, pre-commit, pytest
 ipdb==0.12.3
 ipython-genutils==0.2.0   # via traitlets
-ipython==7.11.1           # via ipdb
+ipython==7.12.0           # via ipdb
 isort==4.3.21             # via pylint
 itypes==1.1.0             # via coreapi
 jedi==0.16.0              # via ipython
@@ -75,11 +75,12 @@ mccabe==0.6.1             # via flake8, pylint
 more-itertools==8.2.0     # via pytest
 mypy-extensions==0.4.3    # via mypy
 mypy==0.761
-nodeenv==1.3.4            # via pre-commit
+nodeenv==1.3.5            # via pre-commit
 oauthlib==3.1.0           # via requests-oauthlib
 packaging==20.1           # via pytest, pytest-sugar, sphinx
-parso==0.6.0              # via jedi
+parso==0.6.1              # via jedi
 pathspec==0.7.0           # via black
+pathtools==0.1.2          # via watchdog
 pexpect==4.8.0            # via ipython
 pickleshare==0.7.5        # via ipython
 pillow==6.2.2             # via wagtail
@@ -133,6 +134,7 @@ uritemplate==3.0.1        # via coreapi
 urllib3==1.25.8           # via django-controlled-vocabulary, elasticsearch, requests
 virtualenv==16.7.9        # via pre-commit
 wagtail==2.7.1
+watchdog==0.10.1
 wcwidth==0.1.8            # via prompt-toolkit, pytest
 webencodings==0.5.1       # via html5lib
 werkzeug==0.16.0
