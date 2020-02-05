@@ -36,6 +36,14 @@ class OrganisationAdmin(AgentChildAdmin):
     autocomplete_fields = AgentChildAdmin.autocomplete_fields + ["members"]
 
 
+class OrganisationInline(admin.TabularInline):
+    model = Organisation.member_of.through
+    autocomplete_fields = ["organisation"]
+    extra = 1
+    verbose_name = "Organisation"
+    verbose_name_plural = "Organisations"
+
+
 @admin.register(Person)
 class PersonAdmin(AgentChildAdmin):
     autocomplete_fields = AgentChildAdmin.autocomplete_fields + [
@@ -43,7 +51,4 @@ class PersonAdmin(AgentChildAdmin):
         "date_death",
         "knows",
     ]
-
-    def get_fields(self, request, obj=None):
-        fields = super().get_fields(request, obj)
-        return fields + ["member_of"]
+    inlines = AgentChildAdmin.inlines + [OrganisationInline]
