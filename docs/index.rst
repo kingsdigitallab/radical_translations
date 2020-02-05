@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Radical Translations Project Documentation
-====================================================================
+==========================================
 
 Table of Contents:
 
