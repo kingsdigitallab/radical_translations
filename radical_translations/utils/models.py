@@ -1,5 +1,9 @@
+import re
+
 from django.db import models
 from edtf.fields import EDTFField
+from edtf.parser.edtf_exceptions import EDTFParseException
+from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
 
 
@@ -39,3 +43,49 @@ class Date(TimeStampedModel):
 
     def __str__(self) -> str:
         return self.date_display
+
+    @staticmethod
+    def from_date_display(date_display: str) -> "Date":
+        """Create a new `Date` from a `date_display` value."""
+        if not date_display:
+            return None
+
+        try:
+            date = Date(date_display=date_display)
+            date.save()
+        # https://github.com/ixc/python-edtf/issues/32
+        except (AttributeError, EDTFParseException):
+            return None
+
+        return date
+
+
+def get_gsx_entry_value(entry: dict, field: str) -> str:
+    """Returns the `entry` value for the given `field`."""
+    if not entry or not field:
+        return None
+
+    field = f"gsx${field}"
+    if field not in entry:
+        return None
+
+    return entry[field]["$t"]
+
+
+GSX_PLACE = re.compile(r"\d{4}:\s(?P<address>[^\[]*)\[(?P<country_code>\w{2})\]")
+
+
+def get_geonames_place_from_gsx_place(name: str) -> Place:
+    """Returns a Geonames `Place` from a Google Spreadsheet place `name`. The GSX place
+    name is in the format `ID: Address [country_code]`."""
+    if not name:
+        return None
+
+    matches = GSX_PLACE.match(name)
+    if not matches:
+        return None
+
+    address = matches.group("address").strip()
+    country_code = matches.group("country_code")
+
+    return Place.get_or_create_from_geonames(address, country_code=country_code)
