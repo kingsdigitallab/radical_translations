@@ -8,6 +8,9 @@ Radical Translations
     :target: https://travis-ci.org/kingsdigitallab/radical_translations
 .. image:: https://coveralls.io/repos/github/kingsdigitallab/radical_translations/badge.svg
     :target: https://coveralls.io/github/kingsdigitallab/radical_translations
+.. image:: https://readthedocs.org/projects/radical-translations/badge/?version=latest
+    :target: https://radical-translations.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
     :target: https://github.com/kingsdigitallab/cookiecutter-django/
     :alt: Built with Cookiecutter Django
