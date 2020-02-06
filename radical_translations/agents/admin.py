@@ -12,9 +12,23 @@ from radical_translations.core.models import Contribution
 @admin.register(Agent)
 class AgentAdmin(PolymorphicParentModelAdmin):
     child_models = [Organisation, Person]
-    list_display = ["name", "polymorphic_ctype"]
-    list_filter = [PolymorphicChildModelFilter]
+    list_display = ["name", "polymorphic_ctype", "roles_display", "based_near_display"]
+    list_filter = [
+        PolymorphicChildModelFilter,
+        ("roles", admin.RelatedOnlyFieldListFilter),
+        ("based_near", admin.RelatedOnlyFieldListFilter),
+    ]
     search_fields = ["name"]
+
+    def based_near_display(self, obj):
+        return "; ".join([place.address for place in obj.based_near.all()])
+
+    based_near_display.short_description = "Places"
+
+    def roles_display(self, obj):
+        return "; ".join([role.label for role in obj.roles.all()])
+
+    roles_display.short_description = "Roles"
 
 
 class ContributionInline(admin.TabularInline):

@@ -48,11 +48,12 @@ class Event(TimeStampedModel):
 
     @staticmethod
     def from_gsx_entry(entry: dict) -> "Event":
-        """Gets or creates a new `Event` from a Google Spreadsheet dictionaty entry."""
+        """Gets or creates a new `Event` from a Google Spreadsheet dictionary
+        `entry`."""
         if not entry:
             return None
 
-        title = entry["gsx$title"]["$t"]
+        title = get_gsx_entry_value(entry, "title")
         if not title:
             return None
 

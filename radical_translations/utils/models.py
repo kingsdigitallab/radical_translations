@@ -1,5 +1,7 @@
 import re
 
+from controlled_vocabulary.apps import ControlledVocabularyConfig
+from controlled_vocabulary.models import ControlledTerm, ControlledVocabulary
 from django.db import models
 from edtf.fields import EDTFField
 from edtf.parser.edtf_exceptions import EDTFParseException
@@ -89,3 +91,30 @@ def get_geonames_place_from_gsx_place(name: str) -> Place:
     country_code = matches.group("country_code")
 
     return Place.get_or_create_from_geonames(address, country_code=country_code)
+
+
+def get_controlled_vocabulary_term(prefix: str, pattern: str) -> ControlledTerm:
+    """Returns a `ControlledTerm` for the `ControlledVocabulary` with the given
+    `prefix` and `pattern`."""
+    if not prefix or not pattern:
+        return None
+
+    try:
+        cv = ControlledVocabulary.objects.get(prefix=prefix)
+    except ControlledVocabulary.DoesNotExist:
+        return None
+
+    manager = ControlledVocabularyConfig.get_vocabulary_manager(cv.prefix)
+
+    terms = manager.search(pattern)
+    if not terms:
+        return None
+
+    term = terms[0]
+    desc = term[2] if len(term) > 2 else ""
+
+    ct, _ = ControlledTerm.objects.get_or_create(
+        termid=term[0], label=term[1], vocabulary=cv, description=desc
+    )
+
+    return ct

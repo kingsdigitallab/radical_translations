@@ -23,3 +23,5 @@ class TestEvent:
 
         entry["gsx$location"]["$t"] = "0001: London [UK]"
         assert Event.from_gsx_entry(entry) is not None
+
+        assert Event.objects.count() == 3

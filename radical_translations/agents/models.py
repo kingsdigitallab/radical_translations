@@ -4,7 +4,12 @@ from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
 
-from radical_translations.utils.models import Date
+from radical_translations.utils.models import (
+    Date,
+    get_controlled_vocabulary_term,
+    get_geonames_place_from_gsx_place,
+    get_gsx_entry_value,
+)
 
 # These models are based on the BIBFRAME 2.0 Agent Model, which is based on FOAF
 # http://xmlns.com/foaf/spec/#term_Agent
@@ -31,6 +36,9 @@ class Agent(PolymorphicModel, TimeStampedModel):
     roles = ControlledTermsField(
         ["wikidata"], blank=True, help_text="Roles performed by this Agent."
     )
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self) -> str:
         return self.name
@@ -104,3 +112,30 @@ class Organisation(Agent):
         related_name="member_of",
         help_text="Members of this organisation",
     )
+
+    @staticmethod
+    def from_gsx_entry(entry: dict) -> "Organisation":
+        """Gets or creates a new `Organisation` from a Google Spreadsheet dictionary
+        `entry`."""
+        if not entry:
+            return None
+
+        name = get_gsx_entry_value(entry, "organisation")
+        if not name:
+            return None
+
+        org = Organisation.objects.create(name=name)
+
+        value = get_gsx_entry_value(entry, "type")
+        term = get_controlled_vocabulary_term("wikidata", value)
+        if term:
+            org.roles.add(term)
+
+        value = get_gsx_entry_value(entry, "location")
+        place = get_geonames_place_from_gsx_place(value)
+        if place:
+            org.based_near.add(place)
+
+        org.save()
+
+        return org
