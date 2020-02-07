@@ -71,7 +71,7 @@ def get_gsx_entry_value(entry: dict, field: str) -> str:
     if field not in entry:
         return None
 
-    return entry[field]["$t"]
+    return entry[field]["$t"].strip()
 
 
 GSX_PLACE = re.compile(r"\d{4}:\s(?P<address>[^\[]*)\[(?P<country_code>\w{2})\]")
