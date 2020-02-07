@@ -27,4 +27,4 @@ def request_factory() -> RequestFactory:
 @pytest.fixture
 @pytest.mark.django_db
 def vocabulary():
-    management.call_command("vocab", "init", verbosity=0)
+    management.call_command("vocab", "init")
