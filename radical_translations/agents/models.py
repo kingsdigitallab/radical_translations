@@ -101,6 +101,78 @@ class Person(Agent):
         ),
     )
 
+    @staticmethod
+    def from_gsx_entry(entry: dict) -> "Person":
+        """Gets or creates a new `Person` from a Google Spreadsheet dictionary
+        `entry`."""
+        if not entry:
+            return None
+
+        name = get_gsx_entry_value(entry, "name")
+        if not name:
+            return None
+
+        person, _ = Person.objects.get_or_create(name=name)
+
+        # person_field: gsx_field
+        fields_mapping = {
+            "given_name": "firstname",
+            "family_name": "lastname",
+            "gender": "gender",
+        }
+
+        for key in fields_mapping.keys():
+            value = get_gsx_entry_value(entry, fields_mapping[key])
+            if value:
+                setattr(person, key, value)
+
+        fields_mapping = {
+            "date_birth": "birth",
+            "date_death": "death",
+        }
+
+        for key in fields_mapping.keys():
+            value = Date.from_date_display(
+                get_gsx_entry_value(entry, fields_mapping[key])
+            )
+            if value:
+                setattr(person, key, value)
+
+        place_fields = ["locationbirth", "locationsresidence", "locationdeath"]
+        for field in place_fields:
+            place_names = get_gsx_entry_value(entry, field)
+            if place_names:
+                for name in place_names.split("; "):
+                    place = get_geonames_place_from_gsx_place(name)
+                    if place:
+                        person.based_near.add(place)
+
+        occupations = get_gsx_entry_value(entry, "occupations")
+        if occupations:
+            for name in occupations.split("; "):
+                term = get_controlled_vocabulary_term("wikidata", name)
+                if term:
+                    person.roles.add(term)
+
+        organisations = get_gsx_entry_value(entry, "organisations")
+        if organisations:
+            for name in organisations.split("; "):
+                try:
+                    org = Organisation.objects.get(name=name)
+                    person.member_of.add(org)
+                except Organisation.DoesNotExist:
+                    pass
+
+        collaborators = get_gsx_entry_value(entry, "collaborators")
+        if collaborators:
+            for name in collaborators.split("; "):
+                p, _ = Person.objects.get_or_create(name=name)
+                person.knows.add(p)
+
+        person.save()
+
+        return person
+
 
 class Organisation(Agent):
     """The Organization class represents a kind of Agent corresponding to social

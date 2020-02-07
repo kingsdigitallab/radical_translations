@@ -67,7 +67,10 @@ class TitleAdmin(admin.ModelAdmin):
 class ResourceAdmin(PolymorphicParentModelAdmin):
     child_models = [Work, Instance, Item]
     list_display = ["title", "date", "polymorphic_ctype"]
-    list_filter = [PolymorphicChildModelFilter, "places"]
+    list_filter = [
+        PolymorphicChildModelFilter,
+        ("places", admin.RelatedOnlyFieldListFilter),
+    ]
     search_fields = ["title", "title_variant"]
 
 

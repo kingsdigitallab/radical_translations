@@ -1,4 +1,5 @@
 import pytest
+from django.apps import apps
 from django.core import management
 from django.test import RequestFactory
 
@@ -28,3 +29,5 @@ def request_factory() -> RequestFactory:
 @pytest.mark.django_db
 def vocabulary():
     management.call_command("vocab", "init")
+    app = apps.get_app_config('controlled_vocabulary')
+    app._load_vocabulary_managers()
