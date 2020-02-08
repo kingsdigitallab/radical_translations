@@ -1,4 +1,5 @@
 from controlled_vocabulary.models import ControlledTermsField
+from controlled_vocabulary.utils import search_term_or_none
 from django.db import models
 from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
@@ -6,7 +7,6 @@ from polymorphic.models import PolymorphicModel
 
 from radical_translations.utils.models import (
     Date,
-    get_controlled_vocabulary_term,
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
 )
@@ -150,7 +150,7 @@ class Person(Agent):
         occupations = get_gsx_entry_value(entry, "occupations")
         if occupations:
             for name in occupations.split("; "):
-                term = get_controlled_vocabulary_term("wikidata", name)
+                term = search_term_or_none("wikidata", name)
                 if term:
                     person.roles.add(term)
 
@@ -199,7 +199,7 @@ class Organisation(Agent):
         org = Organisation.objects.create(name=name)
 
         value = get_gsx_entry_value(entry, "type")
-        term = get_controlled_vocabulary_term("wikidata", value)
+        term = search_term_or_none("wikidata", value)
         if term:
             org.roles.add(term)
 

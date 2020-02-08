@@ -2,7 +2,6 @@ import pytest
 
 from radical_translations.utils.models import (
     Date,
-    get_controlled_vocabulary_term,
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
 )
@@ -44,23 +43,3 @@ def test_get_place_from_gsx_place():
     place = get_geonames_place_from_gsx_place(name)
     assert place is not None
     assert address in place.address
-
-
-@pytest.mark.usefixtures("vocabulary")
-def test_get_controlled_vocabulary_term():
-    prefix = "wikidata"
-    pattern = "pytest"
-
-    assert get_controlled_vocabulary_term(None, None) is None
-    assert get_controlled_vocabulary_term(prefix, None) is None
-    assert get_controlled_vocabulary_term(None, pattern) is None
-    assert get_controlled_vocabulary_term("does-not-exist", pattern) is None
-    assert get_controlled_vocabulary_term(prefix, f"{pattern}{pattern}") is None
-
-    vt = get_controlled_vocabulary_term(prefix, pattern)
-    assert vt is not None
-    assert vt.label == pattern
-
-    vt = get_controlled_vocabulary_term(prefix, pattern)
-    assert vt is not None
-    assert vt.label == pattern
