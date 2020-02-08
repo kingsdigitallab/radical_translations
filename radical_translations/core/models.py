@@ -3,6 +3,7 @@ from django.db import models
 from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
+
 from radical_translations.agents.models import Agent
 from radical_translations.utils.models import Date
 
@@ -15,7 +16,7 @@ class Title(TimeStampedModel):
     title, transcribed title, translated title, variant form of title, etc."""
 
     main_title = models.CharField(
-        max_length=256, help_text="Title being addressed. Possible title component."
+        max_length=512, help_text="Title being addressed. Possible title component."
     )
     subtitle = models.CharField(
         max_length=256,
@@ -179,7 +180,7 @@ class ResourceRelationship(TimeStampedModel):
 class Work(Resource):
     """The highest level of abstraction, a Work, in the BIBFRAME context, reflects the
     conceptual essence of the cataloged resource: authors, languages, and what it is
-    about (subjects). """
+    about(subjects). """
 
     pass
 
