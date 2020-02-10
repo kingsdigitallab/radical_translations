@@ -12,7 +12,7 @@ Table of Contents:
     :maxdepth: 2
 
     readme
-    models
+    technical-overview
     history
 
 
