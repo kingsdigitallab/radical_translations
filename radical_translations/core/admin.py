@@ -71,7 +71,12 @@ class ResourceAdmin(PolymorphicParentModelAdmin):
         PolymorphicChildModelFilter,
         ("places", admin.RelatedOnlyFieldListFilter),
     ]
-    search_fields = ["title", "title_variant"]
+    search_fields = [
+        "title__main_title",
+        "title__subtitle",
+        "title_variant__main_title",
+        "title_variant__subtitle",
+    ]
 
 
 class ResourceChildAdmin(PolymorphicChildModelAdmin):
