@@ -430,14 +430,14 @@ class Instance(Resource):
         else:
             fields_mapping = {
                 "translation of": "translationof",
-                "edition of": "editionof",
+                "other edition": "editionof",
                 "part of": "partof",
             }
 
             for key in fields_mapping.keys():
                 value = get_gsx_entry_value(entry, fields_mapping[key])
                 if value:
-                    title, _ = Title.objects.get_or_create(main_title=main_title)
+                    title, _ = Title.objects.get_or_create(main_title=value)
                     work, _ = Work.objects.get_or_create(title=title)
                     ResourceRelationship.get_or_create(instance, key, work)
 

@@ -169,12 +169,18 @@ class TestWork:
 @pytest.mark.usefixtures("vocabulary")
 class TestInstance:
     @pytest.mark.usefixtures(
-        "entry_original", "entry_translation", "resource", "organisation", "person"
+        "entry_original",
+        "entry_translation",
+        "entry_edition",
+        "resource",
+        "organisation",
+        "person",
     )
     def test_from_gsx_entry(
         self,
         entry_original: Dict[str, Dict[str, str]],
         entry_translation: Dict[str, Dict[str, str]],
+        entry_edition: Dict[str, Dict[str, str]],
         resource: Resource,
         organisation: Organisation,
         person: Person,
@@ -206,3 +212,10 @@ class TestInstance:
         assert (
             instance.relationships.first().relationship_type.label == "translation of"
         )
+
+        instance = Instance.from_gsx_entry(entry_edition)
+        assert instance.relationships.count() == 2
+        assert (
+            instance.relationships.first().relationship_type.label == "translation of"
+        )
+        assert instance.relationships.last().relationship_type.label == "other edition"

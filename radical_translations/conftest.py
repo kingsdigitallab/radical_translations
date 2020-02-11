@@ -110,3 +110,40 @@ def entry_translation() -> Dict[str, Dict[str, str]]:
         "gsx$paratextnotes": {"$t": ""},
         "gsx$paratextprefaceby": {"$t": "author"},
     }
+
+
+@pytest.fixture
+def entry_edition() -> Dict[str, Dict[str, str]]:
+    return {
+        "gsx$title": {"$t": "Discours sur le gouvernement"},
+        "gsx$authors": {"$t": "P.A. Samson"},
+        "gsx$status": {"$t": "Translation: integral"},
+        "gsx$statussource": {"$t": ""},
+        "gsx$translationof": {"$t": "Discourses concerning government"},
+        "gsx$editionof": {"$t": "Discours sur le gouvernement"},
+        "gsx$partof": {"$t": ""},
+        "gsx$journaltitle": {"$t": ""},
+        "gsx$editionnumber": {"$t": ""},
+        "gsx$year": {"$t": "1794"},
+        "gsx$isyearfictional": {"$t": "FALSE"},
+        "gsx$location": {"$t": "0001: Paris [FR]"},
+        "gsx$islocationfictional": {"$t": "FALSE"},
+        "gsx$organisation": {"$t": "Josse"},
+        "gsx$language": {"$t": "French [fr]"},
+        "gsx$genre": {"$t": "essay"},
+        "gsx$theme": {"$t": ""},
+        "gsx$subject": {"$t": ""},
+        "gsx$url": {
+            "$t": "https://gallica.bnf.fr/ark:/12148/bpt6k2054034/f7.image.texteImage"
+        },
+        "gsx$libraries": {"$t": ""},
+        "gsx$notes": {
+            "$t": (
+                "Extracts in La Décade philosophique vol 3, year III/1, no. 24, p. "
+                "537-544; vol 4, ear III/2, n. 26, p. 84-95."
+            )
+        },
+        "gsx$citation": {"$t": ""},
+        "gsx$paratextnotes": {"$t": ""},
+        "gsx$paratextprefaceby": {"$t": ""},
+    }
