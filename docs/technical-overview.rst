@@ -35,12 +35,14 @@ Agents (Persons, Organisations).
 
     Django models
 
-The data model graph was generated with the command::
+The data model graph was generated with the `django-extensions graph_models`_
+command::
 
     $ compose/bin/manage.sh graph_models core agents events utils -E -X PolymorphicModel -X TimeStampedModel -o models.png
 
 .. _BIBFRAME: https://www.loc.gov/bibframe/docs/bibframe2-model.html
 .. _FOAF: http://xmlns.com/foaf/spec/
+.. _django-extensions graph_models: https://django-extensions.readthedocs.io/en/latest/graph_models.html
 
 Workflows
 ^^^^^^^^^
