@@ -3,7 +3,7 @@
 History
 =======
 
-LATEST_VERSION
+0.2.1
 -----
 
 * Fix: Import of resources with editions.
