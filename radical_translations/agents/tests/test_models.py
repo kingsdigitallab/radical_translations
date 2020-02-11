@@ -25,7 +25,7 @@ class TestOrganisation:
         entry["gsx$location"]["$t"] = "0001: London [UK]"
         assert Organisation.from_gsx_entry(entry) is not None
 
-        assert Organisation.objects.count() == 3
+        assert Organisation.objects.count() == 1
 
 
 @pytest.mark.usefixtures("vocabulary")
