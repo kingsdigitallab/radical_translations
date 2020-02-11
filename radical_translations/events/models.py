@@ -1,3 +1,5 @@
+from typing import Dict, Optional
+
 from django.db import models
 from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
@@ -47,7 +49,7 @@ class Event(TimeStampedModel):
         return f"{self.date}: {self.title}"
 
     @staticmethod
-    def from_gsx_entry(entry: dict) -> "Event":
+    def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Event"]:
         """Gets or creates a new `Event` from a Google Spreadsheet dictionary
         `entry`."""
         if not entry:

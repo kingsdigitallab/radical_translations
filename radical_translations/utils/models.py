@@ -1,4 +1,5 @@
 import re
+from typing import Dict, Optional
 
 from django.db import models
 from edtf.fields import EDTFField
@@ -45,7 +46,7 @@ class Date(TimeStampedModel):
         return self.date_display
 
     @staticmethod
-    def from_date_display(date_display: str) -> "Date":
+    def from_date_display(date_display: str) -> Optional["Date"]:
         """Create a new `Date` from a `date_display` value."""
         if not date_display:
             return None
@@ -60,7 +61,7 @@ class Date(TimeStampedModel):
         return date
 
 
-def get_gsx_entry_value(entry: dict, field: str) -> str:
+def get_gsx_entry_value(entry: Dict[str, Dict[str, str]], field: str) -> Optional[str]:
     """Returns the `entry` value for the given `field`."""
     if not entry or not field:
         return None
@@ -75,7 +76,7 @@ def get_gsx_entry_value(entry: dict, field: str) -> str:
 GSX_PLACE = re.compile(r"\d{4}:\s(?P<address>[^\[]*)\[(?P<country_code>\w{2})\]")
 
 
-def get_geonames_place_from_gsx_place(name: str) -> Place:
+def get_geonames_place_from_gsx_place(name: str) -> Optional[Place]:
     """Returns a Geonames `Place` from a Google Spreadsheet place `name`. The GSX place
     name is in the format `ID: Address [country_code]`."""
     if not name:

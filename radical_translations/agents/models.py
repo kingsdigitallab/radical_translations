@@ -1,10 +1,11 @@
+from typing import Dict, Optional
+
 from controlled_vocabulary.models import ControlledTermsField
 from controlled_vocabulary.utils import search_term_or_none
 from django.db import models
 from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
-
 from radical_translations.utils.models import (
     Date,
     get_geonames_place_from_gsx_place,
@@ -102,7 +103,7 @@ class Person(Agent):
     )
 
     @staticmethod
-    def from_gsx_entry(entry: dict) -> "Person":
+    def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Person"]:
         """Gets or creates a new `Person` from a Google Spreadsheet dictionary
         `entry`."""
         if not entry:
@@ -186,7 +187,7 @@ class Organisation(Agent):
     )
 
     @staticmethod
-    def from_gsx_entry(entry: dict) -> "Organisation":
+    def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Organisation"]:
         """Gets or creates a new `Organisation` from a Google Spreadsheet dictionary
         `entry`."""
         if not entry:
@@ -196,7 +197,7 @@ class Organisation(Agent):
         if not name:
             return None
 
-        org = Organisation.objects.create(name=name)
+        org, _ = Organisation.objects.get_or_create(name=name)
 
         value = get_gsx_entry_value(entry, "type")
         term = search_term_or_none("wikidata", value)
