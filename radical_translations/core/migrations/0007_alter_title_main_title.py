@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0006_alter_classification_edition'),
+        ("core", "0006_alter_classification_edition"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='title',
-            name='main_title',
-            field=models.CharField(help_text='Title being addressed. Possible title component.', max_length=512),
+            model_name="title",
+            name="main_title",
+            field=models.CharField(
+                help_text="Title being addressed. Possible title component.",
+                max_length=768,
+            ),
         ),
     ]
