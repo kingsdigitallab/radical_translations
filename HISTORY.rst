@@ -3,7 +3,7 @@
 History
 =======
 
-LATEST_VERSION
+0.2.0
 ---
 
 * Add command to import `Event` records from GSX
