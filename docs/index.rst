@@ -13,8 +13,7 @@ Table of Contents:
 
     readme
     technical-overview
-    history
-
+    changelog
 
 Indices & Tables
 ================
