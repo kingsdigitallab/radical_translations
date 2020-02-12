@@ -26,7 +26,7 @@ django-polymorphic==2.1.2
 django-redis==4.11.0
 django-taggit==1.2.0      # via wagtail
 django-treebeard==4.3.1   # via wagtail
-django==2.2.9
+django==2.2.10
 djangorestframework==3.11.0
 draftjs-exporter==2.1.7   # via wagtail
 edtf==4.0.1
