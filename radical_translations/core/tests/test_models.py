@@ -22,11 +22,11 @@ class TestClassification:
     def test_get_or_create(self, resource: Resource):
         assert Classification.get_or_create(None, None) is None
         assert Classification.get_or_create(resource, None) is None
-        assert Classification.get_or_create(None, "full") is None
+        assert Classification.get_or_create(None, "adaptation") is None
         assert Classification.get_or_create(resource, "original") is None
         assert Classification.get_or_create(resource, "unknown") is None
 
-        classification = Classification.get_or_create(resource, "full")
+        classification = Classification.get_or_create(resource, "adaptation")
         assert classification is not None
 
 
