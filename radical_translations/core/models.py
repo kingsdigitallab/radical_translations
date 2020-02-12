@@ -196,7 +196,7 @@ class Classification(TimeStampedModel):
     )
 
     edition = ControlledTermField(
-        ["fast-topic"],
+        ["bf-cse"],
         on_delete=models.CASCADE,
         help_text=(
             "Edition of the classification scheme, such as full, abridged or a number, "
@@ -224,7 +224,7 @@ class Classification(TimeStampedModel):
             return None
 
         term = term.replace("Translation: ", "")
-        edition = search_term_or_none("fast-topic", term)
+        edition = search_term_or_none("bf-cse", term)
 
         if not edition:
             return None

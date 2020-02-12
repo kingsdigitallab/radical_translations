@@ -12,6 +12,15 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
 
+[Unreleased] -
+--------------------
+
+Added
+~~~~~~~
+
+* Custom vocabulary for ``Classification.edition``.
+
+
 [0.2.2] - 2020-02-12
 --------------------
 

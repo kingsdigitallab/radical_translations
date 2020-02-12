@@ -1,6 +1,28 @@
 from controlled_vocabulary.vocabularies.base_csv import VocabularyBaseList
 
 
+class VocabularyClassificationEdition(VocabularyBaseList):
+    base_url = "http://id.loc.gov/ontologies/bibframe.html#p_edition"
+    concept = "wikidata:Q324254:ontology"
+    description = "BIBFRAME Classification scheme edition"
+    label = "Classification scheme edition"
+    prefix = "bf-cse"
+
+    def _get_searchable_terms(self):
+        return [
+            ["abridged", "abridged"],
+            ["adaptation", "adaptation"],
+            ["announced", "announced"],
+            ["extended", "extended"],
+            ["integral", "integral"],
+            ["partial", "partial"],
+            ["pseudo-translation", "pseudo-translation"],
+            ["self-translation", "self-translation"],
+            ["summarised", "summarised"],
+            ["unpublished", "unpublished"],
+        ]
+
+
 class VocabularyResourceRelationshipType(VocabularyBaseList):
     base_url = "http://id.loc.gov/ontologies/bibframe-category.html#gridTable27"
     concept = "wikidata:Q324254:ontology"
