@@ -18,7 +18,8 @@ RUN apt-get update \
   && apt-get install -y libpq-dev \
   # Translations dependencies
   && apt-get install -y gettext \
-  && apt-get install -y libldap2-dev \
+  # LDAP dependencies
+  && apt-get install -y libldap2-dev libsasl2-dev slapd ldap-utils \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
