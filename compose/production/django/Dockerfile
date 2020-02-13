@@ -19,7 +19,7 @@ RUN apt-get update \
   # Translations dependencies
   && apt-get install -y gettext \
   # LDAP dependencies
-  && apt-get install -y libldap2-dev libsasl2-dev slapd ldap-utils \
+  && apt-get install -y libldap2-dev libsasl2-dev ldap-utils \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
