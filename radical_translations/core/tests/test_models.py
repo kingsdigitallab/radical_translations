@@ -197,6 +197,8 @@ class TestInstance:
         assert instance is not None
         assert instance.title.main_title == resource.title.main_title
         assert instance.contributions.count() == 0
+        assert instance.relationships.count() == 1
+        assert instance.relationships.first().relationship_type.label == "instance of"
 
         entry_original["gsx$authors"]["$t"] = f"{person.name}"
         instance = Instance.from_gsx_entry(entry_original, resource)

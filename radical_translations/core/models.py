@@ -132,7 +132,7 @@ class Resource(PolymorphicModel, TimeStampedModel):
 
         status = get_gsx_entry_value(entry, "status")
 
-        if not status or status.lower == "original":
+        if not status or status.lower() == "original":
             work = Work.from_gsx_entry(entry)
             instance = Instance.from_gsx_entry(entry, work=work)
         else:
