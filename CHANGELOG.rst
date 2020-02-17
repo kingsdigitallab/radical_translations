@@ -24,6 +24,7 @@ Added
 Fixed
 ~~~~~
 * Production Django Dockerfile.
+* ``Resource`` import, it was failing to import `Original` works.
 
 
 [0.2.2] - 2020-02-12
