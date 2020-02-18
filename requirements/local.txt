@@ -7,7 +7,7 @@
 --no-binary psycopg2
 
 alabaster==0.7.12         # via sphinx
-appdirs==1.4.3            # via black
+appdirs==1.4.3            # via black, virtualenv
 argon2-cffi==19.2.0
 aspy.yaml==1.3.0          # via pre-commit
 astroid==2.3.3            # via pylint
@@ -19,7 +19,7 @@ black==19.10b0
 bump2version==1.0.0
 certifi==2019.11.28       # via requests
 cffi==1.14.0              # via argon2-cffi
-cfgv==2.0.1               # via pre-commit
+cfgv==3.0.0               # via pre-commit
 chardet==3.0.4            # via requests
 click==7.0                # via black, geocoder, pip-tools
 coreapi==2.3.3
@@ -28,6 +28,7 @@ coverage==4.5.4           # via coveralls, django-coverage-plugin
 coveralls==1.10.0
 decorator==4.4.1          # via ipython, ratelim, traitlets
 defusedxml==0.6.0         # via python3-openid
+distlib==0.3.0            # via virtualenv
 django-allauth==0.41.0
 django-controlled-vocabulary==0.6
 django-coverage-plugin==1.7.0
@@ -55,6 +56,7 @@ elasticsearch==7.5.1      # via elasticsearch-dsl
 entrypoints==0.3          # via flake8
 factory-boy==2.12.0
 faker==4.0.0              # via factory-boy
+filelock==3.0.12          # via virtualenv
 flake8==3.7.9
 future==0.18.2            # via geocoder
 geocoder==1.38.1          # via django-geonames-place
@@ -62,7 +64,7 @@ html5lib==1.0.1           # via wagtail
 identify==1.4.11          # via pre-commit
 idna==2.8                 # via requests
 imagesize==1.2.0          # via sphinx
-importlib-metadata==1.5.0  # via pluggy, pre-commit, pytest
+importlib-metadata==1.5.0  # via pluggy, pre-commit, pytest, virtualenv
 ipdb==0.12.3
 ipython-genutils==0.2.0   # via traitlets
 ipython==7.12.0           # via ipdb
@@ -70,6 +72,7 @@ isort==4.3.21             # via pylint
 itypes==1.1.0             # via coreapi
 jedi==0.16.0              # via ipython
 jinja2==2.11.1            # via coreschema, sphinx
+l18n==2018.5              # via wagtail
 lazy-object-proxy==1.4.3  # via astroid
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8, pylint
@@ -114,7 +117,7 @@ redis==3.3.11
 regex==2020.1.8           # via black
 requests-oauthlib==1.3.0  # via django-allauth
 requests==2.22.0          # via coreapi, coveralls, django-allauth, geocoder, requests-oauthlib, sphinx, wagtail
-six==1.14.0               # via argon2-cffi, astroid, cfgv, django-coverage-plugin, django-extensions, edtf, elasticsearch-dsl, geocoder, html5lib, packaging, pip-tools, pre-commit, python-dateutil, traitlets, wagtail
+six==1.14.0               # via argon2-cffi, astroid, django-coverage-plugin, django-extensions, edtf, elasticsearch-dsl, geocoder, html5lib, l18n, packaging, pip-tools, pre-commit, python-dateutil, traitlets, virtualenv
 snowballstemmer==2.0.0    # via sphinx
 sphinx==2.3.1
 sphinxcontrib-applehelp==1.0.1  # via sphinx
@@ -133,9 +136,9 @@ typing-extensions==3.7.4.1  # via django-stubs, mypy
 unidecode==1.1.1          # via wagtail
 uritemplate==3.0.1        # via coreapi
 urllib3==1.25.8           # via django-controlled-vocabulary, elasticsearch, requests
-virtualenv==16.7.9        # via pre-commit
-wagtail==2.7.1
-watchdog==0.10.1
+virtualenv==20.0.3        # via pre-commit
+wagtail==2.8
+watchdog==0.10.2
 wcwidth==0.1.8            # via prompt-toolkit, pytest
 webencodings==0.5.1       # via html5lib
 werkzeug==0.16.0

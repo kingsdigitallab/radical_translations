@@ -25,5 +25,5 @@ django-polymorphic  # https://github.com/django-polymorphic/django-polymorphic
 edtf  # https://github.com/ixc/python-edtf
 elasticsearch-dsl>=7.0.0,<8.0.0  # https://github.com/elastic/elasticsearch-dsl-py
 
-wagtail==2.7.1  # https://github.com/wagtail/wagtail
+wagtail==2.8  # https://github.com/wagtail/wagtail
 django-kdl-wagtail==0.8.0  # https://github.com/kingsdigitallab/django-kdl-wagtail

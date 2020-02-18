@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.urls import include, path, re_path
+from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
@@ -20,9 +20,9 @@ urlpatterns = [
     path("users/", include("radical_translations.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Wagtail
-    re_path(r"^cms/", include(wagtailadmin_urls)),
-    re_path(r"^documents/", include(wagtaildocs_urls)),
-    re_path(r"^pages/", include(wagtail_urls)),
+    path("cms/", include(wagtailadmin_urls)),
+    path("documents/", include(wagtaildocs_urls)),
+    path("pages/", include(wagtail_urls)),
     # Django controlled vocabulary
     path("vocabularies/", include("controlled_vocabulary.urls")),
     # Your stuff: custom urls includes go here
