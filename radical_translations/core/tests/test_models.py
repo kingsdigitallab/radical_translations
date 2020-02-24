@@ -79,9 +79,9 @@ class TestResource:
         entry_translation: Dict[str, Dict[str, str]],
         resource: Resource,
     ):
-        assert Instance.from_gsx_entry(None, None) is None
+        assert Resource.from_gsx_entry(None) is None
 
-        instance = Instance.from_gsx_entry(entry_original, None)
+        instance = Resource.from_gsx_entry(entry_original)
         assert instance is not None
         assert "ruines" in instance.title.main_title
         assert instance.date.date_display == "1791"
@@ -146,6 +146,16 @@ class TestResourceRelationship:
 
 @pytest.mark.usefixtures("vocabulary")
 class TestWork:
+    @pytest.mark.usefixtures("entry_original")
+    def test_get_instance(self, entry_original: Dict[str, Dict[str, str]]):
+        Resource.from_gsx_entry(entry_original)
+
+        work = Work.objects.first()
+        instance = work.get_instance()
+
+        assert instance is not None
+        assert instance.title == work.title
+
     @pytest.mark.usefixtures("person")
     def test_from_gsx_entry(self, person: Person):
         assert Work.from_gsx_entry(None) is None
@@ -165,9 +175,35 @@ class TestWork:
         w = Work.from_gsx_entry(entry)
         assert "French" in w.get_language_names()
 
+    @pytest.mark.usefixtures("entry_original")
+    def test_from_instance(self, entry_original: Dict[str, Dict[str, str]]):
+        assert Work.from_instance(None) is None
+
+        entry_original["gsx$title"]["$t"] = "test_from_instance"
+        instance = Instance.from_gsx_entry(entry_original, None)
+
+        work = Work.from_instance(instance)
+        assert work is not None
+        assert work.title == instance.title
+
+        assert work.contributions.count() == instance.contributions.count()
+        assert work.languages.count() == instance.languages.count()
+        assert work.subjects.count() == instance.subjects.count()
+
 
 @pytest.mark.usefixtures("vocabulary")
 class TestInstance:
+    @pytest.mark.usefixtures("entry_original", "resource")
+    def test_get_work(
+        self, entry_original: Dict[str, Dict[str, str]], resource: Resource
+    ):
+        instance = Instance.from_gsx_entry(entry_original, None)
+        assert instance.get_work() is None
+
+        instance = Instance.from_gsx_entry(entry_original, resource)
+        work = instance.get_work()
+        assert work is not None
+
     @pytest.mark.usefixtures(
         "entry_original",
         "entry_translation",

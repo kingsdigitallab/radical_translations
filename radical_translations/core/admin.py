@@ -101,7 +101,6 @@ class ResourceChildAdmin(PolymorphicChildModelAdmin):
     ]
     list_display = ["title", "date"]
     search_fields = ["title", "title_variant"]
-    show_in_index = True
 
 
 @admin.register(Work)
@@ -111,7 +110,11 @@ class WorkAdmin(ResourceChildAdmin):
 
 @admin.register(Instance)
 class InstanceAdmin(ResourceChildAdmin):
-    pass
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+
+        if not obj.get_work():
+            Work.from_instance(obj)
 
 
 @admin.register(Item)

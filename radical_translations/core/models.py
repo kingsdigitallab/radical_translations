@@ -325,7 +325,10 @@ class ResourceRelationship(TimeStampedModel):
         help_text="Any relationship between Work, Instance, and Item resources.",
     )
     related_to = models.ForeignKey(
-        Resource, on_delete=models.CASCADE, help_text="Related resource."
+        Resource,
+        on_delete=models.CASCADE,
+        related_name="related_to",
+        help_text="Related resource.",
     )
 
     def __str__(self) -> str:
@@ -354,6 +357,17 @@ class Work(Resource):
     conceptual essence of the cataloged resource: authors, languages, and what it is
     about (subjects). """
 
+    def get_instance(self) -> Optional["Instance"]:
+        """Returns the first `Instance` of a `Work`."""
+        if self.related_to.count() == 0:
+            return None
+
+        rr = self.related_to.filter(relationship_type__label="instance of")
+        if rr.count() == 0:
+            return None
+
+        return rr.first().resource
+
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Work"]:
         """Gets or creates a new `Work` from a Google Spreadsheet dictionary
@@ -378,6 +392,31 @@ class Work(Resource):
 
         return work
 
+    @staticmethod
+    def from_instance(instance: "Instance") -> Optional["Work"]:
+        """Creates a `Work` from an `Instance`."""
+        if not instance:
+            return None
+
+        work, _ = Work.objects.get_or_create(title=instance.title)
+
+        for contribution in instance.contributions.all():
+            Contribution.objects.get_or_create(
+                resource=work, agent=contribution.agent, roles=contribution.roles
+            )
+
+        for language in instance.languages.all():
+            work.languages.add(language)
+
+        for subject in instance.subjects.all():
+            work.subjects.add(subject)
+
+        ResourceRelationship.get_or_create(instance, "instance of", work)
+
+        work.save()
+
+        return work
+
 
 class Instance(Resource):
     """A Work may have one or more individual, material embodiments, for example, a
@@ -390,6 +429,17 @@ class Instance(Resource):
         null=True,
         help_text="Enumeration of the edition; usually transcribed.",
     )
+
+    def get_work(self) -> Optional["Work"]:
+        """Returns the first `Work` this object is an `Instance` of."""
+        if self.relationships.count() == 0:
+            return None
+
+        rr = self.relationships.filter(relationship_type__label="instance of")
+        if rr.count() == 0:
+            return None
+
+        return rr.first().resource
 
     @staticmethod
     def from_gsx_entry(
@@ -467,4 +517,6 @@ class Item(Resource):
     """An item is an actual copy (physical or electronic) of an Instance. It reflects
     information such as its location (physical or virtual), shelf mark, and barcode."""
 
+    # held_by
+    # electronic_locator
     pass
