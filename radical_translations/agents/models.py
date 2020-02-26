@@ -19,7 +19,7 @@ from radical_translations.utils.models import (
 class Agent(PolymorphicModel, TimeStampedModel):
     """Entity having a role in a resource, such as a person or organization."""
 
-    name = models.CharField(max_length=128, help_text="The agent name.")
+    name = models.CharField(max_length=512, help_text="The agent name.")
 
     based_near = models.ManyToManyField(
         Place,
