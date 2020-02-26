@@ -1,17 +1,17 @@
 from typing import Dict
 
 import pytest
-
 from django.apps import apps
 from django.core import management
 from django.test import RequestFactory
+
 from radical_translations.agents.models import Organisation, Person
 from radical_translations.agents.tests.factories import (
     OrganisationFactory,
     PersonFactory,
 )
-from radical_translations.core.models import Resource
-from radical_translations.core.tests.factories import ResourceFactory
+from radical_translations.core.models import Resource, Title
+from radical_translations.core.tests.factories import ResourceFactory, TitleFactory
 from radical_translations.users.models import User
 from radical_translations.users.tests.factories import UserFactory
 
@@ -54,6 +54,11 @@ def person() -> Person:
 @pytest.fixture
 def resource() -> Resource:
     return ResourceFactory()
+
+
+@pytest.fixture
+def title() -> Title:
+    return TitleFactory()
 
 
 @pytest.fixture

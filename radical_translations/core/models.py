@@ -118,6 +118,10 @@ class Resource(PolymorphicModel, TimeStampedModel):
     def __str__(self) -> str:
         return self.title.main_title
 
+    @property
+    def resource_type(self) -> str:
+        return self.polymorphic_ctype.name
+
     def get_language_names(self) -> str:
         return "; ".join([language.label for language in self.languages.all()])
 

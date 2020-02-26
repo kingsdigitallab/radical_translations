@@ -73,6 +73,28 @@ class TestContribution:
 
 @pytest.mark.usefixtures("vocabulary")
 class TestResource:
+    @pytest.mark.usefixtures("title")
+    def test_resource_type(self, title):
+        obj = Work(title=title)
+        obj.save()
+        assert obj.resource_type == "work"
+
+        obj = Instance(title=title)
+        obj.save()
+        assert obj.resource_type == "instance"
+
+        obj = Item(title=title)
+        obj.save()
+        assert obj.resource_type == "item"
+
+    @pytest.mark.usefixtures("entry_original", "entry_translation")
+    def test_get_language_names(self, entry_original, entry_translation):
+        instance = Resource.from_gsx_entry(entry_original)
+        assert instance.get_language_names() == "French"
+
+        instance = Resource.from_gsx_entry(entry_translation)
+        assert instance.get_language_names() == "English"
+
     @pytest.mark.usefixtures("entry_original", "entry_translation", "resource")
     def test_from_gsx_entry(
         self,

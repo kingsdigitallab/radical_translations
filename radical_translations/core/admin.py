@@ -69,7 +69,7 @@ class TitleAdmin(admin.ModelAdmin):
 @admin.register(Resource)
 class ResourceAdmin(PolymorphicParentModelAdmin):
     child_models = [Work, Instance, Item]
-    list_display = ["title", "get_language_names", "polymorphic_ctype"]
+    list_display = ["resource_type", "title", "get_language_names"]
     list_filter = [
         PolymorphicChildModelFilter,
         ("relationships__relationship_type", admin.RelatedOnlyFieldListFilter),
