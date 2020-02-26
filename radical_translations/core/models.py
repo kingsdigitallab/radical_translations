@@ -430,7 +430,7 @@ class Instance(Resource):
         help_text="Enumeration of the edition; usually transcribed.",
     )
 
-    def get_work(self) -> Optional["Work"]:
+    def instance_of(self) -> Optional["Work"]:
         """Returns the first `Work` this object is an `Instance` of."""
         if self.relationships.count() == 0:
             return None

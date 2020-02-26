@@ -194,14 +194,14 @@ class TestWork:
 @pytest.mark.usefixtures("vocabulary")
 class TestInstance:
     @pytest.mark.usefixtures("entry_original", "resource")
-    def test_get_work(
+    def test_instance_of(
         self, entry_original: Dict[str, Dict[str, str]], resource: Resource
     ):
         instance = Instance.from_gsx_entry(entry_original, None)
-        assert instance.get_work() is None
+        assert instance.instance_of() is None
 
         instance = Instance.from_gsx_entry(entry_original, resource)
-        work = instance.get_work()
+        work = instance.instance_of()
         assert work is not None
 
     @pytest.mark.usefixtures(
