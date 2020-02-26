@@ -21,6 +21,10 @@ Added
 * Team information to the docs.
 * humans.txt (http://humanstxt.org/).
 
+Changed
+~~~~~~~
+* The import `Resource` command to import `Item` records from GSX.
+
 Fixed
 ~~~~~
 * Production Django Dockerfile.
