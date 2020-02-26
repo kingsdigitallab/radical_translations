@@ -125,4 +125,4 @@ class InstanceAdmin(ResourceChildAdmin):
 
 @admin.register(Item)
 class ItemAdmin(ResourceChildAdmin):
-    pass
+    autocomplete_fields = ResourceChildAdmin.autocomplete_fields + ["held_by"]

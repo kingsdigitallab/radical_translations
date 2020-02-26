@@ -8,6 +8,7 @@ from radical_translations.core.models import (
     Classification,
     Contribution,
     Instance,
+    Item,
     Resource,
     ResourceRelationship,
     Work,
@@ -257,3 +258,24 @@ class TestInstance:
             instance.relationships.first().relationship_type.label == "translation of"
         )
         assert instance.relationships.last().relationship_type.label == "other edition"
+
+
+class TestItem:
+    @pytest.mark.usefixtures("entry_original", "entry_edition")
+    def test_from_gsx_entry(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_edition: Dict[str, Dict[str, str]],
+    ):
+        assert Item.from_gsx_entry(None, None) is None
+        assert Item.from_gsx_entry(entry_edition, None) is None
+
+        instance = Instance.from_gsx_entry(entry_original, None)
+        assert Item.from_gsx_entry(None, instance) is None
+        assert Item.from_gsx_entry(entry_original, instance) is None
+
+        instance = Instance.from_gsx_entry(entry_edition, None)
+        item = Item.from_gsx_entry(entry_edition, instance)
+        assert item is not None
+        assert item.held_by.count() == 1
+        assert item.electronic_locator is not None

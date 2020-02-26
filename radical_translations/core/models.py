@@ -138,6 +138,8 @@ class Resource(PolymorphicModel, TimeStampedModel):
         else:
             instance = Instance.from_gsx_entry(entry)
 
+        Item.from_gsx_entry(entry, instance)
+
         return instance
 
     @staticmethod
@@ -517,6 +519,44 @@ class Item(Resource):
     """An item is an actual copy (physical or electronic) of an Instance. It reflects
     information such as its location (physical or virtual), shelf mark, and barcode."""
 
-    # held_by
-    # electronic_locator
-    pass
+    held_by = models.ManyToManyField(
+        Agent,
+        blank=True,
+        related_name="items",
+        help_text="Entity holding the item or from which it is available.",
+    )
+    electronic_locator = models.URLField(
+        max_length=1024,
+        blank=True,
+        null=True,
+        help_text="Electronic location from which the resource is available.",
+    )
+
+    @staticmethod
+    def from_gsx_entry(
+        entry: Dict[str, Dict[str, str]], instance: Instance
+    ) -> Optional["Item"]:
+        """Gets or creates a new `Item` from a Google Spreadsheet dictionary
+        `entry`."""
+        if not entry or not instance:
+            return None
+
+        libraries = get_gsx_entry_value(entry, "libraries")
+        url = get_gsx_entry_value(entry, "url")
+
+        if not libraries and not url:
+            return None
+
+        item, _ = Item.objects.get_or_create(
+            title=instance.title, electronic_locator=url
+        )
+
+        ResourceRelationship.get_or_create(item, "item of", instance)
+
+        for library in libraries.split("; "):
+            agent, _ = Agent.objects.get_or_create(name=library)
+            item.held_by.add(agent)
+
+        item.save()
+
+        return item

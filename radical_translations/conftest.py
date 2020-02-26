@@ -136,7 +136,7 @@ def entry_edition() -> Dict[str, Dict[str, str]]:
         "gsx$url": {
             "$t": "https://gallica.bnf.fr/ark:/12148/bpt6k2054034/f7.image.texteImage"
         },
-        "gsx$libraries": {"$t": ""},
+        "gsx$libraries": {"$t": "BNF"},
         "gsx$notes": {
             "$t": (
                 "Extracts in La Décade philosophique vol 3, year III/1, no. 24, p. "
