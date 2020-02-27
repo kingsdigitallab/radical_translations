@@ -9,6 +9,15 @@ pytestmark = pytest.mark.django_db
 
 @pytest.mark.usefixtures("vocabulary")
 class TestOrganisation:
+    def test_agent_type(self, title):
+        obj = Person(name="person name")
+        obj.save()
+        assert obj.agent_type == "person"
+
+        obj = Organisation(name="organisation name")
+        obj.save()
+        assert obj.agent_type == "organisation"
+
     def test_from_gsx_entry(self):
         assert Organisation.from_gsx_entry(None) is None
 

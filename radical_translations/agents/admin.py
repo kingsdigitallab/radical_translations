@@ -12,7 +12,7 @@ from radical_translations.core.models import Contribution
 @admin.register(Agent)
 class AgentAdmin(PolymorphicParentModelAdmin):
     child_models = [Organisation, Person]
-    list_display = ["name", "polymorphic_ctype", "roles_display", "based_near_display"]
+    list_display = ["name", "agent_type", "roles_display", "based_near_display"]
     list_filter = [
         PolymorphicChildModelFilter,
         ("roles", admin.RelatedOnlyFieldListFilter),

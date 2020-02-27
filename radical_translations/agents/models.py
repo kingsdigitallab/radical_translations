@@ -44,6 +44,10 @@ class Agent(PolymorphicModel, TimeStampedModel):
     def __str__(self) -> str:
         return self.name
 
+    @property
+    def agent_type(self) -> str:
+        return self.polymorphic_ctype.name
+
 
 class Person(Agent):
     """The Person class represents people, whether they're alive, dead, real, or
