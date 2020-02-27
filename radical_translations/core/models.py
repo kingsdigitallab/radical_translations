@@ -558,8 +558,8 @@ class Item(Resource):
         ResourceRelationship.get_or_create(item, "item of", instance)
 
         for library in libraries.split("; "):
-            agent, _ = Agent.objects.get_or_create(name=library)
-            item.held_by.add(agent)
+            org, _ = Organisation.objects.get_or_create(name=library)
+            item.held_by.add(org)
 
         item.save()
 
