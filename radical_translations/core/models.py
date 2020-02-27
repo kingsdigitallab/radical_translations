@@ -558,8 +558,10 @@ class Item(Resource):
         ResourceRelationship.get_or_create(item, "item of", instance)
 
         for library in libraries.split("; "):
-            org, _ = Organisation.objects.get_or_create(name=library)
-            item.held_by.add(org)
+            library = library.strip()
+            if library:
+                org, _ = Organisation.objects.get_or_create(name=library)
+                item.held_by.add(org)
 
         item.save()
 
