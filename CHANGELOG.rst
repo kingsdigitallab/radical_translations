@@ -27,7 +27,7 @@ Changed
 
 Fixed
 ~~~~~
-* Production Django Dockerfile.
+* Production Django Dockerfile: add missing dependencies.
 * ``Resource`` import, it was failing to import `Original` works.
 
 
