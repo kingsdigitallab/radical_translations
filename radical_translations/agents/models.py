@@ -24,6 +24,7 @@ class Agent(PolymorphicModel, TimeStampedModel):
     based_near = models.ManyToManyField(
         Place,
         blank=True,
+        related_name="agents",
         help_text=(
             "A location that something is based near, for some broadly human notion "
             "of near."

@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from radical_translations.events.models import Event
 
 
@@ -8,3 +7,9 @@ class EventAdmin(admin.ModelAdmin):
     autocomplete_fields = ["date", "place", "related_to"]
     list_display = ["date", "place", "title"]
     search_fields = ["date", "place", "title"]
+
+
+class EventInline(admin.TabularInline):
+    model = Event
+    autocomplete_fields = EventAdmin.autocomplete_fields
+    extra = 1

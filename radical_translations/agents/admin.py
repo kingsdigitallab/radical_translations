@@ -31,6 +31,14 @@ class AgentAdmin(PolymorphicParentModelAdmin):
     roles_display.short_description = "Roles"
 
 
+class AgentInline(admin.TabularInline):
+    model = Agent.based_near.through
+    autocomplete_fields = ["agent"]
+    extra = 1
+    fk_name = "place"
+    readonly_fields = ["place"]
+
+
 class ContributionInline(admin.TabularInline):
     model = Contribution
     autocomplete_fields = ["resource"]
