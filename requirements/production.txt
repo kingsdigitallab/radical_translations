@@ -6,70 +6,70 @@
 #
 --no-binary psycopg2
 
-argon2-cffi==19.2.0
+argon2-cffi==19.2.0       # via -r /requirements/./base.in
 beautifulsoup4==4.6.0     # via wagtail
 certifi==2019.11.28       # via requests
 cffi==1.14.0              # via argon2-cffi
 chardet==3.0.4            # via requests
 click==7.0                # via geocoder
-coreapi==2.3.3
+coreapi==2.3.3            # via -r /requirements/./base.in
 coreschema==0.0.4         # via coreapi
-decorator==4.4.1          # via ratelim
+decorator==4.4.2          # via ratelim
 defusedxml==0.6.0         # via python3-openid
-django-allauth==0.41.0
-django-anymail[mailgun]==7.0.0
-django-auth-ldap==2.1.0
-django-controlled-vocabulary==0.6
-django-crispy-forms==1.8.1
-django-environ==0.4.5
-django-geonames-place==0.4.5
-django-kdl-wagtail==0.9.0
-django-model-utils==4.0.0
+django-allauth==0.41.0    # via -r /requirements/./base.in
+django-anymail[mailgun]==7.0.0  # via -r /requirements/production.in
+django-auth-ldap==2.1.0   # via -r /requirements/production.in
+django-controlled-vocabulary==0.6  # via -r /requirements/./base.in
+django-crispy-forms==1.8.1  # via -r /requirements/./base.in
+django-environ==0.4.5     # via -r /requirements/./base.in
+django-geonames-place==0.4.6  # via -r /requirements/./base.in
+django-kdl-wagtail==0.9.0  # via -r /requirements/./base.in
+django-model-utils==4.0.0  # via -r /requirements/./base.in, django-geonames-place
 django-modelcluster==5.0.1  # via wagtail
-django-polymorphic==2.1.2
-django-redis==4.11.0
+django-polymorphic==2.1.2  # via -r /requirements/./base.in
+django-redis==4.11.0      # via -r /requirements/./base.in
 django-taggit==1.2.0      # via wagtail
 django-treebeard==4.3.1   # via wagtail
-django==2.2.10
-djangorestframework==3.11.0
+django==2.2.10            # via -r /requirements/./base.in, django-allauth, django-anymail, django-auth-ldap, django-controlled-vocabulary, django-model-utils, django-polymorphic, django-redis, django-taggit, django-treebeard, djangorestframework, wagtail
+djangorestframework==3.11.0  # via -r /requirements/./base.in, wagtail
 draftjs-exporter==2.1.7   # via wagtail
-edtf==4.0.1
-elasticsearch-dsl==7.1.0
+edtf==4.0.1               # via -r /requirements/./base.in
+elasticsearch-dsl==7.1.0  # via -r /requirements/./base.in
 elasticsearch==7.5.1      # via elasticsearch-dsl
 future==0.18.2            # via geocoder
 geocoder==1.38.1          # via django-geonames-place
-gunicorn==20.0.4
+gunicorn==20.0.4          # via -r /requirements/production.in
 html5lib==1.0.1           # via wagtail
-idna==2.8                 # via requests
+idna==2.9                 # via requests
 itypes==1.1.0             # via coreapi
 jinja2==2.11.1            # via coreschema
 l18n==2018.5              # via wagtail
 markupsafe==1.1.1         # via jinja2
 oauthlib==3.1.0           # via requests-oauthlib
 pillow==6.2.2             # via wagtail
-psycopg2==2.8.4
+psycopg2==2.8.4           # via -r /requirements/production.in
 pyasn1-modules==0.2.8     # via python-ldap
 pyasn1==0.4.8             # via pyasn1-modules, python-ldap
 pycparser==2.19           # via cffi
 pyparsing==2.4.6          # via edtf
 python-dateutil==2.8.1    # via edtf, elasticsearch-dsl
 python-ldap==3.2.0        # via django-auth-ldap
-python-slugify==4.0.0
+python-slugify==4.0.0     # via -r /requirements/./base.in
 python3-openid==3.1.0     # via django-allauth
-pytz==2019.3
+pytz==2019.3              # via -r /requirements/./base.in, django, django-modelcluster, l18n
 ratelim==0.1.6            # via geocoder
-redis==3.4.1
+redis==3.4.1              # via -r /requirements/./base.in, django-redis
 requests-oauthlib==1.3.0  # via django-allauth
-requests==2.22.0          # via coreapi, django-allauth, django-anymail, geocoder, requests-oauthlib, wagtail
+requests==2.23.0          # via coreapi, django-allauth, django-anymail, geocoder, requests-oauthlib, wagtail
 six==1.14.0               # via argon2-cffi, django-anymail, edtf, elasticsearch-dsl, geocoder, html5lib, l18n, python-dateutil
-sqlparse==0.3.0           # via django
+sqlparse==0.3.1           # via django
 text-unidecode==1.3       # via python-slugify
 unidecode==1.1.1          # via wagtail
 uritemplate==3.0.1        # via coreapi
 urllib3==1.25.8           # via django-controlled-vocabulary, elasticsearch, requests
-wagtail==2.8
+wagtail==2.8              # via -r /requirements/./base.in, django-kdl-wagtail
 webencodings==0.5.1       # via html5lib
-whitenoise==5.0.1
+whitenoise==5.0.1         # via -r /requirements/./base.in
 willow==1.3               # via wagtail
 
 # The following packages are considered to be unsafe in a requirements file:
