@@ -33,10 +33,9 @@ parser.add_argument(
 )
 parser.add_argument(
     "options",
-    metavar="OPT",
     type=str,
-    nargs="*",
-    help="optional options to be passed to the command",
+    nargs=argparse.REMAINDER,
+    help="remaining arguments to be passed to the command",
 )
 
 args = parser.parse_args()
