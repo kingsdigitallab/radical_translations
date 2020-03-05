@@ -73,8 +73,8 @@ class TestContribution:
 
 @pytest.mark.usefixtures("vocabulary")
 class TestResource:
-    @pytest.mark.usefixtures("title")
-    def test_resource_type(self, title):
+    @pytest.mark.usefixtures("entry_original", "title")
+    def test_resource_type(self, entry_original, title):
         obj = Work(title=title)
         obj.save()
         assert obj.resource_type == "work"
@@ -82,6 +82,9 @@ class TestResource:
         obj = Instance(title=title)
         obj.save()
         assert obj.resource_type == "instance"
+
+        paratext = Instance.paratext_from_gsx_entry(entry_original, obj)
+        assert paratext.resource_type == "paratext"
 
         obj = Item(title=title)
         obj.save()

@@ -122,7 +122,17 @@ class Resource(PolymorphicModel, TimeStampedModel):
 
     @property
     def resource_type(self) -> str:
+        if self.is_paratext:
+            return f"paratext"
+
         return self.polymorphic_ctype.name
+
+    @property
+    def is_paratext(self) -> bool:
+        return (
+            self.relationships.filter(relationship_type__label="paratext of").count()
+            > 0
+        )
 
     def get_language_names(self) -> str:
         return "; ".join([language.label for language in self.languages.all()])
@@ -431,7 +441,7 @@ class Instance(Resource):
     particular published form. These are Instances of the Work. An Instance reflects
     information such as its publisher, place and date of publication, and format."""
 
-    is_paratext = models.BooleanField(default=False, editable=False)
+    _is_paratext = models.BooleanField(default=False, editable=False)
 
     edition_enumeration = models.CharField(
         max_length=128,
@@ -480,7 +490,7 @@ class Instance(Resource):
 
             title, _ = Title.objects.get_or_create(main_title=main_title)
 
-        instance, _ = Instance.objects.get_or_create(title=title, is_paratext=False)
+        instance, _ = Instance.objects.get_or_create(title=title, _is_paratext=False)
 
         Contribution.from_gsx_entry(instance, entry, "authors", "author")
 
@@ -550,7 +560,7 @@ class Instance(Resource):
 
         paratext, _ = Instance.objects.get_or_create(
             title=instance.title,
-            is_paratext=True,
+            _is_paratext=True,
             summary=citation,
             notes=paratext_notes,
         )

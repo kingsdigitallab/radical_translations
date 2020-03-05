@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0015_alter_resource_subjects'),
+        ("core", "0015_alter_resource_subjects"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='instance',
-            name='is_paratext',
+            model_name="instance",
+            name="_is_paratext",
             field=models.BooleanField(default=False, editable=False),
         ),
     ]
