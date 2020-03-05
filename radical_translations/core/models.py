@@ -77,7 +77,9 @@ class Resource(PolymorphicModel, TimeStampedModel):
         help_text="Language associated with a resource or its parts.",
     )
     subjects = ControlledTermsField(
-        ["fast-topic"], blank=True, help_text="Subject term(s) describing a resource",
+        ["fast-topic", "wikidata"],
+        blank=True,
+        help_text="Subject term(s) describing a resource",
     )
 
     date = models.OneToOneField(
@@ -434,6 +436,15 @@ class Instance(Resource):
         blank=True,
         null=True,
         help_text="Enumeration of the edition; usually transcribed.",
+    )
+
+    summary = models.TextField(
+        blank=True,
+        null=True,
+        help_text=(
+            "Description of the content of a resource, such as an abstract, "
+            "summary, etc.."
+        ),
     )
 
     def instance_of(self) -> Optional["Work"]:
