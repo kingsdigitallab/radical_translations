@@ -59,6 +59,14 @@ class VocabularyResourceRelationshipType(VocabularyBaseList):
                 ),
             ],
             [
+                "paratextOf",
+                "paratext of",
+                (
+                    "Resource in which the described resource is a paratext physically "
+                    " or logically contained."
+                ),
+            ],
+            [
                 "partOf",
                 "part of",
                 (
