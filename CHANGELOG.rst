@@ -20,10 +20,13 @@ Added
 * Custom vocabulary for ``Classification.edition``.
 * Team information to the docs.
 * humans.txt (http://humanstxt.org/).
+* Place of birth and place of death to Person model.
+* Paratext mapping.
 
 Changed
 ~~~~~~~
 * The import `Resource` command to import `Item` records from GSX.
+* Reduce th number of models in the admin interface.
 
 Fixed
 ~~~~~
