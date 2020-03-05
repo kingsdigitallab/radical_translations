@@ -65,6 +65,16 @@ class TestPerson:
         assert "London" in p.based_near.first().address
         assert "Paris" in p.based_near.last().address
 
+        entry["gsx$locationbirth"]["$t"] = "0001: London [UK]"
+        p = Person.from_gsx_entry(entry)
+        assert p is not None
+        assert "London" in p.place_birth.address
+
+        entry["gsx$locationdeath"]["$t"] = "0002: Paris [FR]"
+        p = Person.from_gsx_entry(entry)
+        assert p is not None
+        assert "Paris" in p.place_death.address
+
         entry["gsx$occupations"]["$t"] = "tester"
         p = Person.from_gsx_entry(entry)
         assert p is not None

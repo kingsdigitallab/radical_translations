@@ -71,6 +71,8 @@ class PersonAdmin(AgentChildAdmin):
     autocomplete_fields = AgentChildAdmin.autocomplete_fields + [
         "date_birth",
         "date_death",
+        "place_birth",
+        "place_death",
         "knows",
     ]
     inlines = AgentChildAdmin.inlines + [OrganisationInline]

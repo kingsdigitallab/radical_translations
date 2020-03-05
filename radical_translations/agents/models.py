@@ -92,6 +92,23 @@ class Person(Agent):
         help_text="The date of death of this Person.",
     )
 
+    place_birth = models.ForeignKey(
+        Place,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="births",
+        help_text="The location of birth of this Person.",
+    )
+    place_death = models.ForeignKey(
+        Place,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="deaths",
+        help_text="The location of death of this Person.",
+    )
+
     languages = ControlledTermsField(
         ["iso639-2"],
         blank=True,
@@ -144,14 +161,24 @@ class Person(Agent):
             if value:
                 setattr(person, key, value)
 
-        place_fields = ["locationbirth", "locationsresidence", "locationdeath"]
-        for field in place_fields:
-            place_names = get_gsx_entry_value(entry, field)
+        fields_mapping = {
+            "place_birth": "locationbirth",
+            "place_death": "locationdeath",
+        }
+        for key in fields_mapping.keys():
+            place_names = get_gsx_entry_value(entry, fields_mapping[key])
             if place_names:
                 for name in place_names.split("; "):
                     place = get_geonames_place_from_gsx_place(name)
                     if place:
-                        person.based_near.add(place)
+                        setattr(person, key, place)
+
+        place_names = get_gsx_entry_value(entry, "locationsresidence")
+        if place_names:
+            for name in place_names.split("; "):
+                place = get_geonames_place_from_gsx_place(name)
+                if place:
+                    person.based_near.add(place)
 
         occupations = get_gsx_entry_value(entry, "occupations")
         if occupations:
