@@ -281,6 +281,21 @@ class TestInstance:
         )
         assert instance.relationships.last().relationship_type.label == "other edition"
 
+    @pytest.mark.usefixtures("entry_original", "resource")
+    def test_paratext_from_gsx_entry(
+        self, entry_original: Dict[str, Dict[str, str]], resource: Resource,
+    ):
+        assert Instance.paratext_from_gsx_entry(None, None) is None
+        assert Instance.paratext_from_gsx_entry(entry_original, None) is None
+        assert Instance.paratext_from_gsx_entry(None, resource) is None
+
+        paratext = Instance.paratext_from_gsx_entry(entry_original, resource)
+        assert paratext is not None
+        assert paratext.title == resource.title
+        assert paratext.summary is not None
+        assert paratext.notes is not None
+        assert paratext.relationships.count() == 1
+
 
 class TestItem:
     @pytest.mark.usefixtures("entry_original", "entry_edition")

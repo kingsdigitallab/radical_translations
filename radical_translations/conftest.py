@@ -81,8 +81,8 @@ def entry_original() -> Dict[str, Dict[str, str]]:
         "gsx$url": {"$t": ""},
         "gsx$libraries": {"$t": ""},
         "gsx$notes": {"$t": ""},
-        "gsx$citation": {"$t": ""},
-        "gsx$paratextnotes": {"$t": ""},
+        "gsx$citation": {"$t": "some citation"},
+        "gsx$paratextnotes": {"$t": "note this"},
         "gsx$paratextprefaceby": {"$t": ""},
     }
 
@@ -111,8 +111,8 @@ def entry_translation() -> Dict[str, Dict[str, str]]:
         "gsx$url": {"$t": ""},
         "gsx$libraries": {"$t": ""},
         "gsx$notes": {"$t": ""},
-        "gsx$citation": {"$t": ""},
-        "gsx$paratextnotes": {"$t": ""},
+        "gsx$citation": {"$t": "another citation"},
+        "gsx$paratextnotes": {"$t": "some more notes"},
         "gsx$paratextprefaceby": {"$t": "author"},
     }
 

@@ -431,6 +431,8 @@ class Instance(Resource):
     particular published form. These are Instances of the Work. An Instance reflects
     information such as its publisher, place and date of publication, and format."""
 
+    is_paratext = models.BooleanField(default=False, editable=False)
+
     edition_enumeration = models.CharField(
         max_length=128,
         blank=True,
@@ -478,7 +480,7 @@ class Instance(Resource):
 
             title, _ = Title.objects.get_or_create(main_title=main_title)
 
-        instance, _ = Instance.objects.get_or_create(title=title)
+        instance, _ = Instance.objects.get_or_create(title=title, is_paratext=False)
 
         Contribution.from_gsx_entry(instance, entry, "authors", "author")
 
@@ -527,7 +529,35 @@ class Instance(Resource):
 
         instance.save()
 
+        Instance.paratext_from_gsx_entry(entry, instance)
+
         return instance
+
+    @staticmethod
+    def paratext_from_gsx_entry(
+        entry: Dict[str, Dict[str, str]], instance: "Instance"
+    ) -> Optional["Instance"]:
+        """Gets or creates a new paratext `Instance` from a Google Spreadsheet
+        dictionary `entry`."""
+        if not instance:
+            return None
+
+        citation = get_gsx_entry_value(entry, "citation")
+        paratext_notes = get_gsx_entry_value(entry, "paratextnotes")
+
+        if not citation and not paratext_notes:
+            return None
+
+        paratext, _ = Instance.objects.get_or_create(
+            title=instance.title,
+            is_paratext=True,
+            summary=citation,
+            notes=paratext_notes,
+        )
+
+        ResourceRelationship.get_or_create(paratext, "paratext of", instance)
+
+        return paratext
 
 
 class Item(Resource):
