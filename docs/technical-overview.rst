@@ -41,7 +41,7 @@ Agents (Persons, Organisations).
 The data model graph was generated with the `django-extensions graph_models`_
 command::
 
-    $ compose/bin/manage.sh graph_models core agents events utils -E -X PolymorphicModel -X TimeStampedModel -o models.png
+    $ ./bake.py manage graph_models -X TimeStampedModel,PolymorphicModel -o models.png agents core events utils
 
 .. _BIBFRAME: https://www.loc.gov/bibframe/docs/bibframe2-model.html
 .. _FOAF: http://xmlns.com/foaf/spec/
