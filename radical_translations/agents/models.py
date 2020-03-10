@@ -43,7 +43,7 @@ class Agent(PolymorphicModel, TimeStampedModel):
         ordering = ["name"]
 
     def __str__(self) -> str:
-        return self.name
+        return f"[{self.agent_type}] {self.name}"
 
     @property
     def agent_type(self) -> str:
