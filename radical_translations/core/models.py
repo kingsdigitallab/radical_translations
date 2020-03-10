@@ -118,7 +118,7 @@ class Resource(PolymorphicModel, TimeStampedModel):
         ordering = ["title"]
 
     def __str__(self) -> str:
-        return self.title.main_title
+        return f"[{self.resource_type}] {self.title.main_title}"
 
     @property
     def resource_type(self) -> str:
