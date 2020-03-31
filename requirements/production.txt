@@ -11,7 +11,7 @@ beautifulsoup4==4.6.0     # via wagtail
 certifi==2019.11.28       # via requests
 cffi==1.14.0              # via argon2-cffi
 chardet==3.0.4            # via requests
-click==7.0                # via geocoder
+click==7.1.1              # via geocoder
 coreapi==2.3.3            # via -r /requirements/./base.in
 coreschema==0.0.4         # via coreapi
 decorator==4.4.2          # via ratelim
@@ -19,10 +19,10 @@ defusedxml==0.6.0         # via python3-openid
 django-allauth==0.41.0    # via -r /requirements/./base.in
 django-anymail[mailgun]==7.0.0  # via -r /requirements/production.in
 django-auth-ldap==2.1.0   # via -r /requirements/production.in
-django-controlled-vocabulary==0.6  # via -r /requirements/./base.in
+git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@132e5a0ae83ade28f907e690e5adc9883e265082  # via -r /requirements/./base.in
 django-crispy-forms==1.8.1  # via -r /requirements/./base.in
 django-environ==0.4.5     # via -r /requirements/./base.in
-django-geonames-place==0.4.6  # via -r /requirements/./base.in
+django-geonames-place==0.6.0  # via -r /requirements/./base.in
 django-kdl-wagtail==0.9.0  # via -r /requirements/./base.in
 django-model-utils==4.0.0  # via -r /requirements/./base.in, django-geonames-place
 django-modelcluster==5.0.1  # via wagtail
@@ -35,7 +35,7 @@ djangorestframework==3.11.0  # via -r /requirements/./base.in, wagtail
 draftjs-exporter==2.1.7   # via wagtail
 edtf==4.0.1               # via -r /requirements/./base.in
 elasticsearch-dsl==7.1.0  # via -r /requirements/./base.in
-elasticsearch==7.5.1      # via elasticsearch-dsl
+elasticsearch==7.6.0      # via elasticsearch-dsl
 future==0.18.2            # via geocoder
 geocoder==1.38.1          # via django-geonames-place
 gunicorn==20.0.4          # via -r /requirements/production.in
@@ -50,7 +50,7 @@ pillow==6.2.2             # via wagtail
 psycopg2==2.8.4           # via -r /requirements/production.in
 pyasn1-modules==0.2.8     # via python-ldap
 pyasn1==0.4.8             # via pyasn1-modules, python-ldap
-pycparser==2.19           # via cffi
+pycparser==2.20           # via cffi
 pyparsing==2.4.6          # via edtf
 python-dateutil==2.8.1    # via edtf, elasticsearch-dsl
 python-ldap==3.2.0        # via django-auth-ldap
