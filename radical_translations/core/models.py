@@ -602,7 +602,7 @@ class Item(Resource):
         help_text="Entity holding the item or from which it is available.",
     )
     electronic_locator = models.URLField(
-        max_length=1024,
+        max_length=1280,
         blank=True,
         null=True,
         help_text="Electronic location from which the resource is available.",
