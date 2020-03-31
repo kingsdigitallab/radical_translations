@@ -32,6 +32,8 @@ Fixed
 ~~~~~
 * Production Django Dockerfile: add missing dependencies.
 * ``Resource`` import, it was failing to import `Original` works.
+* ``Resource`` import, it was creating ``Work`` objects for derivative instances.
+* ``Resource`` import, import relationships to multiple ``Work`` objects.
 
 
 [0.2.2] - 2020-02-12
