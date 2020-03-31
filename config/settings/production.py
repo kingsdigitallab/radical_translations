@@ -167,7 +167,7 @@ AUTHENTICATION_BACKENDS = [
 LDAP_BASE_DC = env("LDAP_BASE_DC")
 LDAP_BASE_OU = f"ou=groups,{LDAP_BASE_DC}"
 LDAP_BASE_GROUP = f"cn={env('LDAP_BASE_GROUP')},{LDAP_BASE_OU}"
-LDAP_PROJECT_GROUP = f"cn=radical_translations,{LDAP_BASE_OU}"
+LDAP_PROJECT_GROUP = f"cn=radicalt,{LDAP_BASE_OU}"
 
 # Baseline configuration
 AUTH_LDAP_SERVER_URI = env("LDAP_SERVER_URI")
@@ -197,7 +197,7 @@ AUTH_LDAP_USER_ATTR_MAP = {
 
 AUTH_LDAP_USER_FLAGS_BY_GROUP = {
     "is_active": LDAPGroupQuery(LDAP_BASE_GROUP) | LDAPGroupQuery(LDAP_PROJECT_GROUP),
-    "is_staff": LDAP_BASE_GROUP,
+    "is_staff": LDAPGroupQuery(LDAP_BASE_GROUP) | LDAPGroupQuery(LDAP_PROJECT_GROUP),
     "is_superuser": LDAP_BASE_GROUP,
     # TODO: Wagtail group settings
 }
