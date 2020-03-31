@@ -16,8 +16,8 @@ class Date(TimeStampedModel):
     https://github.com/ixc/python-edtf."""
 
     date_display = models.CharField(
-        blank=True,
         max_length=255,
+        blank=True,
         help_text="Date in EDTF format: https://www.loc.gov/standards/datetime/",
     )
 
@@ -38,6 +38,10 @@ class Date(TimeStampedModel):
     # for sorting
     date_sort_ascending = models.FloatField(blank=True, null=True)
     date_sort_descending = models.FloatField(blank=True, null=True)
+
+    date_radical = models.CharField(
+        max_length=255, blank=True, null=True, help_text="Alternative calendar date"
+    )
 
     class Meta:
         ordering = ["date_sort_ascending", "date_sort_descending"]
