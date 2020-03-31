@@ -519,8 +519,8 @@ class Instance(Resource):
                     main_title = main_title.strip()
                     if main_title:
                         title, _ = Title.objects.get_or_create(main_title=main_title)
-                        work, _ = Work.objects.get_or_create(title=title)
-                        ResourceRelationship.get_or_create(instance, key, work)
+                        resource = Instance.get_or_create_related_resource(title)
+                        ResourceRelationship.get_or_create(instance, key, resource)
 
         value = get_gsx_entry_value(entry, "year")
         if value:
@@ -544,6 +544,25 @@ class Instance(Resource):
         Instance.paratext_from_gsx_entry(entry, instance)
 
         return instance
+
+    @staticmethod
+    def get_or_create_related_resource(title: Title) -> Optional["Resource"]:
+        if not title:
+            return None
+
+        try:
+            return Work.objects.get(title=title)
+        except Work.DoesNotExist:
+            pass
+
+        try:
+            return Instance.objects.get(title=title, _is_paratext=False)
+        except Instance.DoesNotExist:
+            pass
+
+        work, _ = Work.objects.get_or_create(title=title)
+
+        return work
 
     @staticmethod
     def paratext_from_gsx_entry(

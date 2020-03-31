@@ -284,6 +284,25 @@ class TestInstance:
         )
         assert instance.relationships.last().relationship_type.label == "other edition"
 
+    @pytest.mark.usefixtures("entry_translation", "title")
+    def test_get_or_create_related_resource(
+        self, entry_translation: Dict[str, Dict[str, str]], title
+    ):
+        assert Instance.get_or_create_related_resource(None) is None
+
+        instance = Instance.from_gsx_entry(entry_translation)
+        resource = Instance.get_or_create_related_resource(instance.title)
+        assert isinstance(resource, Instance)
+
+        work = Work.from_gsx_entry(entry_translation)
+        resource = Instance.get_or_create_related_resource(work.title)
+        assert isinstance(resource, Work)
+
+        resource = Instance.get_or_create_related_resource(title)
+        assert isinstance(resource, Work)
+
+        # Instance.from_gsx_entry(entry_translation)
+
     @pytest.mark.usefixtures("entry_original", "resource")
     def test_paratext_from_gsx_entry(
         self, entry_original: Dict[str, Dict[str, str]], resource: Resource,
