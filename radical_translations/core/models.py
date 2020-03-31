@@ -515,10 +515,12 @@ class Instance(Resource):
 
             for key in fields_mapping.keys():
                 value = get_gsx_entry_value(entry, fields_mapping[key])
-                if value:
-                    title, _ = Title.objects.get_or_create(main_title=value)
-                    work, _ = Work.objects.get_or_create(title=title)
-                    ResourceRelationship.get_or_create(instance, key, work)
+                for main_title in value.split("; "):
+                    main_title = main_title.strip()
+                    if main_title:
+                        title, _ = Title.objects.get_or_create(main_title=main_title)
+                        work, _ = Work.objects.get_or_create(title=title)
+                        ResourceRelationship.get_or_create(instance, key, work)
 
         value = get_gsx_entry_value(entry, "year")
         if value:
