@@ -9,8 +9,8 @@ from radical_translations.utils.models import Date
 
 @admin.register(Date)
 class DateAdmin(admin.ModelAdmin):
-    fields = ["date_display"]
-    search_fields = ["date_display"]
+    fields = ["date_display", "date_radical"]
+    search_fields = ["date_display", "date_radical"]
 
 
 admin.site.unregister(Place)
