@@ -22,11 +22,12 @@ Added
 * humans.txt (http://humanstxt.org/).
 * Place of birth and place of death to Person model.
 * Paratext mapping.
+* Date field to record dates that are in alternative formats.
 
 Changed
 ~~~~~~~
 * The import `Resource` command to import `Item` records from GSX.
-* Reduce th number of models in the admin interface.
+* Reduce the number of models in the admin interface.
 
 Fixed
 ~~~~~
