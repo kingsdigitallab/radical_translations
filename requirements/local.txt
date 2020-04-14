@@ -134,7 +134,7 @@ unidecode==1.1.1          # via wagtail
 uritemplate==3.0.1        # via coreapi
 urllib3==1.25.8           # via django-controlled-vocabulary, elasticsearch, requests
 virtualenv==16.7.9        # via pre-commit
-wagtail==2.7.1
+wagtail==2.7.2
 watchdog==0.10.1
 wcwidth==0.1.8            # via prompt-toolkit, pytest
 webencodings==0.5.1       # via html5lib
