@@ -504,23 +504,22 @@ class Instance(Resource):
         if value:
             instance.edition_enumeration = value
 
+        fields_mapping = {"part of": "partof"}
+
         if work:
             ResourceRelationship.get_or_create(instance, "instance of", work)
         else:
-            fields_mapping = {
-                "translation of": "translationof",
-                "other edition": "editionof",
-                "part of": "partof",
-            }
+            fields_mapping["translation of"] = "translationof"
+            fields_mapping["other edition"] = "editionof"
 
-            for key in fields_mapping.keys():
-                value = get_gsx_entry_value(entry, fields_mapping[key])
-                for main_title in value.split("; "):
-                    main_title = main_title.strip()
-                    if main_title:
-                        title, _ = Title.objects.get_or_create(main_title=main_title)
-                        resource = Instance.get_or_create_related_resource(title)
-                        ResourceRelationship.get_or_create(instance, key, resource)
+        for key in fields_mapping.keys():
+            value = get_gsx_entry_value(entry, fields_mapping[key])
+            for main_title in value.split("; "):
+                main_title = main_title.strip()
+                if main_title:
+                    title, _ = Title.objects.get_or_create(main_title=main_title)
+                    resource = Instance.get_or_create_related_resource(title)
+                    ResourceRelationship.get_or_create(instance, key, resource)
 
         value = get_gsx_entry_value(entry, "year")
         if value:
