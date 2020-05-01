@@ -75,6 +75,16 @@ class VocabularyResourceRelationshipType(VocabularyBaseList):
                 ),
             ],
             [
+                "relatedTo",
+                "related to",
+                "Any relationship between Work, Instance, and Item resources.",
+            ],
+            [
+                "references",
+                "references",
+                "Resource that is referenced by the described resource.",
+            ],
+            [
                 "translationOf",
                 "translation of",
                 (
