@@ -349,6 +349,12 @@ class ResourceRelationship(TimeStampedModel):
         help_text="Related resource.",
     )
 
+    classification = ControlledTermsField(
+        ["wikidata"],
+        blank=True,
+        help_text="Editorial classification of the relationship.",
+    )
+
     def __str__(self) -> str:
         return f"{self.resource} -> {self.relationship_type.label} -> {self.related_to}"
 
