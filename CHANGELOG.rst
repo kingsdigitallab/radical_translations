@@ -23,6 +23,7 @@ Added
 * Place of birth and place of death to Person model.
 * Paratext mapping.
 * Date field to record dates that are in alternative formats.
+* New resource relationship types.
 
 Changed
 ~~~~~~~
