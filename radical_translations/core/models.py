@@ -271,7 +271,15 @@ class Contribution(TimeStampedModel):
             "printing, distribution, issue, release or production of a resource."
         ),
     )
-    published_as = models.CharField(max_length=256, blank=True, null=True)
+    published_as = models.CharField(
+        max_length=256,
+        blank=True,
+        null=True,
+        help_text=(
+            "Name as it appears in the published resource if different from the agent "
+            "name. for pseudonyms, appelations, etc."
+        ),
+    )
     roles = ControlledTermsField(
         ["wikidata"],
         blank=True,
