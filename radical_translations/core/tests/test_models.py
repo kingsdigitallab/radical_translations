@@ -65,10 +65,24 @@ class TestContribution:
         assert Contribution.get_or_create(resource, None, None) is None
         assert Contribution.get_or_create(None, person, None) is None
         assert Contribution.get_or_create(resource, person, None) is not None
+        assert (
+            Contribution.get_or_create(resource, person, None, "Pseudo Nym") is not None
+        )
 
         c = Contribution.get_or_create(resource, person, role)
         assert c is not None
         assert role in c.roles.first().label.lower()
+
+    # @pytest.mark.usefixtures("person", "resource")
+    # def test_str(self, person: Person, resource: Resource):
+    #     c = Contribution.get_or_create(resource, person, None, None)
+    #     assert person.name in c.__str__()
+
+    #     pseudonym = "Pseudo Nym"
+
+    #     c = Contribution.get_or_create(resource, person, pseudonym, None)
+    #     assert pseudonym in c.__str__()
+    #     assert person.name in c.__str__()
 
 
 @pytest.mark.usefixtures("vocabulary")

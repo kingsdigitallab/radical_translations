@@ -271,6 +271,7 @@ class Contribution(TimeStampedModel):
             "printing, distribution, issue, release or production of a resource."
         ),
     )
+    published_as = models.CharField(max_length=256, blank=True, null=True)
     roles = ControlledTermsField(
         ["wikidata"],
         blank=True,
@@ -278,7 +279,11 @@ class Contribution(TimeStampedModel):
     )
 
     def __str__(self) -> str:
-        return f"{self.agent}: {', '.join([role.label for role in self.roles.all()])}"
+        agent = self.agent
+        if self.published_as:
+            agent = f"{self.published_as} ({agent})"
+
+        return f"{agent}: {', '.join([role.label for role in self.roles.all()])}"
 
     @staticmethod
     def from_gsx_entry(
@@ -313,13 +318,13 @@ class Contribution(TimeStampedModel):
 
     @staticmethod
     def get_or_create(
-        resource: Resource, agent: Agent, role: str
+        resource: Resource, agent: Agent, role: str, published_as: Optional[str] = None,
     ) -> Optional["Contribution"]:
         if not resource or not agent:
             return None
 
         contribution, _ = Contribution.objects.get_or_create(
-            resource=resource, agent=agent
+            resource=resource, agent=agent, published_as=published_as
         )
 
         if role:
