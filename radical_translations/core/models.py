@@ -77,7 +77,7 @@ class Resource(PolymorphicModel, TimeStampedModel):
         help_text="Language associated with a resource or its parts.",
     )
     subjects = ControlledTermsField(
-        ["fast-topic", "wikidata"],
+        ["fast-topic", "fast-forms", "wikidata"],
         blank=True,
         help_text="Subject term(s) describing a resource",
     )
