@@ -461,7 +461,7 @@ class Instance(Resource):
         null=True,
         help_text=(
             "Description of the content of a resource, such as an abstract, "
-            "summary, etc.."
+            "summary, citation, etc."
         ),
     )
 
