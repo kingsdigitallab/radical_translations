@@ -11,6 +11,7 @@ from radical_translations.core.models import (
     Instance,
     Item,
     Resource,
+    ResourceLanguage,
     ResourceRelationship,
     Title,
     Work,
@@ -38,6 +39,12 @@ class EventInline(admin.TabularInline):
     extra = 1
     verbose_name = "Event related to this resource"
     verbose_name_plural = "Events related to this resource"
+
+
+class ResourceLanguageInline(admin.TabularInline):
+    model = ResourceLanguage
+    extra = 1
+    verbose_name = "Language"
 
 
 class ResourceRelationshipInline(admin.TabularInline):
@@ -72,7 +79,7 @@ class ResourceAdmin(PolymorphicParentModelAdmin):
         ("relationships__relationship_type", admin.RelatedOnlyFieldListFilter),
         ("classifications__edition", admin.RelatedOnlyFieldListFilter),
         ("subjects", admin.RelatedOnlyFieldListFilter),
-        ("languages", admin.RelatedOnlyFieldListFilter),
+        ("languages__language", admin.RelatedOnlyFieldListFilter),
         ("places", admin.RelatedOnlyFieldListFilter),
     ]
     search_fields = [
@@ -86,7 +93,6 @@ class ResourceAdmin(PolymorphicParentModelAdmin):
 class ResourceChildAdmin(PolymorphicChildModelAdmin):
     autocomplete_fields = [
         "date",
-        "languages",
         "places",
         "subjects",
         "title",
@@ -95,6 +101,7 @@ class ResourceChildAdmin(PolymorphicChildModelAdmin):
     inlines = [
         ClassificationInline,
         ContributionInline,
+        ResourceLanguageInline,
         ResourceRelationshipInline,
         ResourceRelationshipInverseInline,
         EventInline,

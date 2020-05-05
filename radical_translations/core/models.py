@@ -72,11 +72,6 @@ class Resource(PolymorphicModel, TimeStampedModel):
         ),
     )
 
-    languages = ControlledTermsField(
-        ["iso639-2"],
-        blank=True,
-        help_text="Language associated with a resource or its parts.",
-    )
     subjects = ControlledTermsField(
         ["fast-topic", "fast-forms", "wikidata"],
         blank=True,
@@ -136,7 +131,7 @@ class Resource(PolymorphicModel, TimeStampedModel):
         )
 
     def get_language_names(self) -> str:
-        return "; ".join([language.label for language in self.languages.all()])
+        return "; ".join([rl.language.label for rl in self.languages.all()])
 
     get_language_names.short_description = "Languages"  # type: ignore
 
@@ -179,7 +174,7 @@ class Resource(PolymorphicModel, TimeStampedModel):
             term = search_term_or_none("iso639-2", name)
             if term:
                 languages.append(term)
-                resource.languages.add(term)
+                ResourceLanguage.objects.get_or_create(resource=resource, language=term)
 
         return languages
 
@@ -205,6 +200,25 @@ class Resource(PolymorphicModel, TimeStampedModel):
                 resource.subjects.add(term)
 
         return subjects
+
+
+class ResourceLanguage(TimeStampedModel, EditorialClassificationModel):
+    """Language associated with a resource or its parts."""
+
+    resource = models.ForeignKey(
+        Resource, on_delete=models.CASCADE, related_name="languages"
+    )
+    language = ControlledTermField(
+        ["iso639-2"],
+        on_delete=models.CASCADE,
+        help_text="Language associated with a resource or its parts.",
+    )
+
+    class Meta:
+        unique_together = ["resource", "language"]
+
+    def __str__(self):
+        return self.language
 
 
 class Classification(TimeStampedModel):
@@ -437,8 +451,8 @@ class Work(Resource):
                 resource=work, agent=contribution.agent, roles=contribution.roles
             )
 
-        for language in instance.languages.all():
-            work.languages.add(language)
+        for rl in instance.languages.all():
+            ResourceLanguage.objects.get_or_create(resource=work, language=rl.language)
 
         for subject in instance.subjects.all():
             work.subjects.add(subject)
