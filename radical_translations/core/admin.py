@@ -62,9 +62,6 @@ class ResourceRelationshipInverseInline(admin.TabularInline):
 class TitleAdmin(admin.ModelAdmin):
     search_fields = ["title", "subtitle"]
 
-    def get_model_perms(self, req):
-        return {}
-
 
 @admin.register(Resource)
 class ResourceAdmin(PolymorphicParentModelAdmin):
