@@ -255,7 +255,7 @@ class Classification(TimeStampedModel):
         return classification
 
 
-class Contribution(TimeStampedModel):
+class Contribution(TimeStampedModel, EditorialClassificationModel):
     """Agent and role with respect to the resource being described."""
 
     resource = models.ForeignKey(
