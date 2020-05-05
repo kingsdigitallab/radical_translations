@@ -9,7 +9,7 @@ beautifulsoup4==4.6.0     # via wagtail
 certifi==2020.4.5.1       # via requests
 cffi==1.14.0              # via argon2-cffi
 chardet==3.0.4            # via requests
-click==7.1.1              # via geocoder
+click==7.1.2              # via geocoder
 convertdate==2.2.0        # via -r /requirements/base.in
 coreapi==2.3.3            # via -r /requirements/base.in
 coreschema==0.0.4         # via coreapi
