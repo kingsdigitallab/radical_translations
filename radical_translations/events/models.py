@@ -1,9 +1,9 @@
 from typing import Dict, Optional
 
+from controlled_vocabulary.models import ControlledTermsField
 from django.db import models
 from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
-
 from radical_translations.core.models import Resource
 from radical_translations.utils.models import (
     Date,
@@ -40,6 +40,9 @@ class Event(TimeStampedModel):
         blank=True,
         related_name="events",
         help_text="Resources that are related to this  Event.",
+    )
+    classification = ControlledTermsField(
+        ["wikidata"], blank=True, help_text="Editorial classification of the event.",
     )
 
     class Meta:
