@@ -218,7 +218,7 @@ class ResourceLanguage(TimeStampedModel, EditorialClassificationModel):
         unique_together = ["resource", "language"]
 
     def __str__(self):
-        return self.language
+        return self.language.label
 
 
 class Classification(TimeStampedModel):
