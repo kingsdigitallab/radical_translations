@@ -90,16 +90,6 @@ class Resource(PolymorphicModel, TimeStampedModel):
             "or production of a resource. May be date typed."
         ),
     )
-    places = models.ManyToManyField(
-        Place,
-        blank=True,
-        help_text=(
-            "Geographic location or place entity associated with a resource or element "
-            "of description, such as the place associated with the publication, "
-            "printing, distribution, issue, release or production of a resource, place "
-            "of an event."
-        ),
-    )
 
     notes = models.TextField(
         blank=True,
@@ -358,6 +348,33 @@ class ResourceLanguage(TimeStampedModel, EditorialClassificationModel):
         return self.language.label
 
 
+class ResourcePlace(TimeStampedModel, EditorialClassificationModel):
+    """Geographic location or place entity associated with a resource or element
+    of description, such as the place associated with the publication,
+    printing, distribution, issue, release or production of a resource, place
+    of an event."""
+
+    resource = models.ForeignKey(
+        Resource, on_delete=models.CASCADE, related_name="places"
+    )
+    place = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE,
+        help_text=(
+            "Geographic location or place entity associated with a resource or element "
+            "of description, such as the place associated with the publication, "
+            "printing, distribution, issue, release or production of a resource, place "
+            "of an event."
+        ),
+    )
+
+    class Meta:
+        unique_together = ["resource", "place"]
+
+    def __str__(self):
+        return self.place.address
+
+
 class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     """Any relationship between Work, Instance, and Item resources."""
 
@@ -558,7 +575,7 @@ class Instance(Resource):
             for name in value.split("; "):
                 place = get_geonames_place_from_gsx_place(name)
                 if place:
-                    instance.places.add(place)
+                    ResourcePlace.objects.get_or_create(resource=instance, place=place)
 
         Contribution.from_gsx_entry(instance, entry, "organisation", "publisher")
 

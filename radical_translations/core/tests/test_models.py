@@ -125,7 +125,7 @@ class TestResource:
         assert instance is not None
         assert "ruines" in instance.title.main_title
         assert instance.date.date_display == "1791"
-        assert "Paris" in instance.places.first().address
+        assert "Paris" in instance.places.first().place.address
 
         instance = Instance.from_gsx_entry(entry_original, resource)
         assert instance is not None
@@ -267,7 +267,7 @@ class TestInstance:
         assert instance is not None
         assert "ruines" in instance.title.main_title
         assert instance.date.date_display == "1791"
-        assert "Paris" in instance.places.first().address
+        assert "Paris" in instance.places.first().place.address
 
         instance = Instance.from_gsx_entry(entry_original, resource)
         assert instance is not None
