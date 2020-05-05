@@ -1,6 +1,7 @@
 import re
 from typing import Dict, Optional
 
+from controlled_vocabulary.models import ControlledTermsField
 from django.db import models
 from edtf.fields import EDTFField
 from edtf.parser.edtf_exceptions import EDTFParseException
@@ -66,6 +67,15 @@ class Date(TimeStampedModel):
             return None
 
         return date
+
+
+class EditorialClassificationModel(models.Model):
+    classification = ControlledTermsField(
+        ["wikidata"], blank=True, help_text="Editorial classification.",
+    )
+
+    class Meta:
+        abstract = True
 
 
 def get_gsx_entry_value(entry: Dict[str, Dict[str, str]], field: str) -> Optional[str]:

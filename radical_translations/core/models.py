@@ -14,6 +14,7 @@ from polymorphic.models import PolymorphicModel
 from radical_translations.agents.models import Agent, Organisation, Person
 from radical_translations.utils.models import (
     Date,
+    EditorialClassificationModel,
     get_gsx_entry_value,
     get_geonames_place_from_gsx_place,
 )
@@ -343,7 +344,7 @@ class Contribution(TimeStampedModel):
         return contribution
 
 
-class ResourceRelationship(TimeStampedModel):
+class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     """Any relationship between Work, Instance, and Item resources."""
 
     resource = models.ForeignKey(
@@ -360,12 +361,6 @@ class ResourceRelationship(TimeStampedModel):
         on_delete=models.CASCADE,
         related_name="related_to",
         help_text="Related resource.",
-    )
-
-    classification = ControlledTermsField(
-        ["wikidata"],
-        blank=True,
-        help_text="Editorial classification of the relationship.",
     )
 
     def __str__(self) -> str:
