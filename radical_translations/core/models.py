@@ -202,25 +202,6 @@ class Resource(PolymorphicModel, TimeStampedModel):
         return subjects
 
 
-class ResourceLanguage(TimeStampedModel, EditorialClassificationModel):
-    """Language associated with a resource or its parts."""
-
-    resource = models.ForeignKey(
-        Resource, on_delete=models.CASCADE, related_name="languages"
-    )
-    language = ControlledTermField(
-        ["iso639-2"],
-        on_delete=models.CASCADE,
-        help_text="Language associated with a resource or its parts.",
-    )
-
-    class Meta:
-        unique_together = ["resource", "language"]
-
-    def __str__(self):
-        return self.language.label
-
-
 class Classification(TimeStampedModel):
     """System of coding and organizing materials according to their subject."""
 
@@ -356,6 +337,25 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
                 contribution.roles.add(term)
 
         return contribution
+
+
+class ResourceLanguage(TimeStampedModel, EditorialClassificationModel):
+    """Language associated with a resource or its parts."""
+
+    resource = models.ForeignKey(
+        Resource, on_delete=models.CASCADE, related_name="languages"
+    )
+    language = ControlledTermField(
+        ["iso639-2"],
+        on_delete=models.CASCADE,
+        help_text="Language associated with a resource or its parts.",
+    )
+
+    class Meta:
+        unique_together = ["resource", "language"]
+
+    def __str__(self):
+        return self.language.label
 
 
 class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
