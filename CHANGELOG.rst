@@ -24,6 +24,8 @@ Added
 * Paratext mapping.
 * Date field to record dates that are in alternative formats.
 * New resource relationship types.
+* Editorial classification field to further specify relationships between objects.
+* Field for contributions under pseudonyms.
 
 Changed
 ~~~~~~~
@@ -38,6 +40,10 @@ Fixed
 * ``Resource`` import, it was creating ``Work`` objects for derivative instances.
 * ``Resource`` import, import relationships to multiple ``Work`` objects.
 
+Security
+~~~~~~~~
+* Upgrade jQuery, https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/
+* Upgrade Wagtail, https://docs.wagtail.io/en/stable/releases/2.8.1.html
 
 [0.2.2] - 2020-02-12
 --------------------
