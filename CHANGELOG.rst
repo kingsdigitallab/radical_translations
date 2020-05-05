@@ -27,6 +27,7 @@ Added
 * Editorial classification field to further specify relationships between objects.
 * Field for contributions under pseudonyms.
 
+
 Changed
 ~~~~~~~
 * The import `Resource` command to import `Item` records from GSX.
