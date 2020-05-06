@@ -464,7 +464,7 @@ class Work(Resource):
         if not main_title:
             return None
 
-        title, _ = Title.objects.get_or_create(main_title=main_title)
+        title = Title.get_or_create(main_title)
         work, _ = Work.objects.get_or_create(title=title)
 
         Contribution.from_gsx_entry(work, entry, "authors", "author")
@@ -555,7 +555,7 @@ class Instance(Resource):
             if not main_title:
                 return None
 
-            title, _ = Title.objects.get_or_create(main_title=main_title)
+            title = Title.get_or_create(main_title)
 
         instance, _ = Instance.objects.get_or_create(title=title, _is_paratext=False)
 
@@ -584,7 +584,7 @@ class Instance(Resource):
             for main_title in value.split("; "):
                 main_title = main_title.strip()
                 if main_title:
-                    title, _ = Title.objects.get_or_create(main_title=main_title)
+                    title = Title.get_or_create(main_title)
                     resource = Instance.get_or_create_related_resource(title)
                     ResourceRelationship.get_or_create(instance, key, resource)
 

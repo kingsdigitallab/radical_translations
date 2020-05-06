@@ -77,7 +77,8 @@ class ResourceRelationshipInverseInline(admin.TabularInline):
 
 @admin.register(Title)
 class TitleAdmin(admin.ModelAdmin):
-    search_fields = ["title", "subtitle"]
+    list_display = ["main_title", "subtitle"]
+    search_fields = ["main_title", "subtitle"]
 
 
 @admin.register(Resource)
