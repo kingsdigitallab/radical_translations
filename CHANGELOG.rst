@@ -33,6 +33,7 @@ Changed
 * The import `Resource` command to import `Item` records from GSX.
 * Reduce the number of models in the admin interface.
 * Allow part of relationships for original works.
+* Add counter as `subtitle` to imported `Untitled` and `Translation` titles from GSX.
 
 Fixed
 ~~~~~
