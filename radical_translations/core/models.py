@@ -42,12 +42,34 @@ class Title(TimeStampedModel):
 
     class Meta:
         ordering = ["main_title", "subtitle"]
+        unique_together = ["main_title", "subtitle"]
 
     def __str__(self) -> str:
         if self.subtitle:
             return f"{self.main_title}: {self.subtitle}"
 
         return self.main_title
+
+    @staticmethod
+    def get_or_create(
+        title: str, subtitle: Optional[str] = None, increment: bool = True
+    ) -> Optional["Title"]:
+        """Gets or creates a new title object. If `increment` is True and if the `title`
+        is Untitled or Translation, it will automatically add a counter to the
+        `main_title`."""
+        if not title:
+            return None
+
+        if increment:
+            title_lower = title.lower()
+            if title_lower in ["untitled", "translation"]:
+                subtitle = (
+                    Title.objects.filter(main_title__iexact=title_lower).count() + 1
+                )
+
+        title, _ = Title.objects.get_or_create(main_title=title, subtitle=subtitle)
+
+        return title
 
 
 class Resource(PolymorphicModel, TimeStampedModel):

@@ -11,10 +11,32 @@ from radical_translations.core.models import (
     Item,
     Resource,
     ResourceRelationship,
+    Title,
     Work,
 )
 
 pytestmark = pytest.mark.django_db
+
+
+class TestTitle:
+    def test_get_or_create(self):
+        assert Title.get_or_create(None, None) is None
+
+        mt = "hello"
+        title = Title.get_or_create(mt)
+        assert title is not None
+        assert mt == title.main_title
+
+        for mt in ["untitled", "translation"]:
+            title = Title.get_or_create(mt)
+            assert title is not None
+            assert mt == title.main_title
+            assert 1 == title.subtitle
+
+            title = Title.get_or_create(mt)
+            assert title is not None
+            assert mt == title.main_title
+            assert 2 == title.subtitle
 
 
 @pytest.mark.usefixtures("vocabulary")

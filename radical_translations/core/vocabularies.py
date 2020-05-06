@@ -23,6 +23,20 @@ class VocabularyClassificationEdition(VocabularyBaseList):
         ]
 
 
+class VocabularyRbmscv(VocabularyBaseList):
+    base_url = "http://id.loc.gov/vocabulary/genreFormSchemes/rbmscv"
+    concept = "wikidata:Q324254:ontology"
+    description = (
+        "Chicago: Rare Books and Manuscripts Section, Association of College and "
+        "Research Libraries"
+    )
+    label = "RBMS controlled vocabularies"
+    prefix = "rbmscv"
+
+    def _get_searchable_terms(self):
+        return []
+
+
 class VocabularyResourceRelationshipType(VocabularyBaseList):
     base_url = "http://id.loc.gov/ontologies/bibframe-category.html#gridTable27"
     concept = "wikidata:Q324254:ontology"
