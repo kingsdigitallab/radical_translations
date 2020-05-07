@@ -95,7 +95,7 @@ class Resource(PolymorphicModel, TimeStampedModel):
     )
 
     subjects = ControlledTermsField(
-        ["fast-topic", "fast-forms", "wikidata"],
+        ["fast-forms", "fast-topic", "rbmscv", "wikidata"],
         blank=True,
         help_text="Subject term(s) describing a resource",
     )

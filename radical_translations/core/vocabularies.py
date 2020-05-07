@@ -34,7 +34,105 @@ class VocabularyRbmscv(VocabularyBaseList):
     prefix = "rbmscv"
 
     def _get_searchable_terms(self):
-        return []
+        return [
+            ["False imprint dates", "False imprint dates"],
+            [
+                "Forgeries",
+                "Forgeries",
+                (
+                    "writings created or altered in fraudulent imitation of an author. "
+                    "Use for: Counterfeits, Fakes"
+                ),
+            ],
+            [
+                "Imprint dates style",
+                "Imprint dates style",
+                "use for: Calendar styles, Dating styles (for revolutionary calendars)",
+            ],
+            ["Inserted text leaves", "Inserted text leaves"],
+            ["Insertions", "Insertions"],
+            [
+                "Parts (Publishing)",
+                "Parts (Publishing)",
+                (
+                    "the individually-published instalments of a work intended to be "
+                    "bound together when complete. Use for: Fascicles, Installments"
+                ),
+            ],
+            ["Piracies", "Piracies", "use for: Pirated editions"],
+            [
+                "Printer’s devices",
+                "Printer’s devices",
+                "use for: Publisher’s devices, Printer’s marks",
+            ],
+            [
+                "Printer’s mottoes",
+                "Printer’s mottoes",
+                "use for: Publisher’s mottoes (for radical publishers)",
+            ],
+            [
+                "Privately published books",
+                "Privately published books",
+                "books published for private distribution only",
+            ],
+            ["Series", "Series", "use for: Publisher’s series"],
+            [
+                "Banned works",
+                "Banned works",
+                (
+                    "works which have been officially prohibited from distribution or "
+                    "sale by a legal authority, civil or ecclesiastical"
+                ),
+            ],
+            [
+                "Bookseller’s advertisements",
+                "Bookseller’s advertisements",
+                (
+                    "use this term rather than [Publisher’s advertisements] for "
+                    "examples appearing before the roles of bookseller and publisher "
+                    "were clearly differentiated"
+                ),
+            ],
+            [
+                "Bookseller’s catalogs",
+                "Bookseller’s catalogs",
+                (
+                    "use this term rather than [Publisher’s catalogs] for examples "
+                    "appearing before the roles of bookseller and publisher were "
+                    "clearly differentiated"
+                ),
+            ],
+            [
+                "Book prospectuses",
+                "Book prospectuses",
+                (
+                    "printed descriptions or accounts, sometimes incorporating sample "
+                    "text or specimen pages, issued separately or as part of books or "
+                    "periodicals, to solicit subscription, purchase, or other "
+                    "patronage of forthcoming books"
+                ),
+            ],
+            [
+                "Censored works",
+                "Censored works",
+                (
+                    "works that have been altered, prohibited, or suppressed because "
+                    "of allegedly objectionable content (used for: Censored books, "
+                    "Prohibited books/works, Banned books/works, Condemned works, "
+                    "Expurgated editions, Bowdlerized books)"
+                ),
+            ],
+            [
+                "Underground literature",
+                "Underground literature",
+                "use for Clandestine publications",
+            ],
+            [
+                "Unfinished works",
+                "Unfinished works",
+                "works not finished by the author",
+            ],
+        ]
 
 
 class VocabularyResourceRelationshipType(VocabularyBaseList):
