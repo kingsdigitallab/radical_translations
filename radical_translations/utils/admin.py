@@ -9,7 +9,12 @@ from radical_translations.utils.models import Date
 
 @admin.register(Date)
 class DateAdmin(admin.ModelAdmin):
-    fields = ["date_display", "date_radical"]
+    fields = [
+        "date_display",
+        "date_display_classification",
+        "date_radical",
+        "date_radical_classification",
+    ]
     search_fields = ["date_display", "date_radical"]
 
 

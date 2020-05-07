@@ -21,6 +21,11 @@ class Date(TimeStampedModel):
         blank=True,
         help_text="Date in EDTF format: https://www.loc.gov/standards/datetime/",
     )
+    date_display_classification = ControlledTermsField(
+        ["wikidata"],
+        blank=True,
+        help_text="Editorial classification of the display date.",
+    )
 
     date_edtf = EDTFField(
         natural_text_field="date_display",
@@ -41,7 +46,12 @@ class Date(TimeStampedModel):
     date_sort_descending = models.FloatField(blank=True, null=True)
 
     date_radical = models.CharField(
-        max_length=255, blank=True, null=True, help_text="Alternative calendar date"
+        max_length=255, blank=True, null=True, help_text="Alternative calendar date."
+    )
+    date_radical_classification = ControlledTermsField(
+        ["wikidata"],
+        blank=True,
+        help_text="Editorial classification of the radical date.",
     )
 
     class Meta:
