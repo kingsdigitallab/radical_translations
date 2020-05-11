@@ -26,7 +26,7 @@ Added
 * New resource relationship types.
 * Editorial classification field to further specify relationships between objects.
 * Field for contributions under pseudonyms.
-
+* Chicago: Rare Books and Manuscripts Section controlled vocabulary.
 
 Changed
 ~~~~~~~
