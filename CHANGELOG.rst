@@ -11,12 +11,17 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/en/1.0.0/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+
 [0.3.1] - 2020-05-12
 --------------------
 
 Fixed
 ~~~~~
-* Constraint on unique titles, it was causing duplicate titles under race conditions
+* Constraint on unique titles, it potentially caused duplicate entries under race
+conditions.
 
 [0.3.0] - 2020-05-11
 --------------------
