@@ -33,7 +33,7 @@ class Title(TimeStampedModel):
     subtitle = models.CharField(
         max_length=256,
         blank=True,
-        null=True,
+        default="",
         help_text=(
             "Word, character, or group of words and/or characters that contains the "
             "remainder of the title after the main title. Possible title component."
@@ -52,13 +52,16 @@ class Title(TimeStampedModel):
 
     @staticmethod
     def get_or_create(
-        title: str, subtitle: Optional[str] = None, increment: bool = True
+        title: str, subtitle: str = "", increment: bool = True
     ) -> Optional["Title"]:
         """Gets or creates a new title object. If `increment` is True and if the `title`
         is Untitled or Translation, it will automatically add a counter to the
         `main_title`."""
         if not title:
             return None
+
+        if subtitle is None:
+            subtitle = ""
 
         if increment:
             title_lower = title.lower()
