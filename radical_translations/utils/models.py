@@ -18,7 +18,6 @@ class Date(TimeStampedModel):
 
     date_display = models.CharField(
         max_length=255,
-        blank=True,
         help_text="Date in EDTF format: https://www.loc.gov/standards/datetime/",
     )
     date_display_classification = ControlledTermsField(
