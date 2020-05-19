@@ -91,16 +91,16 @@ class TestContribution:
         assert c is not None
         assert role in c.roles.first().label.lower()
 
-    # @pytest.mark.usefixtures("person", "resource")
-    # def test_str(self, person: Person, resource: Resource):
-    #     c = Contribution.get_or_create(resource, person, None, None)
-    #     assert person.name in c.__str__()
+    @pytest.mark.usefixtures("person", "resource")
+    def test_str(self, person: Person, resource: Resource):
+        c = Contribution.get_or_create(resource, person, None, None)
+        assert person.name in str(c)
 
-    #     pseudonym = "Pseudo Nym"
+        pseudonym = "Pseudo Nym"
 
-    #     c = Contribution.get_or_create(resource, person, pseudonym, None)
-    #     assert pseudonym in c.__str__()
-    #     assert person.name in c.__str__()
+        c = Contribution.get_or_create(resource, person, None, pseudonym)
+        assert pseudonym in str(c)
+        assert person.name in str(c)
 
 
 @pytest.mark.usefixtures("vocabulary")
