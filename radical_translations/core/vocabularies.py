@@ -150,19 +150,6 @@ class VocabularyResourceRelationshipType(VocabularyBaseList):
                 "Source work from which the described resource is derived.",
             ],
             [
-                "instanceOf",
-                "instance of",
-                (
-                    "Work the Instance described instantiates or manifests. For use to "
-                    "connect Instances to Works in the BIBFRAME structure."
-                ),
-            ],
-            [
-                "itemOf",
-                "item of",
-                "Instance for which the described Item is an example.",
-            ],
-            [
                 "otherEdition",
                 "other edition",
                 (
