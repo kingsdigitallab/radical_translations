@@ -11,6 +11,14 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+Fixed
+~~~~~
+* `Classification` tests
+
+
 [0.4.0] - 2020-05-19
 --------------------
 
