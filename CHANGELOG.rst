@@ -11,99 +11,109 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
-[0.4.1] - 2020-05-19
---------------------
-
-Fixed
-~~~~~
-* `Classification` tests
-
-
-[0.4.0] - 2020-05-19
---------------------
-
-Changed
-~~~~~~~
-* For simplicity the Work/Instance/Item objects have been flattened into Resource.
-
-
-[0.3.1] - 2020-05-12
---------------------
-
-Fixed
-~~~~~
-* Constraint on unique titles, it potentially caused duplicate entries under race
-conditions.
-
-[0.3.0] - 2020-05-11
+[Unreleased] - yyyy-mm-dd
 --------------------
 
 Added
 ~~~~~
-* Custom vocabulary for ``Classification.edition``.
-* Team information to the docs.
-* humans.txt (http://humanstxt.org/).
-* Place of birth and place of death to Person model.
-* Paratext mapping.
-* Date field to record dates that are in alternative formats.
-* New resource relationship types.
-* Editorial classification field to further specify relationships between objects.
-* Field for contributions under pseudonyms.
-* Chicago: Rare Books and Manuscripts Section controlled vocabulary.
-
-Changed
-~~~~~~~
-* The import `Resource` command to import `Item` records from GSX.
-* Reduce the number of models in the admin interface.
-* Allow part of relationships for original works.
-* Add counter as `subtitle` to imported `Untitled` and `Translation` titles from GSX.
-
-Fixed
-~~~~~
-* Production Django Dockerfile: add missing dependencies.
-* ``Resource`` import, it was failing to import `Original` works.
-* ``Resource`` import, it was creating ``Work`` objects for derivative instances.
-* ``Resource`` import, import relationships to multiple ``Work`` objects.
-
-Security
-~~~~~~~~
-* Upgrade jQuery, https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/
-* Upgrade Wagtail, https://docs.wagtail.io/en/stable/releases/2.8.1.html
-
-[0.2.2] - 2020-02-12
---------------------
-
-Changed
-~~~~~~~
-* Change the format of this file to adhere to `Keep a Changelog`_.
-
-Security
-~~~~~~~~
-* Bump Django from 2.2.9 to 2.2.10 (https://github.com/kingsdigitallab/radical_translations/pull/2)
+* New unit tests for `Resource` functions.
 
 
-[0.2.1] - 2020-02-11
---------------------
+  [0.4.1] - 2020-05-19
+  --------------------
 
-Fixed
-~~~~~
-* Import of resources with editions.
-
-
-[0.2.0] - 2020-02-11
---------------------
-
-Added
-~~~~~
-* Add command to import ``Event`` records from Google Spreadsheet JSON (GSX).
-* Add command to import ``Organisation`` records from GSX.
-* Add command to import ``Person`` records from GSX.
-* Add command to import ``Resource`` records from GSX.
+  Fixed
+  ~~~~~
+  * `Classification` tests.
 
 
-[0.1.0] - 2020-02-05
---------------------
+  [0.4.0] - 2020-05-19
+  --------------------
 
-Added
-~~~~~
-* Initial data models
+  Changed
+  ~~~~~~~
+  * For simplicity the Work/Instance/Item objects have been flattened into Resource.
+
+
+  [0.3.1] - 2020-05-12
+  --------------------
+
+  Fixed
+  ~~~~~
+  * Constraint on unique titles, it potentially caused duplicate entries under race
+    conditions.
+
+
+  [0.3.0] - 2020-05-11
+  --------------------
+
+  Added
+  ~~~~~
+  * Custom vocabulary for ``Classification.edition``.
+    * Team information to the docs.
+      * humans.txt (http://humanstxt.org/).
+        * Place of birth and place of death to Person model.
+          * Paratext mapping.
+            * Date field to record dates that are in alternative formats.
+              * New resource relationship types.
+                * Editorial classification field to further specify relationships between objects.
+                  * Field for contributions under pseudonyms.
+                    * Chicago: Rare Books and Manuscripts Section controlled vocabulary.
+
+                    Changed
+                    ~~~~~~~
+                    * The import `Resource` command to import `Item` records from GSX.
+                      * Reduce the number of models in the admin interface.
+                        * Allow part of relationships for original works.
+                          * Add counter as `subtitle` to imported `Untitled` and `Translation` titles from GSX.
+
+                          Fixed
+                          ~~~~~
+                          * Production Django Dockerfile: add missing dependencies.
+                            * ``Resource`` import, it was failing to import `Original` works.
+                              * ``Resource`` import, it was creating ``Work`` objects for derivative instances.
+                                * ``Resource`` import, import relationships to multiple ``Work`` objects.
+
+                                Security
+                                ~~~~~~~~
+                                * Upgrade jQuery, https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/
+                                  * Upgrade Wagtail, https://docs.wagtail.io/en/stable/releases/2.8.1.html
+
+
+                                  [0.2.2] - 2020-02-12
+                                  --------------------
+
+                                  Changed
+                                  ~~~~~~~
+                                  * Change the format of this file to adhere to `Keep a Changelog`_.
+
+                                  Security
+                                  ~~~~~~~~
+                                  * Bump Django from 2.2.9 to 2.2.10 (https://github.com/kingsdigitallab/radical_translations/pull/2)
+
+
+                                  [0.2.1] - 2020-02-11
+                                  --------------------
+
+                                  Fixed
+                                  ~~~~~
+                                  * Import of resources with editions.
+
+
+                                  [0.2.0] - 2020-02-11
+                                  --------------------
+
+                                  Added
+                                  ~~~~~
+                                  * Add command to import ``Event`` records from Google Spreadsheet JSON (GSX).
+                                    * Add command to import ``Organisation`` records from GSX.
+                                      * Add command to import ``Person`` records from GSX.
+                                        * Add command to import ``Resource`` records from GSX.
+
+
+                                        [0.1.0] - 2020-02-05
+                                        --------------------
+
+                                        Added
+                                        ~~~~~
+                                        * Initial data models
