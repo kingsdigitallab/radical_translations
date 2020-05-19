@@ -19,6 +19,7 @@ class VocabularyClassificationEdition(VocabularyBaseList):
             ["pseudo-translation", "pseudo-translation"],
             ["self-translation", "self-translation"],
             ["summarised", "summarised"],
+            ["unknown", "unknown"],
             ["unpublished", "unpublished"],
         ]
 

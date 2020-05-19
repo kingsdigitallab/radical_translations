@@ -170,10 +170,20 @@ class Resource(TimeStampedModel):
 
     is_paratext.boolean = True  # type: ignore
 
+    def get_classification(self) -> str:
+        return "; ".join([c.edition.label for c in self.classifications.all()])
+
+    get_classification.short_description = "Edition"  # type: ignore
+
     def get_language_names(self) -> str:
         return "; ".join([rl.language.label for rl in self.languages.all()])
 
     get_language_names.short_description = "Languages"  # type: ignore
+
+    def get_place_names(self) -> str:
+        return "; ".join([rp.place.address for rp in self.places.all()])
+
+    get_place_names.short_description = "Places"  # type: ignore
 
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Resource"]:
@@ -360,7 +370,7 @@ class Classification(TimeStampedModel):
         if not resource or not term:
             return None
 
-        if term.lower() == "original" or term.lower() == "unknown":
+        if term.lower() == "original":
             return None
 
         term = term.replace("Translation: ", "")

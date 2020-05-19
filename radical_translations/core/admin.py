@@ -92,7 +92,14 @@ class ResourceAdmin(admin.ModelAdmin):
         ResourceRelationshipInverseInline,
         EventInline,
     ]
-    list_display = ["title", "is_paratext", "date", "get_language_names"]
+    list_display = [
+        "title",
+        "is_paratext",
+        "get_classification",
+        "date",
+        "get_language_names",
+        "get_place_names",
+    ]
     list_filter = [
         ("relationships__relationship_type", admin.RelatedOnlyFieldListFilter),
         ("classifications__edition", admin.RelatedOnlyFieldListFilter),
