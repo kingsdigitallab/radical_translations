@@ -1,21 +1,13 @@
 from django.contrib import admin
-from polymorphic.admin import (
-    PolymorphicChildModelAdmin,
-    PolymorphicChildModelFilter,
-    PolymorphicParentModelAdmin,
-)
 
 from radical_translations.core.models import (
     Classification,
     Contribution,
-    Instance,
-    Item,
     Resource,
     ResourceLanguage,
     ResourcePlace,
     ResourceRelationship,
     Title,
-    Work,
 )
 from radical_translations.events.models import Event
 
@@ -82,11 +74,26 @@ class TitleAdmin(admin.ModelAdmin):
 
 
 @admin.register(Resource)
-class ResourceAdmin(PolymorphicParentModelAdmin):
-    child_models = [Work, Instance, Item]
-    list_display = ["resource_type", "title", "get_language_names"]
+class ResourceAdmin(admin.ModelAdmin):
+    autocomplete_fields = [
+        "date",
+        "subjects",
+        "held_by",
+        "title",
+        "title_variant",
+    ]
+    empty_value_display = "unknown"
+    inlines = [
+        ClassificationInline,
+        ContributionInline,
+        ResourceLanguageInline,
+        ResourcePlaceInline,
+        ResourceRelationshipInline,
+        ResourceRelationshipInverseInline,
+        EventInline,
+    ]
+    list_display = ["title", "is_paratext", "date", "get_language_names"]
     list_filter = [
-        PolymorphicChildModelFilter,
         ("relationships__relationship_type", admin.RelatedOnlyFieldListFilter),
         ("classifications__edition", admin.RelatedOnlyFieldListFilter),
         ("subjects", admin.RelatedOnlyFieldListFilter),
@@ -100,44 +107,5 @@ class ResourceAdmin(PolymorphicParentModelAdmin):
         "title_variant__subtitle",
     ]
 
-
-class ResourceChildAdmin(PolymorphicChildModelAdmin):
-    autocomplete_fields = [
-        "date",
-        "subjects",
-        "title",
-        "title_variant",
-    ]
-    inlines = [
-        ClassificationInline,
-        ContributionInline,
-        ResourceLanguageInline,
-        ResourcePlaceInline,
-        ResourceRelationshipInline,
-        ResourceRelationshipInverseInline,
-        EventInline,
-    ]
-    list_display = ["title", "date"]
-    search_fields = ["title", "title_variant"]
-
-
-@admin.register(Work)
-class WorkAdmin(ResourceChildAdmin):
-    pass
-
-
-@admin.register(Instance)
-class InstanceAdmin(ResourceChildAdmin):
-    def save_related(self, request, form, formsets, change):
-        super().save_related(request, form, formsets, change)
-
-        obj = form.instance
-        obj.refresh_from_db()
-
-        if obj.relationships.count() == 0 and not obj.instance_of():
-            Work.from_instance(obj)
-
-
-@admin.register(Item)
-class ItemAdmin(ResourceChildAdmin):
-    autocomplete_fields = ResourceChildAdmin.autocomplete_fields + ["held_by"]
+    class Media:
+        css = {"all": ("css/admin.css",)}

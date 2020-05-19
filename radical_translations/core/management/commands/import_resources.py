@@ -2,7 +2,8 @@ import json
 from urllib import request
 
 from django.core.management.base import BaseCommand
-from radical_translations.core.models import Instance, Item, Resource, Work
+
+from radical_translations.core.models import Resource
 
 
 class Command(BaseCommand):
@@ -26,9 +27,6 @@ class Command(BaseCommand):
 
             if delete:
                 self.stdout.write(self.style.WARNING("Deleting all resources..."))
-                Item.objects.all().delete()
-                Instance.objects.all().delete()
-                Work.objects.all().delete()
                 Resource.objects.all().delete()
 
             self.stdout.write("Importing resources...")

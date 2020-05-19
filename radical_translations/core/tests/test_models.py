@@ -7,12 +7,9 @@ from radical_translations.agents.models import Organisation, Person
 from radical_translations.core.models import (
     Classification,
     Contribution,
-    Instance,
-    Item,
     Resource,
     ResourceRelationship,
     Title,
-    Work,
 )
 
 pytestmark = pytest.mark.django_db
@@ -109,49 +106,72 @@ class TestContribution:
 
 @pytest.mark.usefixtures("vocabulary")
 class TestResource:
-    @pytest.mark.usefixtures("entry_original", "title")
-    def test_resource_type(self, entry_original, title):
-        obj = Work(title=title)
-        obj.save()
-        assert obj.resource_type == "work"
-
-        obj = Instance(title=title)
-        obj.save()
-        assert obj.resource_type == "instance"
-
-        paratext = Instance.paratext_from_gsx_entry(entry_original, obj)
-        assert paratext.resource_type == "paratext"
-
-        obj = Item(title=title)
-        obj.save()
-        assert obj.resource_type == "item"
-
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_language_names(self, entry_original, entry_translation):
-        instance = Resource.from_gsx_entry(entry_original)
-        assert instance.get_language_names() == "French"
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.get_language_names() == "French"
 
-        instance = Resource.from_gsx_entry(entry_translation)
-        assert instance.get_language_names() == "English"
+        resource = Resource.from_gsx_entry(entry_translation)
+        assert resource.get_language_names() == "English"
 
-    @pytest.mark.usefixtures("entry_original", "entry_translation", "resource")
+    @pytest.mark.usefixtures(
+        "entry_original",
+        "entry_translation",
+        "entry_edition",
+        "organisation",
+        "person",
+    )
     def test_from_gsx_entry(
         self,
         entry_original: Dict[str, Dict[str, str]],
         entry_translation: Dict[str, Dict[str, str]],
-        resource: Resource,
+        entry_edition: Dict[str, Dict[str, str]],
+        organisation: Organisation,
+        person: Person,
     ):
         assert Resource.from_gsx_entry(None) is None
 
-        instance = Resource.from_gsx_entry(entry_original)
-        assert instance is not None
-        assert "ruines" in instance.title.main_title
-        assert instance.date.date_display == "1791"
-        assert "Paris" in instance.places.first().place.address
+        entry = defaultdict(defaultdict)
+        entry["gsx$title"]["$t"] = ""
+        assert Resource.from_gsx_entry(entry) is None
 
-        instance = Instance.from_gsx_entry(entry_original, resource)
-        assert instance is not None
-        assert instance.title.main_title == resource.title.main_title
+        entry["gsx$title"]["$t"] = "Work 1"
+        assert Resource.from_gsx_entry(entry) is not None
+
+        entry["gsx$authors"]["$t"] = f"{person.name}; Author 2"
+        resource = Resource.from_gsx_entry(entry)
+        assert resource.contributions.first().agent.name == person.name
+
+        entry["gsx$language"]["$t"] = f"French [fr]; English [en]"
+        resource = Resource.from_gsx_entry(entry)
+        assert "French" in resource.get_language_names()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource is not None
+        assert "ruines" in resource.title.main_title
+        assert resource.date.date_display == "1791"
+        assert "Paris" in resource.places.first().place.address
+
+        entry_original["gsx$authors"]["$t"] = f"{person.name}"
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.contributions.count() == 1
+
+        entry_original["gsx$organisation"]["$t"] = f"{organisation.name}"
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.contributions.count() == 2
+
+        resource = Resource.from_gsx_entry(entry_translation)
+        assert resource.relationships.count() == 1
+        assert (
+            resource.relationships.first().relationship_type.label == "translation of"
+        )
+
+        resource = Resource.from_gsx_entry(entry_edition)
+        assert resource.relationships.count() == 2
+        assert (
+            resource.relationships.first().relationship_type.label == "translation of"
+        )
+        assert resource.relationships.last().relationship_type.label == "other edition"
 
     @pytest.mark.usefixtures("resource")
     def test_languages_from_gsx_entry(self, resource: Resource):
@@ -189,165 +209,15 @@ class TestResource:
         assert subjects is not None
         assert len(subjects) == 2
 
-
-@pytest.mark.usefixtures("vocabulary")
-class TestResourceRelationship:
-    @pytest.mark.usefixtures("resource")
-    def test_get_or_create(self, resource: Resource):
-        assert ResourceRelationship.get_or_create(None, None, None) is None
-        assert ResourceRelationship.get_or_create(resource, None, resource) is None
-        assert ResourceRelationship.get_or_create(None, "instance of", None) is None
-        assert (
-            ResourceRelationship.get_or_create(resource, "child of", resource) is None
-        )
-
-        rr = ResourceRelationship.get_or_create(resource, "instance of", resource)
-        assert rr is not None
-        assert resource.relationships.count() == 1
-
-
-@pytest.mark.usefixtures("vocabulary")
-class TestWork:
-    @pytest.mark.usefixtures("entry_original")
-    def test_get_instance(self, entry_original: Dict[str, Dict[str, str]]):
-        Resource.from_gsx_entry(entry_original)
-
-        work = Work.objects.first()
-        instance = work.get_instance()
-
-        assert instance is not None
-        assert instance.title == work.title
-
-    @pytest.mark.usefixtures("person")
-    def test_from_gsx_entry(self, person: Person):
-        assert Work.from_gsx_entry(None) is None
-
-        entry = defaultdict(defaultdict)
-        entry["gsx$title"]["$t"] = ""
-        assert Work.from_gsx_entry(entry) is None
-
-        entry["gsx$title"]["$t"] = "Work 1"
-        assert Work.from_gsx_entry(entry) is not None
-
-        entry["gsx$authors"]["$t"] = f"{person.name}; Author 2"
-        w = Work.from_gsx_entry(entry)
-        assert w.contributions.first().agent.name == person.name
-
-        entry["gsx$language"]["$t"] = f"French [fr]; English [en]"
-        w = Work.from_gsx_entry(entry)
-        assert "French" in w.get_language_names()
-
-    @pytest.mark.usefixtures("entry_original")
-    def test_from_instance(self, entry_original: Dict[str, Dict[str, str]]):
-        assert Work.from_instance(None) is None
-
-        entry_original["gsx$title"]["$t"] = "test_from_instance"
-        instance = Instance.from_gsx_entry(entry_original, None)
-
-        work = Work.from_instance(instance)
-        assert work is not None
-        assert work.title == instance.title
-
-        assert work.contributions.count() == instance.contributions.count()
-        assert work.languages.count() == instance.languages.count()
-        assert work.subjects.count() == instance.subjects.count()
-
-
-@pytest.mark.usefixtures("vocabulary")
-class TestInstance:
-    @pytest.mark.usefixtures("entry_original", "resource")
-    def test_instance_of(
-        self, entry_original: Dict[str, Dict[str, str]], resource: Resource
-    ):
-        instance = Instance.from_gsx_entry(entry_original, None)
-        assert instance.instance_of() is None
-
-        instance = Instance.from_gsx_entry(entry_original, resource)
-        work = instance.instance_of()
-        assert work is not None
-
-    @pytest.mark.usefixtures(
-        "entry_original",
-        "entry_translation",
-        "entry_edition",
-        "resource",
-        "organisation",
-        "person",
-    )
-    def test_from_gsx_entry(
-        self,
-        entry_original: Dict[str, Dict[str, str]],
-        entry_translation: Dict[str, Dict[str, str]],
-        entry_edition: Dict[str, Dict[str, str]],
-        resource: Resource,
-        organisation: Organisation,
-        person: Person,
-    ):
-        assert Instance.from_gsx_entry(None, None) is None
-
-        instance = Instance.from_gsx_entry(entry_original, None)
-        assert instance is not None
-        assert "ruines" in instance.title.main_title
-        assert instance.date.date_display == "1791"
-        assert "Paris" in instance.places.first().place.address
-
-        instance = Instance.from_gsx_entry(entry_original, resource)
-        assert instance is not None
-        assert instance.title.main_title == resource.title.main_title
-        assert instance.contributions.count() == 0
-        assert instance.relationships.count() == 1
-        assert instance.relationships.first().relationship_type.label == "instance of"
-
-        entry_original["gsx$authors"]["$t"] = f"{person.name}"
-        instance = Instance.from_gsx_entry(entry_original, resource)
-        assert instance.contributions.count() == 1
-
-        entry_original["gsx$organisation"]["$t"] = f"{organisation.name}"
-        instance = Instance.from_gsx_entry(entry_original, resource)
-        assert instance.contributions.count() == 2
-        assert instance.relationships.count() == 1
-
-        instance = Instance.from_gsx_entry(entry_translation)
-        assert instance.relationships.count() == 1
-        assert (
-            instance.relationships.first().relationship_type.label == "translation of"
-        )
-
-        instance = Instance.from_gsx_entry(entry_edition)
-        assert instance.relationships.count() == 2
-        assert (
-            instance.relationships.first().relationship_type.label == "translation of"
-        )
-        assert instance.relationships.last().relationship_type.label == "other edition"
-
-    @pytest.mark.usefixtures("entry_translation", "title")
-    def test_get_or_create_related_resource(
-        self, entry_translation: Dict[str, Dict[str, str]], title
-    ):
-        assert Instance.get_or_create_related_resource(None) is None
-
-        instance = Instance.from_gsx_entry(entry_translation)
-        resource = Instance.get_or_create_related_resource(instance.title)
-        assert isinstance(resource, Instance)
-
-        work = Work.from_gsx_entry(entry_translation)
-        resource = Instance.get_or_create_related_resource(work.title)
-        assert isinstance(resource, Work)
-
-        resource = Instance.get_or_create_related_resource(title)
-        assert isinstance(resource, Work)
-
-        # Instance.from_gsx_entry(entry_translation)
-
     @pytest.mark.usefixtures("entry_original", "resource")
     def test_paratext_from_gsx_entry(
         self, entry_original: Dict[str, Dict[str, str]], resource: Resource,
     ):
-        assert Instance.paratext_from_gsx_entry(None, None) is None
-        assert Instance.paratext_from_gsx_entry(entry_original, None) is None
-        assert Instance.paratext_from_gsx_entry(None, resource) is None
+        assert Resource.paratext_from_gsx_entry(None, None) is None
+        assert Resource.paratext_from_gsx_entry(entry_original, None) is None
+        assert Resource.paratext_from_gsx_entry(None, resource) is None
 
-        paratext = Instance.paratext_from_gsx_entry(entry_original, resource)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
         assert paratext is not None
         assert paratext.title == resource.title
         assert paratext.summary is not None
@@ -355,22 +225,16 @@ class TestInstance:
         assert paratext.relationships.count() == 1
 
 
-class TestItem:
-    @pytest.mark.usefixtures("entry_original", "entry_edition")
-    def test_from_gsx_entry(
-        self,
-        entry_original: Dict[str, Dict[str, str]],
-        entry_edition: Dict[str, Dict[str, str]],
-    ):
-        assert Item.from_gsx_entry(None, None) is None
-        assert Item.from_gsx_entry(entry_edition, None) is None
+@pytest.mark.usefixtures("vocabulary")
+class TestResourceRelationship:
+    @pytest.mark.usefixtures("resource")
+    def test_get_or_create(self, resource: Resource):
+        assert ResourceRelationship.get_or_create(None, None, None) is None
+        assert ResourceRelationship.get_or_create(resource, None, resource) is None
+        assert (
+            ResourceRelationship.get_or_create(resource, "child of", resource) is None
+        )
 
-        instance = Instance.from_gsx_entry(entry_original, None)
-        assert Item.from_gsx_entry(None, instance) is None
-        assert Item.from_gsx_entry(entry_original, instance) is None
-
-        instance = Instance.from_gsx_entry(entry_edition, None)
-        item = Item.from_gsx_entry(entry_edition, instance)
-        assert item is not None
-        assert item.held_by.count() == 1
-        assert item.electronic_locator is not None
+        rr = ResourceRelationship.get_or_create(resource, "related to", resource)
+        assert rr is not None
+        assert resource.relationships.count() == 1
