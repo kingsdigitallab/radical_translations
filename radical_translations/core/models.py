@@ -170,10 +170,10 @@ class Resource(TimeStampedModel):
 
     is_paratext.boolean = True  # type: ignore
 
-    def get_classification(self) -> str:
+    def get_classification_edition(self) -> str:
         return "; ".join([c.edition.label for c in self.classifications.all()])
 
-    get_classification.short_description = "Edition"  # type: ignore
+    get_classification_edition.short_description = "Edition"  # type: ignore
 
     def get_language_names(self) -> str:
         return "; ".join([rl.language.label for rl in self.languages.all()])

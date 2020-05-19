@@ -106,12 +106,28 @@ class TestContribution:
 @pytest.mark.usefixtures("vocabulary")
 class TestResource:
     @pytest.mark.usefixtures("entry_original", "entry_translation")
+    def test_get_classification_edition(self, entry_original, entry_translation):
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.get_classification_edition() == ""
+
+        resource = Resource.from_gsx_entry(entry_translation)
+        assert resource.get_classification_edition() == "integral"
+
+    @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_language_names(self, entry_original, entry_translation):
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.get_language_names() == "French"
 
         resource = Resource.from_gsx_entry(entry_translation)
         assert resource.get_language_names() == "English"
+
+    @pytest.mark.usefixtures("entry_original", "entry_translation")
+    def test_get_place_names(self, entry_original, entry_translation):
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.get_place_names() == "Paris"
+
+        resource = Resource.from_gsx_entry(entry_translation)
+        assert resource.get_place_names() == "London"
 
     @pytest.mark.usefixtures(
         "entry_original",

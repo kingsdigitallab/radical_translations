@@ -95,7 +95,7 @@ class ResourceAdmin(admin.ModelAdmin):
     list_display = [
         "title",
         "is_paratext",
-        "get_classification",
+        "get_classification_edition",
         "date",
         "get_language_names",
         "get_place_names",
