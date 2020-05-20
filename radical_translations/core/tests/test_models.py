@@ -16,6 +16,16 @@ pytestmark = pytest.mark.django_db
 
 
 class TestTitle:
+    def test_str(self):
+        t = Title(main_title="main")
+        assert "main" in str(t)
+        assert ":" not in str(t)
+
+        t = Title(main_title="main", subtitle="sub")
+        assert "main" in str(t)
+        assert ":" in str(t)
+        assert "sub" in str(t)
+
     def test_get_or_create(self):
         assert Title.get_or_create(None, None) is None
 
