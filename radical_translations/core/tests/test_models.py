@@ -118,10 +118,10 @@ class TestResource:
     @pytest.mark.usefixtures("entry_original")
     def test_is_paratext(self, entry_original):
         resource = Resource.from_gsx_entry(entry_original)
-        assert not resource.is_paratext
+        assert resource.is_paratext() is False
 
         paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
-        assert paratext.is_paratext
+        assert paratext.is_paratext() is True
 
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_classification_edition(self, entry_original, entry_translation):
