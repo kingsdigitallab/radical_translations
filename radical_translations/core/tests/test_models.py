@@ -76,7 +76,7 @@ class TestContribution:
             resource, entry_original, "authors", "author"
         )
         assert contributions is not None
-        assert len(contributions) == 0
+        assert len(contributions) == 1
 
         entry_original["gsx$authors"]["$t"] = person.name
         contributions = Contribution.from_gsx_entry(
@@ -130,6 +130,17 @@ class TestResource:
 
         paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
         assert paratext.is_paratext() is True
+
+    @pytest.mark.usefixtures("entry_original", "entry_edition")
+    def test_get_authors(self, entry_original, entry_edition):
+        resource = Resource.from_gsx_entry(entry_original)
+        assert "Constantin" in resource.get_authors()
+
+        resource = Resource.from_gsx_entry(entry_edition)
+        authors = resource.get_authors()
+        assert "Samson" in authors
+        assert ";" in authors
+        assert "Dalila" in authors
 
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_classification_edition(self, entry_original, entry_translation):
@@ -186,6 +197,9 @@ class TestResource:
         entry["gsx$language"]["$t"] = f"French [fr]; English [en]"
         resource = Resource.from_gsx_entry(entry)
         assert "French" in resource.get_language_names()
+
+        entry_original["gsx$authors"]["$t"] = ""
+        entry_original["gsx$organisation"]["$t"] = ""
 
         resource = Resource.from_gsx_entry(entry_original)
         assert resource is not None

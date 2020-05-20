@@ -121,7 +121,7 @@ def entry_translation() -> Dict[str, Dict[str, str]]:
 def entry_edition() -> Dict[str, Dict[str, str]]:
     return {
         "gsx$title": {"$t": "Discours sur le gouvernement"},
-        "gsx$authors": {"$t": "P.A. Samson"},
+        "gsx$authors": {"$t": "P.A. Samson; P.A. Dalila"},
         "gsx$status": {"$t": "Translation: integral"},
         "gsx$statussource": {"$t": ""},
         "gsx$translationof": {"$t": "Discourses concerning government"},

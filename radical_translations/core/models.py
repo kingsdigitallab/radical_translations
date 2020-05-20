@@ -175,6 +175,13 @@ class Resource(TimeStampedModel):
 
     is_paratext.boolean = True  # type: ignore
 
+    def get_authors(self) -> str:
+        return "; ".join(
+            [c.agent.name for c in self.contributions.filter(roles__label="author")]
+        )
+
+    get_authors.short_description = "Authors"
+
     def get_classification_edition(self) -> str:
         return "; ".join([c.edition.label for c in self.classifications.all()])
 
@@ -451,7 +458,7 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
 
         for name in value.split("; "):
             try:
-                agent = cls.objects.get(name=name)
+                agent, _ = cls.objects.get_or_create(name=name)
                 contributions.append(Contribution.get_or_create(resource, agent, role))
             except cls.DoesNotExist:
                 pass

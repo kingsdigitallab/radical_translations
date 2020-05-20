@@ -97,6 +97,7 @@ class ResourceAdmin(admin.ModelAdmin):
         "date",
         "is_original",
         "is_paratext",
+        "get_authors",
         "get_classification_edition",
         "get_language_names",
         "get_place_names",
