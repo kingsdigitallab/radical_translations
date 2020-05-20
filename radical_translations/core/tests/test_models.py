@@ -16,7 +16,7 @@ pytestmark = pytest.mark.django_db
 
 
 class TestTitle:
-    def test_str(self):
+    def test___str__(self):
         t = Title(main_title="main")
         assert "main" in str(t)
         assert ":" not in str(t)
@@ -102,7 +102,7 @@ class TestContribution:
         assert role in c.roles.first().label.lower()
 
     @pytest.mark.usefixtures("person", "resource")
-    def test_str(self, person: Person, resource: Resource):
+    def test___str__(self, person: Person, resource: Resource):
         c = Contribution.get_or_create(resource, person, None, None)
         assert person.name in str(c)
 
@@ -115,6 +115,14 @@ class TestContribution:
 
 @pytest.mark.usefixtures("vocabulary")
 class TestResource:
+    @pytest.mark.usefixtures("entry_original")
+    def test_is_paratext(self, entry_original):
+        resource = Resource.from_gsx_entry(entry_original)
+        assert not resource.is_paratext
+
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+        assert paratext.is_paratext
+
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_classification_edition(self, entry_original, entry_translation):
         resource = Resource.from_gsx_entry(entry_original)
