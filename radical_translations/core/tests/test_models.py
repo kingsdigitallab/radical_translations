@@ -53,8 +53,8 @@ class TestClassification:
         assert Classification.get_or_create(None, None) is None
         assert Classification.get_or_create(resource, None) is None
         assert Classification.get_or_create(None, "adaptation") is None
-        assert Classification.get_or_create(resource, "original") is None
 
+        assert Classification.get_or_create(resource, "original") is not None
         assert Classification.get_or_create(resource, "unknown") is not None
         assert Classification.get_or_create(resource, "adaptation") is not None
 
@@ -115,6 +115,14 @@ class TestContribution:
 
 @pytest.mark.usefixtures("vocabulary")
 class TestResource:
+    @pytest.mark.usefixtures("entry_original", "entry_translation")
+    def test_is_original(self, entry_original, entry_translation):
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.is_original() is True
+
+        resource = Resource.from_gsx_entry(entry_translation)
+        assert resource.is_original() is False
+
     @pytest.mark.usefixtures("entry_original")
     def test_is_paratext(self, entry_original):
         resource = Resource.from_gsx_entry(entry_original)
@@ -126,7 +134,7 @@ class TestResource:
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_classification_edition(self, entry_original, entry_translation):
         resource = Resource.from_gsx_entry(entry_original)
-        assert resource.get_classification_edition() == ""
+        assert resource.get_classification_edition() == "original"
 
         resource = Resource.from_gsx_entry(entry_translation)
         assert resource.get_classification_edition() == "integral"

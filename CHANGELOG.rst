@@ -18,6 +18,7 @@ Added
 ~~~~~
 * Tests for `Resource`.
 * Tests for `Title`.
+* Original as a value for `Classification.edition` vocabulary.
 
 
 [0.4.1] - 2020-05-19

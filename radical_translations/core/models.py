@@ -162,6 +162,11 @@ class Resource(TimeStampedModel):
     def __str__(self) -> str:
         return str(self.title)
 
+    def is_original(self) -> bool:
+        return self.get_classification_edition() == "original"
+
+    is_original.boolean = True  # type: ignore
+
     def is_paratext(self) -> bool:
         return (
             self.relationships.filter(relationship_type__label="paratext of").count()
@@ -368,9 +373,6 @@ class Classification(TimeStampedModel):
     @staticmethod
     def get_or_create(resource: Resource, term: str) -> Optional["Classification"]:
         if not resource or not term:
-            return None
-
-        if term.lower() == "original":
             return None
 
         term = term.replace("Translation: ", "")
