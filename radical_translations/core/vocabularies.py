@@ -15,6 +15,7 @@ class VocabularyClassificationEdition(VocabularyBaseList):
             ["announced", "announced"],
             ["extended", "extended"],
             ["integral", "integral"],
+            ["original", "original"],
             ["partial", "partial"],
             ["pseudo-translation", "pseudo-translation"],
             ["self-translation", "self-translation"],
