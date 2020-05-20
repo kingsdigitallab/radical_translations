@@ -16,8 +16,8 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 
 Added
 ~~~~~
-* Tests for `Resource`.
-* Tests for `Title`.
+* New tests for `Resource`.
+* New tests for `Title`.
 * Original as a value for `Classification.edition` vocabulary.
 
 
