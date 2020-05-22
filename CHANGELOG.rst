@@ -19,6 +19,7 @@ Added
 * New tests for `Resource`.
 * New tests for `Title`.
 * Original as a value for `Classification.edition` vocabulary.
+* nginx to serve media files.
 
 
 [0.4.1] - 2020-05-19
