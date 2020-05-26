@@ -101,7 +101,7 @@ class Resource(TimeStampedModel):
     )
 
     subjects = ControlledTermsField(
-        ["fast-forms", "fast-topic", "rbmscv", "wikidata"],
+        ["fast-forms", "fast-topic", "rt-agt", "wikidata"],
         blank=True,
         help_text="Subject term(s) describing a resource",
     )
@@ -163,7 +163,7 @@ class Resource(TimeStampedModel):
         return str(self.title)
 
     def is_original(self) -> bool:
-        return self.get_classification_edition() == "original"
+        return self.get_classification_edition().lower() == "original"
 
     is_original.boolean = True  # type: ignore
 
@@ -358,7 +358,7 @@ class Classification(TimeStampedModel):
     )
 
     edition = ControlledTermField(
-        ["bf-cse"],
+        ["rt-ppt", "rt-tt", "rt-pt"],
         on_delete=models.CASCADE,
         help_text=(
             "Edition of the classification scheme, such as full, abridged or a number, "
@@ -383,7 +383,7 @@ class Classification(TimeStampedModel):
             return None
 
         term = term.replace("Translation: ", "")
-        edition = search_term_or_none("bf-cse", term)
+        edition = search_term_or_none("rt-tt", term)
 
         if not edition:
             return None

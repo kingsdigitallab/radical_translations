@@ -145,10 +145,10 @@ class TestResource:
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_classification_edition(self, entry_original, entry_translation):
         resource = Resource.from_gsx_entry(entry_original)
-        assert resource.get_classification_edition() == "original"
+        assert resource.get_classification_edition().lower() == "original"
 
         resource = Resource.from_gsx_entry(entry_translation)
-        assert resource.get_classification_edition() == "integral"
+        assert resource.get_classification_edition().lower() == "integral"
 
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_language_names(self, entry_original, entry_translation):

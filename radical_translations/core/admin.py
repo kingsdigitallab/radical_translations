@@ -82,7 +82,7 @@ class ResourceAdmin(admin.ModelAdmin):
         "title",
         "title_variant",
     ]
-    empty_value_display = "unknown"
+    # empty_value_display = "unknown"
     inlines = [
         ClassificationInline,
         ContributionInline,
