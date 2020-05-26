@@ -29,10 +29,10 @@ services:
       context: .
       dockerfile: ./compose/production/nginx/Dockerfile
     image: radical_translations_production_nginx
-    depends_on:
-      - django
     volumes:
       - production_django_media:/usr/share/nginx/media:ro
+    depends_on:
+      - django
 
   postgres:
     build:
@@ -71,11 +71,11 @@ services:
       - '127.0.0.1:9200:9200'
       - '127.0.0.1:9300:9300'
 
-    kibana:
-      image: kibana:7.5.1
-      depends_on:
-        - elasticsearch
-      env_file:
-        - ./.envs/.production/.kibana
-      ports:
-        - '5601:5601'
+  kibana:
+    image: kibana:7.5.1
+    depends_on:
+      - elasticsearch
+    env_file:
+      - ./.envs/.production/.kibana
+    ports:
+      - '5601:5601'
