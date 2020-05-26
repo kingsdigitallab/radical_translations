@@ -52,11 +52,11 @@ class TestClassification:
     def test_get_or_create(self, resource: Resource):
         assert Classification.get_or_create(None, None) is None
         assert Classification.get_or_create(resource, None) is None
-        assert Classification.get_or_create(None, "adaptation") is None
+        assert Classification.get_or_create(None, "adapted") is None
 
         assert Classification.get_or_create(resource, "original") is not None
         assert Classification.get_or_create(resource, "unknown") is not None
-        assert Classification.get_or_create(resource, "adaptation") is not None
+        assert Classification.get_or_create(resource, "adapted") is not None
 
 
 @pytest.mark.usefixtures("vocabulary")
