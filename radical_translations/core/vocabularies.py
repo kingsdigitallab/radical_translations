@@ -161,7 +161,8 @@ class VocabularyTranslationTerms(VocabularyBaseList):
                 "New translation",
                 "New translation",
                 "text translated for the first time in a given target language",
-            ][
+            ],
+            [
                 "Partial",
                 "Partial",
                 (
