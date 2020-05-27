@@ -34,3 +34,9 @@ class Command(BaseCommand):
                 resource = Resource.from_gsx_entry(entry)
                 if resource:
                     self.stdout.write(self.style.SUCCESS(f"- {resource}"))
+
+            self.stdout.write("Importing resource relationships...")
+            for entry in entries:
+                resource = Resource.relationships_from_gsx_entry(entry)
+                if resource:
+                    self.stdout.write(self.style.SUCCESS(f"> {resource}"))

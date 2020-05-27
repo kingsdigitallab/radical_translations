@@ -11,6 +11,17 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+Changed
+~~~~~~~
+* When importing `Resource` check if a resource with the same title and date already
+  exists.
+* Import `Resource` relationships after all the resources are imported to avoid
+  conflicts.
+
+
 [0.5.0] - 2020-05-27
 --------------------
 

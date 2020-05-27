@@ -158,22 +158,10 @@ class Resource(TimeStampedModel):
 
     class Meta:
         ordering = ["title"]
+        unique_together = ["title", "date", "_is_paratext"]
 
     def __str__(self) -> str:
         return str(self.title)
-
-    def is_original(self) -> bool:
-        return self.get_classification_edition().lower() == "original"
-
-    is_original.boolean = True  # type: ignore
-
-    def is_paratext(self) -> bool:
-        return (
-            self.relationships.filter(relationship_type__label="paratext of").count()
-            > 0
-        )
-
-    is_paratext.boolean = True  # type: ignore
 
     def get_authors(self) -> str:
         return "; ".join(
@@ -197,6 +185,19 @@ class Resource(TimeStampedModel):
 
     get_place_names.short_description = "Places"  # type: ignore
 
+    def is_original(self) -> bool:
+        return "original" in self.get_classification_edition().lower()
+
+    is_original.boolean = True  # type: ignore
+
+    def is_paratext(self) -> bool:
+        return (
+            self.relationships.filter(relationship_type__label="paratext of").count()
+            > 0
+        )
+
+    is_paratext.boolean = True  # type: ignore
+
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Resource"]:
         """Gets or creates a new `Resource` from a Google Spreadsheet dictionary
@@ -209,7 +210,19 @@ class Resource(TimeStampedModel):
             return None
 
         title = Title.get_or_create(main_title)
-        resource, _ = Resource.objects.get_or_create(_is_paratext=False, title=title)
+        date_display = get_gsx_entry_value(entry, "year")
+
+        if date_display:
+            resource, _ = Resource.objects.get_or_create(
+                _is_paratext=False, title=title, date__date_display=date_display
+            )
+
+            date = Date.from_date_display(date_display)
+            resource.date = date
+        else:
+            resource, _ = Resource.objects.get_or_create(
+                _is_paratext=False, title=title
+            )
 
         Contribution.from_gsx_entry(resource, entry, "authors", "author")
 
@@ -222,28 +235,6 @@ class Resource(TimeStampedModel):
         value = get_gsx_entry_value(entry, "editionnumber")
         if value:
             resource.edition_enumeration = value
-
-        fields_mapping = {
-            "part of": "partof",
-            "translation of": "translationof",
-            "other edition": "editionof",
-        }
-
-        for key in fields_mapping.keys():
-            value = get_gsx_entry_value(entry, fields_mapping[key])
-            if value:
-                for main_title in value.split("; "):
-                    main_title = main_title.strip()
-                    if main_title:
-                        title = Title.get_or_create(main_title)
-                        related_to, _ = Resource.objects.get_or_create(
-                            _is_paratext=False, title=title
-                        )
-                        ResourceRelationship.get_or_create(resource, key, related_to)
-
-        value = get_gsx_entry_value(entry, "year")
-        if value:
-            resource.date = Date.from_date_display(value)
 
         value = get_gsx_entry_value(entry, "location")
         if value:
@@ -348,6 +339,49 @@ class Resource(TimeStampedModel):
         ResourceRelationship.get_or_create(paratext, "paratext of", resource)
 
         return paratext
+
+    @staticmethod
+    def relationships_from_gsx_entry(
+        entry: Dict[str, Dict[str, str]]
+    ) -> Optional["Resource"]:
+        if not entry:
+            return None
+
+        main_title = get_gsx_entry_value(entry, "title")
+        if not main_title:
+            return None
+
+        title = Title.get_or_create(main_title)
+        date_display = get_gsx_entry_value(entry, "year")
+
+        try:
+            if date_display:
+                resource = Resource.objects.get(
+                    _is_paratext=False, title=title, date__date_display=date_display
+                )
+            else:
+                resource = Resource.objects.get(_is_paratext=False, title=title)
+        except Resource.DoesNotExist:
+            return None
+
+        fields_mapping = {
+            "part of": "partof",
+            "translation of": "translationof",
+            "other edition": "editionof",
+        }
+
+        for key in fields_mapping.keys():
+            value = get_gsx_entry_value(entry, fields_mapping[key])
+            if value:
+                for main_title in value.split("; "):
+                    main_title = main_title.strip()
+                    if main_title:
+                        related_to = Resource.objects.filter(
+                            _is_paratext=False, title__main_title=main_title
+                        ).first()
+                        ResourceRelationship.get_or_create(resource, key, related_to)
+
+        return resource
 
 
 class Classification(TimeStampedModel):

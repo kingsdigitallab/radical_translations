@@ -215,19 +215,6 @@ class TestResource:
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.contributions.count() == 2
 
-        resource = Resource.from_gsx_entry(entry_translation)
-        assert resource.relationships.count() == 1
-        assert (
-            resource.relationships.first().relationship_type.label == "translation of"
-        )
-
-        resource = Resource.from_gsx_entry(entry_edition)
-        assert resource.relationships.count() == 2
-        assert (
-            resource.relationships.first().relationship_type.label == "translation of"
-        )
-        assert resource.relationships.last().relationship_type.label == "other edition"
-
     @pytest.mark.usefixtures("resource")
     def test_languages_from_gsx_entry(self, resource: Resource):
         entry = defaultdict(defaultdict)
@@ -278,6 +265,39 @@ class TestResource:
         assert paratext.summary is not None
         assert paratext.notes is not None
         assert paratext.relationships.count() == 1
+
+    @pytest.mark.usefixtures(
+        "entry_original", "entry_translation", "entry_edition"
+    )
+    def test_relationships_from_gsx_entry(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_translation: Dict[str, Dict[str, str]],
+        entry_edition: Dict[str, Dict[str, str]],
+    ):
+        assert Resource.relationships_from_gsx_entry(None) is None
+
+        Resource.from_gsx_entry(entry_original)
+        resource = Resource.relationships_from_gsx_entry(entry_original)
+        assert resource is not None
+        assert resource.relationships.count() == 0
+
+        Resource.from_gsx_entry(entry_translation)
+        resource = Resource.relationships_from_gsx_entry(entry_translation)
+        assert resource is not None
+        assert resource.relationships.count() == 1
+
+        entry = defaultdict(defaultdict)
+        entry["gsx$title"]["$t"] = "Discours sur le gouvernement"
+        Resource.from_gsx_entry(entry)
+        entry = defaultdict(defaultdict)
+        entry["gsx$title"]["$t"] = "Discourses concerning government"
+        Resource.from_gsx_entry(entry)
+
+        Resource.from_gsx_entry(entry_edition)
+        resource = Resource.relationships_from_gsx_entry(entry_edition)
+        assert resource is not None
+        assert resource.relationships.count() == 2
 
 
 @pytest.mark.usefixtures("vocabulary")
