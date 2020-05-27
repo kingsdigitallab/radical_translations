@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Log entries to the admin interface.
+
 
 [0.5.1] - 2020-05-27
 --------------------
