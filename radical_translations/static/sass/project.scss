@@ -3,13 +3,19 @@
 @import "bootstrap";
 
 
-
-
 // project specific CSS goes here
 
 ////////////////////////////////
 		//Variables//
 ////////////////////////////////
+
+// Modifying colour map
+// Ref: https://getbootstrap.com/docs/4.5/getting-started/theming/#modify-map
+
+$theme-colors: (
+  "primary": #0074d9,
+  "danger": #ff4136
+);
 
 // Alert colors
 
