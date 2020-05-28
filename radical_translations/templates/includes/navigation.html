@@ -1,5 +1,7 @@
-{% load menu_tags %}
+{% load menu_tags static i18n %}
 
-{% block main_menu %}
-{% main_menu max_levels=2 %}
-{% endblock %}
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    {% block main_menu %}
+    {% main_menu %}
+    {% endblock %}
+</nav>
