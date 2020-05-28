@@ -7,21 +7,21 @@
 --no-binary psycopg2
 
 alabaster==0.7.12         # via sphinx
-appdirs==1.4.3            # via black, virtualenv
+appdirs==1.4.4            # via black, virtualenv
 argon2-cffi==19.2.0       # via -r /requirements/./base.in
-astroid==2.4.0            # via pylint
+astroid==2.4.1            # via pylint
 attrs==19.3.0             # via black, pytest
 babel==2.8.0              # via sphinx
 backcall==0.1.0           # via ipython
 beautifulsoup4==4.6.0     # via wagtail
 black==19.10b0            # via -r /requirements/local.in
 bump2version==1.0.0       # via -r /requirements/local.in
-certifi==2020.4.5.1       # via requests
+certifi==2020.4.5.1       # via elasticsearch, requests
 cffi==1.14.0              # via argon2-cffi
 cfgv==3.1.0               # via pre-commit
 chardet==3.0.4            # via requests
 click==7.1.2              # via black, geocoder, pip-tools
-convertdate==2.2.0        # via -r /requirements/./base.in
+convertdate==2.2.1        # via -r /requirements/./base.in
 coreapi==2.3.3            # via -r /requirements/./base.in
 coreschema==0.0.4         # via coreapi
 coverage==5.1             # via coveralls, django-coverage-plugin
@@ -30,6 +30,7 @@ decorator==4.4.2          # via ipython, ratelim, traitlets
 defusedxml==0.6.0         # via python3-openid
 distlib==0.3.0            # via virtualenv
 django-allauth==0.41.0    # via -r /requirements/./base.in
+django-cogwheels==0.3     # via wagtailmenus
 git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@132e5a0ae83ade28f907e690e5adc9883e265082  # via -r /requirements/./base.in
 django-coverage-plugin==1.8.0  # via -r /requirements/local.in
 django-crispy-forms==1.8.1  # via -r /requirements/./base.in
@@ -39,11 +40,11 @@ django-extensions==2.2.8  # via -r /requirements/local.in
 django-geonames-place==0.6.0  # via -r /requirements/./base.in
 django-kdl-wagtail==0.9.0  # via -r /requirements/./base.in
 django-model-utils==4.0.0  # via -r /requirements/./base.in, django-geonames-place
-django-modelcluster==5.0.1  # via wagtail
+django-modelcluster==5.0.2  # via wagtail
 django-polymorphic==2.1.2  # via -r /requirements/./base.in
 django-redis==4.11.0      # via -r /requirements/./base.in
 django-stubs==1.4.0       # via -r /requirements/local.in
-django-taggit==1.2.0      # via wagtail
+django-taggit==1.3.0      # via wagtail
 django-treebeard==4.3.1   # via wagtail
 django==2.2.10            # via -r /requirements/./base.in, django-allauth, django-controlled-vocabulary, django-debug-toolbar, django-model-utils, django-polymorphic, django-redis, django-stubs, django-taggit, django-treebeard, djangorestframework, wagtail
 djangorestframework==3.11.0  # via -r /requirements/./base.in, wagtail
@@ -51,23 +52,23 @@ docopt==0.6.2             # via coveralls
 docutils==0.16            # via sphinx
 draftjs-exporter==2.1.7   # via wagtail
 edtf==4.0.1               # via -r /requirements/./base.in
-elasticsearch-dsl==7.1.0  # via -r /requirements/./base.in
-elasticsearch==7.6.0      # via elasticsearch-dsl
+elasticsearch-dsl==7.2.0  # via -r /requirements/./base.in
+elasticsearch==7.7.1      # via elasticsearch-dsl
 entrypoints==0.3          # via flake8
 factory-boy==2.12.0       # via -r /requirements/local.in
-faker==4.0.3              # via factory-boy
+faker==4.1.0              # via factory-boy
 filelock==3.0.12          # via virtualenv
 flake8==3.7.9             # via -r /requirements/local.in
 future==0.18.2            # via geocoder
 geocoder==1.38.1          # via django-geonames-place
 html5lib==1.0.1           # via wagtail
-identify==1.4.15          # via pre-commit
+identify==1.4.17          # via pre-commit
 idna==2.9                 # via requests
 imagesize==1.2.0          # via sphinx
 importlib-metadata==1.6.0  # via pluggy, pre-commit, pytest, virtualenv
 ipdb==0.12.3              # via -r /requirements/local.in
 ipython-genutils==0.2.0   # via traitlets
-ipython==7.13.0           # via ipdb
+ipython==7.14.0           # via ipdb
 isort==4.3.21             # via pylint
 itypes==1.2.0             # via coreapi
 jedi==0.17.0              # via ipython
@@ -76,19 +77,19 @@ l18n==2018.5              # via wagtail
 lazy-object-proxy==1.4.3  # via astroid
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8, pylint
-more-itertools==8.2.0     # via pytest
+more-itertools==8.3.0     # via pytest
 mypy-extensions==0.4.3    # via mypy
 mypy==0.761               # via -r /requirements/local.in, django-stubs
 nodeenv==1.3.5            # via pre-commit
 oauthlib==3.1.0           # via requests-oauthlib
-packaging==20.3           # via pytest, pytest-sugar, sphinx
+packaging==20.4           # via pytest, pytest-sugar, sphinx
 parso==0.7.0              # via jedi
 pathspec==0.8.0           # via black
 pathtools==0.1.2          # via watchdog
 pexpect==4.8.0            # via ipython
 pickleshare==0.7.5        # via ipython
 pillow==6.2.2             # via wagtail
-pip-tools==5.1.1          # via -r /requirements/local.in
+pip-tools==5.2.0          # via -r /requirements/local.in
 pluggy==0.13.1            # via pytest
 pre-commit==2.1.0         # via -r /requirements/local.in
 prompt-toolkit==3.0.5     # via ipython
@@ -102,7 +103,7 @@ pygments==2.6.1           # via ipython, sphinx
 pygraphviz==1.5           # via -r /requirements/local.in
 pylint-django==2.0.13     # via -r /requirements/local.in
 pylint-plugin-utils==0.6  # via pylint-django
-pylint==2.5.0             # via pylint-django, pylint-plugin-utils
+pylint==2.5.2             # via pylint-django, pylint-plugin-utils
 pymeeus==0.3.7            # via convertdate
 pyparsing==2.4.7          # via edtf, packaging
 pytest-django==3.8.0      # via -r /requirements/local.in
@@ -115,10 +116,10 @@ pytz==2019.3              # via -r /requirements/./base.in, babel, convertdate, 
 pyyaml==5.3.1             # via pre-commit
 ratelim==0.1.6            # via geocoder
 redis==3.4.1              # via -r /requirements/./base.in, django-redis
-regex==2020.4.4           # via black
+regex==2020.5.14          # via black
 requests-oauthlib==1.3.0  # via django-allauth
 requests==2.23.0          # via coreapi, coveralls, django-allauth, geocoder, requests-oauthlib, sphinx, wagtail
-six==1.14.0               # via argon2-cffi, astroid, django-coverage-plugin, django-extensions, edtf, elasticsearch-dsl, geocoder, html5lib, l18n, packaging, pip-tools, python-dateutil, traitlets, virtualenv
+six==1.15.0               # via argon2-cffi, astroid, django-coverage-plugin, django-extensions, edtf, elasticsearch-dsl, geocoder, html5lib, l18n, packaging, pip-tools, python-dateutil, traitlets, virtualenv
 snowballstemmer==2.0.0    # via sphinx
 sphinx==2.4.2             # via -r /requirements/local.in
 sphinxcontrib-applehelp==1.0.2  # via sphinx
@@ -130,15 +131,16 @@ sphinxcontrib-serializinghtml==1.1.4  # via sphinx
 sqlparse==0.3.1           # via django, django-debug-toolbar
 termcolor==1.1.0          # via pytest-sugar
 text-unidecode==1.3       # via faker, python-slugify
-toml==0.10.0              # via black, pre-commit, pylint
+toml==0.10.1              # via black, pre-commit, pylint
 traitlets==4.3.3          # via ipython
 typed-ast==1.4.1          # via astroid, black, mypy
 typing-extensions==3.7.4.2  # via django-stubs, mypy
 unidecode==1.1.1          # via wagtail
 uritemplate==3.0.1        # via coreapi
 urllib3==1.25.9           # via django-controlled-vocabulary, elasticsearch, requests
-virtualenv==20.0.18       # via pre-commit
-wagtail==2.8              # via -r /requirements/./base.in, django-kdl-wagtail
+virtualenv==20.0.21       # via pre-commit
+wagtail==2.8.2            # via -r /requirements/./base.in, django-kdl-wagtail
+wagtailmenus==3.0.1       # via -r /requirements/./base.in
 watchdog==0.10.2          # via -r /requirements/local.in
 wcwidth==0.1.9            # via prompt-toolkit, pytest
 webencodings==0.5.1       # via html5lib

@@ -17,6 +17,11 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Log entries to the admin interface.
+* wagtailmenus app.
+
+Changed
+~~~~~~~
+* Wagtail now serves the root URL.
 
 
 [0.5.1] - 2020-05-27

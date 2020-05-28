@@ -2,9 +2,10 @@
 Base settings to build other settings files upon.
 """
 
-from controlled_vocabulary import defaults
-import environ
 import os
+
+import environ
+from controlled_vocabulary import defaults
 
 ROOT_DIR = (
     environ.Path(__file__) - 3
@@ -72,6 +73,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "rest_framework",
     "wagtail.contrib.forms",
+    "wagtail.contrib.modeladmin",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
     "wagtail.embeds",
@@ -85,6 +87,7 @@ THIRD_PARTY_APPS = [
     "modelcluster",
     "taggit",
     "kdl_wagtail.core",
+    "wagtailmenus",
     "controlled_vocabulary",
     "geonames_place.apps.GeonamesPlaceConfig",
     "polymorphic",
@@ -210,6 +213,8 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "radical_translations.utils.context_processors.settings_context",
+                "wagtail.contrib.settings.context_processors.settings",
+                "wagtailmenus.context_processors.wagtailmenus",
             ],
         },
     }
