@@ -23,6 +23,10 @@ Changed
 ~~~~~~~
 * Wagtail now serves the root URL.
 
+Fixed
+~~~~~
+* Add missing Wagtail apps.
+
 
 [0.5.1] - 2020-05-27
 --------------------
