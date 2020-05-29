@@ -2,7 +2,9 @@ import re
 from typing import Dict, Optional
 
 from controlled_vocabulary.models import ControlledTermsField
+from convertdate import french_republican
 from django.db import models
+from edtf import parse_edtf
 from edtf.fields import EDTFField
 from edtf.parser.edtf_exceptions import EDTFParseException
 from geonames_place.models import Place
@@ -57,10 +59,13 @@ class Date(TimeStampedModel):
         ordering = ["date_sort_ascending", "date_sort_descending"]
 
     def __str__(self) -> str:
-        if self.date_radical:
-            return f"{self.date_radical} ({self.date_display})"
+        return f"{self.date_radical} ({self.date_display})"
 
-        return self.date_display
+    def save(self, *args, **kwargs):
+        if self.date_display and not self.date_radical:
+            self.date_radical = get_date_radical_from_gregorian(self.date_display)
+
+        super().save(*args, **kwargs)
 
     @staticmethod
     def from_date_display(date_display: str) -> Optional["Date"]:
@@ -85,6 +90,36 @@ class EditorialClassificationModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+def get_date_radical_from_gregorian(date_display: str) -> Optional[str]:
+    if not date_display:
+        return None
+
+    try:
+        date_edtf = parse_edtf(date_display)
+        if not date_edtf:
+            return None
+
+        date_fr = french_republican.from_gregorian(*date_edtf.lower_strict()[:3])
+        date_str = (
+            f"{date_fr[2]} "
+            f"{french_republican.MOIS[date_fr[1] - 1].lower()} "
+            f"an {int(date_fr[0])}"
+        )
+
+        if date_edtf.lower_strict() != date_edtf.upper_strict():
+            date_fr = french_republican.from_gregorian(*date_edtf.upper_strict()[:3])
+            date_str = (
+                f"{date_str} - "
+                f"{date_fr[2]} "
+                f"{french_republican.MOIS[date_fr[1] - 1].lower()} "
+                f"an {int(date_fr[0])}"
+            )
+
+        return date_str
+    except EDTFParseException:
+        return None
 
 
 def get_gsx_entry_value(entry: Dict[str, Dict[str, str]], field: str) -> Optional[str]:
@@ -114,5 +149,4 @@ def get_geonames_place_from_gsx_place(name: str) -> Optional[Place]:
 
     address = matches.group("address").strip()
     country_code = matches.group("country_code")
-
     return Place.get_or_create_from_geonames(address, country_code=country_code)

@@ -2,6 +2,7 @@ import pytest
 
 from radical_translations.utils.models import (
     Date,
+    get_date_radical_from_gregorian,
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
 )
@@ -16,6 +17,18 @@ class TestDate:
         date = Date.from_date_display("1971")
         assert date is not None
         assert date.date_edtf is not None
+
+
+def test_get_radical_date_from_gregorian():
+    assert get_date_radical_from_gregorian(None) is None
+
+    date = get_date_radical_from_gregorian("1812-12-12")
+    assert "21" in date
+    assert "-" not in date
+
+    date = get_date_radical_from_gregorian("1812")
+    assert "20" in date
+    assert "-" in date
 
 
 def test_get_gsx_entry_value():

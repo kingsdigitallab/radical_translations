@@ -18,6 +18,7 @@ Added
 ~~~~~
 * Log entries to the admin interface.
 * wagtailmenus app.
+* Conversion from Gregorian to French Republican dates.
 
 Changed
 ~~~~~~~
