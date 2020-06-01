@@ -8466,7 +8466,13 @@ body {
     padding-left: 0; }
     .children ul li {
       border-bottom: 1px dotted #999;
-      list-style: none; }
+      list-style: none;
+      padding: 16px 0;
+      padding: 1rem 0; }
+
+.child-page-image {
+  margin-right: 16px;
+  margin-right: 1rem; }
 
 /* Alerts */
 .alert-debug {

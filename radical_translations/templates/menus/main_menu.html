@@ -7,7 +7,7 @@
   <span class="navbar-toggler-icon"></span>
 </button>
 
-<a class="navbar-brand" href="#">Radical Translations</a>
+<a class="navbar-brand" href="/">Radical Translations</a>
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav mr-auto">
@@ -27,6 +27,8 @@
       {% endcomment %}
     </li>
     {% endfor %}
+
+    {% comment %}
 
     {% if request.user.is_authenticated %}
     <li class="nav-item">
@@ -51,5 +53,6 @@
         href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
     </li>
     {% endif %}
+    {% endcomment %}
   </ul>
 </div>
