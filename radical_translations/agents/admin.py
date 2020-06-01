@@ -12,23 +12,13 @@ from radical_translations.core.models import Contribution
 @admin.register(Agent)
 class AgentAdmin(PolymorphicParentModelAdmin):
     child_models = [Organisation, Person]
-    list_display = ["name", "agent_type", "roles_display", "based_near_display"]
+    list_display = ["name", "agent_type", "get_role_names", "get_place_names"]
     list_filter = [
         PolymorphicChildModelFilter,
         ("roles", admin.RelatedOnlyFieldListFilter),
         ("based_near", admin.RelatedOnlyFieldListFilter),
     ]
-    search_fields = ["name"]
-
-    def based_near_display(self, obj):
-        return "; ".join([place.address for place in obj.based_near.all()])
-
-    based_near_display.short_description = "Places"
-
-    def roles_display(self, obj):
-        return "; ".join([role.label for role in obj.roles.all()])
-
-    roles_display.short_description = "Roles"
+    search_fields = ["name", "roles", "base_near"]
 
 
 class AgentInline(admin.TabularInline):
@@ -49,7 +39,12 @@ class ContributionInline(admin.TabularInline):
 class AgentChildAdmin(PolymorphicChildModelAdmin):
     autocomplete_fields = ["based_near"]
     inlines = [ContributionInline]
-    search_fields = ["name"]
+    list_display = ["name", "get_role_names", "get_place_names"]
+    list_filter = [
+        ("roles", admin.RelatedOnlyFieldListFilter),
+        ("based_near", admin.RelatedOnlyFieldListFilter),
+    ]
+    search_fields = ["name", "roles", "base_near"]
     show_in_index = True
 
 
@@ -76,3 +71,20 @@ class PersonAdmin(AgentChildAdmin):
         "knows",
     ]
     inlines = AgentChildAdmin.inlines + [OrganisationInline]
+    list_display = [
+        "name",
+        "gender",
+        "date_birth",
+        "place_birth",
+        "date_death",
+        "place_death",
+        "get_role_names",
+        "get_place_names",
+    ]
+    list_filter = [
+        "gender",
+        ("roles", admin.RelatedOnlyFieldListFilter),
+        ("languages", admin.RelatedOnlyFieldListFilter),
+        ("based_near", admin.RelatedOnlyFieldListFilter),
+        ("knows", admin.RelatedOnlyFieldListFilter),
+    ]

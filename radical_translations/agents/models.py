@@ -6,6 +6,7 @@ from django.db import models
 from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
+
 from radical_translations.utils.models import (
     Date,
     get_geonames_place_from_gsx_place,
@@ -48,6 +49,16 @@ class Agent(PolymorphicModel, TimeStampedModel):
     @property
     def agent_type(self) -> str:
         return self.polymorphic_ctype.name
+
+    def get_place_names(self) -> str:
+        return "; ".join([place.address for place in self.based_near.all()])
+
+    get_place_names.short_description = "Places"  # type: ignore
+
+    def get_role_names(self):
+        return "; ".join([role.label for role in self.roles.all()])
+
+    get_role_names.short_description = "Roles"  # type: ignore
 
 
 class Person(Agent):
