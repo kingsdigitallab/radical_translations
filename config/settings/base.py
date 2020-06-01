@@ -88,6 +88,7 @@ THIRD_PARTY_APPS = [
     "modelcluster",
     "taggit",
     "kdl_wagtail.core",
+    "kdl_wagtail.people",
     "wagtailmenus",
     "controlled_vocabulary",
     "geonames_place.apps.GeonamesPlaceConfig",

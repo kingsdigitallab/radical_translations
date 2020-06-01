@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* KDL Wagtail People page types.
+
 Changed
 ~~~~~~~
 * Do not display French Republican dates by default.
