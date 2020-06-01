@@ -5,7 +5,7 @@ volumes:
   production_postgres_data: {}
   production_postgres_data_backups: {}
   production_traefik: {}
-  production_elasticsearch_data: {}
+  #production_elasticsearch_data: {}
 
 services:
   django:
@@ -18,7 +18,7 @@ services:
     depends_on:
       - postgres
       - redis
-      - elasticsearch
+      #- elasticsearch
     env_file:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
@@ -60,22 +60,20 @@ services:
 
   redis:
     image: redis:5.0
-
-  elasticsearch:
-    image: elasticsearch:7.5.1
-    volumes:
-      - production_elasticsearch_data:/usr/share/elasticsearch/data
-    env_file:
-      - ./.envs/.production/.elasticsearch
-    ports:
-      - '127.0.0.1:9200:9200'
-      - '127.0.0.1:9300:9300'
-
-  kibana:
-    image: kibana:7.5.1
-    depends_on:
-      - elasticsearch
-    env_file:
-      - ./.envs/.production/.kibana
-    ports:
-      - '5601:5601'
+  #elasticsearch:
+  #image: elasticsearch:7.5.1
+  #volumes:
+  #- production_elasticsearch_data:/usr/share/elasticsearch/data
+  #env_file:
+  #- ./.envs/.production/.elasticsearch
+  #ports:
+  #- '127.0.0.1:9200:9200'
+  #- '127.0.0.1:9300:9300'
+  #kibana:
+  #image: kibana:7.5.1
+  #depends_on:
+  #- elasticsearch
+  #env_file:
+  #- ./.envs/.production/.kibana
+  #ports:
+  #- '5601:5601'
