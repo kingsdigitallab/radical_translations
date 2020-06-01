@@ -8430,6 +8430,29 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
+/** RT Fonts **/
+/** Dream Orphans **/
+@font-face {
+  font-family: 'Dream Orphans';
+  src: url("/static/fonts/dream-orphans/dream-orphans.ttf") format("truetype");
+  font-weight: normal; }
+
+@font-face {
+  font-family: 'Dream Orphans';
+  src: url("/static/fonts/dream-orphans/dream-orphans-bd.ttf") format("truetype");
+  font-weight: 700; }
+
+@font-face {
+  font-family: 'Dream Orphans';
+  src: url("/static/fonts/dream-orphans/dream-orphans-it.ttf") format("truetype");
+  font-style: italic; }
+
+@font-face {
+  font-family: 'Dream Orphans';
+  src: url("/static/fonts/dream-orphans/dream-orphans-bd-it.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 700; }
+
 .alert-debug {
   background-color: #fff;
   border-color: #d6e9c6;
