@@ -20,13 +20,13 @@ Added
 * wagtailmenus app.
 * Conversion from Gregorian to French Republican dates.
 * Command to import `Resource` URLs from GSX.
-* Reorganised KDL Wagtail templates.
 * Basic styling and typography.
 
 Changed
 ~~~~~~~
 * Wagtail now serves the root URL.
 * Agents admin, add extra search fields and filters.
+* Reorganise KDL Wagtail templates.
 
 Fixed
 ~~~~~
