@@ -1,0 +1,34 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="children">
+
+    {% if children %}
+    <ul>
+        {% for child in children %}
+        <li class="child-page">
+            <a href="{% pageurl child %}">
+                <h2 class="child-page-title">{{ child.title }}</h2>
+
+                {% if child.image %}
+                <div class="child-page-image">
+                    {% image child.image fill-180x180-c100 %}
+                </div>
+                {% endif %}
+
+                {% if child.introduction %}
+                <p class="child-page-introduction">
+                    {{ child.introduction }}
+                </p>
+                {% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% include "kdl_wagtail_core/includes/pagination.html" with items=children %}
+
+    {% else %}
+    <p>No live pages found!</p>
+    {% endif %}
+
+</div>

@@ -20,6 +20,8 @@ Added
 * wagtailmenus app.
 * Conversion from Gregorian to French Republican dates.
 * Command to import `Resource` URLs from GSX.
+* Reorganised KDL Wagtail templates.
+* Basic styling and typography.
 
 Changed
 ~~~~~~~

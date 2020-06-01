@@ -1,0 +1,55 @@
+{% load menu_tags static i18n %}
+
+<button class="navbar-toggler navbar-toggler-right" type="button"
+      data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+<a class="navbar-brand" href="#">Radical Translations</a>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+
+    {% for item in menu_items %}
+    {% comment %}
+    {# TODO: add dynamic active class #}
+    <li class="nav-item{% if item.active_class %} active{% endif %}">
+    {% endcomment %}
+    <li class="nav-item{% if item.active_class %} active{% endif %}">
+      <a href="{{ item.href }}" class="nav-link">{{ item.text }}{% if item.active_class %} <span
+          class="sr-only">(current)</span>{% endif %}</a>
+      {% comment %}
+      {% if item.has_children_in_menu %}
+      {% sub_menu item template=current %}
+      {% endif %}
+      {% endcomment %}
+    </li>
+    {% endfor %}
+
+    {% if request.user.is_authenticated %}
+    <li class="nav-item">
+      {# URL provided by django-allauth/account/urls.py #}
+      <a class="nav-link"
+        href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
+    </li>
+    <li class="nav-item">
+      {# URL provided by django-allauth/account/urls.py #}
+      <a class="nav-link"
+        href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      {# URL provided by django-allauth/account/urls.py #}
+      <a id="sign-up-link" class="nav-link"
+        href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+    </li>
+    <li class="nav-item">
+      {# URL provided by django-allauth/account/urls.py #}
+      <a id="log-in-link" class="nav-link"
+        href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
