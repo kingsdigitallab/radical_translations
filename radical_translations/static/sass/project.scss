@@ -42,8 +42,13 @@ body {
         li {
             border-bottom: 1px dotted #999;
             list-style: none;
+            padding: 1rem 0;
         }
     }
+}
+
+.child-page-image {
+    margin-right: 1rem;
 }
 
 /* Alerts */
