@@ -5,15 +5,13 @@
 
 // project specific CSS goes here
 
-////////////////////////////////
-		//Variables//
-////////////////////////////////
+/* Variables */
 
 // Modifying colour map
 // Ref: https://getbootstrap.com/docs/4.5/getting-started/theming/#modify-map
 
 $theme-colors: (
-  "primary": #0074d9,
+  "primary": #3c153b,
   "danger": #ff4136
 );
 
@@ -26,9 +24,29 @@ $pink: #f2dede;
 $dark-pink: #eed3d7;
 $red: #b94a48;
 
-////////////////////////////////
-		//Alerts//
-////////////////////////////////
+
+/* Globals */
+
+body {
+    font-family: "Merriweather", serif;
+}
+
+/* Blog */
+
+.children {
+    margin-top: 1rem;
+
+    ul {
+        padding-left: 0;
+        
+        li {
+            border-bottom: 1px dotted #999;
+            list-style: none;
+        }
+    }
+}
+
+/* Alerts */
 
 // bootstrap alert CSS, translated to the django-standard levels of
 // debug, info, success, warning, error
@@ -43,10 +61,4 @@ $red: #b94a48;
   background-color: $pink;
   border-color: $dark-pink;
   color: $red;
-}
-
-/* Typography */
-
-body {
-    font-family: "Merriweather", serif;
 }
