@@ -9,8 +9,8 @@ Team
 
 .. literalinclude:: ../radical_translations/static/humans.txt
     :language: text
-    :start-after: /* TEAM */
-    :end-before: /* SITE */
+    :start-after: */
+    :end-before: /*
 
 Technologies and Processes
 --------------------------
@@ -26,9 +26,9 @@ For more information see `development`_ and `development with docker`_.
 Data model
 ^^^^^^^^^^
 
-The Radical Translations project data model is based on BIBFRAME_, for
-Resources (Works, Instances, Items) and Events, and based on FOAF_ for
-Agents (Persons, Organisations).
+The Radical Translations project data model is based on
+BIBFRAME_, for Resources (Works, Instances, Items are flattened under one
+object type) and Events, and based on FOAF_ for Agents (Persons, Organisations). 
 
 .. figure:: _images/models.png
     :align: center
@@ -43,8 +43,56 @@ command::
 
     $ ./bake.py manage graph_models -X TimeStampedModel,PolymorphicModel -o models.png agents core events utils
 
+
+Conceptual model frameworks:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* BIBFRAME_ to model objects and relationships for bibliographic resources
+  (the instances for paratexts are resources labelled as paratexts and
+  `part_of` other resources)
+* BIBFRAME_ uses FOAF_ for its Agent_ class to model relationships between 
+  agents, persons, organisations and other objects. 
+
+Controlled terms
+~~~~~~~~~~~~~~~~
+
+The vocabularies, data points and taxonomies, used by Radical
+Translations data model:
+
+* FAST_ used for genres (subjects):  this is part of the Library of Congress
+  Linked Open Data resources mapped as FAST topics/forms
+* Additional terms for subjects (with respect to types of publications and
+  genres) use terms from the RBMS controlled vocabularies (in particular
+  the `RBMS printing and publishing`_ and `RBMS genre` vocabularies)
+* Wikidata_ for the professions (roles) of persons e.g. authors and
+  translators as well as types of organisations e.g. political parties
+  vs publishers; Wikidata terms are also used to express editorial
+  classification e.g. of dates (e.g. inferred), events (typology) and
+  relationships (e.g. uncertain attribution)
+* VIAF_ to identify some of the agents (persons) who are well known
+  translators/authors
+* `ISO code for languages`_
+* GeoNames_ for geocoded placenames
+* Extended Date/Time Format (EDTF_) Specification to express dates
+* In one case controlled terms are based on project-specific terms; this is
+  the case for ‘classification scheme edition’ for the Resources objects
+  (in particular paratexts) with values partially adapted from
+  Kathryn Batchelor, Translation and Paratexts (Roudledge 2018);
+  Amy Nottingham-Martin,"Thresholds of Transmedia Storytelling" in
+  Examining Paratextual Theory and Its Applications in Digital Culture,
+  ed. Nadine Desrochers and Daniel Apollon, (IGI Global 2014), 287-307.
+
 .. _BIBFRAME: https://www.loc.gov/bibframe/docs/bibframe2-model.html
 .. _FOAF: http://xmlns.com/foaf/spec/
+.. _Agent: http://xmlns.com/foaf/spec/#term_Agent
+.. _FAST: https://www.oclc.org/research/themes/data-science/fast.html
+.. _RBMS printing and publishing: http://rbms.info/vocabularies/printing-publishing/alphabetical_list.htm
+.. _RBMS genre: https://rbms.info/vocabularies/genre/alphabetical_list.htm
+.. _Wikidata: https://www.wikidata.org/wiki/Wikidata:Main_Page
+.. _VIAF: https://www.oclc.org/en/viaf.html
+.. _ISO code for languages: http://id.loc.gov/vocabulary/iso639-2.html
+.. _Geonames: http://www.geonames.org/ 
+.. _EDTF: https://www.loc.gov/standards/datetime/
 .. _django-extensions graph_models: https://django-extensions.readthedocs.io/en/latest/graph_models.html
 
 Workflows
