@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Changed
+~~~~~~~
+* Do not display French Republican dates by default.
+
 
 [0.6.0] - 2020-06-01
 --------------------
