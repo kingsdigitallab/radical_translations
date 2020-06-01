@@ -9,17 +9,21 @@
             <a href="{% pageurl child %}">
                 <h2 class="child-page-title">{{ child.title }}</h2>
 
-                {% if child.image %}
-                <div class="child-page-image">
-                    {% image child.image fill-180x180-c100 %}
-                </div>
-                {% endif %}
+                <div class="col">
+                    <div class="row">
+                        {% if child.image %}
+                        <div class="child-page-image">
+                            {% image child.image fill-180x180-c100 %}
+                        </div>
+                        {% endif %}
 
-                {% if child.introduction %}
-                <p class="child-page-introduction">
-                    {{ child.introduction }}
-                </p>
-                {% endif %}
+                        {% if child.introduction %}
+                            <p class="child-page-introduction">
+                                {{ child.introduction }}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
             </a>
         </li>
         {% endfor %}
