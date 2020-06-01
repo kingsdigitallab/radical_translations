@@ -11,6 +11,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+
 [0.6.0] - 2020-06-01
 --------------------
 
@@ -31,7 +35,7 @@ Changed
 Fixed
 ~~~~~
 * Add missing Wagtail apps.
-* `Resource`.`electronic_locator` import.
+* `Resource`, `electronic_locator` import.
 
 
 [0.5.1] - 2020-05-27
