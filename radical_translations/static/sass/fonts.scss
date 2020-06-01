@@ -1,28 +1,28 @@
 /** RT Fonts **/
 
-/** Dream Orphans **/
+/** Merriweather **/
 
 @font-face {
-  font-family: 'Dream Orphans';
-  src: url('/static/fonts/dream-orphans/dream-orphans.ttf') format('truetype');
+  font-family: 'Merriweather';
+  src: url('/static/fonts/Merryweather/Merriweather-Regular.ttf') format('truetype');
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Dream Orphans';
-  src: url('/static/fonts/dream-orphans/dream-orphans-bd.ttf') format('truetype');
+  font-family: 'Merriweather';
+  src: url('/static/fonts/Merriweather/Merriweather-Bold.ttf') format('truetype');
   font-weight: 700;
 }
 
 @font-face {
-  font-family: 'Dream Orphans';
-  src: url('/static/fonts/dream-orphans/dream-orphans-it.ttf') format('truetype');
+  font-family: 'Merriweather';
+  src: url('/static/fonts/Merriweather/Merriweather-Italic.ttf') format('truetype');
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'Dream Orphans';
-  src: url('/static/fonts/dream-orphans/dream-orphans-bd-it.ttf') format('truetype');
+  font-family: 'Merriweather';
+  src: url('/static/fonts/Merriweather/Merriweather-BoldItalic.ttf') format('truetype');
   font-style: italic;
   font-weight: 700;
 }
