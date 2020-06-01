@@ -19,14 +19,17 @@ Added
 * Log entries to the admin interface.
 * wagtailmenus app.
 * Conversion from Gregorian to French Republican dates.
+* Command to import `Resource` URLs from GSX.
 
 Changed
 ~~~~~~~
 * Wagtail now serves the root URL.
+* Agents admin, add extra search fields and filters.
 
 Fixed
 ~~~~~
 * Add missing Wagtail apps.
+* `Resource`.`electronic_locator` import.
 
 
 [0.5.1] - 2020-05-27
