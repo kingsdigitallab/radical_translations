@@ -261,7 +261,7 @@ class Resource(TimeStampedModel):
 
         url = get_gsx_entry_value(entry, "url")
         if url:
-            resource.eletronic_locator = url
+            resource.electronic_locator = url
 
         resource.save()
 
