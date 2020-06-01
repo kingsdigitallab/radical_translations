@@ -59,7 +59,7 @@ class Date(TimeStampedModel):
         ordering = ["date_sort_ascending", "date_sort_descending"]
 
     def __str__(self) -> str:
-        return f"{self.date_radical} ({self.date_display})"
+        return f"{self.date_display}"
 
     def save(self, *args, **kwargs):
         if self.date_display and not self.date_radical:
