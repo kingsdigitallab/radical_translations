@@ -22,6 +22,10 @@ Changed
 ~~~~~~~
 * Do not display French Republican dates by default.
 
+Fixed
+~~~~~
+* Agent search.
+
 
 [0.6.0] - 2020-06-01
 --------------------

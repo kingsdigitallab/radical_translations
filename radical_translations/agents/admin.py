@@ -18,7 +18,7 @@ class AgentAdmin(PolymorphicParentModelAdmin):
         ("roles", admin.RelatedOnlyFieldListFilter),
         ("based_near", admin.RelatedOnlyFieldListFilter),
     ]
-    search_fields = ["name", "roles", "base_near"]
+    search_fields = ["name", "roles__label", "based_near__address"]
 
 
 class AgentInline(admin.TabularInline):
@@ -44,7 +44,7 @@ class AgentChildAdmin(PolymorphicChildModelAdmin):
         ("roles", admin.RelatedOnlyFieldListFilter),
         ("based_near", admin.RelatedOnlyFieldListFilter),
     ]
-    search_fields = ["name", "roles", "base_near"]
+    search_fields = ["name", "roles__label", "based_near__address"]
     show_in_index = True
 
 
