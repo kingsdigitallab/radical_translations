@@ -17,6 +17,7 @@ class DateAdmin(admin.ModelAdmin):
         "date_radical",
         "date_radical_classification",
     ]
+    list_display = ['date_display', 'date_radical']
     search_fields = ["date_display", "date_radical"]
 
 

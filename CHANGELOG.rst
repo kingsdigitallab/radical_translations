@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Changed
+~~~~~~~
+* Disable automatic conversion of dates.
+
 
 [0.6.1] - 2020-06-02
 --------------------
