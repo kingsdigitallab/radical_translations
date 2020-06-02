@@ -61,12 +61,6 @@ class Date(TimeStampedModel):
     def __str__(self) -> str:
         return f"{self.date_display}"
 
-    def save(self, *args, **kwargs):
-        if self.date_display and not self.date_radical:
-            self.date_radical = get_date_radical_from_gregorian(self.date_display)
-
-        super().save(*args, **kwargs)
-
     @staticmethod
     def from_date_display(date_display: str) -> Optional["Date"]:
         """Create a new `Date` from a `date_display` value."""
