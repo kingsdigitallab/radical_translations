@@ -40,6 +40,22 @@ class Agent(PolymorphicModel, TimeStampedModel):
         ["wikidata"], blank=True, help_text="Roles performed by this Agent."
     )
 
+    sources = models.ManyToManyField(
+        "core.Resource",
+        blank=True,
+        related_name="agents",
+        help_text="Resources that are relevant bibliographic sources.",
+    )
+
+    notes = models.TextField(
+        blank=True,
+        null=True,
+        help_text=(
+            "Information, usually in textual form, on attributes of an agent or some "
+            "aspect of an agent."
+        ),
+    )
+
     class Meta:
         ordering = ["name"]
 

@@ -37,7 +37,7 @@ class ContributionInline(admin.TabularInline):
 
 
 class AgentChildAdmin(PolymorphicChildModelAdmin):
-    autocomplete_fields = ["based_near"]
+    autocomplete_fields = ["based_near", "sources"]
     inlines = [ContributionInline]
     list_display = ["name", "get_role_names", "get_place_names"]
     list_filter = [
