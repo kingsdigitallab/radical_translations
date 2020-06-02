@@ -23,7 +23,7 @@ certificatesResolvers:
 http:
   routers:
     web-router:
-      rule: 'Host(`radical_translations.info`)'
+      rule: 'Host(`radicaltranslations.org`)'
       entryPoints:
         - web
       middlewares:
@@ -32,7 +32,7 @@ http:
       service: django
 
     web-secure-router:
-      rule: 'Host(`radical_translations.info`)'
+      rule: 'Host(`radicaltranslations.org`)'
       entryPoints:
         - web-secure
       middlewares:
@@ -43,7 +43,7 @@ http:
         certResolver: letsencrypt
 
     web-media-router:
-      rule: 'Host(`radical_translations.info`) && PathPrefix(`/media/`)'
+      rule: 'Host(`radicaltranslations.org`) && PathPrefix(`/media/`)'
       entryPoints:
         - web-secure
       middlewares:

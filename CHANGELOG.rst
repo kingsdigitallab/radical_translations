@@ -21,6 +21,7 @@ Added
 Changed
 ~~~~~~~
 * Do not display French Republican dates by default.
+* Domain name.
 
 Fixed
 ~~~~~
