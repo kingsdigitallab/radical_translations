@@ -8456,7 +8456,7 @@ a.text-dark:hover, a.text-dark:focus {
 /* Variables */
 /* Globals */
 body {
-  font-family: "Merriweather", serif; }
+  font-family: 'Merriweather', serif; }
 
 /* Blog */
 .children {
@@ -8484,3 +8484,45 @@ body {
   background-color: #f2dede;
   border-color: #eed3d7;
   color: #b94a48; }
+
+.events {
+  background: #f1dcdc;
+  border-bottom-right-radius: 4px;
+  border-left: 3px solid #b94a48;
+  border-top-right-radius: 4px;
+  font-size: 1.03em;
+  line-height: 1.4em;
+  list-style: none;
+  margin: 0 auto;
+  max-width: 60%;
+  padding: 50px;
+  position: relative;
+  text-align: left; }
+  .events h3 {
+    font-weight: 600;
+    font-size: 16px;
+    font-size: 1rem; }
+  .events .event {
+    position: relative; }
+  .events .event:before,
+  .events .event:after {
+    display: block;
+    position: absolute;
+    top: 0; }
+  .events .event:before {
+    content: attr(data-date);
+    font-size: 0.9em;
+    font-weight: 100;
+    left: -200px;
+    min-width: 120px;
+    text-align: right; }
+  .events .event:after {
+    background: #fff;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 0 3px #b94a48;
+            box-shadow: 0 0 0 3px #b94a48;
+    content: '';
+    height: 9px;
+    left: -55.8px;
+    top: 5px;
+    width: 9px; }

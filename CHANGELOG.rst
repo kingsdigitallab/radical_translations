@@ -18,6 +18,7 @@ Added
 ~~~~~
 * `Resource` views.
 * `Agent` views.
+* `Event` views.
 
 Fixed
 ~~~~~

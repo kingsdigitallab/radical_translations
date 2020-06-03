@@ -6,7 +6,7 @@
 <p>
 {{ object.gender }}
 |
-{{ object.date_birth }} {{ object.place_birth.address }} - {{ object.date_death }} {{ object.place_death.address }} 
+{{ object.place_birth.address }}, {{ object.date_birth }} – {{ object.date_death }}, {{ object.place_death.address }} 
 
 {% if object.languages.count %}
 |
