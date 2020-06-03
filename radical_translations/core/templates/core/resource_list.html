@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>Resources</h2>
+<ul>
+    {% for resource in object_list %}
+    <li>
+        <a href="{% url 'resource-detail' resource.pk %}">{{ resource }}</a>, {{ resource.date }}
+    </li>
+    {% endfor %}
+</ul>
+
+{% include "includes/list_view_pagination.html" %}
+{% endblock main %}

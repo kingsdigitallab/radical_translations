@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>{{ object.title }}</h2>
+
+<p>
+{{ object.date }}
+|
+{% for subject in object.subjects.all %}
+{{ subject.label }}{% if not forloop.last %}, {% endif %}
+{% endfor %}
+{% if object.edition_enumeration %}
+|
+{{ object.edition_enumeration }}
+{% endif %}
+|
+{% for classification in object.classifications.all %}
+{{ classification.edition.label }}{% if not forloop.last %}, {% endif %}
+{% endfor %}
+|
+{% for language in object.languages.all %}
+{{ language }}{% if not forloop.last %}, {% endif %}
+{% endfor %}
+|
+{% for place in object.places.all %}
+{{ place }}{% if not forloop.last %}, {% endif %}
+{% endfor %}
+{% if object.electronic_locator %}
+|
+<a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
+{% endif %}
+</p>
+
+{% if object.contributions.count %}
+<h3>Contributions</h3>
+<dl>
+    {% for contribution in object.contributions.all %}
+    <dt>{{ contribution.agent.name }}</dt>
+    {% for role in contribution.roles.all %}
+    <dd>{{ role.label }}</dd>
+    {% endfor %}
+    {% for classification in contribution.classification.all %}
+    <dd>{{ classification.label }}</dd>
+    {% endfor %}
+    {% endfor %}
+</dl>
+{% endif %}
+
+{% if object.relationships.count or object.related_to.count %}
+<h3>Related resources</h3>
+<dl>
+    {% if object.relationships.count %}
+    {% for relationship in object.relationships.all %}
+    <dt>{{ relationship.relationship_type.label }}</dt>
+    <dd>
+    <a href="{% url 'resource-detail' relationship.related_to.pk %}">{{ relationship.related_to.title }}</a>
+    </dd>
+    {% for classification in relationship.classification.all %}
+    <dd>{{ classification.label }}</dd>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+
+    {% if object.related_to.count %}
+    {% for relationship in object.related_to.all %}
+    <dt>has {{ relationship.relationship_type.label|cut:' of' }}</dt>
+    <dd>
+    <a href="{% url 'resource-detail' relationship.resource.pk %}">{{ relationship.resource.title }}</a>
+    </dd>
+    {% for classification in relationship.classification.all %}
+    <dd>{{ classification.label }}</dd>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+</dl>
+{% endif %}
+
+{% if object.events.count %}
+<h3>Events</h3>
+<ul>
+    {% for event in object.events.all %}
+    <li>{{ event }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if object.summary %}
+<h3>Summary</h3>
+<p>{{ object.summary }}</p>
+{% endif %}
+
+{% if object.held_by.count %}
+<h3>Held by</h3>
+<ul>
+    {% for agent in object.held_by.all %}
+    <li>{{ agent.name }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if object.notes %}
+<h3>Notes</h3>
+<p>{{ object.notes }}</p>
+{% endif %}
+{% endblock main %}

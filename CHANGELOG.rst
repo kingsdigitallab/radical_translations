@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* `Resource` views.
+
 
 [0.6.2] - 2020-06-02
 --------------------
