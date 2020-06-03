@@ -20,7 +20,7 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 # KDL
 # ------------------------------------------------------------------------------
 convertdate>=2.2.0,<3  # https://github.com/fitnr/convertdate
-git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@132e5a0ae83ade28f907e690e5adc9883e265082  # https://github.com/kingsdigitallab/django-controlled-vocabulary/
+git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@radical  # https://github.com/kingsdigitallab/django-controlled-vocabulary/
 django-geonames-place  # https://github.com/kingsdigitallab/django-geonames-place
 django-polymorphic  # https://github.com/django-polymorphic/django-polymorphic
 edtf  # https://github.com/ixc/python-edtf

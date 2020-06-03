@@ -19,6 +19,9 @@ Added
 * `Resource` views.
 * `Agent` views.
 
+Fixed
+~~~~~
+* Update Django Controlled Vocabulary app.
 
 [0.6.2] - 2020-06-02
 --------------------
