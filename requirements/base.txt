@@ -17,7 +17,7 @@ decorator==4.4.2          # via ratelim
 defusedxml==0.6.0         # via python3-openid
 django-allauth==0.41.0    # via -r /requirements/base.in
 django-cogwheels==0.3     # via wagtailmenus
-git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@132e5a0ae83ade28f907e690e5adc9883e265082  # via -r /requirements/base.in
+git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@radical  # via -r /requirements/base.in
 django-crispy-forms==1.8.1  # via -r /requirements/base.in
 django-environ==0.4.5     # via -r /requirements/base.in
 django-geonames-place==0.6.0  # via -r /requirements/base.in
@@ -32,7 +32,7 @@ django==2.2.10            # via -r /requirements/base.in, django-allauth, django
 djangorestframework==3.11.0  # via -r /requirements/base.in, wagtail
 draftjs-exporter==2.1.7   # via wagtail
 edtf==4.0.1               # via -r /requirements/base.in
-elasticsearch-dsl==7.2.0  # via -r /requirements/base.in
+elasticsearch-dsl==7.2.1  # via -r /requirements/base.in
 elasticsearch==7.7.1      # via elasticsearch-dsl
 future==0.18.2            # via geocoder
 geocoder==1.38.1          # via django-geonames-place
