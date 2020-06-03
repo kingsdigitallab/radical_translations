@@ -17,6 +17,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * `Resource` views.
+* `Agent` views.
 
 
 [0.6.2] - 2020-06-02
