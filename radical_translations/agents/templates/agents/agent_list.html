@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>{{ title }}</h2>
+
+{% include "includes/list_view_pagination.html" %}
+<ul>
+    {% for object in object_list %}
+    <li>
+        {% with agent_type=object.agent_type %}
+        <a href="{% url 'agent-detail' object.pk %}">{{ object.name }}</a>
+
+        {% if object.roles.count %}
+        {% for role in object.roles.all %}
+        <span class="badge badge-warning">{{ role }}</span>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </li>
+    {% endfor %}
+</ul>
+{% include "includes/list_view_pagination.html" %}
+
+{% endblock main %}

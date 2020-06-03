@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>{{ object.name }}</h2>
+
+<p>
+{{ object.gender }}
+|
+{{ object.date_birth }} {{ object.place_birth.address }} - {{ object.date_death }} {{ object.place_death.address }} 
+
+{% if object.languages.count %}
+|
+{% for language in object.languages.all %}
+{{ language }}{% if not forloop.last %}, {% endif %}
+{% endfor %}
+{% endif %}
+
+{% if object.based_near.count %}
+|
+{% for place in object.based_near.all %}
+{{ place.address }}{% if not forloop.last %}, {% endif %}
+{% endfor %}
+{% endif %}
+
+{% if object.page.count %}
+|
+{% for page in object.page.all %}
+<a class="badge badge-info" href="{{ object.page }}">VIAF</a>{% if not forloop.last %}, {% endif %}
+{% endfor %}
+{% endif %}
+
+<br>
+
+{% if object.roles.count %}
+{% for role in object.roles.all %}
+<span class="badge badge-warning">{{ role }}</span>
+{% endfor %}
+{% endif %}
+</p>
+
+{% if object.knows.count %}
+<h3>Knows</h3>
+<ul>
+{% for person in object.knows.all %}
+    <li>
+        <a href="{% url 'agent-detail' person.pk %}">{{ person.name }}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if object.member_of.count %}
+<h3>Member of</h3>
+<ul>
+{% for organisation in object.member_of.all %}
+    <li>
+        <a href="{% url 'agent-detail' organisation.pk %}">{{ organisation.name }}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if object.contributed_to.count %}
+<h3>Contributed to</h3>
+<ul>
+{% for contribution in object.contributed_to.all %}
+    <li>
+        <a href="{% url 'resource-detail' contribution.resource.pk %}">{{ contribution.resource.title }}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if object.notes %}
+<h3>Notes</h3>
+<p>{{ object.notes }}</p>
+{% endif %}
+{% endblock main %}

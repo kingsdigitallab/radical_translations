@@ -35,7 +35,9 @@
 <h3>Contributions</h3>
 <dl>
     {% for contribution in object.contributions.all %}
-    <dt>{{ contribution.agent.name }}</dt>
+    <dt>
+    <a href="{% url 'agent-detail' contribution.agent.pk %}">{{ contribution.agent.name }}</a>
+    </dt>
     {% for role in contribution.roles.all %}
     <dd>{{ role.label }}</dd>
     {% endfor %}
