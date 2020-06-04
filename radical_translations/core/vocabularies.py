@@ -20,20 +20,21 @@ class VocabularyPrintingPublishingTerms(VocabularyBaseList):
                     "Use for: Counterfeits, Fakes"
                 ),
             ],
+            [
+                "New edition",
+                "New edition",
+                (
+                    "use for previously published translation reprinted with new "
+                    "paratextual materials"
+                ),
+            ],
             ["Piracies", "Piracies", "use for: Pirated editions"],
             [
                 "Privately published books",
                 "Privately published books",
                 "books published for private distribution only",
             ],
-            [
-                "Projected",
-                "Projected",
-                (
-                    "use for previously published translation reprinted with new "
-                    "paratextual materials"
-                ),
-            ],
+            ["Projected", "Projected", "use for announced translations"],
             ["Re-issues", "Re-issues"],
             [
                 "Simultaneous issues",

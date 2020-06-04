@@ -17,6 +17,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Fixed
 ~~~~~
 * Update Django Controlled Vocabulary app.
+* Add missing vocabulary entry for Printing and Publishing Terms.
 
 [0.6.2] - 2020-06-02
 --------------------
