@@ -27,6 +27,7 @@ Fixed
 ~~~~~
 * Update Django Controlled Vocabulary app.
 * Add missing vocabulary entry for Printing and Publishing Terms.
+* Autocomplete for `Event` and `Place` models.
 * Issue deleting `Resource` contributions.
 
 [0.6.2] - 2020-06-02
