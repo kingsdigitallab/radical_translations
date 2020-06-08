@@ -17,27 +17,39 @@ class DateAdmin(admin.ModelAdmin):
         "date_radical",
         "date_radical_classification",
     ]
-    list_display = ['date_display', 'date_radical']
+    list_display = ["date_display", "date_radical"]
     search_fields = ["date_display", "date_radical"]
 
 
 @admin.register(LogEntry)
 class LogEntryAdmin(admin.ModelAdmin):
     """Log Entry admin interface."""
-    date_hierarchy = 'action_time'
+
+    date_hierarchy = "action_time"
     fields = (
-        'action_time', 'user', 'content_type', 'object_id',
-        'object_repr', 'action_flag', 'change_message',
+        "action_time",
+        "user",
+        "content_type",
+        "object_id",
+        "object_repr",
+        "action_flag",
+        "change_message",
     )
     list_display = (
-        'action_time', 'user', 'action_message', 'content_type', 'object_link',
+        "action_time",
+        "user",
+        "action_message",
+        "content_type",
+        "object_link",
     )
     list_filter = (
-        ('user', admin.RelatedOnlyFieldListFilter),
-        'action_flag', 'content_type',
+        ("user", admin.RelatedOnlyFieldListFilter),
+        "action_flag",
+        "content_type",
     )
     search_fields = (
-        'object_repr', 'change_message',
+        "object_repr",
+        "change_message",
     )
 
     def object_link(self, obj):
@@ -48,7 +60,7 @@ class LogEntryAdmin(admin.ModelAdmin):
         else:
             return obj.object_repr
 
-    object_link.short_description = 'object'
+    object_link.short_description = "object"
 
     def action_message(self, obj):
         """
@@ -58,13 +70,13 @@ class LogEntryAdmin(admin.ModelAdmin):
         change_message = obj.get_change_message()
         # If there is no change message then use the action flag label
         if not change_message:
-            change_message = '{}.'.format(obj.get_action_flag_display())
+            change_message = "{}.".format(obj.get_action_flag_display())
         return change_message
 
-    action_message.short_description = 'action'
+    action_message.short_description = "action"
 
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related('content_type')
+        return super().get_queryset(request).prefetch_related("content_type")
 
     def has_add_permission(self, request):
         """Log entries cannot be added manually."""
@@ -95,3 +107,4 @@ admin.site.unregister(Place)
 @admin.register(Place)
 class PlaceAdmin(GeonamesPlaceAdmin):
     inlines = [AgentInline, EventInline]
+    search_fields = ["address", "country__name"]
