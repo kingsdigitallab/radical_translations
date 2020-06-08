@@ -17,11 +17,13 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Changed
 ~~~~~~~
 * `Date` display format to include radical date when available.
+* Prefix paratext `Resources` with `[paratext]`.
 
 Fixed
 ~~~~~
 * Update Django Controlled Vocabulary app.
 * Add missing vocabulary entry for Printing and Publishing Terms.
+* Issue deleting `Resource` contributions.
 
 [0.6.2] - 2020-06-02
 --------------------

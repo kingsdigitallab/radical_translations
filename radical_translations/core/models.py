@@ -161,6 +161,9 @@ class Resource(TimeStampedModel):
         unique_together = ["title", "date", "_is_paratext"]
 
     def __str__(self) -> str:
+        if self.is_paratext():
+            return f"[paratext] {self.title}"
+
         return str(self.title)
 
     def get_authors(self) -> str:
