@@ -14,7 +14,7 @@ from radical_translations.events.models import Event
 
 class ClassificationInline(admin.TabularInline):
     model = Classification
-    autocomplete_fields = ["source"]
+    autocomplete_fields = ["classification"]
     extra = 1
     fk_name = "resource"
 

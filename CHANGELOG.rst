@@ -11,10 +11,6 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
-[Unreleased] - yyyy-mm-dd
---------------------
-
-
 [0.6.3] - 2020-06-08
 --------------------
 
@@ -22,6 +18,7 @@ Changed
 ~~~~~~~
 * `Date` display format to include radical date when available.
 * Prefix paratext `Resources` with `[paratext]`.
+* Replace `Classification` `source` with editorial classification field.
 
 Fixed
 ~~~~~
