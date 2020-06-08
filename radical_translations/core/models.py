@@ -161,6 +161,9 @@ class Resource(TimeStampedModel):
         unique_together = ["title", "date", "_is_paratext"]
 
     def __str__(self) -> str:
+        if self.is_paratext():
+            return f"[paratext] {self.title}"
+
         return str(self.title)
 
     def get_authors(self) -> str:
@@ -384,7 +387,7 @@ class Resource(TimeStampedModel):
         return resource
 
 
-class Classification(TimeStampedModel):
+class Classification(TimeStampedModel, EditorialClassificationModel):
     """System of coding and organizing materials according to their subject."""
 
     resource = models.ForeignKey(
@@ -398,14 +401,6 @@ class Classification(TimeStampedModel):
             "Edition of the classification scheme, such as full, abridged or a number, "
             "when a classification scheme designates editions."
         ),
-    )
-    source = models.ForeignKey(
-        Resource,
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name="sources",
-        help_text="Resource from which value or label came or was derived.",
     )
 
     def __str__(self) -> str:
@@ -466,7 +461,7 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
         if self.published_as:
             agent = f"{self.published_as} ({agent})"
 
-        return f"{agent}: {', '.join([role.label for role in self.roles.all()])}"
+        return f"{agent}"
 
     @staticmethod
     def from_gsx_entry(
@@ -533,7 +528,7 @@ class ResourceLanguage(TimeStampedModel, EditorialClassificationModel):
     class Meta:
         unique_together = ["resource", "language"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.language.label
 
 
@@ -560,7 +555,7 @@ class ResourcePlace(TimeStampedModel, EditorialClassificationModel):
     class Meta:
         unique_together = ["resource", "place"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.place.address
 
 

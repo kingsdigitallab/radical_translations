@@ -59,7 +59,10 @@ class Date(TimeStampedModel):
         ordering = ["date_sort_ascending", "date_sort_descending"]
 
     def __str__(self) -> str:
-        return f"{self.date_display}"
+        if self.date_radical:
+            return f"{self.date_radical} ({self.date_display})"
+
+        return self.date_display
 
     @staticmethod
     def from_date_display(date_display: str) -> Optional["Date"]:

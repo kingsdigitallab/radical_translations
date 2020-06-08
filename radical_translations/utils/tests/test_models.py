@@ -18,6 +18,13 @@ class TestDate:
         assert date is not None
         assert date.date_edtf is not None
 
+    def test___str__(self):
+        date = Date.from_date_display("1971")
+        assert str(date) == "1971"
+
+        date.date_radical = "year 7"
+        assert str(date) == "year 7 (1971)"
+
 
 def test_get_radical_date_from_gregorian():
     assert get_date_radical_from_gregorian(None) is None
