@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Changed
+~~~~~~~
+* `Date` display format to include radical date when available.
+
 Fixed
 ~~~~~
 * Update Django Controlled Vocabulary app.
