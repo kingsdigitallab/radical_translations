@@ -466,7 +466,7 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
         if self.published_as:
             agent = f"{self.published_as} ({agent})"
 
-        return f"{agent}: {', '.join([role.label for role in self.roles.all()])}"
+        return f"{agent}"
 
     @staticmethod
     def from_gsx_entry(
@@ -533,7 +533,7 @@ class ResourceLanguage(TimeStampedModel, EditorialClassificationModel):
     class Meta:
         unique_together = ["resource", "language"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.language.label
 
 
@@ -560,7 +560,7 @@ class ResourcePlace(TimeStampedModel, EditorialClassificationModel):
     class Meta:
         unique_together = ["resource", "place"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.place.address
 
 
