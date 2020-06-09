@@ -1,0 +1,5 @@
+{% if object.roles.count %}
+{% for role in object.roles.all %}
+<span class="badge badge-warning">{{ role }}</span>
+{% endfor %}
+{% endif %}

@@ -100,8 +100,5 @@
 </ul>
 {% endif %}
 
-{% if object.notes %}
-<h3>Notes</h3>
-<p>{{ object.notes }}</p>
-{% endif %}
+{% include "includes/object_notes.html" %}
 {% endblock main %}

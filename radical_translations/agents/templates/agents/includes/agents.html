@@ -1,0 +1,11 @@
+{% if agents.count %}
+<h3>{{ title }}</h3>
+<ul>
+{% for agent in agents.all %}
+    <li>
+        <a href="{% url 'agent-detail' agent.pk %}">{{ agent.name }}</a>
+        {% include "agents/includes/roles.html" with object=agent %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}

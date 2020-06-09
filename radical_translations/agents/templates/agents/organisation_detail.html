@@ -10,46 +10,15 @@
 {% endfor %}
 {% endif %}
 
-{% if object.page.count %}
-|
-{% for page in object.page.all %}
-<a class="badge badge-info" href="{{ object.page }}">VIAF</a>{% if not forloop.last %}, {% endif %}
-{% endfor %}
-{% endif %}
-
 <br>
 
-{% if object.roles.count %}
-{% for role in object.roles.all %}
-<span class="badge badge-warning">{{ role }}</span>
-{% endfor %}
-{% endif %}
+{% include "agents/includes/pages.html" %}
+{% include "agents/includes/roles.html" %}
 </p>
 
-{% if object.members.count %}
-<h3>Members</h3>
-<ul>
-{% for person in object.members.all %}
-    <li>
-        <a href="{% url 'agent-detail' person.pk %}">{{ person.name }}</a>
-    </li>
-{% endfor %}
-</ul>
-{% endif %}
+{% include "agents/includes/agents.html" with title='Members' agents=object.members %}
 
-{% if object.contributed_to.count %}
-<h3>Contributed to</h3>
-<ul>
-{% for contribution in object.contributed_to.all %}
-    <li>
-        <a href="{% url 'resource-detail' contribution.resource.pk %}">{{ contribution.resource.title }}</a>
-    </li>
-{% endfor %}
-</ul>
-{% endif %}
+{% include "agents/includes/contributed_to.html" %}
 
-{% if object.notes %}
-<h3>Notes</h3>
-<p>{{ object.notes }}</p>
-{% endif %}
+{% include "includes/object_notes.html" %}
 {% endblock main %}
