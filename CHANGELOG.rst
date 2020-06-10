@@ -20,6 +20,10 @@ Added
 * `Agent` views.
 * `Event` views.
 * Configuration for `dev`, `stg`, and `liv` instances.
+* Fabric_ script for remote task automation.
+
+.. _Fabric: https://www.fabfile.org/
+
 
 [0.6.3] - 2020-06-08
 --------------------
