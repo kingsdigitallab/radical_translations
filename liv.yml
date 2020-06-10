@@ -1,0 +1,78 @@
+version: '3'
+
+volumes:
+  liv_django_media: {}
+  liv_postgres_data: {}
+  liv_postgres_data_backups: {}
+  liv_traefik: {}
+  #liv_elasticsearch_data: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: radical_translations_liv_django
+    volumes:
+      - liv_django_media:/app/radical_translations/media
+    depends_on:
+      - postgres
+      - redis
+      #- elasticsearch
+    env_file:
+      - ./.envs/.liv/.django
+      - ./.envs/.liv/.postgres
+    command: /start
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    image: radical_translations_liv_nginx
+    volumes:
+      - liv_django_media:/usr/share/nginx/media:ro
+    depends_on:
+      - django
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: radical_translations_liv_postgres
+    volumes:
+      - liv_postgres_data:/var/lib/postgresql/data
+      - liv_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.liv/.postgres
+
+  traefik:
+    build:
+      context: .
+      dockerfile: ./compose/production/traefik/Dockerfile
+    image: radical_translations_liv_traefik
+    depends_on:
+      - django
+    volumes:
+      - liv_traefik:/etc/traefik/acme
+    ports:
+      - '127.0.0.1:8201:80'
+
+  redis:
+    image: redis:5.0
+  #elasticsearch:
+  #image: elasticsearch:7.5.1
+  #volumes:
+  #- liv_elasticsearch_data:/usr/share/elasticsearch/data
+  #env_file:
+  #- ./.envs/.liv/.elasticsearch
+  #ports:
+  #- '127.0.0.1:9200:9200'
+  #- '127.0.0.1:9300:9300'
+  #kibana:
+  #image: kibana:7.5.1
+  #depends_on:
+  #- elasticsearch
+  #env_file:
+  #- ./.envs/.liv/.kibana
+  #ports:
+  #- '5601:5601'

@@ -1,0 +1,78 @@
+version: '3'
+
+volumes:
+  stg_django_media: {}
+  stg_postgres_data: {}
+  stg_postgres_data_backups: {}
+  stg_traefik: {}
+  #stg_elasticsearch_data: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: radical_translations_stg_django
+    volumes:
+      - stg_django_media:/app/radical_translations/media
+    depends_on:
+      - postgres
+      - redis
+      #- elasticsearch
+    env_file:
+      - ./.envs/.stg/.django
+      - ./.envs/.stg/.postgres
+    command: /start
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    image: radical_translations_stg_nginx
+    volumes:
+      - stg_django_media:/usr/share/nginx/media:ro
+    depends_on:
+      - django
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: radical_translations_stg_postgres
+    volumes:
+      - stg_postgres_data:/var/lib/postgresql/data
+      - stg_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.stg/.postgres
+
+  traefik:
+    build:
+      context: .
+      dockerfile: ./compose/production/traefik/Dockerfile
+    image: radical_translations_stg_traefik
+    depends_on:
+      - django
+    volumes:
+      - stg_traefik:/etc/traefik/acme
+    ports:
+      - '127.0.0.1:8202:80'
+
+  redis:
+    image: redis:5.0
+  #elasticsearch:
+  #image: elasticsearch:7.5.1
+  #volumes:
+  #- stg_elasticsearch_data:/usr/share/elasticsearch/data
+  #env_file:
+  #- ./.envs/.stg/.elasticsearch
+  #ports:
+  #- '127.0.0.1:9200:9200'
+  #- '127.0.0.1:9300:9300'
+  #kibana:
+  #image: kibana:7.5.1
+  #depends_on:
+  #- elasticsearch
+  #env_file:
+  #- ./.envs/.stg/.kibana
+  #ports:
+  #- '5601:5601'

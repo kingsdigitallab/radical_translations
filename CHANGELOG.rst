@@ -19,6 +19,7 @@ Added
 * `Resource` views.
 * `Agent` views.
 * `Event` views.
+* Configuration for `dev`, `stg`, and `liv` instances.
 
 [0.6.3] - 2020-06-08
 --------------------
