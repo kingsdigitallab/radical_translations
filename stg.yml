@@ -56,6 +56,9 @@ services:
       - stg_traefik:/etc/traefik/acme
     ports:
       - '127.0.0.1:8202:80'
+    labels:
+      - traefik.http.routers.web.rule='Host(`radicalt-stg.kdl.kcl.ac.uk`)'
+      - traefik.http.routers.web.rule='Host(`radicalt-stg.kdl.kcl.ac.uk`) && PathPrefix(`/media/`)'
 
   redis:
     image: redis:5.0
