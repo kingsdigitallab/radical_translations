@@ -28,7 +28,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/nginx/Dockerfile
-    image: radical_translations_nginx
+    image: radical_translations_dev_nginx
     volumes:
       - django_media:/usr/share/nginx/media:ro
     depends_on:
