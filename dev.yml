@@ -1,11 +1,11 @@
 version: '3'
 
 volumes:
-  dev_django_media: {}
-  dev_postgres_data: {}
-  dev_postgres_data_backups: {}
-  dev_traefik: {}
-  #dev_elasticsearch_data: {}
+  django_media: {}
+  postgres_data: {}
+  postgres_data_backups: {}
+  traefik: {}
+  #elasticsearch_data: {}
 
 services:
   django:
@@ -14,7 +14,7 @@ services:
       dockerfile: ./compose/production/django/Dockerfile
     image: radical_translations_dev_django
     volumes:
-      - dev_django_media:/app/radical_translations/media
+      - django_media:/app/radical_translations/media
     depends_on:
       - postgres
       - redis
@@ -28,9 +28,9 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/nginx/Dockerfile
-    image: radical_translations_dev_nginx
+    image: radical_translations_nginx
     volumes:
-      - dev_django_media:/usr/share/nginx/media:ro
+      - django_media:/usr/share/nginx/media:ro
     depends_on:
       - django
 
@@ -40,8 +40,8 @@ services:
       dockerfile: ./compose/production/postgres/Dockerfile
     image: radical_translations_dev_postgres
     volumes:
-      - dev_postgres_data:/var/lib/postgresql/data
-      - dev_postgres_data_backups:/backups
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_backups:/backups
     env_file:
       - ./.envs/.dev/.postgres
 
@@ -53,7 +53,7 @@ services:
     depends_on:
       - django
     volumes:
-      - dev_traefik:/etc/traefik/acme
+      - traefik:/etc/traefik/acme
     ports:
       - '127.0.0.1:8203:80'
     labels:
@@ -65,7 +65,7 @@ services:
   #elasticsearch:
   #image: elasticsearch:7.5.1
   #volumes:
-  #- dev_elasticsearch_data:/usr/share/elasticsearch/data
+  #- elasticsearch_data:/usr/share/elasticsearch/data
   #env_file:
   #- ./.envs/.dev/.elasticsearch
   #ports:

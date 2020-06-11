@@ -1,11 +1,11 @@
 version: '3'
 
 volumes:
-  liv_django_media: {}
-  liv_postgres_data: {}
-  liv_postgres_data_backups: {}
-  liv_traefik: {}
-  #liv_elasticsearch_data: {}
+  django_media: {}
+  postgres_data: {}
+  postgres_data_backups: {}
+  traefik: {}
+  #elasticsearch_data: {}
 
 services:
   django:
@@ -14,7 +14,7 @@ services:
       dockerfile: ./compose/production/django/Dockerfile
     image: radical_translations_liv_django
     volumes:
-      - liv_django_media:/app/radical_translations/media
+      - django_media:/app/radical_translations/media
     depends_on:
       - postgres
       - redis
@@ -30,7 +30,7 @@ services:
       dockerfile: ./compose/production/nginx/Dockerfile
     image: radical_translations_liv_nginx
     volumes:
-      - liv_django_media:/usr/share/nginx/media:ro
+      - django_media:/usr/share/nginx/media:ro
     depends_on:
       - django
 
@@ -40,8 +40,8 @@ services:
       dockerfile: ./compose/production/postgres/Dockerfile
     image: radical_translations_liv_postgres
     volumes:
-      - liv_postgres_data:/var/lib/postgresql/data
-      - liv_postgres_data_backups:/backups
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_backups:/backups
     env_file:
       - ./.envs/.liv/.postgres
 
@@ -53,7 +53,7 @@ services:
     depends_on:
       - django
     volumes:
-      - liv_traefik:/etc/traefik/acme
+      - traefik:/etc/traefik/acme
     ports:
       - '127.0.0.1:8201:80'
 
@@ -62,7 +62,7 @@ services:
   #elasticsearch:
   #image: elasticsearch:7.5.1
   #volumes:
-  #- liv_elasticsearch_data:/usr/share/elasticsearch/data
+  #- elasticsearch_data:/usr/share/elasticsearch/data
   #env_file:
   #- ./.envs/.liv/.elasticsearch
   #ports:
