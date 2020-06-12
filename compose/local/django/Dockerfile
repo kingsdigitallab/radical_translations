@@ -24,8 +24,6 @@ RUN pip install -U pip-tools \
   && pip-compile --annotate --upgrade --quiet /requirements/production.in
 RUN pip install -r /requirements/local.txt
 
-COPY /requirements/*.txt ./requirements/
-
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
