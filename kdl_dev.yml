@@ -48,7 +48,7 @@ services:
   traefik:
     build:
       context: .
-      dockerfile: ./compose/kdl/traefik/Dockerfile
+      dockerfile: ./compose/dev/traefik/Dockerfile
     image: radical_translations_dev_traefik
     depends_on:
       - django
@@ -56,9 +56,6 @@ services:
       - traefik:/etc/traefik/acme
     ports:
       - '127.0.0.1:8203:80'
-    labels:
-      - traefik.http.routers.web.rule='Host(`radicalt-dev.kdl.kcl.ac.uk`)'
-      - traefik.http.routers.web.rule='Host(`radicalt-dev.kdl.kcl.ac.uk`) && PathPrefix(`/media/`)'
 
   redis:
     image: redis:5.0
