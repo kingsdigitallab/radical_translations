@@ -119,7 +119,7 @@ def clone(context, user=get_local_user(), host=HOST, instance=INSTANCE, branch=B
 def run_command(
     context: Context, user: str, host: str, instance: Optional[str], command: str
 ):
-    info(f"{host}\n{command}")
+    info(f"{host}/{instance}\n{command}")
 
     try:
         if is_localhost(host):
@@ -129,7 +129,7 @@ def run_command(
                 with c.cd(f"{HOST_PATH}/{instance}"):
                     c.run(command, pty=True)
     except (Failure, ThreadException, UnexpectedExit):
-        error(f"{host}\nFailed to run command: `{command}`")
+        error(f"{host}/{instance}\nFailed to run command: `{command}`")
 
 
 def is_localhost(host: str):
@@ -299,7 +299,7 @@ def restore(
         user,
         host,
         instance,
-        f"{get_compose_cmd(stack)} run postgres pkill -f {PROJECT}",
+        f"{get_compose_cmd(stack)} exec postgres pkill -f {PROJECT}",
     )
     run_command(
         context,
