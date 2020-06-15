@@ -48,7 +48,7 @@ services:
   traefik:
     build:
       context: .
-      dockerfile: ./compose/production/traefik/Dockerfile
+      dockerfile: ./compose/kdl/traefik/Dockerfile
     image: radical_translations_stg_traefik
     depends_on:
       - django
