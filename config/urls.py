@@ -16,9 +16,9 @@ urlpatterns = [
     # Django controlled vocabulary
     path("vocabularies/", include("controlled_vocabulary.urls")),
     # Radical Translations
-    path("agents/", include("radical_translations.agents.urls")),
-    path("events/", include("radical_translations.events.urls")),
-    path("resources/", include("radical_translations.core.urls")),
+    path("database/agents/", include("radical_translations.agents.urls")),
+    path("database/events/", include("radical_translations.events.urls")),
+    path("database/resources/", include("radical_translations.core.urls")),
     # Wagtail
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
