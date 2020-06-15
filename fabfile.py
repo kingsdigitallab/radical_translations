@@ -101,6 +101,8 @@ def clone(context, host=HOST, instance=INSTANCE, branch=BRANCH):
         f"tar zxvf {env_path}/{env_file} && rm {env_path}/{env_file}",
     )
 
+    run_command(context, host, instance, f"mkdir radical_translations/media")
+
 
 def run_command(context: Context, host: str, instance: Optional[str], command: str):
     info(f"{host}\n{command}")
