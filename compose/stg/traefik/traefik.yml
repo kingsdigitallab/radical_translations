@@ -9,7 +9,7 @@ entryPoints:
 http:
   routers:
     web-router:
-      rule: 'Host(`radicaltranslations.org`)'
+      rule: 'Host(`radicalt-stg.kdl.kcl.ac.uk`)'
       entryPoints:
         - web
       middlewares:
@@ -17,7 +17,7 @@ http:
       service: django
 
     web-media-router:
-      rule: 'Host(`radicaltranslations.org`) && PathPrefix(`/media/`)'
+      rule: 'Host(`radicalt-stg.kdl.kcl.ac.uk`) && PathPrefix(`/media/`)'
       entryPoints:
         - web
       middlewares:
