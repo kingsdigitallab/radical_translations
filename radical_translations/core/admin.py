@@ -106,6 +106,7 @@ class ResourceAdmin(admin.ModelAdmin):
         ("relationships__relationship_type", admin.RelatedOnlyFieldListFilter),
         ("classifications__edition", admin.RelatedOnlyFieldListFilter),
         ("subjects", admin.RelatedOnlyFieldListFilter),
+        ("contributions__roles", admin.RelatedOnlyFieldListFilter),
         ("languages__language", admin.RelatedOnlyFieldListFilter),
         ("places__place", admin.RelatedOnlyFieldListFilter),
     ]
