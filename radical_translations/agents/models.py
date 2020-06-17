@@ -33,7 +33,7 @@ class Agent(PolymorphicModel, TimeStampedModel):
     )
 
     page = ControlledTermsField(
-        ["viaf"], blank=True, help_text="A page or document about this Agent."
+        ["viaf", "cerl"], blank=True, help_text="A page or document about this Agent."
     )
 
     roles = ControlledTermsField(

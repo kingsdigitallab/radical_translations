@@ -1,6 +1,7 @@
 from typing import List
 
 from controlled_vocabulary.vocabularies.base_csv import VocabularyBaseList
+from controlled_vocabulary.vocabularies.base_http import VocabularyHTTP
 
 
 class VocabularyPrintingPublishingTerms(VocabularyBaseList):
@@ -320,3 +321,25 @@ class VocabularyResourceRelationshipType(VocabularyBaseList):
                 ),
             ],
         ]
+
+
+class VocabularyCERL(VocabularyHTTP):
+    prefix = "cerl"
+    label = "CERL"
+    base_url = "http://thesaurus.cerl.org/record/"
+    concept = "wikidata:Q35120:entity"
+    description = """Consortium of European Research Libraries"""
+
+    source = {
+        "url": "https://data.cerl.org/thesaurus/_search?format=json&query={pattern}"
+    }
+
+    def parse_search_response(self, response):
+        ret = []
+
+        for doc in response["rows"]:
+            ret.append(
+                [doc["id"], doc["name_display_line"], doc["additional_display_line"]]
+            )
+
+        return ret

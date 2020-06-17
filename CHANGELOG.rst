@@ -14,6 +14,11 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* CERL_ vocabulary for `Agent` models.
+
+.. _CERL: https://data.cerl.org/thesaurus/
 
 [0.7.0] - 2020-06-17
 --------------------
