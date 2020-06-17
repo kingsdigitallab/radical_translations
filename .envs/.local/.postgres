@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=radical_translations
+POSTGRES_USER=psowFiZAbqfiUQBFVEGxKVcSrcKcpDAO
+POSTGRES_PASSWORD=e8lmedaFKIR6UxgKz05Aeu0P2wxhD6943JXdaiYmQid6kXR3kk9KQrxWJFXvEJ5l

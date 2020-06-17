@@ -275,3 +275,4 @@ radical_translations/media/
 .ipython/
 .env
 .envs/*
+!.envs/.local/
