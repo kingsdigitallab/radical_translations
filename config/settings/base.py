@@ -89,6 +89,7 @@ THIRD_PARTY_APPS = [
     "taggit",
     "kdl_wagtail.core",
     "kdl_wagtail.people",
+    "kdl_wagtail.zotero",
     "wagtailmenus",
     "controlled_vocabulary",
     "geonames_place.apps.GeonamesPlaceConfig",
@@ -317,3 +318,13 @@ CONTROLLED_VOCABULARY_VOCABULARIES = defaults.CONTROLLED_VOCABULARY_VOCABULARIES
 # ------------------------------------------------------------------------------
 GEONAMES_KEY = env("GEONAMES_KEY")
 GEONAMES_MAX_RESULTS = 3
+
+# django-kdl-wagtail
+# https://github.com/kingsdigitallab/django-kdl-wagtail
+# ------------------------------------------------------------------------------
+KDL_WAGTAIL_ZOTERO_COLLECTION = env("KDL_WAGTAIL_ZOTERO_COLLECTION")
+KDL_WAGTAIL_ZOTERO_LIBRARY_ID = env("KDL_WAGTAIL_ZOTERO_LIBRARY_ID")
+KDL_WAGTAIL_ZOTERO_LIBRARY_TYPE = "group"
+KDL_WAGTAIL_ZOTERO_NOTE_STYLE = "chicago-fullnote-bibliography"
+KDL_WAGTAIL_ZOTERO_SHORTNOTE_STYLE = "chicago-note-bibliography"
+KDL_WAGTAIL_ZOTERO_TOKEN = env("KDL_WAGTAIL_ZOTERO_TOKEN")

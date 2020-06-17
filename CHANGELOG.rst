@@ -21,8 +21,11 @@ Added
 * `Event` views.
 * Configuration for `dev`, `stg`, and `liv` instances.
 * Fabric_ script for remote task automation.
+* Zotero_ integration_ to harvest bibliographic data from Zotero.
 
 .. _Fabric: https://www.fabfile.org/
+.. _Zotero: https://www.zotero.org/
+.. _integration: https://django-kdl-wagtail.readthedocs.io/en/latest/readme.html#features
 
 
 [0.6.3] - 2020-06-08
