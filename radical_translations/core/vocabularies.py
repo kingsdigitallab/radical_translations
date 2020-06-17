@@ -159,11 +159,6 @@ class VocabularyTranslationTerms(VocabularyBaseList):
             ["Integral", "Integral"],
             ["Original", "Original"],
             [
-                "New translation",
-                "New translation",
-                "text translated for the first time in a given target language",
-            ],
-            [
                 "Partial",
                 "Partial",
                 (
@@ -241,6 +236,11 @@ class VocabularyParatextTerms(VocabularyBaseList):
                     "elements of paratext attributed to person other than who actually "
                     "wrote them (specify in Notes)"
                 ),
+            ],
+            [
+                "New translation",
+                "New translation",
+                "text translated for the first time in a given target language",
             ],
             ["Notes", "Notes"],
             ["Postface", "Postface"],
