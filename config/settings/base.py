@@ -322,9 +322,11 @@ GEONAMES_MAX_RESULTS = 3
 # django-kdl-wagtail
 # https://github.com/kingsdigitallab/django-kdl-wagtail
 # ------------------------------------------------------------------------------
-KDL_WAGTAIL_ZOTERO_COLLECTION = env("KDL_WAGTAIL_ZOTERO_COLLECTION")
-KDL_WAGTAIL_ZOTERO_LIBRARY_ID = env("KDL_WAGTAIL_ZOTERO_LIBRARY_ID")
+KDL_WAGTAIL_ZOTERO_COLLECTION = env("KDL_WAGTAIL_ZOTERO_COLLECTION", default="PBKKIVPT")
+KDL_WAGTAIL_ZOTERO_LIBRARY_ID = env("KDL_WAGTAIL_ZOTERO_LIBRARY_ID", default="270384")
 KDL_WAGTAIL_ZOTERO_LIBRARY_TYPE = "group"
 KDL_WAGTAIL_ZOTERO_NOTE_STYLE = "chicago-fullnote-bibliography"
 KDL_WAGTAIL_ZOTERO_SHORTNOTE_STYLE = "chicago-note-bibliography"
-KDL_WAGTAIL_ZOTERO_TOKEN = env("KDL_WAGTAIL_ZOTERO_TOKEN")
+KDL_WAGTAIL_ZOTERO_TOKEN = env(
+    "KDL_WAGTAIL_ZOTERO_TOKEN", default="P9NiFoyLeZu2bZNvvuQPDWsd"
+)
