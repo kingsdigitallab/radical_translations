@@ -1,5 +1,5 @@
 {% if object.page.count %}
 {% for page in object.page.all %}
-<a class="badge badge-info" href="{{ object.page }}">VIAF</a>{% if not forloop.last %}, {% endif %}
+<a class="badge badge-info" href="{{ page.vocabulary.base_url }}{{ page.termid }}/">{{ page }}</a>
 {% endfor %}
 {% endif %}
