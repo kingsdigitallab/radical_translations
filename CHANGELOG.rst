@@ -18,6 +18,10 @@ Added
 ~~~~~
 * CERL_ vocabulary for `Agent` models.
 
+Changed
+~~~~~~~
+* Add date to `Resource` string for better disambiguation.
+
 .. _CERL: https://data.cerl.org/thesaurus/
 
 [0.7.0] - 2020-06-17
