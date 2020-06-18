@@ -168,7 +168,7 @@ def update(context, user=get_local_user(), host=HOST, instance=INSTANCE, branch=
     """
     Update the host instance from source control.
     """
-    run_command(context, user, host, instance, f"git pull && git checkout {branch}")
+    run_command(context, user, host, instance, f"git checkout {branch} && git pull")
 
 
 @task(help=HELP)
