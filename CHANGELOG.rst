@@ -22,9 +22,14 @@ Added
 Changed
 ~~~~~~~
 * Add date to `Resource` string for better disambiguation.
+* Simplify the Fabric_ commands.
 
 .. _CERL: https://data.cerl.org/thesaurus/
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
+
+Removed
+~~~~~~~
+* Helper script, it has been replace with the Fabric_ file.
 
 
 [0.7.0] - 2020-06-17

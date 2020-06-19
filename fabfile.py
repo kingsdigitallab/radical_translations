@@ -12,17 +12,17 @@ COLOUR_OFF: str = "\033[0m"
 
 
 def error(message: str):
-    colour_red: str = "\033[31m"
+    red: str = "\033[31m"
 
     print()
-    print(f"{colour_red}{message}{COLOUR_OFF}")
+    print(f"{red}{message}{COLOUR_OFF}")
 
 
 def info(message: str):
-    colour_blu: str = "\033[34m"
+    blue: str = "\033[34m"
 
     print()
-    print(f"{colour_blu}{message}{COLOUR_OFF}")
+    print(f"{blue}{message}{COLOUR_OFF}")
 
 
 cfg: ConfigParser = configparser.ConfigParser()
@@ -50,13 +50,13 @@ HELP = {
     "branch": "Source control branch to checkout.",
     "command": "Django management command.",
     "coverage": "Set to `True` to run test coverage.",
-    "host": "Server where to run the task. For localhost, use `l` or `local`.",
     "Images": "Images to be removed, by default all images are removed.",
     "initial": "Set to `True` for first time deployments.",
     "instance": (
         "Server instance where to run the task, can be left empty when running "
         "local tasks."
     ),
+    "remote": "Set to `True` to run the command on the remote host.",
     "service": "Service name to run the task.",
     "services": "Service names to run the task. Separate multiple services with space.",
     "stack": "Docker stack for docker commands.",
@@ -67,73 +67,112 @@ HELP = {
 
 @task(help=HELP)
 def deploy(
-    context,
-    user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    initial=False,
-    branch=BRANCH,
-    stack=STACK,
+    context, instance, user=get_local_user(), initial=False, stack=None, branch=BRANCH,
 ):
     """
     Deploy the project. By default it creates a database backup before updating from
     source control and rebuilding the docker stack.
     """
-    if initial:
-        clone(context, user, host, instance, branch)
-    else:
-        backup(context, user, host, instance, stack)
+    remote = True
 
-    update(context, user, host, instance, branch)
-    up(context, user, host, instance, stack)
+    if initial:
+        clone(context, instance, user, branch)
+    else:
+        backup(context, user, remote, instance, stack)
+
+    update(context, user, remote, instance, branch)
+    up(context, user, remote, instance, stack)
 
 
 @task(help=HELP)
-def clone(context, user=get_local_user(), host=HOST, instance=INSTANCE, branch=BRANCH):
+def clone(context, instance, user=get_local_user(), branch=BRANCH):
     """
     Clone the project repository into a host instance.
     """
+    local = False
+    no_stack = None
+    no_compose = False
+
     env_path = f"{HOST_PATH}/{instance}/.envs"
     env_file = f"{instance}.tar.gz"
 
-    run_command(
-        context, user, "local", None, f"tar czvf .envs/{env_file} .envs/.{instance}"
-    )
+    command = f"tar czvf .envs/{env_file} .envs/.{instance}"
+    run_command(context, user, local, instance, no_stack, command, no_compose)
 
-    run_command(context, user, host, "", f"git clone {REPOSITORY} {instance}")
+    remote = True
 
-    with get_connection(user, host) as c:
+    command = f"git clone {REPOSITORY} {instance} && git checkout {branch}"
+    run_command(context, user, remote, instance, no_stack, command, no_compose)
+
+    with get_connection(user, HOST) as c:
         c.put(f".envs/{env_file}", env_path)
 
-    run_command(
-        context,
-        user,
-        host,
-        instance,
-        f"tar zxvf {env_path}/{env_file} && rm {env_path}/{env_file}",
-    )
+    command = f"tar zxvf {env_path}/{env_file} && rm {env_path}/{env_file}"
+    run_command(context, user, remote, instance, no_stack, command, no_compose)
 
-    run_command(context, user, host, instance, f"mkdir {PROJECT}/media")
+    command = f"mkdir -p {PROJECT}/media"
+    run_command(context, user, remote, instance, no_stack, command, no_compose)
 
 
 def run_command(
-    context: Context, user: str, host: str, instance: Optional[str], command: str
+    context: Context,
+    user: str,
+    remote: bool,
+    instance: Optional[str],
+    stack: Optional[str],
+    command: str,
+    compose: bool = True,
 ):
-    info(f"{host}/{instance}\n{command}")
+    host = get_host(remote)
+    instance = get_instance(remote, instance)
+    stack = get_stack(remote, instance, stack)
+
+    if compose:
+        command = f"{COMPOSE_CMD} -f {stack} {command}"
+
+    info(f"{host}/{instance}/{stack}\n{command}")
 
     try:
-        if is_localhost(host):
-            context.run(command, replace_env=False, pty=True)
-        else:
-            with get_connection(user, host) as c:
+        if remote:
+            with get_connection(user, HOST) as c:
                 with c.cd(f"{HOST_PATH}/{instance}"):
                     c.run(command, pty=True)
+        else:
+            context.run(command, replace_env=False, pty=True)
     except (Failure, ThreadException, UnexpectedExit):
         error(f"{host}/{instance}\nFailed to run command: `{command}`")
 
 
-def is_localhost(host: str):
-    return host.lower() in ["l", "local"]
+def get_host(remote: bool):
+    if remote:
+        return HOST
+
+    return "local"
+
+
+def get_instance(remote: bool, instance: Optional[str]):
+    if instance:
+        return instance
+
+    if remote:
+        return INSTANCE
+
+    return "local"
+
+
+def get_stack(remote: bool, instance: str, stack: Optional[str]) -> str:
+    if stack:
+        return f"{stack}.yml"
+
+    if instance != "local":
+        return f"kdl_{instance}.yml"
+
+    if remote:
+        return STACK
+
+    return "local.yml"
+
+    return f"{COMPOSE_CMD} -f {stack}.yml"
 
 
 def get_connection(user: str, host: str) -> Connection:
@@ -147,71 +186,68 @@ def get_gateway(user: str) -> Connection:
 
 
 @task(help=HELP)
-def backup(context, user=get_local_user(), host=HOST, instance=INSTANCE, stack=STACK):
+def backup(context, user=get_local_user(), remote=False, instance=None, stack=None):
     """
     Create a database backup.
     """
-    run_command(
-        context, user, host, instance, f"{get_compose_cmd(stack)} run postgres backup"
-    )
-
-
-def get_compose_cmd(stack: str) -> str:
-    if stack.lower() == "l":
-        stack = "local"
-
-    return f"{COMPOSE_CMD} -f {stack}.yml"
+    command = f"run postgres backup"
+    run_command(context, user, remote, instance, stack, command)
 
 
 @task(help=HELP)
-def update(context, user=get_local_user(), host=HOST, instance=INSTANCE, branch=BRANCH):
+def update(context, user=get_local_user(), remote=False, instance=None, branch=BRANCH):
     """
     Update the host instance from source control.
     """
-    run_command(context, user, host, instance, f"git checkout {branch} && git pull")
+    no_stack = None
+    command = f"git checkout {branch} && git pull"
+    no_compose = False
+
+    run_command(context, user, remote, instance, no_stack, command, no_compose)
 
 
 @task(help=HELP)
 def up(
     context,
     user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    stack=STACK,
+    remote=False,
+    instance=None,
+    stack=None,
     services=None,
 ):
     """
     Build the stack for the host instance.
     """
-    command = f"{get_compose_cmd(stack)} up --build"
+    command = f"up --build"
 
-    if not is_localhost(host):
+    if remote:
         command = f"{command} --detach"
 
-    run_command_with_services(context, user, host, instance, command, services)
+    run_command_with_services(context, user, remote, instance, stack, command, services)
 
 
 def run_command_with_services(
     context: Context,
     user: str,
-    host: str,
+    remote: bool,
     instance: str,
+    stack: str,
     command: str,
     services: Optional[str],
 ):
     if services:
         command = f"{command} {services}"
 
-    run_command(context, user, host, instance, command)
+    run_command(context, user, remote, instance, stack, command)
 
 
 @task(help=HELP)
 def down(
     context,
     user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    stack=STACK,
+    remote=False,
+    instance=None,
+    stack=None,
     images="all",
     volumes=True,
     orphans=False,
@@ -219,7 +255,7 @@ def down(
     """
     Stop and remove stack components.
     """
-    command = f"{get_compose_cmd(stack)} down --rmi {images}"
+    command = f"down --rmi {images}"
 
     if volumes:
         command = f"{command} --volumes"
@@ -227,94 +263,76 @@ def down(
     if orphans:
         command = f"{command} --remove-orphans"
 
-    run_command(context, user, host, instance, command)
+    run_command(context, user, remote, instance, stack, command)
 
 
 @task(help=HELP)
 def start(
     context,
     user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    stack=STACK,
+    remote=False,
+    instance=None,
+    stack=None,
     services=None,
 ):
     """
     Start one or more services.
     """
-    command = f"{get_compose_cmd(stack)} start"
-    run_command_with_services(context, user, host, instance, command, services)
+    command = f"start"
+    run_command_with_services(context, user, remote, instance, stack, command, services)
 
 
 @task(help=HELP)
 def stop(
     context,
     user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    stack=STACK,
+    remote=False,
+    instance=None,
+    stack=None,
     services=None,
 ):
     """
     Stop one or more services.
     """
-    command = f"{get_compose_cmd(stack)} stop"
-    run_command_with_services(context, user, host, instance, command, services)
+    command = f"stop"
+    run_command_with_services(context, user, remote, instance, stack, command, services)
 
 
 @task(help=HELP)
 def restart(
     context,
     user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    stack=STACK,
+    remote=False,
+    instance=None,
+    stack=None,
     services=None,
 ):
     """
     Restart one or more services.
     """
-    command = f"{get_compose_cmd(stack)} restart"
-    run_command_with_services(context, user, host, instance, command, services)
+    command = f"restart"
+    run_command_with_services(context, user, remote, instance, stack, command, services)
 
 
 @task(help=HELP)
 def restore(
-    context,
-    user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    stack=STACK,
-    backup=None,
+    context, backup, user=get_local_user(), remote=False, instance=None, stack=None,
 ):
     """
     Restore a database backup.
     """
-    if not backup:
-        error("Please provide a backup file name.")
-        sys.exit(-1)
+    command = f"exec postgres pkill -f {PROJECT}"
+    run_command(context, user, remote, instance, stack, command)
 
-    run_command(
-        context,
-        user,
-        host,
-        instance,
-        f"{get_compose_cmd(stack)} exec postgres pkill -f {PROJECT}",
-    )
-    run_command(
-        context,
-        user,
-        host,
-        instance,
-        f"{get_compose_cmd(stack)} run postgres restore {backup}",
-    )
+    command = f"run postgres restore {backup}"
+    run_command(context, user, remote, instance, stack, command)
 
 
 @task(help=HELP)
 def shell(
     context,
     user=get_local_user(),
-    host=HOST,
+    remote=False,
     instance=INSTANCE,
     stack=STACK,
     service="django",
@@ -322,49 +340,41 @@ def shell(
     """
     Connect to a running service.
     """
-    command = f"{get_compose_cmd(stack)} run {service} bash"
-    run_command(context, user, host, instance, command)
+    command = f"run {service} bash"
+    run_command(context, user, remote, instance, stack, command)
 
 
 @task(help=HELP)
 def django(
-    context,
-    user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    stack=STACK,
-    command=None,
+    context, command, user=get_local_user(), remote=False, instance=None, stack=None
 ):
     """
     Run a Django management command.
     """
-    if not command:
-        command = ""
-
-    command = f"{get_compose_cmd(stack)} run django python manage.py {command}"
-    run_command(context, user, host, instance, command)
+    command = f"run django python manage.py {command}"
+    run_command(context, user, remote, instance, stack, command)
 
 
 @task(help=HELP)
 def test(
     context,
     user=get_local_user(),
-    host=HOST,
-    instance=INSTANCE,
-    stack=STACK,
-    coverage=False,
+    remote=False,
+    instance=None,
+    stack=None,
     app=None,
+    coverage=False,
 ):
     """
     Run tests with pytest.
     """
-    test_command = "pytest"
+    command = "pytest"
+
+    if app:
+        command = f"{command} {app}"
 
     if coverage:
-        test_command = f"coverage run -m {test_command}"
+        command = f"coverage run -m {command}"
 
-    if not app:
-        app = ""
-
-    command = f"{get_compose_cmd(stack)} run django {test_command} {app}"
-    run_command(context, user, host, instance, command)
+    command = f"run django {command}"
+    run_command(context, user, remote, instance, stack, command)
