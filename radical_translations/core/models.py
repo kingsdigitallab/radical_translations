@@ -161,7 +161,7 @@ class Resource(TimeStampedModel):
         unique_together = ["title", "date", "_is_paratext"]
 
     def __str__(self) -> str:
-        title = self.title
+        title = str(self.title)
 
         if self.date:
             title = f"{title} ({str(self.date)})"
