@@ -31,6 +31,10 @@ Removed
 ~~~~~~~
 * Helper script, it has been replace with the Fabric_ file.
 
+Fixed
+~~~~~
+* `TyperError` in `Resource` `__str__`, was preventing the editing of records.
+
 
 [0.7.0] - 2020-06-17
 --------------------
