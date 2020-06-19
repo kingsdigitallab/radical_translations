@@ -17,12 +17,15 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * CERL_ vocabulary for `Agent` models.
+* `Docker Compose`_ restart policies to the Docker services.
 
 Changed
 ~~~~~~~
 * Add date to `Resource` string for better disambiguation.
 
 .. _CERL: https://data.cerl.org/thesaurus/
+.. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
+
 
 [0.7.0] - 2020-06-17
 --------------------

@@ -23,6 +23,7 @@ services:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
+    restart: unless-stopped
 
   nginx:
     build:
@@ -33,6 +34,7 @@ services:
       - production_django_media:/usr/share/nginx/media:ro
     depends_on:
       - django
+    restart: unless-stopped
 
   postgres:
     build:
@@ -44,6 +46,7 @@ services:
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/.production/.postgres
+    restart: unless-stopped
 
   traefik:
     build:
@@ -57,9 +60,11 @@ services:
     ports:
       - '0.0.0.0:80:80'
       - '0.0.0.0:443:443'
+    restart: unless-stopped
 
   redis:
     image: redis:5.0
+    restart: unless-stopped
   #elasticsearch:
   #image: elasticsearch:7.5.1
   #volumes:
@@ -69,6 +74,7 @@ services:
   #ports:
   #- '127.0.0.1:9200:9200'
   #- '127.0.0.1:9300:9300'
+  #restart: unless-stopped
   #kibana:
   #image: kibana:7.5.1
   #depends_on:
@@ -77,3 +83,4 @@ services:
   #- ./.envs/.production/.kibana
   #ports:
   #- '5601:5601'
+  #restart: unless-stopped
