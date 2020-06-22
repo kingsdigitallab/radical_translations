@@ -1,4 +1,5 @@
 import configparser
+import getpass
 import sys
 from configparser import ConfigParser, SectionProxy
 from typing import Optional
@@ -7,6 +8,7 @@ from fabric import Connection, task
 from fabric.util import get_local_user
 from invoke.context import Context
 from invoke.exceptions import Failure, ThreadException, UnexpectedExit
+from paramiko.ssh_exception import AuthenticationException
 
 COLOUR_OFF: str = "\033[0m"
 
@@ -65,6 +67,10 @@ HELP = {
 }
 
 
+connection: Connection = None
+password: str = None
+
+
 @task(help=HELP)
 def deploy(
     context, instance, user=get_local_user(), initial=False, stack=None, branch=BRANCH,
@@ -99,9 +105,13 @@ def clone(context, instance, user=get_local_user(), branch=BRANCH):
     command = f"tar czvf .envs/{env_file} .envs/.{instance}"
     run_command(context, user, local, instance, no_stack, command, no_compose)
 
+    with get_connection(user, HOST) as c:
+        with c.cd(f"{HOST_PATH}"):
+            c.run(f"mkdir -p {HOST_PATH}/{instance}")
+
     remote = True
 
-    command = f"git clone {REPOSITORY} {instance} && git checkout {branch}"
+    command = f"git clone {REPOSITORY} . && git checkout {branch}"
     run_command(context, user, remote, instance, no_stack, command, no_compose)
 
     with get_connection(user, HOST) as c:
@@ -139,6 +149,8 @@ def run_command(
                     c.run(command, pty=True)
         else:
             context.run(command, replace_env=False, pty=True)
+    except (AuthenticationException, ValueError) as e:
+        error(f"{e}")
     except (Failure, ThreadException, UnexpectedExit):
         error(f"{host}/{instance}\nFailed to run command: `{command}`")
 
@@ -172,17 +184,46 @@ def get_stack(remote: bool, instance: str, stack: Optional[str]) -> str:
 
     return "local.yml"
 
-    return f"{COMPOSE_CMD} -f {stack}.yml"
-
 
 def get_connection(user: str, host: str) -> Connection:
-    return Connection(host, user=user, gateway=get_gateway(user))
+    global connection
+
+    if connection:
+        return connection
+
+    try:
+        connection = Connection(host, user=user, gateway=get_gateway(user))
+        if not connection.is_connected:
+            raise AuthenticationException
+    except AuthenticationException:
+        password = get_password(user, host)
+
+        connection = Connection(
+            host,
+            user=user,
+            connect_kwargs={"password": password},
+            gateway=get_gateway(user, password),
+        )
+
+    return connection
 
 
-def get_gateway(user: str) -> Connection:
-    return Connection(
-        GATEWAY, user=user, connect_kwargs={"gss_auth": True, "gss_kex": True}
-    )
+def get_gateway(user: str, password: Optional[str] = None) -> Connection:
+    if password:
+        return Connection(GATEWAY, user=user, connect_kwargs={"password": password})
+
+    return Connection(GATEWAY, user=user)
+
+
+def get_password(user: str, host: str) -> str:
+    global password
+
+    if password:
+        return password
+
+    password = getpass.getpass(prompt=f"Password for {user}@{host}: ")
+
+    return password
 
 
 @task(help=HELP)
@@ -200,7 +241,7 @@ def update(context, user=get_local_user(), remote=False, instance=None, branch=B
     Update the host instance from source control.
     """
     no_stack = None
-    command = f"git checkout {branch} && git pull"
+    command = f"git checkout {branch} || git pull && git checkout {branch}"
     no_compose = False
 
     run_command(context, user, remote, instance, no_stack, command, no_compose)
@@ -377,4 +418,14 @@ def test(
         command = f"coverage run -m {command}"
 
     command = f"run django {command}"
+    run_command(context, user, remote, instance, stack, command)
+
+
+@task(help=HELP)
+def compose(
+    context, command, user=get_local_user(), remote=False, instance=None, stack=None
+):
+    """
+    Run a raw compose command.
+    """
     run_command(context, user, remote, instance, stack, command)
