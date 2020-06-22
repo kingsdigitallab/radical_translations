@@ -29,7 +29,7 @@ Changed
 
 Removed
 ~~~~~~~
-* Helper script, it has been replace with the Fabric_ file.
+* Helper script, it has been replaced with the Fabric_ file.
 
 Fixed
 ~~~~~
