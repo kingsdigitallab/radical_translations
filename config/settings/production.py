@@ -129,7 +129,7 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
-        "django": {
+        "": {
             "level": "ERROR",
             "handlers": ["console", "mail_admins"],
             "propagate": True,
