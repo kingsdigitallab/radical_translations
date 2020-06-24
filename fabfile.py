@@ -231,7 +231,7 @@ def backup(context, user=get_local_user(), remote=False, instance=None, stack=No
     """
     Create a database backup.
     """
-    command = f"run postgres backup"
+    command = f"run --rm postgres backup"
     run_command(context, user, remote, instance, stack, command)
 
 
@@ -365,7 +365,7 @@ def restore(
     command = f"exec postgres pkill -f {PROJECT}"
     run_command(context, user, remote, instance, stack, command)
 
-    command = f"run postgres restore {backup}"
+    command = f"run --rm postgres restore {backup}"
     run_command(context, user, remote, instance, stack, command)
 
 
@@ -381,7 +381,7 @@ def shell(
     """
     Connect to a running service.
     """
-    command = f"run {service} bash"
+    command = f"run --rm {service} bash"
     run_command(context, user, remote, instance, stack, command)
 
 
@@ -392,7 +392,7 @@ def django(
     """
     Run a Django management command.
     """
-    command = f"run django python manage.py {command}"
+    command = f"run --rm django python manage.py {command}"
     run_command(context, user, remote, instance, stack, command)
 
 
@@ -417,7 +417,7 @@ def test(
     if coverage:
         command = f"coverage run -m {command}"
 
-    command = f"run django {command}"
+    command = f"run --rm django {command}"
     run_command(context, user, remote, instance, stack, command)
 
 
