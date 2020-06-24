@@ -18,6 +18,7 @@ Added
 ~~~~~
 * CERL_ vocabulary for `Agent` models.
 * `Docker Compose`_ restart policies to the Docker services.
+* `Django email`_ configuration.
 
 Changed
 ~~~~~~~
@@ -26,19 +27,19 @@ Changed
 
 Removed
 ~~~~~~~
+* Helper script, it has been replaced with the Fabric_ file.
 * Anymail integration.
 * django-allauth integration.
-
-.. _CERL: https://data.cerl.org/thesaurus/
-.. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
-
-Removed
-~~~~~~~
-* Helper script, it has been replaced with the Fabric_ file.
 
 Fixed
 ~~~~~
 * `TyperError` in `Resource` `__str__`, was preventing the editing of records.
+* Error templates.
+
+.. _CERL: https://data.cerl.org/thesaurus/
+.. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
+.. _Django email: https://docs.djangoproject.com/en/3.0/topics/email/
+.. _Fabric: https://fabfile.org/
 
 
 [0.7.0] - 2020-06-17
