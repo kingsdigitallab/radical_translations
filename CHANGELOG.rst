@@ -24,6 +24,11 @@ Changed
 * Add date to `Resource` string for better disambiguation.
 * Simplify the Fabric_ commands.
 
+Removed
+~~~~~~~
+* Anymail integration.
+* django-allauth integration.
+
 .. _CERL: https://data.cerl.org/thesaurus/
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
 

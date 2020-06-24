@@ -17,8 +17,6 @@ convertdate==2.2.1        # via -r requirements/./base.in
 coreapi==2.3.3            # via -r requirements/./base.in
 coreschema==0.0.4         # via coreapi
 decorator==4.4.2          # via ratelim
-defusedxml==0.6.0         # via python3-openid
-django-allauth==0.41.0    # via -r requirements/./base.in
 django-auth-ldap==2.1.0   # via -r requirements/production.in
 django-cogwheels==0.3     # via wagtailmenus
 git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@radical  # via -r requirements/./base.in
@@ -32,7 +30,7 @@ django-polymorphic==2.1.2  # via -r requirements/./base.in
 django-redis==4.11.0      # via -r requirements/./base.in
 django-taggit==1.3.0      # via wagtail
 django-treebeard==4.3.1   # via wagtail
-django==2.2.10            # via -r requirements/./base.in, django-allauth, django-auth-ldap, django-controlled-vocabulary, django-model-utils, django-polymorphic, django-redis, django-taggit, django-treebeard, djangorestframework, wagtail
+django==2.2.10            # via -r requirements/./base.in, django-auth-ldap, django-controlled-vocabulary, django-model-utils, django-polymorphic, django-redis, django-taggit, django-treebeard, djangorestframework, wagtail
 djangorestframework==3.11.0  # via -r requirements/./base.in, wagtail
 draftjs-exporter==2.1.7   # via wagtail
 edtf==4.0.1               # via -r requirements/./base.in
@@ -48,7 +46,6 @@ itypes==1.2.0             # via coreapi
 jinja2==2.11.2            # via coreschema
 l18n==2018.5              # via wagtail
 markupsafe==1.1.1         # via jinja2
-oauthlib==3.1.0           # via requests-oauthlib
 pathlib==1.0.1            # via pyzotero
 pillow==6.2.2             # via wagtail
 psycopg2==2.8.4           # via -r requirements/production.in
@@ -60,13 +57,11 @@ pyparsing==2.4.7          # via bibtexparser, edtf
 python-dateutil==2.8.1    # via edtf, elasticsearch-dsl
 python-ldap==3.2.0        # via django-auth-ldap
 python-slugify==4.0.0     # via -r requirements/./base.in
-python3-openid==3.1.0     # via django-allauth
 pytz==2019.3              # via -r requirements/./base.in, convertdate, django, django-modelcluster, l18n, pyzotero
 pyzotero==1.4.16          # via -r requirements/./base.in
 ratelim==0.1.6            # via geocoder
 redis==3.4.1              # via -r requirements/./base.in, django-redis
-requests-oauthlib==1.3.0  # via django-allauth
-requests==2.23.0          # via coreapi, django-allauth, geocoder, pyzotero, requests-oauthlib, wagtail
+requests==2.23.0          # via coreapi, geocoder, pyzotero, wagtail
 six==1.15.0               # via argon2-cffi, edtf, elasticsearch-dsl, geocoder, html5lib, l18n, python-dateutil
 sqlparse==0.3.1           # via django
 text-unidecode==1.3       # via python-slugify

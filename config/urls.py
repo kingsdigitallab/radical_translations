@@ -12,7 +12,6 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("radical_translations.users.urls", namespace="users")),
-    path("accounts/", include("allauth.urls")),
     # Django controlled vocabulary
     path("vocabularies/", include("controlled_vocabulary.urls")),
     # Radical Translations
