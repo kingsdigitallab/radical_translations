@@ -377,8 +377,8 @@ def shell(
     context,
     user=get_local_user(),
     remote=False,
-    instance=INSTANCE,
-    stack=STACK,
+    instance=None,
+    stack=None,
     service="django",
 ):
     """
