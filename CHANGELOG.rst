@@ -19,12 +19,13 @@ Added
 * CERL_ vocabulary for `Agent` models.
 * `Docker Compose`_ restart policies to the Docker services.
 * `Django email`_ configuration.
-* Main places field to `Person`.
+* Fields `main_places` and `noble` to `Person`.
 
 Changed
 ~~~~~~~
 * Add date to `Resource` string for better disambiguation.
 * Simplify the Fabric_ commands.
+* Index page template to display extra information for blog posts.
 
 Removed
 ~~~~~~~
