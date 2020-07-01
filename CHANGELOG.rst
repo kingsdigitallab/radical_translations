@@ -19,6 +19,7 @@ Added
 * CERL_ vocabulary for `Agent` models.
 * `Docker Compose`_ restart policies to the Docker services.
 * `Django email`_ configuration.
+* Main places field to `Person`.
 
 Changed
 ~~~~~~~
@@ -35,6 +36,7 @@ Fixed
 ~~~~~
 * `TyperError` in `Resource` `__str__`, was preventing the editing of records.
 * Error templates.
+* Admin favicon.
 
 .. _CERL: https://data.cerl.org/thesaurus/
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart

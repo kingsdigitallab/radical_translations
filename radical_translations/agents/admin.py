@@ -64,6 +64,7 @@ class OrganisationInline(admin.TabularInline):
 @admin.register(Person)
 class PersonAdmin(AgentChildAdmin):
     autocomplete_fields = AgentChildAdmin.autocomplete_fields + [
+        "main_places",
         "date_birth",
         "date_death",
         "place_birth",
@@ -79,12 +80,14 @@ class PersonAdmin(AgentChildAdmin):
         "date_death",
         "place_death",
         "get_role_names",
+        "get_main_places_names",
         "get_place_names",
     ]
     list_filter = [
         "gender",
         ("roles", admin.RelatedOnlyFieldListFilter),
         ("languages", admin.RelatedOnlyFieldListFilter),
+        ("main_places", admin.RelatedOnlyFieldListFilter),
         ("based_near", admin.RelatedOnlyFieldListFilter),
         ("knows", admin.RelatedOnlyFieldListFilter),
     ]

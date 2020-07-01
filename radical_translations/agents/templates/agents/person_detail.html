@@ -15,6 +15,13 @@
 {% endfor %}
 {% endif %}
 
+{% if object.main_places.count %}
+|
+{% for place in object.main_places.all %}
+<span class="badge badge-primary">{{ place.address }}</span>
+{% endfor %}
+{% endif %}
+
 {% if object.based_near.count %}
 |
 {% for place in object.based_near.all %}

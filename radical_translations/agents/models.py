@@ -102,6 +102,15 @@ class Person(Agent):
         help_text="The gender of this Person.",
     )
 
+    main_places = models.ManyToManyField(
+        Place,
+        blank=True,
+        related_name="agents_main_places",
+        help_text=(
+            "Main places this Person is associated with (places of residence, etc.)."
+        ),
+    )
+
     date_birth = models.OneToOneField(
         Date,
         blank=True,
@@ -110,15 +119,6 @@ class Person(Agent):
         related_name="person_birth",
         help_text="The date of birth of this Person.",
     )
-    date_death = models.OneToOneField(
-        Date,
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name="person_death",
-        help_text="The date of death of this Person.",
-    )
-
     place_birth = models.ForeignKey(
         Place,
         blank=True,
@@ -126,6 +126,15 @@ class Person(Agent):
         on_delete=models.CASCADE,
         related_name="births",
         help_text="The location of birth of this Person.",
+    )
+
+    date_death = models.OneToOneField(
+        Date,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="person_death",
+        help_text="The date of death of this Person.",
     )
     place_death = models.ForeignKey(
         Place,
@@ -150,6 +159,11 @@ class Person(Agent):
             "interaction between the parties)."
         ),
     )
+
+    def get_main_places_names(self) -> str:
+        return "; ".join([place.address for place in self.main_places.all()])
+
+    get_main_places_names.short_description = "Main places"  # type: ignore
 
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Person"]:
