@@ -102,6 +102,11 @@ class Person(Agent):
         help_text="The gender of this Person.",
     )
 
+    noble = models.BooleanField(
+        default=False,
+        help_text="Wether this person had a noble status at birth or not.",
+    )
+
     main_places = models.ManyToManyField(
         Place,
         blank=True,
