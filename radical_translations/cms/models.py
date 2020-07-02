@@ -31,7 +31,10 @@ class BlogPost(BaseStreamPage):
         if self.guest_authors:
             return self.guest_authors
 
-        return f"{self.owner.first_name} {self.owner.last_name}"
+        if self.owner:
+            return f"{self.owner.first_name} {self.owner.last_name}"
+
+        return ""
 
     @property
     def index(self):
