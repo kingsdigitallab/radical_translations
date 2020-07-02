@@ -39,12 +39,14 @@ Fixed
 * `TyperError` in `Resource` `__str__`, was preventing the editing of records.
 * Error templates.
 * Admin favicon.
+* Issues with `Controlled Vocabulary`_ application.
 
 .. _CERL: https://data.cerl.org/thesaurus/
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
 .. _Django email: https://docs.djangoproject.com/en/3.0/topics/email/
-.. _Fabric: https://fabfile.org/
 .. _Wagtail: https://wagtail.io/
+.. _Fabric: https://fabfile.org/
+.. _Controlled Vocabulary: https://github.com/kingsdigitallab/django-controlled-vocabulary/
 
 
 [0.7.0] - 2020-06-17
