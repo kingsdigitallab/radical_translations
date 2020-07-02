@@ -97,8 +97,9 @@ LOCAL_APPS = [
     "radical_translations.users.apps.UsersConfig",
     "radical_translations.utils.apps.UtilsConfig",
     # Your stuff: custom apps go here
-    "radical_translations.core.apps.CoreConfig",
     "radical_translations.agents.apps.AgentsConfig",
+    "radical_translations.cms.apps.CmsConfig",
+    "radical_translations.core.apps.CoreConfig",
     "radical_translations.events.apps.EventsConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

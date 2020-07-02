@@ -1,0 +1,15 @@
+{% extends "kdl_wagtail_core/base_stream_page.html" %}
+{% load kdl_wagtail_core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block page-header %}
+<div class="page-header {% get_page_label page %}">
+    {% if page.image %}
+    <div class="image">
+        {% image page.image width-1024 %}
+    </div>
+    {% endif %}
+
+    <h1>{{ page.title }}</h1>
+    <h2>by {{ page.author }}, {{ page.first_published_at }}</h2>
+</div>
+{% endblock page-header %}

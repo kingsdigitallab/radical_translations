@@ -20,6 +20,7 @@ Added
 * `Docker Compose`_ restart policies to the Docker services.
 * `Django email`_ configuration.
 * Fields `main_places` and `noble` to `Person`.
+* New application, `cms`, for Wagtail_ customisations.
 
 Changed
 ~~~~~~~
@@ -43,6 +44,7 @@ Fixed
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
 .. _Django email: https://docs.djangoproject.com/en/3.0/topics/email/
 .. _Fabric: https://fabfile.org/
+.. _Wagtail: https://wagtail.io/
 
 
 [0.7.0] - 2020-06-17

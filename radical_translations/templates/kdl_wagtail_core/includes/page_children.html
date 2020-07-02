@@ -9,8 +9,8 @@
             <a href="{% pageurl child %}">
                 <h2 class="child-page-title">{{ child.title }}</h2>
 
-                {% if page.slug.lower == 'blog' %}
-                <h3>{{ child.owner.first_name }} {{ child.owner.last_name }}, {{ child.first_published_at }}</h3>
+                {% if child.author %}
+                <h3>{{ child.author }}, {{ child.first_published_at }}</h3>
                 {% endif %}
 
                 <div class="col">
