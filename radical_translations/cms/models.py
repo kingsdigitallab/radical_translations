@@ -4,12 +4,13 @@ from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.core.query import PageQuerySet
 
 
 class BlogIndexPage(BaseIndexPage):
     subpage_types = ["BlogPost"]
 
-    def children(self):
+    def children(self) -> PageQuerySet:
         return (
             BlogPost.objects.descendant_of(self).live().order_by("-first_published_at")
         )
@@ -27,7 +28,7 @@ class BlogPost(BaseStreamPage):
     subpage_types = []
 
     @property
-    def author(self):
+    def author(self) -> str:
         if self.guest_authors:
             return self.guest_authors
 
@@ -37,7 +38,7 @@ class BlogPost(BaseStreamPage):
         return ""
 
     @property
-    def index(self):
+    def index(self) -> IndexPage:
         return self.get_ancestors().type(IndexPage).last()
 
     promote_panels = BasePage.promote_panels + [

@@ -10,6 +10,11 @@ from radical_translations.agents.tests.factories import (
     OrganisationFactory,
     PersonFactory,
 )
+from radical_translations.cms.models import BlogIndexPage, BlogPost
+from radical_translations.cms.tests.factories import (
+    BlogIndexPageFactory,
+    BlogPostFactory,
+)
 from radical_translations.core.models import Resource, Title
 from radical_translations.core.tests.factories import ResourceFactory, TitleFactory
 from radical_translations.users.models import User
@@ -152,3 +157,18 @@ def entry_edition() -> Dict[str, Dict[str, str]]:
         "gsx$paratextnotes": {"$t": ""},
         "gsx$paratextprefaceby": {"$t": ""},
     }
+
+
+@pytest.fixture
+def blog_index_page() -> BlogIndexPage:
+    return BlogIndexPageFactory()
+
+
+@pytest.fixture
+def blog_post_1() -> BlogPost:
+    return BlogPostFactory()
+
+
+@pytest.fixture
+def blog_post_2() -> BlogPost:
+    return BlogPostFactory()
