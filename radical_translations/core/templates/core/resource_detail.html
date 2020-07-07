@@ -81,7 +81,9 @@
 <h3>Events</h3>
 <ul>
     {% for event in object.events.all %}
-    <li>{{ event }}</li>
+    <li>
+        <a href="{% url 'event-detail' event.pk %}">{{ event }}</a>
+    </li>
     {% endfor %}
 </ul>
 {% endif %}
