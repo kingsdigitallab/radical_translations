@@ -82,6 +82,7 @@ class Resource(TimeStampedModel):
     title = models.ForeignKey(
         Title,
         on_delete=models.CASCADE,
+        related_name="resources",
         help_text=(
             "Title information relating to a resource: work title, preferred title, "
             "instance title, transcribed title, translated title, variant form of "
@@ -93,7 +94,7 @@ class Resource(TimeStampedModel):
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        related_name="variants",
+        related_name="variant_of",
         help_text=(
             "Title associated with the resource that is different from the Work or "
             "Instance title (titles in another language and/or script etc.)."
