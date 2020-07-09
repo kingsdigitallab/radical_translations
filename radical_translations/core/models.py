@@ -103,6 +103,7 @@ class Resource(TimeStampedModel):
     subjects = ControlledTermsField(
         ["fast-forms", "fast-topic", "rt-agt", "wikidata"],
         blank=True,
+        related_name="resources",
         help_text="Subject term(s) describing a resource",
     )
 
@@ -402,6 +403,7 @@ class Classification(TimeStampedModel, EditorialClassificationModel):
     edition = ControlledTermField(
         ["rt-ppt", "rt-tt", "rt-pt"],
         on_delete=models.CASCADE,
+        related_name="classifications",
         help_text=(
             "Edition of the classification scheme, such as full, abridged or a number, "
             "when a classification scheme designates editions."
@@ -458,6 +460,7 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
     roles = ControlledTermsField(
         ["wikidata"],
         blank=True,
+        related_name="contributions",
         help_text="Function provided by a contributor, e.g., author, illustrator, etc.",
     )
 
@@ -527,6 +530,7 @@ class ResourceLanguage(TimeStampedModel, EditorialClassificationModel):
     language = ControlledTermField(
         ["iso639-2"],
         on_delete=models.CASCADE,
+        related_name="resources_languages",
         help_text="Language associated with a resource or its parts.",
     )
 
@@ -574,6 +578,7 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     relationship_type = ControlledTermField(
         ["bf-crr"],
         on_delete=models.CASCADE,
+        related_name="resources_relationships",
         help_text="Any relationship between resources.",
     )
     related_to = models.ForeignKey(
