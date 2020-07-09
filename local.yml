@@ -13,7 +13,7 @@ services:
     image: radical_translations_local_django
     depends_on:
       - postgres
-      # - elasticsearch
+      - elasticsearch
     volumes:
       - .:/app
       - ./requirements:/requirements
