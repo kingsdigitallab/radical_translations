@@ -11,7 +11,7 @@
 {% if object.languages.count %}
 |
 {% for language in object.languages.all %}
-{{ language }}{% if not forloop.last %}, {% endif %}
+{{ language.label }}{% if not forloop.last %}, {% endif %}
 {% endfor %}
 {% endif %}
 
