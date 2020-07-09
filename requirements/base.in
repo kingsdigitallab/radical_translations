@@ -23,7 +23,7 @@ git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@radical 
 django-geonames-place  # https://github.com/kingsdigitallab/django-geonames-place
 django-polymorphic  # https://github.com/django-polymorphic/django-polymorphic
 edtf  # https://github.com/ixc/python-edtf
-elasticsearch-dsl>=7.0.0,<8.0.0  # https://github.com/elastic/elasticsearch-dsl-py
+django-elasticsearch-dsl>=7.1,<7.2  # https://github.com/django-es/django-elasticsearch-dsl
 
 wagtail>=2.8.1,<2.9  # https://github.com/wagtail/wagtail
 django-kdl-wagtail  # https://github.com/kingsdigitallab/django-kdl-wagtail
