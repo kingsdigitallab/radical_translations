@@ -14,6 +14,12 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Elasticsearch_ service.
+* `Resource` search index.
+
+.. _Elasticsearch: https://www.elastic.co/elasticsearch/
 
 [0.7.1] - 2020-07-02
 --------------------
