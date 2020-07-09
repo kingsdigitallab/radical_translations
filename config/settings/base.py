@@ -91,6 +91,7 @@ THIRD_PARTY_APPS = [
     "controlled_vocabulary",
     "geonames_place.apps.GeonamesPlaceConfig",
     "polymorphic",
+    "django_elasticsearch_dsl",
 ]
 
 LOCAL_APPS = [
@@ -279,6 +280,11 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
+
+# Elasticsearch
+# ------------------------------------------------------------------------------
+# https://github.com/django-es/django-elasticsearch-dsl
+ELASTICSEARCH_DSL = {"default": {"hosts": "elasticsearch:9200"}}
 
 # Wagtail
 # ------------------------------------------------------------------------------
