@@ -16,7 +16,6 @@ services:
       - elasticsearch
     volumes:
       - .:/app
-      - ./requirements:/requirements
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
