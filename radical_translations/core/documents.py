@@ -14,6 +14,9 @@ class ResourceDocument(Document):
         properties={"termid": fields.TextField(), "label": fields.TextField()}
     )
 
+    is_original = fields.BooleanField()
+    is_paratext = fields.BooleanField()
+
     class Index:
         name = "resources"
 
@@ -32,3 +35,9 @@ class ResourceDocument(Document):
 
         if isinstance(related_instance, Title):
             return related_instance.resources.all()
+
+    def prepare_is_original(self, instance):
+        return instance.is_original()
+
+    def prepare_is_paratext(self, instance):
+        return instance.is_paratext()
