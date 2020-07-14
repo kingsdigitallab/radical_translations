@@ -1,3 +1,5 @@
+from typing import Dict
+
 from controlled_vocabulary.models import ControlledTerm
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
@@ -5,13 +7,23 @@ from django_elasticsearch_dsl.registries import registry
 from radical_translations.core.models import Resource, Title
 
 
+def get_controlled_term_properties() -> Dict:
+    return {"termid": fields.KeywordField(), "label": fields.KeywordField()}
+
+
 @registry.register_document
 class ResourceDocument(Document):
     title = fields.ObjectField(
         properties={"main_title": fields.TextField(), "subtitle": fields.TextField()}
     )
-    subjects = fields.ObjectField(
-        properties={"termid": fields.TextField(), "label": fields.TextField()}
+    subjects = fields.ObjectField(properties=get_controlled_term_properties())
+    classifications = fields.ObjectField(
+        properties={
+            "classification": fields.ObjectField(
+                properties=get_controlled_term_properties()
+            ),
+            "edition": fields.ObjectField(properties=get_controlled_term_properties()),
+        }
     )
 
     is_original = fields.BooleanField()
@@ -27,7 +39,7 @@ class ResourceDocument(Document):
         related_models = [ControlledTerm, Title]
 
     def get_queryset(self):
-        return super().get_queryset().select_related("title")
+        return super().get_queryset().select_related("title", "date")
 
     def get_instances_from_related(self, related_instance):
         if isinstance(related_instance, ControlledTerm):
