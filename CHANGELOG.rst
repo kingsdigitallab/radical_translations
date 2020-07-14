@@ -17,9 +17,11 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Elasticsearch_ service.
+* Kibana_ service.
 * `Resource` search index.
 
 .. _Elasticsearch: https://www.elastic.co/elasticsearch/
+.. _Kibana: https://www.elastic.co/kibana/
 
 [0.7.1] - 2020-07-02
 --------------------
