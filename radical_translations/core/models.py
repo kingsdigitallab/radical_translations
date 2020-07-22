@@ -181,7 +181,7 @@ class Resource(TimeStampedModel):
             [c.agent.name for c in self.contributions.filter(roles__label=role)]
         )
 
-    get_authors.short_description = "Authors"
+    get_authors.short_description = "Authors/translators"  # type: ignore
 
     def get_classification_edition(self) -> str:
         return "; ".join([c.edition.label for c in self.classifications.all()])
