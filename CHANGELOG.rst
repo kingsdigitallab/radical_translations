@@ -14,6 +14,11 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Migration to convert `author` roles to `translator` when the `Resource` is a
+  translation.
+
 
 [0.7.1] - 2020-07-02
 --------------------

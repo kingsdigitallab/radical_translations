@@ -1,15 +1,15 @@
 from typing import Dict, List, Optional
 
+from django.db import models
+from model_utils.models import TimeStampedModel
+
 from controlled_vocabulary.models import (
     ControlledTerm,
     ControlledTermField,
     ControlledTermsField,
 )
 from controlled_vocabulary.utils import search_term_or_none
-from django.db import models
 from geonames_place.models import Place
-from model_utils.models import TimeStampedModel
-
 from radical_translations.agents.models import Agent, Organisation, Person
 from radical_translations.utils.models import (
     Date,
@@ -172,8 +172,13 @@ class Resource(TimeStampedModel):
         return title
 
     def get_authors(self) -> str:
+        role = "author"
+
+        if self.is_translation():
+            role = "translator"
+
         return "; ".join(
-            [c.agent.name for c in self.contributions.filter(roles__label="author")]
+            [c.agent.name for c in self.contributions.filter(roles__label=role)]
         )
 
     get_authors.short_description = "Authors"
@@ -205,6 +210,12 @@ class Resource(TimeStampedModel):
         )
 
     is_paratext.boolean = True  # type: ignore
+
+    def is_translation(self) -> bool:
+        return (
+            self.relationships.filter(relationship_type__label="translation of").count()
+            > 0
+        )
 
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Resource"]:

@@ -116,7 +116,11 @@ class TestContribution:
 @pytest.mark.usefixtures("vocabulary")
 class TestResource:
     @pytest.mark.usefixtures("entry_original", "entry_translation")
-    def test_is_original(self, entry_original, entry_translation):
+    def test_is_original(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_translation: Dict[str, Dict[str, str]],
+    ):
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.is_original() is True
 
@@ -124,15 +128,38 @@ class TestResource:
         assert resource.is_original() is False
 
     @pytest.mark.usefixtures("entry_original")
-    def test_is_paratext(self, entry_original):
+    def test_is_paratext(self, entry_original: Dict[str, Dict[str, str]]):
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.is_paratext() is False
 
         paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
         assert paratext.is_paratext() is True
 
+    @pytest.mark.usefixtures("entry_original", "entry_translation", "entry_edition")
+    def test_is_translation(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_translation: Dict[str, Dict[str, str]],
+        entry_edition: Dict[str, Dict[str, str]],
+    ):
+        Resource.from_gsx_entry(entry_original)
+        resource = Resource.relationships_from_gsx_entry(entry_original)
+        assert resource.is_translation() is False
+
+        Resource.from_gsx_entry(entry_translation)
+        resource = Resource.relationships_from_gsx_entry(entry_translation)
+        assert resource.is_translation() is True
+
+        Resource.from_gsx_entry(entry_edition)
+        resource = Resource.relationships_from_gsx_entry(entry_edition)
+        assert resource.is_translation() is False
+
     @pytest.mark.usefixtures("entry_original", "entry_edition")
-    def test_get_authors(self, entry_original, entry_edition):
+    def test_get_authors(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_edition: Dict[str, Dict[str, str]],
+    ):
         resource = Resource.from_gsx_entry(entry_original)
         assert "Constantin" in resource.get_authors()
 
@@ -143,7 +170,11 @@ class TestResource:
         assert "Dalila" in authors
 
     @pytest.mark.usefixtures("entry_original", "entry_translation")
-    def test_get_classification_edition(self, entry_original, entry_translation):
+    def test_get_classification_edition(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_translation: Dict[str, Dict[str, str]],
+    ):
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.get_classification_edition().lower() == "original"
 
@@ -151,7 +182,11 @@ class TestResource:
         assert resource.get_classification_edition().lower() == "integral"
 
     @pytest.mark.usefixtures("entry_original", "entry_translation")
-    def test_get_language_names(self, entry_original, entry_translation):
+    def test_get_language_names(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_translation: Dict[str, Dict[str, str]],
+    ):
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.get_language_names() == "French"
 
@@ -159,7 +194,11 @@ class TestResource:
         assert resource.get_language_names() == "English"
 
     @pytest.mark.usefixtures("entry_original", "entry_translation")
-    def test_get_place_names(self, entry_original, entry_translation):
+    def test_get_place_names(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_translation: Dict[str, Dict[str, str]],
+    ):
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.get_place_names() == "Paris"
 
@@ -194,7 +233,7 @@ class TestResource:
         resource = Resource.from_gsx_entry(entry)
         assert resource.contributions.first().agent.name == person.name
 
-        entry["gsx$language"]["$t"] = f"French [fr]; English [en]"
+        entry["gsx$language"]["$t"] = "French [fr]; English [en]"
         resource = Resource.from_gsx_entry(entry)
         assert "French" in resource.get_language_names()
 
@@ -266,9 +305,7 @@ class TestResource:
         assert paratext.notes is not None
         assert paratext.relationships.count() == 1
 
-    @pytest.mark.usefixtures(
-        "entry_original", "entry_translation", "entry_edition"
-    )
+    @pytest.mark.usefixtures("entry_original", "entry_translation", "entry_edition")
     def test_relationships_from_gsx_entry(
         self,
         entry_original: Dict[str, Dict[str, str]],
