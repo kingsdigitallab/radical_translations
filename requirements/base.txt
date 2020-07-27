@@ -16,7 +16,7 @@ coreapi==2.3.3            # via -r requirements/base.in
 coreschema==0.0.4         # via coreapi
 decorator==4.4.2          # via ratelim
 django-cogwheels==0.3     # via wagtailmenus
-git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@radical  # via -r requirements/base.in
+django-controlled-vocabulary==0.8  # via -r requirements/base.in
 django-crispy-forms==1.8.1  # via -r requirements/base.in
 django-environ==0.4.5     # via -r requirements/base.in
 django-geonames-place==0.6.0  # via -r requirements/base.in
