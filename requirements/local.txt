@@ -30,7 +30,7 @@ coveralls==2.0.0          # via -r requirements/local.in
 decorator==4.4.2          # via ipython, ratelim, traitlets
 distlib==0.3.0            # via virtualenv
 django-cogwheels==0.3     # via wagtailmenus
-git+https://github.com/kingsdigitallab/django-controlled-vocabulary.git@radical  # via -r requirements/./base.in
+django-controlled-vocabulary==0.8  # via -r requirements/./base.in
 django-coverage-plugin==1.8.0  # via -r requirements/local.in
 django-crispy-forms==1.8.1  # via -r requirements/./base.in
 django-debug-toolbar==2.2  # via -r requirements/local.in
