@@ -19,6 +19,10 @@ Added
 * Migration to convert `author` roles to `translator` when the `Resource` is a
   translation.
 
+Changed
+~~~~~~~
+* Upgrade `Controlled Vocabulary`_ application.
+
 
 [0.7.1] - 2020-07-02
 --------------------
