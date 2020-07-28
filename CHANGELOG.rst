@@ -19,9 +19,16 @@ Added
 * Elasticsearch_ service.
 * Kibana_ service.
 * `Resource` search index.
+* Migration to convert `author` roles to `translator` when the `Resource` is a
+  translation.
+
+Changed
+~~~~~~~
+* Upgrade `Controlled Vocabulary`_ application.
 
 .. _Elasticsearch: https://www.elastic.co/elasticsearch/
 .. _Kibana: https://www.elastic.co/kibana/
+
 
 [0.7.1] - 2020-07-02
 --------------------
