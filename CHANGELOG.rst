@@ -25,6 +25,7 @@ Added
 Changed
 ~~~~~~~
 * Upgrade `Controlled Vocabulary`_ application.
+* Upgrade Wagtail_ to version 2.9.
 
 .. _Elasticsearch: https://www.elastic.co/elasticsearch/
 .. _Kibana: https://www.elastic.co/kibana/
