@@ -57,9 +57,12 @@ services:
     restart: unless-stopped
 
   elasticsearch:
-    image: elasticsearch:7.5.1
+    build:
+      context: .
+      dockerfile: ./compose/production/elasticsearch/Dockerfile
+    image: radical_translations_production_elasticsearch
     volumes:
-      - local_elasticsearch_data:/usr/share/elasticsearch/data
+      - ./.volumes/local_elasticsearch_data:/usr/share/elasticsearch/data
     env_file:
       - ./.envs/.local/.elasticsearch
     ports:
@@ -68,7 +71,7 @@ services:
     restart: unless-stopped
 
   kibana:
-    image: kibana:7.5.1
+    image: kibana:7.8.1
     depends_on:
       - elasticsearch
     env_file:
