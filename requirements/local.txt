@@ -13,7 +13,7 @@ astroid==2.4.1            # via pylint
 attrs==19.3.0             # via black, pytest
 babel==2.8.0              # via sphinx
 backcall==0.1.0           # via ipython
-beautifulsoup4==4.6.0     # via wagtail
+beautifulsoup4==4.8.2     # via wagtail
 bibtexparser==1.2.0       # via pyzotero
 black==19.10b0            # via -r requirements/local.in
 bump2version==1.0.0       # via -r requirements/local.in
@@ -120,6 +120,7 @@ regex==2020.5.14          # via black
 requests==2.23.0          # via coreapi, coveralls, geocoder, pyzotero, sphinx, wagtail
 six==1.15.0               # via argon2-cffi, astroid, django-coverage-plugin, django-extensions, edtf, elasticsearch-dsl, geocoder, html5lib, l18n, packaging, pip-tools, python-dateutil, traitlets, virtualenv
 snowballstemmer==2.0.0    # via sphinx
+soupsieve==2.0.1          # via beautifulsoup4
 sphinx==2.4.2             # via -r requirements/local.in
 sphinxcontrib-applehelp==1.0.2  # via sphinx
 sphinxcontrib-devhelp==1.0.2  # via sphinx
@@ -138,7 +139,7 @@ unidecode==1.1.1          # via wagtail
 uritemplate==3.0.1        # via coreapi
 urllib3==1.25.9           # via django-controlled-vocabulary, elasticsearch, requests
 virtualenv==20.0.21       # via pre-commit
-wagtail==2.8.2            # via -r requirements/./base.in, django-kdl-wagtail
+wagtail==2.9.3            # via -r requirements/./base.in, django-kdl-wagtail
 wagtailmenus==3.0.1       # via -r requirements/./base.in
 watchdog==0.10.2          # via -r requirements/local.in
 wcwidth==0.2.3            # via prompt-toolkit, pytest
@@ -147,6 +148,7 @@ werkzeug==1.0.0           # via -r requirements/local.in
 whitenoise==5.0.1         # via -r requirements/./base.in
 willow==1.3               # via wagtail
 wrapt==1.12.1             # via astroid
+xlsxwriter==1.2.9         # via wagtail
 zipp==3.1.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:

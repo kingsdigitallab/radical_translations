@@ -22,6 +22,7 @@ Added
 Changed
 ~~~~~~~
 * Upgrade `Controlled Vocabulary`_ application.
+* Upgrade Wagtail_ to version 2.9.
 
 
 [0.7.1] - 2020-07-02
