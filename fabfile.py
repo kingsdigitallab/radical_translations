@@ -231,7 +231,7 @@ def backup(context, user=get_local_user(), remote=False, instance=None, stack=No
     """
     Create a database backup.
     """
-    command = f"run --rm postgres backup"
+    command = "run --rm postgres backup"
     run_command(context, user, remote, instance, stack, command)
 
 
@@ -246,7 +246,7 @@ def update(context, user=get_local_user(), remote=False, instance=None, branch=B
     command = f"git checkout {branch} || git pull && git checkout {branch}"
     run_command(context, user, remote, instance, no_stack, command, no_compose)
 
-    command = f"git pull"
+    command = "git pull"
     run_command(context, user, remote, instance, no_stack, command, no_compose)
 
 
@@ -262,7 +262,7 @@ def up(
     """
     Build the stack for the host instance.
     """
-    command = f"up --build"
+    command = "up --build"
 
     if remote:
         command = f"{command} --detach"
@@ -322,7 +322,7 @@ def start(
     """
     Start one or more services.
     """
-    command = f"start"
+    command = "start"
     run_command_with_services(context, user, remote, instance, stack, command, services)
 
 
@@ -338,7 +338,7 @@ def stop(
     """
     Stop one or more services.
     """
-    command = f"stop"
+    command = "stop"
     run_command_with_services(context, user, remote, instance, stack, command, services)
 
 
@@ -354,7 +354,7 @@ def restart(
     """
     Restart one or more services.
     """
-    command = f"restart"
+    command = "restart"
     run_command_with_services(context, user, remote, instance, stack, command, services)
 
 
@@ -422,6 +422,22 @@ def test(
 
     command = f"run --rm django {command}"
     run_command(context, user, remote, instance, stack, command)
+
+
+@task(help=HELP)
+def requirements(context):
+    """
+    Run piptools pip-compile to update requirements.
+    """
+    pip_compile = "pip-compile --annotate --quiet"
+
+    command = (
+        f"{pip_compile} requirements/base.in "
+        f"&& {pip_compile} requirements/local.in "
+        f"&& {pip_compile} requirements/production.in"
+    )
+    command = f"run --rm django bash -c '{command}'"
+    run_command(context, get_local_user(), False, None, None, command)
 
 
 @task(help=HELP)
