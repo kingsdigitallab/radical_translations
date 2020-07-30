@@ -21,6 +21,7 @@ Added
 * `Resource` search index.
 * Migration to convert `author` roles to `translator` when the `Resource` is a
   translation.
+* Field to record fictional places of publication.
 
 Changed
 ~~~~~~~
