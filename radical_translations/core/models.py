@@ -560,6 +560,8 @@ class ResourcePlace(TimeStampedModel, EditorialClassificationModel):
     place = models.ForeignKey(
         Place,
         on_delete=models.CASCADE,
+        blank=True,
+        null=True,
         help_text=(
             "Geographic location or place entity associated with a resource or element "
             "of description, such as the place associated with the publication, "
@@ -567,11 +569,20 @@ class ResourcePlace(TimeStampedModel, EditorialClassificationModel):
             "of an event."
         ),
     )
+    fictional_place = models.CharField(
+        max_length=256,
+        blank=True,
+        null=True,
+        help_text="Name of the place if fictional.",
+    )
 
     class Meta:
-        unique_together = ["resource", "place"]
+        unique_together = ["resource", "place", "fictional_place"]
 
     def __str__(self) -> str:
+        if self.fictional_place:
+            return self.fictional_place
+
         return self.place.address
 
 
