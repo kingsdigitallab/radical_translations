@@ -196,7 +196,7 @@ class Resource(TimeStampedModel):
     get_language_names.short_description = "Languages"  # type: ignore
 
     def get_place_names(self) -> str:
-        return "; ".join([rp.place.address for rp in self.places.all()])
+        return "; ".join([str(rp) for rp in self.places.all()])
 
     get_place_names.short_description = "Places"  # type: ignore
 
@@ -212,6 +212,18 @@ class Resource(TimeStampedModel):
         )
 
     is_paratext.boolean = True  # type: ignore
+
+    def paratext_of(self) -> Optional["Resource"]:
+        if not self.is_paratext:
+            return None
+
+        relationship = self.relationships.filter(
+            relationship_type__label="paratext of"
+        ).first()
+        if relationship:
+            return relationship.related_to
+
+        return None
 
     def is_translation(self) -> bool:
         return (
