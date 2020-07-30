@@ -128,12 +128,17 @@ class TestResource:
         assert resource.is_original() is False
 
     @pytest.mark.usefixtures("entry_original")
-    def test_is_paratext(self, entry_original: Dict[str, Dict[str, str]]):
+    def test_paratext(self, entry_original: Dict[str, Dict[str, str]]):
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.is_paratext() is False
+        assert resource.paratext_of() is None
 
         paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
         assert paratext.is_paratext() is True
+
+        paratext_of = paratext.paratext_of()
+        assert paratext_of is not None
+        assert paratext_of.id == resource.id
 
     @pytest.mark.usefixtures("entry_original", "entry_translation", "entry_edition")
     def test_is_translation(
