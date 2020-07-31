@@ -1,4 +1,3 @@
-from datetime import date
 from typing import Dict
 
 from django_elasticsearch_dsl import Document, fields
@@ -58,7 +57,7 @@ class ResourceDocument(Document):
     def prepare_date_earliest(self, instance):
         resource = self._get_resource(instance)
         if resource.date and resource.date.date_earliest:
-            return date.fromtimestamp(resource.date.date_earliest)
+            return resource.date.get_date_earliest()
 
     def _get_resource(self, resource):
         if resource.is_paratext():
@@ -69,7 +68,7 @@ class ResourceDocument(Document):
     def prepare_date_latest(self, instance):
         resource = self._get_resource(instance)
         if resource.date and resource.date.date_latest:
-            return date.fromtimestamp(self._get_resource(instance).date.date_latest)
+            return resource.date.get_date_latest()
 
     def prepare_is_original(self, instance):
         return instance.is_original()
