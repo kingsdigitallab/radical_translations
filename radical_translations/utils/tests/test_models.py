@@ -25,6 +25,37 @@ class TestDate:
         date.date_radical = "year 7"
         assert str(date) == "year 7 (1971)"
 
+    def test_get_date_earliest(self):
+        date = Date()
+        assert date.get_date_earliest() is None
+
+        date = Date(date_display="1790-12-12").get_date_earliest()
+        assert date is not None
+        assert date.year == 1790
+
+        date = Date(date_display="1790-12-12/1799-12-12").get_date_earliest()
+        assert date is not None
+        assert date.year == 1790
+
+    def test_parse_date(self):
+        date = Date()
+        assert date.parse_date() is None
+
+        date = Date(date_display="1790-12-12")
+        assert date.parse_date() is not None
+
+    def test_get_date_latest(self):
+        date = Date()
+        assert date.get_date_latest() is None
+
+        date = Date(date_display="1790-12-12").get_date_latest()
+        assert date is not None
+        assert date.year == 1790
+
+        date = Date(date_display="1790-12-12/1799-12-12").get_date_latest()
+        assert date is not None
+        assert date.year == 1799
+
 
 def test_get_radical_date_from_gregorian():
     assert get_date_radical_from_gregorian(None) is None

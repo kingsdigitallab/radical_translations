@@ -1,14 +1,17 @@
 import re
+from datetime import date
+from time import mktime, struct_time
 from typing import Dict, Optional
 
-from controlled_vocabulary.models import ControlledTermsField
 from convertdate import french_republican
 from django.db import models
 from edtf import parse_edtf
 from edtf.fields import EDTFField
 from edtf.parser.edtf_exceptions import EDTFParseException
-from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
+
+from controlled_vocabulary.models import ControlledTermsField
+from geonames_place.models import Place
 
 
 class Date(TimeStampedModel):
@@ -63,6 +66,26 @@ class Date(TimeStampedModel):
             return f"{self.date_radical} ({self.date_display})"
 
         return self.date_display
+
+    def get_date_earliest(self) -> Optional[date]:
+        struct = self.parse_date()
+        if not struct:
+            return None
+
+        return date.fromtimestamp(mktime(struct.lower_strict()))
+
+    def parse_date(self) -> Optional[struct_time]:
+        try:
+            return parse_edtf(self.date_display)
+        except (AttributeError, EDTFParseException):
+            return None
+
+    def get_date_latest(self) -> Optional[date]:
+        struct = self.parse_date()
+        if not struct:
+            return None
+
+        return date.fromtimestamp(mktime(struct.upper_strict()))
 
     @staticmethod
     def from_date_display(date_display: str) -> Optional["Date"]:
