@@ -1,38 +1,32 @@
 {% load kdl_wagtail_core_tags menu_tags staticfiles %}
 
-<div class="grid-container">
-  <div class="grid-x grid-margin-x">
-    <div class="cell medium-4 large-3">
-      <h4>{{ PROJECT_TITLE }}</h4>
-      <p>&copy; {% now 'Y' %}</p>
-    </div>
-    <div class="cell medium-8 large-3">
-      <nav>
-        {% flat_menu 'footer_menu' apply_active_classes=True template='menus/footer_menu.html' %}
-      </nav>
-    </div>
-    <div class="cell medium-12 large-6">
-      <div class="grid-x grid-margin-x">
-        <div class="cell medium-8">
-          <a href="//erc.europa.eu/">
-            <img src="{% static 'images/LOGO_ERC-FLAG_EU.svg' %}" alt="ERC funding acknowledgement.">
-          </a>
-          <p class="acknowledgement">This publication has been made possible as a result of funding from the European Research Council (ERC) for the project 'Ego-Media: the impact of new media on forms and practices of self-presentation' [FP7/2007-2013; grant agreement No. 340331].</p>
-        </div>
-        <div class="cell center medium-4">
-          <a href="//kcl.ac.uk/">
-            <img src="{% static 'images/kings-logo-red.svg' %}" alt="King's College London website." class="kcl">
-          </a>
-        </div>
+<footer>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+        <h4>{{ ds.WAGTAIL_SITE_NAME }}</h4>
+        <p>&copy; {% now 'Y' %}</p>
+      </div>
+      <div class="col-sm partners-funders">
+        <h4>Partners and Funders</h4>
+
+        <a href="//kcl.ac.uk/">
+          <img src="{% static 'images/logos/kings-logo-red.svg' %}" alt="King's College London website.">
+        </a>
+
+        <a href="//www.unimib.it">
+          <img src="{% static 'images/logos/logo-universita-bicocca-milano.svg' %}" alt="Univeristà degli Studi di Milano Bicocca">
+        </a>
+
+        <a href="//ahrc.ukri.org/">
+          <img src="{% static 'images/logos/UKRI_AHR_Council-Logo_Horiz-RGB.svg' %}" alt="UKRI AHRC">
+        </a>
+      </div>
+      <div class="col-sm">
+        <p>
+          Designed, developed and maintained by <a href="//kdl.kcl.ac.uk">King's Digital Lab</a>.
+        </p>
       </div>
     </div>
   </div>
-  <div class="grid-x">
-    <div class="cell">
-      {% get_footer_text %}
-      <p>
-          Designed and developed by <a href="//kdl.kcl.ac.uk">King's Digital Lab</a>.
-      </p>
-    </div>
-  </div>
-</div>
+</footer>
