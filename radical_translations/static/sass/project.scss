@@ -26,7 +26,22 @@ $red: #b94a48;
 /* Globals */
 
 body {
+  background: #f8f8f8;
   font-family: 'Merriweather', serif;
+}
+
+footer,
+.top-header {
+  background: white;
+}
+
+footer {
+  border-top: 5px solid lighten($gray-600, 45%);
+  padding: 1rem 0;
+}
+
+.top-header {
+  border-bottom: 5px solid lighten($gray-600, 45%);
 }
 
 // Halftone filter
@@ -63,6 +78,23 @@ body {
     transform: rotate(11.25deg);
     transition: 1s ease-in-out transform;
     z-index: 1;
+}
+
+// Logos
+
+.partners-funders {
+  img,
+  svg {
+    max-height: 100px;
+    max-width: 200px;
+    padding: .5rem;
+  }
+}
+
+/* Main content area */
+
+main {
+  padding: 1rem 0;
 }
 
 
