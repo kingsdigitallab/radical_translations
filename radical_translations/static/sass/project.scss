@@ -10,23 +10,37 @@
 // Ref: https://getbootstrap.com/docs/4.5/getting-started/theming/#modify-map
 
 $theme-colors: (
-  'primary': #3c153b,
+  'primary': #9b2923,
   'danger': #ff4136
 );
 
 // Alert colors
 
-$white: #fff;
-$mint-green: #d6e9c6;
 $black: #000;
-$pink: #f2dede;
 $dark-pink: #eed3d7;
-$red: #b94a48;
+$mint-green: #d6e9c6;
+$old-yellow: #e9c46a;
+$pink: #f2dede;
+$red: #9b2923;
+$white: #fff;
+
+$link-color: $red;
 
 /* Globals */
 
+a {
+  color: darken($red, 10%);
+  text-decoration: underline;
+
+  &:hover {
+    background: $red;
+    color: $white;
+    text-decoration: none;
+  }
+}
+
 body {
-  background: #f8f8f8;
+  background: lighten($old-yellow, 25%);
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
@@ -45,6 +59,10 @@ footer,
 footer {
   border-top: 5px solid lighten($gray-600, 45%);
   padding: 1rem 0;
+
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
 .top-header {
@@ -87,9 +105,59 @@ footer {
     z-index: 1;
 }
 
+.image {
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+// Headings
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: Oswald, sans-serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+}
+
+// Navigation
+
+nav,
+.main-menu {
+  font-family: Oswald, sans-serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      background: lighten($red, 50%);
+    }
+  }
+}
+
+.navbar-brand {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-variation-settings: 'wdth' 400, 'wght' 700;
+  min-width: 280px;
+  text-transform: uppercase;
+
+  svg {
+    margin-top: 7px;
+    max-height: 24px;
+    max-width: 28px;
+    vertical-align: text-top;
+  }
+}
+
 // Logos
 
 .partners-funders {
+  h2 {
+    padding-left: .5rem;
+  }
+
   img,
   svg {
     max-height: 100px;
@@ -104,7 +172,7 @@ footer {
     &.one-quarter {
       width: 25%;
     }
-    
+
     &.half {
       width: 45%;
     }

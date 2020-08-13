@@ -3,7 +3,7 @@
 /** Variable Fonts **/
 /** Lora, Oswald **/
 
-@supports (font-variation-settings: 'wdth' 400) {
+@supports (font-variation-settings: 'wdth' 200) {
   @font-face {
     /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
     font-family: Lora;
@@ -38,6 +38,24 @@
          url('/static/fonts/Lora/static/Lora-BoldItalic.ttf') format('truetype');
     font-weight: 700;
     font-style: italic;
+  }
+
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Oswald;
+    src: url('/static/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype'),
+         url('/static/fonts/Oswald/static/Oswald-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Oswald;
+    src: url('/static/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype'),
+         url('/static/fonts/Oswald/static/Oswald-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
   }
 }
 
