@@ -27,7 +27,14 @@ $red: #b94a48;
 
 body {
   background: #f8f8f8;
-  font-family: 'Merriweather', serif;
+  font-family: Lora, serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+}
+
+
+b,
+strong {
+  font-variation-settings: 'wdth' 400, 'wght' 700;
 }
 
 footer,
@@ -86,8 +93,21 @@ footer {
   img,
   svg {
     max-height: 100px;
-    max-width: 200px;
+    max-width: 100%;
     padding: .5rem;
+  }
+
+  a {
+    display: inline-block;
+    text-align: center;
+
+    &.one-quarter {
+      width: 25%;
+    }
+    
+    &.half {
+      width: 45%;
+    }
   }
 }
 

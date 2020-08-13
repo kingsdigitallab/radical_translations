@@ -1,28 +1,69 @@
 /** RT Fonts **/
 
+/** Variable Fonts **/
+/** Lora, Oswald **/
+
+@supports (font-variation-settings: 'wdth' 400) {
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Lora;
+    src: url('/static/fonts/Lora/Lora-VariableFont_wght.ttf') format('truetype'),
+         url('/static/fonts/Lora/static/Lora-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Lora;
+    src: url('/static/fonts/Lora/Lora-Italic-VariableFont_wght.ttf') format('truetype'),
+         url('/static/fonts/Lora/static/Lora-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Lora;
+    src: url('/static/fonts/Lora/Lora-VariableFont_wght.ttf') format('truetype'),
+         url('/static/fonts/Lora/static/Lora-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Lora;
+    src: url('/static/fonts/Lora/Lora-Italic-VariableFont_wght.ttf') format('truetype'),
+         url('/static/fonts/Lora/static/Lora-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+  }
+}
+
 /** Merriweather **/
 
-@font-face {
-  font-family: 'Merriweather';
-  src: url('/static/fonts/Merriweather/Merriweather-Regular.ttf') format('truetype');
-  font-weight: normal;
-}
+// @font-face {
+//   font-family: 'Merriweather';
+//   src: url('/static/fonts/Merriweather/Merriweather-Regular.ttf') format('truetype');
+//   font-weight: normal;
+// }
 
-@font-face {
-  font-family: 'Merriweather';
-  src: url('/static/fonts/Merriweather/Merriweather-Bold.ttf') format('truetype');
-  font-weight: 700;
-}
+// @font-face {
+//   font-family: 'Merriweather';
+//   src: url('/static/fonts/Merriweather/Merriweather-Bold.ttf') format('truetype');
+//   font-weight: 700;
+// }
 
-@font-face {
-  font-family: 'Merriweather';
-  src: url('/static/fonts/Merriweather/Merriweather-Italic.ttf') format('truetype');
-  font-style: italic;
-}
+// @font-face {
+//   font-family: 'Merriweather';
+//   src: url('/static/fonts/Merriweather/Merriweather-Italic.ttf') format('truetype');
+//   font-style: italic;
+// }
 
-@font-face {
-  font-family: 'Merriweather';
-  src: url('/static/fonts/Merriweather/Merriweather-BoldItalic.ttf') format('truetype');
-  font-style: italic;
-  font-weight: 700;
-}
+// @font-face {
+//   font-family: 'Merriweather';
+//   src: url('/static/fonts/Merriweather/Merriweather-BoldItalic.ttf') format('truetype');
+//   font-style: italic;
+//   font-weight: 700;
+// }

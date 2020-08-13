@@ -8431,33 +8431,45 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6; } }
 
 /** RT Fonts **/
+/** Variable Fonts **/
+/** Lora, Oswald **/
+@supports (font-variation-settings: "wdth" 400) {
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Lora;
+    src: url("/static/fonts/Lora/Lora-VariableFont_wght.ttf") format("truetype"), url("/static/fonts/Lora/static/Lora-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Lora;
+    src: url("/static/fonts/Lora/Lora-Italic-VariableFont_wght.ttf") format("truetype"), url("/static/fonts/Lora/static/Lora-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic; }
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Lora;
+    src: url("/static/fonts/Lora/Lora-VariableFont_wght.ttf") format("truetype"), url("/static/fonts/Lora/static/Lora-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal; }
+  @font-face {
+    /* https://fonts.google.com/specimen/Lora?vfonly=true&category=Serif */
+    font-family: Lora;
+    src: url("/static/fonts/Lora/Lora-Italic-VariableFont_wght.ttf") format("truetype"), url("/static/fonts/Lora/static/Lora-BoldItalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic; } }
+
 /** Merriweather **/
-@font-face {
-  font-family: 'Merriweather';
-  src: url("/static/fonts/Merriweather/Merriweather-Regular.ttf") format("truetype");
-  font-weight: normal; }
-
-@font-face {
-  font-family: 'Merriweather';
-  src: url("/static/fonts/Merriweather/Merriweather-Bold.ttf") format("truetype");
-  font-weight: 700; }
-
-@font-face {
-  font-family: 'Merriweather';
-  src: url("/static/fonts/Merriweather/Merriweather-Italic.ttf") format("truetype");
-  font-style: italic; }
-
-@font-face {
-  font-family: 'Merriweather';
-  src: url("/static/fonts/Merriweather/Merriweather-BoldItalic.ttf") format("truetype");
-  font-style: italic;
-  font-weight: 700; }
-
 /* Variables */
 /* Globals */
 body {
   background: #f8f8f8;
-  font-family: 'Merriweather', serif; }
+  font-family: Lora, serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400; }
+
+b,
+strong {
+  font-variation-settings: 'wdth' 400, 'wght' 700; }
 
 footer,
 .top-header {
@@ -8506,9 +8518,17 @@ footer {
 .partners-funders img,
 .partners-funders svg {
   max-height: 100px;
-  max-width: 200px;
+  max-width: 100%;
   padding: 8px;
   padding: .5rem; }
+
+.partners-funders a {
+  display: inline-block;
+  text-align: center; }
+  .partners-funders a.one-quarter {
+    width: 25%; }
+  .partners-funders a.half {
+    width: 45%; }
 
 /* Main content area */
 main {
