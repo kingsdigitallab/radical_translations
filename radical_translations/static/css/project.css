@@ -8483,7 +8483,7 @@ a {
     text-decoration: none; }
 
 body {
-  background: #f9f0d9;
+  background: #fdf9ef;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
 
@@ -8557,6 +8557,18 @@ nav,
     .main-menu a:hover {
       background: #f3ccca; }
 
+.navbar.bg-light {
+  background: url("../images/pattern-background.jpg"); }
+  .navbar.bg-light::after {
+    content: "";
+    background: url("../images/pattern-background.jpg");
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; }
+
 .navbar-brand {
   display: inline-block;
   font-size: 24px;
@@ -8591,6 +8603,19 @@ nav,
 
 /* Main content area */
 main {
+  position: relative; }
+  main::after {
+    content: "";
+    background: url("../images/pattern-background.jpg");
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; }
+
+.main {
   padding: 16px 0;
   padding: 1rem 0; }
 
