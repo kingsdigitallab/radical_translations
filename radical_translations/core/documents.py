@@ -1,5 +1,3 @@
-from typing import Dict
-
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
@@ -13,11 +11,13 @@ from radical_translations.core.models import (
     ResourceRelationship,
     Title,
 )
+from radical_translations.utils.documents import (
+    get_agent_field,
+    get_controlled_term_properties,
+    get_place_properties,
+    get_resource_field
+)
 from radical_translations.utils.models import Date
-
-
-def get_controlled_term_properties() -> Dict:
-    return {"termid": fields.KeywordField(), "label": fields.KeywordField()}
 
 
 @registry.register_document
@@ -38,7 +38,7 @@ class ResourceDocument(Document):
     )
     contributions = fields.ObjectField(
         properties={
-            "agent": fields.ObjectField(properties={"name": fields.TextField()}),
+            "agent": get_agent_field(),
             "published_as": fields.TextField(),
             "roles": fields.ObjectField(properties=get_controlled_term_properties()),
         }
@@ -50,14 +50,7 @@ class ResourceDocument(Document):
     )
     places = fields.ObjectField(
         properties={
-            "place": fields.ObjectField(
-                properties={
-                    "address": fields.TextField(),
-                    "country": fields.ObjectField(
-                        properties={"name": fields.TextField()}
-                    ),
-                }
-            ),
+            "place": fields.ObjectField(properties=get_place_properties()),
             "fictional_place": fields.TextField(),
         }
     )
@@ -66,14 +59,7 @@ class ResourceDocument(Document):
             "relationship_type": fields.ObjectField(
                 properties=get_controlled_term_properties()
             ),
-            "related_to": fields.NestedField(
-                properties={
-                    "id": fields.IntegerField(),
-                    "title": fields.ObjectField(
-                        properties={"main_title": fields.TextField()}
-                    ),
-                }
-            ),
+            "related_to": get_resource_field(),
         }
     )
 
