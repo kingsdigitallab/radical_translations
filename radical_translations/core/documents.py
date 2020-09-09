@@ -4,7 +4,15 @@ from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
 from controlled_vocabulary.models import ControlledTerm
-from radical_translations.core.models import Resource, Title
+from radical_translations.core.models import (
+    Classification,
+    Contribution,
+    Resource,
+    ResourceLanguage,
+    ResourcePlace,
+    ResourceRelationship,
+    Title,
+)
 from radical_translations.utils.models import Date
 
 
@@ -28,6 +36,46 @@ class ResourceDocument(Document):
             "edition": fields.ObjectField(properties=get_controlled_term_properties()),
         }
     )
+    contributions = fields.ObjectField(
+        properties={
+            "agent": fields.ObjectField(properties={"name": fields.TextField()}),
+            "published_as": fields.TextField(),
+            "roles": fields.ObjectField(properties=get_controlled_term_properties()),
+        }
+    )
+    languages = fields.ObjectField(
+        properties={
+            "language": fields.ObjectField(properties=get_controlled_term_properties())
+        }
+    )
+    places = fields.ObjectField(
+        properties={
+            "place": fields.ObjectField(
+                properties={
+                    "address": fields.TextField(),
+                    "country": fields.ObjectField(
+                        properties={"name": fields.TextField()}
+                    ),
+                }
+            ),
+            "fictional_place": fields.TextField(),
+        }
+    )
+    relationships = fields.ObjectField(
+        properties={
+            "relationship_type": fields.ObjectField(
+                properties=get_controlled_term_properties()
+            ),
+            "related_to": fields.NestedField(
+                properties={
+                    "id": fields.IntegerField(),
+                    "title": fields.ObjectField(
+                        properties={"main_title": fields.TextField()}
+                    ),
+                }
+            ),
+        }
+    )
 
     is_original = fields.BooleanField()
     is_paratext = fields.BooleanField()
@@ -39,20 +87,35 @@ class ResourceDocument(Document):
         model = Resource
         fields = ["id"]
 
-        related_models = [ControlledTerm, Title]
+        related_models = [
+            Classification,
+            Contribution,
+            ControlledTerm,
+            Date,
+            ResourceLanguage,
+            ResourcePlace,
+            ResourceRelationship,
+            Title,
+        ]
 
     def get_queryset(self):
         return super().get_queryset().select_related("title", "date")
 
     def get_instances_from_related(self, related_instance):
-        if isinstance(related_instance, ControlledTerm):
+        if isinstance(related_instance, (ControlledTerm, Date, Title)):
             return related_instance.resources.all()
 
-        if isinstance(related_instance, Date):
-            return related_instance.resources.all()
-
-        if isinstance(related_instance, Title):
-            return related_instance.resources.all()
+        if isinstance(
+            related_instance,
+            (
+                Classification,
+                Contribution,
+                ResourceLanguage,
+                ResourcePlace,
+                ResourceRelationship,
+            ),
+        ):
+            return related_instance.resource
 
     def prepare_date_earliest(self, instance):
         resource = self._get_resource(instance)
