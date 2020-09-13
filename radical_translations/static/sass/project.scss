@@ -124,38 +124,55 @@ h4, h5, h6 {
 
 nav,
 .main-menu {
+  background: darken($red, 10%);
+  color: $white;
+
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 
   a {
+    color: $white;
     text-decoration: none;
 
-    &:hover {
-      background: lighten($red, 50%);
+    &.nav-link {
+      border-bottom: 10px solid darken($red, 10%);
+      font-size: 1.5rem;
+      text-decoration: none;
+
+      &:hover {
+        background: transparent;
+        border-bottom: 10px solid $old-yellow;
+        color: lighten($red, 50%);
+      }
     }
   }
 }
 
-.navbar.bg-light {
-  background: url('../images/pattern-background.jpg');
-
-  &::after {
-    content: "";
-    background: url('../images/pattern-background.jpg');
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-  }
+.navbar {
+  padding: 5px 1rem 0;
 }
+
+// .navbar.bg-light {
+//   background: url('../images/pattern-background.jpg');
+
+//   &::after {
+//     content: "";
+//     background: url('../images/pattern-background.jpg');
+//     top: 0;
+//     left: 0;
+//     bottom: 0;
+//     right: 0;
+//     position: absolute;
+//     z-index: -1;
+//   }
+// }
 
 .navbar-brand {
   display: inline-block;
   font-size: 1.5rem;
   font-variation-settings: 'wdth' 400, 'wght' 700;
   min-width: 280px;
+  padding-top: 0;
   text-transform: uppercase;
 
   svg {
@@ -199,17 +216,17 @@ nav,
 main {
   position: relative;
 
-  &::after {
-    content: "";
-    background: url('../images/pattern-background.jpg');
-    opacity: 0.2;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-  }
+  // &::after {
+  //   content: "";
+  //   background: url('../images/pattern-background.jpg');
+  //   opacity: 0.2;
+  //   top: 0;
+  //   left: 0;
+  //   bottom: 0;
+  //   right: 0;
+  //   position: absolute;
+  //   z-index: -1;
+  // }
 }
 
 .main {
