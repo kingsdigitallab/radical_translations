@@ -39,7 +39,9 @@ class PersonDocument(AgentDocument):
     place_birth = fields.ObjectField(properties=get_place_properties())
     place_death = fields.ObjectField(properties=get_place_properties())
 
-    languages = fields.ObjectField(properties=get_controlled_term_properties())
+    languages = fields.ObjectField(
+        properties={"language": get_controlled_term_properties()}
+    )
     knows = get_agent_field()
 
     class Django:

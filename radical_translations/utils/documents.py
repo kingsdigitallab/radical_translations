@@ -4,7 +4,7 @@ from django_elasticsearch_dsl import fields
 
 
 def get_agent_field():
-    return fields.NestedField(
+    return fields.ObjectField(
         properties={"id": fields.IntegerField(), "name": fields.TextField()}
     )
 
@@ -21,7 +21,7 @@ def get_place_properties() -> Dict:
 
 
 def get_resource_field():
-    return fields.NestedField(
+    return fields.ObjectField(
         properties={
             "id": fields.IntegerField(),
             "title": fields.ObjectField(properties={"main_title": fields.TextField()}),
