@@ -20,11 +20,15 @@ Added
   translation.
 * Field to record fictional places of publication.
 * Helper functions to `Date`, to get the earliest and latest dates for an object.
+* Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
 
 Changed
 ~~~~~~~
 * Upgrade `Controlled Vocabulary`_ application.
 * Upgrade Wagtail_ to version 2.9.
+
+.. _FAST: https://www.oclc.org/research/areas/data-science/fast.html
+
 
 
 [0.7.1] - 2020-07-02
