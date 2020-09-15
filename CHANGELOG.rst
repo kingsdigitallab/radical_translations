@@ -23,6 +23,7 @@ Added
   translation.
 * Field to record fictional places of publication.
 * Helper functions to `Date`, to get the earliest and latest dates for an object.
+* Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
 
 Changed
 ~~~~~~~
@@ -31,6 +32,7 @@ Changed
 
 .. _Elasticsearch: https://www.elastic.co/elasticsearch/
 .. _Kibana: https://www.elastic.co/kibana/
+.. _FAST: https://www.oclc.org/research/areas/data-science/fast.html
 
 
 [0.7.1] - 2020-07-02
