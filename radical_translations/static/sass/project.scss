@@ -10,24 +10,45 @@
 // Ref: https://getbootstrap.com/docs/4.5/getting-started/theming/#modify-map
 
 $theme-colors: (
-  'primary': #3c153b,
+  'primary': #9b2923,
   'danger': #ff4136
 );
 
 // Alert colors
 
-$white: #fff;
-$mint-green: #d6e9c6;
 $black: #000;
-$pink: #f2dede;
 $dark-pink: #eed3d7;
-$red: #b94a48;
+$mint-green: #d6e9c6;
+$old-yellow: #e9c46a;
+$pink: #f2dede;
+$red: #9b2923;
+$white: #fff;
+
+$link-color: $red;
 
 /* Globals */
 
+a {
+  color: darken($red, 10%);
+  text-decoration: underline;
+
+  &:hover {
+    background: $red;
+    color: $white;
+    text-decoration: none;
+  }
+}
+
 body {
-  background: #f8f8f8;
-  font-family: 'Merriweather', serif;
+  background: lighten($old-yellow, 30%);
+  font-family: Lora, serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+}
+
+
+b,
+strong {
+  font-variation-settings: 'wdth' 400, 'wght' 700;
 }
 
 footer,
@@ -38,6 +59,10 @@ footer,
 footer {
   border-top: 5px solid lighten($gray-600, 45%);
   padding: 1rem 0;
+
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
 .top-header {
@@ -80,21 +105,132 @@ footer {
     z-index: 1;
 }
 
+.image {
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+// Headings
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: Oswald, sans-serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+}
+
+// Navigation
+
+nav,
+.main-menu {
+  background: darken($red, 10%);
+  color: $white;
+
+  font-family: Oswald, sans-serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+
+  a {
+    color: $white;
+    text-decoration: none;
+
+    &.nav-link {
+      border-bottom: 10px solid darken($red, 10%);
+      font-size: 1.5rem;
+      text-decoration: none;
+
+      &:hover {
+        background: transparent;
+        border-bottom: 10px solid $old-yellow;
+        color: lighten($red, 50%);
+      }
+    }
+  }
+}
+
+.navbar {
+  padding: 5px 1rem 0;
+}
+
+// .navbar.bg-light {
+//   background: url('../images/pattern-background.jpg');
+
+//   &::after {
+//     content: "";
+//     background: url('../images/pattern-background.jpg');
+//     top: 0;
+//     left: 0;
+//     bottom: 0;
+//     right: 0;
+//     position: absolute;
+//     z-index: -1;
+//   }
+// }
+
+.navbar-brand {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-variation-settings: 'wdth' 400, 'wght' 700;
+  min-width: 280px;
+  padding-top: 0;
+  text-transform: uppercase;
+
+  svg {
+    margin-top: 7px;
+    max-height: 24px;
+    max-width: 28px;
+    vertical-align: text-top;
+  }
+}
+
 // Logos
 
 .partners-funders {
+  h2 {
+    padding-left: .5rem;
+  }
+
   img,
   svg {
     max-height: 100px;
-    max-width: 200px;
+    max-width: 100%;
     padding: .5rem;
+  }
+
+  a {
+    display: inline-block;
+    text-align: center;
+
+    &.one-quarter {
+      width: 25%;
+    }
+
+    &.half {
+      width: 45%;
+    }
   }
 }
 
 /* Main content area */
 
 main {
-  padding: 1rem 0;
+  position: relative;
+
+  // &::after {
+  //   content: "";
+  //   background: url('../images/pattern-background.jpg');
+  //   opacity: 0.2;
+  //   top: 0;
+  //   left: 0;
+  //   bottom: 0;
+  //   right: 0;
+  //   position: absolute;
+  //   z-index: -1;
+  // }
+}
+
+.main {
+  padding: 1rem 0;  
 }
 
 
