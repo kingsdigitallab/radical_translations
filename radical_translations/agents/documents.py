@@ -44,7 +44,9 @@ class PersonDocument(AgentDocument):
     noble = fields.BooleanField()
 
     main_places = fields.ObjectField(properties=get_place_properties())
+    year_birth = fields.IntegerField()
     place_birth = fields.ObjectField(properties=get_place_properties())
+    year_death = fields.IntegerField()
     place_death = fields.ObjectField(properties=get_place_properties())
 
     languages = fields.ObjectField(properties=get_controlled_term_properties())
@@ -65,3 +67,17 @@ class PersonDocument(AgentDocument):
 
         if isinstance(related_instance, (ControlledTerm, Date, Place)):
             return related_instance.persons.all()
+
+    def prepare_year_birth(self, instance):
+        db = instance.date_birth
+
+        if db and db.date_earliest:
+            if db.get_date_earliest() is not None:
+                return db.get_date_earliest().year
+
+    def prepare_year_death(self, instance):
+        dd = instance.date_death
+
+        if dd and dd.date_latest:
+            if dd.get_date_latest() is not None:
+                return dd.get_date_latest().year
