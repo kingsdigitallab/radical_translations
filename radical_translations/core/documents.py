@@ -13,9 +13,10 @@ from radical_translations.core.models import (
 )
 from radical_translations.utils.documents import (
     get_agent_field,
-    get_controlled_term_properties,
-    get_place_properties,
-    get_resource_field
+    get_controlled_term_field,
+    get_event_field,
+    get_place_field,
+    get_resource_field,
 )
 from radical_translations.utils.models import Date
 
@@ -25,43 +26,34 @@ class ResourceDocument(Document):
     title = fields.ObjectField(
         properties={"main_title": fields.TextField(), "subtitle": fields.TextField()}
     )
-    subjects = fields.ObjectField(properties=get_controlled_term_properties())
+    subjects = get_controlled_term_field()
     date_earliest = fields.DateField()
     date_latest = fields.DateField()
     classifications = fields.ObjectField(
         properties={
-            "classification": fields.ObjectField(
-                properties=get_controlled_term_properties()
-            ),
-            "edition": fields.ObjectField(properties=get_controlled_term_properties()),
+            "classification": get_controlled_term_field(),
+            "edition": get_controlled_term_field(),
         }
     )
     contributions = fields.ObjectField(
         properties={
             "agent": get_agent_field(),
             "published_as": fields.TextField(),
-            "roles": fields.ObjectField(properties=get_controlled_term_properties()),
+            "roles": get_controlled_term_field(),
         }
     )
-    languages = fields.ObjectField(
-        properties={
-            "language": fields.ObjectField(properties=get_controlled_term_properties())
-        }
-    )
+    languages = fields.ObjectField(properties={"language": get_controlled_term_field()})
     places = fields.ObjectField(
-        properties={
-            "place": fields.ObjectField(properties=get_place_properties()),
-            "fictional_place": fields.TextField(),
-        }
+        properties={"place": get_place_field(), "fictional_place": fields.TextField()}
     )
     relationships = fields.ObjectField(
         properties={
-            "relationship_type": fields.ObjectField(
-                properties=get_controlled_term_properties()
-            ),
+            "relationship_type": get_controlled_term_field(),
             "related_to": get_resource_field(),
         }
     )
+
+    events = get_event_field()
 
     is_original = fields.BooleanField()
     is_paratext = fields.BooleanField()

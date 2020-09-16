@@ -3,12 +3,12 @@ from django_elasticsearch_dsl.registries import registry
 
 from controlled_vocabulary.models import ControlledTerm
 from geonames_place.models import Place
-from radical_translations.agents.models import Person
+from radical_translations.agents.models import Organisation, Person
 from radical_translations.core.models import Contribution
 from radical_translations.utils.documents import (
     get_agent_field,
-    get_controlled_term_properties,
-    get_place_properties,
+    get_controlled_term_field,
+    get_place_field,
     get_resource_field,
 )
 from radical_translations.utils.models import Date
@@ -16,14 +16,14 @@ from radical_translations.utils.models import Date
 
 class AgentDocument(Document):
     name = fields.TextField()
-    based_near = fields.ObjectField(properties=get_place_properties())
-    roles = fields.ObjectField(properties=get_controlled_term_properties())
+    based_near = get_place_field()
+    roles = get_controlled_term_field()
     sources = get_resource_field()
 
     contributed_to = fields.ObjectField(
         properties={
             "resource": get_resource_field(),
-            "roles": fields.ObjectField(properties=get_controlled_term_properties()),
+            "roles": get_controlled_term_field(),
         }
     )
 
@@ -43,14 +43,16 @@ class PersonDocument(AgentDocument):
     gender = fields.KeywordField()
     noble = fields.BooleanField()
 
-    main_places = fields.ObjectField(properties=get_place_properties())
+    main_places = get_place_field()
     year_birth = fields.IntegerField()
-    place_birth = fields.ObjectField(properties=get_place_properties())
+    place_birth = get_place_field()
     year_death = fields.IntegerField()
-    place_death = fields.ObjectField(properties=get_place_properties())
+    place_death = get_place_field()
 
-    languages = fields.ObjectField(properties=get_controlled_term_properties())
+    languages = get_controlled_term_field()
+
     knows = get_agent_field()
+    member_of = get_agent_field()
 
     class Django:
         model = Person
@@ -81,3 +83,11 @@ class PersonDocument(AgentDocument):
         if dd and dd.date_latest:
             if dd.get_date_latest() is not None:
                 return dd.get_date_latest().year
+
+
+@registry.register_document
+class OrganisationDocument(AgentDocument):
+    members = get_agent_field()
+
+    class Django:
+        model = Organisation
