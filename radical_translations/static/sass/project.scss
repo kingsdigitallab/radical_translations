@@ -14,13 +14,19 @@ $theme-colors: (
   'danger': #ff4136
 );
 
-// Alert colors
+// Colour palette
 
 $black: #000;
+$dark-gray: #222222;
 $dark-pink: #eed3d7;
-$mint-green: #d6e9c6;
+// $mint-green: #d6e9c6;
+$dirt: #eae9da;
+$light-gray: #d9d9d9;
+$medium-gray: #808080;
 $old-yellow: #e9c46a;
 $pink: #f2dede;
+$prussian-blue: #00548b;
+$purple: #7f2992;
 $red: #9b2923;
 $white: #fff;
 
@@ -40,7 +46,7 @@ a {
 }
 
 body {
-  background: lighten($old-yellow, 30%);
+  background: url('../images/rt-bg.svg') no-repeat lighten($old-yellow, 30%);
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
@@ -152,21 +158,6 @@ nav,
   padding: 5px 1rem 0;
 }
 
-// .navbar.bg-light {
-//   background: url('../images/pattern-background.jpg');
-
-//   &::after {
-//     content: "";
-//     background: url('../images/pattern-background.jpg');
-//     top: 0;
-//     left: 0;
-//     bottom: 0;
-//     right: 0;
-//     position: absolute;
-//     z-index: -1;
-//   }
-// }
-
 .navbar-brand {
   display: inline-block;
   font-size: 1.5rem;
@@ -215,18 +206,6 @@ nav,
 
 main {
   position: relative;
-
-  // &::after {
-  //   content: "";
-  //   background: url('../images/pattern-background.jpg');
-  //   opacity: 0.2;
-  //   top: 0;
-  //   left: 0;
-  //   bottom: 0;
-  //   right: 0;
-  //   position: absolute;
-  //   z-index: -1;
-  // }
 }
 
 .main {
@@ -261,7 +240,7 @@ main {
 
 .alert-debug {
   background-color: $white;
-  border-color: $mint-green;
+  border-color: $dirt;
   color: $black;
 }
 

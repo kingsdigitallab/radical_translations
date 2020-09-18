@@ -8483,7 +8483,7 @@ a {
     text-decoration: none; }
 
 body {
-  background: #fdf9ef;
+  background: url("../images/rt-bg.svg") no-repeat #fdf9ef;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
 
@@ -8632,7 +8632,7 @@ main {
 /* Alerts */
 .alert-debug {
   background-color: #fff;
-  border-color: #d6e9c6;
+  border-color: #eae9da;
   color: #000; }
 
 .alert-error {
