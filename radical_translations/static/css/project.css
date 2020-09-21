@@ -8475,7 +8475,7 @@ a.text-dark:hover, a.text-dark:focus {
 /* Variables */
 /* Globals */
 a {
-  color: #711e1a;
+  color: #9b2923;
   text-decoration: underline; }
   a:hover {
     background: #9b2923;
@@ -8484,6 +8484,7 @@ a {
 
 body {
   background: url("../images/rt-bg.svg") no-repeat #fdf9ef;
+  background-size: cover;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
 
@@ -8491,8 +8492,7 @@ b,
 strong {
   font-variation-settings: 'wdth' 400, 'wght' 700; }
 
-footer,
-.top-header {
+footer {
   background: white; }
 
 footer {
@@ -8502,9 +8502,6 @@ footer {
   footer h2 {
     font-size: 24px;
     font-size: 1.5rem; }
-
-.top-header {
-  border-bottom: 5px solid #e6e7e9; }
 
 .halftone {
   background: white;
@@ -8548,13 +8545,10 @@ h1, h2, h3, h4, h5, h6 {
 
 nav,
 .main-menu {
-  background: #711e1a;
-  color: #fff;
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
   nav a,
   .main-menu a {
-    color: #fff;
     text-decoration: none; }
     nav a.nav-link,
     .main-menu a.nav-link {
@@ -8565,26 +8559,50 @@ nav,
       nav a.nav-link:hover,
       .main-menu a.nav-link:hover {
         background: transparent;
-        border-bottom: 10px solid #e9c46a;
-        color: #f3ccca; }
+        border-bottom: 10px solid #e9c46a; }
 
 .navbar {
-  padding: 5px 16px 0;
-  padding: 5px 1rem 0; }
+  padding: 0; }
 
 .navbar-brand {
-  display: inline-block;
-  font-size: 24px;
-  font-size: 1.5rem;
-  font-variation-settings: 'wdth' 400, 'wght' 700;
+  display: block;
+  font-size: 64px;
+  font-size: 4rem;
+  font-variation-settings: 'wdth' 100, 'wght' 600;
   min-width: 280px;
   padding-top: 0;
-  text-transform: uppercase; }
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%; }
+  .navbar-brand .blob {
+    background: #c3c1a8;
+    border-radius: 50%;
+    display: block;
+    height: 80px;
+    left: -30px;
+    padding: 40px 8px 8px 40px;
+    position: absolute;
+    text-align: left;
+    top: -30px;
+    width: 80px; }
   .navbar-brand svg {
-    margin-top: 7px;
     max-height: 24px;
     max-width: 28px;
-    vertical-align: text-top; }
+    vertical-align: top; }
+  .navbar-brand:hover {
+    background: transparent;
+    color: #711e1a; }
+
+.navbar-nav {
+  margin: 0 auto; }
+
+.navbar-toggler {
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%; }
+  .navbar-toggler svg {
+    height: 24px; }
 
 .partners-funders h2 {
   padding-left: 8px;

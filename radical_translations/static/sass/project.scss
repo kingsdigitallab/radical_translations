@@ -21,6 +21,7 @@ $dark-gray: #222222;
 $dark-pink: #eed3d7;
 // $mint-green: #d6e9c6;
 $dirt: #eae9da;
+$kaki: #c3c1a8;
 $light-gray: #d9d9d9;
 $medium-gray: #808080;
 $old-yellow: #e9c46a;
@@ -35,7 +36,8 @@ $link-color: $red;
 /* Globals */
 
 a {
-  color: darken($red, 10%);
+  // color: darken($red, 10%);
+  color: $red;
   text-decoration: underline;
 
   &:hover {
@@ -47,6 +49,7 @@ a {
 
 body {
   background: url('../images/rt-bg.svg') no-repeat lighten($old-yellow, 30%);
+  background-size: cover;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
@@ -57,8 +60,12 @@ strong {
   font-variation-settings: 'wdth' 400, 'wght' 700;
 }
 
-footer,
-.top-header {
+// footer,
+// .top-header {
+//   background: white;
+// }
+
+footer {
   background: white;
 }
 
@@ -71,9 +78,9 @@ footer {
   }
 }
 
-.top-header {
-  border-bottom: 5px solid lighten($gray-600, 45%);
-}
+// .top-header {
+//   border-bottom: 5px solid lighten($gray-600, 45%);
+// }
 
 // Halftone filter
 // Source: https://codepen.io/coreh/pen/LQJBLa
@@ -130,14 +137,14 @@ h4, h5, h6 {
 
 nav,
 .main-menu {
-  background: darken($red, 10%);
-  color: $white;
+  // background: darken($red, 10%);
+  // color: $white;
 
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 
   a {
-    color: $white;
+    // color: $white;
     text-decoration: none;
 
     &.nav-link {
@@ -148,29 +155,64 @@ nav,
       &:hover {
         background: transparent;
         border-bottom: 10px solid $old-yellow;
-        color: lighten($red, 50%);
+        // color: lighten($red, 50%);
       }
     }
   }
 }
 
 .navbar {
-  padding: 5px 1rem 0;
+  // padding: 5px 1rem 0;
+  padding: 0;
 }
 
 .navbar-brand {
-  display: inline-block;
-  font-size: 1.5rem;
-  font-variation-settings: 'wdth' 400, 'wght' 700;
+  display: block;
+  font-size: 4rem;
+  font-variation-settings: 'wdth' 100, 'wght' 600;
   min-width: 280px;
   padding-top: 0;
+  position: relative;
+  text-align: center;
   text-transform: uppercase;
+  width: 100%;
+
+  .blob {
+    background: $kaki;
+    border-radius: 50%;
+    display: block;
+    height: 80px;
+    left: -30px;
+    padding: 40px 8px 8px 40px;
+    position: absolute;
+    text-align: left;
+    top: -30px;
+    width: 80px;
+  }
 
   svg {
-    margin-top: 7px;
     max-height: 24px;
     max-width: 28px;
-    vertical-align: text-top;
+    vertical-align: top;
+  }
+
+  &:hover {
+    background: transparent;
+    color: darken($red, 10%);
+  }
+}
+
+.navbar-nav {
+  margin: 0 auto;
+}
+
+.navbar-toggler {
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+
+  svg {
+    height: 24px;
   }
 }
 
