@@ -3,14 +3,64 @@
 {% block main %}
 <h2>Resources</h2>
 
-{% include "includes/list_view_pagination.html" %}
-<ul>
-    {% for resource in object_list %}
-    <li>
-        <a href="{% url 'resource-detail' resource.pk %}">{{ resource }}</a>, {{ resource.date }}
-    </li>
-    {% endfor %}
-</ul>
-{% include "includes/list_view_pagination.html" %}
-
+<div id="app">
+    <p>
+        <input v-model="query" type="text" placeholder="Search for resources..." />
+    </p>
+    <ul>
+        <li v-for="resource in resources">
+            <a :href="resource.id">[[ resource.title.main_title ]]</a>
+            [ [[ resource.date_earliest ]] - [[ resource.date_latest ]] ]
+        </li>
+    </ul>
+</div>
 {% endblock main %}
+
+{% block javascript %}
+{{ block.super }}
+
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/lodash"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+            query: '',
+            resources: []
+        },
+        // This hook will be executed when the instance of
+        // Vue is created
+        async created () {
+            this.resources = await this.getResources()
+        },
+        methods: {
+            // Sends a request to our API in order to get
+            // a list of resources
+            async getResources () {
+                let params = {}
+                if (this.query) {
+                    params = {search: this.query}
+                }
+
+                const response = await axios.get('/database/resources/api/', {
+                    params: params
+                })
+                return response.data
+            }
+        },
+        watch: {
+            // This function will be executed every time
+            // the user changes `query`.
+            // Using debounce from lodash library here allows us to
+            // delay sending a request to an API until
+            // the user has stopped changing `query`.
+            // Stopped typing, basically.
+            query: _.debounce(async function () {
+                this.resources = await this.getResources()
+            }, 500)
+        }
+    })
+</script>
+{% endblock javascript %}
