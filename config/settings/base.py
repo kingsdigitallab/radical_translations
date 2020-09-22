@@ -5,6 +5,7 @@ Base settings to build other settings files upon.
 import os
 
 import environ
+
 from controlled_vocabulary import defaults
 
 ROOT_DIR = (
@@ -92,6 +93,7 @@ THIRD_PARTY_APPS = [
     "geonames_place.apps.GeonamesPlaceConfig",
     "polymorphic",
     "django_elasticsearch_dsl",
+    "django_elasticsearch_dsl_drf",
 ]
 
 LOCAL_APPS = [
