@@ -1,0 +1,6 @@
+<ul>
+    <li v-for="item in data.results">
+        <a :href="item.id">{[ item.title.main_title ]}</a>
+        [{[ item.date_earliest ]} - {[ item.date_latest ]}]
+    </li>
+</ul>

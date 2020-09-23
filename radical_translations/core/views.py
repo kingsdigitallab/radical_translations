@@ -23,4 +23,5 @@ class ResourceViewSet(DocumentViewSet):
     filter_backends = [SearchFilterBackend]
     lookup_field = "id"
     ordering = ["title.main_title", "date_earliest", "date_latest"]
+    page_size = 50
     search_fields = ["title.main_title", "languages.language.label"]
