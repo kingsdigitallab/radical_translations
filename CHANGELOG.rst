@@ -19,11 +19,14 @@ Added
 * Elasticsearch_ service.
 * Kibana_ service.
 * `Resource` search index.
+* `Agents` search index.
+* `Events` search index.
 * Migration to convert `author` roles to `translator` when the `Resource` is a
   translation.
 * Field to record fictional places of publication.
 * Helper functions to `Date`, to get the earliest and latest dates for an object.
 * Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
+* `Resource` simple text search and pagination of search results.
 
 Changed
 ~~~~~~~
