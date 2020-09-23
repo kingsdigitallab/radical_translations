@@ -12,7 +12,7 @@ const browserSync = require('browser-sync').create()
 
 const concat = require('gulp-concat')
 
-const cssnano = require ('cssnano')
+const cssnano = require('cssnano')
 const imagemin = require('gulp-imagemin')
 const pixrem = require('pixrem')
 const plumber = require('gulp-plumber')
@@ -29,21 +29,22 @@ function pathsConfig(appName) {
   const vendorsRoot = 'node_modules'
 
   return {
-    
     bootstrapSass: `${vendorsRoot}/bootstrap/scss`,
     vendorsJs: [
       `${vendorsRoot}/jquery/dist/jquery.slim.js`,
       `${vendorsRoot}/popper.js/dist/umd/popper.js`,
       `${vendorsRoot}/bootstrap/dist/js/bootstrap.js`,
+      `${vendorsRoot}/lodash/lodash.js`,
+      `${vendorsRoot}/vue/dist/vue.js`
     ],
-    
+
     app: this.app,
     templates: `${this.app}/templates`,
     css: `${this.app}/static/css`,
     sass: `${this.app}/static/sass`,
     fonts: `${this.app}/static/fonts`,
     images: `${this.app}/static/images`,
-    js: `${this.app}/static/js`,
+    js: `${this.app}/static/js`
   }
 }
 
@@ -56,23 +57,20 @@ var paths = pathsConfig()
 // Styles autoprefixing and minification
 function styles() {
   var processCss = [
-      autoprefixer(), // adds vendor prefixes
-      pixrem(),       // add fallbacks for rem units
+    autoprefixer(), // adds vendor prefixes
+    pixrem() // add fallbacks for rem units
   ]
 
   var minifyCss = [
-      cssnano({ preset: 'default' })   // minify result
+    cssnano({ preset: 'default' }) // minify result
   ]
 
   return src(`${paths.sass}/project.scss`)
-    .pipe(sass({
-      includePaths: [
-        
-        paths.bootstrapSass,
-        
-        paths.sass
-      ]
-    }).on('error', sass.logError))
+    .pipe(
+      sass({
+        includePaths: [paths.bootstrapSass, paths.sass]
+      }).on('error', sass.logError)
+    )
     .pipe(plumber()) // Checks for errors
     .pipe(postcss(processCss))
     .pipe(dest(paths.css))
@@ -90,18 +88,18 @@ function scripts() {
     .pipe(dest(paths.js))
 }
 
-
 // Vendor Javascript minification
 function vendorScripts() {
-  return src(paths.vendorsJs)
-    .pipe(concat('vendors.js'))
-    .pipe(dest(paths.js))
-    .pipe(plumber()) // Checks for errors
-    .pipe(uglify()) // Minifies the js
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(dest(paths.js))
+  return (
+    src(paths.vendorsJs)
+      .pipe(concat('vendors.js'))
+      .pipe(dest(paths.js))
+      //.pipe(plumber()) // Checks for errors
+      .pipe(uglify()) // Minifies the js
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(dest(paths.js))
+  )
 }
-
 
 // Image compression
 function imgCompression() {
@@ -112,8 +110,8 @@ function imgCompression() {
 
 // Run django server
 function runServer(cb) {
-  var cmd = spawn('python', ['manage.py', 'runserver'], {stdio: 'inherit'})
-  cmd.on('close', function(code) {
+  var cmd = spawn('python', ['manage.py', 'runserver'], { stdio: 'inherit' })
+  cmd.on('close', function (code) {
     console.log('runServer exited with code ' + code)
     cb(code)
   })
@@ -121,50 +119,42 @@ function runServer(cb) {
 
 // Browser sync server for live reload
 function initBrowserSync() {
-    browserSync.init(
-      [
-        `${paths.css}/*.css`,
-        `${paths.js}/*.js`,
-        `${paths.templates}/*.html`
-      ], {
-        // https://www.browsersync.io/docs/options/#option-proxy
-        proxy:  {
-          target: 'django:8000',
-          proxyReq: [
-            function(proxyReq, req) {
-              // Assign proxy "host" header same as current request at Browsersync server
-              proxyReq.setHeader('Host', req.headers.host)
-            }
-          ]
-        },
-        // https://www.browsersync.io/docs/options/#option-open
-        // Disable as it doesn't work from inside a container
-        open: false
-      }
-    )
+  browserSync.init(
+    [`${paths.css}/*.css`, `${paths.js}/*.js`, `${paths.templates}/*.html`],
+    {
+      // https://www.browsersync.io/docs/options/#option-proxy
+      proxy: {
+        target: 'django:8000',
+        proxyReq: [
+          function (proxyReq, req) {
+            // Assign proxy "host" header same as current request at Browsersync server
+            proxyReq.setHeader('Host', req.headers.host)
+          }
+        ]
+      },
+      // https://www.browsersync.io/docs/options/#option-open
+      // Disable as it doesn't work from inside a container
+      open: false
+    }
+  )
 }
 
 // Watch
 function watchPaths() {
   watch(`${paths.sass}/*.scss`, styles)
-  watch(`${paths.templates}/**/*.html`).on("change", reload)
-  watch([`${paths.js}/*.js`, `!${paths.js}/*.min.js`], scripts).on("change", reload)
+  watch(`${paths.templates}/**/*.html`).on('change', reload)
+  watch([`${paths.js}/*.js`, `!${paths.js}/*.min.js`], scripts).on(
+    'change',
+    reload
+  )
 }
 
 // Generate all assets
-const generateAssets = parallel(
-  styles,
-  scripts,
-  vendorScripts,
-  imgCompression
-)
+const generateAssets = parallel(styles, scripts, vendorScripts, imgCompression)
 
 // Set up dev environment
-const dev = parallel(
-  initBrowserSync,
-  watchPaths
-)
+const dev = parallel(initBrowserSync, watchPaths)
 
 exports.default = series(generateAssets, dev)
-exports["generate-assets"] = generateAssets
-exports["dev"] = dev
+exports['generate-assets'] = generateAssets
+exports['dev'] = dev
