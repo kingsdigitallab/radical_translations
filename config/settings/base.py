@@ -318,3 +318,13 @@ KDL_WAGTAIL_ZOTERO_LIBRARY_TYPE = "group"
 KDL_WAGTAIL_ZOTERO_NOTE_STYLE = "chicago-fullnote-bibliography"
 KDL_WAGTAIL_ZOTERO_SHORTNOTE_STYLE = "chicago-note-bibliography"
 KDL_WAGTAIL_ZOTERO_TOKEN = env("KDL_WAGTAIL_ZOTERO_TOKEN", default="")
+
+
+# django-rest-framework
+# https://github.com/encode/django-rest-framework
+# ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 50,
+    "ORDERING_PARAM": "ordering",
+}
