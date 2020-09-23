@@ -1,24 +1,4 @@
-{% extends "base.html" %}
+{% extends "search/base.html" %}
 {% load staticfiles %}
 
-{% block main %}
-<h2>Resources</h2>
-
-<div id="app">
-    {% include 'vue/search_query.html' %}
-
-    {% include 'vue/search_summary.html' %}
-
-    {% include 'vue/pagination.html' %}
-
-    {% include 'vue/search_results.html' %}
-
-    {% include 'vue/pagination.html' %}
-</div>
-{% endblock main %}
-
-{% block javascript %}
-{{ block.super }}
-
-<script src="{% static 'js/search.js' %}"></script>
-{% endblock javascript %}
+{% block search_header %}Resources{% endblock search_header %}
