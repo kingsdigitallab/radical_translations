@@ -24,7 +24,10 @@ from radical_translations.utils.models import Date
 @registry.register_document
 class ResourceDocument(Document):
     title = fields.ObjectField(
-        properties={"main_title": fields.TextField(), "subtitle": fields.TextField()}
+        properties={
+            "main_title": fields.TextField(fields={"raw": fields.KeywordField()}),
+            "subtitle": fields.TextField(),
+        }
     )
     subjects = get_controlled_term_field()
     date_earliest = fields.DateField()
