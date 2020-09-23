@@ -9,7 +9,7 @@ def get_agent_field() -> fields.ObjectField:
 
 def get_controlled_term_field() -> fields.ObjectField:
     return fields.ObjectField(
-        properties={"termid": fields.KeywordField(), "label": fields.KeywordField()}
+        properties={"termid": fields.KeywordField(), "label": fields.TextField()}
     )
 
 
