@@ -1,2 +1,3 @@
 <button type="button" class="btn btn-link" v-if="data.previous" @click="page--">previous</button>
+page <input v-model="page" type="number" min="1" :max="numberOfPages" size="1" /> of {[ numberOfPages ]}
 <button type="button" class="btn btn-link" v-if="data.next" @click="page++">next</button
