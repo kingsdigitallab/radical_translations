@@ -2,10 +2,10 @@
     <li v-for="item in data.results">
         <a v-bind:href="item.id">{[ item.title.main_title ]}</a>
         <span class="date" v-if="item.year_earliest">
-            <span v-if="item.year_earliest != item.year_latest">
+            <template v-if="item.year_earliest != item.year_latest">
             [{[ item.year_earliest ]} - {[ item.year_latest ]}]
-            </span>
-            <span v-else>[{[ item.year_earliest ]}]</span>
+            </template>
+            <template v-else>[{[ item.year_earliest ]}]</template>
         </span>
     </li>
 </ul>

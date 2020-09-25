@@ -1,0 +1,9 @@
+<p v-for="facet in facets">
+    {[ facet.name ]}
+    <button
+        v-for="bucket in facet.buckets" 
+        @click="updateFilters([facet.name, bucket.key])" 
+        class="btn"
+        v-bind:class="filterExists([facet.name, bucket.key]) ? 'btn-primary': 'btn-link'"
+        type="button">{[ bucket.key ]} ({[ bucket.doc_count ]})</button>
+</p>
