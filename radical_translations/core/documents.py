@@ -30,8 +30,8 @@ class ResourceDocument(Document):
         }
     )
     subjects = get_controlled_term_field()
-    date_earliest = fields.DateField()
-    date_latest = fields.DateField()
+    year_earliest = fields.IntegerField()
+    year_latest = fields.IntegerField()
     classifications = fields.ObjectField(
         properties={
             "classification": get_controlled_term_field(),
@@ -98,10 +98,12 @@ class ResourceDocument(Document):
         ):
             return related_instance.resource
 
-    def prepare_date_earliest(self, instance):
+    def prepare_year_earliest(self, instance):
         resource = self._get_resource(instance)
         if resource.date and resource.date.date_earliest:
-            return resource.date.get_date_earliest()
+            date_earliest = resource.date.get_date_earliest()
+            if date_earliest is not None:
+                return date_earliest.year
 
     def _get_resource(self, resource):
         if resource.is_paratext():
@@ -109,10 +111,12 @@ class ResourceDocument(Document):
 
         return resource
 
-    def prepare_date_latest(self, instance):
+    def prepare_year_latest(self, instance):
         resource = self._get_resource(instance)
         if resource.date and resource.date.date_latest:
-            return resource.date.get_date_latest()
+            date_latest = resource.date.get_date_latest()
+            if date_latest is not None:
+                return date_latest.year
 
     def prepare_is_original(self, instance):
         return instance.is_original()

@@ -33,7 +33,7 @@ class ResourceViewSet(DocumentViewSet):
 
     lookup_field = "id"
 
-    ordering_fields = {"title": "title.main_title.raw", "date": "date_earliest"}
+    ordering_fields = {"title": "title.main_title.raw", "date": "year_earliest"}
     ordering = ["title", "date"]
 
     pagination_class = PageNumberPagination
