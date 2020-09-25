@@ -36,7 +36,6 @@ $link-color: $red;
 /* Globals */
 
 a {
-  // color: darken($red, 10%);
   color: $red;
   text-decoration: underline;
 
@@ -49,7 +48,7 @@ a {
 
 body {
   background: url('../images/rt-bg.svg') no-repeat lighten($old-yellow, 30%);
-  background-size: cover;
+  background-size: 100%;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
@@ -59,11 +58,6 @@ b,
 strong {
   font-variation-settings: 'wdth' 400, 'wght' 700;
 }
-
-// footer,
-// .top-header {
-//   background: white;
-// }
 
 footer {
   background: white;
@@ -77,10 +71,6 @@ footer {
     font-size: 1.5rem;
   }
 }
-
-// .top-header {
-//   border-bottom: 5px solid lighten($gray-600, 45%);
-// }
 
 // Halftone filter
 // Source: https://codepen.io/coreh/pen/LQJBLa
@@ -137,9 +127,6 @@ h4, h5, h6 {
 
 nav,
 .main-menu {
-  // background: darken($red, 10%);
-  // color: $white;
-
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 
@@ -155,14 +142,12 @@ nav,
       &:hover {
         background: transparent;
         border-bottom: 10px solid $old-yellow;
-        // color: lighten($red, 50%);
       }
     }
   }
 }
 
 .navbar {
-  // padding: 5px 1rem 0;
   padding: 0;
 }
 
@@ -177,24 +162,11 @@ nav,
   text-transform: uppercase;
   width: 100%;
 
-  // .blob {
-  //   background: $kaki;
-  //   border-radius: 50%;
-  //   display: block;
-  //   height: 80px;
-  //   left: -30px;
-  //   padding: 40px 8px 8px 40px;
-  //   position: absolute;
-  //   text-align: left;
-  //   top: -30px;
-  //   width: 80px;
-  // }
-
   svg {
     display: block;
     margin: 1rem auto;
-    max-height: 24px;
-    max-width: 28px;
+    max-height: 48px;
+    max-width: 56px;
     vertical-align: top;
   }
 

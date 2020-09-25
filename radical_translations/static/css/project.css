@@ -8484,7 +8484,7 @@ a {
 
 body {
   background: url("../images/rt-bg.svg") no-repeat #fdf9ef;
-  background-size: cover;
+  background-size: 100%;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
 
@@ -8579,8 +8579,8 @@ nav,
     display: block;
     margin: 16px auto;
     margin: 1rem auto;
-    max-height: 24px;
-    max-width: 28px;
+    max-height: 48px;
+    max-width: 56px;
     vertical-align: top; }
   .navbar-brand:hover {
     background: transparent;
