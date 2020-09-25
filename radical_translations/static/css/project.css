@@ -8575,18 +8575,10 @@ nav,
   text-align: center;
   text-transform: uppercase;
   width: 100%; }
-  .navbar-brand .blob {
-    background: #c3c1a8;
-    border-radius: 50%;
-    display: block;
-    height: 80px;
-    left: -30px;
-    padding: 40px 8px 8px 40px;
-    position: absolute;
-    text-align: left;
-    top: -30px;
-    width: 80px; }
   .navbar-brand svg {
+    display: block;
+    margin: 16px auto;
+    margin: 1rem auto;
     max-height: 24px;
     max-width: 28px;
     vertical-align: top; }
