@@ -1,5 +1,5 @@
 <ul>
-    <li v-for="item in data.results">
+    <li v-for="item in data.results" :key="item.id">
         <a v-bind:href="item.id">{[ item.title.main_title ]}</a>
         <span class="date" v-if="item.year_earliest">
             <template v-if="item.year_earliest != item.year_latest">

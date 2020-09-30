@@ -4,7 +4,7 @@ new Vue({
   data: {
     url: new URL(`${window.location}api/`),
     query: '',
-    page: 1,
+    filters: [],
     ordering: 'title',
     ordering_options: [
       { key: 'title', value: 'title ascending' },
@@ -12,14 +12,30 @@ new Vue({
       { key: 'date', value: 'date ascending' },
       { key: '-date', value: 'date descending' }
     ],
-    filters: [],
+    page: 1,
     data: []
   },
-  async created() {
+  watch: {
+    // wait until the user stopped typing before sending the `query`.
+    query: _.debounce(async function () {
+      this.page = 1
+      this.data = await this.search()
+    }, 500),
+    page: _.debounce(async function () {
+      this.data = await this.search()
+    }, 250),
+    ordering: async function (newOrdering, oldOrdering) {
+      this.data = await this.search()
+    },
+    filters: async function (newFilters, oldFilters) {
+      this.data = await this.search()
+    }
+  },
+  created: async function () {
     this.data = await this.search()
   },
   computed: {
-    facets() {
+    facets: function () {
       let facets = []
 
       if (this.data.facets !== undefined) {
@@ -34,12 +50,12 @@ new Vue({
 
       return facets
     },
-    numberOfPages() {
+    numberOfPages: function () {
       return Math.ceil(this.data.count / this.data.page_size)
     }
   },
   methods: {
-    async search() {
+    search: async function () {
       const params = new URLSearchParams()
 
       if (this.query) {
@@ -56,21 +72,23 @@ new Vue({
       this.filters.forEach((filter) =>
         params.append(`${filter[0]}__term`, filter[1])
       )
-      console.log(params.toString())
 
       this.url.search = params.toString()
       const response = await fetch(this.url)
 
       return response.json()
     },
-    filterExists(filter) {
+    filterExists: function (filter) {
       return (
         this.filters.find(
           (item) => item[0] === filter[0] && item[1] === filter[1]
         ) !== undefined
       )
     },
-    updateFilters(filter) {
+    getBucketValue: function (bucket) {
+      return bucket.key_as_string ? bucket.key_as_string : bucket.key
+    },
+    updateFilters: function (filter) {
       if (this.filterExists(filter)) {
         this.filters = this.filters.filter(
           (item) => item[0] !== filter[0] || item[1] !== filter[1]
@@ -78,22 +96,6 @@ new Vue({
       } else {
         this.filters.push(filter)
       }
-    }
-  },
-  watch: {
-    // wait until the user stopped typing before sending the `query`.
-    query: _.debounce(async function () {
-      this.page = 1
-      this.data = await this.search()
-    }, 500),
-    page: _.debounce(async function () {
-      this.data = await this.search()
-    }, 250),
-    ordering: async function () {
-      this.data = await this.search()
-    },
-    filters: async function () {
-      this.data = await this.search()
     }
   }
 })
