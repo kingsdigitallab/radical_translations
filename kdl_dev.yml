@@ -5,7 +5,7 @@ volumes:
   postgres_data: {}
   postgres_data_backups: {}
   traefik: {}
-  #elasticsearch_data: {}
+  elasticsearch_data: {}
 
 services:
   django:
