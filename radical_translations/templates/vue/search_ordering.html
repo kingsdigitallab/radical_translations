@@ -1,7 +1,9 @@
-order by
-<select v-model="ordering">
-    <option
-        v-for="option in ordering_options"
-        :key="option.key"
-        v-bind:value="option.key">{[ option.value ]}</option>
-</select>
+<h4>Order by</h4>
+<p>
+    <select v-model="ordering">
+        <option
+            v-for="option in ordering_options"
+            :key="option.key"
+            v-bind:value="option.key">{[ option.value ]}</option>
+    </select>
+</p>

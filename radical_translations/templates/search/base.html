@@ -6,19 +6,29 @@
 
 {% block search_body %}
 <div id="app">
-    {% include 'vue/search_query.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% include 'vue/search_query.html' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                {% include 'vue/search_facets.html' %}
+            </div>
+            <div class="col-8">
+                {% include 'vue/search_summary.html' %}
 
-    {% include 'vue/search_ordering.html' %}
+                {% include 'vue/search_ordering.html' %}
 
-    {% include 'vue/search_summary.html' %}
+                {% include 'vue/pagination.html' %}
 
-    {% include 'vue/search_facets.html' %}
+                {% include 'vue/search_results.html' %}
 
-    {% include 'vue/pagination.html' %}
-
-    {% include 'vue/search_results.html' %}
-
-    {% include 'vue/pagination.html' %}
+                {% include 'vue/pagination.html' %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock search_body %}
 {% endblock main %}

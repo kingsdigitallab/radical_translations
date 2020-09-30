@@ -1,11 +1,33 @@
-<ul>
+<ol v-bind:start="data.current_page * data.page_size - data.page_size + 1">
     <li v-for="item in data.results" :key="item.id">
-        <a v-bind:href="item.id">{[ item.title.main_title ]}</a>
-        <span class="date" v-if="item.year_earliest">
-            <template v-if="item.year_earliest != item.year_latest">
-            [{[ item.year_earliest ]} - {[ item.year_latest ]}]
+        <h5 class="font-italic"><a v-bind:href="item.id">{[ item.title.main_title ]}</a></h5>
+        <p>
+            <template v-for="contribution in item.contributions">
+                <span v-for="role in contribution.roles">{[ role.label ]}</span>:
+                <span>{[ contribution.agent.name ]}</span>;
             </template>
-            <template v-else>[{[ item.year_earliest ]}]</template>
-        </span>
+        </p>
+        <p>
+            <span class="date" v-if="item.year_earliest">
+                <template v-if="item.year_earliest != item.year_latest">
+                    [{[ item.year_earliest ]} - {[ item.year_latest ]}]
+                </template>
+                <template v-else>{[ item.year_earliest ]}</template>
+            </span>
+            <span v-for="place in item.places" :key="place.place.address">
+                {[ place.place.address ]}
+            </span>|
+            <span v-if="item.is_translation">translation</span>
+            <span v-if="item.is_paratext">paratext</span>|
+            <span v-for="classification in item.classifications" :key="classification.edition.label">
+                {[ classification.edition.label ]}
+            </span>|
+            <span v-for="language in item.languages" :key="language.language.label">
+                {[ language.language.label ]}
+            </span>|
+            <span v-for="subject in item.subjects" :key="subject.label">
+                {[ subject.label ]}
+            </span>
+        </p>
     </li>
-</ul>
+</ol>
