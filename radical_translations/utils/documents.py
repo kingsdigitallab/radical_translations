@@ -3,7 +3,10 @@ from django_elasticsearch_dsl import fields
 
 def get_agent_field() -> fields.ObjectField:
     return fields.ObjectField(
-        properties={"id": fields.IntegerField(), "name": fields.TextField()}
+        properties={
+            "id": fields.IntegerField(),
+            "name": fields.TextField(fields={"raw": fields.KeywordField()}),
+        }
     )
 
 
@@ -20,7 +23,7 @@ def get_event_field() -> fields.ObjectField:
     return fields.ObjectField(
         properties={
             "id": fields.IntegerField(),
-            "title": fields.TextField(),
+            "title": fields.TextField(fields={"raw": fields.KeywordField()}),
             "place": get_place_field(),
         }
     )
@@ -29,8 +32,12 @@ def get_event_field() -> fields.ObjectField:
 def get_place_field() -> fields.ObjectField:
     return fields.ObjectField(
         properties={
-            "address": fields.TextField(),
-            "country": fields.ObjectField(properties={"name": fields.TextField()}),
+            "address": fields.TextField(fields={"raw": fields.KeywordField()}),
+            "country": fields.ObjectField(
+                properties={
+                    "name": fields.TextField(fields={"raw": fields.KeywordField()})
+                }
+            ),
         }
     )
 

@@ -47,7 +47,10 @@ class ResourceDocument(Document):
     )
     languages = fields.ObjectField(properties={"language": get_controlled_term_field()})
     places = fields.ObjectField(
-        properties={"place": get_place_field(), "fictional_place": fields.TextField()}
+        properties={
+            "place": get_place_field(),
+            "fictional_place": fields.TextField(fields={"raw": fields.KeywordField()}),
+        }
     )
     relationships = fields.ObjectField(
         properties={
@@ -60,6 +63,9 @@ class ResourceDocument(Document):
 
     is_original = fields.BooleanField()
     is_paratext = fields.BooleanField()
+    is_translation = fields.BooleanField()
+
+    has_date_radical = fields.BooleanField()
 
     class Index:
         name = "rt-resources"
@@ -123,3 +129,10 @@ class ResourceDocument(Document):
 
     def prepare_is_paratext(self, instance):
         return instance.is_paratext()
+
+    def prepare_is_translation(self, instance):
+        return instance.is_translation()
+
+    def prepare_has_date_radical(self, instance):
+        if instance.date:
+            return instance.date.date_radical is not None
