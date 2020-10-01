@@ -26,7 +26,7 @@ Added
 * Field to record fictional places of publication.
 * Helper functions to `Date`, to get the earliest and latest dates for an object.
 * Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
-* `Resource` simple text search and pagination of search results.
+* `Resource` simple text search with filters, ordering and pagination of search results.
 
 Changed
 ~~~~~~~
