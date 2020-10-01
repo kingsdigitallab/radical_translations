@@ -71,9 +71,6 @@ services:
       - elasticsearch_data:/usr/share/elasticsearch/data
     env_file:
       - ./.envs/.stg/.elasticsearch
-    ports:
-      - '127.0.0.1:9200:9200'
-      - '127.0.0.1:9300:9300'
     restart: unless-stopped
   #kibana:
   #image: kibana:7.5.1
