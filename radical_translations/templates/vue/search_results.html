@@ -18,7 +18,6 @@
             <template v-if="item.classifications.length > 0">
                 <dt>Classification</dt>
                 <dd v-for="classification in item.classifications" :key="classification.edition.label">
-                {[ classification.edition.label ]}
                 </dd>
             </template>
             <template v-if="item.languages.length > 0">

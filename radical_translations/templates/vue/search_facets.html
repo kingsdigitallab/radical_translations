@@ -5,7 +5,7 @@
         <button
             @click="updateFilters([facet.name, getBucketValue(bucket)])" 
             class="filter btn"
-            v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-primary': 'btn-link'"
+            v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info': 'btn-link'"
             type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
     </li>
 </ul>
