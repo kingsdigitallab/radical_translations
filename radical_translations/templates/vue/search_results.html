@@ -15,6 +15,12 @@
                 </dd>
                 <dd v-else>{[ item.year_earliest ]}</dd>
             </template>
+            <template v-if="item.places.length > 0">
+                <dt>Places</dt>
+                <dd v-for="place in item.places" :key="place.place.address">
+                {[ place.place.address ]}
+                </dd>
+            </template>
             <template v-if="item.classifications.length > 0">
                 <dt>Classification</dt>
                 <dd v-for="classification in item.classifications" :key="classification.edition.label">
