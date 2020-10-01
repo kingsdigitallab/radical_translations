@@ -8508,7 +8508,7 @@ footer {
   max-height: 100px;
   max-width: 200px;
   padding: 8px;
-  padding: .5rem; }
+  padding: 0.5rem; }
 
 /* Main content area */
 main {
@@ -8583,3 +8583,12 @@ main {
     left: -55.8px;
     top: 5px;
     width: 9px; }
+
+.filter {
+  text-align: left; }
+
+dl.search-result dt {
+  float: left; }
+
+dl.search-result dd {
+  margin-left: 9em; }

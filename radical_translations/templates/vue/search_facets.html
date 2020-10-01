@@ -1,15 +1,11 @@
-<h3>Search filters</h3>
-<button
-    v-for="filter in filters" :key="filter[0]"
-    @click="updateFilters(filter)" 
-    class="btn btn-primary" type="button">{[ filter[0] ]}: {[ filter[1] ]}</button>
-
-<div v-for="facet in facets" :key="facet.name">
-    <h4>{[ facet.name ]}</h4>
-    <button
-        v-for="bucket in facet.buckets" :key="bucket.key"
-        @click="updateFilters([facet.name, getBucketValue(bucket)])" 
-        class="btn"
-        v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-primary': 'btn-link'"
-        type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
-</div>
+<h3>Available filters</h3>
+<ul class="list-unstyled" v-for="facet in facets" :key="facet.name">
+    <li><h4>{[ facet.name ]}</h4></li>
+    <li v-for="bucket in facet.buckets" :key="bucket.key">
+        <button
+            @click="updateFilters([facet.name, getBucketValue(bucket)])" 
+            class="filter btn"
+            v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-primary': 'btn-link'"
+            type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
+    </li>
+</ul>
