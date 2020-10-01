@@ -8,7 +8,6 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     SearchFilterBackend,
 )
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
-from elasticsearch_dsl import TermsFacet
 
 from radical_translations.core.documents import ResourceDocument
 from radical_translations.core.models import Resource
@@ -38,71 +37,69 @@ class ResourceViewSet(DocumentViewSet):
 
     lookup_field = "id"
 
+    facet_options = {"order": {"_key": "asc"}, "size": 100}
+
     faceted_search_fields = {
         "classification": {
             "field": "classifications.edition.label.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "contributor": {
             "field": "contributions.agent.name.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "contributor_role": {
             "field": "contributions.roles.label.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
-        "date": {
-            "field": "year_earliest",
-            "facet": TermsFacet,
-            "enabled": True,
-        },
+        "date": {"field": "year_earliest", "enabled": True, "options": facet_options},
         "language": {
             "field": "languages.language.label.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "publication_place": {
             "field": "places.place.address.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "publication_country": {
             "field": "places.place.country.name.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "fictional_place_of_publication": {
             "field": "places.fictional_place.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "status": {
             "field": "relationships.relationship_type.label.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "subject": {
             "field": "subjects.label.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "event": {
             "field": "events.title.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "event_place": {
             "field": "events.place.address.raw",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
         "radical_date": {
             "field": "has_date_radical",
-            "facet": TermsFacet,
             "enabled": True,
+            "options": facet_options,
         },
     }
 
