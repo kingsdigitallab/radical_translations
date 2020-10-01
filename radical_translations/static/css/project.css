@@ -8492,6 +8492,9 @@ b,
 strong {
   font-variation-settings: 'wdth' 400, 'wght' 700; }
 
+canvas {
+  background: red; }
+
 footer {
   background: white; }
 
