@@ -18,7 +18,7 @@ services:
     depends_on:
       - postgres
       - redis
-      #- elasticsearch
+      - elasticsearch
     env_file:
       - ./.envs/.stg/.django
       - ./.envs/.stg/.postgres

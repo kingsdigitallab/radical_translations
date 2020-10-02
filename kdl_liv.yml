@@ -5,7 +5,7 @@ volumes:
   postgres_data: {}
   postgres_data_backups: {}
   traefik: {}
-  #elasticsearch_data: {}
+  elasticsearch_data: {}
 
 services:
   django:
@@ -18,7 +18,7 @@ services:
     depends_on:
       - postgres
       - redis
-      #- elasticsearch
+      - elasticsearch
     env_file:
       - ./.envs/.liv/.django
       - ./.envs/.liv/.postgres
@@ -64,16 +64,14 @@ services:
   redis:
     image: redis:5.0
     restart: unless-stopped
-  #elasticsearch:
-  #image: elasticsearch:7.5.1
-  #volumes:
-  #- elasticsearch_data:/usr/share/elasticsearch/data
-  #env_file:
-  #- ./.envs/.liv/.elasticsearch
-  #ports:
-  #- '127.0.0.1:9200:9200'
-  #- '127.0.0.1:9300:9300'
-  #restart: unless-stopped
+
+  elasticsearch:
+    image: elasticsearch:7.5.1
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    env_file:
+      - ./.envs/.liv/.elasticsearch
+    restart: unless-stopped
   #kibana:
   #image: kibana:7.5.1
   #depends_on:
