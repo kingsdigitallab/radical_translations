@@ -288,6 +288,8 @@ LOGGING = {
 # https://github.com/django-es/django-elasticsearch-dsl
 ELASTICSEARCH_DSL = {"default": {"hosts": "elasticsearch:9200"}}
 
+ES_FACET_OPTIONS = {"order": {"_key": "asc"}, "size": 100}
+
 # Wagtail
 # ------------------------------------------------------------------------------
 # https://docs.wagtail.io/en/v2.7.1/getting_started/integrating_into_django.html

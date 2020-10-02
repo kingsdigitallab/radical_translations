@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django_elasticsearch_dsl_drf.filter_backends import (
@@ -13,6 +14,8 @@ from radical_translations.core.documents import ResourceDocument
 from radical_translations.core.models import Resource
 from radical_translations.core.serializers import ResourceDocumentSerializer
 from radical_translations.utils.search import PageNumberPagination
+
+ES_FACET_OPTIONS = settings.ES_FACET_OPTIONS
 
 
 class ResourceDetailView(DetailView):
@@ -37,69 +40,71 @@ class ResourceViewSet(DocumentViewSet):
 
     lookup_field = "id"
 
-    facet_options = {"order": {"_key": "asc"}, "size": 100}
-
     faceted_search_fields = {
         "classification": {
             "field": "classifications.edition.label.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "contributor": {
             "field": "contributions.agent.name.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "contributor_role": {
             "field": "contributions.roles.label.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
-        "date": {"field": "year_earliest", "enabled": True, "options": facet_options},
+        "date": {
+            "field": "year_earliest",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
         "language": {
             "field": "languages.language.label.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "publication_place": {
             "field": "places.place.address.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "publication_country": {
             "field": "places.place.country.name.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "fictional_place_of_publication": {
             "field": "places.fictional_place.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "status": {
             "field": "relationships.relationship_type.label.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "subject": {
             "field": "subjects.label.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "event": {
             "field": "events.title.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "event_place": {
             "field": "events.place.address.raw",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
         "radical_date": {
             "field": "has_date_radical",
             "enabled": True,
-            "options": facet_options,
+            "options": ES_FACET_OPTIONS,
         },
     }
 
