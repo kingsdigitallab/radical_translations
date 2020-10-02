@@ -1,6 +1,6 @@
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
-from elasticsearch_dsl import analyzer
+from elasticsearch_dsl import analyzer, normalizer
 
 from controlled_vocabulary.models import ControlledTerm
 from radical_translations.core.models import (
@@ -21,8 +21,11 @@ from radical_translations.utils.documents import (
 )
 from radical_translations.utils.models import Date
 
-text_analyzer = analyzer(
+text_folding_analyzer = analyzer(
     "folding", tokenizer="standard", filter=["lowercase", "asciifolding"]
+)
+lowercase_sort_normalizer = normalizer(
+    "lowercase_sort", filter=["lowercase", "asciifolding"]
 )
 
 
@@ -31,7 +34,11 @@ class ResourceDocument(Document):
     title = fields.ObjectField(
         properties={
             "main_title": fields.TextField(
-                analyzer=text_analyzer, fields={"raw": fields.KeywordField()}
+                analyzer=text_folding_analyzer,
+                fields={
+                    "raw": fields.KeywordField(),
+                    "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
+                },
             ),
             "subtitle": fields.TextField(),
         }

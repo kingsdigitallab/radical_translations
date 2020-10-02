@@ -124,7 +124,10 @@ class ResourceViewSet(DocumentViewSet):
         "radical_date": "has_date_radical",
     }
 
-    ordering_fields = {"title": "title.main_title.raw", "date": "year_earliest"}
+    ordering_fields = {
+        "title": "title.main_title.sort",
+        "date": "year_earliest",
+    }
     ordering = ["title", "date"]
 
     pagination_class = PageNumberPagination
