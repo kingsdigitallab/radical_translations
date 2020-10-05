@@ -22,7 +22,7 @@ services:
     ports:
       - '8000:8000'
     command: /start
-    restart: on-failure:5
+    restart: unless-stopped
 
   postgres:
     build:
@@ -57,7 +57,7 @@ services:
     restart: unless-stopped
 
   elasticsearch:
-    image: elasticsearch:7.9.1
+    image: elasticsearch:7.9.2
     volumes:
       - ./.volumes/local_elasticsearch_data:/usr/share/elasticsearch/data
     env_file:
@@ -68,7 +68,7 @@ services:
     restart: unless-stopped
 
   kibana:
-    image: kibana:7.8.1
+    image: kibana:7.9.2
     depends_on:
       - elasticsearch
     #env_file:
