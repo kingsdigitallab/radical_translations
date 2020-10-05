@@ -25,6 +25,13 @@ class TestDate:
         date.date_radical = "year 7"
         assert str(date) == "year 7 (1971)"
 
+    def test_is_radical(self):
+        date = Date(date_display="1971")
+        assert not date.is_radical
+
+        date.date_radical = "year 7"
+        assert date.is_radical
+
     def test_get_date_earliest(self):
         date = Date()
         assert date.get_date_earliest() is None

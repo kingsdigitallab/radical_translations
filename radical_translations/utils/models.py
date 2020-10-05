@@ -67,6 +67,10 @@ class Date(TimeStampedModel):
 
         return self.date_display
 
+    @property
+    def is_radical(self) -> bool:
+        return self.date_radical is not None
+
     def get_date_earliest(self) -> Optional[date]:
         struct = self.parse_date()
         if not struct:
@@ -105,7 +109,9 @@ class Date(TimeStampedModel):
 
 class EditorialClassificationModel(models.Model):
     classification = ControlledTermsField(
-        ["wikidata"], blank=True, help_text="Editorial classification.",
+        ["wikidata"],
+        blank=True,
+        help_text="Editorial classification.",
     )
 
     class Meta:
