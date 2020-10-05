@@ -8,12 +8,11 @@
             </small>
         </h5>
         <dl class="search-result">
-            <template v-if="item.year_earliest">
+            <template v-if="item.date_display !== undefined">
                 <dt>Date</dt>
-                <dd v-if="item.year_earliest != item.year_latest">
-                [{[ item.year_earliest ]} - {[ item.year_latest ]}]
+                <dd>
+                {[ item.date_display ]}
                 </dd>
-                <dd v-else>{[ item.year_earliest ]}</dd>
             </template>
             <template v-if="item.places.length > 0">
                 <dt>Places</dt>
