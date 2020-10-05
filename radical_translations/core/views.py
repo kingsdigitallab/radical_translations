@@ -132,4 +132,4 @@ class ResourceViewSet(DocumentViewSet):
 
     pagination_class = PageNumberPagination
 
-    search_fields = ["title.main_title"]
+    search_fields = ["title.main_title", "summary"]

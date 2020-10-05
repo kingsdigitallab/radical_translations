@@ -46,6 +46,7 @@ class ResourceDocument(Document):
     subjects = get_controlled_term_field()
     year_earliest = fields.IntegerField()
     year_latest = fields.IntegerField()
+    summary = fields.TextField()
     classifications = fields.ObjectField(
         properties={
             "classification": get_controlled_term_field(),
