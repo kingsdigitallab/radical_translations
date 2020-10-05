@@ -44,6 +44,7 @@ class ResourceDocument(Document):
         }
     )
     subjects = get_controlled_term_field()
+    date_display = fields.TextField()
     year_earliest = fields.IntegerField()
     year_latest = fields.IntegerField()
     summary = fields.TextField()
@@ -122,12 +123,10 @@ class ResourceDocument(Document):
         ):
             return related_instance.resource
 
-    def prepare_year_earliest(self, instance):
+    def prepare_date_display(self, instance):
         resource = self._get_resource(instance)
-        if resource.date and resource.date.date_earliest:
-            date_earliest = resource.date.get_date_earliest()
-            if date_earliest is not None:
-                return date_earliest.year
+        if resource.date:
+            return str(resource.date)
 
     def _get_resource(self, resource):
         if resource.is_paratext():
@@ -135,13 +134,16 @@ class ResourceDocument(Document):
 
         return resource
 
+    def prepare_year_earliest(self, instance):
+        resource = self._get_resource(instance)
+        if resource.date and resource.date.date_earliest:
+            date_earliest = resource.date.get_date_earliest()
+            if date_earliest is not None:
+                return date_earliest.year
+
     def prepare_year_latest(self, instance):
         resource = self._get_resource(instance)
         if resource.date and resource.date.date_latest:
             date_latest = resource.date.get_date_latest()
             if date_latest is not None:
                 return date_latest.year
-
-    def prepare_has_date_radical(self, instance):
-        if instance.date:
-            return instance.date.date_radical is not None
