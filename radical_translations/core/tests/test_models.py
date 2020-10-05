@@ -11,6 +11,7 @@ from radical_translations.core.models import (
     ResourceRelationship,
     Title,
 )
+from radical_translations.utils.models import Date
 
 pytestmark = pytest.mark.django_db
 
@@ -115,6 +116,15 @@ class TestContribution:
 
 @pytest.mark.usefixtures("vocabulary")
 class TestResource:
+    @pytest.mark.usefixtures("resource")
+    def test_has_date_radical(self, resource):
+        assert not resource.has_date_radical()
+
+        resource.date = Date(date_radical="year 1")
+        resource.date.save()
+
+        assert resource.has_date_radical()
+
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_is_original(
         self,
@@ -297,7 +307,9 @@ class TestResource:
 
     @pytest.mark.usefixtures("entry_original", "resource")
     def test_paratext_from_gsx_entry(
-        self, entry_original: Dict[str, Dict[str, str]], resource: Resource,
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        resource: Resource,
     ):
         assert Resource.paratext_from_gsx_entry(None, None) is None
         assert Resource.paratext_from_gsx_entry(entry_original, None) is None

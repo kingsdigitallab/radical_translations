@@ -142,15 +142,6 @@ class ResourceDocument(Document):
             if date_latest is not None:
                 return date_latest.year
 
-    def prepare_is_original(self, instance):
-        return instance.is_original()
-
-    def prepare_is_paratext(self, instance):
-        return instance.is_paratext()
-
-    def prepare_is_translation(self, instance):
-        return instance.is_translation()
-
     def prepare_has_date_radical(self, instance):
         if instance.date:
             return instance.date.date_radical is not None

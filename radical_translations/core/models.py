@@ -200,6 +200,12 @@ class Resource(TimeStampedModel):
 
     get_place_names.short_description = "Places"  # type: ignore
 
+    def has_date_radical(self) -> bool:
+        if self.date:
+            return self.date.is_radical
+
+        return False
+
     def is_original(self) -> bool:
         return "original" in self.get_classification_edition().lower()
 
@@ -528,7 +534,10 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
 
     @staticmethod
     def get_or_create(
-        resource: Resource, agent: Agent, role: str, published_as: Optional[str] = None,
+        resource: Resource,
+        agent: Agent,
+        role: str,
+        published_as: Optional[str] = None,
     ) -> Optional["Contribution"]:
         if not resource or not agent:
             return None
