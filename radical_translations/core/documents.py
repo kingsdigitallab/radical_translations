@@ -103,6 +103,9 @@ class ResourceDocument(Document):
         return super().get_queryset().select_related("title", "date")
 
     def get_instances_from_related(self, related_instance):
+        if isinstance(related_instance, Date):
+            return related_instance.resource
+
         if isinstance(related_instance, (ControlledTerm, Date, Title)):
             return related_instance.resources.all()
 

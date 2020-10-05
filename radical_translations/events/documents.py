@@ -31,7 +31,10 @@ class EventDocument(Document):
         return super().get_queryset().select_related("date")
 
     def get_instances_from_related(self, related_instance):
-        if isinstance(related_instance, (ControlledTerm, Date, Place, Resource)):
+        if isinstance(related_instance, Date):
+            return related_instance.event
+
+        if isinstance(related_instance, (ControlledTerm, Place, Resource)):
             return related_instance.events.all()
 
     def prepare_date_earliest(self, instance):

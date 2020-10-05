@@ -61,13 +61,24 @@ class PersonDocument(AgentDocument):
         return (
             super()
             .get_queryset()
-            .select_related("date_birth", "place_birth", "date_death", "place_death",)
+            .select_related(
+                "date_birth",
+                "place_birth",
+                "date_death",
+                "place_death",
+            )
         )
 
     def get_instances_from_related(self, related_instance):
         super().get_instances_from_related(related_instance)
 
-        if isinstance(related_instance, (ControlledTerm, Date, Place)):
+        if isinstance(related_instance, Date):
+            if related_instance.person_birth:
+                return related_instance.person_birth
+
+            return related_instance.person_death
+
+        if isinstance(related_instance, (ControlledTerm, Place)):
             return related_instance.persons.all()
 
     def prepare_year_birth(self, instance):
