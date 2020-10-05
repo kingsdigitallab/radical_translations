@@ -280,4 +280,6 @@ radical_translations/media/
 controlled_vocabulary
 django-controlled-vocabulary/
 django-geonames-place/
+django_kdl_edtf
 geonames_place
+python-edtf
