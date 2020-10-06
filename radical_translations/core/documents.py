@@ -108,7 +108,7 @@ class ResourceDocument(Document):
         if isinstance(related_instance, Date):
             return related_instance.resource
 
-        if isinstance(related_instance, (ControlledTerm, Date, Title)):
+        if isinstance(related_instance, (ControlledTerm, Title)):
             return related_instance.resources.all()
 
         if isinstance(
