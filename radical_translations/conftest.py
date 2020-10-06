@@ -160,6 +160,32 @@ def entry_edition() -> Dict[str, Dict[str, str]]:
 
 
 @pytest.fixture
+def entry_search() -> Dict[str, Dict[str, str]]:
+    return {
+        "gsx$title": {"$t": "Les ruines de la search :)"},
+        "gsx$authors": {"$t": "Py test"},
+        "gsx$status": {"$t": "Original"},
+        "gsx$statussource": {"$t": ""},
+        "gsx$translationof": {"$t": ""},
+        "gsx$editionof": {"$t": ""},
+        "gsx$partof": {"$t": ""},
+        "gsx$journaltitle": {"$t": ""},
+        "gsx$editionnumber": {"$t": ""},
+        "gsx$year": {"$t": "1791"},
+        "gsx$location": {"$t": "0001: Paris [FR]"},
+        "gsx$organisation": {"$t": "Desenne"},
+        "gsx$language": {"$t": "French [fr]"},
+        "gsx$genre": {"$t": "essay"},
+        "gsx$url": {"$t": ""},
+        "gsx$libraries": {"$t": ""},
+        "gsx$notes": {"$t": ""},
+        "gsx$citation": {"$t": "some citation"},
+        "gsx$paratextnotes": {"$t": ""},
+        "gsx$paratextprefaceby": {"$t": ""},
+    }
+
+
+@pytest.fixture
 def blog_index_page() -> BlogIndexPage:
     return BlogIndexPageFactory()
 
