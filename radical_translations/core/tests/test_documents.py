@@ -10,9 +10,17 @@ pytestmark = pytest.mark.django_db
 @pytest.fixture
 @pytest.mark.usefixtures("entry_search")
 def resource_for_search(entry_search):
+    # setup
     resource = Resource.from_gsx_entry(entry_search)
+
     yield resource
+
+    # teardown
     if resource.id:
+        for rr in resource.related_to.all():
+            print(rr.title)
+            rr.resource.delete()
+
         resource.delete()
 
 
@@ -44,12 +52,12 @@ class TestResourceDocument:
         subject.save()
 
         search = ResourceDocument.search().query("term", subjects__label=label)
-        assert len(search.execute()) == 1
+        assert len(search.execute()) == subject.resources.count()
 
         search = ResourceDocument.search().query(
             "match_phrase", title__main_title=resource.title.main_title
         )
-        assert len(search.execute()) == 2
+        assert len(search.execute()) == resource.title.resources.count()
 
         title = resource.title
         title.main_title = "radical translations"
@@ -58,9 +66,66 @@ class TestResourceDocument:
         search = ResourceDocument.search().query(
             "match_phrase", title__main_title=resource.title.main_title
         )
-        assert len(search.execute()) == 2
+        assert len(search.execute()) == title.resources.count()
 
-        resource.delete()
+        label = "pytest"
+        search = ResourceDocument.search().query(
+            "term", classifications__edition__label=label
+        )
+        assert len(search.execute()) == 0
+
+        edition = resource.classifications.first().edition
+        edition.label = label
+        edition.save()
+
+        search = ResourceDocument.search().query(
+            "term", classifications__edition__label=label
+        )
+        assert len(search.execute()) == edition.resources.count()
+
+        contribution = resource.contributions.first()
+        agent = contribution.agent
+
+        search = ResourceDocument.search().query(
+            "match", contributions__agent__name=contribution.agent.name
+        )
+        assert len(search.execute()) == agent.contributed_to.count()
+
+        agent.name = "change agent display name"
+        agent.save()
+
+        contribution.save()
+
+        search = ResourceDocument.search().query(
+            "match", contributions__agent__name=agent.name
+        )
+        assert len(search.execute()) == agent.contributed_to.count()
+
+        label = "flemish"
+        search = ResourceDocument.search().query(
+            "term", languages_language__label=label
+        )
+        assert len(search.execute()) == 0
+
+        language = resource.languages.first().language
+        language.label = label
+        language.save()
+
+        search = ResourceDocument.search().query(
+            "term", languages_language__label=label
+        )
+        assert len(search.execute()) == language.resources.count()
+
+        label = "nowhere"
+        search = ResourceDocument.search().query("match", places__fictional_place=label)
+        assert len(search.execute()) == 0
+
+        rp = resource.places.first()
+        rp.fictional_place = label
+        rp.save()
+
+        search = ResourceDocument.search().query("match", places__fictional_place=label)
+        assert len(search.execute()) == 1
 
     @pytest.mark.usefixtures("resource")
     def test_prepare_date_display(self, resource):
@@ -72,14 +137,14 @@ class TestResourceDocument:
         resource.date.save()
         assert doc.prepare_date_display(resource) is not None
 
-    @pytest.mark.usefixtures("entry_search")
-    def test__get_resource(self, entry_search):
+    @pytest.mark.usefixtures("entry_original")
+    def test__get_resource(self, entry_original):
         doc = ResourceDocument()
 
-        resource = Resource.from_gsx_entry(entry_search)
+        resource = Resource.from_gsx_entry(entry_original)
         assert doc._get_resource(resource) == resource
 
-        paratext = Resource.paratext_from_gsx_entry(entry_search, resource)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
         assert doc._get_resource(paratext) == resource
 
     @pytest.mark.usefixtures("resource")

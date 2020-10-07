@@ -163,7 +163,7 @@ def entry_edition() -> Dict[str, Dict[str, str]]:
 def entry_search() -> Dict[str, Dict[str, str]]:
     return {
         "gsx$title": {"$t": "Les ruines de la search :)"},
-        "gsx$authors": {"$t": "Py test"},
+        "gsx$authors": {"$t": "search test"},
         "gsx$status": {"$t": "Original"},
         "gsx$statussource": {"$t": ""},
         "gsx$translationof": {"$t": ""},
@@ -179,7 +179,7 @@ def entry_search() -> Dict[str, Dict[str, str]]:
         "gsx$url": {"$t": ""},
         "gsx$libraries": {"$t": ""},
         "gsx$notes": {"$t": ""},
-        "gsx$citation": {"$t": "some citation"},
+        "gsx$citation": {"$t": ""},
         "gsx$paratextnotes": {"$t": ""},
         "gsx$paratextprefaceby": {"$t": ""},
     }
