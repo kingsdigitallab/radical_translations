@@ -8484,7 +8484,7 @@ a {
 
 body {
   background: url("../images/rt-bg.svg") no-repeat #fdf9ef;
-  background-size: 100%;
+  background-size: cover;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
 
@@ -8546,6 +8546,28 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
 
+.site-title {
+  margin-bottom: 0; }
+
+.top-header {
+  position: relative; }
+
+.login {
+  display: inline-block;
+  padding: 8px;
+  padding: .5rem;
+  position: absolute;
+  right: 0;
+  top: 0; }
+  .login svg {
+    width: 16px; }
+  .login a svg {
+    fill: #9b2923; }
+  .login a:hover {
+    background: transparent; }
+    .login a:hover svg {
+      fill: #c5342c; }
+
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;
@@ -8572,6 +8594,7 @@ nav,
   font-size: 64px;
   font-size: 4rem;
   font-variation-settings: 'wdth' 100, 'wght' 600;
+  margin: 0;
   min-width: 280px;
   padding-top: 0;
   position: relative;
@@ -8580,9 +8603,9 @@ nav,
   width: 100%; }
   .navbar-brand svg {
     display: block;
-    margin: 16px auto;
-    margin: 1rem auto;
-    max-height: 48px;
+    margin: 16px auto 0;
+    margin: 1rem auto 0;
+    max-height: 36px;
     max-width: 56px;
     vertical-align: top; }
   .navbar-brand:hover {

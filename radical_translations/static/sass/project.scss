@@ -21,6 +21,7 @@ $dark-gray: #222222;
 $dark-pink: #eed3d7;
 // $mint-green: #d6e9c6;
 $dirt: #eae9da;
+$green-italian-flag: rgba(0, 146, 70, 1);
 $kaki: #c3c1a8;
 $light-gray: #d9d9d9;
 $medium-gray: #808080;
@@ -48,7 +49,7 @@ a {
 
 body {
   background: url('../images/rt-bg.svg') no-repeat lighten($old-yellow, 30%);
-  background-size: 100%;
+  background-size: cover;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
@@ -127,6 +128,46 @@ h4, h5, h6 {
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
 
+.site-title {
+  margin-bottom: 0;
+}
+
+// Header 
+
+// Top header
+
+.top-header {
+  position: relative;
+}
+
+.login {
+  display: inline-block;
+  // float: right;
+  padding: .5rem;
+  position: absolute;
+  right: 0;
+  // text-align: right;
+  top: 0;
+
+  svg {
+    width: 16px;
+  }
+
+  a {
+    svg {
+      fill: $red;
+    }
+
+    &:hover {
+      background: transparent;
+
+      svg {
+        fill: lighten($red, 10%);
+      }
+    }
+  }
+}
+
 // Navigation
 
 nav,
@@ -159,6 +200,7 @@ nav,
   display: block;
   font-size: 4rem;
   font-variation-settings: 'wdth' 100, 'wght' 600;
+  margin: 0;
   min-width: 280px;
   padding-top: 0;
   position: relative;
@@ -168,8 +210,8 @@ nav,
 
   svg {
     display: block;
-    margin: 1rem auto;
-    max-height: 48px;
+    margin: 1rem auto 0;
+    max-height: 36px;
     max-width: 56px;
     vertical-align: top;
   }
