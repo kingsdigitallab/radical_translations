@@ -1,12 +1,18 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
+from django_elasticsearch_dsl_drf.constants import (
+    SUGGESTER_COMPLETION,
+    SUGGESTER_PHRASE,
+    SUGGESTER_TERM,
+)
 from django_elasticsearch_dsl_drf.filter_backends import (
     DefaultOrderingFilterBackend,
     FacetedSearchFilterBackend,
     FilteringFilterBackend,
     OrderingFilterBackend,
     SearchFilterBackend,
+    SuggesterFilterBackend,
 )
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
 
@@ -31,11 +37,13 @@ class ResourceViewSet(DocumentViewSet):
     serializer_class = ResourceDocumentSerializer
 
     filter_backends = [
-        DefaultOrderingFilterBackend,
-        FacetedSearchFilterBackend,
         FilteringFilterBackend,
+        FacetedSearchFilterBackend,
         OrderingFilterBackend,
+        DefaultOrderingFilterBackend,
         SearchFilterBackend,
+        # the suggester backend needs to be the last backend
+        SuggesterFilterBackend,
     ]
 
     lookup_field = "id"
@@ -133,3 +141,12 @@ class ResourceViewSet(DocumentViewSet):
     pagination_class = PageNumberPagination
 
     search_fields = ["title.main_title", "summary"]
+
+    suggester_fields = {
+        "suggest_field": {
+            "field": "title.main_title.suggest",
+            "suggesters": [SUGGESTER_COMPLETION, SUGGESTER_PHRASE, SUGGESTER_TERM],
+            "default_suggester": SUGGESTER_COMPLETION,
+            "options": {"skip_duplicates": True},
+        },
+    }

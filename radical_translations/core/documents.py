@@ -38,6 +38,7 @@ class ResourceDocument(Document):
                 fields={
                     "raw": fields.KeywordField(),
                     "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
+                    "suggest": fields.CompletionField(),
                 },
             ),
             "subtitle": fields.TextField(),

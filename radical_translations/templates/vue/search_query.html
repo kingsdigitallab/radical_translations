@@ -1,2 +1,12 @@
 <h3>Search query</h3>
-<input v-model="query" type="text" placeholder="Search query..." />
+<div class="dropdown">
+    <input v-model="query_text" v-on:keyup.13="textSearch()" class="form-control dropdown-toggle" data-toggle="dropdown" type="text" placeholder="Search query..." />
+    <ul v-if="suggestions" class="dropdown-menu">
+        <li v-for="suggest in suggestions">
+        <button
+            @click="textSearch(suggest)" 
+            class="filter btn btn-link"
+            type="button">{[ suggest ]}</button>
+        </li>
+    </ul>
+</div>
