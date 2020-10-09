@@ -5,6 +5,7 @@ Base settings to build other settings files upon.
 import os
 
 import environ
+
 from controlled_vocabulary import defaults
 
 ROOT_DIR = (
@@ -284,6 +285,8 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 # https://docs.wagtail.io/en/v2.7.1/getting_started/integrating_into_django.html
 WAGTAIL_SITE_NAME = "Radical Translations"
+
+HOMEPAGE_RICHTEXT_FEATURES = ["bold", "italic", "link"]
 
 # Your stuff...
 # ------------------------------------------------------------------------------
