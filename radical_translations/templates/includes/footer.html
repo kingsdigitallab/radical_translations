@@ -4,25 +4,27 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <h4>{{ ds.WAGTAIL_SITE_NAME }}</h4>
+        <h2>{{ ds.WAGTAIL_SITE_NAME }}</h2>
         <p>&copy; {% now 'Y' %}</p>
       </div>
       <div class="col-sm partners-funders">
-        <h4>Partners and Funders</h4>
+        <h2>Partners and Funders</h2>
 
-        <a href="//kcl.ac.uk/">
+        <a href="//kcl.ac.uk/" class="one-quarter">
           <img src="{% static 'images/logos/kings-logo-red.svg' %}" alt="King's College London website.">
         </a>
 
-        <a href="//www.unimib.it">
+        <a href="//www.unimib.it" class="one-quarter">
           <img src="{% static 'images/logos/logo-universita-bicocca-milano.svg' %}" alt="Univeristà degli Studi di Milano Bicocca">
         </a>
 
-        <a href="//ahrc.ukri.org/">
+        <a href="//ahrc.ukri.org/" class="half">
           <img src="{% static 'images/logos/UKRI_AHR_Council-Logo_Horiz-RGB.svg' %}" alt="UKRI AHRC">
         </a>
       </div>
-      <div class="col-sm">
+      <div class="col-sm text-right">
+        <p><a href="#">Accessibility statement</a></p>
+        <p><a href="#">Cookies and privacy policy</a></p>
         <p>
           Designed, developed and maintained by <a href="//kdl.kcl.ac.uk">King's Digital Lab</a>.
         </p>
