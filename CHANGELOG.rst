@@ -28,6 +28,7 @@ Added
 * Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
 * `Resource` text search with filters, ordering and pagination of search results.
 * `Resource` search tests.
+* `Resource` search suggestions.
 
 Changed
 ~~~~~~~
