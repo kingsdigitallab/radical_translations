@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block main %}
+<article>
+    <section class="block-section">
+        {{ page.introduction|richtext }}
+    </section>
+
+    {% for block in page.body %}
+    <section id="block-{{ block.block_type }}">
+        {% with value=block.value %}
+        <h2>{{ value.title }}</h2>
+        {{ value.description|richtext }}
+        {% if value.page %}
+        <a href="{% pageurl value.page %}">>>></a>
+        {% endif %}
+        {% endwith %}
+    </section>
+    {% endfor %}
+</article>
+{% endblock main %}

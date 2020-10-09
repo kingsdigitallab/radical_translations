@@ -1,9 +1,13 @@
+from django.conf import settings
 from django.db import models
 from kdl_wagtail.core.models import BaseIndexPage, BasePage, BaseStreamPage, IndexPage
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.core import blocks
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.models import Page
 from wagtail.core.query import PageQuerySet
 
 
@@ -44,4 +48,57 @@ class BlogPost(BaseStreamPage):
     promote_panels = BasePage.promote_panels + [
         FieldPanel("guest_authors"),
         FieldPanel("tags"),
+    ]
+
+
+class HomePage(BasePage):
+    features = settings.HOMEPAGE_RICHTEXT_FEATURES
+
+    introduction = RichTextField(features=features)
+    body = StreamField(
+        blocks.StreamBlock(
+            [
+                (
+                    "section",
+                    blocks.StructBlock(
+                        [
+                            ("title", blocks.CharBlock()),
+                            ("description", blocks.RichTextBlock(features=features)),
+                        ],
+                        icon="doc-full-inverse",
+                    ),
+                ),
+                (
+                    "featured",
+                    blocks.StructBlock(
+                        [
+                            ("title", blocks.CharBlock()),
+                            ("page", blocks.PageChooserBlock(can_choose_root=False)),
+                            ("description", blocks.RichTextBlock(features=features)),
+                        ],
+                        icon="pick",
+                    ),
+                ),
+            ],
+            block_counts={
+                "section": {"min_number": 4, "max_num": 4},
+                "featured": {"min_number": 3, "max_num": 3},
+            },
+        )
+    )
+
+    subpage_types = [
+        "kdl_wagtail_zotero.BibliographyIndexPage",
+        "BlogIndexPage",
+        "kdl_wagtail_core.ContactUsPage",
+        "kdl_wagtail_core.IndexPage",
+        "kdl_wagtail_people.PeopleIndexPage",
+        "kdl_wagtail_core.RichTextPage",
+        "kdl_wagtail_core.SitemapPage",
+        "kdl_wagtail_core.StreamPage",
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel("introduction", classname="full"),
+        StreamFieldPanel("body"),
     ]
