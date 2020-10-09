@@ -1,10 +1,6 @@
 {% load menu_tags static i18n %}
 
-{% comment %} 
- # TODO:
- # If on homepage or on small screens show collapsed navigation
- # Else display the expanded nav
-{% endcomment %}
+{# Nav collapsed on homepage / expanded on other pages while on lg screens #}
 
 {% if page.url == '/' %}
 <div class="d-none d-md-block navbar main-menu{% if page.url == '/' %} homepage-menu{% endif %}">
@@ -26,7 +22,7 @@
     {% endblock %}
 </nav>
 
-{# Always collapsed nav for small screens #}
+{# Nav always collapsed nav for small screens #}
 
 <div class="d-block d-sm-block d-md-none">
   <nav class="navbar main-menu{% if page.url == '/' %} homepage-menu{% endif %}">
