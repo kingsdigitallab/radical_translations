@@ -295,6 +295,8 @@ ES_FACET_OPTIONS = {"order": {"_key": "asc"}, "size": 100}
 # https://docs.wagtail.io/en/v2.7.1/getting_started/integrating_into_django.html
 WAGTAIL_SITE_NAME = "Radical Translations"
 
+HOMEPAGE_RICHTEXT_FEATURES = ["bold", "italic", "link"]
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 
