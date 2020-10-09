@@ -49,7 +49,7 @@ a {
 
 body {
   background: url('../images/rt-bg.svg') no-repeat lighten($old-yellow, 30%);
-  background-size: cover;
+  background-size: 100%;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
@@ -196,21 +196,24 @@ nav,
   padding: 0;
 }
 
-.navbar-brand {
+.brand {
   display: block;
+  font-family: "Oswald", sans-serif;
   font-size: 4rem;
   font-variation-settings: 'wdth' 100, 'wght' 600;
+  line-height: 1;
   margin: 0;
   min-width: 280px;
-  padding-top: 0;
+  padding-top: 1rem;
   position: relative;
   text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
   width: 100%;
 
   svg {
     display: block;
-    margin: 1rem auto 0;
+    margin: 0 auto;
     max-height: 36px;
     max-width: 56px;
     vertical-align: top;
@@ -223,7 +226,14 @@ nav,
 }
 
 .navbar-nav {
-  margin: 0 auto;
+  // margin: 0 auto;
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.nav-item {
+  display: inline-block;
 }
 
 .navbar-toggler {

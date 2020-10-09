@@ -1,13 +1,13 @@
 {% load menu_tags static i18n %}
 
-<div class="navbar main-menu{% if page.url == '/' %} homepage-menu{% endif %}">
+{% comment %} 
+ # TODO:
+ # If on homepage or on small screens show collapsed navigation
+ # Else display the expanded nav
+{% endcomment %}
 
-    <a class="navbar-brand" href="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 467.47 367.29"><path d="M163.24,352.72a48.24,48.24,0,0,1,96.48,0c0,.34,0,.67,0,1H477.31S452.5,217.2,327.21,120.55C216.64,35.25,141.45,63.8,104.6,84.43c-28.55,16-56,68.72-36.81,95.25C83.15,201,128.34,167,132.63,188.52c3,14.74-35.87,44.84-67.79,104.64s-23.79,60.57-23.79,60.57H163.26C163.26,353.39,163.24,353.06,163.24,352.72Z" transform="translate(-24.98 -62.71)" fill="#9b2923"/><path d="M236.69,353.73c0-.34,0-.67,0-1a25.24,25.24,0,0,0-50.48,0c0,.34,0,.67,0,1Z" transform="translate(-24.98 -62.71)" fill="#9b2923"/><rect y="306.19" width="467.47" height="61.09" rx="5.61" fill="#9b2923"/></svg>
-
-      <p class="site-title">{{ ds.WAGTAIL_SITE_NAME }}</p>
-    </a>
-
+{% if page.url == '/' %}
+<div class="d-none d-md-block navbar main-menu{% if page.url == '/' %} homepage-menu{% endif %}">
     <button class="navbar-toggler" type="button"
           data-toggle="collapse" data-target="#collapsedMainMenu"
           aria-controls="collapsedMainMenu" aria-expanded="false"
@@ -18,8 +18,29 @@
       Menu
     </button>
 </div>
-<nav class="collapse navbar navbar-expand-md main-menu" id="collapsedMainMenu">
+{% endif %}
+
+<nav class="{% if page.url != '/' %} navbar-expand-lg{% endif %}collapse navbar navbar-expand-md main-menu{% if page.url != '/' %} d-none d-sm-none d-md-block{% endif %}" id="collapsedMainMenu">
     {% block main_menu %}
     {% main_menu %}
     {% endblock %}
 </nav>
+
+{# Always collapsed nav for small screens #}
+
+<div class="d-block d-sm-block d-md-none">
+  <nav class="navbar main-menu{% if page.url == '/' %} homepage-menu{% endif %}">
+      <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#collapsedMainMenuSmallScreen"
+            aria-controls="collapsedMainMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+        </span>
+        Menu
+      </button>
+      <div class="collapse navbar-collapse main-menu" id="collapsedMainMenuSmallScreen">
+          {% main_menu %}
+      </div>
+  </nav>
+</div>
