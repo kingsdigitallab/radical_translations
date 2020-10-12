@@ -8512,7 +8512,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-title {
   margin-bottom: 8px;
-  margin-bottom: .5rem; }
+  margin-bottom: 0.5rem; }
 
 .top-header {
   position: relative; }
@@ -8520,7 +8520,7 @@ h1, h2, h3, h4, h5, h6 {
 .login {
   display: inline-block;
   padding: 8px;
-  padding: .5rem;
+  padding: 0.5rem;
   position: absolute;
   right: 0;
   top: 0; }
@@ -8556,7 +8556,7 @@ nav,
 
 .brand {
   display: block;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 64px;
   font-size: 4rem;
   font-variation-settings: 'wdth' 100, 'wght' 600;
@@ -8597,7 +8597,7 @@ nav,
 
 .partners-funders h2 {
   padding-left: 8px;
-  padding-left: .5rem; }
+  padding-left: 0.5rem; }
 
 .partners-funders img,
 .partners-funders svg {
@@ -8629,8 +8629,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .sections {
   display: grid;
   grid-gap: 1px; }
-  .sections h1, .sections h2, .sections h3,
-  .sections h4, .sections h4, .sections h6 {
+  .sections h1,
+  .sections h2,
+  .sections h3,
+  .sections h4,
+  .sections h4,
+  .sections h6 {
     padding-top: 16px;
     padding-top: 1rem;
     text-transform: uppercase; }

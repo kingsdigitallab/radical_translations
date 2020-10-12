@@ -1,4 +1,8 @@
-@import 'custom_bootstrap_vars'; @import 'bootstrap'; @import 'fonts'; // project specific CSS goes here
+@import 'custom_bootstrap_vars';
+@import 'bootstrap';
+@import 'fonts';
+
+// project specific CSS goes here
 
 /* Variables */
 
@@ -50,7 +54,6 @@ body {
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
 
-
 b,
 strong {
   font-variation-settings: 'wdth' 400, 'wght' 700;
@@ -69,60 +72,64 @@ footer {
 // Halftone filter
 // Source: https://codepen.io/coreh/pen/LQJBLa
 
-<<<<<<< HEAD
-.halftone {
-  background: white;
-  position: relative;
-  filter: contrast(500%);
-  overflow: hidden;
-}
+// .halftone {
+//     background: white;
+//     position: relative;
+//     filter: contrast(500%);
+//     overflow: hidden;
+// }
 
-.halftone > * {
-  filter: brightness(0.5) blur(4px);
-  filter: grayscale(100%);
-}
+// .halftone > * {
+//     filter: brightness(0.5) blur(4px);
+//     filter: grayscale(100%);
+// }
 
-.halftone::after {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  right: -100%;
-  bottom: -100%;
-  background-blend-mode: hard-light;
-  background: radial-gradient(8px 8px, black, white),
-    radial-gradient(8px 8px, black, white),
-    radial-gradient(8px 8px, black, white);
-  background-size: 8px 8px;
-  background-position: 0 -3px, -2px 0, 2px 0;
-  mix-blend-mode: screen;
-  pointer-events: none;
-  transform: rotate(11.25deg);
-  transition: 1s ease-in-out transform;
-  z-index: 1;
+// .halftone::after {
+//     content: '';
+//     position: absolute;
+//     top: -100%;
+//     left: -100%;
+//     right: -100%;
+//     bottom: -100%;
+//     background-blend-mode: hard-light;
+//     background:
+//         radial-gradient(8px 8px, black, white),
+//         radial-gradient(8px 8px, black, white),
+//         radial-gradient(8px 8px, black, white);
+//     background-size: 8px 8px;
+//     background-position: 0 -3px, -2px 0, 2px 0;
+//     mix-blend-mode: screen;
+//     pointer-events: none;
+//     transform: rotate(11.25deg);
+//     transition: 1s ease-in-out transform;
+//     z-index: 1;
+// }
 
-  .image {
-    img {
-      height: auto;
-      max-width: 100%;
-    }
+.image {
+  img {
+    height: auto;
+    max-width: 100%;
   }
 }
 
 // Headings
 
-h1, h2, h3,
-h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 700;
   font-weight: 700;
 }
 
 .site-title {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
-// Header 
+// Header
 
 // Top header
 
@@ -132,7 +139,7 @@ h4, h5, h6 {
 
 .login {
   display: inline-block;
-  padding: .5rem;
+  padding: 0.5rem;
   position: absolute;
   right: 0;
   top: 0;
@@ -185,7 +192,7 @@ nav,
 
 .brand {
   display: block;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 4rem;
   font-variation-settings: 'wdth' 100, 'wght' 600;
   line-height: 1;
@@ -230,21 +237,20 @@ nav,
   svg {
     height: 24px;
   }
->>>>>>> develop
 }
 
 // Logos
 
 .partners-funders {
   h2 {
-    padding-left: .5rem;
+    padding-left: 0.5rem;
   }
 
   img,
   svg {
     max-height: 100px;
     max-width: 100%;
-    padding: .5rem;
+    padding: 0.5rem;
   }
 
   a {
@@ -268,7 +274,7 @@ main {
 }
 
 .main {
-  padding: 1rem 0;  
+  padding: 1rem 0;
 }
 
 /* Homepage */
@@ -281,8 +287,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   display: grid;
   grid-gap: 1px;
 
-  h1, h2, h3,
-  h4, h4, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h4,
+  h6 {
     padding-top: 1rem;
     text-transform: uppercase;
   }
@@ -301,7 +311,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     border-bottom: 10px solid $old-yellow;
     height: 100%;
   }
-  
+
   section:nth-child(1) {
     grid-column: 5 / 10;
     grid-row: 1;
