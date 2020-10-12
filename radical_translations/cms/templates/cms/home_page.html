@@ -28,7 +28,7 @@
     {% if block.block_type == 'featured' %}
         {% with value=block.value %}
         <section class="{{ block.block_type }}">
-            <a href="#" class="block-link" href="{% pageurl value.page %}">
+            <a class="block-link" href="{% pageurl value.page %}">
                 <div class="card">
                   <div class="card-header">
                     Category
