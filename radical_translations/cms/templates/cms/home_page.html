@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 
 {% block main %}
 <div class="sections">
@@ -16,20 +15,31 @@
                 <a href="{% pageurl value.page %}">{{ value.title }}</a>
             </h2>
             {{ value.description|richtext }}
+
+            <a href="{% pageurl value.page %}" class="btn btn-secondary btn-block">Find out more <span class="sr-only">about {{ value.title }}</span></a>
         </section>
         {% endwith %}
     {% endif %}
     {% endfor %}
-
+</div>
+<h2>Featured</h2>
+<div class="features">
     {% for block in page.body %}
     {% if block.block_type == 'featured' %}
         {% with value=block.value %}
         <section class="{{ block.block_type }}">
-            <h2>
-                <a href="{% pageurl value.page %}">{{ value.title }}</a>
-            </h2>
-            {{ value.description|richtext }}
-            <a href="{% pageurl value.page %}">>>></a>
+            <a href="#" class="block-link" href="{% pageurl value.page %}">
+                <div class="card">
+                  <div class="card-header">
+                    Category
+                  </div>
+                  <img src="{% static 'images/image-placeholder.svg' %}" class="card-img-top" alt="image placeholder for featured content">
+                  <div class="card-body">
+                    <h3 class="card-title">{{ value.title }}</h3>
+                    <p class="card-text">{{ value.description|richtext }}</p>
+                  </div>
+                </div>
+            </a>
         </section>
         {% endwith %}
     {% endif %}
