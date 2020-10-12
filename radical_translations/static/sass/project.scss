@@ -70,42 +70,6 @@ footer {
   }
 }
 
-// Halftone filter
-// Source: https://codepen.io/coreh/pen/LQJBLa
-
-// .halftone {
-//     background: white;
-//     position: relative;
-//     filter: contrast(500%);
-//     overflow: hidden;
-// }
-
-// .halftone > * {
-//     filter: brightness(0.5) blur(4px);
-//     filter: grayscale(100%);
-// }
-
-// .halftone::after {
-//     content: '';
-//     position: absolute;
-//     top: -100%;
-//     left: -100%;
-//     right: -100%;
-//     bottom: -100%;
-//     background-blend-mode: hard-light;
-//     background:
-//         radial-gradient(8px 8px, black, white),
-//         radial-gradient(8px 8px, black, white),
-//         radial-gradient(8px 8px, black, white);
-//     background-size: 8px 8px;
-//     background-position: 0 -3px, -2px 0, 2px 0;
-//     mix-blend-mode: screen;
-//     pointer-events: none;
-//     transform: rotate(11.25deg);
-//     transition: 1s ease-in-out transform;
-//     z-index: 1;
-// }
-
 .image {
   img {
     height: auto;
@@ -175,13 +139,36 @@ nav,
       font-size: 1.5rem;
       text-decoration: none;
 
-      &:hover {
+      &:hover,
+      &.active {
         background: transparent;
         border-bottom: 10px solid $old-yellow;
+        color: lighten($radical-red, 10%);
       }
     }
   }
 }
+
+// navbar style otpion: red bar
+
+// #collapsedMainMenu,
+// #collapsedMainMenuSmallScreen {
+//   background: $radical-red;
+//   border-bottom: 10px solid $dark-gray;
+//   color: $white;
+
+//   .nav-link {
+//     border-bottom: 10px solid darken($radical-red, 10%);
+//     color: $white;
+//     font-size: 1.5rem;
+//     text-decoration: none;
+
+//     &:hover {
+//       background: transparent;
+//       border-bottom: 10px solid $old-yellow;
+//     }
+//   }
+// }
 
 .navbar {
   padding: 0;
@@ -251,8 +238,14 @@ nav,
   }
 
   a {
+    background: transparent;
     display: inline-block;
     text-align: center;
+
+    &:active,
+    &:focus {
+      border: 1px dotted $radical-red;
+    }
 
     &.one-quarter {
       width: 25%;
@@ -438,7 +431,7 @@ section:nth-child(5) {
   text-align: left;
 
   h3 {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1rem;
   }
 
@@ -473,3 +466,39 @@ section:nth-child(5) {
     width: 9px;
   }
 }
+
+// Halftone filter
+// Source: https://codepen.io/coreh/pen/LQJBLa
+
+// .halftone {
+//     background: white;
+//     position: relative;
+//     filter: contrast(500%);
+//     overflow: hidden;
+// }
+
+// .halftone > * {
+//     filter: brightness(0.5) blur(4px);
+//     filter: grayscale(100%);
+// }
+
+// .halftone::after {
+//     content: '';
+//     position: absolute;
+//     top: -100%;
+//     left: -100%;
+//     right: -100%;
+//     bottom: -100%;
+//     background-blend-mode: hard-light;
+//     background:
+//         radial-gradient(8px 8px, black, white),
+//         radial-gradient(8px 8px, black, white),
+//         radial-gradient(8px 8px, black, white);
+//     background-size: 8px 8px;
+//     background-position: 0 -3px, -2px 0, 2px 0;
+//     mix-blend-mode: screen;
+//     pointer-events: none;
+//     transform: rotate(11.25deg);
+//     transition: 1s ease-in-out transform;
+//     z-index: 1;
+// }

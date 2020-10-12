@@ -8546,10 +8546,12 @@ nav,
       font-size: 24px;
       font-size: 1.5rem;
       text-decoration: none; }
-      nav a.nav-link:hover,
-      .main-menu a.nav-link:hover {
+      nav a.nav-link:hover, nav a.nav-link.active,
+      .main-menu a.nav-link:hover,
+      .main-menu a.nav-link.active {
         background: transparent;
-        border-bottom: 10px solid #e9c46a; }
+        border-bottom: 10px solid #e9c46a;
+        color: #c5342c; }
 
 .navbar {
   padding: 0; }
@@ -8607,8 +8609,11 @@ nav,
   padding: .5rem; }
 
 .partners-funders a {
+  background: transparent;
   display: inline-block;
   text-align: center; }
+  .partners-funders a:active, .partners-funders a:focus {
+    border: 1px dotted #9b2923; }
   .partners-funders a.one-quarter {
     width: 25%; }
   .partners-funders a.half {
@@ -8741,7 +8746,7 @@ section:nth-child(5) {
   position: relative;
   text-align: left; }
   .events h3 {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 16px;
     font-size: 1rem; }
   .events .event {
