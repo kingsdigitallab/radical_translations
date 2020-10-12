@@ -5,8 +5,6 @@ set -o pipefail
 set -o nounset
 
 
-
-
 if [ -z "${POSTGRES_USER}" ]; then
     base_postgres_image_default_user='postgres'
     export POSTGRES_USER="${base_postgres_image_default_user}"
@@ -39,6 +37,10 @@ until postgres_ready; do
 done
 >&2 echo 'PostgreSQL is available'
 
+if [ -z "${ELASTICSEARCH_HOST:-}" ]; then
+    export ELASTICSEARCH_HOST="elasticsearch:9200"
+fi
+
 elasticsearch_ready() {
 python << END
 import sys
@@ -46,7 +48,7 @@ import sys
 from elasticsearch_dsl import connections
 
 try:
-    c = connections.create_connection(hosts=["elasticsearch"], timeout=10)
+    c = connections.create_connection(hosts=["${ELASTICSEARCH_HOST}"], timeout=10)
     c.info()
 except ConnectionError:
     sys.exit(-1)

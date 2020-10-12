@@ -29,7 +29,7 @@ Added
 * `Resource` text search with filters, ordering and pagination of search results.
 * `Resource` search tests.
 * `Resource` search suggestions.
-* Add new Wagtail_ page type for the home page.
+* New Wagtail_ page type for the home page.
 
 Changed
 ~~~~~~~
