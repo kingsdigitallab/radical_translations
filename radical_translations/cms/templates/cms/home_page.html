@@ -3,21 +3,36 @@
 {% load wagtailcore_tags %}
 
 {% block main %}
-<article>
-    <section class="block-section">
+<div class="sections">
+    <section class="block-section intro">
         {{ page.introduction|richtext }}
     </section>
 
     {% for block in page.body %}
-    <section id="block-{{ block.block_type }}">
+    {% if block.block_type == 'section' %}
         {% with value=block.value %}
-        <h2>{{ value.title }}</h2>
-        {{ value.description|richtext }}
-        {% if value.page %}
-        <a href="{% pageurl value.page %}">>>></a>
-        {% endif %}
+        <section class="{{ block.block_type }}">
+            <h2>
+                <a href="{% pageurl value.page %}">{{ value.title }}</a>
+            </h2>
+            {{ value.description|richtext }}
+        </section>
         {% endwith %}
-    </section>
+    {% endif %}
     {% endfor %}
-</article>
+
+    {% for block in page.body %}
+    {% if block.block_type == 'featured' %}
+        {% with value=block.value %}
+        <section class="{{ block.block_type }}">
+            <h2>
+                <a href="{% pageurl value.page %}">{{ value.title }}</a>
+            </h2>
+            {{ value.description|richtext }}
+            <a href="{% pageurl value.page %}">>>></a>
+        </section>
+        {% endwith %}
+    {% endif %}
+    {% endfor %}
+</div>
 {% endblock main %}

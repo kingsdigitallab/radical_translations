@@ -1,7 +1,42 @@
 {% load menu_tags static i18n %}
 
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+{# Nav collapsed on homepage / expanded on other pages while on lg screens #}
+
+{% if page.url == '/' %}
+<div class="d-none d-md-block navbar main-menu{% if page.url == '/' %} homepage-menu{% endif %}">
+    <button class="navbar-toggler" type="button"
+          data-toggle="collapse" data-target="#collapsedMainMenu"
+          aria-controls="collapsedMainMenu" aria-expanded="false"
+          aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+      </span>
+      Menu
+    </button>
+</div>
+{% endif %}
+
+<nav class="{% if page.url != '/' %} navbar-expand-lg{% endif %}collapse navbar navbar-expand-md main-menu{% if page.url != '/' %} d-none d-sm-none d-md-block{% endif %}" id="collapsedMainMenu">
     {% block main_menu %}
     {% main_menu %}
     {% endblock %}
 </nav>
+
+{# Nav always collapsed nav for small screens #}
+
+<div class="d-block d-sm-block d-md-none">
+  <nav class="navbar main-menu{% if page.url == '/' %} homepage-menu{% endif %}">
+      <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#collapsedMainMenuSmallScreen"
+            aria-controls="collapsedMainMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+        </span>
+        Menu
+      </button>
+      <div class="collapse navbar-collapse main-menu" id="collapsedMainMenuSmallScreen">
+          {% main_menu %}
+      </div>
+  </nav>
+</div>

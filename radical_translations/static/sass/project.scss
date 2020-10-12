@@ -1,8 +1,4 @@
-@import 'custom_bootstrap_vars';
-@import 'bootstrap';
-@import 'fonts';
-
-// project specific CSS goes here
+@import 'custom_bootstrap_vars'; @import 'bootstrap'; @import 'fonts'; // project specific CSS goes here
 
 /* Variables */
 
@@ -10,43 +6,70 @@
 // Ref: https://getbootstrap.com/docs/4.5/getting-started/theming/#modify-map
 
 $theme-colors: (
-  'primary': #3c153b,
+  'primary': #9b2923,
   'danger': #ff4136
 );
 
-// Alert colors
+// Colour palette
 
-$white: #fff;
-$mint-green: #d6e9c6;
 $black: #000;
-$pink: #f2dede;
+$dark-gray: #222222;
 $dark-pink: #eed3d7;
-$red: #b94a48;
+// $mint-green: #d6e9c6;
+$dirt: #eae9da;
+$green-italian-flag: rgba(0, 146, 70, 1);
+$kaki: #c3c1a8;
+$light-gray: #d9d9d9;
+$medium-gray: #808080;
+$old-yellow: #e9c46a;
+$pink: #f2dede;
+$prussian-blue: #00548b;
+$purple: #7f2992;
+$radical-red: #9b2923;
+$white: #fff;
+
+$link-color: $radical-red;
 
 /* Globals */
 
-body {
-  background: #f8f8f8;
-  font-family: 'Merriweather', serif;
+a {
+  color: $radical-red;
+  text-decoration: underline;
+
+  &:hover {
+    background: $radical-red;
+    color: $white;
+    text-decoration: none;
+  }
 }
 
-footer,
-.top-header {
-  background: white;
+body {
+  background: url('../images/rt-bg.svg') no-repeat lighten($old-yellow, 30%);
+  background-size: 100%;
+  font-family: Lora, serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+}
+
+
+b,
+strong {
+  font-variation-settings: 'wdth' 400, 'wght' 700;
 }
 
 footer {
+  background: white;
   border-top: 5px solid lighten($gray-600, 45%);
   padding: 1rem 0;
-}
 
-.top-header {
-  border-bottom: 5px solid lighten($gray-600, 45%);
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
 // Halftone filter
 // Source: https://codepen.io/coreh/pen/LQJBLa
 
+<<<<<<< HEAD
 .halftone {
   background: white;
   position: relative;
@@ -77,23 +100,286 @@ footer {
   transform: rotate(11.25deg);
   transition: 1s ease-in-out transform;
   z-index: 1;
+
+  .image {
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+  }
+}
+
+// Headings
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: Oswald, sans-serif;
+  font-variation-settings: 'wdth' 400, 'wght' 700;
+  font-weight: 700;
+}
+
+.site-title {
+  margin-bottom: .5rem;
+}
+
+// Header 
+
+// Top header
+
+.top-header {
+  position: relative;
+}
+
+.login {
+  display: inline-block;
+  padding: .5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  svg {
+    width: 16px;
+  }
+
+  a {
+    svg {
+      fill: $radical-red;
+    }
+
+    &:hover {
+      background: transparent;
+
+      svg {
+        fill: lighten($radical-red, 10%);
+      }
+    }
+  }
+}
+
+// Navigation
+
+nav,
+.main-menu {
+  font-family: Oswald, sans-serif;
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+
+  a {
+    text-decoration: none;
+
+    &.nav-link {
+      border-bottom: 10px solid darken($radical-red, 10%);
+      font-size: 1.5rem;
+      text-decoration: none;
+
+      &:hover {
+        background: transparent;
+        border-bottom: 10px solid $old-yellow;
+      }
+    }
+  }
+}
+
+.navbar {
+  padding: 0;
+}
+
+.brand {
+  display: block;
+  font-family: "Oswald", sans-serif;
+  font-size: 4rem;
+  font-variation-settings: 'wdth' 100, 'wght' 600;
+  line-height: 1;
+  margin: 0;
+  min-width: 280px;
+  padding-top: 1rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 100%;
+
+  svg {
+    display: block;
+    margin: 0 auto;
+    max-height: 36px;
+    max-width: 56px;
+    vertical-align: top;
+  }
+
+  &:hover {
+    background: transparent;
+    color: darken($radical-red, 10%);
+  }
+}
+
+.navbar-nav {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.nav-item {
+  display: inline-block;
+}
+
+.navbar-toggler {
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+
+  svg {
+    height: 24px;
+  }
+>>>>>>> develop
 }
 
 // Logos
 
 .partners-funders {
+  h2 {
+    padding-left: .5rem;
+  }
+
   img,
   svg {
     max-height: 100px;
-    max-width: 200px;
-    padding: 0.5rem;
+    max-width: 100%;
+    padding: .5rem;
+  }
+
+  a {
+    display: inline-block;
+    text-align: center;
+
+    &.one-quarter {
+      width: 25%;
+    }
+
+    &.half {
+      width: 45%;
+    }
   }
 }
 
 /* Main content area */
 
 main {
-  padding: 1rem 0;
+  position: relative;
+}
+
+.main {
+  padding: 1rem 0;  
+}
+
+/* Homepage */
+
+/*
+Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
+*/
+
+.sections {
+  display: grid;
+  grid-gap: 1px;
+
+  h1, h2, h3,
+  h4, h4, h6 {
+    padding-top: 1rem;
+    text-transform: uppercase;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .sections {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  section:nth-child(2),
+  section:nth-child(3),
+  section:nth-child(4),
+  section:nth-child(5) {
+    border-bottom: 10px solid $old-yellow;
+    height: 100%;
+  }
+  
+  section:nth-child(1) {
+    grid-column: 5 / 10;
+    grid-row: 1;
+  }
+  section:nth-child(2) {
+    grid-column: 1 / 5;
+    grid-row: 1 / 3;
+    z-index: 0;
+
+    .rich-text {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    p:first-child {
+      grid-column: 1 / 6;
+    }
+
+    p:last-child {
+      grid-column: 1 / 4;
+    }
+  }
+  section:nth-child(3) {
+    grid-column: 4 / 7;
+    grid-row: 2 / 3;
+    z-index: 1;
+  }
+  section:nth-child(4) {
+    grid-column: 7 / 10;
+    grid-row: 2 / 3;
+  }
+  section:nth-child(5) {
+    grid-column: 10 / 13;
+    grid-row: 1 / 3;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .sections {
+    grid-template-columns: 100%;
+  }
+
+  section {
+    grid-column: 1;
+  }
+}
+
+section {
+  font-size: 1.25em;
+  padding: 0 1rem;
+
+  &:nth-child(2) {
+    background-color: $old-yellow;
+  }
+
+  &:nth-child(3) {
+    background-color: $prussian-blue;
+  }
+
+  &:nth-child(4) {
+    background-color: $dark-gray;
+  }
+
+  &:nth-child(5) {
+    background-color: $radical-red;
+  }
+}
+
+section:nth-child(3),
+section:nth-child(4),
+section:nth-child(5) {
+  color: $white;
+}
+
+.intro {
+  color: $dark-gray;
+  font-size: 1.5rem;
+  font-style: italic;
 }
 
 /* Blog */
@@ -123,21 +409,21 @@ main {
 
 .alert-debug {
   background-color: $white;
-  border-color: $mint-green;
+  border-color: $dirt;
   color: $black;
 }
 
 .alert-error {
   background-color: $pink;
   border-color: $dark-pink;
-  color: $red;
+  color: $radical-red;
 }
 
 // Events timeline
 .events {
-  background: lighten($red, 40%);
+  background: lighten($radical-red, 40%);
   border-bottom-right-radius: 4px;
-  border-left: 3px solid $red;
+  border-left: 3px solid $radical-red;
   border-top-right-radius: 4px;
   font-size: 1.03em;
   line-height: 1.4em;
@@ -176,7 +462,7 @@ main {
   .event:after {
     background: $white;
     border-radius: 50%;
-    box-shadow: 0 0 0 3px $red;
+    box-shadow: 0 0 0 3px $radical-red;
     content: '';
     height: 9px;
     left: -55.8px;

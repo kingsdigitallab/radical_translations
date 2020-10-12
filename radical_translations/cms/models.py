@@ -63,6 +63,7 @@ class HomePage(BasePage):
                     blocks.StructBlock(
                         [
                             ("title", blocks.CharBlock()),
+                            ("page", blocks.PageChooserBlock(can_choose_root=False)),
                             ("description", blocks.RichTextBlock(features=features)),
                         ],
                         icon="doc-full-inverse",
