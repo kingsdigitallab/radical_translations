@@ -39,4 +39,25 @@ until postgres_ready; do
 done
 >&2 echo 'PostgreSQL is available'
 
+elasticsearch_ready() {
+python << END
+import sys
+
+from elasticsearch_dsl import connections
+
+try:
+    c = connections.create_connection(hosts=["elasticsearch"], timeout=10)
+    c.info()
+except ConnectionError:
+    sys.exit(-1)
+
+sys.exit(0)
+END
+}
+until elasticsearch_ready; do
+  >&2 echo 'Waiting for elasticsearch to become available...'
+  sleep 1
+done
+>&2 echo 'elasticsearch is available'
+
 exec "$@"
