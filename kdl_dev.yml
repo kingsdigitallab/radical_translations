@@ -5,7 +5,6 @@ volumes:
   postgres_data: {}
   postgres_data_backups: {}
   traefik: {}
-  elasticsearch_data: {}
 
 services:
   django:
@@ -67,8 +66,6 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.8.1
-    volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
     env_file:
       - ./.envs/.dev/.elasticsearch
     ports:

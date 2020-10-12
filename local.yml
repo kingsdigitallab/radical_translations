@@ -3,7 +3,6 @@ version: '3'
 volumes:
   local_postgres_data: {}
   local_postgres_data_backups: {}
-  local_elasticsearch_data: {}
 
 services:
   django:
@@ -58,21 +57,18 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.9.2
-    volumes:
-      - ./.volumes/local_elasticsearch_data:/usr/share/elasticsearch/data
     env_file:
       - ./.envs/.local/.elasticsearch
     ports:
       - '9200:9200'
       - '9300:9300'
     restart: unless-stopped
-
-  kibana:
-    image: kibana:7.9.2
-    depends_on:
-      - elasticsearch
-    #env_file:
-    #- ./.envs/.local/.kibana
-    ports:
-      - '5601:5601'
-    restart: unless-stopped
+  #kibana:
+  #image: kibana:7.9.2
+  #depends_on:
+  #- elasticsearch
+  ##env_file:
+  ##- ./.envs/.local/.kibana
+  #ports:
+  #- '5601:5601'
+  #restart: unless-stopped

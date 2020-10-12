@@ -50,8 +50,8 @@ from elasticsearch_dsl import connections
 try:
     c = connections.create_connection(hosts=["${ELASTICSEARCH_HOST}"], timeout=10)
     c.info()
-except ConnectionError as e:
-    print(e)
+except (ConnectionError) as e:
+    print('Elasticsearch not available...')
     sys.exit(-1)
 
 sys.exit(0)
