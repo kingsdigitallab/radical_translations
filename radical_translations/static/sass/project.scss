@@ -42,6 +42,13 @@ body {
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
 
+.btn {
+  border-radius: 0;
+  font-family: "Oswald", sans-serif;
+  font-variation-settings: 'wght' 700;
+  font-weight: 700;
+  text-transform: uppercase;
+}
 
 b,
 strong {
@@ -295,9 +302,20 @@ main {
   z-index: 100;
 }
 
+.card-image {
+  height: 200px;
+  margin-top: -10px;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
 .card-img-top {
   filter: grayscale(100%);
-  margin-top: -10px;
 }
 
 /* Homepage */
@@ -351,6 +369,60 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .features {
   display: grid;
   grid-gap: 20px;
+
+  /* TO BE REMOVED: for review only */
+
+  .featured {
+
+    .card-header {
+      &:before {
+        display: inline-block;
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    &:first-child {
+      .card-header {
+        &:before {
+          content: url("/static/fontawesome/svgs/solid/users.svg");
+        }
+        .card-category {
+          &:before {
+            content: "Biographies";
+          }
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      .card-header {
+        &:before {
+          content: url("/static/fontawesome/svgs/solid/copy.svg");
+        }
+        .card-category {
+          &:before {
+            content: "Resources";
+          }
+        }
+      }
+    }
+
+    &:nth-child(3) {
+      .card-header {
+        &:before {
+          content: url("/static/fontawesome/svgs/solid/pencil-alt.svg");
+        }
+        .card-category {
+          &:before {
+            content: "Blog";
+          }
+        }
+      }
+    }
+  }
+
+  /* END of TO BE REMOVED */
 }
 
 @include media-breakpoint-up(md) {
