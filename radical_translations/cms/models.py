@@ -10,7 +10,7 @@ from kdl_wagtail.core.models import (
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel, StreamFieldPanel
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
@@ -19,6 +19,7 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 
 from radical_translations.agents.models import Person
+from radical_translations.core.models import Resource
 
 
 class BlogIndexPage(BaseIndexPage):
@@ -61,60 +62,6 @@ class BlogPost(BaseStreamPage):
     ]
 
 
-class HomePage(BasePage):
-    features = settings.HOMEPAGE_RICHTEXT_FEATURES
-
-    introduction = RichTextField(features=features)
-    body = StreamField(
-        blocks.StreamBlock(
-            [
-                (
-                    "section",
-                    blocks.StructBlock(
-                        [
-                            ("title", blocks.CharBlock()),
-                            ("page", blocks.PageChooserBlock(can_choose_root=False)),
-                            ("description", blocks.RichTextBlock(features=features)),
-                        ],
-                        icon="doc-full-inverse",
-                    ),
-                ),
-                (
-                    "featured",
-                    blocks.StructBlock(
-                        [
-                            ("title", blocks.CharBlock()),
-                            ("page", blocks.PageChooserBlock(can_choose_root=False)),
-                            ("description", blocks.RichTextBlock(features=features)),
-                        ],
-                        icon="pick",
-                    ),
-                ),
-            ],
-            block_counts={
-                "section": {"min_number": 4, "max_num": 4},
-                "featured": {"min_number": 3, "max_num": 3},
-            },
-        )
-    )
-
-    subpage_types = [
-        "kdl_wagtail_zotero.BibliographyIndexPage",
-        "BlogIndexPage",
-        "kdl_wagtail_core.ContactUsPage",
-        "kdl_wagtail_core.IndexPage",
-        "kdl_wagtail_people.PeopleIndexPage",
-        "kdl_wagtail_core.RichTextPage",
-        "kdl_wagtail_core.SitemapPage",
-        "kdl_wagtail_core.StreamPage",
-    ]
-
-    content_panels = Page.content_panels + [
-        FieldPanel("introduction", classname="full"),
-        StreamFieldPanel("body"),
-    ]
-
-
 register_snippet(Person)
 
 
@@ -130,4 +77,67 @@ class BiographyPage(BaseRichTextPage):
     content_panels = BasePage.content_panels + [
         SnippetChooserPanel("person"),
         FieldPanel("body", classname="full"),
+    ]
+
+
+register_snippet(Resource)
+
+
+class HomePage(BasePage):
+    features = settings.HOMEPAGE_RICHTEXT_FEATURES
+
+    introduction = RichTextField(features=features)
+
+    sections = StreamField(
+        blocks.StreamBlock(
+            [
+                (
+                    "section",
+                    blocks.StructBlock(
+                        [
+                            ("title", blocks.CharBlock()),
+                            ("page", blocks.PageChooserBlock(can_choose_root=False)),
+                            ("description", blocks.RichTextBlock(features=features)),
+                        ],
+                        icon="doc-full-inverse",
+                    ),
+                ),
+            ],
+            block_counts={
+                "section": settings.HOMEPAGE_SECTION_BLOCK_COUNTS,
+            },
+        )
+    )
+
+    featured_biography = models.ForeignKey(
+        BiographyPage,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    featured_resource = models.ForeignKey(
+        Resource, blank=True, null=True, on_delete=models.SET_NULL, related_name="+"
+    )
+    featured_blog_post = models.ForeignKey(
+        BlogPost, blank=True, null=True, on_delete=models.SET_NULL, related_name="+"
+    )
+
+    subpage_types = [
+        "kdl_wagtail_zotero.BibliographyIndexPage",
+        "BlogIndexPage",
+        "kdl_wagtail_core.ContactUsPage",
+        "kdl_wagtail_core.IndexPage",
+        "kdl_wagtail_people.PeopleIndexPage",
+        "kdl_wagtail_core.RichTextPage",
+        "kdl_wagtail_core.SitemapPage",
+        "kdl_wagtail_core.StreamPage",
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel("introduction", classname="full"),
+        StreamFieldPanel("sections"),
+        PageChooserPanel("featured_biography"),
+        SnippetChooserPanel("featured_resource"),
+        PageChooserPanel("featured_blog_post"),
     ]
