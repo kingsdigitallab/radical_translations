@@ -1,6 +1,12 @@
 from django.conf import settings
 from django.db import models
-from kdl_wagtail.core.models import BaseIndexPage, BasePage, BaseStreamPage, IndexPage
+from kdl_wagtail.core.models import (
+    BaseIndexPage,
+    BasePage,
+    BaseRichTextPage,
+    BaseStreamPage,
+    IndexPage,
+)
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
@@ -9,6 +15,10 @@ from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 from wagtail.core.query import PageQuerySet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
+
+from radical_translations.agents.models import Person
 
 
 class BlogIndexPage(BaseIndexPage):
@@ -102,4 +112,22 @@ class HomePage(BasePage):
     content_panels = Page.content_panels + [
         FieldPanel("introduction", classname="full"),
         StreamFieldPanel("body"),
+    ]
+
+
+register_snippet(Person)
+
+
+class BiographyPage(BaseRichTextPage):
+    person = models.ForeignKey(
+        Person,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="biographies",
+    )
+
+    content_panels = BasePage.content_panels + [
+        SnippetChooserPanel("person"),
+        FieldPanel("body", classname="full"),
     ]
