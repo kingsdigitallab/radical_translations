@@ -21,7 +21,8 @@ Added
 * Field to record fictional places of publication.
 * Helper functions to `Date`, to get the earliest and latest dates for an object.
 * Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
-* Add new Wagtail_ page type for the home page.
+* Wagtail_ page type for the home page.
+* Wagtail_ page type for biographies.
 
 Changed
 ~~~~~~~
