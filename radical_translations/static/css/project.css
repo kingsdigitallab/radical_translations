@@ -8523,19 +8523,22 @@ h4, h5, h6,
 
 .login {
   display: inline-block;
-  padding: 8px;
-  padding: .5rem;
   position: absolute;
   right: 0;
-  top: 0; }
+  top: 0;
+  z-index: 999; }
   .login svg {
     width: 16px; }
-  .login a svg {
-    fill: #9b2923; }
-  .login a:hover {
-    background: transparent; }
-    .login a:hover svg {
-      fill: #c5342c; }
+  .login a {
+    display: block;
+    padding: 16px;
+    padding: 1rem; }
+    .login a svg {
+      fill: #9b2923; }
+    .login a:hover {
+      background: transparent; }
+      .login a:hover svg {
+        fill: #c5342c; }
 
 nav,
 .main-menu {

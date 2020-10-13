@@ -92,16 +92,18 @@ h4, h5, h6,
 
 .login {
   display: inline-block;
-  padding: .5rem;
   position: absolute;
   right: 0;
   top: 0;
+  z-index: 999;
 
   svg {
     width: 16px;
   }
 
   a {
+    display: block;
+    padding: 1rem;
     svg {
       fill: $radical-red;
     }
