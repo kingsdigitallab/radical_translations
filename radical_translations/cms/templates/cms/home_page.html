@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailimages_tags wagtailcore_tags %}
 
 {% block main %}
 <div class="sections">
@@ -30,14 +30,19 @@
         <section class="{{ block.block_type }}">
             <a class="block-link" href="{% pageurl value.page %}">
                 <div class="card">
-                  <div class="card-header">
-                    Category
-                  </div>
-                  <img src="{% static 'images/image-placeholder.svg' %}" class="card-img-top" alt="image placeholder for featured content">
-                  <div class="card-body">
-                    <h3 class="card-title">{{ value.title }}</h3>
-                    <p class="card-text">{{ value.description|richtext }}</p>
-                  </div>
+                    <div class="card-header">
+                        <span class="card-category">{# Dynamicall add category #}</span>
+                    </div>
+                    {# TODO #}
+                    {# if resource, hide the image for now #}
+                    {# else, display the feed_image in the promote tab #}
+                    <div class="card-image">
+                        <img src="{% static 'images/tom-birch-bw-xiGR_hCU-unsplash-low.jpg' %}" class="card-img-top" alt="image placeholder for featured content">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ value.title }}</h3>
+                        <p class="card-text">{{ value.description|richtext }}</p>
+                    </div>
                 </div>
             </a>
         </section>

@@ -8486,6 +8486,13 @@ body {
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
 
+.btn {
+  border-radius: 0;
+  font-family: "Oswald", sans-serif;
+  font-variation-settings: 'wght' 700;
+  font-weight: 700;
+  text-transform: uppercase; }
+
 b,
 strong {
   font-variation-settings: 'wdth' 400, 'wght' 700; }
@@ -8523,19 +8530,22 @@ h4, h5, h6,
 
 .login {
   display: inline-block;
-  padding: 8px;
-  padding: .5rem;
   position: absolute;
   right: 0;
-  top: 0; }
+  top: 0;
+  z-index: 999; }
   .login svg {
     width: 16px; }
-  .login a svg {
-    fill: #9b2923; }
-  .login a:hover {
-    background: transparent; }
-    .login a:hover svg {
-      fill: #c5342c; }
+  .login a {
+    display: block;
+    padding: 16px;
+    padding: 1rem; }
+    .login a svg {
+      fill: #9b2923; }
+    .login a:hover {
+      background: transparent; }
+      .login a:hover svg {
+        fill: #c5342c; }
 
 nav,
 .main-menu {
@@ -8655,10 +8665,19 @@ main {
           clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
   z-index: 100; }
 
+.card-image {
+  height: 200px;
+  margin-top: -10px;
+  overflow: hidden; }
+  .card-image img {
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    width: 100%; }
+
 .card-img-top {
   -webkit-filter: grayscale(100%);
-          filter: grayscale(100%);
-  margin-top: -10px; }
+          filter: grayscale(100%); }
 
 /* Homepage */
 /*
@@ -8695,7 +8714,25 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .features {
   display: grid;
-  grid-gap: 20px; }
+  grid-gap: 20px;
+  /* TO BE REMOVED: for review only */
+  /* END of TO BE REMOVED */ }
+  .features .featured .card-header:before {
+    display: inline-block;
+    height: 16px;
+    width: 16px; }
+  .features .featured:first-child .card-header:before {
+    content: url("/static/fontawesome/svgs/solid/users.svg"); }
+  .features .featured:first-child .card-header .card-category:before {
+    content: "Biographies"; }
+  .features .featured:nth-child(2) .card-header:before {
+    content: url("/static/fontawesome/svgs/solid/copy.svg"); }
+  .features .featured:nth-child(2) .card-header .card-category:before {
+    content: "Resources"; }
+  .features .featured:nth-child(3) .card-header:before {
+    content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
+  .features .featured:nth-child(3) .card-header .card-category:before {
+    content: "Blog"; }
 
 @media (min-width: 768px) {
   .sections {
