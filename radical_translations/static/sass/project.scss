@@ -85,6 +85,10 @@ h4, h5, h6,
   font-weight: 700;
 }
 
+.home-heading {
+  margin: 1.5rem 0 1rem;
+}
+
 .site-title {
   margin-bottom: .5rem;
 }
@@ -297,11 +301,9 @@ main {
 
   &:hover {
     text-decoration: underline;
-  }
 
-  img {
-    &:hover {
-      filter: brightness(0.9);
+    img {
+      filter: grayscale(0);
     }
   }
 }
@@ -315,7 +317,7 @@ main {
 }
 
 .card {
-  background: $kaki;
+  background: lighten($kaki, 15%);
 }
 
 .card-header {
@@ -330,14 +332,11 @@ main {
   overflow: hidden;
 
   img {
+    filter: grayscale(100%);
     height: 100%;
     object-fit: cover;
     width: 100%;
   }
-}
-
-.card-img-top {
-  filter: grayscale(100%);
 }
 
 /* Homepage */
@@ -392,11 +391,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   display: grid;
   grid-gap: 20px;
 
-  /* TO BE REMOVED: for review only */
-
   .featured {
-    background: $kaki;
-    border: 1px solid $kaki;
+    background: lighten($kaki, 15%);
+    border: 1px solid lighten($kaki, 10%);
 
     .card-header {
       &:before {
@@ -404,49 +401,26 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
         height: 16px;
         width: 16px;
       }
-    }
 
-    &:first-child {
-      .card-header {
+      &.biographies-icon {
         &:before {
           content: url("/static/fontawesome/svgs/solid/users.svg");
         }
-        .card-category {
-          &:before {
-            content: "Biographies";
-          }
-        }
       }
-    }
 
-    &:nth-child(2) {
-      .card-header {
-        &:before {
-          content: url("/static/fontawesome/svgs/solid/copy.svg");
-        }
-        .card-category {
-          &:before {
-            content: "Resources";
-          }
-        }
-      }
-    }
-
-    &:nth-child(3) {
-      .card-header {
+      &.blog-icon {
         &:before {
           content: url("/static/fontawesome/svgs/solid/pencil-alt.svg");
-        }
-        .card-category {
-          &:before {
-            content: "Blog";
-          }
-        }
+        }   
+      }
+
+      &.resources-icon {
+        &:before {
+          content: url("/static/fontawesome/svgs/solid/copy.svg");
+        }   
       }
     }
   }
-
-  /* END of TO BE REMOVED */
 }
 
 @include media-breakpoint-up(md) {
@@ -511,10 +485,16 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       grid-template-columns: 1fr;
     }
   }
+
+  .with-image {
+    grid-gap: 1rem;
+    grid-template-columns: 150px auto;
+  }
 }
 
 @include media-breakpoint-down(sm) {
-  .sections {
+  .sections,
+  .with-image {
     grid-template-columns: 100%;
   }
 
@@ -552,24 +532,42 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   font-style: italic;
 }
 
-/* Blog */
+/* Index pages / Blog / Etc. */
 
 .children {
   margin-top: 1rem;
+
+  a {
+    color: $dark-gray;
+    text-decoration: none;
+
+    &:hover {
+      color: $radical-red;
+      text-decoration: underline;
+    }
+  }
 
   ul {
     padding-left: 0;
 
     li {
-      border-bottom: 1px dotted #999;
+      border-bottom: 5px solid $kaki;
       list-style: none;
       padding: 1rem 0;
     }
   }
 }
 
+.with-image {
+  display: grid;
+}
+
 .child-page-image {
-  margin-right: 1rem;
+  img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
 }
 
 /* Alerts */
@@ -640,39 +638,3 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     width: 9px;
   }
 }
-
-// Halftone filter
-// Source: https://codepen.io/coreh/pen/LQJBLa
-
-// .halftone {
-//     background: white;
-//     position: relative;
-//     filter: contrast(500%);
-//     overflow: hidden;
-// }
-
-// .halftone > * {
-//     filter: brightness(0.5) blur(4px);
-//     filter: grayscale(100%);
-// }
-
-// .halftone::after {
-//     content: '';
-//     position: absolute;
-//     top: -100%;
-//     left: -100%;
-//     right: -100%;
-//     bottom: -100%;
-//     background-blend-mode: hard-light;
-//     background:
-//         radial-gradient(8px 8px, black, white),
-//         radial-gradient(8px 8px, black, white),
-//         radial-gradient(8px 8px, black, white);
-//     background-size: 8px 8px;
-//     background-position: 0 -3px, -2px 0, 2px 0;
-//     mix-blend-mode: screen;
-//     pointer-events: none;
-//     transform: rotate(11.25deg);
-//     transition: 1s ease-in-out transform;
-//     z-index: 1;
-// }
