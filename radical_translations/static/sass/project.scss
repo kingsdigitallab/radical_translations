@@ -104,24 +104,31 @@ h4, h5, h6,
   top: 0;
   z-index: 999;
 
-  svg {
-    width: 16px;
-  }
-
   a {
     display: block;
-    padding: 1rem;
+    padding: .25rem .5rem 0 0;
+    text-decoration: none;
+
     svg {
       fill: $radical-red;
     }
 
     &:hover {
       background: transparent;
+      text-decoration: underline;
 
       svg {
         fill: lighten($radical-red, 10%);
       }
     }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  svg {
+    width: 16px;
   }
 }
 
@@ -257,6 +264,21 @@ nav,
   }
 }
 
+.social-media {
+  a {
+    svg {
+      &:hover {
+        fill: $prussian-blue;
+      }
+    }
+  }
+  svg {
+    fill: $radical-red;
+    height: 24px;
+    width: 24px;
+  }
+}
+
 /* Main content area */
 
 main {
@@ -373,6 +395,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   /* TO BE REMOVED: for review only */
 
   .featured {
+    background: $kaki;
+    border: 1px solid $kaki;
 
     .card-header {
       &:before {

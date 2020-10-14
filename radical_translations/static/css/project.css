@@ -8534,18 +8534,22 @@ h4, h5, h6,
   right: 0;
   top: 0;
   z-index: 999; }
-  .login svg {
-    width: 16px; }
   .login a {
     display: block;
-    padding: 16px;
-    padding: 1rem; }
+    padding: 4px 8px 0 0;
+    padding: .25rem .5rem 0 0;
+    text-decoration: none; }
     .login a svg {
       fill: #9b2923; }
     .login a:hover {
-      background: transparent; }
+      background: transparent;
+      text-decoration: underline; }
       .login a:hover svg {
         fill: #c5342c; }
+  .login p {
+    margin: 0; }
+  .login svg {
+    width: 16px; }
 
 nav,
 .main-menu {
@@ -8632,6 +8636,14 @@ nav,
   .partners-funders a.half {
     width: 45%; }
 
+.social-media a svg:hover {
+  fill: #00548b; }
+
+.social-media svg {
+  fill: #9b2923;
+  height: 24px;
+  width: 24px; }
+
 /* Main content area */
 main {
   position: relative; }
@@ -8717,22 +8729,25 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   grid-gap: 20px;
   /* TO BE REMOVED: for review only */
   /* END of TO BE REMOVED */ }
-  .features .featured .card-header:before {
-    display: inline-block;
-    height: 16px;
-    width: 16px; }
-  .features .featured:first-child .card-header:before {
-    content: url("/static/fontawesome/svgs/solid/users.svg"); }
-  .features .featured:first-child .card-header .card-category:before {
-    content: "Biographies"; }
-  .features .featured:nth-child(2) .card-header:before {
-    content: url("/static/fontawesome/svgs/solid/copy.svg"); }
-  .features .featured:nth-child(2) .card-header .card-category:before {
-    content: "Resources"; }
-  .features .featured:nth-child(3) .card-header:before {
-    content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
-  .features .featured:nth-child(3) .card-header .card-category:before {
-    content: "Blog"; }
+  .features .featured {
+    background: #c3c1a8;
+    border: 1px solid #c3c1a8; }
+    .features .featured .card-header:before {
+      display: inline-block;
+      height: 16px;
+      width: 16px; }
+    .features .featured:first-child .card-header:before {
+      content: url("/static/fontawesome/svgs/solid/users.svg"); }
+    .features .featured:first-child .card-header .card-category:before {
+      content: "Biographies"; }
+    .features .featured:nth-child(2) .card-header:before {
+      content: url("/static/fontawesome/svgs/solid/copy.svg"); }
+    .features .featured:nth-child(2) .card-header .card-category:before {
+      content: "Resources"; }
+    .features .featured:nth-child(3) .card-header:before {
+      content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
+    .features .featured:nth-child(3) .card-header .card-category:before {
+      content: "Blog"; }
 
 @media (min-width: 768px) {
   .sections {
