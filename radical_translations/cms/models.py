@@ -111,6 +111,7 @@ class HomePage(BasePage):
 
     featured_biography = models.ForeignKey(
         BiographyPage,
+        # default=BiographyPage.objects.order_by("-modified").first(),
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
@@ -141,3 +142,14 @@ class HomePage(BasePage):
         SnippetChooserPanel("featured_resource"),
         PageChooserPanel("featured_blog_post"),
     ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.id:
+            self.featured_biography = (
+                BiographyPage.objects.live().order_by("-last_published_at").first()
+            )
+            self.featured_resource = Resource.objects.order_by("-modified").first()
+            self.featured_blog_post = BlogPost.objects.order_by(
+                "-last_published_at"
+            ).first()
