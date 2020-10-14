@@ -1,0 +1,24 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<section class="featured">
+    <a class="block-link" href="{% pageurl featured %}">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-category">{# TODO rather we set the title here than on the CSS, can we do that? #}</span>
+            </div>
+            <div class="card-image">
+                {% if featured.image %}
+                {% image featured.image max-320x200 alt=featured.image.title %}
+                {% else %}
+                <img src="{% static 'images/tom-birch-bw-xiGR_hCU-unsplash-low.jpg' %}"
+                     class="card-img-top"
+                     alt="image placeholder for featured content">
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">{{ featured.title }}</h3>
+                <p class="card-text">{{ featured.introduction }}</p>
+            </div>
+        </div>
+    </a>
+</section>

@@ -1,14 +1,25 @@
 from django.conf import settings
 from django.db import models
-from kdl_wagtail.core.models import BaseIndexPage, BasePage, BaseStreamPage, IndexPage
+from kdl_wagtail.core.models import (
+    BaseIndexPage,
+    BasePage,
+    BaseRichTextPage,
+    BaseStreamPage,
+    IndexPage,
+)
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel, StreamFieldPanel
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 from wagtail.core.query import PageQuerySet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
+
+from radical_translations.agents.models import Person
+from radical_translations.core.models import Resource
 
 
 class BlogIndexPage(BaseIndexPage):
@@ -51,11 +62,33 @@ class BlogPost(BaseStreamPage):
     ]
 
 
+register_snippet(Person)
+
+
+class BiographyPage(BaseRichTextPage):
+    person = models.ForeignKey(
+        Person,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="biographies",
+    )
+
+    content_panels = BasePage.content_panels + [
+        SnippetChooserPanel("person"),
+        FieldPanel("body", classname="full"),
+    ]
+
+
+register_snippet(Resource)
+
+
 class HomePage(BasePage):
     features = settings.HOMEPAGE_RICHTEXT_FEATURES
 
     introduction = RichTextField(features=features)
-    body = StreamField(
+
+    sections = StreamField(
         blocks.StreamBlock(
             [
                 (
@@ -69,23 +102,26 @@ class HomePage(BasePage):
                         icon="doc-full-inverse",
                     ),
                 ),
-                (
-                    "featured",
-                    blocks.StructBlock(
-                        [
-                            ("title", blocks.CharBlock()),
-                            ("page", blocks.PageChooserBlock(can_choose_root=False)),
-                            ("description", blocks.RichTextBlock(features=features)),
-                        ],
-                        icon="pick",
-                    ),
-                ),
             ],
             block_counts={
-                "section": {"min_number": 4, "max_num": 4},
-                "featured": {"min_number": 3, "max_num": 3},
+                "section": settings.HOMEPAGE_SECTION_BLOCK_COUNTS,
             },
         )
+    )
+
+    featured_biography = models.ForeignKey(
+        BiographyPage,
+        # default=BiographyPage.objects.order_by("-modified").first(),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    featured_resource = models.ForeignKey(
+        Resource, blank=True, null=True, on_delete=models.SET_NULL, related_name="+"
+    )
+    featured_blog_post = models.ForeignKey(
+        BlogPost, blank=True, null=True, on_delete=models.SET_NULL, related_name="+"
     )
 
     subpage_types = [
@@ -101,5 +137,19 @@ class HomePage(BasePage):
 
     content_panels = Page.content_panels + [
         FieldPanel("introduction", classname="full"),
-        StreamFieldPanel("body"),
+        StreamFieldPanel("sections"),
+        PageChooserPanel("featured_biography"),
+        SnippetChooserPanel("featured_resource"),
+        PageChooserPanel("featured_blog_post"),
     ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.id:
+            self.featured_biography = (
+                BiographyPage.objects.live().order_by("-last_published_at").first()
+            )
+            self.featured_resource = Resource.objects.order_by("-modified").first()
+            self.featured_blog_post = BlogPost.objects.order_by(
+                "-last_published_at"
+            ).first()

@@ -4,16 +4,6 @@
 
 // project specific CSS goes here
 
-/* Variables */
-
-// Modifying colour map
-// Ref: https://getbootstrap.com/docs/4.5/getting-started/theming/#modify-map
-
-$theme-colors: (
-  'primary': #9b2923,
-  'danger': #ff4136
-);
-
 // Colour palette
 
 $black: #000;
@@ -41,8 +31,6 @@ a {
   text-decoration: underline;
 
   &:hover {
-    background: $radical-red;
-    color: $white;
     text-decoration: none;
   }
 }
@@ -54,6 +42,14 @@ body {
   font-variation-settings: 'wdth' 400, 'wght' 400;
 }
 
+.btn {
+  border-radius: 0;
+  font-family: 'Oswald', sans-serif;
+  font-variation-settings: 'wght' 700;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 b,
 strong {
   font-variation-settings: 'wdth' 400, 'wght' 700;
@@ -61,49 +57,16 @@ strong {
 
 footer {
   background: white;
-  border-top: 5px solid lighten($gray-600, 45%);
+  border-top: 15px solid $dark-gray;
+  box-shadow: inset 0 10px $dark-gray;
+  clip-path: polygon(0 0, 100% 20px, 100% 100%, 0 100%);
+
   padding: 1rem 0;
 
   h2 {
     font-size: 1.5rem;
   }
 }
-
-// Halftone filter
-// Source: https://codepen.io/coreh/pen/LQJBLa
-
-// .halftone {
-//     background: white;
-//     position: relative;
-//     filter: contrast(500%);
-//     overflow: hidden;
-// }
-
-// .halftone > * {
-//     filter: brightness(0.5) blur(4px);
-//     filter: grayscale(100%);
-// }
-
-// .halftone::after {
-//     content: '';
-//     position: absolute;
-//     top: -100%;
-//     left: -100%;
-//     right: -100%;
-//     bottom: -100%;
-//     background-blend-mode: hard-light;
-//     background:
-//         radial-gradient(8px 8px, black, white),
-//         radial-gradient(8px 8px, black, white),
-//         radial-gradient(8px 8px, black, white);
-//     background-size: 8px 8px;
-//     background-position: 0 -3px, -2px 0, 2px 0;
-//     mix-blend-mode: screen;
-//     pointer-events: none;
-//     transform: rotate(11.25deg);
-//     transition: 1s ease-in-out transform;
-//     z-index: 1;
-// }
 
 .image {
   img {
@@ -119,7 +82,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.card-header {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 700;
   font-weight: 700;
@@ -139,27 +103,36 @@ h6 {
 
 .login {
   display: inline-block;
-  padding: 0.5rem;
   position: absolute;
   right: 0;
   top: 0;
-
-  svg {
-    width: 16px;
-  }
+  z-index: 999;
 
   a {
+    display: block;
+    padding: 0.25rem 0.5rem 0 0;
+    text-decoration: none;
+
     svg {
       fill: $radical-red;
     }
 
     &:hover {
       background: transparent;
+      text-decoration: underline;
 
       svg {
         fill: lighten($radical-red, 10%);
       }
     }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  svg {
+    width: 16px;
   }
 }
 
@@ -178,13 +151,36 @@ nav,
       font-size: 1.5rem;
       text-decoration: none;
 
-      &:hover {
+      &:hover,
+      &.active {
         background: transparent;
         border-bottom: 10px solid $old-yellow;
+        color: lighten($radical-red, 10%);
       }
     }
   }
 }
+
+// navbar style otpion: red bar
+
+// #collapsedMainMenu,
+// #collapsedMainMenuSmallScreen {
+//   background: $radical-red;
+//   border-bottom: 10px solid $dark-gray;
+//   color: $white;
+
+//   .nav-link {
+//     border-bottom: 10px solid darken($radical-red, 10%);
+//     color: $white;
+//     font-size: 1.5rem;
+//     text-decoration: none;
+
+//     &:hover {
+//       background: transparent;
+//       border-bottom: 10px solid $old-yellow;
+//     }
+//   }
+// }
 
 .navbar {
   padding: 0;
@@ -257,6 +253,11 @@ nav,
     display: inline-block;
     text-align: center;
 
+    &:active,
+    &:focus {
+      border: 1px dotted $radical-red;
+    }
+
     &.one-quarter {
       width: 25%;
     }
@@ -264,6 +265,21 @@ nav,
     &.half {
       width: 45%;
     }
+  }
+}
+
+.social-media {
+  a {
+    svg {
+      &:hover {
+        fill: $prussian-blue;
+      }
+    }
+  }
+  svg {
+    fill: $radical-red;
+    height: 24px;
+    width: 24px;
   }
 }
 
@@ -277,6 +293,57 @@ main {
   padding: 1rem 0;
 }
 
+// Cards
+
+.block-link {
+  color: $dark-gray;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  img {
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
+
+.card,
+.card-header,
+.card-img-top,
+.card-body {
+  border: 0;
+  border-radius: 0 !important;
+}
+
+.card {
+  background: $kaki;
+}
+
+.card-header {
+  background: $kaki;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  z-index: 100;
+}
+
+.card-image {
+  height: 200px;
+  margin-top: -10px;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+.card-img-top {
+  filter: grayscale(100%);
+}
+
 /* Homepage */
 
 /*
@@ -286,6 +353,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .sections {
   display: grid;
   grid-gap: 1px;
+  position: relative;
 
   h1,
   h2,
@@ -295,57 +363,165 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   h6 {
     padding-top: 1rem;
     text-transform: uppercase;
+
+    a {
+      color: $white;
+      text-decoration: none;
+
+      &:hover {
+        background: transparent;
+        text-decoration: underline;
+      }
+    }
   }
+
+  section:nth-child(2) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      a {
+        color: $dark-gray;
+      }
+    }
+  }
+
+  section:nth-child(3),
+  section:nth-child(4),
+  section:nth-child(5) {
+    color: $white;
+  }
+
+  .btn {
+    margin-bottom: 1rem;
+    text-decoration: none;
+  }
+}
+
+.features {
+  display: grid;
+  grid-gap: 20px;
+
+  /* TO BE REMOVED: for review only */
+
+  .featured {
+    background: $kaki;
+    border: 1px solid $kaki;
+
+    .card-header {
+      &:before {
+        display: inline-block;
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    &:first-child {
+      .card-header {
+        &:before {
+          content: url('/static/fontawesome/svgs/solid/users.svg');
+        }
+        .card-category {
+          &:before {
+            content: 'Biographies';
+          }
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      .card-header {
+        &:before {
+          content: url('/static/fontawesome/svgs/solid/copy.svg');
+        }
+        .card-category {
+          &:before {
+            content: 'Resources';
+          }
+        }
+      }
+    }
+
+    &:nth-child(3) {
+      .card-header {
+        &:before {
+          content: url('/static/fontawesome/svgs/solid/pencil-alt.svg');
+        }
+        .card-category {
+          &:before {
+            content: 'Blog';
+          }
+        }
+      }
+    }
+  }
+
+  /* END of TO BE REMOVED */
 }
 
 @include media-breakpoint-up(md) {
   .sections {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr;
-  }
 
-  section:nth-child(2),
-  section:nth-child(3),
-  section:nth-child(4),
-  section:nth-child(5) {
-    border-bottom: 10px solid $old-yellow;
-    height: 100%;
-  }
-
-  section:nth-child(1) {
-    grid-column: 5 / 10;
-    grid-row: 1;
-  }
-  section:nth-child(2) {
-    grid-column: 1 / 5;
-    grid-row: 1 / 3;
-    z-index: 0;
-
-    .rich-text {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
+    section:nth-child(2),
+    section:nth-child(3),
+    section:nth-child(4),
+    section:nth-child(5) {
+      border-bottom: 10px solid $old-yellow;
+      height: 100%;
     }
 
-    p:first-child {
-      grid-column: 1 / 6;
+    section:nth-child(1) {
+      grid-column: 5 / 10;
+      grid-row: 1;
     }
+    section:nth-child(2) {
+      grid-column: 1 / 5;
+      grid-row: 1 / 3;
+      z-index: 0;
 
-    p:last-child {
-      grid-column: 1 / 4;
+      .rich-text {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      p:first-child {
+        grid-column: 1 / 6;
+      }
+
+      p {
+        grid-column: 1 / 4;
+      }
+
+      .btn {
+        width: 73%;
+      }
+    }
+    section:nth-child(3) {
+      grid-column: 4 / 7;
+      grid-row: 2 / 3;
+      z-index: 1;
+    }
+    section:nth-child(4) {
+      grid-column: 7 / 10;
+      grid-row: 2 / 3;
+    }
+    section:nth-child(5) {
+      grid-column: 10 / 13;
+      grid-row: 1 / 3;
     }
   }
-  section:nth-child(3) {
-    grid-column: 4 / 7;
-    grid-row: 2 / 3;
-    z-index: 1;
-  }
-  section:nth-child(4) {
-    grid-column: 7 / 10;
-    grid-row: 2 / 3;
-  }
-  section:nth-child(5) {
-    grid-column: 10 / 13;
-    grid-row: 1 / 3;
+
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+
+    section {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
@@ -359,31 +535,27 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-section {
-  font-size: 1.25em;
-  padding: 0 1rem;
+.sections {
+  section {
+    font-size: 1.25em;
+    padding: 0 1rem;
 
-  &:nth-child(2) {
-    background-color: $old-yellow;
+    &:nth-child(2) {
+      background-color: $old-yellow;
+    }
+
+    &:nth-child(3) {
+      background-color: $prussian-blue;
+    }
+
+    &:nth-child(4) {
+      background-color: $dark-gray;
+    }
+
+    &:nth-child(5) {
+      background-color: $radical-red;
+    }
   }
-
-  &:nth-child(3) {
-    background-color: $prussian-blue;
-  }
-
-  &:nth-child(4) {
-    background-color: $dark-gray;
-  }
-
-  &:nth-child(5) {
-    background-color: $radical-red;
-  }
-}
-
-section:nth-child(3),
-section:nth-child(4),
-section:nth-child(5) {
-  color: $white;
 }
 
 .intro {
@@ -445,7 +617,7 @@ section:nth-child(5) {
   text-align: left;
 
   h3 {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1rem;
   }
 

@@ -39,7 +39,7 @@ function pathsConfig(appName) {
     ],
 
     app: this.app,
-    templates: `${this.app}/templates`,
+    templates: `${this.app}/**/templates/**/*.html`,
     css: `${this.app}/static/css`,
     sass: `${this.app}/static/sass`,
     fonts: `${this.app}/static/fonts`,
@@ -120,7 +120,7 @@ function runServer(cb) {
 // Browser sync server for live reload
 function initBrowserSync() {
   browserSync.init(
-    [`${paths.css}/*.css`, `${paths.js}/*.js`, `${paths.templates}/*.html`],
+    [`${paths.css}/*.css`, `${paths.js}/*.js`, `${paths.templates}`],
     {
       // https://www.browsersync.io/docs/options/#option-proxy
       proxy: {
@@ -142,7 +142,7 @@ function initBrowserSync() {
 // Watch
 function watchPaths() {
   watch(`${paths.sass}/*.scss`, styles)
-  watch(`${paths.templates}/**/*.html`).on('change', reload)
+  watch(`${paths.templates}`).on('change', reload)
   watch([`${paths.js}/*.js`, `!${paths.js}/*.min.js`], scripts).on(
     'change',
     reload

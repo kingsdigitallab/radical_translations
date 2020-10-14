@@ -29,7 +29,8 @@ Added
 * `Resource` text search with filters, ordering and pagination of search results.
 * `Resource` search tests.
 * `Resource` search suggestions.
-* New Wagtail_ page type for the home page.
+* Wagtail_ page type for the home page.
+* Wagtail_ page type for biographies.
 
 Changed
 ~~~~~~~

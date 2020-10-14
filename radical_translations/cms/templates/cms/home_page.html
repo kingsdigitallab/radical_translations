@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 
 {% block main %}
 <div class="sections">
@@ -8,31 +7,43 @@
         {{ page.introduction|richtext }}
     </section>
 
-    {% for block in page.body %}
-    {% if block.block_type == 'section' %}
-        {% with value=block.value %}
-        <section class="{{ block.block_type }}">
-            <h2>
-                <a href="{% pageurl value.page %}">{{ value.title }}</a>
-            </h2>
-            {{ value.description|richtext }}
-        </section>
-        {% endwith %}
-    {% endif %}
-    {% endfor %}
+    {% for block in page.sections %}
+    {% with value=block.value %}
+    <section class="{{ block.block_type }}">
+        <h2>
+            <a href="{% pageurl value.page %}">{{ value.title }}</a>
+        </h2>
+        {{ value.description|richtext }}
 
-    {% for block in page.body %}
-    {% if block.block_type == 'featured' %}
-        {% with value=block.value %}
-        <section class="{{ block.block_type }}">
-            <h2>
-                <a href="{% pageurl value.page %}">{{ value.title }}</a>
-            </h2>
-            {{ value.description|richtext }}
-            <a href="{% pageurl value.page %}">>>></a>
-        </section>
-        {% endwith %}
-    {% endif %}
+        <a href="{% pageurl value.page %}" class="btn btn-secondary btn-block">Find out more <span class="sr-only">about {{ value.title }}</span></a>
+    </section>
+    {% endwith %}
     {% endfor %}
+</div>
+<h2>Featured</h2>
+<div class="features">
+    {% include "cms/includes/featured_page.html" with featured=page.featured_biography %}
+
+    <section class="featured">
+        {% with resource=page.featured_resource %}
+        <a class="block-link" href="{% url 'resource-detail' resource.id %}">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-category">{# TODO rather we set the title here than on the CSS, can we do that? #}</span>
+                </div>
+                <div class="card-image">
+                    <img src="{% static 'images/tom-birch-bw-xiGR_hCU-unsplash-low.jpg' %}"
+                         class="card-img-top"
+                         alt="image placeholder for featured content">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ resource.title }}</h3>
+                </div>
+            </div>
+        </a>
+        {% endwith %}
+    </section>
+
+    {% include "cms/includes/featured_page.html" with featured=page.featured_blog_post %}
 </div>
 {% endblock main %}

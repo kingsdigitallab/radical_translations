@@ -185,6 +185,21 @@ class TestResource:
         assert "Dalila" in authors
 
     @pytest.mark.usefixtures("entry_original", "entry_translation")
+    def test_get_authors_source_text(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_translation: Dict[str, Dict[str, str]],
+    ):
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.get_authors_source_text() is None
+
+        Resource.from_gsx_entry(entry_translation)
+        resource = Resource.relationships_from_gsx_entry(entry_translation)
+        authors = resource.get_authors_source_text()
+        assert authors is not None
+        assert "Constantin" in authors[0].name
+
+    @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_classification_edition(
         self,
         entry_original: Dict[str, Dict[str, str]],

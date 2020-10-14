@@ -296,6 +296,7 @@ ES_FACET_OPTIONS = {"order": {"_key": "asc"}, "size": 100}
 WAGTAIL_SITE_NAME = "Radical Translations"
 
 HOMEPAGE_RICHTEXT_FEATURES = ["bold", "italic", "link"]
+HOMEPAGE_SECTION_BLOCK_COUNTS = {"min_number": 4, "max_num": 4}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
