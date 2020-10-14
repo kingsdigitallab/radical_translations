@@ -20,22 +20,26 @@
     {% endwith %}
     {% endfor %}
 </div>
-<h2>Featured</h2>
+
+<h2 class="home-heading">Featured</h2>
+
 <div class="features">
-    {% include "cms/includes/featured_page.html" with featured=page.featured_biography %}
+    {% include "cms/includes/featured_page.html" with featured=page.featured_biography category='Biographies' %}
 
     <section class="featured">
         {% with resource=page.featured_resource %}
         <a class="block-link" href="{% url 'resource-detail' resource.id %}">
             <div class="card">
-                <div class="card-header">
-                    <span class="card-category">{# TODO rather we set the title here than on the CSS, can we do that? #}</span>
+                <div class="card-header resources-icon">
+                    Resources
                 </div>
+                {% comment %}
                 <div class="card-image">
-                    <img src="{% static 'images/tom-birch-bw-xiGR_hCU-unsplash-low.jpg' %}"
+                    <img src="{% static 'images/image-placeholder.svg' %}"
                          class="card-img-top"
                          alt="image placeholder for featured content">
                 </div>
+                {% endcomment %}
                 <div class="card-body">
                     <h3 class="card-title">{{ resource.title }}</h3>
                 </div>
@@ -44,6 +48,6 @@
         {% endwith %}
     </section>
 
-    {% include "cms/includes/featured_page.html" with featured=page.featured_blog_post %}
+    {% include "cms/includes/featured_page.html" with featured=page.featured_blog_post category='Blog' %}
 </div>
 {% endblock main %}

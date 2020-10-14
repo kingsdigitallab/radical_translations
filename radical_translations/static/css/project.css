@@ -8521,6 +8521,10 @@ h4, h5, h6,
   font-variation-settings: 'wdth' 400, 'wght' 700;
   font-weight: 700; }
 
+.home-heading {
+  margin: 24px 0 16px;
+  margin: 1.5rem 0 1rem; }
+
 .site-title {
   margin-bottom: 8px;
   margin-bottom: .5rem; }
@@ -8657,9 +8661,9 @@ main {
   text-decoration: none; }
   .block-link:hover {
     text-decoration: underline; }
-  .block-link img:hover {
-    -webkit-filter: brightness(0.9);
-            filter: brightness(0.9); }
+    .block-link:hover img {
+      -webkit-filter: grayscale(0);
+              filter: grayscale(0); }
 
 .card,
 .card-header,
@@ -8669,7 +8673,7 @@ main {
   border-radius: 0 !important; }
 
 .card {
-  background: #c3c1a8; }
+  background: #e2e1d5; }
 
 .card-header {
   background: #c3c1a8;
@@ -8682,14 +8686,12 @@ main {
   margin-top: -10px;
   overflow: hidden; }
   .card-image img {
+    -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
     height: 100%;
     -o-object-fit: cover;
        object-fit: cover;
     width: 100%; }
-
-.card-img-top {
-  -webkit-filter: grayscale(100%);
-          filter: grayscale(100%); }
 
 /* Homepage */
 /*
@@ -8726,28 +8728,20 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .features {
   display: grid;
-  grid-gap: 20px;
-  /* TO BE REMOVED: for review only */
-  /* END of TO BE REMOVED */ }
+  grid-gap: 20px; }
   .features .featured {
-    background: #c3c1a8;
-    border: 1px solid #c3c1a8; }
+    background: #e2e1d5;
+    border: 1px solid #d8d7c6; }
     .features .featured .card-header:before {
       display: inline-block;
       height: 16px;
       width: 16px; }
-    .features .featured:first-child .card-header:before {
+    .features .featured .card-header.biographies-icon:before {
       content: url("/static/fontawesome/svgs/solid/users.svg"); }
-    .features .featured:first-child .card-header .card-category:before {
-      content: "Biographies"; }
-    .features .featured:nth-child(2) .card-header:before {
-      content: url("/static/fontawesome/svgs/solid/copy.svg"); }
-    .features .featured:nth-child(2) .card-header .card-category:before {
-      content: "Resources"; }
-    .features .featured:nth-child(3) .card-header:before {
+    .features .featured .card-header.blog-icon:before {
       content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
-    .features .featured:nth-child(3) .card-header .card-category:before {
-      content: "Blog"; }
+    .features .featured .card-header.resources-icon:before {
+      content: url("/static/fontawesome/svgs/solid/copy.svg"); }
 
 @media (min-width: 768px) {
   .sections {
@@ -8789,10 +8783,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr; }
     .features section {
-      grid-template-columns: 1fr; } }
+      grid-template-columns: 1fr; }
+  .with-image {
+    grid-gap: 1rem;
+    grid-template-columns: 150px auto; } }
 
 @media (max-width: 767.98px) {
-  .sections {
+  .sections,
+  .with-image {
     grid-template-columns: 100%; }
   section {
     grid-column: 1; } }
@@ -8816,21 +8814,32 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   font-size: 1.5rem;
   font-style: italic; }
 
-/* Blog */
+/* Index pages / Blog / Etc. */
 .children {
   margin-top: 16px;
   margin-top: 1rem; }
+  .children a {
+    color: #222222;
+    text-decoration: none; }
+    .children a:hover {
+      color: #9b2923;
+      text-decoration: underline; }
   .children ul {
     padding-left: 0; }
     .children ul li {
-      border-bottom: 1px dotted #999;
+      border-bottom: 5px solid #c3c1a8;
       list-style: none;
       padding: 16px 0;
       padding: 1rem 0; }
 
-.child-page-image {
-  margin-right: 16px;
-  margin-right: 1rem; }
+.with-image {
+  display: grid; }
+
+.child-page-image img {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%; }
 
 /* Alerts */
 .alert-debug {
