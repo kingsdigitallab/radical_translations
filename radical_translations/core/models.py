@@ -183,6 +183,27 @@ class Resource(TimeStampedModel):
 
     get_authors.short_description = "Authors/translators"  # type: ignore
 
+    def get_authors_source_text(self) -> Optional[List[Agent]]:
+        if self.is_original():
+            return None
+
+        authors = []
+
+        for rel in self.relationships.filter(
+            relationship_type__label__in=["derivative of", "translation of"]
+        ):
+            resource = rel.related_to
+            authors.extend(
+                [
+                    c.agent
+                    for c in resource.contributions.filter(
+                        roles__label__in=["author", "translator"]
+                    )
+                ]
+            )
+
+        return authors
+
     def get_classification_edition(self) -> str:
         return "; ".join([c.edition.label for c in self.classifications.all()])
 
@@ -524,7 +545,10 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
 
     @staticmethod
     def get_or_create(
-        resource: Resource, agent: Agent, role: str, published_as: Optional[str] = None,
+        resource: Resource,
+        agent: Agent,
+        role: str,
+        published_as: Optional[str] = None,
     ) -> Optional["Contribution"]:
         if not resource or not agent:
             return None

@@ -31,6 +31,15 @@
 {% endif %}
 </p>
 
+{% if object.is_translation %}
+<h3>Authors of source text</h3>
+<p>
+{% for author in object.get_authors_source_text %}
+<a href="{% url 'agent-detail' author.pk %}">{{ author.name }}</a>
+{% endfor %}
+</p>
+{% endif %}
+
 {% if object.contributions.count %}
 <h3>Contributions</h3>
 <dl>
