@@ -7,17 +7,21 @@
                 <span class="badge badge-secondary" v-if="item.is_paratext">Paratext</span>
             </small>
         </h5>
-        <dl class="search-result">
-            <template v-if="item.date_display !== undefined">
-                <dt>Date</dt>
-                <dd>
-                {[ item.date_display ]}
-                </dd>
-            </template>
+        <div>
             <template v-if="item.places.length > 0">
-                <dt>Places</dt>
-                <dd v-for="place in item.places" :key="place.place.address">
+                <span v-for="place in item.places" :key="place.place.address">
                 {[ place.place.address ]}
+                </span>
+            </template>
+            <span v-if="item.date_display !== undefined">
+                {[ item.date_display ]}
+            </span>
+        </div>
+        <dl class="search-result">
+            <template v-if="item.authors.length > 0">
+                <dt>Authors of the source text</dt>
+                <dd v-for="author in item.authors" :key="author.person.id">
+                {[ author.person.name ]}
                 </dd>
             </template>
             <template v-if="item.contributions.length > 0">
@@ -29,24 +33,18 @@
                 <span>{[ contribution.agent.name ]}</span>
                 </dd>
             </template>
-            <!--template v-if="item.classifications.length > 0">
-                <dt>Classification</dt>
-                <dd v-for="classification in item.classifications" :key="classification.edition.label">
-                {[ classification.edition.label ]}
-                </dd>
-            </template>
-            <template v-if="item.languages.length > 0">
+            <!--template v-if="item.languages.length > 0">
                 <dt>Languages</dt>
                 <dd v-for="language in item.languages" :key="language.language.label">
                 {[ language.language.label ]}
                 </dd>
-            </template>
-            <template v-if="item.subjects.length > 0">
+                </template>
+                <template v-if="item.subjects.length > 0">
                 <dt>Subjects</dt>
                 <dd v-for="subject in item.subjects" :key="subject.label">
                 {[ subject.label ]}
                 </dd>
-            </template-->
+                </template-->
         </dl>
     </li>
 </ol>

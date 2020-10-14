@@ -84,6 +84,10 @@ class ResourceDocument(Document):
 
     has_date_radical = fields.BooleanField()
 
+    authors = fields.ObjectField(
+        attr="get_authors_source_text", properties={"person": get_agent_field()}
+    )
+
     class Index:
         name = "rt-resources"
 
