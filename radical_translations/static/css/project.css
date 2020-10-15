@@ -8537,23 +8537,29 @@ footer {
   .metadata .date:before {
     content: url("/static/fontawesome/svgs/solid/calendar.svg"); }
 
-.tags:before {
-  content: url("/static/fontawesome/svgs/solid/tags.svg");
-  display: inline-block;
-  height: 16px;
-  margin-right: 4px;
-  margin-right: 0.25rem;
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
-  vertical-align: text-bottom;
-  width: 16px; }
+.tags {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0; }
+  .tags:before {
+    content: url("/static/fontawesome/svgs/solid/tags.svg");
+    display: inline-block;
+    height: 16px;
+    margin-right: 4px;
+    margin-right: 0.25rem;
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+    vertical-align: text-bottom;
+    width: 16px; }
 
 .tag,
 .children .tag {
   background: #e9c46a;
   border-bottom: 0;
   display: inline-block;
-  font-family: 'Oswald', sans-serif;
   padding: 4px 8px 8px;
   padding: 0.25rem 0.5rem 0.5rem; }
 

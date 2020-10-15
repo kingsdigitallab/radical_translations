@@ -1,7 +1,12 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 <section class="featured">
-    <a class="block-link" href="{% pageurl featured %}">
+    <a class="block-link"
+        {% if featured.person %}
+        href="{% url 'agent-detail' featured.person.id %}">
+        {% else %}
+        href="{% pageurl featured %}">
+        {% endif %}
         <div class="card">
             <div class="card-header {{ category | lower }}-icon">
                 {{ category }}
@@ -17,6 +22,9 @@
             </div>
             <div class="card-body">
                 <h3 class="card-title">{{ featured.title }}</h3>
+                {% if category == 'Blog' %}
+                {% include "cms/includes/metadata.html" with page=featured %}
+                {% endif %}
                 <p class="card-text">
                     {% if featured.search_description %}
                     {{ featured.search_description }}
@@ -24,6 +32,9 @@
                     Read more.
                     {% endif %}
                 </p>
+                {% if featured.tags %}
+                {% include "cms/includes/tags.html" with page=featured %}
+                {% endif %}
             </div>
         </div>
     </a>
