@@ -8913,3 +8913,10 @@ dl.search-result dt {
 
 dl.search-result dd {
   margin-left: 14em; }
+
+.highlight {
+  background: #f6e7c3;
+  padding-left: 8px;
+  padding-left: 0.5rem;
+  padding-right: 8px;
+  padding-right: 0.5rem; }

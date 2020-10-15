@@ -666,3 +666,9 @@ dl.search-result {
     margin-left: 14em;
   }
 }
+
+.highlight {
+  background: lighten($old-yellow, 20%);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}

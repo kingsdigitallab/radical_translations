@@ -1,7 +1,12 @@
 <ol v-bind:start="data.current_page * data.page_size - data.page_size + 1">
     <li v-for="item in data.results" :key="item.id">
         <h5 class="font-italic">
-            <a v-bind:href="item.id">{[ item.title.main_title ]}</a>
+            <a v-bind:href="item.id">
+                <span
+                    v-if="'title.main_title' in item.highlight"
+                    v-html="item.highlight['title.main_title'][0]"></span>
+                <span v-else>{[ item.title.main_title ]}</span>
+            </a>
             <small v-if="item.is_translation || item.is_paratext">
                 <span v-if="item.is_translation" class="badge badge-secondary">Translation</span>
                 <span v-if="item.is_paratext" class="badge badge-secondary">Paratext</span>

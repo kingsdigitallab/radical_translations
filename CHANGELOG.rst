@@ -32,6 +32,7 @@ Added
 * Wagtail_ page type for the home page.
 * Wagtail_ page type for biographies.
 * Fuzzy_ text search.
+* Search results highlighting_.
 
 Changed
 ~~~~~~~
@@ -42,6 +43,7 @@ Changed
 .. _Kibana: https://www.elastic.co/kibana/
 .. _FAST: https://www.oclc.org/research/areas/data-science/fast.html
 .. _Fuzzy: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-fuzzy-query.html
+.. _highlighting: https://www.elastic.co/guide/en/elasticsearch/reference/7.9/highlighting.html
 
 
 [0.7.1] - 2020-07-02

@@ -11,6 +11,7 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     DefaultOrderingFilterBackend,
     FacetedSearchFilterBackend,
     FilteringFilterBackend,
+    HighlightBackend,
     OrderingFilterBackend,
     SearchFilterBackend,
     SuggesterFilterBackend,
@@ -45,6 +46,7 @@ class ResourceViewSet(DocumentViewSet):
         DefaultOrderingFilterBackend,
         CompoundSearchFilterBackend,
         SearchFilterBackend,
+        HighlightBackend,
         # the suggester backend needs to be the last backend
         SuggesterFilterBackend,
     ]
@@ -133,6 +135,17 @@ class ResourceViewSet(DocumentViewSet):
         "event": "events.title.raw",
         "event_place": "events.place.address.raw",
         "radical_date": "has_date_radical",
+    }
+
+    highlight_fields = {
+        "title.main_title": {
+            "enabled": True,
+            "options": {
+                "number_of_fragments": 0,
+                "pre_tags": ["<span class='highlight'>"],
+                "post_tags": ["</span>"],
+            },
+        }
     }
 
     ordering_fields = {
