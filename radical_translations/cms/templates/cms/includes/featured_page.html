@@ -24,6 +24,9 @@
                     Read more.
                     {% endif %}
                 </p>
+                {% if featured.tags %}
+                {% include "cms/includes/tags.html" with page=featured %}
+                {% endif %}
             </div>
         </div>
     </a>
