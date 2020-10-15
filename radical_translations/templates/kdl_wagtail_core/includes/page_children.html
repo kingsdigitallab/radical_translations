@@ -1,30 +1,35 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 <div class="children">
-
     {% if children %}
     <ul>
         {% for child in children %}
-        <li class="child-page">
+        <li class="child-page{% if child.image %} with-image{% endif %}">
+            <a href="{% pageurl child %}">
+                {% if child.image %}
+                <div class="child-page-image">
+                    {% image child.image max-600x600 %}
+                </div>
+                {% endif %}
+            </a>
+
             <a href="{% pageurl child %}">
                 <h2 class="child-page-title">{{ child.title }}</h2>
 
                 {% if child.author %}
-                <h3>{{ child.author }}, {{ child.first_published_at }}</h3>
+                <p class="metadata">
+                    <span class="author">{{ child.author }}</span><br>
+                    <time class="date">{{ child.first_published_at }}</time>
+                </p>
                 {% endif %}
 
                 <div class="col">
                     <div class="row">
-                        {% if child.image %}
-                        <div class="child-page-image">
-                            {% image child.image fill-180x180-c100 %}
-                        </div>
-                        {% endif %}
-
-                        {% if child.introduction %}
+                        {% if child.search_description %}
                             <p class="child-page-introduction">
-                                {{ child.introduction }}
+                                {{ child.search_description }}
                             </p>
+                            {% include "cms/includes/tags.html" %}
                         {% endif %}
                     </div>
                 </div>
