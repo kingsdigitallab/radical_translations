@@ -8510,9 +8510,52 @@ footer {
     font-size: 24px;
     font-size: 1.5rem; }
 
+.highlight {
+  background: #fdf9ef;
+  padding-left: 8px;
+  padding-left: .5rem;
+  padding-right: 8px;
+  padding-right: .5rem; }
+
 .image img {
   height: auto;
   max-width: 100%; }
+
+.metadata {
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
+  font-size: .875rem; }
+  .metadata .author:before,
+  .metadata .date:before {
+    display: inline-block;
+    height: 10px;
+    margin-right: 4px;
+    margin-right: .25rem;
+    width: 10px; }
+  .metadata .author:before {
+    content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
+  .metadata .date:before {
+    content: url("/static/fontawesome/svgs/solid/calendar.svg"); }
+
+.tags:before {
+  content: url("/static/fontawesome/svgs/solid/tags.svg");
+  display: inline-block;
+  height: 16px;
+  margin-right: 4px;
+  margin-right: .25rem;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  vertical-align: text-bottom;
+  width: 16px; }
+
+.tag,
+.children .tag {
+  background: #e9c46a;
+  border-bottom: 0;
+  display: inline-block;
+  font-family: "Oswald", sans-serif;
+  padding: 4px 8px 8px;
+  padding: .25rem .5rem .5rem; }
 
 h1, h2, h3,
 h4, h5, h6,
@@ -8744,6 +8787,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       content: url("/static/fontawesome/svgs/solid/copy.svg"); }
 
 @media (min-width: 768px) {
+  .child-page-image {
+    height: 150px;
+    overflow: hidden; }
   .sections {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr; }
@@ -8789,6 +8835,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     grid-template-columns: 150px auto; } }
 
 @media (max-width: 767.98px) {
+  .child-page-image {
+    height: 200px;
+    overflow: hidden; }
   .sections,
   .with-image {
     grid-template-columns: 100%; }
