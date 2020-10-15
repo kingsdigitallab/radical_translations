@@ -204,7 +204,7 @@ class Resource(TimeStampedModel):
                 ]
             )
 
-        return authors
+        return list(set(authors))
 
     def get_classification_edition(self) -> str:
         return "; ".join([c.edition.label for c in self.classifications.all()])
