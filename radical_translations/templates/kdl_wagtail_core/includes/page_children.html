@@ -20,16 +20,12 @@
                 {% include "cms/includes/metadata.html" with page=child %}
                 {% endif %}
 
-                <div class="col">
-                    <div class="row">
-                        {% if child.search_description %}
-                            <p class="child-page-introduction">
-                                {{ child.search_description }}
-                            </p>
-                            {% include "cms/includes/tags.html" with page=child %}
-                        {% endif %}
-                    </div>
-                </div>
+                {% if child.search_description %}
+                    <p class="child-page-introduction">
+                        {{ child.search_description }}
+                    </p>
+                    {% include "cms/includes/tags.html" with page=child %}
+                {% endif %}
             </a>
         </li>
         {% endfor %}
