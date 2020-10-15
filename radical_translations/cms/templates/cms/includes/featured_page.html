@@ -1,7 +1,12 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 <section class="featured">
-    <a class="block-link" href="{% pageurl featured %}">
+    <a class="block-link"
+        {% if featured.person %}
+        href="{% url 'agent-detail' featured.person.id %}">
+        {% else %}
+        href="{% pageurl featured %}">
+        {% endif %}
         <div class="card">
             <div class="card-header {{ category | lower }}-icon">
                 {{ category }}
