@@ -17,22 +17,15 @@
                 <h2 class="child-page-title">{{ child.title }}</h2>
 
                 {% if child.author %}
-                <p class="metadata">
-                    <span class="author">{{ child.author }}</span><br>
-                    <time class="date">{{ child.first_published_at }}</time>
-                </p>
+                {% include "cms/includes/metadata.html" with page=child %}
                 {% endif %}
 
-                <div class="col">
-                    <div class="row">
-                        {% if child.search_description %}
-                            <p class="child-page-introduction">
-                                {{ child.search_description }}
-                            </p>
-                            {% include "cms/includes/tags.html" %}
-                        {% endif %}
-                    </div>
-                </div>
+                {% if child.search_description %}
+                    <p class="child-page-introduction">
+                        {{ child.search_description }}
+                    </p>
+                    {% include "cms/includes/tags.html" with page=child %}
+                {% endif %}
             </a>
         </li>
         {% endfor %}

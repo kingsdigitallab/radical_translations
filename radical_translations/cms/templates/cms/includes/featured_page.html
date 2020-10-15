@@ -22,6 +22,9 @@
             </div>
             <div class="card-body">
                 <h3 class="card-title">{{ featured.title }}</h3>
+                {% if category == 'Blog' %}
+                {% include "cms/includes/metadata.html" with page=featured %}
+                {% endif %}
                 <p class="card-text">
                     {% if featured.search_description %}
                     {{ featured.search_description }}
@@ -29,6 +32,9 @@
                     Read more.
                     {% endif %}
                 </p>
+                {% if featured.tags %}
+                {% include "cms/includes/tags.html" with page=featured %}
+                {% endif %}
             </div>
         </div>
     </a>
