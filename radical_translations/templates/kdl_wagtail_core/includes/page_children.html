@@ -29,7 +29,7 @@
                             <p class="child-page-introduction">
                                 {{ child.search_description }}
                             </p>
-                            {% include "cms/includes/tags.html" %}
+                            {% include "cms/includes/tags.html" with page=child %}
                         {% endif %}
                     </div>
                 </div>
