@@ -109,6 +109,8 @@ footer {
 }
 
 .tags {
+  padding: 0;
+
   &:before {
     content: url("/static/fontawesome/svgs/solid/tags.svg");
     display: inline-block;
