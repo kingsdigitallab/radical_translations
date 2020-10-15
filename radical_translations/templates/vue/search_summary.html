@@ -1,9 +1,14 @@
 <h3>Search results: {[ data.count ]} records</h3>
 
 <h4 v-if="query || filters.length > 0">Current filters</h4>
-<button v-if="query" @click="query = ''"
-    class="btn btn-info" type="button">{[ query ]}</button>
 <button
-    v-for="filter in filters" :key="filter[0]"
-    @click="updateFilters(filter)" 
-    class="btn btn-info" type="button">{[ filter[0] ]}: {[ filter[1] ]}</button>
+    v-if="query"
+    v-on:click="textSearch()"
+    class="btn btn-info"
+    type="button">{[ query ]}</button>
+<button
+    v-for="filter in filters"
+    :key="filter[0]"
+    v-on:click="updateFilters(filter)" 
+    class="btn btn-info"
+    type="button">{[ filter[0] ]}: {[ filter[1] ]}</button>

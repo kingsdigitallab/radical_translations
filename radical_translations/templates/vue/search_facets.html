@@ -3,7 +3,7 @@
     <li><h4>{[ facet.name ]}</h4></li>
     <li v-for="bucket in facet.buckets" :key="bucket.key">
         <button
-            @click="updateFilters([facet.name, getBucketValue(bucket)])" 
+            v-on:click="updateFilters([facet.name, getBucketValue(bucket)])" 
             class="filter btn"
             v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info': 'btn-link'"
             type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
