@@ -1,5 +1,7 @@
+{% if page.tags %}
 <ul class="tags">
     {% for tag in page.tags.all %}
     <li class="tag">{{ tag }}</li>
     {% endfor %}
 </ul>
+{% endif %}

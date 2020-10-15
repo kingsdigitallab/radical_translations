@@ -21,11 +21,12 @@
                 {% endif %}
 
                 {% if child.search_description %}
-                    <p class="child-page-introduction">
-                        {{ child.search_description }}
-                    </p>
-                    {% include "cms/includes/tags.html" with page=child %}
+                <p class="child-page-introduction">
+                {{ child.search_description }}
+                </p>
                 {% endif %}
+
+                {% include "cms/includes/tags.html" with page=child %}
             </a>
         </li>
         {% endfor %}
@@ -36,5 +37,4 @@
     {% else %}
     <p>No live pages found!</p>
     {% endif %}
-
 </div>
