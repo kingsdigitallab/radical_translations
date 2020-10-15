@@ -7,6 +7,7 @@ from django_elasticsearch_dsl_drf.constants import (
     SUGGESTER_TERM,
 )
 from django_elasticsearch_dsl_drf.filter_backends import (
+    CompoundSearchFilterBackend,
     DefaultOrderingFilterBackend,
     FacetedSearchFilterBackend,
     FilteringFilterBackend,
@@ -41,6 +42,7 @@ class ResourceViewSet(DocumentViewSet):
         FacetedSearchFilterBackend,
         OrderingFilterBackend,
         DefaultOrderingFilterBackend,
+        CompoundSearchFilterBackend,
         SearchFilterBackend,
         # the suggester backend needs to be the last backend
         SuggesterFilterBackend,
@@ -140,7 +142,10 @@ class ResourceViewSet(DocumentViewSet):
 
     pagination_class = PageNumberPagination
 
-    search_fields = ["title.main_title", "summary"]
+    search_fields = {
+        "title.main_title": {"fuzziness": "AUTO"},
+        "summary": None,
+    }
 
     suggester_fields = {
         "suggest_field": {
