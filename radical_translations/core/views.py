@@ -23,6 +23,7 @@ from radical_translations.core.serializers import ResourceDocumentSerializer
 from radical_translations.utils.search import PageNumberPagination
 
 ES_FACET_OPTIONS = settings.ES_FACET_OPTIONS
+ES_FUZZINESS_OPTIONS = settings.ES_FUZZINESS_OPTIONS
 
 
 class ResourceDetailView(DetailView):
@@ -143,7 +144,8 @@ class ResourceViewSet(DocumentViewSet):
     pagination_class = PageNumberPagination
 
     search_fields = {
-        "title.main_title": {"fuzziness": "AUTO"},
+        "title.main_title": ES_FUZZINESS_OPTIONS,
+        "authors.person.name": ES_FUZZINESS_OPTIONS,
         "summary": None,
     }
 

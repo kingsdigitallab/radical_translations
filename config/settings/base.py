@@ -289,6 +289,7 @@ LOGGING = {
 ELASTICSEARCH_DSL = {"default": {"hosts": f"{env('ELASTICSEARCH_HOST')}"}}
 
 ES_FACET_OPTIONS = {"order": {"_key": "asc"}, "size": 100}
+ES_FUZZINESS_OPTIONS = {"fuzziness": "AUTO"}
 
 # Wagtail
 # ------------------------------------------------------------------------------
