@@ -17,6 +17,9 @@
             </div>
             <div class="card-body">
                 <h3 class="card-title">{{ featured.title }}</h3>
+                {% if category == 'Blog' %}
+                {% include "cms/includes/metadata.html" with page=featured %}
+                {% endif %}
                 <p class="card-text">
                     {% if featured.search_description %}
                     {{ featured.search_description }}
