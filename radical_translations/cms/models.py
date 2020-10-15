@@ -150,6 +150,6 @@ class HomePage(BasePage):
                 BiographyPage.objects.live().order_by("-last_published_at").first()
             )
             self.featured_resource = Resource.objects.order_by("-modified").first()
-            self.featured_blog_post = BlogPost.objects.order_by(
-                "-last_published_at"
-            ).first()
+            self.featured_blog_post = (
+                BlogPost.objects.live().order_by("-last_published_at").first()
+            )
