@@ -1,0 +1,13 @@
+{% load kdl_wagtail_core_tags wagtailcore_tags %}
+
+{% include "kdl_wagtail_core/includes/page_header.html" %}
+
+{{ page.type }}
+
+<div class="page-body {% get_page_label page %}">
+    {% block page-introduction %}
+    {% include "kdl_wagtail_core/includes/page_introduction.html" %}
+    {% endblock page-introduction %}
+
+    {{ page.body|richtext|krackdown }}
+</div>
