@@ -149,6 +149,7 @@ h4, h5, h6,
 }
 
 .site-title {
+  line-height: 1.25;
   margin-bottom: .5rem;
 }
 
@@ -219,27 +220,6 @@ nav,
     }
   }
 }
-
-// navbar style otpion: red bar
-
-// #collapsedMainMenu,
-// #collapsedMainMenuSmallScreen {
-//   background: $radical-red;
-//   border-bottom: 10px solid $dark-gray;
-//   color: $white;
-
-//   .nav-link {
-//     border-bottom: 10px solid darken($radical-red, 10%);
-//     color: $white;
-//     font-size: 1.5rem;
-//     text-decoration: none;
-
-//     &:hover {
-//       background: transparent;
-//       border-bottom: 10px solid $old-yellow;
-//     }
-//   }
-// }
 
 .navbar {
   padding: 0;
@@ -355,19 +335,6 @@ main {
 }
 
 // Cards
-
-// .block-link {
-//   color: $dark-gray;
-//   text-decoration: none;
-
-//   &:hover {
-//     text-decoration: underline;
-
-//     img {
-//       filter: grayscale(0);
-//     }
-//   }
-// }
 
 .card,
 .card-header,
@@ -505,6 +472,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     overflow: hidden;
   }
 
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+
+    section {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .sections {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr;
@@ -558,13 +534,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
-  .features {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
-
-    section {
-      grid-template-columns: 1fr;
-    }
+  .site-title {
+    font-size: 4rem;
   }
 
   .with-image {
@@ -587,6 +558,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   section {
     grid-column: 1;
+  }
+
+  .site-title {
+    font-size: 2.5rem;
   }
 }
 
