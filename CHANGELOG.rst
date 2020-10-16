@@ -23,6 +23,7 @@ Added
 * Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
 * Wagtail_ page type for the home page.
 * Wagtail_ page type for biographies.
+* Template tag to render breadcrumbs.
 
 Changed
 ~~~~~~~
