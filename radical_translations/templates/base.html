@@ -30,6 +30,10 @@
     {% include "includes/header.html" %}
     {% endblock header %}
 
+    {% block breadcrumbs %}
+    {% include "cms/includes/breadcrumbs.html" %}
+    {% endblock breadcrumbs %}
+
     <main>
       <div class="container main">
         {% if messages %}
