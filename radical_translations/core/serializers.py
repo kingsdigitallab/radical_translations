@@ -11,7 +11,6 @@ class ResourceDocumentSerializer(DocumentSerializer):
         document = ResourceDocument
 
     def get_highlight(self, obj):
-        print(obj.meta)
         if hasattr(obj.meta, "highlight"):
             return obj.meta.highlight.__dict__["_d_"]
 
