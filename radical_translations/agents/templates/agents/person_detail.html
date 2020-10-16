@@ -42,4 +42,11 @@
 {% include "agents/includes/contributed_to.html" %}
 
 {% include "includes/object_notes.html" %}
+
+{% if object.biographies %}
+<h2>Biography</h2>
+{% for page in object.biographies.all %}
+    {% include "cms/includes/biography.html" %}
+{% endfor %}
+{% endif %}
 {% endblock main %}
