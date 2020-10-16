@@ -1,6 +1,7 @@
 import pytest
 
-from radical_translations.cms.models import BlogIndexPage, BlogPost
+from radical_translations.agents.models import Person
+from radical_translations.cms.models import BiographyPage, BlogIndexPage, BlogPost
 from radical_translations.users.models import User
 
 pytestmark = pytest.mark.django_db
@@ -36,3 +37,12 @@ class TestBlogPost:
         blog_post_1.guest_authors = None
         blog_post_1.owner = user
         assert blog_post_1.author == user.name
+
+
+class TestBiographyPage:
+    @pytest.mark.usefixtures("blog_index_page", "biography_page", "person")
+    def test_get_url(self, biography_page: BiographyPage, person: Person):
+        biography_page.person = person
+        url = biography_page.get_url()
+        assert "biographies" not in url
+        assert "agents" in url
