@@ -1,0 +1,18 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="children">
+    {% if people %}
+    <ul>
+        {% for p in people %}
+        {% with person=p.person %}
+        <li class="child-page{% if person.image %} with-image{% endif %}">
+            {% include "kdl_wagtail_people/includes/person.html" %}
+        </li>
+        {% endwith %}
+        {% endfor %}
+    </ul>
+</div>
+
+{% else %}
+<p>No one here!</p>
+{% endif %}
