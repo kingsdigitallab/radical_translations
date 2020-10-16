@@ -8702,6 +8702,20 @@ nav,
   height: 24px;
   width: 24px; }
 
+/* Breadcrumbs */
+.breadcrumbs {
+  display: block;
+  list-style: none; }
+  .breadcrumbs li {
+    display: inline-block; }
+    .breadcrumbs li::after {
+      content: "/"; }
+    .breadcrumbs li:last-child::after {
+      content: ""; }
+  .breadcrumbs svg {
+    width: 16px;
+    height: 16px; }
+
 /* Main content area */
 main {
   padding-left: 16px;
@@ -8899,7 +8913,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   font-size: 1.5rem;
   font-style: italic; }
 
-/* Index pages / Blog / Etc. */
+/* Index pages / Blog / People Etc. */
 .children {
   margin-top: 16px;
   margin-top: 1rem; }

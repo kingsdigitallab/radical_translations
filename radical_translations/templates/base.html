@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load cms_tags i18n static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,6 +29,10 @@
     {% block header %}
     {% include "includes/header.html" %}
     {% endblock header %}
+
+    {% block breadcrumbs %}
+    {% breadcrumbs %}
+    {% endblock breadcrumbs %}
 
     <main>
       <div class="container main">

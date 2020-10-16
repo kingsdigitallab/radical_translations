@@ -33,6 +33,7 @@ Added
 * Wagtail_ page type for biographies.
 * Fuzzy_ text search.
 * Search results highlighting_.
+* Template tag to render breadcrumbs.
 
 Changed
 ~~~~~~~
