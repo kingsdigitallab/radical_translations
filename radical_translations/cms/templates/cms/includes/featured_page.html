@@ -6,47 +6,32 @@
             {{ category }}
         </div>
         <div class="card-image">
-            {% if featured.image %}
             <a href="{% pageurl featured %}">
+                {% if featured.image %}
                 {% image featured.image max-370x600 alt=featured.image.title %}
-            </a>
-            {% else %}
-            <a href="{% pageurl featured %}">
+                {% else %}
                 <img src="{% static 'images/image-placeholder.svg' %}"
                      class="card-img-top"
                      alt="Image placeholder for featured content.">
+                {% endif %}
             </a>
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">
+                <a href="{% pageurl featured %}">{{ featured.title }}</a>
+            </h3>
+            {% if category == 'Blog' %}
+            {% include "cms/includes/metadata.html" with page=featured %}
             {% endif %}
-        </a>
-    </div>
-    <div class="card-body">
-        <h3 class="card-title">
-            {% if featured.person %}
-            <a href="{% url 'agent-detail' featured.person.id %}">
-            {% else %}
+            <p class="card-text">  
             <a href="{% pageurl featured %}">
-            {% endif %}
-                {{ featured.title }}
-            </a>
-        </h3>
-        {% if category == 'Blog' %}
-        {% include "cms/includes/metadata.html" with page=featured %}
-        {% endif %}
-        <p class="card-text">  
-            {% if featured.person %}
-            <a href="{% url 'agent-detail' featured.person.id %}">
-            {% else %}
-            <a href="{% pageurl featured %}">
-            {% endif %}
                 {% if featured.search_description %}
                 {{ featured.search_description }}
                 {% else %}
                 Read more.
                 {% endif %}
             </a>
-        </p>
-        {% if featured.tags %}
-        {% include "cms/includes/tags.html" with page=featured %}
-        {% endif %}
-    </div>
+            </p>
+            {% include "cms/includes/tags.html" with page=featured %}
+        </div>
 </section>
