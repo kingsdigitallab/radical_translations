@@ -28,23 +28,25 @@
 
     <section class="featured">
         {% with resource=page.featured_resource %}
-        <a class="block-link" href="{% url 'resource-detail' resource.id %}">
-            <div class="card">
-                <div class="card-header resources-icon">
-                    Resources
-                </div>
-                {% comment %}
-                <div class="card-image">
-                    <img src="{% static 'images/image-placeholder.svg' %}"
-                         class="card-img-top"
-                         alt="image placeholder for featured content">
-                </div>
-                {% endcomment %}
-                <div class="card-body">
-                    <h3 class="card-title">{{ resource.title }}</h3>
-                </div>
+        <div class="card">
+            <div class="card-header resources-icon">
+                Resources
             </div>
-        </a>
+            {% comment %}
+            <div class="card-image">
+                <img src="{% static 'images/image-placeholder.svg' %}"
+                     class="card-img-top"
+                     alt="image placeholder for featured content">
+            </div>
+            {% endcomment %}
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a class="block-link" href="{% url 'resource-detail' resource.id %}">
+                        {{ resource.title }}
+                    </a>
+                </h3>
+            </div>
+        </div>
         {% endwith %}
     </section>
 

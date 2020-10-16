@@ -1,36 +1,52 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 <section class="featured">
-    <a class="block-link" href="{% pageurl featured %}">
-        <div class="card">
-            <div class="card-header {{ category | lower }}-icon">
-                {{ category }}
-            </div>
-            <div class="card-image">
-                {% if featured.image %}
+    <div class="card">
+        <div class="card-header {{ category | lower }}-icon">
+            {{ category }}
+        </div>
+        <div class="card-image">
+            {% if featured.image %}
+            <a href="{% pageurl featured %}">
                 {% image featured.image max-370x600 alt=featured.image.title %}
-                {% else %}
+            </a>
+            {% else %}
+            <a href="{% pageurl featured %}">
                 <img src="{% static 'images/image-placeholder.svg' %}"
                      class="card-img-top"
                      alt="Image placeholder for featured content.">
+            </a>
+            {% endif %}
+        </a>
+    </div>
+    <div class="card-body">
+        <h3 class="card-title">
+            {% if featured.person %}
+            <a href="{% url 'agent-detail' featured.person.id %}">
+            {% else %}
+            <a href="{% pageurl featured %}">
+            {% endif %}
+                {{ featured.title }}
+            </a>
+        </h3>
+        {% if category == 'Blog' %}
+        {% include "cms/includes/metadata.html" with page=featured %}
+        {% endif %}
+        <p class="card-text">  
+            {% if featured.person %}
+            <a href="{% url 'agent-detail' featured.person.id %}">
+            {% else %}
+            <a href="{% pageurl featured %}">
+            {% endif %}
+                {% if featured.search_description %}
+                {{ featured.search_description }}
+                {% else %}
+                Read more.
                 {% endif %}
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">{{ featured.title }}</h3>
-                {% if category == 'Blog' %}
-                {% include "cms/includes/metadata.html" with page=featured %}
-                {% endif %}
-                <p class="card-text">
-                    {% if featured.search_description %}
-                    {{ featured.search_description }}
-                    {% else %}
-                    Read more.
-                    {% endif %}
-                </p>
-                {% if featured.tags %}
-                {% include "cms/includes/tags.html" with page=featured %}
-                {% endif %}
-            </div>
-        </div>
-    </a>
+            </a>
+        </p>
+        {% if featured.tags %}
+        {% include "cms/includes/tags.html" with page=featured %}
+        {% endif %}
+    </div>
 </section>

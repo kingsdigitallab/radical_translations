@@ -345,6 +345,8 @@ nav,
 /* Main content area */
 
 main {
+  padding-left: 1rem;
+  padding-right: 1rem;
   position: relative;
 }
 
@@ -354,18 +356,18 @@ main {
 
 // Cards
 
-.block-link {
-  color: $dark-gray;
-  text-decoration: none;
+// .block-link {
+//   color: $dark-gray;
+//   text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
+//   &:hover {
+//     text-decoration: underline;
 
-    img {
-      filter: grayscale(0);
-    }
-  }
-}
+//     img {
+//       filter: grayscale(0);
+//     }
+//   }
+// }
 
 .card,
 .card-header,
@@ -377,6 +379,20 @@ main {
 
 .card {
   background: lighten($kaki, 15%);
+
+  a {
+    color: $dark-gray;
+    text-decoration: none;
+
+    &:hover {
+      color: $radical-red;
+      text-decoration: underline;
+
+      img {
+        filter: grayscale(0);
+      }
+    }
+  }
 }
 
 .card-header {
@@ -554,6 +570,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .with-image {
     grid-gap: 1rem;
     grid-template-columns: 150px auto;
+    grid-template-row: 1;
   }
 }
 
@@ -628,16 +645,18 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-.with-image {
-  display: grid;
-}
-
 .child-page-image {
+  margin-bottom: 1rem;
+
   img {
     height: 100%;
     object-fit: cover;
     width: 100%;
   }
+}
+
+.with-image {
+  display: grid;
 }
 
 /* Alerts */
@@ -706,5 +725,19 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     left: -55.8px;
     top: 5px;
     width: 9px;
+  }
+}
+
+// Search
+.filter {
+  text-align: left;
+}
+
+dl.search-result {
+  dt {
+    float: left;
+  }
+  dd {
+    margin-left: 14em;
   }
 }
