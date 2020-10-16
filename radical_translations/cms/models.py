@@ -53,7 +53,7 @@ class BlogPost(BaseStreamPage):
             if self.owner.name:
                 return self.owner.name
 
-            return f"{self.owner.first_name} {self.owner.last_name}"
+            return self.owner.get_full_name() or self.owner.get_username()
 
         return None
 
