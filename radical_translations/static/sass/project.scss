@@ -333,8 +333,10 @@ nav,
 
     &::after {
       content: "/";
+    }
 
-      &:last-child {
+    &:last-child {
+      &::after {
         content: "";
       }
     }

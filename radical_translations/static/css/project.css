@@ -8706,8 +8706,8 @@ nav,
     display: inline-block; }
     .breadcrumbs li::after {
       content: "/"; }
-      .breadcrumbs li::after:last-child {
-        content: ""; }
+    .breadcrumbs li:last-child::after {
+      content: ""; }
   .breadcrumbs svg {
     width: 16px;
     height: 16px; }
