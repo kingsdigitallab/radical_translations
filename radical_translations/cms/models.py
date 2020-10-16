@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db import models
+from django.http import HttpRequest
+from django.urls import reverse
 from kdl_wagtail.core.models import (
     BaseIndexPage,
     BasePage,
@@ -13,7 +15,7 @@ from taggit.models import TaggedItemBase
 from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel, StreamFieldPanel
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.models import Page
+from wagtail.core.models import Page, Site
 from wagtail.core.query import PageQuerySet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
@@ -48,9 +50,12 @@ class BlogPost(BaseStreamPage):
             return self.guest_authors
 
         if self.owner:
+            if self.owner.name:
+                return self.owner.name
+
             return f"{self.owner.first_name} {self.owner.last_name}"
 
-        return ""
+        return None
 
     @property
     def index(self) -> IndexPage:
@@ -78,6 +83,12 @@ class BiographyPage(BaseRichTextPage):
         SnippetChooserPanel("person"),
         FieldPanel("body", classname="full"),
     ]
+
+    def relative_url(self, current_site: Site, request: HttpRequest = None):
+        if self.person:
+            return reverse("agent-detail", kwargs={"pk": self.person.id})
+
+        return super().relative_url(current_site=current_site, request=request)
 
 
 register_snippet(Resource)
