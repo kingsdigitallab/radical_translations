@@ -84,11 +84,11 @@ class BiographyPage(BaseRichTextPage):
         FieldPanel("body", classname="full"),
     ]
 
-    def relative_url(self, current_site: Site, request: HttpRequest = None):
+    def get_url(self, request: HttpRequest = None, current_site: Site = None):
         if self.person:
             return reverse("agent-detail", kwargs={"pk": self.person.id})
 
-        return super().relative_url(current_site=current_site, request=request)
+        return super().get_url(request=request, current_site=current_site)
 
 
 register_snippet(Resource)

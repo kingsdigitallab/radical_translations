@@ -10,8 +10,9 @@ from radical_translations.agents.tests.factories import (
     OrganisationFactory,
     PersonFactory,
 )
-from radical_translations.cms.models import BlogIndexPage, BlogPost
+from radical_translations.cms.models import BiographyPage, BlogIndexPage, BlogPost
 from radical_translations.cms.tests.factories import (
+    BiographyPageFactory,
     BlogIndexPageFactory,
     BlogPostFactory,
 )
@@ -172,3 +173,8 @@ def blog_post_1() -> BlogPost:
 @pytest.fixture
 def blog_post_2() -> BlogPost:
     return BlogPostFactory()
+
+
+@pytest.fixture
+def biography_page() -> BiographyPage:
+    return BiographyPageFactory()

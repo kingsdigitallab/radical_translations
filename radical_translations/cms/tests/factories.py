@@ -1,6 +1,6 @@
 from factory import DjangoModelFactory, Faker, Sequence
 
-from radical_translations.cms.models import BlogIndexPage, BlogPost
+from radical_translations.cms.models import BiographyPage, BlogIndexPage, BlogPost
 
 
 class BlogIndexPageFactory(DjangoModelFactory):
@@ -21,3 +21,14 @@ class BlogPostFactory(DjangoModelFactory):
     class Meta:
         model = BlogPost
         django_get_or_create = ["title", "path", "depth"]
+
+
+class BiographyPageFactory(DjangoModelFactory):
+    title = Faker("name")
+    path = Sequence(lambda n: f"00010009000{n}")
+    depth = 3
+    body = "body"
+
+    class Meta:
+        model = BiographyPage
+        django_get_or_create = ["title", "path", "depth", "body"]
