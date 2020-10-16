@@ -8701,7 +8701,9 @@ nav,
 /* Breadcrumbs */
 .breadcrumbs {
   display: block;
-  list-style: none; }
+  list-style: none;
+  margin-top: 16px;
+  margin-top: 1rem; }
   .breadcrumbs li {
     display: inline-block; }
     .breadcrumbs li::after {
