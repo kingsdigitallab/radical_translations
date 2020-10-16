@@ -1,17 +1,16 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 <section class="featured">
-    <a class="block-link"
-        {% if featured.person %}
-        href="{% url 'agent-detail' featured.person.id %}">
-        {% else %}
-        href="{% pageurl featured %}">
-        {% endif %}
-        <div class="card">
-            <div class="card-header {{ category | lower }}-icon">
-                {{ category }}
-            </div>
-            <div class="card-image">
+    <div class="card">
+        <div class="card-header {{ category | lower }}-icon">
+            {{ category }}
+        </div>
+        <div class="card-image">
+            {% if featured.person %}
+            <a href="{% url 'agent-detail' featured.person.id %}">
+            {% else %}
+            <a href="{% pageurl featured %}">
+                {% endif %}
                 {% if featured.image %}
                 {% image featured.image max-370x600 alt=featured.image.title %}
                 {% else %}
@@ -19,23 +18,37 @@
                      class="card-img-top"
                      alt="Image placeholder for featured content.">
                 {% endif %}
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">{{ featured.title }}</h3>
-                {% if category == 'Blog' %}
-                {% include "cms/includes/metadata.html" with page=featured %}
+            </a>
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">
+                {% if featured.person %}
+                <a href="{% url 'agent-detail' featured.person.id %}">
+                {% else %}
+                <a href="{% pageurl featured %}">
                 {% endif %}
-                <p class="card-text">
+                    {{ featured.title }}
+                </a>
+            </h3>
+            {% if category == 'Blog' %}
+            {% include "cms/includes/metadata.html" with page=featured %}
+            {% endif %}
+            <p class="card-text">  
+                {% if featured.person %}
+                <a href="{% url 'agent-detail' featured.person.id %}">
+                {% else %}
+                <a href="{% pageurl featured %}">
+                {% endif %}
                     {% if featured.search_description %}
                     {{ featured.search_description }}
                     {% else %}
                     Read more.
                     {% endif %}
-                </p>
-                {% if featured.tags %}
-                {% include "cms/includes/tags.html" with page=featured %}
-                {% endif %}
-            </div>
+                </a>
+            </p>
+            {% if featured.tags %}
+            {% include "cms/includes/tags.html" with page=featured %}
+            {% endif %}
         </div>
-    </a>
+    </div>
 </section>

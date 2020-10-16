@@ -8699,20 +8699,15 @@ nav,
 
 /* Main content area */
 main {
+  padding-left: 16px;
+  padding-left: 1rem;
+  padding-right: 16px;
+  padding-right: 1rem;
   position: relative; }
 
 .main {
   padding: 16px 0;
   padding: 1rem 0; }
-
-.block-link {
-  color: #222222;
-  text-decoration: none; }
-  .block-link:hover {
-    text-decoration: underline; }
-    .block-link:hover img {
-      -webkit-filter: grayscale(0);
-              filter: grayscale(0); }
 
 .card,
 .card-header,
@@ -8723,6 +8718,15 @@ main {
 
 .card {
   background: #e2e1d5; }
+  .card a {
+    color: #222222;
+    text-decoration: none; }
+    .card a:hover {
+      color: #9b2923;
+      text-decoration: underline; }
+      .card a:hover img {
+        -webkit-filter: grayscale(0);
+                filter: grayscale(0); }
 
 .card-header {
   background: #c3c1a8;
@@ -8838,7 +8842,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       grid-template-columns: 1fr; }
   .with-image {
     grid-gap: 1rem;
-    grid-template-columns: 150px auto; } }
+    grid-template-columns: 150px auto;
+    grid-template-row: 1; } }
 
 @media (max-width: 767.98px) {
   .child-page-image {
@@ -8887,14 +8892,17 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       padding: 16px 0;
       padding: 1rem 0; }
 
+.child-page-image {
+  margin-bottom: 16px;
+  margin-bottom: 1rem; }
+  .child-page-image img {
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    width: 100%; }
+
 .with-image {
   display: grid; }
-
-.child-page-image img {
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 100%; }
 
 /* Alerts */
 .alert-debug {
@@ -8948,3 +8956,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     left: -55.8px;
     top: 5px;
     width: 9px; }
+
+.filter {
+  text-align: left; }
+
+dl.search-result dt {
+  float: left; }
+
+dl.search-result dd {
+  margin-left: 14em; }
