@@ -3,16 +3,10 @@
     <input
         v-model="query_text"
         v-on:keyup.13="textSearch()"
-        class="form-control dropdown-toggle"
-        data-toggle="dropdown"
-        type="text"
-        placeholder="Search query..." />
-    <ul v-if="suggestions" class="dropdown-menu">
-        <li v-for="suggest in suggestions">
-            <button
-                v-on:click="textSearch(suggest)" 
-                class="filter btn btn-link"
-                type="button">{[ suggest ]}</button>
-        </li>
-    </ul>
+        list="suggestions"
+        placeholder="Search query..."
+        type="text" />
+    <datalist id="suggestions">
+        <option v-for="option in suggestions">{[ option ]}</option>
+    </datalist>
 </div>
