@@ -1,0 +1,32 @@
+{% extends "kdl_wagtail_core/base.html" %}
+{% load kdl_wagtail_core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block page-header %}
+<h1>{{ page.person.title }} <small>{{ page.person.introduction }}</small></h1>
+{% endblock page-header %}
+
+{% block page-body %}
+<div class="page-body {% get_page_label page %}">
+    {% if page.image %}
+    <div class="child-page-image">
+        {% image page.image fill-180x180-c100 %}
+    </div>
+    {% elif page.person.image %}
+    <div class="child-page-image">
+        {% image page.person.image fill-180x180-c100 %}
+    </div>
+    {% endif %}
+
+    <div class="child-content">
+        {% if page.introduction %}
+        <p class="child-page-introduction">{{ page.introduction }}</p>
+        {% endif %}
+
+        {% if page.person.description %}
+        <div class="person-description">
+            {{ page.person.description|richtext|krackdown }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock page-body %}
