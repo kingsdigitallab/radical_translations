@@ -5,7 +5,7 @@
     <ul>
         {% for p in people %}
         {% with person=p.person %}
-        <li class="child-page{% if person.image %} with-image{% endif %}">
+        <li class="child-page{% if person.page.first.image or person.image %} with-image{% endif %}">
             {% include "kdl_wagtail_people/includes/person.html" %}
         </li>
         {% endwith %}
