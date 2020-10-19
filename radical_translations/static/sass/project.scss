@@ -87,7 +87,7 @@ footer {
 
   .author,
   .date {
-    &:before {
+    &::before {
       display: inline-block;
       height: 10px;
       margin-right: .25rem;
@@ -96,13 +96,13 @@ footer {
   }
 
   .author {
-    &:before {
+    &::before {
       content: url("/static/fontawesome/svgs/solid/pencil-alt.svg");
     }
   }
 
   .date {
-    &:before {
+    &::before {
       content: url("/static/fontawesome/svgs/solid/calendar.svg");
     }
   }
@@ -115,7 +115,7 @@ footer {
   line-height: 1;
   padding: 0;
 
-  &:before {
+  &::before {
     content: url("/static/fontawesome/svgs/solid/tags.svg");
     display: inline-block;
     height: 16px;
@@ -327,12 +327,25 @@ nav,
 .breadcrumbs {
   display: block;
   list-style: none;
+  margin-top: 1rem;
+
+  a {
+    svg {
+      fill: $radical-red;
+    }
+  }
 
   li {
     display: inline-block;
 
     &::after {
       content: "/";
+    }
+
+    &:first-child {
+      a {
+        text-decoration: none;
+      }
     }
 
     &:last-child {
@@ -343,8 +356,8 @@ nav,
   }
 
   svg {
-    width: 16px;
     height: 16px;
+    width: 16px;
   }
 }
 
@@ -358,7 +371,13 @@ main {
 }
 
 .main {
-  padding: 1rem 0;  
+  padding: 1rem 0;
+
+  h1 {
+    small {
+      display: block;
+    }
+  }
 }
 
 // Cards
@@ -465,26 +484,26 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     border: 1px solid lighten($kaki, 10%);
 
     .card-header {
-      &:before {
+      &::before {
         display: inline-block;
         height: 16px;
         width: 16px;
       }
 
       &.biographies-icon {
-        &:before {
+        &::before {
           content: url("/static/fontawesome/svgs/solid/users.svg");
         }
       }
 
       &.blog-icon {
-        &:before {
+        &::before {
           content: url("/static/fontawesome/svgs/solid/pencil-alt.svg");
         }   
       }
 
       &.resources-icon {
-        &:before {
+        &::before {
           content: url("/static/fontawesome/svgs/solid/copy.svg");
         }   
       }
@@ -654,6 +673,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     height: 100%;
     object-fit: cover;
     width: 100%;
+  }
+}
+
+.child-page-title {
+  small {
+    display: block;
   }
 }
 

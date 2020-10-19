@@ -8525,16 +8525,16 @@ footer {
   font-family: "Oswald", sans-serif;
   font-size: 14px;
   font-size: .875rem; }
-  .metadata .author:before,
-  .metadata .date:before {
+  .metadata .author::before,
+  .metadata .date::before {
     display: inline-block;
     height: 10px;
     margin-right: 4px;
     margin-right: .25rem;
     width: 10px; }
-  .metadata .author:before {
+  .metadata .author::before {
     content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
-  .metadata .date:before {
+  .metadata .date::before {
     content: url("/static/fontawesome/svgs/solid/calendar.svg"); }
 
 .tags {
@@ -8544,7 +8544,7 @@ footer {
   font-size: .75rem;
   line-height: 1;
   padding: 0; }
-  .tags:before {
+  .tags::before {
     content: url("/static/fontawesome/svgs/solid/tags.svg");
     display: inline-block;
     height: 16px;
@@ -8701,16 +8701,22 @@ nav,
 /* Breadcrumbs */
 .breadcrumbs {
   display: block;
-  list-style: none; }
+  list-style: none;
+  margin-top: 16px;
+  margin-top: 1rem; }
+  .breadcrumbs a svg {
+    fill: #9b2923; }
   .breadcrumbs li {
     display: inline-block; }
     .breadcrumbs li::after {
       content: "/"; }
+    .breadcrumbs li:first-child a {
+      text-decoration: none; }
     .breadcrumbs li:last-child::after {
       content: ""; }
   .breadcrumbs svg {
-    width: 16px;
-    height: 16px; }
+    height: 16px;
+    width: 16px; }
 
 /* Main content area */
 main {
@@ -8723,6 +8729,8 @@ main {
 .main {
   padding: 16px 0;
   padding: 1rem 0; }
+  .main h1 small {
+    display: block; }
 
 .card,
 .card-header,
@@ -8800,15 +8808,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .features .featured {
     background: #e2e1d5;
     border: 1px solid #d8d7c6; }
-    .features .featured .card-header:before {
+    .features .featured .card-header::before {
       display: inline-block;
       height: 16px;
       width: 16px; }
-    .features .featured .card-header.biographies-icon:before {
+    .features .featured .card-header.biographies-icon::before {
       content: url("/static/fontawesome/svgs/solid/users.svg"); }
-    .features .featured .card-header.blog-icon:before {
+    .features .featured .card-header.blog-icon::before {
       content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
-    .features .featured .card-header.resources-icon:before {
+    .features .featured .card-header.resources-icon::before {
       content: url("/static/fontawesome/svgs/solid/copy.svg"); }
 
 @media (min-width: 768px) {
@@ -8919,6 +8927,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     -o-object-fit: cover;
        object-fit: cover;
     width: 100%; }
+
+.child-page-title small {
+  display: block; }
 
 .with-image {
   display: grid; }
