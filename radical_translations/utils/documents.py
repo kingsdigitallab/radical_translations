@@ -5,7 +5,12 @@ def get_agent_field() -> fields.ObjectField:
     return fields.ObjectField(
         properties={
             "id": fields.IntegerField(),
-            "name": fields.TextField(fields={"raw": fields.KeywordField()}),
+            "name": fields.TextField(
+                fields={
+                    "raw": fields.KeywordField(),
+                    "suggest": fields.CompletionField(),
+                }
+            ),
         }
     )
 

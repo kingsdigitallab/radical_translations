@@ -164,9 +164,9 @@ class ResourceViewSet(DocumentViewSet):
 
     suggester_fields = {
         "suggest_field": {
-            "field": "title.main_title.suggest",
+            "field": "authors.person.name.suggest",
             "suggesters": [SUGGESTER_COMPLETION, SUGGESTER_PHRASE, SUGGESTER_TERM],
             "default_suggester": SUGGESTER_COMPLETION,
-            "options": {"skip_duplicates": True},
+            "options": {"skip_duplicates": True, "size": 20},
         },
     }
