@@ -371,7 +371,13 @@ main {
 }
 
 .main {
-  padding: 1rem 0;  
+  padding: 1rem 0;
+
+  h1 {
+    small {
+      display: block;
+    }
+  }
 }
 
 // Cards
@@ -667,6 +673,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     height: 100%;
     object-fit: cover;
     width: 100%;
+  }
+}
+
+.child-page-title {
+  small {
+    display: block;
   }
 }
 

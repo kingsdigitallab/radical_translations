@@ -19,7 +19,8 @@
 <div class="child-content">
     <h2 class="child-page-title">
         {% if person_page.live %}<a href="{% pageurl person_page %}">{% endif %}
-        {{ person.title }} <small>{{ person.introduction }}</small>
+            {{ person.title }}
+            <small>{{ person.introduction }}</small>
         {% if person_page.live %}</a>{% endif %}
     </h2>
 

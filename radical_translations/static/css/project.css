@@ -8729,6 +8729,8 @@ main {
 .main {
   padding: 16px 0;
   padding: 1rem 0; }
+  .main h1 small {
+    display: block; }
 
 .card,
 .card-header,
@@ -8925,6 +8927,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     -o-object-fit: cover;
        object-fit: cover;
     width: 100%; }
+
+.child-page-title small {
+  display: block; }
 
 .with-image {
   display: grid; }
