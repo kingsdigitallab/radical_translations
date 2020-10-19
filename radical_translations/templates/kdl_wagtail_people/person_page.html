@@ -7,11 +7,13 @@
 
 {% block page-body %}
 <div class="page-body {% get_page_label page %}{% if page.image or page.person.image %} with-image{% endif %}">
-    {% if page.image %}
-    {% image page.image fill-180x180-c100 %}
-    {% elif page.person.image %}
-    {% image page.person.image fill-180x180-c100 %}
-    {% endif %}
+    <div class="child-page-image">
+        {% if page.image %}
+        {% image page.image max-600x600 %}
+        {% elif page.person.image %}
+        {% image page.person.image max-600x600 %}
+        {% endif %}
+    </div>
 
     <div>
         {% if page.introduction %}

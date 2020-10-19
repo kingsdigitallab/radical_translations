@@ -8821,7 +8821,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 @media (min-width: 768px) {
   .child-page-image {
-    height: 150px;
+    height: 200px;
     overflow: hidden; }
   .features {
     grid-template-columns: repeat(3, 1fr);
@@ -8867,16 +8867,36 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     font-size: 4rem; }
   .with-image {
     grid-gap: 1rem;
-    grid-template-columns: 150px auto;
+    grid-template-columns: 200px auto;
     grid-template-row: 1; } }
 
 @media (max-width: 767.98px) {
   .child-page-image {
     height: 200px;
     overflow: hidden; }
+  .intro {
+    margin-top: 1rem; }
+  .people .with-image .child-page-image {
+    height: 300px; }
+    .people .with-image .child-page-image img {
+      display: block;
+      height: 300px;
+      -o-object-fit: cover;
+         object-fit: cover; }
   .sections,
   .with-image {
     grid-template-columns: 100%; }
+    .sections.people .child-page-image, .sections.personpage .child-page-image,
+    .with-image.people .child-page-image,
+    .with-image.personpage .child-page-image {
+      height: 300px; }
+      .sections.people .child-page-image img, .sections.personpage .child-page-image img,
+      .with-image.people .child-page-image img,
+      .with-image.personpage .child-page-image img {
+        display: block;
+        height: 300px;
+        -o-object-fit: cover;
+           object-fit: cover; }
   section {
     grid-column: 1; }
   .site-title {
@@ -8897,8 +8917,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .intro {
   color: #222222;
-  font-size: 24px;
-  font-size: 1.5rem;
+  font-size: 20px;
+  font-size: 1.25rem;
   font-style: italic; }
 
 /* Index pages / Blog / People Etc. */
@@ -8920,10 +8940,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       padding: 1rem 0; }
 
 .child-page-image {
+  border: 1px solid #c3c1a8;
   margin-bottom: 16px;
   margin-bottom: 1rem; }
+  .child-page-image a {
+    display: block; }
   .child-page-image img {
-    height: 100%;
+    height: 200px;
     -o-object-fit: cover;
        object-fit: cover;
     width: 100%; }

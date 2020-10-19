@@ -514,7 +514,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 @include media-breakpoint-up(md) {
 
   .child-page-image {
-    height: 150px;
+    height: 200px;
     overflow: hidden;
   }
 
@@ -586,7 +586,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .with-image {
     grid-gap: 1rem;
-    grid-template-columns: 150px auto;
+    grid-template-columns: 200px auto;
     grid-template-row: 1;
   }
 }
@@ -597,9 +597,40 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     overflow: hidden;
   }
 
+  .intro {
+    margin-top: 1rem;
+  }
+
+  .people {
+    .with-image {
+      .child-page-image {
+        height: 300px;
+
+        img {
+          display: block;
+          height: 300px;
+          object-fit: cover;
+        }
+      } 
+    }
+  }
+
   .sections,
   .with-image {
     grid-template-columns: 100%;
+
+    &.people,
+    &.personpage {
+      .child-page-image {
+        height: 300px;
+
+        img {
+          display: block;
+          height: 300px;
+          object-fit: cover;
+        }
+      }
+    }
   }
 
   section {
@@ -636,7 +667,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .intro {
   color: $dark-gray;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-style: italic;
 }
 
@@ -667,10 +698,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .child-page-image {
+  border: 1px solid $kaki;
   margin-bottom: 1rem;
 
+  a {
+    display: block;
+  }
+
   img {
-    height: 100%;
+    height: 200px;
     object-fit: cover;
     width: 100%;
   }
