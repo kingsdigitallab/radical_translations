@@ -8907,7 +8907,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .sections section:nth-child(5) {
     background-color: #9b2923; }
 
-.intro {
+.intro,
+.introduction {
   color: #222222;
   font-size: 24px;
   font-size: 1.5rem;
