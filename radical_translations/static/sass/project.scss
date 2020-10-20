@@ -44,7 +44,7 @@ body {
 
 .btn {
   border-radius: 0;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-variation-settings: 'wght' 700;
   font-weight: 700;
   text-transform: uppercase;
@@ -70,8 +70,8 @@ footer {
 
 .highlight {
   background: $old-yellow;
-  padding-left: .5rem;
-  padding-right: .5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .image {
@@ -82,15 +82,15 @@ footer {
 }
 
 .metadata {
-  font-family: "Oswald", sans-serif;
-  font-size: .875rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.875rem;
 
   .author,
   .date {
     &::before {
       display: inline-block;
       height: 10px;
-      margin-right: .25rem;
+      margin-right: 0.25rem;
       width: 10px;
     }
   }
@@ -110,8 +110,8 @@ footer {
 
 .tags {
   display: block;
-  font-family: "Oswald", sans-serif;
-  font-size: .75rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
   line-height: 1;
   padding: 0;
 
@@ -119,7 +119,7 @@ footer {
     content: url("/static/fontawesome/svgs/solid/tags.svg");
     display: inline-block;
     height: 16px;
-    margin-right: .25rem;
+    margin-right: 0.25rem;
     transform: rotate(90deg);
     vertical-align: text-bottom;
     width: 16px;
@@ -131,13 +131,17 @@ footer {
   background: $old-yellow;
   border-bottom: 0;
   display: inline-block;
-  padding: .25rem .5rem .5rem;
+  padding: 0.25rem 0.5rem 0.5rem;
 }
 
 // Headings
 
-h1, h2, h3,
-h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .card-header {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 700;
@@ -150,10 +154,10 @@ h4, h5, h6,
 
 .site-title {
   line-height: 1.25;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
-// Header 
+// Header
 
 // Top header
 
@@ -170,7 +174,7 @@ h4, h5, h6,
 
   a {
     display: block;
-    padding: .25rem .5rem 0 0;
+    padding: 0.25rem 0.5rem 0 0;
     text-decoration: none;
 
     svg {
@@ -227,7 +231,7 @@ nav,
 
 .brand {
   display: block;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 4rem;
   font-variation-settings: 'wdth' 100, 'wght' 600;
   line-height: 1;
@@ -274,18 +278,45 @@ nav,
   }
 }
 
+// Tabs
+
+.nav-tabs {
+  border-bottom: 5px solid $kaki;
+  margin-bottom: 1rem;
+
+  .nav-item {
+    margin-bottom: -2px;
+
+    .nav-link {
+      border: 0;
+      border-radius: 0;
+      text-decoration: none;
+
+      &.active {
+        background: $kaki;
+        color: $dark-gray;
+      }
+
+      &:hover {
+        background: rgba($kaki, .4);
+        border: transparent;
+      }
+    }
+  }
+}
+
 // Logos
 
 .partners-funders {
   h2 {
-    padding-left: .5rem;
+    padding-left: 0.5rem;
   }
 
   img,
   svg {
     max-height: 100px;
     max-width: 100%;
-    padding: .5rem;
+    padding: 0.5rem;
   }
 
   a {
@@ -438,8 +469,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   grid-gap: 1px;
   position: relative;
 
-  h1, h2, h3,
-  h4, h4, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h4,
+  h6 {
     padding-top: 1rem;
     text-transform: uppercase;
 
@@ -455,8 +490,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 
   section:nth-child(2) {
-    h1, h2, h3,
-    h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       a {
         color: $dark-gray;
       }
@@ -505,14 +544,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       &.resources-icon {
         &::before {
           content: url("/static/fontawesome/svgs/solid/copy.svg");
-        }   
+        }
       }
     }
   }
 }
 
 @include media-breakpoint-up(md) {
-
   .child-page-image {
     height: 200px;
     overflow: hidden;
@@ -538,7 +576,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       border-bottom: 10px solid $old-yellow;
       height: 100%;
     }
-    
+
     section:nth-child(1) {
       grid-column: 5 / 10;
       grid-row: 1;
@@ -665,7 +703,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-.intro {
+.intro,
+.introduction {
   color: $dark-gray;
   font-size: 1.25rem;
   font-style: italic;

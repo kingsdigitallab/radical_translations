@@ -8488,7 +8488,7 @@ body {
 
 .btn {
   border-radius: 0;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-variation-settings: 'wght' 700;
   font-weight: 700;
   text-transform: uppercase; }
@@ -8513,24 +8513,24 @@ footer {
 .highlight {
   background: #e9c46a;
   padding-left: 8px;
-  padding-left: .5rem;
+  padding-left: 0.5rem;
   padding-right: 8px;
-  padding-right: .5rem; }
+  padding-right: 0.5rem; }
 
 .image img {
   height: auto;
   max-width: 100%; }
 
 .metadata {
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 14px;
-  font-size: .875rem; }
+  font-size: 0.875rem; }
   .metadata .author::before,
   .metadata .date::before {
     display: inline-block;
     height: 10px;
     margin-right: 4px;
-    margin-right: .25rem;
+    margin-right: 0.25rem;
     width: 10px; }
   .metadata .author::before {
     content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
@@ -8539,9 +8539,9 @@ footer {
 
 .tags {
   display: block;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 12px;
-  font-size: .75rem;
+  font-size: 0.75rem;
   line-height: 1;
   padding: 0; }
   .tags::before {
@@ -8549,7 +8549,7 @@ footer {
     display: inline-block;
     height: 16px;
     margin-right: 4px;
-    margin-right: .25rem;
+    margin-right: 0.25rem;
     -webkit-transform: rotate(90deg);
             transform: rotate(90deg);
     vertical-align: text-bottom;
@@ -8561,10 +8561,14 @@ footer {
   border-bottom: 0;
   display: inline-block;
   padding: 4px 8px 8px;
-  padding: .25rem .5rem .5rem; }
+  padding: 0.25rem 0.5rem 0.5rem; }
 
-h1, h2, h3,
-h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .card-header {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 400, 'wght' 700;
@@ -8577,7 +8581,7 @@ h4, h5, h6,
 .site-title {
   line-height: 1.25;
   margin-bottom: 8px;
-  margin-bottom: .5rem; }
+  margin-bottom: 0.5rem; }
 
 .top-header {
   position: relative; }
@@ -8591,7 +8595,7 @@ h4, h5, h6,
   .login a {
     display: block;
     padding: 4px 8px 0 0;
-    padding: .25rem .5rem 0 0;
+    padding: 0.25rem 0.5rem 0 0;
     text-decoration: none; }
     .login a svg {
       fill: #9b2923; }
@@ -8630,7 +8634,7 @@ nav,
 
 .brand {
   display: block;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 64px;
   font-size: 4rem;
   font-variation-settings: 'wdth' 100, 'wght' 600;
@@ -8669,16 +8673,33 @@ nav,
   .navbar-toggler svg {
     height: 24px; }
 
+.nav-tabs {
+  border-bottom: 5px solid #c3c1a8;
+  margin-bottom: 16px;
+  margin-bottom: 1rem; }
+  .nav-tabs .nav-item {
+    margin-bottom: -2px; }
+    .nav-tabs .nav-item .nav-link {
+      border: 0;
+      border-radius: 0;
+      text-decoration: none; }
+      .nav-tabs .nav-item .nav-link.active {
+        background: #c3c1a8;
+        color: #222222; }
+      .nav-tabs .nav-item .nav-link:hover {
+        background: rgba(195, 193, 168, 0.4);
+        border: transparent; }
+
 .partners-funders h2 {
   padding-left: 8px;
-  padding-left: .5rem; }
+  padding-left: 0.5rem; }
 
 .partners-funders img,
 .partners-funders svg {
   max-height: 100px;
   max-width: 100%;
   padding: 8px;
-  padding: .5rem; }
+  padding: 0.5rem; }
 
 .partners-funders a {
   display: inline-block;
@@ -8777,21 +8798,37 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   display: grid;
   grid-gap: 1px;
   position: relative; }
-  .sections h1, .sections h2, .sections h3,
-  .sections h4, .sections h4, .sections h6 {
+  .sections h1,
+  .sections h2,
+  .sections h3,
+  .sections h4,
+  .sections h4,
+  .sections h6 {
     padding-top: 16px;
     padding-top: 1rem;
     text-transform: uppercase; }
-    .sections h1 a, .sections h2 a, .sections h3 a,
-    .sections h4 a, .sections h4 a, .sections h6 a {
+    .sections h1 a,
+    .sections h2 a,
+    .sections h3 a,
+    .sections h4 a,
+    .sections h4 a,
+    .sections h6 a {
       color: #fff;
       text-decoration: none; }
-      .sections h1 a:hover, .sections h2 a:hover, .sections h3 a:hover,
-      .sections h4 a:hover, .sections h4 a:hover, .sections h6 a:hover {
+      .sections h1 a:hover,
+      .sections h2 a:hover,
+      .sections h3 a:hover,
+      .sections h4 a:hover,
+      .sections h4 a:hover,
+      .sections h6 a:hover {
         background: transparent;
         text-decoration: underline; }
-  .sections section:nth-child(2) h1 a, .sections section:nth-child(2) h2 a, .sections section:nth-child(2) h3 a,
-  .sections section:nth-child(2) h4 a, .sections section:nth-child(2) h5 a, .sections section:nth-child(2) h6 a {
+  .sections section:nth-child(2) h1 a,
+  .sections section:nth-child(2) h2 a,
+  .sections section:nth-child(2) h3 a,
+  .sections section:nth-child(2) h4 a,
+  .sections section:nth-child(2) h5 a,
+  .sections section:nth-child(2) h6 a {
     color: #222222; }
   .sections section:nth-child(3),
   .sections section:nth-child(4),
@@ -8915,7 +8952,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .sections section:nth-child(5) {
     background-color: #9b2923; }
 
-.intro {
+.intro,
+.introduction {
   color: #222222;
   font-size: 20px;
   font-size: 1.25rem;
