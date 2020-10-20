@@ -8673,6 +8673,23 @@ nav,
   .navbar-toggler svg {
     height: 24px; }
 
+.nav-tabs {
+  border-bottom: 5px solid #c3c1a8;
+  margin-bottom: 16px;
+  margin-bottom: 1rem; }
+  .nav-tabs .nav-item {
+    margin-bottom: -2px; }
+    .nav-tabs .nav-item .nav-link {
+      border: 0;
+      border-radius: 0;
+      text-decoration: none; }
+      .nav-tabs .nav-item .nav-link.active {
+        background: #c3c1a8;
+        color: #222222; }
+      .nav-tabs .nav-item .nav-link:hover {
+        background: rgba(195, 193, 168, 0.4);
+        border: transparent; }
+
 .partners-funders h2 {
   padding-left: 8px;
   padding-left: 0.5rem; }
