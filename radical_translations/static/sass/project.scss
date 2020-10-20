@@ -87,7 +87,7 @@ footer {
 
   .author,
   .date {
-    &:before {
+    &::before {
       display: inline-block;
       height: 10px;
       margin-right: 0.25rem;
@@ -96,13 +96,13 @@ footer {
   }
 
   .author {
-    &:before {
+    &::before {
       content: url('/static/fontawesome/svgs/solid/pencil-alt.svg');
     }
   }
 
   .date {
-    &:before {
+    &::before {
       content: url('/static/fontawesome/svgs/solid/calendar.svg');
     }
   }
@@ -115,7 +115,7 @@ footer {
   line-height: 1;
   padding: 0;
 
-  &:before {
+  &::before {
     content: url('/static/fontawesome/svgs/solid/tags.svg');
     display: inline-block;
     height: 16px;
@@ -278,6 +278,33 @@ nav,
   }
 }
 
+// Tabs
+
+.nav-tabs {
+  border-bottom: 5px solid $kaki;
+  margin-bottom: 1rem;
+
+  .nav-item {
+    margin-bottom: -2px;
+
+    .nav-link {
+      border: 0;
+      border-radius: 0;
+      text-decoration: none;
+
+      &.active {
+        background: $kaki;
+        color: $dark-gray;
+      }
+
+      &:hover {
+        background: rgba($kaki, 0.4);
+        border: transparent;
+      }
+    }
+  }
+}
+
 // Logos
 
 .partners-funders {
@@ -331,24 +358,37 @@ nav,
 .breadcrumbs {
   display: block;
   list-style: none;
+  margin-top: 1rem;
+
+  a {
+    svg {
+      fill: $radical-red;
+    }
+  }
 
   li {
     display: inline-block;
 
     &::after {
-      content: "/";
+      content: '/';
+    }
+
+    &:first-child {
+      a {
+        text-decoration: none;
+      }
     }
 
     &:last-child {
       &::after {
-        content: "";
+        content: '';
       }
     }
   }
 
   svg {
-    width: 16px;
     height: 16px;
+    width: 16px;
   }
 }
 
@@ -363,6 +403,12 @@ main {
 
 .main {
   padding: 1rem 0;
+
+  h1 {
+    small {
+      display: block;
+    }
+  }
 }
 
 // Cards
@@ -477,26 +523,26 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     border: 1px solid lighten($kaki, 10%);
 
     .card-header {
-      &:before {
+      &::before {
         display: inline-block;
         height: 16px;
         width: 16px;
       }
 
       &.biographies-icon {
-        &:before {
+        &::before {
           content: url('/static/fontawesome/svgs/solid/users.svg');
         }
       }
 
       &.blog-icon {
-        &:before {
+        &::before {
           content: url('/static/fontawesome/svgs/solid/pencil-alt.svg');
         }
       }
 
       &.resources-icon {
-        &:before {
+        &::before {
           content: url('/static/fontawesome/svgs/solid/copy.svg');
         }
       }
@@ -506,7 +552,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 @include media-breakpoint-up(md) {
   .child-page-image {
-    height: 150px;
+    height: 200px;
     overflow: hidden;
   }
 
@@ -578,7 +624,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .with-image {
     grid-gap: 1rem;
-    grid-template-columns: 150px auto;
+    grid-template-columns: 200px auto;
     grid-template-row: 1;
   }
 }
@@ -589,9 +635,40 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     overflow: hidden;
   }
 
+  .intro {
+    margin-top: 1rem;
+  }
+
+  .people {
+    .with-image {
+      .child-page-image {
+        height: 300px;
+
+        img {
+          display: block;
+          height: 300px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
   .sections,
   .with-image {
     grid-template-columns: 100%;
+
+    &.people,
+    &.personpage {
+      .child-page-image {
+        height: 300px;
+
+        img {
+          display: block;
+          height: 300px;
+          object-fit: cover;
+        }
+      }
+    }
   }
 
   section {
@@ -626,9 +703,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-.intro {
+.intro,
+.introduction {
   color: $dark-gray;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-style: italic;
 }
 
@@ -659,12 +737,23 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .child-page-image {
+  border: 1px solid $kaki;
   margin-bottom: 1rem;
 
+  a {
+    display: block;
+  }
+
   img {
-    height: 100%;
+    height: 200px;
     object-fit: cover;
     width: 100%;
+  }
+}
+
+.child-page-title {
+  small {
+    display: block;
   }
 }
 

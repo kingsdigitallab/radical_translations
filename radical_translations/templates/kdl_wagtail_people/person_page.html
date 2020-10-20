@@ -6,26 +6,22 @@
 {% endblock page-header %}
 
 {% block page-body %}
-<div class="page-body {% get_page_label page %}">
-    {% if page.image %}
+<div class="page-body {% get_page_label page %}{% if page.image or page.person.image %} with-image{% endif %}">
     <div class="child-page-image">
-        {% image page.image fill-180x180-c100 %}
+        {% if page.image %}
+        {% image page.image max-600x600 %}
+        {% elif page.person.image %}
+        {% image page.person.image max-600x600 %}
+        {% endif %}
     </div>
-    {% elif page.person.image %}
-    <div class="child-page-image">
-        {% image page.person.image fill-180x180-c100 %}
-    </div>
-    {% endif %}
 
-    <div class="child-content">
+    <div>
         {% if page.introduction %}
-        <p class="child-page-introduction">{{ page.introduction }}</p>
+        <p class="intro">{{ page.introduction }}</p>
         {% endif %}
 
         {% if page.person.description %}
-        <div class="person-description">
-            {{ page.person.description|richtext|krackdown }}
-        </div>
+        {{ page.person.description|richtext|krackdown }}
         {% endif %}
     </div>
 </div>
