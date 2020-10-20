@@ -5,13 +5,13 @@
 {% if person_page.image %}
 <div class="child-page-image">
     {% if person_page.live %}<a href="{% pageurl person_page %}">{% endif %}
-    {% image person_page.image fill-180x180-c100 %}
+    {% image person_page.image max-600x600 %}
     {% if person_page.live %}</a>{% endif %}
 </div>
 {% elif person.image %}
 <div class="child-page-image">
     {% if person_page.live %}<a href="{% pageurl person_page %}">{% endif %}
-    {% image person.image fill-180x180-c100 %}
+    {% image person.image max-600x600 %}
     {% if person_page.live %}</a>{% endif %}
 </div>
 {% endif %}
@@ -19,7 +19,8 @@
 <div class="child-content">
     <h2 class="child-page-title">
         {% if person_page.live %}<a href="{% pageurl person_page %}">{% endif %}
-        {{ person.title }} <small>{{ person.introduction }}</small>
+            {{ person.title }}
+            <small>{{ person.introduction }}</small>
         {% if person_page.live %}</a>{% endif %}
     </h2>
 
