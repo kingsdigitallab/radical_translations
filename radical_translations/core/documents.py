@@ -28,9 +28,13 @@ lowercase_sort_normalizer = normalizer(
     "lowercase_sort", filter=["lowercase", "asciifolding"]
 )
 
+kwargs = {"copy_to": "content"}
+
 
 @registry.register_document
 class ResourceDocument(Document):
+    content = fields.TextField(attr="title.main_title")
+
     title = fields.ObjectField(
         properties={
             "main_title": fields.TextField(
@@ -40,15 +44,16 @@ class ResourceDocument(Document):
                     "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
                     "suggest": fields.CompletionField(),
                 },
+                **kwargs
             ),
             "subtitle": fields.TextField(),
-        }
+        },
     )
     subjects = get_controlled_term_field()
     date_display = fields.TextField()
     year_earliest = fields.IntegerField()
     year_latest = fields.IntegerField()
-    summary = fields.TextField()
+    summary = fields.TextField(**kwargs)
     classifications = fields.ObjectField(
         properties={
             "classification": get_controlled_term_field(),

@@ -6,3 +6,9 @@ IPYTHONDIR=/app/.ipython
 # Geonames
 # ------------------------------------------------------------------------------
 GEONAMES_KEY=kdlinfo
+
+# Zotero
+# ------------------------------------------------------------------------------
+KDL_WAGTAIL_ZOTERO_COLLECTION=EMZBL5DI
+KDL_WAGTAIL_ZOTERO_LIBRARY_ID=2379976
+KDL_WAGTAIL_ZOTERO_TOKEN=vs9eT6pMDkbSiswR4ziSuwno

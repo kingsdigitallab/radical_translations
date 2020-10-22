@@ -4,6 +4,7 @@
 <h1>{{ object.name }}</h1>
 
 <!-- Bio / Record tabs -->
+{% if object.biographies.count %}
 <nav>
     <ul class="nav nav-tabs" id="bio-record" role="tablist">
         <li class="nav-item" role="presentation">
@@ -14,6 +15,7 @@
         </li>
     </ul>
 </nav>
+{% endif %}
 
 <!-- Tab panes -->
 <div class="tab-content">
@@ -58,13 +60,14 @@
 
         {% include "includes/object_notes.html" %}
     </div>
+
+    {% if object.biographies.count %}
     <div class="tab-pane" id="bio" role="tabpanel" aria-labelledby="bio-tab">
-        {% if object.biographies %}
         <h2>Biography</h2>
         {% for page in object.biographies.all %}
         {% include "cms/includes/biography.html" %}
         {% endfor %}
-        {% endif %}
     </div>
+    {% endif %}
 </div>
 {% endblock main %}
