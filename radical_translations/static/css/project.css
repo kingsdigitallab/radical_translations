@@ -8730,11 +8730,11 @@ nav,
   .breadcrumbs li {
     display: inline-block; }
     .breadcrumbs li::after {
-      content: "/"; }
+      content: '/'; }
     .breadcrumbs li:first-child a {
       text-decoration: none; }
     .breadcrumbs li:last-child::after {
-      content: ""; }
+      content: ''; }
   .breadcrumbs svg {
     height: 16px;
     width: 16px; }
