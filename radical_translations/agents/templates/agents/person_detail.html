@@ -6,49 +6,49 @@
 <!-- Bio / Record tabs -->
 <nav>
     <ul class="nav nav-tabs" id="bio-record" role="tablist">
-      <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="record-tab" data-toggle="tab" href="#record-details" role="tab" aria-controls="record-details" aria-selected="true">Record details</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab" aria-controls="bio" aria-selected="false">Biography</a>
-      </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="record-tab" data-toggle="tab" href="#record-details" role="tab" aria-controls="record-details" aria-selected="true">Record details</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab" aria-controls="bio" aria-selected="false">Biography</a>
+        </li>
     </ul>
 </nav>
 
 <!-- Tab panes -->
 <div class="tab-content">
     <p>
-        {{ object.gender }}
-        |
-        {{ object.place_birth.address }}, {{ object.date_birth }} – {{ object.date_death }}, {{ object.place_death.address }} 
+    {{ object.gender }}
+    |
+    {{ object.place_birth.address }}, {{ object.date_birth }} – {{ object.date_death }}, {{ object.place_death.address }} 
 
-        {% if object.languages.count %}
-        |
-        {% for language in object.languages.all %}
-        {{ language.label }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-        {% endif %}
+    {% if object.languages.count %}
+    |
+    {% for language in object.languages.all %}
+    {{ language.label }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    {% endif %}
 
-        {% if object.main_places.count %}
-        |
-        {% for place in object.main_places.all %}
-        <span class="badge badge-primary">{{ place.address }}</span>
-        {% endfor %}
-        {% endif %}
+    {% if object.main_places.count %}
+    |
+    {% for place in object.main_places.all %}
+    <span class="badge badge-primary">{{ place.address }}</span>
+    {% endfor %}
+    {% endif %}
 
-        {% if object.based_near.count %}
-        |
-        {% for place in object.based_near.all %}
-        {{ place.address }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-        {% endif %}
+    {% if object.based_near.count %}
+    |
+    {% for place in object.based_near.all %}
+    {{ place.address }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    {% endif %}
 
-        <br>
+    <br>
 
-        {% include "agents/includes/pages.html" %}
-        {% include "agents/includes/roles.html" %}
+    {% include "agents/includes/pages.html" %}
+    {% include "agents/includes/roles.html" %}
     </p>
-    
+
     <div class="tab-pane active" id="record-details" role="tabpanel" aria-labelledby="record-tab">
         {% include "agents/includes/agents.html" with title='Knows' agents=object.knows %}
 
@@ -62,7 +62,7 @@
         {% if object.biographies %}
         <h2>Biography</h2>
         {% for page in object.biographies.all %}
-            {% include "cms/includes/biography.html" %}
+        {% include "cms/includes/biography.html" %}
         {% endfor %}
         {% endif %}
     </div>
