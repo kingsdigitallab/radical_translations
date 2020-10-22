@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h2>{{ object.name }}</h2>
+<h1>{{ object.name }}</h1>
 
 <!-- Bio / Record tabs -->
-<ul class="nav nav-tabs" id="bio-record" role="tablist">
-  <li class="nav-item" role="presentation">
-    <a class="nav-link active" id="record-tab" data-toggle="tab" href="#record-details" role="tab" aria-controls="record-details" aria-selected="true">Record details</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab" aria-controls="bio" aria-selected="false">Biography</a>
-  </li>
-</ul>
+<nav>
+    <ul class="nav nav-tabs" id="bio-record" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="record-tab" data-toggle="tab" href="#record-details" role="tab" aria-controls="record-details" aria-selected="true">Record details</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab" aria-controls="bio" aria-selected="false">Biography</a>
+      </li>
+    </ul>
+</nav>
 
 <!-- Tab panes -->
 <div class="tab-content">
