@@ -11,6 +11,7 @@ RUN apt-get update \
   && apt-get install -y gettext \
   # PyGraphviz dependencies
   && apt-get install -y graphviz graphviz-dev \
+  && apt-get install -y postgresql-client \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
