@@ -8497,6 +8497,12 @@ b,
 strong {
   font-variation-settings: 'wdth' 400, 'wght' 700; }
 
+.close.btn-sm, .btn-group-sm > .close.btn {
+  font-size: 16px;
+  font-size: 1rem;
+  padding-right: 16px;
+  padding-right: 1rem; }
+
 footer {
   background: white;
   border-top: 15px solid #222222;
