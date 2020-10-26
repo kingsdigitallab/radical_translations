@@ -61,12 +61,32 @@
     {% include "includes/footer.html" %}
     {% endblock footer %}
 
+
+    {# Cookies #}
+    <div class="cookies-box hidden" id="cookie-disclaimer">
+        <p>
+            <button type="button" class="btn btn-sm close" aria-label="Close cookies disclaimer">
+                Close <span aria-hidden="true">&times;</span>
+            </button>
+        </p>
+        <p>We use cookies to track usage and preferences.</p>
+        <p>
+            <a href="/cookies-policy/" class="btn btn-secondary">Cookie Policy</a>
+            <button type="button" class="btn btn-success" aria-label="Accept cookies">
+                Accept
+            </button>
+        </p>
+
+    </div>
+
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     {% block javascript %}
     <!-- Vendor dependencies bundled as one file-->
     <script src="{% static 'js/vendors.js' %}"></script>
+    <script src="{% static 'js/js-cookie/src/js.cookie.js' %}"
+      type="text/javascript"></script>
     <!-- place project specific Javascript in this file -->
     <script src="{% static 'js/project.js' %}"></script>
     {% endblock javascript %}
