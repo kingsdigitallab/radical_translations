@@ -3,8 +3,14 @@
 // Modifying colour map
 // Ref: https://getbootstrap.com/docs/4.5/getting-started/theming/#modify-map
 
+// Adding primary and secondary to the map doesn't seem to work.
+// I am adding them separately here.
+// Anything else goes in the map.
+
+$primary: #9b2923;
+$secondary: #eae9da;
+
 $theme-colors: (
-  "primary": #9b2923,
-  "secondary": #eae9da,
-  "danger": #ff4136
+    "danger": #ff4136,
+    "success": #006345
 );

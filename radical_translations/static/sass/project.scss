@@ -55,6 +55,13 @@ strong {
   font-variation-settings: 'wdth' 400, 'wght' 700;
 }
 
+.close {
+  &.btn-sm {
+    font-size: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 footer {
   background: white;
   border-top: 15px solid $dark-gray;
@@ -66,6 +73,10 @@ footer {
   h2 {
     font-size: 1.5rem;
   }
+}
+
+.hidden {
+  display: none;
 }
 
 .highlight {
@@ -842,4 +853,19 @@ dl.search-result {
   dd {
     margin-left: 14em;
   }
+}
+
+/* Cookies disclaimer box */
+
+.cookies-box {
+  background: $secondary;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  opacity: 0.95;
+  padding-top: 1rem;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  z-index: 1001;
 }
