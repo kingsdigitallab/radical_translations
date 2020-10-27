@@ -33,6 +33,10 @@ a {
   &:hover {
     text-decoration: none;
   }
+
+  svg {
+    fill: $radical-red;
+  }
 }
 
 body {
@@ -94,7 +98,7 @@ footer {
 
 .metadata {
   font-family: 'Oswald', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.9125rem;
 
   .author,
   .date {
@@ -116,6 +120,12 @@ footer {
     &::before {
       content: url('/static/fontawesome/svgs/solid/calendar.svg');
     }
+  }
+
+  svg {
+    fill: $dark-gray;
+    height: 16px;
+    width: 16px;
   }
 }
 
@@ -576,6 +586,18 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
+  .metadata-block {
+    &::after {
+      content: '|';
+    }
+
+    &:last-child {
+      &::after {
+        content: '';
+      }
+    }
+  }
+
   .sections {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr;
@@ -648,6 +670,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .intro {
     margin-top: 1rem;
+  }
+
+  .metadata-block {
+    display: block;
   }
 
   .people {
@@ -778,6 +804,26 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   svg {
     height: 16px;
     width: 16px;
+  }
+}
+
+.radical,
+.uncertain {
+  &::before {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.radical {
+  &::beforet {
+    content: url("/static/images/phrygian-cap.svg");
+  }
+}
+
+.uncertain {
+  &::before {
+    content: url("/static/fontawesome/svgs/solid/question.svg");
   }
 }
 

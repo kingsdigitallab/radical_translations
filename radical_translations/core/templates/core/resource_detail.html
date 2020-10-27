@@ -51,7 +51,7 @@
     <dd>{{ role.label }}</dd>
     {% endfor %}
     {% for classification in contribution.classification.all %}
-    <dd>{{ classification.label }}</dd>
+    <dd class="{{ classification.label }}">{{ classification.label }}</dd>
     {% endfor %}
     {% endfor %}
 </dl>
@@ -67,7 +67,7 @@
     <a href="{% url 'resource-detail' relationship.related_to.pk %}">{{ relationship.related_to.title }}</a>
     </dd>
     {% for classification in relationship.classification.all %}
-    <dd>{{ classification.label }}</dd>
+    <dd class="{{ classification.label }}">{{ classification.label }}</dd>
     {% endfor %}
     {% endfor %}
     {% endif %}
@@ -79,7 +79,7 @@
     <a href="{% url 'resource-detail' relationship.resource.pk %}">{{ relationship.resource.title }}</a>
     </dd>
     {% for classification in relationship.classification.all %}
-    <dd>{{ classification.label }}</dd>
+    <dd class="{{ classification.label }}">{{ classification.label }}</dd>
     {% endfor %}
     {% endfor %}
     {% endif %}
