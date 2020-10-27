@@ -8479,6 +8479,8 @@ a {
   text-decoration: underline; }
   a:hover {
     text-decoration: none; }
+  a svg {
+    fill: #9b2923; }
 
 body {
   background: url("../images/rt-bg.svg") no-repeat #fdf9ef;
@@ -8532,8 +8534,8 @@ footer {
 
 .metadata {
   font-family: 'Oswald', sans-serif;
-  font-size: 14px;
-  font-size: 0.875rem; }
+  font-size: 14.6px;
+  font-size: 0.9125rem; }
   .metadata .author::before,
   .metadata .date::before {
     display: inline-block;
@@ -8545,6 +8547,10 @@ footer {
     content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
   .metadata .date::before {
     content: url("/static/fontawesome/svgs/solid/calendar.svg"); }
+  .metadata svg {
+    fill: #222222;
+    height: 16px;
+    width: 16px; }
 
 .tags {
   display: block;
@@ -8874,6 +8880,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     grid-template-rows: 1fr; }
     .features section {
       grid-template-columns: 1fr; }
+  .metadata-block::after {
+    content: '|'; }
+  .metadata-block:last-child::after {
+    content: ''; }
   .sections {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr; }
@@ -8922,6 +8932,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     overflow: hidden; }
   .intro {
     margin-top: 1rem; }
+  .metadata-block {
+    display: block; }
   .people .with-image .child-page-image {
     height: 300px; }
     .people .with-image .child-page-image img {
@@ -9008,6 +9020,17 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .noble svg {
   height: 16px;
   width: 16px; }
+
+.radical::before,
+.uncertain::before {
+  height: 16px;
+  width: 16px; }
+
+.radical::beforet {
+  content: url("/static/images/phrygian-cap.svg"); }
+
+.uncertain::before {
+  content: url("/static/fontawesome/svgs/solid/question.svg"); }
 
 /* Alerts */
 .alert-debug {

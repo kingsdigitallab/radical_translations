@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-      {% block title %}{{ page.title }} {% if object.name %}{{ object.name }}{% endif %} | {{ ds.WAGTAIL_SITE_NAME }}{% endblock title %}
+      {% block title %}{{ page.title }}{% if object.name %}{{ object.name }}{% elif title %}{{ title }}{% endif %} | {{ ds.WAGTAIL_SITE_NAME }}{% endblock title %}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
