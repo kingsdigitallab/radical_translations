@@ -61,7 +61,8 @@
     {% include "includes/footer.html" %}
     {% endblock footer %}
 
-
+    {% comment %}
+    {# Disabled unless we use cookies #}
     {# Cookies #}
     <div class="cookies-box hidden" id="cookie-disclaimer">
         <p>
@@ -76,8 +77,8 @@
                 Accept
             </button>
         </p>
-
     </div>
+    {% endcomment %}
 
     <!-- Le javascript
     ================================================== -->
@@ -85,8 +86,10 @@
     {% block javascript %}
     <!-- Vendor dependencies bundled as one file-->
     <script src="{% static 'js/vendors.js' %}"></script>
+    {% comment %}
     <script src="{% static 'js/js-cookie/src/js.cookie.js' %}"
       type="text/javascript"></script>
+    {% endcomment %}
     <!-- place project specific Javascript in this file -->
     <script src="{% static 'js/project.js' %}"></script>
     {% endblock javascript %}

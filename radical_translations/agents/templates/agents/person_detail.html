@@ -21,6 +21,10 @@
 <div class="tab-content">
     <p>
     {{ object.gender }}
+
+    {% comment %}
+    object.noble = boolean
+    {% endcomment %}
     |
     {{ object.place_birth.address }}, {{ object.date_birth }} – {{ object.date_death }}, {{ object.place_death.address }} 
 
