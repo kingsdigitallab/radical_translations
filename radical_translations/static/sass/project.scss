@@ -33,6 +33,10 @@ a {
   &:hover {
     text-decoration: none;
   }
+
+  svg {
+    fill: $radical-red;
+  }
 }
 
 body {

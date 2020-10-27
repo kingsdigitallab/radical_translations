@@ -8479,6 +8479,8 @@ a {
   text-decoration: underline; }
   a:hover {
     text-decoration: none; }
+  a svg {
+    fill: #9b2923; }
 
 body {
   background: url("../images/rt-bg.svg") no-repeat #fdf9ef;
