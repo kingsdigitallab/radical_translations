@@ -9011,6 +9011,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   height: 16px;
   width: 16px; }
 
+.uncertain::before {
+  content: url("/static/fontawesome/svgs/solid/question.svg");
+  height: 16px;
+  width: 16px; }
+
 /* Alerts */
 .alert-debug {
   background-color: #fff;
