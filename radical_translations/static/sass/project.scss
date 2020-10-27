@@ -772,6 +772,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   display: grid;
 }
 
+/* Agents / Persons */
+
+.noble {
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+}
+
 /* Alerts */
 
 // bootstrap alert CSS, translated to the django-standard levels of
