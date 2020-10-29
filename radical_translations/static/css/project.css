@@ -8766,6 +8766,9 @@ nav,
 
 /* Main content area */
 main {
+  background: url("/static/images/liberta-eguaglianza.svg") center 64px no-repeat;
+  background: url("/static/images/liberta-eguaglianza.svg") center 4rem no-repeat;
+  background-size: 100%;
   padding-left: 16px;
   padding-left: 1rem;
   padding-right: 16px;
