@@ -8599,7 +8599,8 @@ h6,
   margin-bottom: 0.5rem; }
 
 .top-header {
-  position: relative; }
+  position: relative;
+  text-align: center; }
 
 .login {
   display: inline-block;
@@ -8624,6 +8625,13 @@ h6,
   .login svg {
     width: 16px; }
 
+.curly-brackets {
+  fill: #222222;
+  height: 10px;
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-left: 2rem; }
+
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;
@@ -8646,6 +8654,8 @@ nav,
 
 .navbar {
   padding: 0; }
+  .navbar button {
+    padding: 0; }
 
 .brand {
   display: block;
@@ -8666,12 +8676,12 @@ nav,
   .brand svg {
     display: block;
     margin: 0 auto;
-    max-height: 36px;
-    max-width: 56px;
-    vertical-align: top; }
+    max-height: 50px; }
   .brand:hover {
     background: transparent;
     color: #711e1a; }
+    .brand:hover svg .st0 {
+      fill: #711e1a; }
 
 .navbar-nav {
   display: block;

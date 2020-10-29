@@ -1,1 +1,30 @@
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 1920 1010" xml:space="preserve"><style>.st1{fill:#dad8c7}</style><path fill="#c3c1a8" d="M1920 1001.2L0 630.7V0h1920z"/><path class="st1" d="M0 1010V348.4l609 626.3z"/><path class="st1" d="M1345 979.1l575-568.9V0L0 957.1z"/><path fill="#d2d0c1" d="M1920 1010V348.4l-609 626.3z"/><path fill="#eae9da" d="M575 979.1L0 410.2V0l1920 957.1z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1010">
+<style type="text/css">
+    .st0{fill:#C3C1A8;}
+    .st1{fill:#DAD8C7;}
+    .st2{fill:#D2D0C1;}
+    .st3{fill:#EAE9DA;}
+    .st4{opacity:0.4;}
+    .st5{fill:#9B2923;}
+    .st6{fill:#00548B;}
+</style>
+<g id="Layer_1">
+    <path class="st0" d="M1920,1001.2L0,630.7V0h1920V1001.2z"/>
+    <path class="st1" d="M0,1010V348.4l609,626.3L0,1010z"/>
+    <path class="st1" d="M1345,979.1l575-568.9V0L0,957.1L1345,979.1z"/>
+    <path class="st2" d="M1920,1010V348.4l-609,626.3L1920,1010z"/>
+    <path class="st3" d="M575,979.1L0,410.2V0l1920,957.1L575,979.1z"/>
+</g>
+<g id="Layer_2">
+    <g class="st4">
+        <polygon class="st3" points="942.9,504.3 0,34.2 0,17.2 977.1,504.3      "/>
+        <polygon class="st5" points="910.1,504.3 0,50.8 0,34.2 942.9,504.3      "/>
+        <polygon class="st6" points="977.1,504.3 0,17.2 0,0 1012,504.3      "/>
+    </g>
+    <g class="st4">
+        <polygon class="st6" points="942.9,503.3 1920,16.2 1920,-0.3 910.1,503.3        "/>
+        <polygon class="st3" points="977.1,503.3 1920,33.2 1920,16.2 942.9,503.3        "/>
+        <polygon class="st5" points="1012,503.3 1920,49.8 1920,33.2 977.1,503.3         "/>
+    </g>
+</g>
+</svg>
