@@ -435,8 +435,9 @@ nav,
 
 main {
   // background: lighten($old-yellow, 30%);
-  background: url("/static/images/liberta-eguaglianza.svg") center 4rem no-repeat;
+  background: url("/static/images/liberta-eguaglianza.svg") center 3rem no-repeat;
   background-size: 100%;
+  min-height: 30vh;
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
