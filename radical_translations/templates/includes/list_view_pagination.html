@@ -1,3 +1,4 @@
+{% comment %}
 <div class="pagination">
   <span class="step-links">
     {% if page_obj.has_previous %}
@@ -15,3 +16,40 @@
     {% endif %}
   </span>
 </div>
+{% endcomment %}
+
+<nav aria-label="List pagination">
+  <ul class="pagination pagination-sm">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Pages</a>
+    </li>
+    {% comment %}
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page=1" aria-label="First">&laquo;</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">&lsaquo;</a>
+    </li>
+    {% endif %}
+    {% endcomment %}
+    {% for page in paginator.page_range %}
+    <li class="page-item{% if forloop.counter == page_obj.number %} active{% endif %}">
+      <a class="page-link" href="?page={{ forloop.counter }}">
+        {{ forloop.counter }}
+      </a>
+    </li>
+    {% endfor %}
+    {% comment %}
+    {% if page_obj.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">&rsaquo;</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endcomment %}
+  </ul>
+</nav>
