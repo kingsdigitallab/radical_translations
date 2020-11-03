@@ -8953,7 +8953,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     display: block; }
   .pagination {
     display: grid;
-    grid-template-columns: repeat(8, auto); }
+    grid-template-columns: repeat(9, auto); }
   .people .with-image .child-page-image {
     height: 300px; }
     .people .with-image .child-page-image img {
