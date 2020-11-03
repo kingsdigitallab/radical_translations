@@ -8944,6 +8944,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     grid-template-row: 1; } }
 
 @media (max-width: 767.98px) {
+  .brand svg {
+    max-height: 30px; }
   .child-page-image {
     height: 200px;
     overflow: hidden; }
@@ -8951,6 +8953,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     margin-top: 1rem; }
   .metadata-block {
     display: block; }
+  .pagination {
+    display: grid;
+    grid-template-columns: repeat(9, auto); }
   .people .with-image .child-page-image {
     height: 300px; }
     .people .with-image .child-page-image img {
@@ -8975,7 +8980,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   section {
     grid-column: 1; }
   .site-title {
-    font-size: 2.5rem; } }
+    font-size: 2.25rem;
+    line-height: 1.125;
+    margin-top: .5rem; } }
 
 .sections section {
   font-size: 1.25em;
@@ -9039,14 +9046,18 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   width: 16px; }
 
 .radical::before,
-.uncertain::before {
+.uncertain::before,
+.uncertainty::before,
+.unknown::before {
   height: 16px;
   width: 16px; }
 
 .radical::beforet {
   content: url("/static/images/phrygian-cap.svg"); }
 
-.uncertain::before {
+.uncertain::before,
+.uncertainty::before,
+.unknown::before {
   content: url("/static/fontawesome/svgs/solid/question.svg"); }
 
 /* Alerts */
