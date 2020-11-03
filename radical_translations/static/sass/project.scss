@@ -280,9 +280,10 @@ nav,
 
   svg {
     display: block;
+    fill: $radical-red;
     margin: 0 auto;
-    max-height: 50px;
-    // transform: rotate(-15deg); // Rotate the cap 15º counterclockwise
+    max-height: 40px;
+    transform: rotate(-10deg); // Rotate the cap 15º counterclockwise
   }
 
   &:hover {
@@ -290,7 +291,7 @@ nav,
     color: darken($radical-red, 10%);
 
     svg {
-      .st0 {
+      .cap {
         fill: darken($radical-red, 10%);
       }
     }
