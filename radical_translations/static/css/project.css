@@ -8944,6 +8944,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     grid-template-row: 1; } }
 
 @media (max-width: 767.98px) {
+  .brand svg {
+    max-height: 30px; }
   .child-page-image {
     height: 200px;
     overflow: hidden; }
@@ -8978,7 +8980,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   section {
     grid-column: 1; }
   .site-title {
-    font-size: 2.5rem; } }
+    font-size: 2.25rem;
+    line-height: 1.125;
+    margin-top: .5rem; } }
 
 .sections section {
   font-size: 1.25em;
