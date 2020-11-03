@@ -831,7 +831,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .radical,
 .uncertain,
-.uncertainty {
+.uncertainty,
+.unknown {
   &::before {
     height: 16px;
     width: 16px;
@@ -845,7 +846,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .uncertain,
-.uncertainty {
+.uncertainty,
+.unknown {
   &::before {
     content: url("/static/fontawesome/svgs/solid/question.svg");
   }
