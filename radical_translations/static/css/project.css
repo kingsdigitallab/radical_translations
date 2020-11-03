@@ -8675,12 +8675,15 @@ nav,
   width: 100%; }
   .brand svg {
     display: block;
+    fill: #9b2923;
     margin: 0 auto;
-    max-height: 50px; }
+    max-height: 40px;
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg); }
   .brand:hover {
     background: transparent;
     color: #711e1a; }
-    .brand:hover svg .st0 {
+    .brand:hover svg .cap {
       fill: #711e1a; }
 
 .navbar-nav {
