@@ -685,6 +685,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 @include media-breakpoint-down(sm) {
+  .brand {
+    svg {
+      max-height: 30px;
+    }
+  }
+  
   .child-page-image {
     height: 200px;
     overflow: hidden;
@@ -696,6 +702,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .metadata-block {
     display: block;
+  }
+
+  .pagination {
+    display: grid;
+    grid-template-columns: repeat(9, auto)
   }
 
   .people {
@@ -735,7 +746,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 
   .site-title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+    line-height: 1.125;
+    margin-top: .5rem;
   }
 }
 
@@ -830,7 +843,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .radical,
-.uncertain {
+.uncertain,
+.uncertainty,
+.unknown {
   &::before {
     height: 16px;
     width: 16px;
@@ -843,7 +858,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-.uncertain {
+.uncertain,
+.uncertainty,
+.unknown {
   &::before {
     content: url("/static/fontawesome/svgs/solid/question.svg");
   }

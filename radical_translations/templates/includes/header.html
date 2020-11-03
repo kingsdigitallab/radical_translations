@@ -3,6 +3,7 @@
 <header class="top-header">
     <div class="login">
         <a href="/cms/" class="btn btn-sm">
+            {# Font Awesome user icon #}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/></svg>
             {% if request.user.is_authenticated %}
             <small> {{ user.username }}</small>
@@ -14,6 +15,7 @@
     </div>
 
     <a class="brand" href="/">
+        {# Custom Phrygian cap icon #}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 467.47 367.29">
             <path d="M163.24,352.72a48.24,48.24,0,0,1,96.48,0c0,.34,0,.67,0,1H477.31S452.5,217.2,327.21,120.55C216.64,35.25,141.45,63.8,104.6,84.43c-28.55,16-56,68.72-36.81,95.25C83.15,201,128.34,167,132.63,188.52c3,14.74-35.87,44.84-67.79,104.64s-23.79,60.57-23.79,60.57H163.26C163.26,353.39,163.24,353.06,163.24,352.72Z" transform="translate(-24.98 -62.71)" class="cap"/>
             <path d="M236.69,353.73c0-.34,0-.67,0-1a25.24,25.24,0,0,0-50.48,0c0,.34,0,.67,0,1Z" transform="translate(-24.98 -62.71)" class="cap"/><rect y="306.19" width="467.47" height="61.09" rx="5.61" class="cap"/>
