@@ -8951,6 +8951,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     margin-top: 1rem; }
   .metadata-block {
     display: block; }
+  .pagination {
+    display: grid;
+    grid-template-columns: repeat(8, auto); }
   .people .with-image .child-page-image {
     height: 300px; }
     .people .with-image .child-page-image img {
