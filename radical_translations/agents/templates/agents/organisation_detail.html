@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h2>{{ object.name }}</h2>
+<h1>{{ object.name }}</h1>
 
-<p>
-{% if object.based_near.count %}
-{% for place in object.based_near.all %}
-{{ place.address }}{% if not forloop.last %}, {% endif %}
-{% endfor %}
-{% endif %}
-
-<br>
-
-{% include "agents/includes/pages.html" %}
-{% include "agents/includes/roles.html" %}
+<p class="metadata">
+    {% if object.based_near.count %}
+    <span class="metadata-block">
+        {% for place in object.based_near.all %}
+        {{ place.address }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% endif %}
+    {% include "agents/includes/pages.html" %}
+    <span class="metadata-block">
+        {% include "agents/includes/roles.html" %}
+    </span>
 </p>
 
 {% include "agents/includes/agents.html" with title='Members' agents=object.members %}
@@ -21,7 +22,7 @@
 {% include "agents/includes/contributed_to.html" %}
 
 {% if object.resources.count %}
-<h3>Resources held</h3>
+<h2>Resources held</h2>
 <ul>
     {% for resource in object.resources.all %}
     <li>
