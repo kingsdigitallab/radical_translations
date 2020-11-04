@@ -24,13 +24,13 @@
             {% include "agents/includes/noble.html" %}
             {% if object.gender == "m" %}
             {# Font Awesome Mars icon #}
-            {% include "includes/mars.svg" %}
+            {% include "svgs/solid/mars.svg" %}
             {% elif object.gender == "f" %}
             {# Font Awesome Venus icon #}
-            {% include "includes/venus.svg" %}
+            {% include "svgs/solid/venus.svg" %}
             {% else %}
             {# Font Awesome question mark icon #}
-            {% include "includes/question.svg" %}
+            {% include "svgs/solid/question.svg" %}
             {% endif %}
 
             {% if object.place_birth or object.date_birth or object.date_death or object.place_death %}
@@ -44,7 +44,7 @@
         {% if object.languages.count %}
         <span class="metadata-block">
             {# Custom language icon "language2.svg" #}
-            {% include "includes/language2.svg" %}
+            {% include "svgs/solid/language2.svg" %}
             {% for language in object.languages.all %}
             {{ language.label }}{% if not forloop.last %}, {% endif %}
             {% endfor %}
@@ -64,12 +64,8 @@
 
         {% if object.based_near.count %}
         <span class="metadata-block">
-            {% comment %}
-            {# Font Awesome map marker icon #}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z"/></svg>
-            {% endcomment %}
             {# Font Awesome route icon #}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Pro 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M416 320h-96c-17.6 0-32-14.4-32-32s14.4-32 32-32h96s96-107 96-160-43-96-96-96-96 43-96 96c0 25.5 22.2 63.4 45.3 96H320c-52.9 0-96 43.1-96 96s43.1 96 96 96h96c17.6 0 32 14.4 32 32s-14.4 32-32 32H185.5c-16 24.8-33.8 47.7-47.3 64H416c52.9 0 96-43.1 96-96s-43.1-96-96-96zm0-256c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32zM96 256c-53 0-96 43-96 96s96 160 96 160 96-107 96-160-43-96-96-96zm0 128c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/></svg>
+            {% include "svgs/solid/globe.svg" %}
              Other:
             {% for place in object.based_near.all %}
             {{ place.address }}{% if not forloop.last %}, {% endif %}
@@ -80,9 +76,7 @@
         <span class="metadata-block">
             {% include "agents/includes/roles.html" %}
         </span>
-        <span class="metadata-block">
-            {% include "agents/includes/pages.html" %}
-        </span>
+        {% include "agents/includes/pages.html" %}
     </p>
 
     <div class="tab-pane active" id="record-details" role="tabpanel" aria-labelledby="record-tab">
