@@ -8,7 +8,10 @@
     {% for object in object_list %}
     <li>
         {% with agent_type=object.agent_type %}
-        <a href="{% url 'agent-detail' object.pk %}">{{ object.name }}</a>
+        <a href="{% url 'agent-detail' object.pk %}">
+            {% include "agents/includes/noble.html" %}
+            {{ object.name }}
+        </a>
 
         {% include "agents/includes/roles.html" %}
         {% endwith %}

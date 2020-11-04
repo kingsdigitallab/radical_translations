@@ -46,7 +46,6 @@ Changed
 .. _Fuzzy: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-fuzzy-query.html
 .. _highlighting: https://www.elastic.co/guide/en/elasticsearch/reference/7.9/highlighting.html
 
-
 [0.7.1] - 2020-07-02
 --------------------
 

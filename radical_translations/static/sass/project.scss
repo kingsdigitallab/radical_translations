@@ -33,6 +33,10 @@ a {
   &:hover {
     text-decoration: none;
   }
+
+  svg {
+    fill: $radical-red;
+  }
 }
 
 body {
@@ -55,6 +59,13 @@ strong {
   font-variation-settings: 'wdth' 400, 'wght' 700;
 }
 
+.close {
+  &.btn-sm {
+    font-size: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 footer {
   background: white;
   border-top: 15px solid $dark-gray;
@@ -66,6 +77,10 @@ footer {
   h2 {
     font-size: 1.5rem;
   }
+}
+
+.hidden {
+  display: none;
 }
 
 .highlight {
@@ -83,7 +98,7 @@ footer {
 
 .metadata {
   font-family: 'Oswald', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.9125rem;
 
   .author,
   .date {
@@ -105,6 +120,12 @@ footer {
     &::before {
       content: url("/static/fontawesome/svgs/solid/calendar.svg");
     }
+  }
+
+  svg {
+    fill: $dark-gray;
+    height: 16px;
+    width: 16px;
   }
 }
 
@@ -163,6 +184,7 @@ h6,
 
 .top-header {
   position: relative;
+  text-align: center;
 }
 
 .login {
@@ -200,6 +222,14 @@ h6,
   }
 }
 
+.curly-brackets {
+  fill: $dark-gray;
+  height: 10px;
+  margin: 0 auto;
+  // opacity: 0.2;
+  padding-left: 2rem;
+}
+
 // Navigation
 
 nav,
@@ -227,6 +257,10 @@ nav,
 
 .navbar {
   padding: 0;
+
+  button {
+    padding: 0;
+  }
 }
 
 .brand {
@@ -246,15 +280,21 @@ nav,
 
   svg {
     display: block;
+    fill: $radical-red;
     margin: 0 auto;
-    max-height: 36px;
-    max-width: 56px;
-    vertical-align: top;
+    max-height: 40px;
+    transform: rotate(-10deg); // Rotate the cap 15º counterclockwise
   }
 
   &:hover {
     background: transparent;
     color: darken($radical-red, 10%);
+
+    svg {
+      .cap {
+        fill: darken($radical-red, 10%);
+      }
+    }
   }
 }
 
@@ -396,6 +436,9 @@ nav,
 
 main {
   // background: lighten($old-yellow, 30%);
+  background: url("/static/images/liberta-eguaglianza.svg") center 3rem no-repeat;
+  background-size: 100%;
+  min-height: 30vh;
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
@@ -565,6 +608,18 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
+  .metadata-block {
+    &::after {
+      content: '|';
+    }
+
+    &:last-child {
+      &::after {
+        content: '';
+      }
+    }
+  }
+
   .sections {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr;
@@ -630,6 +685,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 @include media-breakpoint-down(sm) {
+  .brand {
+    svg {
+      max-height: 30px;
+    }
+  }
+  
   .child-page-image {
     height: 200px;
     overflow: hidden;
@@ -637,6 +698,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .intro {
     margin-top: 1rem;
+  }
+
+  .metadata-block {
+    display: block;
+  }
+
+  .pagination {
+    display: grid;
+    grid-template-columns: repeat(9, auto)
   }
 
   .people {
@@ -676,7 +746,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 
   .site-title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+    line-height: 1.125;
+    margin-top: .5rem;
   }
 }
 
@@ -761,6 +833,39 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   display: grid;
 }
 
+/* Agents / Persons */
+
+.noble {
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.radical,
+.uncertain,
+.uncertainty,
+.unknown {
+  &::before {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.radical {
+  &::beforet {
+    content: url("/static/images/phrygian-cap.svg");
+  }
+}
+
+.uncertain,
+.uncertainty,
+.unknown {
+  &::before {
+    content: url("/static/fontawesome/svgs/solid/question.svg");
+  }
+}
+
 /* Alerts */
 
 // bootstrap alert CSS, translated to the django-standard levels of
@@ -842,4 +947,19 @@ dl.search-result {
   dd {
     margin-left: 14em;
   }
+}
+
+/* Cookies disclaimer box */
+
+.cookies-box {
+  background: $secondary;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  opacity: 0.95;
+  padding-top: 1rem;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  z-index: 1001;
 }
