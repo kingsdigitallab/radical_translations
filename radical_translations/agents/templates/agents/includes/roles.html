@@ -1,6 +1,6 @@
 {% if object.roles.count %}
 Roles: 
-{% for role in object.roles.all %}
-<span class="badge badge-warning">{{ role }}</span>
+{% for role in object.roles.all|dictsort:'label' %}
+<span class="badge badge-warning">{{ role.label }}</span>
 {% endfor %}
 {% endif %}
