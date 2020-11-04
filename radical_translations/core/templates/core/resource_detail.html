@@ -106,7 +106,7 @@
 <h3>Held by</h3>
 <ul>
     {% for agent in object.held_by.all %}
-    <li>{{ agent.name }}</li>
+    <li><a href="{% url 'agent-detail' agent.pk %}">{{ agent.name }}</a></li>
     {% endfor %}
 </ul>
 {% endif %}
