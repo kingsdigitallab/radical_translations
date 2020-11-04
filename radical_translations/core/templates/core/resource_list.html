@@ -4,13 +4,13 @@
 <h1>Resources</h1>
 
 {% include "includes/list_view_pagination.html" %}
-<ul>
+<ol start="{{ page_obj.start_index }}">
     {% for resource in object_list %}
     <li>
         <a href="{% url 'resource-detail' resource.pk %}">{{ resource }}</a>, {{ resource.date }}
     </li>
     {% endfor %}
-</ul>
+</ol>
 {% include "includes/list_view_pagination.html" %}
 
 {% endblock main %}
