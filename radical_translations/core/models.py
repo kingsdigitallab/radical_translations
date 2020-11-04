@@ -505,6 +505,9 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
         help_text="Function provided by a contributor, e.g., author, illustrator, etc.",
     )
 
+    class Meta:
+        ordering = ['resource', 'agent']
+
     def __str__(self) -> str:
         agent = self.agent
         if self.published_as:

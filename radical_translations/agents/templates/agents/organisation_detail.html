@@ -20,5 +20,16 @@
 
 {% include "agents/includes/contributed_to.html" %}
 
+{% if object.resources.count %}
+<h3>Resources held</h3>
+<ul>
+    {% for resource in object.resources.all %}
+    <li>
+        <a href="{% url 'resource-detail' resource.pk %}">{{ resource.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 {% include "includes/object_notes.html" %}
 {% endblock main %}
