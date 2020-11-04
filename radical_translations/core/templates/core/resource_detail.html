@@ -4,7 +4,7 @@
 <h2>{{ object.title }}</h2>
 
 <p>
-{{ object.date }}
+<span{% if object.date.date_radical %} class="radical"{% endif %}>{{ object.date }}</span>
 |
 {% for subject in object.subjects.all %}
 {{ subject.label }}{% if not forloop.last %}, {% endif %}
