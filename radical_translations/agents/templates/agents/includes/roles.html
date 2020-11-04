@@ -1,5 +1,6 @@
 {% if object.roles.count %}
-Roles: 
+{# Font Awesome file-certificate icon #}
+<span class="small-icon">{% include "svgs/solid/file-certificate.svg" %}</span>
 {% for role in object.roles.all|dictsort:'label' %}
 <span class="badge badge-warning">{{ role.label }}</span>
 {% endfor %}

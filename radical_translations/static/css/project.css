@@ -8488,6 +8488,9 @@ body {
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400; }
 
+.badge {
+  border-radius: 0; }
+
 .btn {
   border-radius: 0;
   font-family: 'Oswald', sans-serif;
@@ -8551,6 +8554,11 @@ footer {
     fill: #222222;
     height: 16px;
     width: 16px; }
+
+.small-icon,
+.small-icon svg {
+  height: 16px;
+  width: 16px; }
 
 .tags {
   display: block;
