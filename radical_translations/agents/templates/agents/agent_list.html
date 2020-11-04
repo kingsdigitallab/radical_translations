@@ -4,7 +4,7 @@
 <h2>{{ title }}</h2>
 
 {% include "includes/list_view_pagination.html" %}
-<ul>
+<ol start="{{ page_obj.start_index }}">
     {% for object in object_list %}
     <li>
         {% with agent_type=object.agent_type %}
@@ -17,7 +17,7 @@
         {% endwith %}
     </li>
     {% endfor %}
-</ul>
+</ol>
 {% include "includes/list_view_pagination.html" %}
 
 {% endblock main %}
