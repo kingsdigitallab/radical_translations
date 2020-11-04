@@ -1,5 +1,6 @@
 {% if object.roles.count %}
-Roles: 
+{# Font Awesome pen-nib icon #}
+<span class="small-icon">{% include "includes/pen-nib.svg" %}</span>
 {% for role in object.roles.all|dictsort:'label' %}
 <span class="badge badge-warning">{{ role.label }}</span>
 {% endfor %}
