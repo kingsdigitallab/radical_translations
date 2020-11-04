@@ -57,7 +57,7 @@
         <span class="metadata-block">
             {# Font Awesome map marker icon #}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z"/></svg>
-             Place{% if object.main_places.count > 1 %}s{% endif %} of publication: 
+             Main places: 
             {% for place in object.main_places.all %}
             <span class="badge badge-primary">{{ place.address }}</span>
             {% endfor %}
@@ -68,7 +68,7 @@
         <span class="metadata-block">
             {# Font Awesome map marker icon #}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z"/></svg>
-             Other place{% if object.based_near.count > 1 %}s{% endif %}:
+             Other places:
             {% for place in object.based_near.all %}
             {{ place.address }}{% if not forloop.last %}, {% endif %}
             {% endfor %}
