@@ -33,7 +33,6 @@ Changed
 .. _FAST: https://www.oclc.org/research/areas/data-science/fast.html
 
 
-
 [0.7.1] - 2020-07-02
 --------------------
 
