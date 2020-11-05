@@ -80,11 +80,11 @@
     </p>
 
     <div class="tab-pane active" id="record-details" role="tabpanel" aria-labelledby="record-tab">
+        {% include "agents/includes/contributed_to.html" %}
+
         {% include "agents/includes/agents.html" with title='Knows' agents=object.knows %}
 
         {% include "agents/includes/agents.html" with title='Member of' agents=object.member_of %}
-
-        {% include "agents/includes/contributed_to.html" %}
 
         {% include "includes/object_notes.html" %}
     </div>
