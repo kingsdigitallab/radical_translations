@@ -1,12 +1,7 @@
 <dt>{% if direct %}{{ label }}{% else %}has {{ label|cut:' of' }}{% endif %}</dt>
 <dd>
 <a href="{% url 'resource-detail' related.pk %}">{{ related.title }}</a>
-{% if related.is_translation %}
-<span class="badge badge-info">translation</span>
-{% endif %}
-{% if related.is_paratext %}
-<span class="badge badge-info">paratext</span>
-{% endif %}
+{% include "core/includes/type.html" with resource=related %}
 </dd>
 {% for classification in relationship.classification.all %}
 <dd class="{{ classification.label }}">{{ classification.label }}</dd>
