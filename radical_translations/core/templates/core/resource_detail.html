@@ -23,7 +23,14 @@
     {% endif %}
     <span class="metadata-block">
         {% for classification in object.classifications.all %}
-        {{ classification.edition.label }}{% if not forloop.last %}, {% endif %}
+        {% with edition=classification.edition %}
+        <a
+            {% if edition.description %}
+            href="#"
+            data-toggle="tooltip"
+            title="{{ edition.description }}"
+            {% endif %}>{{ edition.label }}</a>
+        {% endwith %}
         {% endfor %}
     </span>
     <span class="metadata-block">
@@ -65,7 +72,7 @@
 <dl>
     {% for contribution in object.contributions.all %}
     <dt>
-        <a href="{% url 'agent-detail' contribution.agent.pk %}">{{ contribution.agent.name }}</a>
+    <a href="{% url 'agent-detail' contribution.agent.pk %}">{{ contribution.agent.name }}</a>
     </dt>
     {% for role in contribution.roles.all %}
     <dd>{{ role.label }}</dd>
@@ -84,7 +91,7 @@
     {% for relationship in object.relationships.all %}
     <dt>{{ relationship.relationship_type.label }}</dt>
     <dd>
-        <a href="{% url 'resource-detail' relationship.related_to.pk %}">{{ relationship.related_to.title }}</a>
+    <a href="{% url 'resource-detail' relationship.related_to.pk %}">{{ relationship.related_to.title }}</a>
     </dd>
     {% for classification in relationship.classification.all %}
     <dd class="{{ classification.label }}">{{ classification.label }}</dd>
@@ -96,7 +103,7 @@
     {% for relationship in object.related_to.all %}
     <dt>has {{ relationship.relationship_type.label|cut:' of' }}</dt>
     <dd>
-        <a href="{% url 'resource-detail' relationship.resource.pk %}">{{ relationship.resource.title }}</a>
+    <a href="{% url 'resource-detail' relationship.resource.pk %}">{{ relationship.resource.title }}</a>
     </dd>
     {% for classification in relationship.classification.all %}
     <dd class="{{ classification.label }}">{{ classification.label }}</dd>
