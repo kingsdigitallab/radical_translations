@@ -1,11 +1,16 @@
 {% if object.contributed_to.count %}
 <h3>Contributed to</h3>
 <ul>
-  {% for contribution in object.contributed_to.all %}
-  <li>
-    <a href="{% url 'resource-detail' contribution.resource.pk %}">{{ contribution.resource.title }}</a>
-    {% include "agents/includes/roles.html" with object=contribution %}
-  </li>
-  {% endfor %}
+    {% for contribution in object.contributed_to.all %}
+    <li>
+        {% with resource=contribution.resource %}
+        <a href="{% url 'resource-detail' resource.pk %}">{{ resource.title }}</a>
+
+        {% include "core/includes/type.html" %}
+        {% endwith %}
+
+        {% include "agents/includes/roles.html" with object=contribution %}
+    </li>
+    {% endfor %}
 </ul>
 {% endif %}

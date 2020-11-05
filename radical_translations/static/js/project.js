@@ -1,7 +1,7 @@
 /* Project specific Javascript goes here. */
 
-// Highlight active tab and allow permalink for bibliography and record pages
 $(function () {
+  // highlight active tab and allow permalink for bibliography and record pages
   const hash = window.location.hash
 
   if (hash) {
@@ -15,6 +15,7 @@ $(function () {
     history.replaceState(null, null, url)
   })
 
+  // enable tooltips
   $('[data-toggle="tooltip"]').tooltip()
 
   // Commenting cookie disclaimer.

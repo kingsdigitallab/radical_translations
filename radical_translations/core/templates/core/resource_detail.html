@@ -89,25 +89,13 @@
 <dl>
     {% if object.relationships.count %}
     {% for relationship in object.relationships.all %}
-    <dt>{{ relationship.relationship_type.label }}</dt>
-    <dd>
-    <a href="{% url 'resource-detail' relationship.related_to.pk %}">{{ relationship.related_to.title }}</a>
-    </dd>
-    {% for classification in relationship.classification.all %}
-    <dd class="{{ classification.label }}">{{ classification.label }}</dd>
-    {% endfor %}
+    {% include "core/includes/relationship.html" with direct=True label=relationship.relationship_type.label related=relationship.related_to %}
     {% endfor %}
     {% endif %}
 
     {% if object.related_to.count %}
     {% for relationship in object.related_to.all %}
-    <dt>has {{ relationship.relationship_type.label|cut:' of' }}</dt>
-    <dd>
-    <a href="{% url 'resource-detail' relationship.resource.pk %}">{{ relationship.resource.title }}</a>
-    </dd>
-    {% for classification in relationship.classification.all %}
-    <dd class="{{ classification.label }}">{{ classification.label }}</dd>
-    {% endfor %}
+    {% include "core/includes/relationship.html" with label=relationship.relationship_type.label related=relationship.resource %}
     {% endfor %}
     {% endif %}
 </dl>
