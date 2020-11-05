@@ -1,12 +1,12 @@
 from typing import Dict, Optional
 
-from controlled_vocabulary.models import ControlledTermsField
-from controlled_vocabulary.utils import search_term_or_none
 from django.db import models
-from geonames_place.models import Place
 from model_utils.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
 
+from controlled_vocabulary.models import ControlledTermsField
+from controlled_vocabulary.utils import search_term_or_none
+from geonames_place.models import Place
 from radical_translations.utils.models import (
     Date,
     get_geonames_place_from_gsx_place,
@@ -65,6 +65,10 @@ class Agent(PolymorphicModel, TimeStampedModel):
     @property
     def agent_type(self) -> str:
         return self.polymorphic_ctype.name
+
+    @property
+    def title(self) -> str:
+        return self.name
 
     def get_place_names(self) -> str:
         return "; ".join([place.address for place in self.based_near.all()])

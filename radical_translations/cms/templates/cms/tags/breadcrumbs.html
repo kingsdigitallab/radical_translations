@@ -1,6 +1,5 @@
 {% load wagtailcore_tags %}
 
-{% if ancestors %}
 <div class="container">
     <ul class="breadcrumbs">
         <li>
@@ -17,7 +16,16 @@
             <a href="{% pageurl page %}">{{ page.title }}</a>
             {% endif %}
         </li>
+        {% empty %}
+        {% for crumb in crumbs %}
+        <li>
+            {% if forloop.last %}
+            {{ crumb.title }}
+            {% else %}
+            <a href="{{ crumb.path }}">{{ crumb.title }}</a>
+            {% endif %}
+        </li>
+        {% endfor %}
         {% endfor %}
     </ul>
 </div>
-{% endif %}
