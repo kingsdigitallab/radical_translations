@@ -1,0 +1,7 @@
+<dt>{{ label }}</dt>
+<dd>
+<a href="{% url 'resource-detail' related.pk %}">{{ related.title }}</a>
+</dd>
+{% for classification in relationship.classification.all %}
+<dd class="{{ classification.label }}">{{ classification.label }}</dd>
+{% endfor %}

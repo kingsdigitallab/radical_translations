@@ -1,47 +1,74 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h2>{{ object.title }}</h2>
+<h1>{{ object.title }}</h1>
 
-<p>
-<span{% if object.date.date_radical %} class="radical"{% endif %}>{{ object.date }}</span>
-|
-{% for subject in object.subjects.all %}
-{{ subject.label }}{% if not forloop.last %}, {% endif %}
-{% endfor %}
-{% if object.edition_enumeration %}
-|
-{{ object.edition_enumeration }}
-{% endif %}
-|
-{% for classification in object.classifications.all %}
-{{ classification.edition.label }}{% if not forloop.last %}, {% endif %}
-{% endfor %}
-|
-{% for language in object.languages.all %}
-{{ language }}{% if not forloop.last %}, {% endif %}
-{% endfor %}
-|
-{% for place in object.places.all %}
-{{ place }}{% if not forloop.last %}, {% endif %}
-{% endfor %}
-{% if object.electronic_locator %}
-|
-<a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
-{% endif %}
+<p class="metadata">
+    <span class="metadata-block">
+        <span{% if object.date.date_radical %} class="radical"{% endif %}>
+            {# Font Awesome Mars icon #}
+            {% include "svgs/solid/calendar.svg" %}
+            {{ object.date }}
+        </span>
+    </span>
+    <span class="metadata-block">
+        {% for subject in object.subjects.all %}
+        {{ subject.label }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% if object.edition_enumeration %}
+    <span class="metadata-block">
+        {{ object.edition_enumeration }}
+    </span>
+    {% endif %}
+    <span class="metadata-block">
+        {% for classification in object.classifications.all %}
+        {% with edition=classification.edition %}
+        <a
+            {% if edition.description %}
+            href="#"
+            data-toggle="tooltip"
+            title="{{ edition.description }}"
+            {% endif %}>{{ edition.label }}</a>
+        {% endwith %}
+        {% endfor %}
+    </span>
+    <span class="metadata-block">
+        {# Custom language icon "language2.svg" #}
+        {% include "svgs/solid/language2.svg" %}
+        {% for language in object.languages.all %}
+        {{ language }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% if object.places.all %}
+    <span class="metadata-block">
+        {# Font Awesome map-marker-alt icon #}
+        {% include "svgs/solid/map-marker-alt.svg" %}
+        {% for place in object.places.all %}
+        {{ place }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% endif %}
+    {% if object.electronic_locator %}
+    <span class="metadata-block">
+        {# Font Awesome map-marker-alt icon #}
+        {% include "svgs/solid/external-link-alt.svg" %}
+        <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
+    </span>
+    {% endif %}
 </p>
 
 {% if object.is_translation %}
-<h3>Authors of source text</h3>
+<h2>Authors of source text</h2>
 <p>
-{% for author in object.get_authors_source_text %}
-<a href="{% url 'agent-detail' author.pk %}">{{ author.name }}</a>
-{% endfor %}
+    {% for author in object.get_authors_source_text %}
+    <a href="{% url 'agent-detail' author.pk %}">{{ author.name }}</a>
+    {% endfor %}
 </p>
 {% endif %}
 
 {% if object.contributions.count %}
-<h3>Contributions</h3>
+<h2>Contributions</h2>
 <dl>
     {% for contribution in object.contributions.all %}
     <dt>
@@ -58,36 +85,24 @@
 {% endif %}
 
 {% if object.relationships.count or object.related_to.count %}
-<h3>Related resources</h3>
+<h2>Related resources</h2>
 <dl>
     {% if object.relationships.count %}
     {% for relationship in object.relationships.all %}
-    <dt>{{ relationship.relationship_type.label }}</dt>
-    <dd>
-    <a href="{% url 'resource-detail' relationship.related_to.pk %}">{{ relationship.related_to.title }}</a>
-    </dd>
-    {% for classification in relationship.classification.all %}
-    <dd class="{{ classification.label }}">{{ classification.label }}</dd>
-    {% endfor %}
+    {% include "core/includes/relationship.html" with direct=True label=relationship.relationship_type.label related=relationship.related_to %}
     {% endfor %}
     {% endif %}
 
     {% if object.related_to.count %}
     {% for relationship in object.related_to.all %}
-    <dt>has {{ relationship.relationship_type.label|cut:' of' }}</dt>
-    <dd>
-    <a href="{% url 'resource-detail' relationship.resource.pk %}">{{ relationship.resource.title }}</a>
-    </dd>
-    {% for classification in relationship.classification.all %}
-    <dd class="{{ classification.label }}">{{ classification.label }}</dd>
-    {% endfor %}
+    {% include "core/includes/relationship.html" with label=relationship.relationship_type.label related=relationship.resource %}
     {% endfor %}
     {% endif %}
 </dl>
 {% endif %}
 
 {% if object.events.count %}
-<h3>Events</h3>
+<h2>Events</h2>
 <ul>
     {% for event in object.events.all %}
     <li>
@@ -98,15 +113,15 @@
 {% endif %}
 
 {% if object.summary %}
-<h3>Summary</h3>
+<h2>Summary</h2>
 <p>{{ object.summary }}</p>
 {% endif %}
 
 {% if object.held_by.count %}
-<h3>Held by</h3>
+<h2>Held by</h2>
 <ul>
     {% for agent in object.held_by.all %}
-    <li>{{ agent.name }}</li>
+    <li><a href="{% url 'agent-detail' agent.pk %}">{{ agent.name }}</a></li>
     {% endfor %}
 </ul>
 {% endif %}
