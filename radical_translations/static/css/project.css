@@ -8553,6 +8553,7 @@ footer {
   .metadata svg {
     fill: #222222;
     height: 16px;
+    margin-top: -4px;
     width: 16px; }
 
 .small-icon,
