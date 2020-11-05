@@ -40,10 +40,11 @@ a {
 }
 
 body {
-  background: url('../images/rt-bg.svg') no-repeat lighten($old-yellow, 30%);
-  background-size: 100%;
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 400, 'wght' 400;
+
+  background: url('../images/rt-bg.svg') no-repeat top left lighten($old-yellow, 30%);
+  background-size: 135% auto;
 }
 
 .badge {
@@ -445,7 +446,6 @@ nav,
 /* Main content area */
 
 main {
-  // background: lighten($old-yellow, 30%);
   background: url("/static/images/liberta-eguaglianza.svg") center 3rem no-repeat;
   background-size: 100%;
   min-height: 30vh;
