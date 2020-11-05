@@ -17,9 +17,9 @@
     </span>
 </p>
 
-{% include "agents/includes/agents.html" with title='Members' agents=object.members %}
-
 {% include "agents/includes/contributed_to.html" %}
+
+{% include "agents/includes/agents.html" with title='Members' agents=object.members %}
 
 {% if object.resources.count %}
 <h2>Resources held</h2>
