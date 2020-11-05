@@ -8483,10 +8483,10 @@ a {
     fill: #9b2923; }
 
 body {
-  background: url("../images/rt-bg.svg") no-repeat #fdf9ef;
-  background-size: 100%;
   font-family: Lora, serif;
-  font-variation-settings: 'wdth' 400, 'wght' 400; }
+  font-variation-settings: 'wdth' 400, 'wght' 400;
+  background: url("../images/rt-bg.svg") no-repeat top left #fdf9ef;
+  background-size: 135% auto; }
 
 .badge {
   border-radius: 0; }
