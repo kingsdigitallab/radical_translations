@@ -44,7 +44,7 @@
         {% if object.languages.count %}
         <span class="metadata-block">
             {# Custom language icon "language2.svg" #}
-            {% include "svgs/solid/language2.svg" %}
+            {% include "svgs/solid/language3.svg" %}
             {% for language in object.languages.all %}
             {{ language.label }}{% if not forloop.last %}, {% endif %}
             {% endfor %}
@@ -65,7 +65,7 @@
         {% if object.based_near.count %}
         <span class="metadata-block">
             {# Font Awesome route icon #}
-            {% include "svgs/solid/globe.svg" %}
+            {% include "svgs/solid/map-marker-alt.svg" %}
              Other:
             {% for place in object.based_near.all %}
             {{ place.address }}{% if not forloop.last %}, {% endif %}
