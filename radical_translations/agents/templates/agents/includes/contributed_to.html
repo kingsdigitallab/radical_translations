@@ -1,6 +1,6 @@
 {% if object.contributed_to.count %}
-<h2>Contributed to</h2>
-<ul>
+<h3>Contributions</h3>
+<ol>
     {% for contribution in object.contributed_to.all %}
     <li>
         {% with resource=contribution.resource %}
@@ -12,5 +12,5 @@
         {% include "agents/includes/roles.html" with object=contribution %}
     </li>
     {% endfor %}
-</ul>
+</ol>
 {% endif %}
