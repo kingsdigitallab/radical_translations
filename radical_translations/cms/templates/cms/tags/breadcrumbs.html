@@ -20,7 +20,7 @@
         {% for crumb in crumbs %}
         <li>
             {% if forloop.last %}
-            {{ crumb.title }}
+            {{ crumb.title|truncatewords:5 }}
             {% else %}
             <a href="{{ crumb.path }}">{{ crumb.title }}</a>
             {% endif %}
