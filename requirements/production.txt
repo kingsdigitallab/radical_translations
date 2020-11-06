@@ -47,7 +47,7 @@ jinja2==2.11.2            # via coreschema
 l18n==2018.5              # via wagtail
 markupsafe==1.1.1         # via jinja2
 pathlib==1.0.1            # via pyzotero
-pillow==6.2.2             # via wagtail
+pillow==7.1.0             # via wagtail
 psycopg2==2.8.4           # via -r requirements/production.in
 pyasn1-modules==0.2.8     # via python-ldap
 pyasn1==0.4.8             # via pyasn1-modules, python-ldap

@@ -88,7 +88,7 @@ pathspec==0.8.0           # via black
 pathtools==0.1.2          # via watchdog
 pexpect==4.8.0            # via ipython
 pickleshare==0.7.5        # via ipython
-pillow==6.2.2             # via wagtail
+pillow==7.1.0             # via wagtail
 pip-tools==5.2.0          # via -r requirements/local.in
 pluggy==0.13.1            # via pytest
 pre-commit==2.1.0         # via -r requirements/local.in
