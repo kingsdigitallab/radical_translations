@@ -14,10 +14,6 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
-
-[0.8.0] - 2020-11-06
---------------------
-
 Added
 ~~~~~
 * Elasticsearch_ service.
@@ -25,18 +21,28 @@ Added
 * `Resource` search index.
 * `Agents` search index.
 * `Events` search index.
+* `Resource` text search with filters, ordering and pagination of search results.
+* `Resource` search tests.
+* `Resource` search suggestions.
+* Fuzzy_ text search.
+* Search results highlighting_.
+
+.. _Elasticsearch: https://www.elastic.co/elasticsearch/
+.. _Kibana: https://www.elastic.co/kibana/
+.. _Fuzzy: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-fuzzy-query.html
+.. _highlighting: https://www.elastic.co/guide/en/elasticsearch/reference/7.9/highlighting.html
+
+
+[0.8.0] - 2020-11-06
+--------------------
+
 * Migration to convert `author` roles to `translator` when the `Resource` is a
   translation.
 * Field to record fictional places of publication.
 * Helper functions to `Date`, to get the earliest and latest dates for an object.
 * Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
-* `Resource` text search with filters, ordering and pagination of search results.
-* `Resource` search tests.
-* `Resource` search suggestions.
 * Wagtail_ page type for the home page.
 * Wagtail_ page type for biographies.
-* Fuzzy_ text search.
-* Search results highlighting_.
 * Template tag to render breadcrumbs.
 
 Changed
@@ -44,11 +50,7 @@ Changed
 * Upgrade `Controlled Vocabulary`_ application.
 * Upgrade Wagtail_ to version 2.9.
 
-.. _Elasticsearch: https://www.elastic.co/elasticsearch/
-.. _Kibana: https://www.elastic.co/kibana/
 .. _FAST: https://www.oclc.org/research/areas/data-science/fast.html
-.. _Fuzzy: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-fuzzy-query.html
-.. _highlighting: https://www.elastic.co/guide/en/elasticsearch/reference/7.9/highlighting.html
 
 [0.7.1] - 2020-07-02
 --------------------
