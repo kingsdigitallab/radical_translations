@@ -16,7 +16,6 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 
 Changed
 ~~~~~~~
-
 * Truncate breadcrumb to 5 words.
 * Truncate metatitle to 10 words.
 
