@@ -8,9 +8,13 @@ register = template.Library()
 def breadcrumbs(context) -> dict:
     page = context.get("self")
 
-    # on the home page/not on a wagtail page
-    if page is None or page.depth <= 2:
+    # not on a wagtail page
+    if page is None:
         return {"ancestors": [], "crumbs": get_object_crumbs(context)}
+
+    # on the home page
+    if page.depth <= 2:
+        return {"ancestors": []}
 
     return {
         "ancestors": Page.objects.ancestor_of(page, inclusive=True).filter(depth__gt=2)
