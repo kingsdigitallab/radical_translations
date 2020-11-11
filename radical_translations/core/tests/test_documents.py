@@ -18,7 +18,6 @@ def resource_for_search(entry_search):
     # teardown
     if resource.id:
         for rr in resource.related_to.all():
-            print(rr.title)
             rr.resource.delete()
 
         resource.delete()
@@ -87,7 +86,7 @@ class TestResourceDocument:
         agent = contribution.agent
 
         search = ResourceDocument.search().query(
-            "match", contributions__agent__name=contribution.agent.name
+            "match", contributions__agent__name=agent.name
         )
         assert len(search.execute()) == agent.contributed_to.count()
 
