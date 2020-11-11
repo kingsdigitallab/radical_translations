@@ -174,7 +174,7 @@ def entry_search() -> Dict[str, Dict[str, str]]:
         "gsx$editionnumber": {"$t": ""},
         "gsx$year": {"$t": "1791"},
         "gsx$location": {"$t": "0001: Paris [FR]"},
-        "gsx$organisation": {"$t": "Desenne"},
+        "gsx$organisation": {"$t": "publisher name"},
         "gsx$language": {"$t": "French [fr]"},
         "gsx$genre": {"$t": "essay"},
         "gsx$url": {"$t": ""},
