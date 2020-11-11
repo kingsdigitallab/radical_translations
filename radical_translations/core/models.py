@@ -1,6 +1,7 @@
 from typing import Dict, List, Optional
 
 from django.db import models
+from django.db.models.query import QuerySet
 from model_utils.models import TimeStampedModel
 
 from controlled_vocabulary.models import (
@@ -232,6 +233,17 @@ class Resource(TimeStampedModel):
 
     is_paratext.boolean = True  # type: ignore
 
+    def is_translation(self) -> bool:
+        return (
+            self.relationships.filter(relationship_type__label="translation of").count()
+            > 0
+        )
+
+    is_translation.boolean = True  # type: ignore
+
+    def get_paratext(self) -> QuerySet:
+        return self.related_to.filter(relationship_type__label="paratext of")
+
     def paratext_of(self) -> Optional["Resource"]:
         if not self.is_paratext:
             return None
@@ -243,12 +255,6 @@ class Resource(TimeStampedModel):
             return relationship.related_to
 
         return None
-
-    def is_translation(self) -> bool:
-        return (
-            self.relationships.filter(relationship_type__label="translation of").count()
-            > 0
-        )
 
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Resource"]:
@@ -506,7 +512,7 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
     )
 
     class Meta:
-        ordering = ['resource', 'agent']
+        ordering = ["resource", "agent"]
 
     def __str__(self) -> str:
         agent = self.agent
