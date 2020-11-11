@@ -49,6 +49,7 @@ class ResourceDocument(Document):
             "subtitle": fields.TextField(),
         },
     )
+    form_genre = get_controlled_term_field()
     subjects = get_controlled_term_field()
     date_display = fields.TextField()
     year_earliest = fields.IntegerField()
@@ -132,6 +133,18 @@ class ResourceDocument(Document):
             ),
         ):
             return related_instance.resource
+
+    def prepare_form_genre(self, instance):
+        return [
+            {"label": item.label}
+            for item in instance.subjects.filter(vocabulary__prefix="fast-forms")
+        ]
+
+    def prepare_subjects(self, instance):
+        return [
+            {"label": item.label}
+            for item in instance.subjects.filter(vocabulary__prefix="fast-topics")
+        ]
 
     def prepare_date_display(self, instance):
         resource = self._get_resource(instance)

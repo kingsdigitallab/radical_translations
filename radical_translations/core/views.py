@@ -104,6 +104,11 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "form_genre": {
+            "field": "form_genre.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
         "event": {
             "field": "events.title.raw",
             "enabled": True,
@@ -126,6 +131,7 @@ class ResourceViewSet(DocumentViewSet):
         "contributor": "contributions.agent.name.raw",
         "contributor_role": "contributions.roles.label.raw",
         "date": "year_earliest",
+        "form_genre": "form_genre.label.raw",
         "language": "languages.language.label.raw",
         "publication_place": "places.place.address.raw",
         "publication_country": "places.place.country.raw",
