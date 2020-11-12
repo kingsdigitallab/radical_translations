@@ -11,7 +11,6 @@ certifi==2020.4.5.1       # via elasticsearch, requests
 cffi==1.14.0              # via argon2-cffi
 chardet==3.0.4            # via requests
 click==7.1.2              # via geocoder
-convertdate==2.2.1        # via -r requirements/base.in
 coreapi==2.3.3            # via -r requirements/base.in
 coreschema==0.0.4         # via coreapi
 decorator==4.4.2          # via ratelim
@@ -48,11 +47,10 @@ markupsafe==1.1.1         # via jinja2
 pathlib==1.0.1            # via pyzotero
 pillow==6.2.2             # via wagtail
 pycparser==2.20           # via cffi
-pymeeus==0.3.7            # via convertdate
 pyparsing==2.4.7          # via bibtexparser, edtf
 python-dateutil==2.8.1    # via edtf, elasticsearch-dsl
 python-slugify==4.0.0     # via -r requirements/base.in
-pytz==2019.3              # via -r requirements/base.in, convertdate, django, django-modelcluster, l18n, pyzotero
+pytz==2019.3              # via -r requirements/base.in, django, django-modelcluster, l18n, pyzotero
 pyzotero==1.4.16          # via -r requirements/base.in
 ratelim==0.1.6            # via geocoder
 redis==3.4.1              # via -r requirements/base.in, django-redis
