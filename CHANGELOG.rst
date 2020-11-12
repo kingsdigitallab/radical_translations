@@ -18,6 +18,7 @@ Changed
 ~~~~~~~
 * Truncate breadcrumb to 5 words.
 * Truncate metatitle to 10 words.
+* Remove unused and duplicate packages.
 
 [0.8.0] - 2020-11-06
 --------------------
