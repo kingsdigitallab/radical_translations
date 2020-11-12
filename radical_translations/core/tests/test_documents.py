@@ -1,7 +1,8 @@
 import pytest
 
+from controlled_vocabulary.utils import search_term_or_none
 from radical_translations.core.documents import ResourceDocument
-from radical_translations.core.models import Resource
+from radical_translations.core.models import Classification, Resource
 from radical_translations.utils.models import Date
 
 pytestmark = pytest.mark.django_db
@@ -54,7 +55,7 @@ class TestResourceDocument:
         assert len(search.execute()) == subject.resources.count()
 
         search = ResourceDocument.search().query(
-            "match_phrase", title__main_title=resource.title.main_title
+            "match_phrase", title=resource.title.main_title
         )
         assert len(search.execute()) == resource.title.resources.count()
 
@@ -63,7 +64,7 @@ class TestResourceDocument:
         title.save()
 
         search = ResourceDocument.search().query(
-            "match_phrase", title__main_title=resource.title.main_title
+            "match_phrase", title=resource.title.main_title
         )
         assert len(search.execute()) == title.resources.count()
 
@@ -126,6 +127,57 @@ class TestResourceDocument:
         search = ResourceDocument.search().query("match", places__fictional_place=label)
         assert len(search.execute()) == 1
 
+    @pytest.mark.usefixtures("entry_original")
+    def test_prepare_title(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+
+        assert len(doc.prepare_title(resource)) == 1
+
+        paratext.title.main_title = "a different title"
+        paratext.title.save()
+        paratext.save()
+
+        assert len(doc.prepare_title(resource)) == 2
+
+    @pytest.mark.usefixtures("entry_original")
+    def test_prepare_form_genre(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+
+        assert len(doc.prepare_form_genre(resource)) == 0
+
+        resource.subjects.add(search_term_or_none("fast-forms", "History"))
+        assert len(doc.prepare_form_genre(resource)) == 1
+
+        paratext.subjects.add(search_term_or_none("fast-forms", "Periodicals"))
+        assert len(doc.prepare_form_genre(resource)) == 2
+
+    @pytest.mark.usefixtures("entry_original")
+    def test__get_subjects(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+
+        assert len(doc._get_subjects(resource, "fast-forms")) == 0
+        assert len(doc._get_subjects(resource, "fast-topic")) == 1
+
+    @pytest.mark.usefixtures("entry_original")
+    def test_prepare_subjects(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+
+        assert len(doc.prepare_subjects(resource)) == 1
+
+        paratext.subjects.add(search_term_or_none("fast-topic", "Operas"))
+        assert len(doc.prepare_subjects(resource)) == 2
+
     @pytest.mark.usefixtures("resource")
     def test_prepare_date_display(self, resource):
         doc = ResourceDocument()
@@ -173,3 +225,70 @@ class TestResourceDocument:
         prepared_data = doc.prepare_year_latest(resource)
         assert prepared_data is not None
         assert prepared_data == 1971
+
+    @pytest.mark.usefixtures("entry_original")
+    def test_prepare_classifications_printing_publishing(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+
+        assert len(doc.prepare_classifications_printing_publishing(resource)) == 0
+
+        resource.classifications.add(
+            Classification(edition=search_term_or_none("rt-ppt", "Forgeries")),
+            bulk=False,
+        )
+        assert len(doc.prepare_classifications_printing_publishing(resource)) == 1
+
+        paratext.classifications.add(
+            Classification(edition=search_term_or_none("rt-ppt", "Piracies")),
+            bulk=False,
+        )
+        assert len(doc.prepare_classifications_printing_publishing(resource)) == 2
+
+    @pytest.mark.usefixtures("entry_original")
+    def test__get_classifications(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+
+        assert len(doc._get_classifications(resource, "rt-ppt")) == 0
+        assert len(doc._get_classifications(resource, "rt-tt")) == 1
+        assert len(doc._get_classifications(resource, "rt-pt")) == 0
+
+    @pytest.mark.usefixtures("entry_original")
+    def test_prepare_classifications_translation(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+
+        assert len(doc.prepare_classifications_translation(resource)) == 1
+
+        resource.classifications.add(
+            Classification(edition=search_term_or_none("rt-tt", "Integral")),
+            bulk=False,
+        )
+        assert len(doc.prepare_classifications_translation(resource)) == 2
+
+        paratext.classifications.add(
+            Classification(edition=search_term_or_none("rt-tt", "Partial")),
+            bulk=False,
+        )
+        assert len(doc.prepare_classifications_translation(resource)) == 3
+
+    @pytest.mark.usefixtures("entry_original")
+    def test_prepare_classifications_paratext(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+
+        assert len(doc.prepare_classifications_paratext(resource)) == 0
+
+        paratext.classifications.add(
+            Classification(edition=search_term_or_none("rt-pt", "Preface")),
+            bulk=False,
+        )
+        assert len(doc.prepare_classifications_paratext(resource)) == 1

@@ -83,7 +83,7 @@ def entry_original() -> Dict[str, Dict[str, str]]:
         "gsx$location": {"$t": "0001: Paris [FR]"},
         "gsx$organisation": {"$t": "Desenne"},
         "gsx$language": {"$t": "French [fr]"},
-        "gsx$genre": {"$t": "essay"},
+        "gsx$genre": {"$t": "essays"},
         "gsx$url": {"$t": ""},
         "gsx$libraries": {"$t": ""},
         "gsx$notes": {"$t": ""},

@@ -158,7 +158,7 @@ class ResourceViewSet(DocumentViewSet):
     }
 
     highlight_fields = {
-        "title.main_title": {
+        "title": {
             "enabled": True,
             "options": {
                 "number_of_fragments": 0,
@@ -169,7 +169,7 @@ class ResourceViewSet(DocumentViewSet):
     }
 
     ordering_fields = {
-        "title": "title.main_title.sort",
+        "title": "title.sort",
         "date": "year_earliest",
     }
     ordering = ["title", "date"]
@@ -177,7 +177,7 @@ class ResourceViewSet(DocumentViewSet):
     pagination_class = PageNumberPagination
 
     search_fields = {
-        "title.main_title": ES_FUZZINESS_OPTIONS,
+        "title": ES_FUZZINESS_OPTIONS,
         "authors.person.name": ES_FUZZINESS_OPTIONS,
         "summary": None,
     }

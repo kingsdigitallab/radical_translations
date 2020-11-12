@@ -35,19 +35,14 @@ kwargs = {"copy_to": "content"}
 class ResourceDocument(Document):
     content = fields.TextField(attr="title.main_title")
 
-    title = fields.ObjectField(
-        properties={
-            "main_title": fields.TextField(
-                analyzer=text_folding_analyzer,
-                fields={
-                    "raw": fields.KeywordField(),
-                    "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
-                    "suggest": fields.CompletionField(),
-                },
-                **kwargs
-            ),
-            "subtitle": fields.TextField(),
+    title = fields.TextField(
+        analyzer=text_folding_analyzer,
+        fields={
+            "raw": fields.KeywordField(),
+            "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
+            "suggest": fields.CompletionField(),
         },
+        **kwargs
     )
     form_genre = get_controlled_term_field()
     subjects = get_controlled_term_field()
@@ -88,7 +83,6 @@ class ResourceDocument(Document):
     events = get_event_field()
 
     is_original = fields.BooleanField()
-    is_paratext = fields.BooleanField()
     is_translation = fields.BooleanField()
 
     has_date_radical = fields.BooleanField()
@@ -142,17 +136,32 @@ class ResourceDocument(Document):
         ):
             return related_instance.resource
 
+    def prepare_title(self, instance):
+        titles = [str(instance.title)]
+
+        for relationship in instance.get_paratext():
+            paratext = relationship.resource
+            if str(paratext.title) != str(instance.title):
+                titles.append(str(paratext.title))
+
+        return titles
+
     def prepare_form_genre(self, instance):
-        return [
+        return self._get_subjects(instance, "fast-forms")
+
+    def _get_subjects(self, instance, prefix):
+        subjects = [
             {"label": item.label}
-            for item in instance.subjects.filter(vocabulary__prefix="fast-forms")
+            for item in instance.subjects.filter(vocabulary__prefix=prefix)
         ]
 
+        for relationship in instance.get_paratext():
+            subjects.extend(self._get_subjects(relationship.resource, prefix))
+
+        return subjects
+
     def prepare_subjects(self, instance):
-        return [
-            {"label": item.label}
-            for item in instance.subjects.filter(vocabulary__prefix="fast-topics")
-        ]
+        return self._get_subjects(instance, "fast-topic")
 
     def prepare_date_display(self, instance):
         resource = self._get_resource(instance)
@@ -183,7 +192,7 @@ class ResourceDocument(Document):
         return self._get_classifications(instance, "rt-ppt")
 
     def _get_classifications(self, instance, prefix):
-        return [
+        classifications = [
             {
                 "edition": {"label": item.edition.label},
             }
@@ -191,6 +200,13 @@ class ResourceDocument(Document):
                 edition__vocabulary__prefix=prefix
             )
         ]
+
+        for relationship in instance.get_paratext():
+            classifications.extend(
+                self._get_classifications(relationship.resource, prefix)
+            )
+
+        return classifications
 
     def prepare_classifications_translation(self, instance):
         return self._get_classifications(instance, "rt-tt")
