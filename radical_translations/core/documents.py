@@ -116,7 +116,12 @@ class ResourceDocument(Document):
         ]
 
     def get_queryset(self):
-        return super().get_queryset().select_related("title", "date")
+        return (
+            super()
+            .get_queryset()
+            .exclude(relationships__relationship_type__label="paratext of")
+            .select_related("title", "date")
+        )
 
     def get_instances_from_related(self, related_instance):
         if isinstance(related_instance, Date):
