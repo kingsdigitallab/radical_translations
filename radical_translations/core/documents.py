@@ -55,11 +55,14 @@ class ResourceDocument(Document):
     year_earliest = fields.IntegerField()
     year_latest = fields.IntegerField()
     summary = fields.TextField(**kwargs)
-    classifications = fields.ObjectField(
-        properties={
-            "classification": get_controlled_term_field(),
-            "edition": get_controlled_term_field(),
-        }
+    classifications_printing_publishing = fields.ObjectField(
+        properties={"edition": get_controlled_term_field()}
+    )
+    classifications_translation = fields.ObjectField(
+        properties={"edition": get_controlled_term_field()}
+    )
+    classifications_paratext = fields.ObjectField(
+        properties={"edition": get_controlled_term_field()}
     )
     contributions = fields.ObjectField(
         properties={
@@ -170,3 +173,22 @@ class ResourceDocument(Document):
             date_latest = resource.date.get_date_latest()
             if date_latest is not None:
                 return date_latest.year
+
+    def prepare_classifications_printing_publishing(self, instance):
+        return self._get_classifications(instance, "rt-ppt")
+
+    def _get_classifications(self, instance, prefix):
+        return [
+            {
+                "edition": {"label": item.edition.label},
+            }
+            for item in instance.classifications.filter(
+                edition__vocabulary__prefix=prefix
+            )
+        ]
+
+    def prepare_classifications_translation(self, instance):
+        return self._get_classifications(instance, "rt-tt")
+
+    def prepare_classifications_paratext(self, instance):
+        return self._get_classifications(instance, "rt-pt")

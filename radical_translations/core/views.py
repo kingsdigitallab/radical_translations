@@ -54,8 +54,18 @@ class ResourceViewSet(DocumentViewSet):
     lookup_field = "id"
 
     faceted_search_fields = {
-        "classification": {
-            "field": "classifications.edition.label.raw",
+        "classification_paratext": {
+            "field": "classifications_paratext.edition.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+        "classification_printing_publishing": {
+            "field": "classifications_printing_publishing.edition.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+        "classification_translation": {
+            "field": "classifications_translation.edition.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -127,7 +137,11 @@ class ResourceViewSet(DocumentViewSet):
     }
 
     filter_fields = {
-        "classification": "classifications.edition.label.raw",
+        "classification_paratext": "classifications_paratext.edition.label.raw",
+        "classification_printing_publishing": (
+            "classifications_printing_publishing.edition.label.raw"
+        ),
+        "classification_translation": "classifications_translation.edition.label.raw",
         "contributor": "contributions.agent.name.raw",
         "contributor_role": "contributions.roles.label.raw",
         "date": "year_earliest",
