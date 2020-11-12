@@ -17,10 +17,11 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 
 # KDL
 # ------------------------------------------------------------------------------
+convertdate>=2.2.0,<3  # https://github.com/fitnr/convertdate
 django-controlled-vocabulary>=0.8,<1  # https://github.com/kingsdigitallab/django-controlled-vocabulary/
 django-geonames-place  # https://github.com/kingsdigitallab/django-geonames-place
 django-elasticsearch-dsl>=7.1,<7.2  # https://github.com/django-es/django-elasticsearch-dsl
-django-elasticsearch-dsl-drf>=0.20,<0.21  # https://github.com/barseghyanartur/django-elasticsearch-dsl-drf
+django-elasticsearch-dsl-drf>=0.20,<0.30  # https://github.com/barseghyanartur/django-elasticsearch-dsl-drf
 django-polymorphic>=2.1,<2.2  # https://github.com/django-polymorphic/django-polymorphic
 edtf>=4.0,<4.1  # https://github.com/ixc/python-edtf
 elasticsearch-dsl>=7.0.0,<8.0.0  # https://github.com/elastic/elasticsearch-dsl-py
