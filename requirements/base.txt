@@ -50,7 +50,7 @@ pycparser==2.20           # via cffi
 pyparsing==2.4.7          # via bibtexparser, edtf
 python-dateutil==2.8.1    # via edtf, elasticsearch-dsl
 python-slugify==4.0.0     # via -r requirements/base.in
-pytz==2019.3              # via -r requirements/base.in, django, django-modelcluster, l18n, pyzotero
+pytz==2019.3              # via django, django-modelcluster, l18n, pyzotero
 pyzotero==1.4.16          # via -r requirements/base.in
 ratelim==0.1.6            # via geocoder
 redis==3.4.1              # via -r requirements/base.in, django-redis

@@ -31,6 +31,7 @@ Changed
 ~~~~~~~
 * Truncate breadcrumb to 5 words.
 * Truncate metatitle to 10 words.
+* Remove unused and duplicate packages.
 
 .. _Elasticsearch: https://www.elastic.co/elasticsearch/
 .. _Kibana: https://www.elastic.co/kibana/
