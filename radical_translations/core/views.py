@@ -85,7 +85,7 @@ class ResourceViewSet(DocumentViewSet):
             "options": ES_FACET_OPTIONS,
         },
         "language": {
-            "field": "languages.language.label.raw",
+            "field": "languages.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -146,7 +146,7 @@ class ResourceViewSet(DocumentViewSet):
         "contributor_role": "contributions.roles.label.raw",
         "date": "year_earliest",
         "form_genre": "form_genre.label.raw",
-        "language": "languages.language.label.raw",
+        "language": "languages.label.raw",
         "publication_place": "places.place.address.raw",
         "publication_country": "places.place.country.raw",
         "fictional_place_of_publication": "places.fictional_place.raw",

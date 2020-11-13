@@ -42,7 +42,7 @@ class ResourceDocument(Document):
             "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
             "suggest": fields.CompletionField(),
         },
-        **kwargs
+        **kwargs,
     )
     form_genre = get_controlled_term_field()
     subjects = get_controlled_term_field()
@@ -213,6 +213,25 @@ class ResourceDocument(Document):
 
     def prepare_classifications_paratext(self, instance):
         return self._get_classifications(instance, "rt-pt")
+
+    def prepare_contributions(self, instance):
+        contributions = [
+            {
+                "agent": {
+                    "id": item.agent.id,
+                    "name": f"{item.published_as} ({item.agent.name})"
+                    if item.published_as
+                    else item.agent.name,
+                },
+                "roles": [{"label": role.label for role in item.roles.all()}],
+            }
+            for item in instance.contributions.all()
+        ]
+
+        for relationship in instance.get_paratext():
+            contributions.extend(self.prepare_contributions(relationship.resource))
+
+        return contributions
 
     def prepare_languages(self, instance):
         languages = [

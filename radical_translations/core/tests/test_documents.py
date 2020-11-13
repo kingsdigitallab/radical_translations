@@ -2,7 +2,12 @@ import pytest
 
 from controlled_vocabulary.utils import search_term_or_none
 from radical_translations.core.documents import ResourceDocument
-from radical_translations.core.models import Classification, Resource, ResourceLanguage
+from radical_translations.core.models import (
+    Classification,
+    Contribution,
+    Resource,
+    ResourceLanguage,
+)
 from radical_translations.utils.models import Date
 
 pytestmark = pytest.mark.django_db
@@ -292,6 +297,18 @@ class TestResourceDocument:
             bulk=False,
         )
         assert len(doc.prepare_classifications_paratext(resource)) == 1
+
+    @pytest.mark.usefixtures("entry_original", "person")
+    def test_prepare_contributions(self, entry_original, person):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+
+        assert len(doc.prepare_contributions(resource)) == 2
+
+        paratext.contributions.add(Contribution(agent=person), bulk=False)
+        assert len(doc.prepare_contributions(resource)) == 3
 
     @pytest.mark.usefixtures("entry_original")
     def test_prepare_languages(self, entry_original):
