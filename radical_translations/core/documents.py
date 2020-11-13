@@ -223,7 +223,14 @@ class ResourceDocument(Document):
                     if item.published_as
                     else item.agent.name,
                 },
-                "roles": [{"label": role.label for role in item.roles.all()}],
+                "roles": [
+                    {
+                        "label": f"{role.label} of paratext"
+                        if instance.is_paratext()
+                        else role.label
+                        for role in item.roles.all()
+                    }
+                ],
             }
             for item in instance.contributions.all()
         ]
