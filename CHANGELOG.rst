@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Migration to copy subjects from the translation resource to the original resource.
+
 Changed
 ~~~~~~~
 * Truncate breadcrumb to 5 words.
