@@ -66,7 +66,7 @@ class ResourceDocument(Document):
             "roles": get_controlled_term_field(),
         }
     )
-    languages = fields.ObjectField(properties={"language": get_controlled_term_field()})
+    languages = get_controlled_term_field()
     places = fields.ObjectField(
         properties={
             "place": get_place_field(),
@@ -213,3 +213,13 @@ class ResourceDocument(Document):
 
     def prepare_classifications_paratext(self, instance):
         return self._get_classifications(instance, "rt-pt")
+
+    def prepare_languages(self, instance):
+        languages = [
+            {"label": item.language.label} for item in instance.languages.all()
+        ]
+
+        for relationship in instance.get_paratext():
+            languages.extend(self.prepare_languages(relationship.resource))
+
+        return languages
