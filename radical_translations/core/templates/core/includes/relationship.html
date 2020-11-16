@@ -1,4 +1,4 @@
-<dt>{% if direct %}{{ label }}{% else %}has {{ label|cut:' of' }}{% endif %}</dt>
+<dt>{% if direct %}is {{ label }}{% else %}has {{ label|cut:' of' }}{% endif %}</dt>
 <dd>
 <a href="{% url 'resource-detail' related.pk %}">{{ related.title }}</a>
 {% include "core/includes/type.html" with resource=related %}
