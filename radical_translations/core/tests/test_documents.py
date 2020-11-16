@@ -232,6 +232,17 @@ class TestResourceDocument:
         assert prepared_data == 1971
 
     @pytest.mark.usefixtures("entry_original")
+    def test_prepare_summary(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+
+        assert len(doc.prepare_summary(resource)) == 1
+
+        resource.summary = "resource summary"
+        assert len(doc.prepare_summary(resource)) == 2
+
+    @pytest.mark.usefixtures("entry_original")
     def test_prepare_classifications_printing_publishing(self, entry_original):
         doc = ResourceDocument()
 

@@ -49,7 +49,7 @@ class ResourceDocument(Document):
     date_display = fields.TextField()
     year_earliest = fields.IntegerField()
     year_latest = fields.IntegerField()
-    summary = fields.TextField(**kwargs)
+    summary = fields.TextField()
     classifications_printing_publishing = fields.ObjectField(
         properties={"edition": get_controlled_term_field()}
     )
@@ -187,6 +187,18 @@ class ResourceDocument(Document):
             date_latest = resource.date.get_date_latest()
             if date_latest is not None:
                 return date_latest.year
+
+    def prepare_summary(self, instance):
+        summaries = []
+
+        if instance.summary:
+            summaries = [instance.summary]
+
+        for relationship in instance.get_paratext():
+            if relationship.resource.summary:
+                summaries.append(relationship.resource.summary)
+
+        return summaries
 
     def prepare_classifications_printing_publishing(self, instance):
         return self._get_classifications(instance, "rt-ppt")
