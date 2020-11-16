@@ -62,7 +62,6 @@ class ResourceDocument(Document):
     contributions = fields.ObjectField(
         properties={
             "agent": get_agent_field(),
-            "published_as": fields.TextField(),
             "roles": get_controlled_term_field(),
         }
     )
