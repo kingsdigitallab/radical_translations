@@ -260,3 +260,32 @@ class ResourceDocument(Document):
             languages.extend(self.prepare_languages(relationship.resource))
 
         return languages
+
+    def prepare_places(self, instance):
+        places = []
+
+        for item in instance.places.all():
+            address = ""
+            place = {}
+
+            if item.fictional_place:
+                address = item.fictional_place
+                place = {
+                    "fictional_place": item.fictional_place,
+                    "place": {"address": address},
+                }
+
+            if item.place:
+                address = (
+                    f"{address} ({item.place.address})"
+                    if address
+                    else item.place.address
+                )
+                place["place"] = {
+                    "address": address,
+                    "country": {"name": item.place.country.name},
+                }
+
+            places.append(place)
+
+        return places

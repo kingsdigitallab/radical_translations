@@ -99,11 +99,6 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "fictional_place_of_publication": {
-            "field": "places.fictional_place.raw",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
         "status": {
             "field": "relationships.relationship_type.label.raw",
             "enabled": True,

@@ -335,3 +335,19 @@ class TestResourceDocument:
             bulk=False,
         )
         assert len(doc.prepare_languages(resource)) == 2
+
+    @pytest.mark.usefixtures("entry_original")
+    def test_prepare_places(self, entry_original):
+        doc = ResourceDocument()
+
+        resource = Resource.from_gsx_entry(entry_original)
+        assert 'fictional_place' not in doc.prepare_places(resource)[0]
+
+        place = resource.places.first()
+        place.fictional_place = "mordor"
+        place.save()
+
+        prepared = doc.prepare_places(resource)[0]
+
+        assert "(" in prepared["place"]["address"]
+        assert prepared["fictional_place"] is not None
