@@ -143,7 +143,7 @@ class ResourceViewSet(DocumentViewSet):
         "form_genre": "form_genre.label.raw",
         "language": "languages.label.raw",
         "publication_place": "places.place.address.raw",
-        "publication_country": "places.place.country.raw",
+        "publication_country": "places.place.country.name.raw",
         "fictional_place_of_publication": "places.fictional_place.raw",
         "status": "relationships.relationship_type.label.raw",
         "subject": "subjects.label.raw",
