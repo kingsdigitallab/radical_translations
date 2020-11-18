@@ -232,7 +232,11 @@ class ResourceDocument(Document):
                     "id": item.agent.id,
                     "name": f"{item.published_as} ({item.agent.name})"
                     if item.published_as
-                    else item.agent.name,
+                    else (
+                        "Anonymous"
+                        if item.agent.name.startswith("Anon")
+                        else item.agent.name
+                    ),
                 },
                 "roles": [
                     {

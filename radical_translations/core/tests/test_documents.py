@@ -321,6 +321,12 @@ class TestResourceDocument:
         paratext.contributions.add(Contribution(agent=person), bulk=False)
         assert len(doc.prepare_contributions(resource)) == 3
 
+        person.name = 'Anonymous Badger'
+        person.save()
+
+        contribution = doc.prepare_contributions(resource)[-1]
+        assert contribution['agent']['name'] == 'Anonymous'
+
     @pytest.mark.usefixtures("entry_original")
     def test_prepare_languages(self, entry_original):
         doc = ResourceDocument()
