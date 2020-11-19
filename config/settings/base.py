@@ -291,7 +291,7 @@ LOGGING = {
 # https://github.com/django-es/django-elasticsearch-dsl
 ELASTICSEARCH_DSL = {"default": {"hosts": f"{env('ELASTICSEARCH_HOST')}"}}
 
-ES_FACET_OPTIONS = {"order": {"_key": "asc"}, "size": 100}
+ES_FACET_OPTIONS = {"order": {"_key": "asc"}, "size": 1000}
 ES_FUZZINESS_OPTIONS = {"fuzziness": "AUTO"}
 
 # Wagtail
