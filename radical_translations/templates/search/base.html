@@ -2,17 +2,20 @@
 {% load staticfiles %}
 
 {% block main %}
-<h2>{% block search_header %}{% endblock search_header %}</h2>
 
 {% block search_body %}
 <div id="app">
     <div class="container">
+        <h2>{% block search_header %}{% endblock search_header %}</h2>
+        
         <div class="row">
-            <div class="col-4">
+            <div class="col">
                 {% include 'vue/search_query.html' %}
                 {% include 'vue/search_facets.html' %}
             </div>
-            <div class="col-8">
+        </div>
+        <div class="row">
+            <div class="col">
                 {% include 'vue/search_summary.html' %}
 
                 {% include 'vue/search_ordering.html' %}
