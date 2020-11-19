@@ -138,7 +138,15 @@ class TestResource:
         assert resource.is_original() is False
 
     @pytest.mark.usefixtures("entry_original")
-    def test_paratext(self, entry_original: Dict[str, Dict[str, str]]):
+    def test_get_paratext(self, entry_original: Dict[str, Dict[str, str]]):
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.get_paratext().count() == 1
+
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+        assert paratext.get_paratext().count() == 0
+
+    @pytest.mark.usefixtures("entry_original")
+    def test_paratext_of(self, entry_original: Dict[str, Dict[str, str]]):
         resource = Resource.from_gsx_entry(entry_original)
         assert resource.is_paratext() is False
         assert resource.paratext_of() is None
@@ -259,7 +267,7 @@ class TestResource:
         entry["gsx$title"]["$t"] = "Work 1"
         assert Resource.from_gsx_entry(entry) is not None
 
-        entry["gsx$authors"]["$t"] = f"{person.name}; Author 2"
+        entry["gsx$authors"]["$t"] = f"{person.name}"
         resource = Resource.from_gsx_entry(entry)
         assert resource.contributions.first().agent.name == person.name
 

@@ -26,16 +26,18 @@ Added
 * `Resource` search suggestions.
 * Fuzzy_ text search.
 * Search results highlighting_.
+* Migration to copy subjects from the translation resource to the original resource.
 
 Changed
 ~~~~~~~
 * Truncate breadcrumb to 5 words.
 * Truncate metatitle to 10 words.
+* Remove unused and duplicate packages.
 
 .. _Elasticsearch: https://www.elastic.co/elasticsearch/
 .. _Kibana: https://www.elastic.co/kibana/
 .. _Fuzzy: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-fuzzy-query.html
-.. _highlighting: https://www.elastic.co/guide/en/elasticsearch/reference/7.9/highlighting.html
+.. _highlighting: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/highlighting.html
 
 
 [0.8.0] - 2020-11-06

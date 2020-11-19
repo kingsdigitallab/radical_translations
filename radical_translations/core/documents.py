@@ -35,39 +35,37 @@ kwargs = {"copy_to": "content"}
 class ResourceDocument(Document):
     content = fields.TextField(attr="title.main_title")
 
-    title = fields.ObjectField(
-        properties={
-            "main_title": fields.TextField(
-                analyzer=text_folding_analyzer,
-                fields={
-                    "raw": fields.KeywordField(),
-                    "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
-                    "suggest": fields.CompletionField(),
-                },
-                **kwargs
-            ),
-            "subtitle": fields.TextField(),
+    title = fields.TextField(
+        analyzer=text_folding_analyzer,
+        fields={
+            "raw": fields.KeywordField(),
+            "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
+            "suggest": fields.CompletionField(),
         },
+        **kwargs,
     )
+    form_genre = get_controlled_term_field()
     subjects = get_controlled_term_field()
     date_display = fields.TextField()
     year_earliest = fields.IntegerField()
     year_latest = fields.IntegerField()
-    summary = fields.TextField(**kwargs)
-    classifications = fields.ObjectField(
-        properties={
-            "classification": get_controlled_term_field(),
-            "edition": get_controlled_term_field(),
-        }
+    summary = fields.TextField()
+    classifications_printing_publishing = fields.ObjectField(
+        properties={"edition": get_controlled_term_field()}
+    )
+    classifications_translation = fields.ObjectField(
+        properties={"edition": get_controlled_term_field()}
+    )
+    classifications_paratext = fields.ObjectField(
+        properties={"edition": get_controlled_term_field()}
     )
     contributions = fields.ObjectField(
         properties={
             "agent": get_agent_field(),
-            "published_as": fields.TextField(),
             "roles": get_controlled_term_field(),
         }
     )
-    languages = fields.ObjectField(properties={"language": get_controlled_term_field()})
+    languages = get_controlled_term_field()
     places = fields.ObjectField(
         properties={
             "place": get_place_field(),
@@ -84,7 +82,6 @@ class ResourceDocument(Document):
     events = get_event_field()
 
     is_original = fields.BooleanField()
-    is_paratext = fields.BooleanField()
     is_translation = fields.BooleanField()
 
     has_date_radical = fields.BooleanField()
@@ -112,7 +109,12 @@ class ResourceDocument(Document):
         ]
 
     def get_queryset(self):
-        return super().get_queryset().select_related("title", "date")
+        return (
+            super()
+            .get_queryset()
+            .exclude(relationships__relationship_type__label="paratext of")
+            .select_related("title", "date")
+        )
 
     def get_instances_from_related(self, related_instance):
         if isinstance(related_instance, Date):
@@ -132,6 +134,33 @@ class ResourceDocument(Document):
             ),
         ):
             return related_instance.resource
+
+    def prepare_title(self, instance):
+        titles = [str(instance.title)]
+
+        for relationship in instance.get_paratext():
+            paratext = relationship.resource
+            if str(paratext.title) != str(instance.title):
+                titles.append(str(paratext.title))
+
+        return titles
+
+    def prepare_form_genre(self, instance):
+        return self._get_subjects(instance, "fast-forms")
+
+    def _get_subjects(self, instance, prefix):
+        subjects = [
+            {"label": item.label}
+            for item in instance.subjects.filter(vocabulary__prefix=prefix)
+        ]
+
+        for relationship in instance.get_paratext():
+            subjects.extend(self._get_subjects(relationship.resource, prefix))
+
+        return subjects
+
+    def prepare_subjects(self, instance):
+        return self._get_subjects(instance, "fast-topic")
 
     def prepare_date_display(self, instance):
         resource = self._get_resource(instance)
@@ -157,3 +186,110 @@ class ResourceDocument(Document):
             date_latest = resource.date.get_date_latest()
             if date_latest is not None:
                 return date_latest.year
+
+    def prepare_summary(self, instance):
+        summaries = []
+
+        if instance.summary:
+            summaries = [instance.summary]
+
+        for relationship in instance.get_paratext():
+            if relationship.resource.summary:
+                summaries.append(relationship.resource.summary)
+
+        return summaries
+
+    def prepare_classifications_printing_publishing(self, instance):
+        return self._get_classifications(instance, "rt-ppt")
+
+    def _get_classifications(self, instance, prefix):
+        classifications = [
+            {
+                "edition": {"label": item.edition.label},
+            }
+            for item in instance.classifications.filter(
+                edition__vocabulary__prefix=prefix
+            )
+        ]
+
+        for relationship in instance.get_paratext():
+            classifications.extend(
+                self._get_classifications(relationship.resource, prefix)
+            )
+
+        return classifications
+
+    def prepare_classifications_translation(self, instance):
+        return self._get_classifications(instance, "rt-tt")
+
+    def prepare_classifications_paratext(self, instance):
+        return self._get_classifications(instance, "rt-pt")
+
+    def prepare_contributions(self, instance):
+        contributions = [
+            {
+                "agent": {
+                    "id": item.agent.id,
+                    "name": f"{item.published_as} ({item.agent.name})"
+                    if item.published_as
+                    else (
+                        "Anonymous"
+                        if item.agent.name.startswith("Anon")
+                        else item.agent.name
+                    ),
+                },
+                "roles": [
+                    {
+                        "label": f"{role.label} of paratext"
+                        if instance.is_paratext()
+                        else role.label
+                        for role in item.roles.all()
+                    }
+                ],
+            }
+            for item in instance.contributions.all()
+        ]
+
+        for relationship in instance.get_paratext():
+            contributions.extend(self.prepare_contributions(relationship.resource))
+
+        return contributions
+
+    def prepare_languages(self, instance):
+        languages = [
+            {"label": item.language.label} for item in instance.languages.all()
+        ]
+
+        for relationship in instance.get_paratext():
+            languages.extend(self.prepare_languages(relationship.resource))
+
+        return languages
+
+    def prepare_places(self, instance):
+        places = []
+
+        for item in instance.places.all():
+            address = ""
+            place = {}
+
+            if item.fictional_place:
+                address = item.fictional_place
+                place = {
+                    "fictional_place": item.fictional_place,
+                    "place": {"address": address},
+                }
+
+            if item.place:
+                address = (
+                    f"{address} ({item.place.address})"
+                    if address
+                    else item.place.address
+                )
+                place["place"] = {
+                    "address": address,
+                    "country": {"name": item.place.country.name},
+                }
+
+            places.append(place)
+
+        return places

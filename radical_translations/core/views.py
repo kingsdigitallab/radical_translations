@@ -54,8 +54,18 @@ class ResourceViewSet(DocumentViewSet):
     lookup_field = "id"
 
     faceted_search_fields = {
-        "classification": {
-            "field": "classifications.edition.label.raw",
+        "classification_paratext": {
+            "field": "classifications_paratext.edition.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+        "classification_printing_publishing": {
+            "field": "classifications_printing_publishing.edition.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+        "classification_translation": {
+            "field": "classifications_translation.edition.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -75,7 +85,7 @@ class ResourceViewSet(DocumentViewSet):
             "options": ES_FACET_OPTIONS,
         },
         "language": {
-            "field": "languages.language.label.raw",
+            "field": "languages.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -89,11 +99,6 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "fictional_place_of_publication": {
-            "field": "places.fictional_place.raw",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
         "status": {
             "field": "relationships.relationship_type.label.raw",
             "enabled": True,
@@ -101,6 +106,11 @@ class ResourceViewSet(DocumentViewSet):
         },
         "subject": {
             "field": "subjects.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+        "form_genre": {
+            "field": "form_genre.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -122,13 +132,18 @@ class ResourceViewSet(DocumentViewSet):
     }
 
     filter_fields = {
-        "classification": "classifications.edition.label.raw",
+        "classification_paratext": "classifications_paratext.edition.label.raw",
+        "classification_printing_publishing": (
+            "classifications_printing_publishing.edition.label.raw"
+        ),
+        "classification_translation": "classifications_translation.edition.label.raw",
         "contributor": "contributions.agent.name.raw",
         "contributor_role": "contributions.roles.label.raw",
         "date": "year_earliest",
-        "language": "languages.language.label.raw",
+        "form_genre": "form_genre.label.raw",
+        "language": "languages.label.raw",
         "publication_place": "places.place.address.raw",
-        "publication_country": "places.place.country.raw",
+        "publication_country": "places.place.country.name.raw",
         "fictional_place_of_publication": "places.fictional_place.raw",
         "status": "relationships.relationship_type.label.raw",
         "subject": "subjects.label.raw",
@@ -138,7 +153,7 @@ class ResourceViewSet(DocumentViewSet):
     }
 
     highlight_fields = {
-        "title.main_title": {
+        "title": {
             "enabled": True,
             "options": {
                 "number_of_fragments": 0,
@@ -149,7 +164,7 @@ class ResourceViewSet(DocumentViewSet):
     }
 
     ordering_fields = {
-        "title": "title.main_title.sort",
+        "title": "title.sort",
         "date": "year_earliest",
     }
     ordering = ["title", "date"]
@@ -157,7 +172,7 @@ class ResourceViewSet(DocumentViewSet):
     pagination_class = PageNumberPagination
 
     search_fields = {
-        "title.main_title": ES_FUZZINESS_OPTIONS,
+        "title": ES_FUZZINESS_OPTIONS,
         "authors.person.name": ES_FUZZINESS_OPTIONS,
         "summary": None,
     }

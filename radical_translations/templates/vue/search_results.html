@@ -3,13 +3,12 @@
         <h5 class="font-italic">
             <a v-bind:href="item.id">
                 <span
-                    v-if="'title.main_title' in item.highlight"
-                    v-html="item.highlight['title.main_title'][0]"></span>
-                <span v-else>{[ item.title.main_title ]}</span>
+                    v-if="'title' in item.highlight"
+                    v-html="item.highlight['title'][0]"></span>
+                <span v-else>{[ item.title[0] ]}</span>
             </a>
-            <small v-if="item.is_translation || item.is_paratext">
-                <span v-if="item.is_translation" class="badge badge-secondary">Translation</span>
-                <span v-if="item.is_paratext" class="badge badge-secondary">Paratext</span>
+            <small v-if="item.is_translation">
+                <span class="badge badge-secondary">Translation</span>
             </small>
         </h5>
         <div>
@@ -40,8 +39,8 @@
             </template>
             <!--template v-if="item.languages.length > 0">
                 <dt>Languages</dt>
-                <dd v-for="language in item.languages" :key="language.language.label">
-                {[ language.language.label ]}
+                <dd v-for="language in item.languages" :key="language.label">
+                {[ language.label ]}
                 </dd>
                 </template>
                 <template v-if="item.subjects.length > 0">
