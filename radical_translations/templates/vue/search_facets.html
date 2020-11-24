@@ -9,21 +9,20 @@
         aria-expanded="false"
         class="btn btn-outline-primary btn-sm"
         data-toggle="collapse"
-        type="button">{[ facet.name ]}
-        ({[ getFacetMax(facet.buckets) ]})</button>
+        type="button">{[ facet.name ]} ({[ getFacetMax(facet.buckets) ]})</button>
 
     <div
         v-for="facet in facets"
-        :key="facet.name"
+        :key="facet.name + 'buckets'"
         v-bind:id="facet.name"
         class="alert collapse"
         data-parent="#filters">
-        <span v-for="bucket in facet.buckets" :key="bucket.key">
-            <button
-                v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
-                v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
-                class="filter btn"
-                type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
-        </span>
+        <button
+            v-for="bucket in facet.buckets"
+            :key="bucket.key"
+            v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
+            v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+            class="filter btn"
+            type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
     </div>
 </span>
