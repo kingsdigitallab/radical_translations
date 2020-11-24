@@ -9129,6 +9129,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .filter {
   text-align: left; }
 
+#filters button {
+  margin-bottom: 4px;
+  margin-right: 4px; }
+
 dl.search-result dt {
   float: left; }
 

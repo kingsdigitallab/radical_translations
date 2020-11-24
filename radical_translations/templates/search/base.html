@@ -10,8 +10,14 @@
         
         <div class="row">
             <div class="col">
-                {% include 'vue/search_query.html' %}
-                {% include 'vue/search_facets.html' %}
+                <div class="row">
+                    <div class="col col-md-3">
+                        {% include 'vue/search_query.html' %}
+                    </div>
+                    <div class="col col-md-9">
+                        {% include 'vue/search_facets.html' %}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">

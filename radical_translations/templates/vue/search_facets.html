@@ -11,12 +11,14 @@
     </li>
 </ul>
 -->
-<button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" :data-target="'#' + facet.name" aria-expanded="false" :aria-controls="facet.name" v-for="facet in facets" :key="facet.name">{[ facet.name ]}</button>
+<span id="filters">
+    <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" :data-target="'#' + facet.name" aria-expanded="false" :aria-controls="facet.name" v-for="facet in facets" :key="facet.name">{[ facet.name ]}</button>
 
-<div class="collapse" v-for="facet in facets" :key="facet.name + '-target'" :id="facet.name">
-    <span v-for="bucket in facet.buckets" :key="bucket.key">
-            <button v-on:click="updateFilters([facet.name, getBucketValue(bucket)])" class="filter btn" v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info': 'btn-link' + ' btn-outline-dark btn-sm'" type="button">
-                    {[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})
-            </button>
-    </span>
-</div>
+    <div class="alert collapse" v-for="facet in facets" :key="facet.name + '-target'" :id="facet.name" data-parent="#filters">
+        <span v-for="bucket in facet.buckets" :key="bucket.key">
+                <button v-on:click="updateFilters([facet.name, getBucketValue(bucket)])" class="filter btn" v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'" type="button">
+                        {[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})
+                </button>
+        </span>
+    </div>
+</span>
