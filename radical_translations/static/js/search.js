@@ -134,7 +134,9 @@ new Vue({
     filterExists: function (filter) {
       return (
         this.filters.find(
-          (item) => item[0] === filter[0] && item[1] === filter[1]
+          (item) =>
+            item[0] === filter[0] &&
+            (filter[1] === undefined || item[1] === filter[1])
         ) !== undefined
       )
     },

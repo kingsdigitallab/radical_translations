@@ -3,6 +3,7 @@
     <template v-for="facet in facets">
         <button
             v-bind:aria-controls="facet.name" 
+            v-bind:class="filterExists([facet.name]) ? 'active' : ''"
             v-bind:data-target="'#' + facet.name"
             aria-expanded="false"
             class="btn btn-outline-primary btn-sm"
