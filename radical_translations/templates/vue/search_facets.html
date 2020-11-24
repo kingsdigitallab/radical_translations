@@ -13,7 +13,7 @@
 
     <div
         v-for="facet in facets"
-        :key="facet.name"
+        :key="facet.name + 'buckets'"
         v-bind:id="facet.name"
         class="alert collapse"
         data-parent="#filters">
