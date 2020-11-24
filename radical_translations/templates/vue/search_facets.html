@@ -1,5 +1,5 @@
-<h3>Available filters</h3>
-<span id="filters">
+<h3>Filters</h3>
+<div id="filters" class="mb-2">
     <button
         v-for="facet in facets"
         :key="facet.name"
@@ -9,7 +9,10 @@
         aria-expanded="false"
         class="btn btn-outline-primary btn-sm"
         data-toggle="collapse"
-        type="button">{[ facet.name ]} ({[ getFacetMax(facet.buckets) ]})</button>
+        type="button">{[ facet.name ]} 
+        <span class="badge badge-secondary">{[ getFacetMax(facet.buckets) ]}</span>
+        <span class="sr-only">records</span>
+    </button>
 
     <div
         v-for="facet in facets"
@@ -23,6 +26,10 @@
             v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
             v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
             class="filter btn"
-            type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
+            type="button">
+                {[ getBucketValue(bucket) ]} 
+                <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
+                <span class="sr-only">records</span>
+            </button>
     </div>
-</span>
+</div>

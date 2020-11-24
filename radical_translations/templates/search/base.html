@@ -11,10 +11,8 @@
         <div class="row">
             <div class="col">
                 <div class="row alert alert-secondary">
-                    <div class="col col-md-3">
+                    <div class="col">
                         {% include 'vue/search_query.html' %}
-                    </div>
-                    <div class="col col-md-9">
                         {% include 'vue/search_facets.html' %}
                     </div>
                 </div>
@@ -23,11 +21,9 @@
         <div class="row">
             <div class="col">
                 <div class="row">
-                    <div class="col col-md-3">
-                        {% include 'vue/search_ordering.html' %}
-                    </div>
-                    <div class="col col-md-9">
+                    <div class="col">
                         {% include 'vue/search_summary.html' %}
+                        {% include 'vue/search_ordering.html' %}
                     </div>
                 </div>
 
