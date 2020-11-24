@@ -9139,6 +9139,10 @@ dl.search-result dt {
 dl.search-result dd {
   margin-left: 14em; }
 
+.spacing {
+  margin-bottom: 4px;
+  margin-right: 4px; }
+
 /* Cookies disclaimer box */
 .cookies-box {
   background: #eae9da;
