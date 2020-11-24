@@ -9133,6 +9133,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   margin-bottom: 4px;
   margin-right: 4px; }
 
+#filters button[aria-expanded="true"] {
+  background: #9b2923;
+  color: white; }
+
 dl.search-result dt {
   float: left; }
 

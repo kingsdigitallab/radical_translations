@@ -4,7 +4,7 @@
         v-for="facet in facets"
         :key="facet.name"
         v-bind:aria-controls="facet.name" 
-        v-bind:class="filterExists([facet.name]) ? 'active' : ''"
+        v-bind:class="filterExists([facet.name]) ? 'btn-info' : ''"
         v-bind:data-target="'#' + facet.name"
         aria-expanded="false"
         class="btn btn-outline-primary btn-sm"

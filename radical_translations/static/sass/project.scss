@@ -959,6 +959,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     margin-bottom: 4px;
     margin-right: 4px;
   }
+
+  button[aria-expanded="true"] {
+    background: $primary;
+    color: white;
+  }
 }
 
 dl.search-result {
