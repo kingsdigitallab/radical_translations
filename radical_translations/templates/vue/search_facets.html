@@ -1,24 +1,29 @@
 <h3>Available filters</h3>
 <span id="filters">
-    <template v-for="facet in facets">
-        <button
-            v-bind:aria-controls="facet.name" 
-            v-bind:class="filterExists([facet.name]) ? 'active' : ''"
-            v-bind:data-target="'#' + facet.name"
-            aria-expanded="false"
-            class="btn btn-outline-primary btn-sm"
-            data-toggle="collapse"
-            type="button">{[ facet.name ]}
-            ({[ getFacetMax(facet.buckets) ]})</button>
+    <button
+        v-for="facet in facets"
+        :key="facet.name"
+        v-bind:aria-controls="facet.name" 
+        v-bind:class="filterExists([facet.name]) ? 'active' : ''"
+        v-bind:data-target="'#' + facet.name"
+        aria-expanded="false"
+        class="btn btn-outline-primary btn-sm"
+        data-toggle="collapse"
+        type="button">{[ facet.name ]}
+        ({[ getFacetMax(facet.buckets) ]})</button>
 
-        <div v-bind:id="facet.name" class="alert collapse" data-parent="#filters">
-            <span v-for="bucket in facet.buckets" :key="bucket.key">
-                <button
-                    v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
-                    v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
-                    class="filter btn"
-                    type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
-            </span>
-        </div>
-    </template>
+    <div
+        v-for="facet in facets"
+        :key="facet.name"
+        v-bind:id="facet.name"
+        class="alert collapse"
+        data-parent="#filters">
+        <span v-for="bucket in facet.buckets" :key="bucket.key">
+            <button
+                v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
+                v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+                class="filter btn"
+                type="button">{[ getBucketValue(bucket) ]} ({[ bucket.doc_count ]})</button>
+        </span>
+    </div>
 </span>
