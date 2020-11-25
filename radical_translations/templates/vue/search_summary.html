@@ -4,11 +4,11 @@
 <button
     v-if="query"
     v-on:click="textSearch()"
-    class="btn btn-info btn-sm"
+    class="btn btn-info btn-sm spacing closeable"
     type="button">{[ query ]}</button>
 <button
     v-for="filter in filters"
     :key="filter[0]"
     v-on:click="updateFilters(filter)" 
-    class="btn btn-info btn-sm spacing"
-    type="button">{[ filter[0] ]}: {[ filter[1] ]}</button>
+    class="btn btn-info btn-sm spacing closeable"
+    type="button"><span class="text-body">{[ filter[0] ]}:</span> {[ filter[1] ]}</button>
