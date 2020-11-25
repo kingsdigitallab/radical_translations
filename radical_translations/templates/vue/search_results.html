@@ -1,6 +1,6 @@
 <ol v-bind:start="data.current_page * data.page_size - data.page_size + 1">
     <li v-for="item in data.results" :key="item.id">
-        <h5 class="font-italic">
+        <h5>
             <a v-bind:href="item.id">
                 <span
                     v-if="'title' in item.highlight"

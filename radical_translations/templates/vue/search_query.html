@@ -1,11 +1,13 @@
 <h3>Search query</h3>
-<div class="dropdown">
-    <input
+<div class="dropdown mb-4">
+    <input 
+        aria-label="Type text to start a search query"
+        class="form-control"
         v-model="query_text"
         v-on:keyup.13="textSearch()"
         list="suggestions"
         placeholder="Search query..."
-        type="text" />
+        type="text">
     <datalist id="suggestions">
         <option v-for="option in suggestions">{[ option ]}</option>
     </datalist>

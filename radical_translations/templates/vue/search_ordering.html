@@ -1,9 +1,19 @@
-<h4>Order by</h4>
-<p>
-    <select v-model="ordering">
+{% load staticfiles %}
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <label class="input-group-text" for="order">
+            {# Font Awesome sort-amount-down-alt icon #}
+            <span class="small-icon mr-1">
+                <img src="{% static 'fontawesome/svgs/solid/sort-amount-down-alt.svg' %}" alt="Sort order icon">
+            </span> 
+            Order by
+        </label>
+    </div>
+    <select class="custom-select" v-model="ordering" name="order" id="order">
         <option
             v-for="option in ordering_options"
             :key="option.key"
             v-bind:value="option.key">{[ option.value ]}</option>
     </select>
-</p>
+</div>

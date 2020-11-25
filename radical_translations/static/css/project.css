@@ -8491,8 +8491,7 @@ body {
 .badge {
   border-radius: 0;
   font-family: 'Oswald', sans-serif;
-  font-size: 14.6px;
-  font-size: .9125rem;
+  font-size: .9125em;
   padding: .125em .4em .25em; }
 
 .btn {
@@ -8564,6 +8563,9 @@ footer {
 .small-icon svg {
   height: 16px;
   width: 16px; }
+
+.small-icon img {
+  vertical-align: text-top; }
 
 .tags {
   display: block;
@@ -9132,6 +9134,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 #filters button {
   margin-bottom: 4px;
   margin-right: 4px; }
+
+#filters button[aria-expanded="true"] {
+  background: #9b2923;
+  color: white; }
+
+#filters .btn-info {
+  border-color: #00548b;
+  color: white; }
 
 dl.search-result dt {
   float: left; }
