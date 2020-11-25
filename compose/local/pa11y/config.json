@@ -1,0 +1,20 @@
+{
+  "port": 4000,
+  "noindex": true,
+  "readonly": false,
+  "webservice": {
+    "database": "mongodb://mongo:27017/pa11y-webservice",
+    "host": "0.0.0.0",
+    "port": 5000,
+    "cron": "0 30 0 * * *",
+    "allowedStandards": "WCAG2AA",
+    "level": "error",
+    "chromeLaunchConfig": {
+      "args": [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage"
+      ]
+    }
+  }
+}
