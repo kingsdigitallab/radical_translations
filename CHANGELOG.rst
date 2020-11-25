@@ -17,12 +17,16 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Migration to copy subjects from the translation resource to the original resource.
+* `Pa11y dashboard`_ service.
 
 Changed
 ~~~~~~~
 * Truncate breadcrumb to 5 words.
 * Truncate metatitle to 10 words.
 * Remove unused and duplicate packages.
+
+.. _Pa11y dashboard: https://github.com/pa11y/pa11y-dashboard
+
 
 [0.8.0] - 2020-11-06
 --------------------
