@@ -27,6 +27,7 @@ Added
 * Fuzzy_ text search.
 * Search results highlighting_.
 * Migration to copy subjects from the translation resource to the original resource.
+* `Pa11y dashboard`_ service.
 
 Changed
 ~~~~~~~
@@ -38,6 +39,7 @@ Changed
 .. _Kibana: https://www.elastic.co/kibana/
 .. _Fuzzy: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-fuzzy-query.html
 .. _highlighting: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/highlighting.html
+.. _Pa11y dashboard: https://github.com/pa11y/pa11y-dashboard
 
 
 [0.8.0] - 2020-11-06

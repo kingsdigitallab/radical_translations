@@ -72,3 +72,19 @@ services:
   #ports:
   #- '5601:5601'
   #restart: unless-stopped
+  pa11y:
+    build:
+      context: .
+      dockerfile: ./compose/local/pa11y/Dockerfile
+    image: radical_translations_local_pa11y
+    depends_on:
+      - mongo
+    command: node index.js
+    ports:
+      - '4000:4000'
+      - '5000:5000'
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:4
+    restart: unless-stopped
