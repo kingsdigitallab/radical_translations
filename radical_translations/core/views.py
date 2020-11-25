@@ -174,7 +174,7 @@ class ResourceViewSet(DocumentViewSet):
     search_fields = {
         "title": ES_FUZZINESS_OPTIONS,
         "authors.person.name": ES_FUZZINESS_OPTIONS,
-        "summary": None,
+        "content": ES_FUZZINESS_OPTIONS,
     }
 
     suggester_fields = {
