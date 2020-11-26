@@ -59,7 +59,7 @@
             {% include "svgs/solid/map-marker-alt.svg" %}
              Main: 
             {% for place in object.based_near.all %}
-            {{ place.address }}{% if not forloop.last %}, {% endif %}
+            <span class="badge badge-primary">{{ place.address }}</span>
             {% endfor %}
         </span>
         {% endif %}
@@ -70,7 +70,7 @@
             {% include "svgs/solid/map-marker-alt.svg" %}
              Other:
             {% for place in object.main_places.all %}
-            <span class="badge badge-primary">{{ place.address }}</span>
+            {{ place.address }}{% if not forloop.last %}, {% endif %}
             {% endfor %}
         </span>
         {% endif %}
