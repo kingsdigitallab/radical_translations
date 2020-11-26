@@ -58,8 +58,8 @@
             {# Font Awesome map-marker-alt icon #}
             {% include "svgs/solid/map-marker-alt.svg" %}
              Main: 
-            {% for place in object.main_places.all %}
-            <span class="badge badge-primary">{{ place.address }}</span>
+            {% for place in object.based_near.all %}
+            {{ place.address }}{% if not forloop.last %}, {% endif %}
             {% endfor %}
         </span>
         {% endif %}
@@ -69,8 +69,8 @@
             {# Font Awesome route icon #}
             {% include "svgs/solid/map-marker-alt.svg" %}
              Other:
-            {% for place in object.based_near.all %}
-            {{ place.address }}{% if not forloop.last %}, {% endif %}
+            {% for place in object.main_places.all %}
+            <span class="badge badge-primary">{{ place.address }}</span>
             {% endfor %}
         </span>
         {% endif %}
