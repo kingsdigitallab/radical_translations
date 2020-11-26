@@ -33,7 +33,7 @@ copy_to_content = {"copy_to": "content"}
 
 @registry.register_document
 class ResourceDocument(Document):
-    content = fields.TextField(attr="title.main_title")
+    content = fields.TextField(attr="title.main_title", store=True)
 
     title = fields.TextField(
         analyzer=text_folding_analyzer,

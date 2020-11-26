@@ -11,10 +11,16 @@
                 <span class="badge badge-secondary">Translation</span>
             </small>
         </h5>
+        <p v-if="'content' in item.highlight">
+        <span
+            v-for="frag in item.highlight['content']"
+            v-html="`${frag}... `"
+            class="fragment"></span>
+        </p>
         <div>
             <template v-if="item.places.length > 0">
                 <span v-for="place in item.places" :key="place.place.address">
-                {[ place.place.address ]}
+                    {[ place.place.address ]}
                 </span>
             </template>
             <span v-if="item.date_display !== undefined">
