@@ -20,6 +20,7 @@ Added
 * `Pa11y dashboard`_ service.
 * Data migration to merge duplicate libraries (`Organisation`).
 * Data migration to merge duplicate languages.
+* Function to get the date of a `Resource`.
 
 Changed
 ~~~~~~~
