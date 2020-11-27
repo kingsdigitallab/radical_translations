@@ -28,6 +28,10 @@ Changed
 * Remove unused and duplicate packages.
 * Swap the labels for main and other places in the `Agent` detail view.
 
+Fixed
+~~~~~
+* Do not display tag icon if there are not tags associated with a blog post.
+
 .. _Pa11y dashboard: https://github.com/pa11y/pa11y-dashboard
 
 
