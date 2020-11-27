@@ -19,6 +19,7 @@ Added
 * Data migration to copy subjects from the translation resource to the original resource.
 * `Pa11y dashboard`_ service.
 * Data migration to merge duplicate libraries (`Organisation`).
+* Data migration to merge duplicate languages.
 
 Changed
 ~~~~~~~
