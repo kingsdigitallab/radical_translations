@@ -5,8 +5,12 @@ from django.db import migrations
 
 def merge_languages(apps, schema_editor):
     ControlledTerm = apps.get_model("controlled_vocabulary", "ControlledTerm")
-    fra = ControlledTerm.objects.get(termid="fra", label="French")
-    fre = ControlledTerm.objects.get(termid="fre", label="French")
+
+    try:
+        fra = ControlledTerm.objects.get(termid="fra", label="French")
+        fre = ControlledTerm.objects.get(termid="fre", label="French")
+    except ControlledTerm.DoesNotExist:
+        return
 
     ResourceLanguage = apps.get_model("core", "ResourceLanguage")
     for rl in ResourceLanguage.objects.filter(language=fra):

@@ -6,8 +6,11 @@ from django.db import migrations
 def merge_libraries(apps, schema_editor):
     Organisation = apps.get_model("agents", "Organisation")
 
-    bl = Organisation.objects.get(name="BL")
-    british_library = Organisation.objects.get(name="British Library")
+    try:
+        bl = Organisation.objects.get(name="BL")
+        british_library = Organisation.objects.get(name="British Library")
+    except Organisation.DoesNotExist:
+        return
 
     for resource in bl.resources.all():
         british_library.resources.add(resource)
