@@ -256,6 +256,16 @@ class Resource(TimeStampedModel):
 
         return None
 
+    def get_date(self) -> Optional[Date]:
+        if self.is_paratext and not self.date:
+            relationship = self.relationships.filter(
+                relationship_type__label="paratext of"
+            ).first()
+            if relationship:
+                return relationship.related_to.date
+
+        return self.date
+
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Resource"]:
         """Gets or creates a new `Resource` from a Google Spreadsheet dictionary

@@ -148,6 +148,17 @@ class TestResource:
         assert paratext_of is not None
         assert paratext_of.id == resource.id
 
+    @pytest.mark.usefixtures("entry_original")
+    def test_get_date(self, entry_original: Dict[str, Dict[str, str]]):
+        resource = Resource.from_gsx_entry(entry_original)
+        assert resource.date is not None
+        assert resource.get_date() is not None
+
+        paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
+        assert paratext.date is None
+        assert paratext.get_date() is not None
+        assert paratext.get_date() == resource.get_date()
+
     @pytest.mark.usefixtures("entry_original", "entry_translation", "entry_edition")
     def test_is_translation(
         self,
