@@ -26,14 +26,22 @@ Added
 * `Resource` search suggestions.
 * Fuzzy_ text search.
 * Search results highlighting_.
-* Migration to copy subjects from the translation resource to the original resource.
+* Data migration to copy subjects from the translation resource to the original resource.
 * `Pa11y dashboard`_ service.
+* Data migration to merge duplicate libraries (`Organisation`).
+* Data migration to merge duplicate languages.
+* Function to get the date of a `Resource`.
 
 Changed
 ~~~~~~~
 * Truncate breadcrumb to 5 words.
 * Truncate metatitle to 10 words.
 * Remove unused and duplicate packages.
+* Swap the labels for main and other places in the `Agent` detail view.
+
+Fixed
+~~~~~
+* Do not display tag icon if there are not tags associated with a blog post.
 
 .. _Elasticsearch: https://www.elastic.co/elasticsearch/
 .. _Kibana: https://www.elastic.co/kibana/

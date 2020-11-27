@@ -1,4 +1,4 @@
-{% if page.tags %}
+{% if page.tags.count > 0 %}
 <ul class="tags">
     {% for tag in page.tags.all %}
     <li class="tag">{{ tag }}</li>
