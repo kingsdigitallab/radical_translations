@@ -1,48 +1,54 @@
 <ol v-bind:start="data.current_page * data.page_size - data.page_size + 1">
     <li v-for="item in data.results" :key="item.id">
-        <h5>
+        <p class="title">
             <a v-bind:href="item.id">
                 <span
                     v-if="'title' in item.highlight"
                     v-html="item.highlight['title'][0]"></span>
                 <span v-else>{[ item.title[0] ]}</span>
             </a>
-            <!-- <small v-if="item.is_translation"> -->
-                <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
-            <!-- </small> -->
-        </h5>
-        <p v-if="'content' in item.highlight">
-        <span
-            v-for="frag in item.highlight['content']"
-            v-html="`${frag}... `"
-            class="fragment"></span>
+            <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
         </p>
-        <div>
-            <template v-if="item.places.length > 0">
-                <span v-for="place in item.places" :key="place.place.address">
-                    {[ place.place.address ]}
-                </span>
-            </template>
-            <span v-if="item.date_display !== undefined">
-                {[ item.date_display ]}
-            </span>
-        </div>
-        <dl class="search-result">
-            <template v-if="item.authors.length > 0">
-                <dt>Authors of the source text</dt>
-                <dd v-for="author in item.authors" :key="author.person.id">
-                {[ author.person.name ]}
-                </dd>
-            </template>
-            <template v-if="item.contributions.length > 0">
-                <dt>Contributors</dt>
-                <dd v-for="contribution in item.contributions">
-                <template v-if="contribution.roles.length > 0">
-                    <span v-for="role in contribution.roles">{[ role.label ]}</span>:
+        <p v-if="'content' in item.highlight">
+            <span
+                v-for="frag in item.highlight['content']"
+                v-html="`${frag}... `"
+                class="fragment"></span>
+        </p>
+        <div class="row">
+            <div class="col col-md-3">
+                <template v-if="item.date_display !== undefined">
+                    {# Font Awesome calendar icon #}
+                    <span class="small-icon">{% include "svgs/solid/calendar.svg" %}</span>
+                    {[ item.date_display ]}<br>
                 </template>
-                <span>{[ contribution.agent.name ]}</span>
-                </dd>
-            </template>
-        </dl>
+                <template v-if="item.places.length > 0">
+                    <span v-for="place in item.places" :key="place.place.address">
+                        {# Font Awesome map-marker-alt icon #}
+                        <span class="small-icon">{% include "svgs/solid/map-marker-alt.svg" %}</span>
+                        {[ place.place.address ]}
+                    </span>
+                </template>
+            </div>
+            <div class="col col-md-9">
+                <dl class="search-result">
+                    <template v-if="item.authors.length > 0">
+                        <dt><strong>Authors of the source text</strong></dt>
+                        <dd v-for="author in item.authors" :key="author.person.id">
+                        {[ author.person.name ]}
+                        </dd>
+                    </template>
+                    <template v-if="item.contributions.length > 0">
+                        <dt><strong>Contributors</strong></dt>
+                        <dd v-for="contribution in item.contributions">
+                        <template v-if="contribution.roles.length > 0">
+                            <span v-for="role in contribution.roles"><strong>{[ role.label ]}</strong></span>:
+                        </template>
+                        <span>{[ contribution.agent.name ]}</span>
+                        </dd>
+                    </template>
+                </dl>
+            </div>
+        </div>
     </li>
 </ol>

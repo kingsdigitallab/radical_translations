@@ -152,7 +152,9 @@ footer {
 
 .small-icon,
 .small-icon svg {
+  fill: $medium-gray;
   height: 16px;
+  margin-bottom: 4px;
   width: 16px;
 }
 
@@ -200,6 +202,12 @@ h4, h5, h6,
 
 .home-heading {
   margin: 1.5rem 0 1rem;
+}
+
+.title {
+  font-family: Oswald, sans-serif;
+  font-size: 1.25rem;
+  font-variation-settings: 'wdth' 100, 'wght' 700;
 }
 
 .site-title {
@@ -988,12 +996,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-dl.search-result {
-  dt {
-    float: left;
-  }
+.search-result {
   dd {
-    margin-left: 14em;
+    margin-bottom: 0;
+    margin-left: 2rem;
   }
 }
 

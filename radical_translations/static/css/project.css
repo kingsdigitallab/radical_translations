@@ -8571,7 +8571,9 @@ footer {
 
 .small-icon,
 .small-icon svg {
+  fill: #808080;
   height: 16px;
+  margin-bottom: 4px;
   width: 16px; }
 
 .small-icon img {
@@ -8613,6 +8615,12 @@ h4, h5, h6,
 .home-heading {
   margin: 24px 0 16px;
   margin: 1.5rem 0 1rem; }
+
+.title {
+  font-family: Oswald, sans-serif;
+  font-size: 20px;
+  font-size: 1.25rem;
+  font-variation-settings: 'wdth' 100, 'wght' 700; }
 
 .site-title {
   line-height: 1.25;
@@ -9151,11 +9159,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   border-color: #00548b;
   color: white; }
 
-dl.search-result dt {
-  float: left; }
-
-dl.search-result dd {
-  margin-left: 14em; }
+.search-result dd {
+  margin-bottom: 0;
+  margin-left: 32px;
+  margin-left: 2rem; }
 
 .spacing {
   margin-bottom: 4px;
