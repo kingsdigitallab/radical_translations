@@ -41,7 +41,7 @@ a {
 
 body {
   font-family: Lora, serif;
-  font-variation-settings: 'wdth' 400, 'wght' 400;
+  font-variation-settings: 'wdth' 100, 'wght' 400;
 
   background: url('../images/rt-bg.svg') no-repeat top left lighten($old-yellow, 30%);
   background-size: 135% auto;
@@ -64,7 +64,7 @@ body {
 
 b,
 strong {
-  font-variation-settings: 'wdth' 400, 'wght' 700;
+  font-variation-settings: 'wdth' 100, 'wght' 700;
 }
 
 .close {
@@ -190,15 +190,11 @@ footer {
 
 // Headings
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3,
+h4, h5, h6,
 .card-header {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 400, 'wght' 700;
+  font-variation-settings: 'wdth' 100, 'wght' 700;
   font-weight: 700;
 }
 
@@ -268,7 +264,7 @@ h6,
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 400, 'wght' 400;
+  font-variation-settings: 'wdth' 100, 'wght' 400;
 
   a {
     text-decoration: none;
