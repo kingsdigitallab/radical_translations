@@ -41,7 +41,7 @@ a {
 
 body {
   font-family: Lora, serif;
-  font-variation-settings: 'wdth' 400, 'wght' 400;
+  font-variation-settings: 'wdth' 100, 'wght' 400;
 
   background: url('../images/rt-bg.svg') no-repeat top left lighten($old-yellow, 30%);
   background-size: 135% auto;
@@ -64,13 +64,25 @@ body {
 
 b,
 strong {
-  font-variation-settings: 'wdth' 400, 'wght' 700;
+  font-variation-settings: 'wdth' 100, 'wght' 700;
 }
 
 .close {
   &.btn-sm {
     font-size: 1rem;
     padding-right: 1rem;
+  }
+}
+
+.closeable {
+  &::after {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>');
+    display: inline-block;
+    filter: invert(100%);
+    height: 12px;
+    width: 12px;
+    margin-left: .5em;
+    vertical-align: -0.1875em;
   }
 }
 
@@ -140,7 +152,9 @@ footer {
 
 .small-icon,
 .small-icon svg {
+  fill: $medium-gray;
   height: 16px;
+  margin-bottom: 4px;
   width: 16px;
 }
 
@@ -178,20 +192,22 @@ footer {
 
 // Headings
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3,
+h4, h5, h6,
 .card-header {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 400, 'wght' 700;
+  font-variation-settings: 'wdth' 100, 'wght' 700;
   font-weight: 700;
 }
 
 .home-heading {
   margin: 1.5rem 0 1rem;
+}
+
+.title {
+  font-family: Oswald, sans-serif;
+  font-size: 1.25rem;
+  font-variation-settings: 'wdth' 100, 'wght' 700;
 }
 
 .site-title {
@@ -256,7 +272,7 @@ h6,
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 400, 'wght' 400;
+  font-variation-settings: 'wdth' 100, 'wght' 400;
 
   a {
     text-decoration: none;
@@ -866,9 +882,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .uncertain,
 .uncertainty,
 .unknown {
+
   &::before {
-    height: 16px;
-    width: 16px;
+    display: inline-block;
+    height: 10px;
+    margin-right: 4px;
+    width: 10px;
   }
 }
 
@@ -977,12 +996,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-dl.search-result {
-  dt {
-    float: left;
-  }
+.search-result {
   dd {
-    margin-left: 14em;
+    margin-bottom: 0;
+    margin-left: 2rem;
   }
 }
 

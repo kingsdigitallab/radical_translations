@@ -8484,7 +8484,7 @@ a {
 
 body {
   font-family: Lora, serif;
-  font-variation-settings: 'wdth' 400, 'wght' 400;
+  font-variation-settings: 'wdth' 100, 'wght' 400;
   background: url("../images/rt-bg.svg") no-repeat top left #fdf9ef;
   background-size: 135% auto; }
 
@@ -8503,13 +8503,23 @@ body {
 
 b,
 strong {
-  font-variation-settings: 'wdth' 400, 'wght' 700; }
+  font-variation-settings: 'wdth' 100, 'wght' 700; }
 
 .close.btn-sm, .btn-group-sm > .close.btn {
   font-size: 16px;
   font-size: 1rem;
   padding-right: 16px;
   padding-right: 1rem; }
+
+.closeable::after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>');
+  display: inline-block;
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+  height: 12px;
+  width: 12px;
+  margin-left: .5em;
+  vertical-align: -0.1875em; }
 
 footer {
   background: white;
@@ -8561,7 +8571,9 @@ footer {
 
 .small-icon,
 .small-icon svg {
+  fill: #808080;
   height: 16px;
+  margin-bottom: 4px;
   width: 16px; }
 
 .small-icon img {
@@ -8593,20 +8605,22 @@ footer {
   padding: 4px 8px 8px;
   padding: 0.25rem 0.5rem 0.5rem; }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3,
+h4, h5, h6,
 .card-header {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 400, 'wght' 700;
+  font-variation-settings: 'wdth' 100, 'wght' 700;
   font-weight: 700; }
 
 .home-heading {
   margin: 24px 0 16px;
   margin: 1.5rem 0 1rem; }
+
+.title {
+  font-family: Oswald, sans-serif;
+  font-size: 20px;
+  font-size: 1.25rem;
+  font-variation-settings: 'wdth' 100, 'wght' 700; }
 
 .site-title {
   line-height: 1.25;
@@ -8650,7 +8664,7 @@ h6,
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 400, 'wght' 400; }
+  font-variation-settings: 'wdth' 100, 'wght' 400; }
   nav a,
   .main-menu a {
     text-decoration: none; }
@@ -9064,8 +9078,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .uncertain::before,
 .uncertainty::before,
 .unknown::before {
-  height: 16px;
-  width: 16px; }
+  display: inline-block;
+  height: 10px;
+  margin-right: 4px;
+  width: 10px; }
 
 .radical::beforet {
   content: url("/static/images/phrygian-cap.svg"); }
@@ -9143,11 +9159,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   border-color: #00548b;
   color: white; }
 
-dl.search-result dt {
-  float: left; }
-
-dl.search-result dd {
-  margin-left: 14em; }
+.search-result dd {
+  margin-bottom: 0;
+  margin-left: 32px;
+  margin-left: 2rem; }
 
 .spacing {
   margin-bottom: 4px;
