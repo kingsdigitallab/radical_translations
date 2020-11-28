@@ -6,13 +6,17 @@
 <h1>{{ object.title }}</h1>
 
 <p class="metadata">
+    {% with date=object.get_date %}
+    {% if date %}
     <span class="metadata-block">
-        <span{% if object.date.date_radical %} class="radical"{% endif %}>
+        <span{% if date.date_radical %} class="radical"{% endif %}>
             {# Font Awesome Mars icon #}
             {% include "svgs/solid/calendar.svg" %}
-            {{ object.date }}
+            {{ date }}
         </span>
     </span>
+    {% endif %}
+    {% endwith %}
     <span class="metadata-block">
         {% for subject in object.subjects.all %}
         {{ subject.label }}{% if not forloop.last %}, {% endif %}
