@@ -25,10 +25,10 @@
         <span class="metadata-block">
             {% include "agents/includes/noble.html" %}
             {% if object.gender == "m" %}
-            {# Font Awesome Mars icon #}
+            {# Font Awesome mars icon #}
             {% include "svgs/solid/mars.svg" %}
             {% elif object.gender == "f" %}
-            {# Font Awesome Venus icon #}
+            {# Font Awesome venus icon #}
             {% include "svgs/solid/venus.svg" %}
             {% else %}
             {# Font Awesome question mark icon #}
@@ -45,7 +45,7 @@
 
         {% if object.languages.count %}
         <span class="metadata-block">
-            {# Custom language icon "language2.svg" #}
+            {# Custom language icon "language3.svg" #}
             {% include "svgs/solid/language3.svg" %}
             {% for language in object.languages.all %}
             {{ language.label }}{% if not forloop.last %}, {% endif %}
@@ -66,7 +66,7 @@
 
         {% if object.based_near.count %}
         <span class="metadata-block">
-            {# Font Awesome route icon #}
+            {# Font Awesome map-marker-alt icon #}
             {% include "svgs/solid/map-marker-alt.svg" %}
              Other:
             {% for place in object.main_places.all %}

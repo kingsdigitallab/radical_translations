@@ -9070,8 +9070,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .uncertain::before,
 .uncertainty::before,
 .unknown::before {
-  height: 16px;
-  width: 16px; }
+  display: inline-block;
+  height: 10px;
+  margin-right: 4px;
+  width: 10px; }
 
 .radical::beforet {
   content: url("/static/images/phrygian-cap.svg"); }

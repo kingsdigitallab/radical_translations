@@ -7,9 +7,9 @@
                     v-html="item.highlight['title'][0]"></span>
                 <span v-else>{[ item.title[0] ]}</span>
             </a>
-            <small v-if="item.is_translation">
-                <span class="badge badge-secondary">Translation</span>
-            </small>
+            <!-- <small v-if="item.is_translation"> -->
+                <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
+            <!-- </small> -->
         </h5>
         <p v-if="'content' in item.highlight">
         <span
