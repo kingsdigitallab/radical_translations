@@ -160,7 +160,16 @@ class ResourceViewSet(DocumentViewSet):
                 "pre_tags": ["<span class='highlight'>"],
                 "post_tags": ["</span>"],
             },
-        }
+        },
+        "content": {
+            "enabled": True,
+            "options": {
+                "fragment_size": 150,
+                "number_of_fragments": 3,
+                "pre_tags": ["<span class='highlight'>"],
+                "post_tags": ["</span>"],
+            },
+        },
     }
 
     ordering_fields = {
@@ -174,7 +183,7 @@ class ResourceViewSet(DocumentViewSet):
     search_fields = {
         "title": ES_FUZZINESS_OPTIONS,
         "authors.person.name": ES_FUZZINESS_OPTIONS,
-        "summary": None,
+        "content": ES_FUZZINESS_OPTIONS,
     }
 
     suggester_fields = {

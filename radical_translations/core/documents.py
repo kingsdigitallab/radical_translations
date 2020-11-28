@@ -28,12 +28,12 @@ lowercase_sort_normalizer = normalizer(
     "lowercase_sort", filter=["lowercase", "asciifolding"]
 )
 
-kwargs = {"copy_to": "content"}
+copy_to_content = {"copy_to": "content"}
 
 
 @registry.register_document
 class ResourceDocument(Document):
-    content = fields.TextField(attr="title.main_title")
+    content = fields.TextField(attr="title.main_title", store=True)
 
     title = fields.TextField(
         analyzer=text_folding_analyzer,
@@ -42,44 +42,44 @@ class ResourceDocument(Document):
             "sort": fields.KeywordField(normalizer=lowercase_sort_normalizer),
             "suggest": fields.CompletionField(),
         },
-        **kwargs,
+        **copy_to_content,
     )
-    form_genre = get_controlled_term_field()
-    subjects = get_controlled_term_field()
-    date_display = fields.TextField()
-    year_earliest = fields.IntegerField()
-    year_latest = fields.IntegerField()
-    summary = fields.TextField()
+    form_genre = get_controlled_term_field(options=copy_to_content)
+    subjects = get_controlled_term_field(options=copy_to_content)
+    date_display = fields.TextField(**copy_to_content)
+    year_earliest = fields.IntegerField(**copy_to_content)
+    year_latest = fields.IntegerField(**copy_to_content)
+    summary = fields.TextField(**copy_to_content)
     classifications_printing_publishing = fields.ObjectField(
-        properties={"edition": get_controlled_term_field()}
+        properties={"edition": get_controlled_term_field(options=copy_to_content)}
     )
     classifications_translation = fields.ObjectField(
-        properties={"edition": get_controlled_term_field()}
+        properties={"edition": get_controlled_term_field(options=copy_to_content)}
     )
     classifications_paratext = fields.ObjectField(
-        properties={"edition": get_controlled_term_field()}
+        properties={"edition": get_controlled_term_field(options=copy_to_content)}
     )
     contributions = fields.ObjectField(
         properties={
-            "agent": get_agent_field(),
+            "agent": get_agent_field(options=copy_to_content),
             "roles": get_controlled_term_field(),
         }
     )
-    languages = get_controlled_term_field()
+    languages = get_controlled_term_field(options=copy_to_content)
     places = fields.ObjectField(
         properties={
-            "place": get_place_field(),
+            "place": get_place_field(options=copy_to_content),
             "fictional_place": fields.TextField(fields={"raw": fields.KeywordField()}),
         }
     )
     relationships = fields.ObjectField(
         properties={
-            "relationship_type": get_controlled_term_field(),
-            "related_to": get_resource_field(),
+            "relationship_type": get_controlled_term_field(options=copy_to_content),
+            "related_to": get_resource_field(options=copy_to_content),
         }
     )
 
-    events = get_event_field()
+    events = get_event_field(options=copy_to_content)
 
     is_original = fields.BooleanField()
     is_translation = fields.BooleanField()
@@ -87,7 +87,8 @@ class ResourceDocument(Document):
     has_date_radical = fields.BooleanField()
 
     authors = fields.ObjectField(
-        attr="get_authors_source_text", properties={"person": get_agent_field()}
+        attr="get_authors_source_text",
+        properties={"person": get_agent_field(options=copy_to_content)},
     )
 
     class Index:

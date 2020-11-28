@@ -16,6 +16,16 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 
 Added
 ~~~~~
+* Elasticsearch_ service.
+* Kibana_ service.
+* `Resource` search index.
+* `Agents` search index.
+* `Events` search index.
+* `Resource` text search with filters, ordering and pagination of search results.
+* `Resource` search tests.
+* `Resource` search suggestions.
+* Fuzzy_ text search.
+* Search results highlighting_.
 * Data migration to copy subjects from the translation resource to the original resource.
 * `Pa11y dashboard`_ service.
 * Data migration to merge duplicate libraries (`Organisation`).
