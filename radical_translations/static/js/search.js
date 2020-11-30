@@ -149,10 +149,13 @@ new Vue({
         roles: c.roles.filter((r) => r.label !== undefined)
       }))
     },
-    getFacetSum: function (buckets) {
+    getFacetCount: function (buckets) {
       return buckets
         .map((el) => el.doc_count)
-        .reduce((acc, cur) => acc + cur, 0)
+        .reduce((acc, cur) => Math.max(acc, cur), 0)
+    },
+    hasAny: function (facet) {
+      return facet.buckets.find((b) => this.getBucketValue(b) === 'any')
     },
     updateFilters: function (filter) {
       if (this.filterExists(filter)) {

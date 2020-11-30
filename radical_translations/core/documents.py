@@ -159,7 +159,7 @@ class ResourceDocument(Document):
             subjects.extend(self._get_subjects(relationship.resource, prefix))
 
         if subjects:
-            subjects.append({"label": "Any"})
+            subjects.append({"label": "any"})
 
         return subjects
 
@@ -222,7 +222,7 @@ class ResourceDocument(Document):
             )
 
         if classifications:
-            classifications.append({"edition": {"label": "Any"}})
+            classifications.append({"edition": {"label": "any"}})
 
         return classifications
 
@@ -260,6 +260,11 @@ class ResourceDocument(Document):
         for relationship in instance.get_paratext():
             contributions.extend(self.prepare_contributions(relationship.resource))
 
+        if contributions:
+            contributions.append(
+                {"agent": {"name": "any"}, "roles": [{"label": "any"}]}
+            )
+
         return contributions
 
     def prepare_languages(self, instance):
@@ -271,7 +276,7 @@ class ResourceDocument(Document):
             languages.extend(self.prepare_languages(relationship.resource))
 
         if languages:
-            languages.append({"label": "Any"})
+            languages.append({"label": "any"})
 
         return languages
 
@@ -302,4 +307,47 @@ class ResourceDocument(Document):
 
             places.append(place)
 
+        if places:
+            places.append({"place": {"address": "any", "country": {"name": "any"}}})
+
         return places
+
+    def prepare_relationships(self, instance):
+        relationships = [
+            {
+                "relationship_type": {"label": item.relationship_type.label},
+                "related_to": {
+                    "id": item.related_to.id,
+                    "title": {"main_title": str(item.related_to.title)},
+                },
+            }
+            for item in instance.relationships.all()
+        ]
+
+        if relationships:
+            relationships.append({"relationship_type": {"label": "any"}})
+
+        return relationships
+
+    def prepare_events(self, instance):
+        events = [
+            {
+                "id": item.id,
+                "title": item.title,
+                "place": {
+                    "address": item.place.address,
+                    "country": {"name": item.place.country.name},
+                },
+            }
+            for item in instance.events.all()
+        ]
+
+        if events:
+            events.append(
+                {
+                    "title": "any",
+                    "place": {"address": "any", "country": {"name": "any"}},
+                }
+            )
+
+        return events

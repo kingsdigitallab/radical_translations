@@ -1,18 +1,28 @@
 <h3>Filters</h3>
 <div id="filters" class="mb-2">
-    <button
+    <div
         v-for="facet in facets"
         :key="facet.name"
-        v-bind:aria-controls="facet.name" 
-        v-bind:class="filterExists([facet.name]) ? 'btn-info' : ''"
-        v-bind:data-target="'#' + facet.name"
-        aria-expanded="false"
-        class="btn btn-outline-primary btn-sm"
-        data-toggle="collapse"
-        type="button">{[ facet.name ]} 
-        <span class="badge badge-secondary">{[ getFacetSum(facet.buckets) ]}</span>
-        <span class="sr-only">records</span>
-    </button>
+        class="btn-group">
+        <button
+            v-bind:aria-controls="facet.name" 
+            v-bind:class="filterExists([facet.name]) ? 'btn-info' : ''"
+            v-bind:data-target="'#' + facet.name"
+            aria-expanded="false"
+            class="btn btn-outline-primary btn-sm"
+            data-toggle="collapse"
+            type="button">{[ facet.name ]} 
+        </button>
+        <button
+            v-if="hasAny(facet)"
+            v-on:click="updateFilters([facet.name, 'any'])"
+            v-bind:class="filterExists([facet.name, 'any']) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+            class="btn btn-outline-primary btn-sm"
+            type="button">Any
+            <span class="badge badge-secondary">{[ getFacetCount(facet.buckets) ]}</span>
+            <span class="sr-only">records</span>
+        </button>
+    </div>
 
     <div
         v-for="facet in facets"
@@ -20,16 +30,17 @@
         v-bind:id="facet.name"
         class="alert collapse"
         data-parent="#filters">
-        <button
-            v-for="bucket in facet.buckets"
-            :key="bucket.key"
-            v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
-            v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
-            class="filter btn"
-            type="button">
+        <template v-for="bucket in facet.buckets">
+            <button
+                v-if="getBucketValue(bucket) !== 'any'"
+                v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
+                v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+                class="filter btn"
+                type="button">
                 {[ getBucketValue(bucket) ]} 
                 <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
                 <span class="sr-only">records</span>
             </button>
+        </template>
     </div>
 </div>
