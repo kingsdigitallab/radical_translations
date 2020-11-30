@@ -892,6 +892,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .radical {
   &::before {
     content: url("/static/images/phrygian-cap.svg");
+    height: 16px;
+    width: 16px;
   }
 }
 
@@ -999,6 +1001,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     margin-bottom: 0;
     margin-left: 2rem;
   }
+}
+
+.search-results-list {
+  padding-left: 1rem;
 }
 
 .spacing {
