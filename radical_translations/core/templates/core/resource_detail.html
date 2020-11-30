@@ -79,10 +79,15 @@
 <dl>
     {% for contribution in object.contributions.all %}
     <dt>
+        {% for classification in contribution.classification.all %}
+        {% if classification.label == "uncertainty" %}
+        {# Font Awesome question icon #}
+        <span class="small-icon uncertainty">
+            <span class="sr-only">Uncertain</span>
+        </span>
+        {% endif %}
+        {% endfor %}
         <a href="{% url 'agent-detail' contribution.agent.pk %}">
-            {% for classification in contribution.classification.all %}
-            {% if classification == "uncertainty" %}{{ classification.label }}{% endif %}
-            {% endfor %}
             {{ contribution.agent.name }}
         </a>
     </dt>
@@ -90,7 +95,9 @@
     <dd>{{ role.label }}</dd>
     {% endfor %}
     {% for classification in contribution.classification.all %}
+    {% if classification.label != "uncertainty" %}
     <dd class="{{ classification.label }}">{{ classification.label }}</dd>
+    {% endif %}
     {% endfor %}
     {% endfor %}
 </dl>
