@@ -8962,8 +8962,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .child-page-image {
     height: 200px;
     overflow: hidden; }
-  .intro {
-    margin-top: 1rem; }
   .metadata-block {
     display: block; }
   .pagination {
@@ -9015,7 +9013,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   color: #222222;
   font-size: 20px;
   font-size: 1.25rem;
-  font-style: italic; }
+  font-style: italic;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  margin-top: 16px;
+  margin-top: 1rem; }
 
 /* Index pages / Blog / People Etc. */
 .children {
