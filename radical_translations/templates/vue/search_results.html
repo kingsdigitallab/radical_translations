@@ -46,7 +46,7 @@
                         <div class="col col-md-6">
                             <dl class="search-result">
                                 <dt><strong>Contributors</strong></dt>
-                                <dd v-for="contribution in item.contributions">
+                                <dd v-for="contribution in getContributions(item)">
                                 <template v-if="contribution.roles.length > 0">
                                     <span v-for="role in contribution.roles"><strong>{[ role.label ]}</strong></span>:
                                 </template>
