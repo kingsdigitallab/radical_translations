@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+
+[0.9.0] - 2020-11-30
+--------------------
+
 Added
 ~~~~~
 * Data migration to copy subjects from the translation resource to the original resource.
