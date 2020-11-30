@@ -158,6 +158,9 @@ class ResourceDocument(Document):
         for relationship in instance.get_paratext():
             subjects.extend(self._get_subjects(relationship.resource, prefix))
 
+        if subjects:
+            subjects.append({"label": "Any"})
+
         return subjects
 
     def prepare_subjects(self, instance):
@@ -218,6 +221,9 @@ class ResourceDocument(Document):
                 self._get_classifications(relationship.resource, prefix)
             )
 
+        if classifications:
+            classifications.append({"edition": {"label": "Any"}})
+
         return classifications
 
     def prepare_classifications_translation(self, instance):
@@ -263,6 +269,9 @@ class ResourceDocument(Document):
 
         for relationship in instance.get_paratext():
             languages.extend(self.prepare_languages(relationship.resource))
+
+        if languages:
+            languages.append({"label": "Any"})
 
         return languages
 
