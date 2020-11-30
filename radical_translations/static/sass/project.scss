@@ -890,7 +890,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .radical {
-  &::beforet {
+  &::before {
     content: url("/static/images/phrygian-cap.svg");
   }
 }
