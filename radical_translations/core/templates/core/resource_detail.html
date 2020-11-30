@@ -9,6 +9,7 @@
     {% with date=object.get_date %}
     {% if date %}
     <span class="metadata-block">
+        {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
         <span{% if date.date_radical %} class="radical"{% endif %}>
             {# Font Awesome Mars icon #}
             {% include "svgs/solid/calendar.svg" %}
