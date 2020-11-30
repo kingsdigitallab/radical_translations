@@ -710,10 +710,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     overflow: hidden;
   }
 
-  .intro {
-    margin-top: 1rem;
-  }
-
   .metadata-block {
     display: block;
   }
@@ -794,6 +790,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   color: $dark-gray;
   font-size: 1.25rem;
   font-style: italic;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 /* Index pages / Blog / People Etc. */
