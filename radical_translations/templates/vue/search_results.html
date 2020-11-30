@@ -31,23 +31,31 @@
                 </template>
             </div>
             <div class="col col-md-9">
-                <dl class="search-result">
+                <div class="row">
                     <template v-if="item.authors.length > 0">
-                        <dt><strong>Authors of the source text</strong></dt>
-                        <dd v-for="author in item.authors" :key="author.person.id">
-                        {[ author.person.name ]}
-                        </dd>
+                        <div class="col col-md-6">
+                            <dl class="search-result">
+                                <dt><strong>Authors of the source text</strong></dt>
+                                <dd v-for="author in item.authors" :key="author.person.id">
+                                    {[ author.person.name ]}
+                                </dd>
+                            </dl>
+                        </div>
                     </template>
                     <template v-if="item.contributions.length > 0">
-                        <dt><strong>Contributors</strong></dt>
-                        <dd v-for="contribution in item.contributions">
-                        <template v-if="contribution.roles.length > 0">
-                            <span v-for="role in contribution.roles"><strong>{[ role.label ]}</strong></span>:
-                        </template>
-                        <span>{[ contribution.agent.name ]}</span>
-                        </dd>
+                        <div class="col col-md-6">
+                            <dl class="search-result">
+                                <dt><strong>Contributors</strong></dt>
+                                <dd v-for="contribution in item.contributions">
+                                <template v-if="contribution.roles.length > 0">
+                                    <span v-for="role in contribution.roles"><strong>{[ role.label ]}</strong></span>:
+                                </template>
+                                <span>{[ contribution.agent.name ]}</span>
+                                </dd>
+                            </dl>
+                        </div>
                     </template>
-                </dl>
+                </div>
             </div>
         </div>
     </li>
