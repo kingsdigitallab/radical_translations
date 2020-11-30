@@ -143,10 +143,16 @@ new Vue({
     getBucketValue: function (bucket) {
       return bucket.key_as_string ? bucket.key_as_string : bucket.key
     },
-    getFacetMax: function (buckets) {
+    getContributions: function (item) {
+      return item.contributions.map((c) => ({
+        agent: c.agent,
+        roles: c.roles.filter((r) => r.label !== undefined)
+      }))
+    },
+    getFacetSum: function (buckets) {
       return buckets
         .map((el) => el.doc_count)
-        .reduce((acc, cur) => Math.max(acc, cur), 0)
+        .reduce((acc, cur) => acc + cur, 0)
     },
     updateFilters: function (filter) {
       if (this.filterExists(filter)) {
