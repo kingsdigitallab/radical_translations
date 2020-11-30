@@ -8781,6 +8781,11 @@ nav,
     width: 16px; }
 
 /* Main content area */
+main,
+.main {
+  display: block;
+  overflow: hidden; }
+
 main {
   background: url("/static/images/liberta-eguaglianza.svg") center 48px no-repeat;
   background: url("/static/images/liberta-eguaglianza.svg") center 3rem no-repeat;
@@ -8834,6 +8839,24 @@ main {
     -o-object-fit: cover;
        object-fit: cover;
     width: 100%; }
+
+.full-width {
+  display: block;
+  height: auto;
+  margin: 16px 0;
+  margin: 1rem 0;
+  width: 100%; }
+  .full-width img {
+    width: 100%; }
+
+.left + p,
+.right + p {
+  padding-top: 16px;
+  padding-top: 1rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  margin-top: 16px;
+  margin-top: 1rem; }
 
 /* Homepage */
 /*
@@ -8910,6 +8933,22 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     grid-template-rows: 1fr; }
     .features section {
       grid-template-columns: 1fr; }
+  .left,
+  .right {
+    display: inline-block; }
+    .left::before,
+    .right::before {
+      clear: both; }
+  .left {
+    float: left;
+    margin: 1rem 1rem 1rem 0; }
+  .left + p {
+    margin: 0 0 1rem 1rem; }
+  .right {
+    float: right;
+    margin: 1rem 0 1rem 1rem; }
+    .right + p {
+      margin: 0 1rem 1rem 0; }
   .metadata-block::after {
     content: '|'; }
   .metadata-block:last-child::after {
@@ -8962,10 +9001,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .child-page-image {
     height: 200px;
     overflow: hidden; }
-  .intro {
-    margin-top: 1rem; }
   .metadata-block {
     display: block; }
+  img.left, img.right {
+    height: auto;
+    width: 100%; }
   .pagination {
     display: grid;
     grid-template-columns: repeat(9, auto); }
@@ -9015,7 +9055,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   color: #222222;
   font-size: 20px;
   font-size: 1.25rem;
-  font-style: italic; }
+  font-style: italic;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  margin-top: 16px;
+  margin-top: 1rem; }
 
 /* Index pages / Blog / People Etc. */
 .children {
