@@ -471,6 +471,12 @@ nav,
 
 /* Main content area */
 
+main,
+.main {
+  display: block;
+  overflow: hidden;
+}
+
 main {
   background: url("/static/images/liberta-eguaglianza.svg") center 3rem no-repeat;
   background-size: 100%;
@@ -534,6 +540,28 @@ main {
     height: 100%;
     object-fit: cover;
     width: 100%;
+  }
+}
+
+// Images
+
+.full-width {
+  display: block;
+  height: auto;
+  margin: 1rem 0;
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
+}
+
+.left,
+.right {
+  & + p {
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 }
 
@@ -644,6 +672,35 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
+  // Images
+
+  .left,
+  .right {
+    display: inline-block;
+
+    &::before {
+      clear: both;
+    }
+  }
+
+  .left {
+    float: left;
+    margin: 1rem 1rem 1rem 0;
+  }
+
+  .left + p {
+    margin: 0 0 1rem 1rem;
+  }
+
+  .right {
+    float: right;
+    margin: 1rem 0 1rem 1rem;
+
+    & + p {
+      margin: 0 1rem 1rem 0;
+    }
+  }
+
   .metadata-block {
     &::after {
       content: '|';
@@ -734,6 +791,16 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .metadata-block {
     display: block;
+  }
+
+  // Images
+
+  img {
+    &.left,
+    &.right {
+      height: auto;
+      width: 100%;
+    }
   }
 
   .pagination {
