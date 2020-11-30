@@ -53,22 +53,22 @@
         </span>
         {% endif %}
 
-        {% if object.main_places.count %}
+        {% if object.based_near.count %}
         <span class="metadata-block">
             {# Font Awesome map-marker-alt icon #}
             {% include "svgs/solid/map-marker-alt.svg" %}
-             Main: 
+            Main: 
             {% for place in object.based_near.all %}
             <span class="badge badge-primary">{{ place.address }}</span>
             {% endfor %}
         </span>
         {% endif %}
 
-        {% if object.based_near.count %}
+        {% if object.main_places.count %}
         <span class="metadata-block">
             {# Font Awesome route icon #}
             {% include "svgs/solid/map-marker-alt.svg" %}
-             Other:
+            Other:
             {% for place in object.main_places.all %}
             {{ place.address }}{% if not forloop.last %}, {% endif %}
             {% endfor %}
