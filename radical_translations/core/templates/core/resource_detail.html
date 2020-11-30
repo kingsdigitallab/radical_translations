@@ -78,7 +78,12 @@
 <dl>
     {% for contribution in object.contributions.all %}
     <dt>
-    <a href="{% url 'agent-detail' contribution.agent.pk %}">{{ contribution.agent.name }}</a>
+        <a href="{% url 'agent-detail' contribution.agent.pk %}">
+            {% for classification in contribution.classification.all %}
+            {% if classification == "uncertainty" %}{{ classification.label }}{% endif %}
+            {% endfor %}
+            {{ contribution.agent.name }}
+        </a>
     </dt>
     {% for role in contribution.roles.all %}
     <dd>{{ role.label }}</dd>
