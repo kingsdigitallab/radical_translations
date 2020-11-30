@@ -9085,7 +9085,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   margin-right: 4px;
   width: 10px; }
 
-.radical::beforet {
+.radical::before {
   content: url("/static/images/phrygian-cap.svg"); }
 
 .uncertain::before,
