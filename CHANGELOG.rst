@@ -28,6 +28,10 @@ Added
 * Search results highlighting_.
 * Search styling.
 
+
+[0.9.1] - 2020-12-01
+--------------------
+
 Fixed
 ~~~~~
 * Images formatting and alignment.
