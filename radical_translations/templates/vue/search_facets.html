@@ -16,7 +16,7 @@
         aria-label="Grouped filters">
         <button
             v-bind:aria-controls="facet.name" 
-            v-bind:class="filterExists([facet.name]) ? 'btn-info' : ''"
+            v-bind:class="hasFilter([facet.name]) ? 'btn-info' : ''"
             v-bind:data-target="'#' + facet.name"
             aria-expanded="false"
             class="btn btn-outline-primary btn-sm"
@@ -26,7 +26,7 @@
         <button
             v-if="hasAny(facet)"
             v-on:click="updateFilters([facet.name, 'any'])"
-            v-bind:class="filterExists([facet.name, 'any']) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+            v-bind:class="hasFilter([facet.name, 'any']) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
             class="btn btn-outline-primary btn-sm"
             type="button">Any
             <span class="badge badge-secondary">{[ getFacetCount(facet.buckets) ]}</span>
@@ -44,7 +44,7 @@
             <button
                 v-if="getBucketValue(bucket) !== 'any'"
                 v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
-                v-bind:class="filterExists([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+                v-bind:class="hasFilter([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
                 class="filter btn"
                 type="button">
                 {[ getBucketValue(bucket) ]} 

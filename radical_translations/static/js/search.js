@@ -87,15 +87,6 @@ new Vue({
       this.filters = []
       this.query = ''
     },
-    filterExists: function (filter) {
-      return (
-        this.filters.find(
-          (item) =>
-            item[0] === filter[0] &&
-            (filter[1] === undefined || item[1] === filter[1])
-        ) !== undefined
-      )
-    },
     getBucketValue: function (bucket) {
       return bucket.key_as_string ? bucket.key_as_string : bucket.key
     },
@@ -128,6 +119,15 @@ new Vue({
     },
     hasAny: function (facet) {
       return facet.buckets.find((b) => this.getBucketValue(b) === 'any')
+    },
+    hasFilter: function (filter) {
+      return (
+        this.filters.find(
+          (item) =>
+            item[0] === filter[0] &&
+            (filter[1] === undefined || item[1] === filter[1])
+        ) !== undefined
+      )
     },
     search: async function () {
       const params = new URLSearchParams()
@@ -164,7 +164,7 @@ new Vue({
       this.data = await this.search()
     },
     updateFilters: function (filter) {
-      if (this.filterExists(filter)) {
+      if (this.hasFilter(filter)) {
         this.filters = this.filters.filter(
           (item) => item[0] !== filter[0] || item[1] !== filter[1]
         )

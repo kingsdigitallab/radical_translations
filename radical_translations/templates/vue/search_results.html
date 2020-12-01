@@ -1,6 +1,6 @@
 <ol
-    v-bind:start="data.current_page * data.page_size - data.page_size + 1"
-    class="search-results-list">
+       v-bind:start="data.current_page * data.page_size - data.page_size + 1"
+       class="search-results-list">
     <li v-for="item in data.results" :key="item.id">
         <p class="title">
         <a v-bind:href="item.id">
@@ -20,8 +20,11 @@
         <div class="row">
             <div class="col col-md-3">
                 <template v-if="item.date_display">
+                    <span v-if="item.has_date_radical" class="sr-only">Radical date</span>
                     {# Font Awesome calendar icon #}
-                    <span class="small-icon">{% include "svgs/solid/calendar.svg" %}</span>
+                    <span
+                        v-bind:class="{'radical': item.has_date_radical}"
+                        class="small-icon">{% include "svgs/solid/calendar.svg" %}</span>
                     {[ item.date_display ]}<br>
                 </template>
                 <template v-if="item.places.length > 0">
