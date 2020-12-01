@@ -19,7 +19,7 @@
         </p>
         <div class="row">
             <div class="col col-md-3">
-                <template v-if="item.date_display !== undefined">
+                <template v-if="item.date_display">
                     {# Font Awesome calendar icon #}
                     <span class="small-icon">{% include "svgs/solid/calendar.svg" %}</span>
                     {[ item.date_display ]}<br>

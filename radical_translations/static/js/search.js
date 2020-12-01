@@ -87,54 +87,6 @@ new Vue({
       this.filters = []
       this.query = ''
     },
-    getSuggestions: async function () {
-      if (!this.query_text) {
-        this.data_suggest = []
-        return
-      }
-
-      const params = new URLSearchParams()
-      params.append('suggest_field', this.query_text)
-
-      this.url_suggest.search = params.toString()
-      this.data_suggest = await fetch(this.url_suggest).then((response) =>
-        response.json()
-      )
-    },
-    textSearch: async function (text) {
-      this.page = 1
-      this.query = this.query_text
-      this.query_text = ''
-
-      if (text) {
-        this.query = text
-      }
-
-      this.data = await this.search()
-    },
-    search: async function () {
-      const params = new URLSearchParams()
-
-      if (this.query) {
-        params.append('search', this.query)
-      }
-
-      if (!this.page || this.page > this.numberOfPages) {
-        this.page = 1
-      }
-
-      params.append('page', this.page)
-      params.append('ordering', this.ordering)
-
-      this.filters.forEach((filter) =>
-        params.append(`${filter[0]}__term`, filter[1])
-      )
-
-      this.url.search = params.toString()
-      const response = await fetch(this.url)
-
-      return response.json()
-    },
     filterExists: function (filter) {
       return (
         this.filters.find(
@@ -160,8 +112,56 @@ new Vue({
         .map((el) => el.doc_count)
         .reduce((acc, cur) => Math.max(acc, cur), 0)
     },
+    getSuggestions: async function () {
+      if (!this.query_text) {
+        this.data_suggest = []
+        return
+      }
+
+      const params = new URLSearchParams()
+      params.append('suggest_field', this.query_text)
+
+      this.url_suggest.search = params.toString()
+      this.data_suggest = await fetch(this.url_suggest).then((response) =>
+        response.json()
+      )
+    },
     hasAny: function (facet) {
       return facet.buckets.find((b) => this.getBucketValue(b) === 'any')
+    },
+    search: async function () {
+      const params = new URLSearchParams()
+
+      if (this.query) {
+        params.append('search', this.query)
+      }
+
+      if (!this.page || this.page > this.numberOfPages) {
+        this.page = 1
+      }
+
+      params.append('page', this.page)
+      params.append('ordering', this.ordering)
+
+      this.filters.forEach((filter) =>
+        params.append(`${filter[0]}__term`, filter[1])
+      )
+
+      this.url.search = params.toString()
+      const response = await fetch(this.url)
+
+      return response.json()
+    },
+    textSearch: async function (text) {
+      this.page = 1
+      this.query = this.query_text
+      this.query_text = ''
+
+      if (text) {
+        this.query = text
+      }
+
+      this.data = await this.search()
     },
     updateFilters: function (filter) {
       if (this.filterExists(filter)) {
