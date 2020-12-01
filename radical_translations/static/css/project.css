@@ -8872,6 +8872,28 @@ main {
 .rich-text img {
   border: 1px solid #c3c1a8; }
 
+.attribution,
+.caption {
+  font-size: .875em;
+  font-style: italic; }
+
+.attribution {
+  float: right;
+  text-align: right; }
+  .attribution::before {
+    content: '\00a9'; }
+
+.caption {
+  margin-top: .5em; }
+
+.float-center,
+.float-left,
+.float-right {
+  display: block; }
+
+.float-center figure {
+  text-align: center; }
+
 .full-width {
   display: block;
   height: auto;
@@ -8886,9 +8908,7 @@ main {
   padding-top: 16px;
   padding-top: 1rem;
   margin-bottom: 16px;
-  margin-bottom: 1rem;
-  margin-top: 16px;
-  margin-top: 1rem; }
+  margin-bottom: 1rem; }
 
 /* Homepage */
 /*
@@ -8965,6 +8985,22 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     grid-template-rows: 1fr; }
     .features section {
       grid-template-columns: 1fr; }
+  .float-left figure,
+  .float-right figure {
+    max-width: 60%; }
+  .float-left .description,
+  .float-right .description {
+    max-width: 40%; }
+  .float-left figure {
+    float: left; }
+  .float-left .description {
+    float: right;
+    padding-left: 1rem; }
+  .float-right figure {
+    float: right; }
+  .float-right .description {
+    float: left;
+    padding-right: 1rem; }
   .left,
   .right {
     display: inline-block; }
