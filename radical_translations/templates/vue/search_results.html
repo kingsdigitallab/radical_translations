@@ -1,19 +1,19 @@
 <ol v-bind:start="data.current_page * data.page_size - data.page_size + 1" class="search-results-list">
     <li v-for="item in data.results" :key="item.id">
         <p class="title">
-            <a v-bind:href="item.id">
-                <span
-                    v-if="'title' in item.highlight"
-                    v-html="item.highlight['title'][0]"></span>
-                <span v-else>{[ item.title[0] ]}</span>
-            </a>
-            <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
+        <a v-bind:href="item.id">
+            <span
+                v-if="'title' in item.highlight"
+                v-html="item.highlight['title'][0]"></span>
+            <span v-else>{[ item.title[0] ]}</span>
+        </a>
+        <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
         </p>
         <p v-if="'content' in item.highlight">
-            <span
-                v-for="frag in item.highlight['content']"
-                v-html="`${frag}... `"
-                class="fragment"></span>
+        <span
+            v-for="frag in item.highlight['content']"
+            v-html="`${frag}... `"
+            class="fragment"></span>
         </p>
         <div class="row">
             <div class="col col-md-3">
@@ -34,29 +34,25 @@
             </div>
             <div class="col col-md-9">
                 <div class="row">
-                    <template v-if="item.authors.length > 0">
-                        <div class="col col-md-6">
-                            <dl class="search-result">
-                                <dt><strong>Authors of the source text</strong></dt>
-                                <dd v-for="author in item.authors" :key="author.person.id">
-                                    {[ author.person.name ]}
-                                </dd>
-                            </dl>
-                        </div>
-                    </template>
-                    <template v-if="item.contributions.length > 0">
-                        <div class="col col-md-6">
-                            <dl class="search-result">
-                                <dt><strong>Contributors</strong></dt>
-                                <dd v-for="contribution in getContributions(item)">
-                                <template v-if="contribution.roles.length > 0">
-                                    <span v-for="role in contribution.roles" v-if="role.label !== 'any'"><strong>{[ role.label ]}:</strong></span>
-                                </template>
-                                <span v-if="contribution.agent.name !== 'any'">{[ contribution.agent.name ]}</span>
-                                </dd>
-                            </dl>
-                        </div>
-                    </template>
+                    <div v-if="item.authors.length > 0" class="col col-md-6">
+                        <dl class="search-result">
+                            <dt><strong>Authors of the source text</strong></dt>
+                            <dd v-for="author in item.authors" :key="author.person.id">
+                            {[ author.person.name ]}
+                            </dd>
+                        </dl>
+                    </div>
+                    <div v-if="item.contributions.length > 0" class="col col-md-6">
+                        <dl class="search-result">
+                            <dt><strong>Contributors</strong></dt>
+                            <dd v-for="contribution in getContributions(item)">
+                            <template v-if="contribution.roles.length > 0">
+                                <span v-for="role in contribution.roles"><strong>{[ role.label ]}:</strong></span>
+                            </template>
+                            <span>{[ contribution.agent.name ]}</span>
+                            </dd>
+                        </dl>
+                    </div>
                 </div>
             </div>
         </div>

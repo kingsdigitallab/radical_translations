@@ -144,10 +144,12 @@ new Vue({
       return bucket.key_as_string ? bucket.key_as_string : bucket.key
     },
     getContributions: function (item) {
-      return item.contributions.map((c) => ({
-        agent: c.agent,
-        roles: c.roles.filter((r) => r.label !== undefined)
-      }))
+      return item.contributions
+        .filter((c) => c.agent.name !== 'any')
+        .map((c) => ({
+          agent: c.agent,
+          roles: c.roles.filter((r) => r.label !== undefined)
+        }))
     },
     getFacetCount: function (buckets) {
       return buckets
