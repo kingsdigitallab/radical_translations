@@ -28,6 +28,11 @@ Added
 * Search results highlighting_.
 * Search styling.
 
+Fixed
+~~~~~
+* Images formatting and alignment.
+* Icons display.
+
 
 [0.9.0] - 2020-11-30
 --------------------
