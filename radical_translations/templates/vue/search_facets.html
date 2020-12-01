@@ -1,9 +1,19 @@
-<h3>Filters</h3>
+<h3>
+    Filters <span 
+        class="sup-icon" 
+        data-toggle="tooltip" 
+        title="Click on a filter label to expand it and see the sub-filters. Click on 'Any' to apply all the sub-filters or click on the sub-filter label to only apply that. The number in the badge indicates how many records are available if that filter is applied.">
+        {% include "svgs/solid/info-circle.svg" %}
+        </span>
+</h3>
+
 <div id="filters" class="mb-2">
     <div
         v-for="facet in facets"
         :key="facet.name"
-        class="btn-group">
+        class="btn-group"
+        role="group"
+        aria-label="Grouped filters">
         <button
             v-bind:aria-controls="facet.name" 
             v-bind:class="filterExists([facet.name]) ? 'btn-info' : ''"

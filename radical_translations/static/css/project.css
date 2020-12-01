@@ -8579,6 +8579,16 @@ footer {
 .small-icon img {
   vertical-align: text-top; }
 
+.sup-icon,
+.sup-icon svg {
+  color: #808080;
+  fill: #808080;
+  height: .6125em;
+  margin-top: -.5em; }
+  .sup-icon:hover,
+  .sup-icon svg:hover {
+    cursor: pointer; }
+
 .tags {
   display: block;
   font-family: 'Oswald', sans-serif;
@@ -8604,6 +8614,9 @@ footer {
   display: inline-block;
   padding: 4px 8px 8px;
   padding: 0.25rem 0.5rem 0.5rem; }
+
+.tooltip-inner {
+  text-align: left; }
 
 h1, h2, h3,
 h4, h5, h6,
@@ -8797,6 +8810,11 @@ nav,
     width: 16px; }
 
 /* Main content area */
+main,
+.main {
+  display: block;
+  overflow: hidden; }
+
 main {
   background: url("/static/images/liberta-eguaglianza.svg") center 48px no-repeat;
   background: url("/static/images/liberta-eguaglianza.svg") center 3rem no-repeat;
@@ -8850,6 +8868,27 @@ main {
     -o-object-fit: cover;
        object-fit: cover;
     width: 100%; }
+
+.rich-text img {
+  border: 1px solid #c3c1a8; }
+
+.full-width {
+  display: block;
+  height: auto;
+  margin: 16px 0;
+  margin: 1rem 0;
+  width: 100%; }
+  .full-width img {
+    width: 100%; }
+
+.left + p,
+.right + p {
+  padding-top: 16px;
+  padding-top: 1rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  margin-top: 16px;
+  margin-top: 1rem; }
 
 /* Homepage */
 /*
@@ -8926,6 +8965,22 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     grid-template-rows: 1fr; }
     .features section {
       grid-template-columns: 1fr; }
+  .left,
+  .right {
+    display: inline-block; }
+    .left::before,
+    .right::before {
+      clear: both; }
+  .left {
+    float: left;
+    margin: 1rem 1rem 1rem 0; }
+  .left + p {
+    margin: 0 0 1rem 1rem; }
+  .right {
+    float: right;
+    margin: 1rem 0 1rem 1rem; }
+    .right + p {
+      margin: 0 1rem 1rem 0; }
   .metadata-block::after {
     content: '|'; }
   .metadata-block:last-child::after {
@@ -8980,6 +9035,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     overflow: hidden; }
   .metadata-block {
     display: block; }
+  img.left, img.right {
+    height: auto;
+    width: 100%; }
   .pagination {
     display: grid;
     grid-template-columns: repeat(9, auto); }
@@ -9151,13 +9209,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .filter {
   text-align: left; }
 
-#filters button {
-  margin-bottom: 4px;
-  margin-right: 4px; }
-
 #filters button[aria-expanded="true"] {
   background: #9b2923;
   color: white; }
+
+#filters .btn-group {
+  border: 5px solid #d9d9d9;
+  margin: 4px;
+  margin: .25rem; }
 
 #filters .btn-info {
   border-color: #00548b;

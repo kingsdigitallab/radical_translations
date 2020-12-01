@@ -164,6 +164,18 @@ footer {
   }
 }
 
+.sup-icon,
+.sup-icon svg {
+  color: $medium-gray;
+  fill: $medium-gray;
+  height: .6125em;
+  margin-top: -.5em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .tags {
   display: block;
   font-family: 'Oswald', sans-serif;
@@ -188,6 +200,10 @@ footer {
   border-bottom: 0;
   display: inline-block;
   padding: 0.25rem 0.5rem 0.5rem;
+}
+
+.tooltip-inner {
+  text-align: left;
 }
 
 // Headings
@@ -471,6 +487,12 @@ nav,
 
 /* Main content area */
 
+main,
+.main {
+  display: block;
+  overflow: hidden;
+}
+
 main {
   background: url("/static/images/liberta-eguaglianza.svg") center 3rem no-repeat;
   background-size: 100%;
@@ -534,6 +556,34 @@ main {
     height: 100%;
     object-fit: cover;
     width: 100%;
+  }
+}
+
+// Images
+
+.rich-text {
+  img {
+    border: 1px solid $kaki;
+  }
+}
+
+.full-width {
+  display: block;
+  height: auto;
+  margin: 1rem 0;
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
+}
+
+.left,
+.right {
+  & + p {
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 }
 
@@ -644,6 +694,35 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
+  // Images
+
+  .left,
+  .right {
+    display: inline-block;
+
+    &::before {
+      clear: both;
+    }
+  }
+
+  .left {
+    float: left;
+    margin: 1rem 1rem 1rem 0;
+  }
+
+  .left + p {
+    margin: 0 0 1rem 1rem;
+  }
+
+  .right {
+    float: right;
+    margin: 1rem 0 1rem 1rem;
+
+    & + p {
+      margin: 0 1rem 1rem 0;
+    }
+  }
+
   .metadata-block {
     &::after {
       content: '|';
@@ -734,6 +813,16 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .metadata-block {
     display: block;
+  }
+
+  // Images
+
+  img {
+    &.left,
+    &.right {
+      height: auto;
+      width: 100%;
+    }
   }
 
   .pagination {
@@ -980,14 +1069,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 #filters {
-  button {
-    margin-bottom: 4px;
-    margin-right: 4px;
-  }
 
   button[aria-expanded="true"] {
     background: $primary;
     color: white;
+  }
+
+  .btn-group {
+    border: 5px solid $light-gray;
+    margin: .25rem;
   }
 
   .btn-info {
