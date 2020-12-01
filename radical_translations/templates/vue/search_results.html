@@ -1,4 +1,6 @@
-<ol v-bind:start="data.current_page * data.page_size - data.page_size + 1" class="search-results-list">
+<ol
+    v-bind:start="data.current_page * data.page_size - data.page_size + 1"
+    class="search-results-list">
     <li v-for="item in data.results" :key="item.id">
         <p class="title">
         <a v-bind:href="item.id">

@@ -83,6 +83,10 @@ new Vue({
     }
   },
   methods: {
+    clearFilters() {
+      this.filters = []
+      this.query = ''
+    },
     getSuggestions: async function () {
       if (!this.query_text) {
         this.data_suggest = []
