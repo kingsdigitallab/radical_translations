@@ -83,6 +83,35 @@ new Vue({
     }
   },
   methods: {
+    clearFilters() {
+      this.filters = []
+      this.query = ''
+    },
+    filterExists: function (filter) {
+      return (
+        this.filters.find(
+          (item) =>
+            item[0] === filter[0] &&
+            (filter[1] === undefined || item[1] === filter[1])
+        ) !== undefined
+      )
+    },
+    getBucketValue: function (bucket) {
+      return bucket.key_as_string ? bucket.key_as_string : bucket.key
+    },
+    getContributions: function (item) {
+      return item.contributions
+        .filter((c) => c.agent.name !== 'any')
+        .map((c) => ({
+          agent: c.agent,
+          roles: c.roles.filter((r) => r.label !== undefined)
+        }))
+    },
+    getFacetCount: function (buckets) {
+      return buckets
+        .map((el) => el.doc_count)
+        .reduce((acc, cur) => Math.max(acc, cur), 0)
+    },
     getSuggestions: async function () {
       if (!this.query_text) {
         this.data_suggest = []
@@ -97,16 +126,8 @@ new Vue({
         response.json()
       )
     },
-    textSearch: async function (text) {
-      this.page = 1
-      this.query = this.query_text
-      this.query_text = ''
-
-      if (text) {
-        this.query = text
-      }
-
-      this.data = await this.search()
+    hasAny: function (facet) {
+      return facet.buckets.find((b) => this.getBucketValue(b) === 'any')
     },
     search: async function () {
       const params = new URLSearchParams()
@@ -131,31 +152,16 @@ new Vue({
 
       return response.json()
     },
-    filterExists: function (filter) {
-      return (
-        this.filters.find(
-          (item) =>
-            item[0] === filter[0] &&
-            (filter[1] === undefined || item[1] === filter[1])
-        ) !== undefined
-      )
-    },
-    getBucketValue: function (bucket) {
-      return bucket.key_as_string ? bucket.key_as_string : bucket.key
-    },
-    getContributions: function (item) {
-      return item.contributions.map((c) => ({
-        agent: c.agent,
-        roles: c.roles.filter((r) => r.label !== undefined)
-      }))
-    },
-    getFacetCount: function (buckets) {
-      return buckets
-        .map((el) => el.doc_count)
-        .reduce((acc, cur) => Math.max(acc, cur), 0)
-    },
-    hasAny: function (facet) {
-      return facet.buckets.find((b) => this.getBucketValue(b) === 'any')
+    textSearch: async function (text) {
+      this.page = 1
+      this.query = this.query_text
+      this.query_text = ''
+
+      if (text) {
+        this.query = text
+      }
+
+      this.data = await this.search()
     },
     updateFilters: function (filter) {
       if (this.filterExists(filter)) {
