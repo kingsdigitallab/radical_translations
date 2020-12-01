@@ -164,6 +164,18 @@ footer {
   }
 }
 
+.sup-icon,
+.sup-icon svg {
+  color: $medium-gray;
+  fill: $medium-gray;
+  height: .6125em;
+  margin-top: -.5em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .tags {
   display: block;
   font-family: 'Oswald', sans-serif;
@@ -188,6 +200,10 @@ footer {
   border-bottom: 0;
   display: inline-block;
   padding: 0.25rem 0.5rem 0.5rem;
+}
+
+.tooltip-inner {
+  text-align: left;
 }
 
 // Headings
@@ -544,6 +560,12 @@ main {
 }
 
 // Images
+
+.rich-text {
+  img {
+    border: 1px solid $kaki;
+  }
+}
 
 .full-width {
   display: block;
@@ -1047,14 +1069,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 #filters {
-  button {
-    margin-bottom: 4px;
-    margin-right: 4px;
-  }
 
   button[aria-expanded="true"] {
     background: $primary;
     color: white;
+  }
+
+  .btn-group {
+    border: 5px solid $light-gray;
+    margin: .25rem;
   }
 
   .btn-info {

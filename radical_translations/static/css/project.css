@@ -8579,6 +8579,16 @@ footer {
 .small-icon img {
   vertical-align: text-top; }
 
+.sup-icon,
+.sup-icon svg {
+  color: #808080;
+  fill: #808080;
+  height: .6125em;
+  margin-top: -.5em; }
+  .sup-icon:hover,
+  .sup-icon svg:hover {
+    cursor: pointer; }
+
 .tags {
   display: block;
   font-family: 'Oswald', sans-serif;
@@ -8604,6 +8614,9 @@ footer {
   display: inline-block;
   padding: 4px 8px 8px;
   padding: 0.25rem 0.5rem 0.5rem; }
+
+.tooltip-inner {
+  text-align: left; }
 
 h1, h2, h3,
 h4, h5, h6,
@@ -8855,6 +8868,9 @@ main {
     -o-object-fit: cover;
        object-fit: cover;
     width: 100%; }
+
+.rich-text img {
+  border: 1px solid #c3c1a8; }
 
 .full-width {
   display: block;
@@ -9193,13 +9209,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .filter {
   text-align: left; }
 
-#filters button {
-  margin-bottom: 4px;
-  margin-right: 4px; }
-
 #filters button[aria-expanded="true"] {
   background: #9b2923;
   color: white; }
+
+#filters .btn-group {
+  border: 5px solid #d9d9d9;
+  margin: 4px;
+  margin: .25rem; }
 
 #filters .btn-info {
   border-color: #00548b;
