@@ -26,6 +26,16 @@ Added
 * `Resource` search suggestions.
 * Fuzzy_ text search.
 * Search results highlighting_.
+* Search styling.
+
+
+[0.9.1] - 2020-12-01
+--------------------
+
+Fixed
+~~~~~
+* Images formatting and alignment.
+* Icons display.
 
 
 [0.9.0] - 2020-11-30
