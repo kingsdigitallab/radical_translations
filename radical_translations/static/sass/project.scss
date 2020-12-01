@@ -561,7 +561,8 @@ main {
 
 // Images
 
-.rich-text {
+.rich-text,
+figure {
   img {
     border: 1px solid $kaki;
   }
