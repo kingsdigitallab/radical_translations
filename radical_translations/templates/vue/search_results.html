@@ -24,9 +24,11 @@
                 </template>
                 <template v-if="item.places.length > 0">
                     <span v-for="place in item.places" :key="place.place.address">
-                        {# Font Awesome map-marker-alt icon #}
-                        <span class="small-icon">{% include "svgs/solid/map-marker-alt.svg" %}</span>
-                        {[ place.place.address ]}
+                        <template v-if="place.place.address !== 'any'">
+                            {# Font Awesome map-marker-alt icon #}
+                            <span class="small-icon">{% include "svgs/solid/map-marker-alt.svg" %}</span>
+                            {[ place.place.address ]}
+                        </template>
                     </span>
                 </template>
             </div>
@@ -48,9 +50,9 @@
                                 <dt><strong>Contributors</strong></dt>
                                 <dd v-for="contribution in getContributions(item)">
                                 <template v-if="contribution.roles.length > 0">
-                                    <span v-for="role in contribution.roles"><strong>{[ role.label ]}</strong></span>:
+                                    <span v-for="role in contribution.roles" v-if="role.label !== 'any'"><strong>{[ role.label ]}:</strong></span>
                                 </template>
-                                <span>{[ contribution.agent.name ]}</span>
+                                <span v-if="contribution.agent.name !== 'any'">{[ contribution.agent.name ]}</span>
                                 </dd>
                             </dl>
                         </div>
