@@ -8869,7 +8869,8 @@ main {
        object-fit: cover;
     width: 100%; }
 
-.rich-text img {
+.rich-text img,
+figure img {
   border: 1px solid #c3c1a8; }
 
 .attribution,
