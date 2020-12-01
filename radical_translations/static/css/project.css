@@ -8877,11 +8877,8 @@ main {
   font-size: .875em;
   font-style: italic; }
 
-.attribution {
-  float: right;
-  text-align: right; }
-  .attribution::before {
-    content: '\00a9'; }
+.attribution::before {
+  content: '\00a9'; }
 
 .caption {
   margin-top: .5em; }
