@@ -574,9 +574,6 @@ main {
 }
 
 .attribution {
-  float: right;
-  text-align: right;
-
   &::before {
     content: '\00a9';
   }
