@@ -26,6 +26,7 @@ Added
 * `Resource` search suggestions.
 * Fuzzy_ text search.
 * Search results highlighting_.
+* Search styling.
 
 
 [0.9.0] - 2020-11-30
