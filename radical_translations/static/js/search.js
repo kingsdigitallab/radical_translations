@@ -85,6 +85,9 @@ new Vue({
     }
   },
   methods: {
+    getFacetDisplayName(name) {
+      return name.replaceAll('_', ' ')
+    },
     clearFilters() {
       this.filters = []
       this.query = ''
