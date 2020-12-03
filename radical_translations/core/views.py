@@ -176,7 +176,7 @@ class ResourceViewSet(DocumentViewSet):
         "title": "title.sort",
         "date": "year_earliest",
     }
-    ordering = ["title", "date"]
+    ordering = ["_score", "title.sort", "year_earliest"]
 
     pagination_class = PageNumberPagination
 

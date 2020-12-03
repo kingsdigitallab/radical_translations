@@ -7,12 +7,14 @@ new Vue({
     query: '',
     query_text: '',
     filters: [],
-    ordering: 'title',
+    ordering_default: 'score',
+    ordering: 'score',
     ordering_options: [
-      { key: 'title', value: 'title ascending' },
-      { key: '-title', value: 'title descending' },
-      { key: 'date', value: 'date ascending' },
-      { key: '-date', value: 'date descending' }
+      { key: 'score', value: 'Relevance' },
+      { key: 'title', value: 'Title ascending' },
+      { key: '-title', value: 'Title descending' },
+      { key: 'date', value: 'Date ascending' },
+      { key: '-date', value: 'Date descending' }
     ],
     page: 1,
     data: [],
@@ -141,7 +143,10 @@ new Vue({
       }
 
       params.append('page', this.page)
-      params.append('ordering', this.ordering)
+
+      if (this.ordering !== this.ordering_default) {
+        params.append('ordering', this.ordering)
+      }
 
       this.filters.forEach((filter) =>
         params.append(`${filter[0]}__term`, filter[1])
