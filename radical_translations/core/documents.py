@@ -47,8 +47,7 @@ class ResourceDocument(Document):
     form_genre = get_controlled_term_field(options=copy_to_content)
     subjects = get_controlled_term_field(options=copy_to_content)
     date_display = fields.TextField(**copy_to_content)
-    year_earliest = fields.IntegerField(**copy_to_content)
-    year_latest = fields.IntegerField(**copy_to_content)
+    year = fields.IntegerField(**copy_to_content)
     summary = fields.TextField(**copy_to_content)
     classifications_printing_publishing = fields.ObjectField(
         properties={"edition": get_controlled_term_field(options=copy_to_content)}
@@ -177,18 +176,21 @@ class ResourceDocument(Document):
 
         return resource
 
-    def prepare_year_earliest(self, instance):
+    def prepare_year(self, instance):
         resource = self._get_resource(instance)
-        if resource.date and resource.date.date_earliest:
+        if resource.date:
             date_earliest = resource.date.get_date_earliest()
-            if date_earliest is not None:
+            date_latest = resource.date.get_date_latest()
+
+            if date_earliest and date_latest:
+                return [
+                    year for year in range(date_earliest.year, date_latest.year + 1)
+                ]
+
+            if date_earliest:
                 return date_earliest.year
 
-    def prepare_year_latest(self, instance):
-        resource = self._get_resource(instance)
-        if resource.date and resource.date.date_latest:
-            date_latest = resource.date.get_date_latest()
-            if date_latest is not None:
+            if date_latest:
                 return date_latest.year
 
     def prepare_summary(self, instance):

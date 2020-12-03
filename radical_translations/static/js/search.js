@@ -13,8 +13,8 @@ new Vue({
       { key: 'score', value: 'Relevance' },
       { key: 'title', value: 'Title ascending' },
       { key: '-title', value: 'Title descending' },
-      { key: 'date', value: 'Date ascending' },
-      { key: '-date', value: 'Date descending' }
+      { key: 'year', value: 'Year ascending' },
+      { key: '-year', value: 'Year descending' }
     ],
     page: 1,
     data: [],

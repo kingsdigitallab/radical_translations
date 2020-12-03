@@ -79,8 +79,8 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "date": {
-            "field": "year_earliest",
+        "year": {
+            "field": "year",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -139,7 +139,7 @@ class ResourceViewSet(DocumentViewSet):
         "translation": "classifications_translation.edition.label.raw",
         "contributor": "contributions.agent.name.raw",
         "contributor_role": "contributions.roles.label.raw",
-        "date": "year_earliest",
+        "year": "year",
         "form_genre": "form_genre.label.raw",
         "language": "languages.label.raw",
         "publication_place": "places.place.address.raw",
@@ -174,9 +174,9 @@ class ResourceViewSet(DocumentViewSet):
 
     ordering_fields = {
         "title": "title.sort",
-        "date": "year_earliest",
+        "year": "year",
     }
-    ordering = ["_score", "title.sort", "year_earliest"]
+    ordering = ["_score", "title.sort", "year"]
 
     pagination_class = PageNumberPagination
 
