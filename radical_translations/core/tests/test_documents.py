@@ -157,10 +157,10 @@ class TestResourceDocument:
         assert len(doc.prepare_form_genre(resource)) == 0
 
         resource.subjects.add(search_term_or_none("fast-forms", "History"))
-        assert len(doc.prepare_form_genre(resource)) == 1
+        assert len(doc.prepare_form_genre(resource)) == 2
 
         paratext.subjects.add(search_term_or_none("fast-forms", "Periodicals"))
-        assert len(doc.prepare_form_genre(resource)) == 2
+        assert len(doc.prepare_form_genre(resource)) == 4
 
     @pytest.mark.usefixtures("entry_original")
     def test__get_subjects(self, entry_original):
@@ -169,7 +169,7 @@ class TestResourceDocument:
         resource = Resource.from_gsx_entry(entry_original)
 
         assert len(doc._get_subjects(resource, "fast-forms")) == 0
-        assert len(doc._get_subjects(resource, "fast-topic")) == 1
+        assert len(doc._get_subjects(resource, "fast-topic")) == 2
 
     @pytest.mark.usefixtures("entry_original")
     def test_prepare_subjects(self, entry_original):
@@ -178,10 +178,10 @@ class TestResourceDocument:
         resource = Resource.from_gsx_entry(entry_original)
         paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
 
-        assert len(doc.prepare_subjects(resource)) == 1
+        assert len(doc.prepare_subjects(resource)) == 2
 
         paratext.subjects.add(search_term_or_none("fast-topic", "Operas"))
-        assert len(doc.prepare_subjects(resource)) == 2
+        assert len(doc.prepare_subjects(resource)) == 4
 
     @pytest.mark.usefixtures("resource")
     def test_prepare_date_display(self, resource):
@@ -204,32 +204,25 @@ class TestResourceDocument:
         assert doc._get_resource(paratext) == resource
 
     @pytest.mark.usefixtures("resource")
-    def test_prepare_year_earliest(self, resource):
+    def test_prepare_year(self, resource):
         doc = ResourceDocument()
 
-        prepared_data = doc.prepare_year_earliest(resource)
+        prepared_data = doc.prepare_year(resource)
         assert prepared_data is None
 
         resource.date = Date(date_display="1971")
         resource.date.save()
 
-        prepared_data = doc.prepare_year_earliest(resource)
+        prepared_data = doc.prepare_year(resource)
         assert prepared_data is not None
-        assert prepared_data == 1971
+        assert prepared_data == [1971]
 
-    @pytest.mark.usefixtures("resource")
-    def test_prepare_year_latest(self, resource):
-        doc = ResourceDocument()
-
-        prepared_data = doc.prepare_year_latest(resource)
-        assert prepared_data is None
-
-        resource.date = Date(date_display="1971")
+        resource.date = Date(date_display="1971/1972")
         resource.date.save()
 
-        prepared_data = doc.prepare_year_latest(resource)
+        prepared_data = doc.prepare_year(resource)
         assert prepared_data is not None
-        assert prepared_data == 1971
+        assert len(prepared_data) == 2
 
     @pytest.mark.usefixtures("entry_original")
     def test_prepare_summary(self, entry_original):
@@ -255,13 +248,13 @@ class TestResourceDocument:
             Classification(edition=search_term_or_none("rt-ppt", "Forgeries")),
             bulk=False,
         )
-        assert len(doc.prepare_classifications_printing_publishing(resource)) == 1
+        assert len(doc.prepare_classifications_printing_publishing(resource)) == 2
 
         paratext.classifications.add(
             Classification(edition=search_term_or_none("rt-ppt", "Piracies")),
             bulk=False,
         )
-        assert len(doc.prepare_classifications_printing_publishing(resource)) == 2
+        assert len(doc.prepare_classifications_printing_publishing(resource)) == 4
 
     @pytest.mark.usefixtures("entry_original")
     def test__get_classifications(self, entry_original):
@@ -270,7 +263,7 @@ class TestResourceDocument:
         resource = Resource.from_gsx_entry(entry_original)
 
         assert len(doc._get_classifications(resource, "rt-ppt")) == 0
-        assert len(doc._get_classifications(resource, "rt-tt")) == 1
+        assert len(doc._get_classifications(resource, "rt-tt")) == 2
         assert len(doc._get_classifications(resource, "rt-pt")) == 0
 
     @pytest.mark.usefixtures("entry_original")
@@ -280,19 +273,19 @@ class TestResourceDocument:
         resource = Resource.from_gsx_entry(entry_original)
         paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
 
-        assert len(doc.prepare_classifications_translation(resource)) == 1
+        assert len(doc.prepare_classifications_translation(resource)) == 2
 
         resource.classifications.add(
             Classification(edition=search_term_or_none("rt-tt", "Integral")),
             bulk=False,
         )
-        assert len(doc.prepare_classifications_translation(resource)) == 2
+        assert len(doc.prepare_classifications_translation(resource)) == 3
 
         paratext.classifications.add(
             Classification(edition=search_term_or_none("rt-tt", "Partial")),
             bulk=False,
         )
-        assert len(doc.prepare_classifications_translation(resource)) == 3
+        assert len(doc.prepare_classifications_translation(resource)) == 5
 
     @pytest.mark.usefixtures("entry_original")
     def test_prepare_classifications_paratext(self, entry_original):
@@ -307,7 +300,7 @@ class TestResourceDocument:
             Classification(edition=search_term_or_none("rt-pt", "Preface")),
             bulk=False,
         )
-        assert len(doc.prepare_classifications_paratext(resource)) == 1
+        assert len(doc.prepare_classifications_paratext(resource)) == 3
 
     @pytest.mark.usefixtures("entry_original", "person")
     def test_prepare_contributions(self, entry_original, person):
@@ -316,16 +309,16 @@ class TestResourceDocument:
         resource = Resource.from_gsx_entry(entry_original)
         paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
 
-        assert len(doc.prepare_contributions(resource)) == 2
-
-        paratext.contributions.add(Contribution(agent=person), bulk=False)
         assert len(doc.prepare_contributions(resource)) == 3
 
-        person.name = 'Anonymous Badger'
+        person.name = "Anonymous Badger"
         person.save()
 
-        contribution = doc.prepare_contributions(resource)[-1]
-        assert contribution['agent']['name'] == 'Anonymous'
+        paratext.contributions.add(Contribution(agent=person), bulk=False)
+        assert len(doc.prepare_contributions(resource)) == 5
+
+        contribution = doc.prepare_contributions(resource)[2]
+        assert contribution["agent"]["name"] == "Anonymous"
 
     @pytest.mark.usefixtures("entry_original")
     def test_prepare_languages(self, entry_original):
@@ -334,20 +327,20 @@ class TestResourceDocument:
         resource = Resource.from_gsx_entry(entry_original)
         paratext = Resource.paratext_from_gsx_entry(entry_original, resource)
 
-        assert len(doc.prepare_languages(resource)) == 1
+        assert len(doc.prepare_languages(resource)) == 2
 
         paratext.languages.add(
             ResourceLanguage(language=search_term_or_none("iso639-2", "english")),
             bulk=False,
         )
-        assert len(doc.prepare_languages(resource)) == 2
+        assert len(doc.prepare_languages(resource)) == 4
 
     @pytest.mark.usefixtures("entry_original")
     def test_prepare_places(self, entry_original):
         doc = ResourceDocument()
 
         resource = Resource.from_gsx_entry(entry_original)
-        assert 'fictional_place' not in doc.prepare_places(resource)[0]
+        assert "fictional_place" not in doc.prepare_places(resource)[0]
 
         place = resource.places.first()
         place.fictional_place = "mordor"
