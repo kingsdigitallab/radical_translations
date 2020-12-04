@@ -1136,9 +1136,27 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 #filters {
 
+  button[aria-expanded] {
+    &::before {
+      display: inline-block;
+    }
+  }
+
+  button[aria-expanded="false"] {
+    &::before {
+      content: url("/static/fontawesome/svgs/solid/caret-right.svg");
+      width: 5px;
+    }
+  }
+
   button[aria-expanded="true"] {
     background: $primary;
     color: white;
+
+    &::before {
+      content: url("/static/fontawesome/svgs/solid/caret-down.svg");
+      width: 8px;
+    }
   }
 
   .btn-group {
