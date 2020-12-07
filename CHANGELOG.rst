@@ -11,6 +11,233 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+
+[0.10.0] - 2020-12-07
+--------------------
+
+Added
+~~~~~
+* Elasticsearch_ service.
+* Kibana_ service.
+* `Resource` search index.
+* `Agents` search index.
+* `Events` search index.
+* `Resource` text search with filters, ordering and pagination of search results.
+* `Resource` search tests.
+* `Resource` search suggestions.
+* Fuzzy_ text search.
+* Search results highlighting_.
+* Search styling.
+
+
+[0.9.1] - 2020-12-01
+--------------------
+
+Fixed
+~~~~~
+* Images formatting and alignment.
+* Icons display.
+
+
+[0.9.0] - 2020-11-30
+--------------------
+
+Added
+~~~~~
+* Data migration to copy subjects from the translation resource to the original resource.
+* `Pa11y dashboard`_ service.
+* Data migration to merge duplicate libraries (`Organisation`).
+* Data migration to merge duplicate languages.
+* Function to get the date of a `Resource`.
+
+Changed
+~~~~~~~
+* Truncate breadcrumb to 5 words.
+* Truncate metatitle to 10 words.
+* Remove unused and duplicate packages.
+* Swap the labels for main and other places in the `Agent` detail view.
+
+Fixed
+~~~~~
+* Do not display tag icon if there are not tags associated with a blog post.
+
+.. _Elasticsearch: https://www.elastic.co/elasticsearch/
+.. _Kibana: https://www.elastic.co/kibana/
+.. _Fuzzy: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-fuzzy-query.html
+.. _highlighting: https://www.elastic.co/guide/en/elasticsearch/reference/7.x/highlighting.html
+.. _Pa11y dashboard: https://github.com/pa11y/pa11y-dashboard
+
+
+[0.8.0] - 2020-11-06
+--------------------
+
+Added
+~~~~~
+* Migration to convert `author` roles to `translator` when the `Resource` is a
+  translation.
+* Field to record fictional places of publication.
+* Helper functions to `Date`, to get the earliest and latest dates for an object.
+* Migration to convert Essay term from FAST_ topics to FAST_ forms vocabulary.
+* Wagtail_ page type for the home page.
+* Wagtail_ page type for biographies.
+* Template tag to render breadcrumbs.
+
+Changed
+~~~~~~~
+* Upgrade `Controlled Vocabulary`_ application.
+* Upgrade Wagtail_ to version 2.9.
+
+.. _FAST: https://www.oclc.org/research/areas/data-science/fast.html
+
+[0.7.1] - 2020-07-02
+--------------------
+
+Added
+~~~~~
+* CERL_ vocabulary for `Agent` models.
+* `Docker Compose`_ restart policies to the Docker services.
+* `Django email`_ configuration.
+* Fields `main_places` and `noble` to `Person`.
+* New application, `cms`, for Wagtail_ customisations.
+
+Changed
+~~~~~~~
+* Add date to `Resource` string for better disambiguation.
+* Simplify the Fabric_ commands.
+* Index page template to display extra information for blog posts.
+
+Removed
+~~~~~~~
+* Helper script, it has been replaced with the Fabric_ file.
+* Anymail integration.
+* django-allauth integration.
+
+Fixed
+~~~~~
+* `TyperError` in `Resource` `__str__`, was preventing the editing of records.
+* Error templates.
+* Admin favicon.
+* Issues with `Controlled Vocabulary`_ application.
+
+.. _CERL: https://data.cerl.org/thesaurus/
+.. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
+.. _Django email: https://docs.djangoproject.com/en/3.0/topics/email/
+.. _Wagtail: https://wagtail.io/
+.. _Fabric: https://fabfile.org/
+.. _Controlled Vocabulary: https://github.com/kingsdigitallab/django-controlled-vocabulary/
+
+
+[0.7.0] - 2020-06-17
+--------------------
+
+Added
+~~~~~
+* `Resource` views.
+* `Agent` views.
+* `Event` views.
+* Configuration for `dev`, `stg`, and `liv` instances.
+* Fabric_ script for remote task automation.
+* Zotero_ integration_ to harvest bibliographic data from Zotero.
+
+.. _Fabric: https://www.fabfile.org/
+.. _Zotero: https://www.zotero.org/
+.. _integration: https://django-kdl-wagtail.readthedocs.io/en/latest/readme.html#features
+
+
+[0.6.3] - 2020-06-08
+--------------------
+
+Changed
+~~~~~~~
+* `Date` display format to include radical date when available.
+* Prefix paratext `Resources` with `[paratext]`.
+* Replace `Classification` `source` with editorial classification field.
+
+Fixed
+~~~~~
+* Update Django Controlled Vocabulary app.
+* Add missing vocabulary entry for Printing and Publishing Terms.
+* Autocomplete for `Event` and `Place` models.
+* Issue deleting `Resource` contributions.
+
+[0.6.2] - 2020-06-02
+--------------------
+
+Changed
+~~~~~~~
+* Disable automatic conversion of dates.
+
+
+[0.6.1] - 2020-06-02
+--------------------
+
+Added
+~~~~~
+* KDL Wagtail People page types.
+* Sources and notes fields to `Agent`.
+
+Changed
+~~~~~~~
+* Do not display French Republican dates by default.
+* Domain name, radicaltranslations.org.
+
+Fixed
+~~~~~
+* Agent search.
+
+
+[0.6.0] - 2020-06-01
+--------------------
+
+Added
+~~~~~
+* Log entries to the admin interface.
+* wagtailmenus app.
+* Conversion from Gregorian to French Republican dates.
+* Command to import `Resource` URLs from GSX.
+* Basic styling and typography.
+
+Changed
+~~~~~~~
+* Wagtail now serves the root URL.
+* Agents admin, add extra search fields and filters.
+* Reorganise KDL Wagtail templates.
+
+Fixed
+~~~~~
+* Add missing Wagtail apps.
+* `Resource`, `electronic_locator` import.
+
+
+[0.5.1] - 2020-05-27
+--------------------
+
+Changed
+~~~~~~~
+* When importing `Resource` check if a resource with the same title and date already
+  exists.
+* Import `Resource` relationships after all the resources are imported to avoid
+  conflicts.
+
+
+[0.5.0] - 2020-05-27
+--------------------
+
+Added
+~~~~~
+* New tests for `Resource`.
+* New tests for `Title`.
+* Original as a value for `Classification.edition` vocabulary.
+* nginx to serve media files.
+
+Changed
+~~~~~~~
+* Update vocabularies with values provided by the research team.
+
+
 [0.10.0] - 2020-12-07
 --------------------
 
