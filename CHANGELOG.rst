@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Fixed
+~~~~~
+* Do not display notes in bibliography page.
+
 
 [0.10.0] - 2020-12-07
 --------------------

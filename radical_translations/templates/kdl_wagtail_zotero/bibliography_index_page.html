@@ -1,0 +1,23 @@
+{% extends "kdl_wagtail_core/base_index_page.html" %}
+{% load wagtailcore_tags %}
+
+{% block page-children %}
+<div class="children">
+
+    {% if entries %}
+    <ul>
+        {% for entry in entries %}
+        {% if entry.item_type != 'note' %}
+        <li class="bibliography">
+            {{ entry.bib|richtext }}
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% else %}
+    <p>No bibliography entries found!</p>
+    {% endif %}
+
+</div>
+{% endblock page-children %}
