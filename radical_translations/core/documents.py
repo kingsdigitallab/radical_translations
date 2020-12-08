@@ -146,12 +146,12 @@ class ResourceDocument(Document):
         return titles
 
     def prepare_form_genre(self, instance):
-        return self._get_subjects(instance, "fast-forms")
+        return self._get_subjects(instance, ["fast-forms", "rt-agt"])
 
     def _get_subjects(self, instance, prefix):
         subjects = [
             {"label": item.label}
-            for item in instance.subjects.filter(vocabulary__prefix=prefix)
+            for item in instance.subjects.filter(vocabulary__prefix__in=prefix)
         ]
 
         for relationship in instance.get_paratext():
@@ -163,7 +163,7 @@ class ResourceDocument(Document):
         return subjects
 
     def prepare_subjects(self, instance):
-        return self._get_subjects(instance, "fast-topic")
+        return self._get_subjects(instance, ["fast-topic"])
 
     def prepare_date_display(self, instance):
         resource = self._get_resource(instance)
