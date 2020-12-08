@@ -9243,9 +9243,19 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .filter {
   text-align: left; }
 
+#filters button[aria-expanded]::before {
+  display: inline-block; }
+
+#filters button[aria-expanded="false"]::before {
+  content: url("/static/fontawesome/svgs/solid/caret-right.svg");
+  width: 5px; }
+
 #filters button[aria-expanded="true"] {
   background: #9b2923;
   color: white; }
+  #filters button[aria-expanded="true"]::before {
+    content: url("/static/fontawesome/svgs/solid/caret-down.svg");
+    width: 8px; }
 
 #filters .btn-group {
   border: 5px solid #d9d9d9;

@@ -2,7 +2,7 @@
     Filters <span 
         class="sup-icon" 
         data-toggle="tooltip" 
-        title="Click on a filter label to expand it and see the sub-filters. Click on 'Any' to apply all the sub-filters or click on the sub-filter label to only apply that. The number in the badge indicates how many records are available if that filter is applied.">
+        title="Click on a filter label to expand it and see the sub-filters. Click on 'Add all' to apply all the sub-filters or click on the sub-filter label to only apply that. The number in the badge indicates how many records are available if that filter is applied.">
         {% include "svgs/solid/info-circle.svg" %}
         </span>
 </h3>
@@ -19,16 +19,17 @@
             v-bind:class="hasFilter([facet.name]) ? 'btn-info' : ''"
             v-bind:data-target="'#' + facet.name"
             aria-expanded="false"
-            class="btn btn-outline-primary btn-sm"
+            class="btn btn-outline-primary btn-sm toggler"
             data-toggle="collapse"
-            type="button">{[ getFacetDisplayName(facet.name) ]} 
+            type="button">
+            {[ getFacetDisplayName(facet.name) ]} 
         </button>
         <button
             v-if="hasAny(facet)"
             v-on:click="updateFilters([facet.name, 'any'])"
             v-bind:class="hasFilter([facet.name, 'any']) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
             class="btn btn-outline-primary btn-sm"
-            type="button">Any
+            type="button">Add all
             <span class="badge badge-secondary">{[ getFacetCount(facet.buckets) ]}</span>
             <span class="sr-only">records</span>
         </button>
