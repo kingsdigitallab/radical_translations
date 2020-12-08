@@ -172,7 +172,7 @@ STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = [str(APPS_DIR.path("static"))]
+STATICFILES_DIRS = [str(APPS_DIR.path("static")), str(ROOT_DIR.path("node_modules"))]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -199,7 +199,7 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         "DIRS": [
             str(APPS_DIR.path("templates")),
-            str(APPS_DIR.path("static/fontawesome"))
+            str(APPS_DIR.path("static/fontawesome")),
         ],
         "OPTIONS": {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
@@ -292,7 +292,7 @@ LOGGING = {
 ELASTICSEARCH_DSL = {"default": {"hosts": f"{env('ELASTICSEARCH_HOST')}"}}
 
 ES_FACET_OPTIONS = {"order": {"_key": "asc"}, "size": 1000}
-ES_FUZZINESS_OPTIONS = {"fuzziness": "AUTO"}
+ES_FUZZINESS_OPTIONS = {"fuzziness": "1"}
 
 # Wagtail
 # ------------------------------------------------------------------------------

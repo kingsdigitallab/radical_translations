@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Changed
+~~~~~~~
+* Reduce the search fuzziness distance to 1.
+
 Fixed
 ~~~~~
 * Do not display notes in bibliography page.
