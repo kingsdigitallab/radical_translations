@@ -39,7 +39,7 @@ django-elasticsearch-dsl==7.1.4  # via -r requirements/./base.in, django-elastic
 django-environ==0.4.5     # via -r requirements/./base.in
 django-extensions==3.0.9  # via -r requirements/local.in
 django-geonames-place==0.6.0  # via -r requirements/./base.in
-django-kdl-wagtail==0.9.4  # via -r requirements/./base.in
+django-kdl-wagtail==0.9.6  # via -r requirements/./base.in
 django-model-utils==4.0.0  # via -r requirements/./base.in, django-geonames-place
 django-modelcluster==5.0.2  # via wagtail
 django-nine==0.2.3        # via django-elasticsearch-dsl-drf
