@@ -588,6 +588,7 @@ figure {
 .float-left,
 .float-right {
   display: block;
+  width: 100%;
 }
 
 .float-center {
@@ -730,11 +731,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .float-left,
   .float-right {
     figure {
-      max-width: 60%;
+      max-width: 50%;
     }
 
     .description {
-      max-width: 40%;
+      max-width: 50%;
+    }
+
+    img {
+      width: 100%;
     }
   }
 
@@ -1136,9 +1141,27 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 #filters {
 
+  button[aria-expanded] {
+    &::before {
+      display: inline-block;
+    }
+  }
+
+  button[aria-expanded="false"] {
+    &::before {
+      content: url("/static/fontawesome/svgs/solid/caret-right.svg");
+      width: 5px;
+    }
+  }
+
   button[aria-expanded="true"] {
     background: $primary;
     color: white;
+
+    &::before {
+      content: url("/static/fontawesome/svgs/solid/caret-down.svg");
+      width: 8px;
+    }
   }
 
   .btn-group {
