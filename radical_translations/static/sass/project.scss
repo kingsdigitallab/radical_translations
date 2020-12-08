@@ -371,6 +371,19 @@ nav,
   }
 }
 
+// Pagination
+
+.pagination {
+  .form-control {
+    min-width: 60px;
+  }
+
+  .input-group-text,
+  .page-link {
+    border-radius: 0 !important;
+  }
+}
+
 // Tabs
 
 .nav-tabs {
@@ -898,7 +911,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .pagination {
     display: grid;
-    grid-template-columns: repeat(9, auto)
+    grid-template-columns: repeat(9, auto);
+
+    .page-link {
+      width: 100%;
+    }
   }
 
   .people {
