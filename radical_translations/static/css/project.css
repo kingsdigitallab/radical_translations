@@ -8743,6 +8743,13 @@ nav,
   .navbar-toggler svg {
     height: 24px; }
 
+.pagination .form-control {
+  min-width: 60px; }
+
+.pagination .input-group-text,
+.pagination .page-link {
+  border-radius: 0 !important; }
+
 .nav-tabs {
   border-bottom: 5px solid #c3c1a8;
   margin-bottom: 16px;
@@ -9079,6 +9086,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .pagination {
     display: grid;
     grid-template-columns: repeat(9, auto); }
+    .pagination .page-link {
+      width: 100%; }
   .people .with-image .child-page-image {
     height: 300px; }
     .people .with-image .child-page-image img {
