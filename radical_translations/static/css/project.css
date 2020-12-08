@@ -8887,7 +8887,8 @@ figure img {
 .float-center,
 .float-left,
 .float-right {
-  display: block; }
+  display: block;
+  width: 100%; }
 
 .float-center figure {
   text-align: center; }
@@ -8985,10 +8986,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       grid-template-columns: 1fr; }
   .float-left figure,
   .float-right figure {
-    max-width: 60%; }
+    max-width: 50%; }
   .float-left .description,
   .float-right .description {
-    max-width: 40%; }
+    max-width: 50%; }
+  .float-left img,
+  .float-right img {
+    width: 100%; }
   .float-left figure {
     float: left; }
   .float-left .description {
