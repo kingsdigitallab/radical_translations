@@ -11,6 +11,15 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+Added
+~~~~~
+* Slider to range facets.
+* Analytics script.
+
+
 [0.10.1] - 2020-12-08
 --------------------
 
