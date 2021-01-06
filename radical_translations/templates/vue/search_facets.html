@@ -4,7 +4,7 @@
         data-toggle="tooltip" 
         title="Click on a filter label to expand it and see the sub-filters. Click on 'Add all' to apply all the sub-filters or click on the sub-filter label to only apply that. The number in the badge indicates how many records are available if that filter is applied.">
         {% include "svgs/solid/info-circle.svg" %}
-        </span>
+    </span>
 </h3>
 
 <div id="filters" class="mb-2">
@@ -41,17 +41,25 @@
         v-bind:id="facet.name"
         class="alert collapse"
         data-parent="#filters">
-        <template v-for="bucket in facet.buckets">
-            <button
-                v-if="getBucketValue(bucket) !== 'any'"
-                v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
-                v-bind:class="hasFilter([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
-                class="filter btn"
-                type="button">
-                {[ getBucketValue(bucket) ]} 
-                <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
-                <span class="sr-only">records</span>
-            </button>
+        <template v-if="facet.range">
+            <vue-slider
+                :data="facet.buckets"
+                :tooltip="'always'"
+                v-model="query_dates"></vue-slider>
+        </template>
+        <template v-else>
+            <template v-for="bucket in facet.buckets">
+                <button
+                    v-if="getBucketValue(bucket) !== 'any'"
+                    v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
+                    v-bind:class="hasFilter([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+                    class="filter btn"
+                    type="button">
+                    {[ getBucketValue(bucket) ]} 
+                    <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
+                    <span class="sr-only">records</span>
+                </button>
+            </template>
         </template>
     </div>
 </div>

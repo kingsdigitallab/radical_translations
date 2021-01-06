@@ -304,6 +304,7 @@ class ResourceDocument(Document):
                 )
                 place["place"] = {
                     "address": address,
+                    "geo": item.place.geo,
                     "country": {"name": item.place.country.name},
                 }
 
