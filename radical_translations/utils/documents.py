@@ -42,10 +42,14 @@ def get_place_field(options: Optional[Dict] = {}) -> fields.ObjectField:
             "address": fields.TextField(
                 fields={"raw": fields.KeywordField()}, **options
             ),
+            "geo": fields.GeoPointField(),
             "country": fields.ObjectField(
                 properties={
                     "name": fields.TextField(
-                        fields={"raw": fields.KeywordField()}, **options
+                        fields={
+                            "raw": fields.KeywordField(),
+                        },
+                        **options
                     )
                 }
             ),
