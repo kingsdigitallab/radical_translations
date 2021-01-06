@@ -1,11 +1,6 @@
 new Vue({
   el: '#app',
   components: {
-    'l-map': window.Vue2Leaflet.LMap,
-    'l-marker': window.Vue2Leaflet.LMarker,
-    'l-popup': window.Vue2Leaflet.LPopup,
-    'l-tile-layer': window.Vue2Leaflet.LTileLayer,
-    'l-marker-cluster': window.Vue2LeafletMarkerCluster,
     'vue-slider': window['vue-slider-component']
   },
   delimiters: ['{[', ']}'],
@@ -27,18 +22,7 @@ new Vue({
     ],
     page: 1,
     data: [],
-    data_suggest: [],
-    map: {
-      options: {
-        zoomSnap: 0.5
-      },
-      center: window.L.latLng(53.3439, 0),
-      show: true,
-      zoom: 3,
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }
+    data_suggest: []
   },
   watch: {
     query_dates: _.debounce(async function () {

@@ -34,14 +34,7 @@
 
                 {% include 'vue/pagination.html' %}
 
-                <button @click="map.show = !map.show">Toggle map</button>
-
-                <template v-if="map.show">
-                    {% include 'vue/search_results_map.html' %}
-                </template>
-                <template v-else>
-                    {% include 'vue/search_results.html' %}
-                </template>
+                {% include 'vue/search_results.html' %}
 
                 {% include 'vue/pagination.html' %}
             </div>
@@ -56,9 +49,5 @@
 {{ block.super }}
 
 <script src="{% static 'vue-slider-component/dist/vue-slider-component.umd.min.js' %}"></script>
-<script src="{% static 'leaflet/dist/leaflet.js' %}"></script>
-<script src="{% static 'leaflet.markercluster/dist/leaflet.markercluster.js' %}"></script>
-<script src="{% static 'vue2-leaflet/dist/vue2-leaflet.min.js' %}"></script>
-<script src="{% static 'js/Vue2LeafletMarkerCluster.js' %}"></script>
 <script src="{% static 'js/search.js' %}"></script>
 {% endblock javascript %}
