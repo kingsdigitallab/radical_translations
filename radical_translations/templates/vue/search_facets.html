@@ -44,7 +44,9 @@
         <template v-if="facet.range">
             <vue-slider
                 :data="facet.buckets"
+                :marks="rangeMarks"
                 :tooltip="'always'"
+                @drag-end="rangeSearch"
                 v-model="query_dates"></vue-slider>
         </template>
         <template v-else>

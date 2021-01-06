@@ -1,3 +1,6 @@
+const YEAR_MIN = 1516
+const YEAR_MAX = 1820
+
 new Vue({
   el: '#app',
   components: {
@@ -9,7 +12,7 @@ new Vue({
     url_suggest: new URL(`${window.location}api/suggest/`),
     query: '',
     query_text: '',
-    query_dates: [1516, 1820],
+    query_dates: [YEAR_MIN, YEAR_MAX],
     filters: [],
     ordering_default: 'score',
     ordering: 'score',
@@ -21,13 +24,11 @@ new Vue({
       { key: '-year', value: 'Year descending' }
     ],
     page: 1,
+    rangeMarks: (v) => v % 10 === 0,
     data: [],
     data_suggest: []
   },
   watch: {
-    query_dates: _.debounce(async function () {
-      this.data = await this.search()
-    }, 250),
     query_text: _.debounce(async function () {
       await this.getSuggestions()
     }, 250),
@@ -53,22 +54,21 @@ new Vue({
           const name = f.replace('_filter_', '')
           const range = name === 'year' ? true : false
           let buckets = this.data.facets[f][name]['buckets']
-          let max,
-            min = 0
+          let marks = []
 
           if (range) {
             //buckets = buckets.flatMap((b) => Array(b.doc_count).fill(b.key))
             buckets = buckets.map((b) => b.key)
-            max = Math.max(buckets)
-            min = Math.min(buckets)
+            buckets.indexOf(YEAR_MIN) === -1
+              ? buckets.unshift(YEAR_MIN)
+              : buckets
+            buckets.indexOf(YEAR_MAX) === -1 ? buckets.push(YEAR_MAX) : buckets
           }
 
           facets.push({
             name: name,
             range: range,
             buckets: buckets,
-            min: min,
-            max: max
           })
         })
       }
@@ -155,6 +155,9 @@ new Vue({
             (filter[1] === undefined || item[1] === filter[1])
         ) !== undefined
       )
+    },
+    rangeSearch: async function () {
+      this.data = await this.search()
     },
     search: async function () {
       const params = new URLSearchParams()
