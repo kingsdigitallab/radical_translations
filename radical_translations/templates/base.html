@@ -93,9 +93,11 @@
     {% endcomment %}
     <!-- place project specific Javascript in this file -->
     <script src="{% static 'js/project.js' %}"></script>
+    {% if not ds.DEBUG %}
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1e7d078aa1174ce5b3dd1ff8e693f8a1"}'></script>
     <!-- End Cloudflare Web Analytics -->
+    {% endif %}
     {% endblock javascript %}
   </body>
 </html>
