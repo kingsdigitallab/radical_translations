@@ -1,11 +1,20 @@
 new Vue({
   el: '#app',
+  components: {
+    'l-map': window.Vue2Leaflet.LMap,
+    'l-marker': window.Vue2Leaflet.LMarker,
+    'l-popup': window.Vue2Leaflet.LPopup,
+    'l-tile-layer': window.Vue2Leaflet.LTileLayer,
+    'l-marker-cluster': window.Vue2LeafletMarkerCluster,
+    'vue-slider': window['vue-slider-component']
+  },
   delimiters: ['{[', ']}'],
   data: {
     url: new URL(`${window.location}api/`),
     url_suggest: new URL(`${window.location}api/suggest/`),
     query: '',
     query_text: '',
+    query_dates: [1516, 1820],
     filters: [],
     ordering_default: 'score',
     ordering: 'score',
@@ -18,9 +27,23 @@ new Vue({
     ],
     page: 1,
     data: [],
-    data_suggest: []
+    data_suggest: [],
+    map: {
+      options: {
+        zoomSnap: 0.5
+      },
+      center: window.L.latLng(53.3439, 0),
+      show: true,
+      zoom: 3,
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }
   },
   watch: {
+    query_dates: _.debounce(async function () {
+      this.data = await this.search()
+    }, 250),
     query_text: _.debounce(async function () {
       await this.getSuggestions()
     }, 250),
@@ -44,9 +67,24 @@ new Vue({
       if (this.data.facets !== undefined) {
         Object.keys(this.data.facets).forEach((f) => {
           const name = f.replace('_filter_', '')
+          const range = name === 'year' ? true : false
+          let buckets = this.data.facets[f][name]['buckets']
+          let max,
+            min = 0
+
+          if (range) {
+            //buckets = buckets.flatMap((b) => Array(b.doc_count).fill(b.key))
+            buckets = buckets.map((b) => b.key)
+            max = Math.max(buckets)
+            min = Math.min(buckets)
+          }
+
           facets.push({
             name: name,
-            buckets: this.data.facets[f][name]['buckets']
+            range: range,
+            buckets: buckets,
+            min: min,
+            max: max
           })
         })
       }
@@ -85,10 +123,10 @@ new Vue({
     }
   },
   methods: {
-    getFacetDisplayName(name) {
+    getFacetDisplayName: function (name) {
       return name.replaceAll('_', ' ')
     },
-    clearFilters() {
+    clearFilters: function () {
       this.filters = []
       this.query = ''
     },
@@ -140,6 +178,9 @@ new Vue({
       if (this.query) {
         params.append('search', this.query)
       }
+
+      params.append('year__gte', this.query_dates[0])
+      params.append('year__lte', this.query_dates[1])
 
       if (!this.page || this.page > this.numberOfPages) {
         this.page = 1
