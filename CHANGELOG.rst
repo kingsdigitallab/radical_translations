@@ -14,9 +14,13 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Histogram to range facets.
+
 
 [0.10.2] - 2021-01-05
---------------------
+---------------------
 
 Added
 ~~~~~
@@ -25,7 +29,7 @@ Added
 
 
 [0.10.1] - 2020-12-08
---------------------
+---------------------
 
 Changed
 ~~~~~~~
@@ -37,7 +41,7 @@ Fixed
 
 
 [0.10.0] - 2020-12-07
---------------------
+---------------------
 
 Added
 ~~~~~

@@ -23,12 +23,16 @@
   "engines": {
     "node": ">=8"
   },
-  "browserslist": ["last 2 versions"],
+  "browserslist": [
+    "last 2 versions"
+  ],
   "scripts": {
     "dev": "gulp",
     "build": "gulp generate-assets"
   },
   "dependencies": {
+    "chart.js": "^2.9.4",
+    "vue-chartjs": "^3.5.1",
     "vue-slider-component": "^3.2.11"
   }
 }

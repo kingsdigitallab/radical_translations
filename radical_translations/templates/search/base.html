@@ -48,6 +48,8 @@
 {% block javascript %}
 {{ block.super }}
 
+<script src="{% static 'chart.js/dist/Chart.min.js' %}"></script>
+<script src="{% static 'vue-chartjs/dist/vue-chartjs.min.js' %}"></script>
 <script src="{% static 'vue-slider-component/dist/vue-slider-component.umd.min.js' %}"></script>
 <script src="{% static 'js/search.js' %}"></script>
 {% endblock javascript %}

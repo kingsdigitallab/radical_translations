@@ -1,6 +1,25 @@
 const YEAR_MIN = 1516
 const YEAR_MAX = 1820
 
+Vue.component('bar-chart', {
+  extends: VueChartJs.Bar,
+  mixins: [VueChartJs.mixins.reactiveProp],
+  mounted() {
+    this.renderChart(this.chartData, {
+      legend: { display: false },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    })
+  }
+})
+
 new Vue({
   el: '#app',
   components: {
@@ -54,21 +73,28 @@ new Vue({
           const name = f.replace('_filter_', '')
           const range = name === 'year' ? true : false
           let buckets = this.data.facets[f][name]['buckets']
-          let marks = []
+          let chartData = {
+            labels: [],
+            datasets: [{ label: name, backgroundColor: '#9b2923', data: [] }]
+          }
 
           if (range) {
             //buckets = buckets.flatMap((b) => Array(b.doc_count).fill(b.key))
-            buckets = buckets.map((b) => b.key)
-            buckets.indexOf(YEAR_MIN) === -1
-              ? buckets.unshift(YEAR_MIN)
+            buckets.findIndex((b) => b.key === YEAR_MIN) === -1
+              ? buckets.unshift({ key: YEAR_MIN, count: 0 })
               : buckets
-            buckets.indexOf(YEAR_MAX) === -1 ? buckets.push(YEAR_MAX) : buckets
+            buckets.findIndex((b) => b.key === YEAR_MAX) === -1
+              ? buckets.push({ key: YEAR_MAX })
+              : buckets
+            chartData.labels = buckets.map((b) => b.key)
+            chartData.datasets[0].data = buckets.map((b) => b.doc_count)
           }
 
           facets.push({
             name: name,
             range: range,
             buckets: buckets,
+            chartData: chartData
           })
         })
       }
@@ -166,8 +192,12 @@ new Vue({
         params.append('search', this.query)
       }
 
-      params.append('year__gte', this.query_dates[0])
-      params.append('year__lte', this.query_dates[1])
+      if (this.query_dates[0] !== YEAR_MIN) {
+        params.append('year__gte', this.query_dates[0])
+      }
+      if (this.query_dates[1] !== YEAR_MAX) {
+        params.append('year__lte', this.query_dates[1])
+      }
 
       if (!this.page || this.page > this.numberOfPages) {
         this.page = 1
