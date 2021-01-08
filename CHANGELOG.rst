@@ -17,6 +17,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Histogram to range facets.
+* Click event to the histogram.
 
 
 [0.10.2] - 2021-01-05

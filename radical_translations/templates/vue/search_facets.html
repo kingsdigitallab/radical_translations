@@ -42,7 +42,7 @@
         class="alert collapse"
         data-parent="#filters">
         <template v-if="facet.range">
-            <bar-chart :chart-data="facet.chartData" :height="50"></bar-chart>
+            <bar-chart :chart-data="facet.chartData" :height="50" :click-handler="handleChartClick"></bar-chart>
             <vue-slider
                 :data="facet.buckets"
                 :data-label="'key'"

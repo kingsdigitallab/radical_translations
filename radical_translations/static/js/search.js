@@ -3,8 +3,10 @@ const YEAR_MAX = 1820
 
 Vue.component('bar-chart', {
   extends: VueChartJs.Bar,
+  props: ['clickHandler'],
   mixins: [VueChartJs.mixins.reactiveProp],
   mounted() {
+    const self = this
     this.renderChart(this.chartData, {
       legend: { display: false },
       scales: {
@@ -15,6 +17,12 @@ Vue.component('bar-chart', {
             }
           }
         ]
+      },
+      onClick: function (evt, item) {
+        if (item.length > 0) {
+          const year = item[0]['_model'].label
+          self.clickHandler(year, year)
+        }
       }
     })
   }
@@ -169,6 +177,10 @@ new Vue({
       this.data_suggest = await fetch(this.url_suggest).then((response) =>
         response.json()
       )
+    },
+    handleChartClick: async function (from, to) {
+      this.query_dates = [from, to]
+      await this.rangeSearch()
     },
     hasAny: function (facet) {
       return facet.buckets.find((b) => this.getBucketValue(b) === 'any')
