@@ -102,7 +102,8 @@ new Vue({
             name: name,
             range: range,
             buckets: buckets,
-            chartData: chartData
+            chartData: chartData,
+            display: this.query_dates
           })
         })
       }
