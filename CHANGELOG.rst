@@ -14,6 +14,9 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Fixed
+~~~~~
+* Reset pagination when filtering by year.
 
 [0.10.3] - 2021-01-12
 --------------------

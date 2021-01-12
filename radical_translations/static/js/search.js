@@ -196,6 +196,7 @@ new Vue({
       )
     },
     rangeSearch: async function () {
+      this.page = 1
       this.data = await this.search()
     },
     search: async function () {
@@ -227,6 +228,7 @@ new Vue({
       )
 
       this.url.search = params.toString()
+      console.log(this.url.search)
       const response = await fetch(this.url)
 
       return response.json()
