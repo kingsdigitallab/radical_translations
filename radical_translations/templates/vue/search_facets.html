@@ -13,7 +13,7 @@
         :key="facet.name"
         class="btn-group"
         role="group"
-        aria-label="Grouped filters">
+        :aria-label="'Grouped filters for ' + getFacetDisplayName(facet.name)">
         <button
             v-bind:aria-controls="facet.name" 
             v-bind:class="hasFilter([facet.name]) ? 'btn-info' : ''"
