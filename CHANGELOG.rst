@@ -17,6 +17,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Data migration to merge duplicate libraries (`Organisation`).
+* Field `radical` to `Agent`.
 
 Changed
 ~~~~~~~

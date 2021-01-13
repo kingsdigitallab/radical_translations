@@ -21,6 +21,10 @@ class Agent(PolymorphicModel, TimeStampedModel):
     """Entity having a role in a resource, such as a person or organization."""
 
     name = models.CharField(max_length=512, help_text="The agent name.")
+    radical = models.BooleanField(
+        default=False,
+        help_text="Wether this person was considered a radical or not.",
+    )
 
     based_near = models.ManyToManyField(
         Place,
