@@ -18,6 +18,11 @@ Added
 ~~~~~
 * Data migration to merge duplicate libraries (`Organisation`).
 
+Changed
+~~~~~~~
+* `is_original` to include resources that are marked both as `original` and
+`source text`.
+
 Fixed
 ~~~~~
 * Reset pagination when filtering by year.

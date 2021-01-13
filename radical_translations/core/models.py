@@ -229,9 +229,13 @@ class Resource(TimeStampedModel):
         return False
 
     def is_original(self) -> bool:
-        return "original" in self.get_classification_edition().lower()
+        return any(
+            term in self.get_classification_edition().lower()
+            for term in ["original", "source text"]
+        )
 
     is_original.boolean = True  # type: ignore
+    is_original.short_description = "Is source text"
 
     def is_paratext(self) -> bool:
         return (
