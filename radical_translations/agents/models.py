@@ -169,6 +169,9 @@ class Person(Agent):
         ),
     )
 
+    class Meta:
+        ordering = ["family_name", "given_name", "name"]
+
     def get_main_places_names(self) -> str:
         return "; ".join([place.address for place in self.main_places.all()])
 
