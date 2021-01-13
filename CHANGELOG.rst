@@ -14,9 +14,14 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Data migration to merge duplicate libraries (`Organisation`).
+
 Fixed
 ~~~~~
 * Reset pagination when filtering by year.
+
 
 [0.10.3] - 2021-01-12
 --------------------
