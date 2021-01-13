@@ -13,6 +13,9 @@ def merge_libraries(apps, schema_editor):
     except Organisation.DoesNotExist:
         return
 
+    if not first or not last:
+        return
+
     for resource in last.resources.all():
         first.resources.add(resource)
 
