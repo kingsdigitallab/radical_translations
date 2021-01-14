@@ -72,6 +72,7 @@ new Vue({
     }
   },
   created: async function () {
+    this.loadSearchParams()
     this.data = await this.search()
   },
   computed: {
@@ -109,7 +110,9 @@ new Vue({
     },
     clearFilters: function () {
       this.filters = []
+      this.page = 1
       this.query = ''
+      this.query_dates = [YEAR_MIN, YEAR_MAX]
     },
     getBucketValue: function (bucket) {
       return bucket.key_as_string ? bucket.key_as_string : bucket.key
@@ -207,6 +210,37 @@ new Vue({
             (filter[1] === undefined || item[1] === filter[1])
         ) !== undefined
       )
+    },
+    loadSearchParams: function () {
+      const params = new URLSearchParams(window.location.search)
+
+      let key = 'page'
+      if (params.has(key)) {
+        this.page = params.get(key)
+        params.delete(key)
+      }
+
+      key = 'search'
+      if (params.has(key)) {
+        this.query = params.get(key)
+        params.delete(key)
+      }
+
+      key = 'year__gte'
+      if (params.has(key)) {
+        this.query_dates[0] = params.get(key)
+        params.delete(key)
+      }
+
+      key = 'year__lte'
+      if (params.has(key)) {
+        this.query_dates[1] = params.get(key)
+        params.delete(key)
+      }
+
+      for (const key of params.keys()) {
+        this.updateFilters([key.replace('__term', ''), params.get(key)])
+      }
     },
     rangeSearch: async function () {
       this.page = 1
