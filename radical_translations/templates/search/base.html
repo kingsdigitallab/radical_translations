@@ -35,14 +35,30 @@
 
                 {% include 'vue/pagination.html' %}
 
-                <button @click="map.show = !map.show">Toggle map</button>
+                <ul class="nav nav-tabs" id="result-views" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="list-view-tab" data-bs-toggle="tab" href="#list-view" role="tab" aria-controls="list" aria-selected="true">List</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="map-view-tab" data-bs-toggle="tab" href="#map-view" role="tab" aria-controls="map" aria-selected="false">Map</a>
+                    </li>
+                </ul>
 
-                <template v-if="map.show">
-                    {% include 'vue/search_results_map.html' %}
-                </template>
-                <template v-else>
-                    {% include 'vue/search_results.html' %}
-                </template>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
+                        {# <template v-else> #}
+                            {% include 'vue/search_results.html' %}
+                        {# </template> #}
+                    </div>
+                    <div class="tab-pane" id="map-view" role="tabpanel" aria-labelledby="map-view-tab">
+                        {# <template v-if="map.show"> #}
+                            {% include 'vue/search_results_map.html' %}
+                        {# </template> #}
+                    </div>
+                </div>
+
+
+                {# <button @click="map.show = !map.show">Toggle map</button> #}
 
                 {% include 'vue/pagination.html' %}
             </div>
