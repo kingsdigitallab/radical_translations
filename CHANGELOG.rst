@@ -20,6 +20,8 @@ Added
 * Field `radical` to `Agent`.
 * Data migration to merge duplicate paratext terms.
 * State management to search.
+* Help text to both filter types (main and secondary).
+* Help text to remove applied filters.
 
 Changed
 ~~~~~~~
@@ -27,6 +29,7 @@ Changed
 `source text`.
 * Exclude the original/source text terms from being indexed with the translation terms.
 * `Source text` and `translation` moved to top level filters.
+* Split filters view into main and secondary.
 
 Fixed
 ~~~~~
