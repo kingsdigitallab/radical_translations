@@ -9,7 +9,7 @@
 </button>
 <button
     v-for="filter in filters"
-    :key="filter[0]"
+    :key="filter[0] + filter[1]"
     v-on:click="updateFilters(filter)" 
     class="btn btn-info btn-sm spacing closeable"
     type="button">
