@@ -3,6 +3,7 @@
 
 {% block css %}
 {{ block.super }}
+<link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet">
 <link href="{% static 'vue-slider-component/theme/default.css' %}" rel="stylesheet">
 {% endblock css %}
 
@@ -34,7 +35,14 @@
 
                 {% include 'vue/pagination.html' %}
 
-                {% include 'vue/search_results.html' %}
+                <button @click="map.show = !map.show">Toggle map</button>
+
+                <template v-if="map.show">
+                    {% include 'vue/search_results_map.html' %}
+                </template>
+                <template v-else>
+                    {% include 'vue/search_results.html' %}
+                </template>
 
                 {% include 'vue/pagination.html' %}
             </div>
@@ -49,6 +57,8 @@
 {{ block.super }}
 
 <script src="{% static 'chart.js/dist/Chart.min.js' %}"></script>
+<script src="{% static 'leaflet/dist/leaflet.js' %}"></script>
+<script src="{% static 'vue2-leaflet/dist/vue2-leaflet.min.js' %}"></script>
 <script src="{% static 'vue-chartjs/dist/vue-chartjs.min.js' %}"></script>
 <script src="{% static 'vue-slider-component/dist/vue-slider-component.umd.min.js' %}"></script>
 <script src="{% static 'js/search.js' %}"></script>

@@ -31,6 +31,10 @@ Vue.component('bar-chart', {
 new Vue({
   el: '#app',
   components: {
+    'l-map': window.Vue2Leaflet.LMap,
+    'l-marker': window.Vue2Leaflet.LMarker,
+    'l-popup': window.Vue2Leaflet.LPopup,
+    'l-tile-layer': window.Vue2Leaflet.LTileLayer,
     'vue-slider': window['vue-slider-component']
   },
   delimiters: ['{[', ']}'],
@@ -55,7 +59,18 @@ new Vue({
     page: 1,
     rangeMarks: (v) => v % 10 === 0,
     data: [],
-    data_suggest: []
+    data_suggest: [],
+    map: {
+      options: {
+        zoomSnap: 0.5
+      },
+      center: window.L.latLng(53.3439, 0),
+      show: false,
+      zoom: 3,
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }
   },
   watch: {
     query_text: _.debounce(async function () {

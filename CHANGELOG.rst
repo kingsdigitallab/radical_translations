@@ -22,6 +22,7 @@ Added
 * State management to search.
 * Help text to both filter types (main and secondary).
 * Help text to remove applied filters.
+* Map view to the search results.
 
 Changed
 ~~~~~~~
