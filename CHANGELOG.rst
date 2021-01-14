@@ -23,6 +23,8 @@ Changed
 ~~~~~~~
 * `is_original` to include resources that are marked both as `original` and
 `source text`.
+* Exclude the original/source text terms from being indexed with the translation terms.
+* `Source text` and `translation` moved to top level filters.
 
 Fixed
 ~~~~~

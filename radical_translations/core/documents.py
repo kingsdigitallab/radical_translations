@@ -33,6 +33,7 @@ copy_to_content = {"copy_to": "content"}
 
 @registry.register_document
 class ResourceDocument(Document):
+    meta = fields.KeywordField()
     content = fields.TextField(attr="title.main_title", store=True)
 
     title = fields.TextField(
@@ -135,6 +136,13 @@ class ResourceDocument(Document):
         ):
             return related_instance.resource
 
+    def prepare_meta(self, instance):
+        if instance.is_original():
+            return "source texts"
+
+        if instance.is_translation():
+            return "translations"
+
     def prepare_title(self, instance):
         titles = [str(instance.title)]
 
@@ -216,6 +224,7 @@ class ResourceDocument(Document):
             for item in instance.classifications.filter(
                 edition__vocabulary__prefix=prefix
             )
+            if item.edition.label.lower() not in ["original", "source text"]
         ]
 
         for relationship in instance.get_paratext():
