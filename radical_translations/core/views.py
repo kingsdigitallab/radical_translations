@@ -129,6 +129,7 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "meta": {"field": "meta", "enabled": True, "options": ES_FACET_OPTIONS},
     }
 
     filter_fields = {
@@ -150,6 +151,7 @@ class ResourceViewSet(DocumentViewSet):
         "event": "events.title.raw",
         "event_place": "events.place.address.raw",
         "radical_date": "has_date_radical",
+        "meta": "meta",
     }
 
     highlight_fields = {

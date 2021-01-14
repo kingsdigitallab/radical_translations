@@ -8,6 +8,21 @@
 </h3>
 
 <div id="filters" class="mb-2">
+    <div 
+        v-for="bucket in meta_facets.buckets"
+        :key="bucket.key"
+        class="btn-group">
+        <button
+            v-on:click="updateFilters([meta_facets.name, getBucketValue(bucket)])"
+            v-bind:class="hasFilter([meta_facets.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+            class="filter btn"
+            type="button">
+            {[ getBucketValue(bucket) ]} 
+            <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
+            <span class="sr-only">records</span>
+        </button>
+    </div>
+
     <div
         v-for="facet in facets"
         :key="facet.name"

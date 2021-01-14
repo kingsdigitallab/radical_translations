@@ -35,8 +35,10 @@ new Vue({
   },
   delimiters: ['{[', ']}'],
   data: {
-    url: new URL(`${window.location}api/`),
-    url_suggest: new URL(`${window.location}api/suggest/`),
+    url: new URL(`${window.location.origin}${window.location.pathname}api/`),
+    url_suggest: new URL(
+      `${window.location.origin}${window.location.pathname}api/suggest/`
+    ),
     query: '',
     query_text: '',
     query_dates: [YEAR_MIN, YEAR_MAX],
@@ -74,6 +76,53 @@ new Vue({
   },
   computed: {
     facets: function () {
+      return this.getFacets().filter((f) => f.name !== 'meta')
+    },
+    meta_facets: function () {
+      const facets = this.getFacets().filter((f) => f.name === 'meta')
+      if (facets.length == 1) {
+        return facets[0]
+      }
+
+      return facets
+    },
+    numberOfPages: function () {
+      return Math.ceil(this.data.count / this.data.page_size)
+    },
+    suggestions: function () {
+      let suggestions = []
+
+      if (this.data_suggest !== undefined) {
+        Object.keys(this.data_suggest).forEach((s) => {
+          this.data_suggest[s][0].options.forEach((o) =>
+            suggestions.push(o.text)
+          )
+        })
+      }
+
+      return suggestions
+    }
+  },
+  methods: {
+    getFacetDisplayName: function (name) {
+      return name.replaceAll('_', ' ')
+    },
+    clearFilters: function () {
+      this.filters = []
+      this.query = ''
+    },
+    getBucketValue: function (bucket) {
+      return bucket.key_as_string ? bucket.key_as_string : bucket.key
+    },
+    getContributions: function (item) {
+      return item.contributions
+        .filter((c) => c.agent.name !== 'any')
+        .map((c) => ({
+          agent: c.agent,
+          roles: c.roles.filter((r) => r.label !== undefined)
+        }))
+    },
+    getFacets: function () {
       let facets = []
 
       if (this.data.facets !== undefined) {
@@ -123,42 +172,6 @@ new Vue({
       })
 
       return facets
-    },
-    numberOfPages: function () {
-      return Math.ceil(this.data.count / this.data.page_size)
-    },
-    suggestions: function () {
-      let suggestions = []
-
-      if (this.data_suggest !== undefined) {
-        Object.keys(this.data_suggest).forEach((s) => {
-          this.data_suggest[s][0].options.forEach((o) =>
-            suggestions.push(o.text)
-          )
-        })
-      }
-
-      return suggestions
-    }
-  },
-  methods: {
-    getFacetDisplayName: function (name) {
-      return name.replaceAll('_', ' ')
-    },
-    clearFilters: function () {
-      this.filters = []
-      this.query = ''
-    },
-    getBucketValue: function (bucket) {
-      return bucket.key_as_string ? bucket.key_as_string : bucket.key
-    },
-    getContributions: function (item) {
-      return item.contributions
-        .filter((c) => c.agent.name !== 'any')
-        .map((c) => ({
-          agent: c.agent,
-          roles: c.roles.filter((r) => r.label !== undefined)
-        }))
     },
     getFacetCount: function (buckets) {
       return buckets
@@ -228,7 +241,8 @@ new Vue({
       )
 
       this.url.search = params.toString()
-      console.log(this.url.search)
+      window.history.pushState({}, '', this.url.search)
+
       const response = await fetch(this.url)
 
       return response.json()
