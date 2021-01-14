@@ -18,6 +18,7 @@ Added
 ~~~~~
 * Data migration to merge duplicate libraries (`Organisation`).
 * Field `radical` to `Agent`.
+* Migration to merge duplicate paratext terms.
 
 Changed
 ~~~~~~~
