@@ -1,6 +1,14 @@
 <h2>Results: <span class="badge badge-secondary">{[ data.count ]}</span> records</h2>
 
-<h3 v-if="query || filters.length > 0">Current filters</h3>
+<h3 v-if="query || filters.length > 0">
+    Current filters
+    <span 
+        class="sup-icon" 
+        data-toggle="tooltip" 
+        title="It's possible to remove single filters by clicking on their labels or remove all filters at once, using the 'Clear all' button.">
+        {% include "svgs/solid/info-circle.svg" %}
+    </span>
+</h3>
 <button
     v-if="query"
     v-on:click="textSearch()"

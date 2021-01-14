@@ -1,4 +1,4 @@
-<h3>Search query</h3>
+<h3>Free text search</h3>
 <div class="dropdown mb-4">
     <input 
         aria-label="Type text to start a search query"
@@ -6,7 +6,7 @@
         v-model="query_text"
         v-on:keyup.13="textSearch()"
         list="suggestions"
-        placeholder="Search query..."
+        placeholder="Start typing..."
         type="text">
     <datalist id="suggestions">
         <option v-for="option in suggestions">{[ option ]}</option>
