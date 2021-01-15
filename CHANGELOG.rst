@@ -35,7 +35,7 @@ Changed
 
 Fixed
 ~~~~~
-* Reset pagination when filtering by year.
+* Reset pagination when filtering by year or updating filters.
 
 
 [0.10.3] - 2021-01-12
