@@ -1,6 +1,9 @@
 const YEAR_MIN = 1516
 const YEAR_MAX = 1820
 
+const META_FACETS = ['meta']
+const RANGE_FACETS = ['year']
+
 Vue.component('bar-chart', {
   extends: VueChartJs.Bar,
   props: ['clickHandler'],
@@ -93,13 +96,24 @@ new Vue({
   },
   computed: {
     facets: function () {
-      return this.getFacets().filter((f) => f.name !== 'meta')
+      return this.getFacets().filter(
+        (f) => ![...META_FACETS, ...RANGE_FACETS].includes(f.name)
+      )
     },
-    meta_facets: function () {
-      const facets = this.getFacets().filter((f) => f.name === 'meta')
+    metaFacets: function () {
+      const facets = this.getFacets().filter((f) =>
+        META_FACETS.includes(f.name)
+      )
       if (facets.length == 1) {
         return facets[0]
       }
+
+      return facets
+    },
+    rangeFacets: function () {
+      const facets = this.getFacets().filter((f) =>
+        RANGE_FACETS.includes(f.name)
+      )
 
       return facets
     },

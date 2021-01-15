@@ -1,22 +1,22 @@
 <h3>
     Filters
-        <span 
-            class="sup-icon" 
-            data-toggle="tooltip" 
-            title="Main filters can be applied by clicking on their label, secondary filters may be expanded to see sub-filters or the 'Apply all' button can be used to apply the whole set. For both type of filters the number in the badge shows the records available if that filter is applied.">
-            {% include "svgs/solid/info-circle.svg" %}
-        </span>
+    <span 
+        class="sup-icon" 
+        data-toggle="tooltip" 
+        title="Main filters can be applied by clicking on their label, secondary filters may be expanded to see sub-filters or the 'Apply all' button can be used to apply the whole set. For both type of filters the number in the badge shows the records available if that filter is applied.">
+        {% include "svgs/solid/info-circle.svg" %}
+    </span>
 </h3>
 
 <div id="filters" class="mb-2">
     <div class="main-filters">
         <div 
-            v-for="bucket in meta_facets.buckets"
-            :key="bucket.key"
-            class="btn-group">
+         v-for="bucket in metaFacets.buckets"
+         :key="bucket.key"
+         class="btn-group">
             <button
-                v-on:click="updateFilters([meta_facets.name, getBucketValue(bucket)])"
-                v-bind:class="hasFilter([meta_facets.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+                v-on:click="updateFilters([metaFacets.name, getBucketValue(bucket)])"
+                v-bind:class="hasFilter([metaFacets.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
                 class="filter btn"
                 type="button">
                 {[ getBucketValue(bucket) ]} 
@@ -24,20 +24,67 @@
                 <span class="sr-only">records</span>
             </button>
         </div>
+        <div
+            v-for="facet in rangeFacets"
+            :key="facet.name"
+            :aria-label="'Grouped filters for ' + getFacetDisplayName(facet.name)"
+            class="btn-group"
+            role="group">
+            <button
+                v-bind:aria-controls="facet.name" 
+                v-bind:class="hasFilter([facet.name]) ? 'btn-info' : ''"
+                v-bind:data-target="'#' + facet.name"
+                aria-expanded="true"
+                class="btn btn-outline-primary btn-sm toggler"
+                data-toggle="collapse"
+                type="button">
+                {[ getFacetDisplayName(facet.name) ]} 
+            </button>
+            <button
+                v-if="facet.range"
+                class="btn btn-outline-dark btn-sm"
+                type="button">{[ facet.display[0] ]}–{[ facet.display[1] ]}
+            </button>
+        </div>
+        <div
+            v-for="facet in rangeFacets"
+            v-bind:id="facet.name"
+            class="alert expand"
+            data-parent="#filters">
+            <bar-chart
+                :chart-data="facet.chartData"
+                :height="50"
+                :click-handler="handleChartClick"></bar-chart>
+            <vue-slider
+                :data="facet.buckets"
+                :data-label="'key'"
+                :data-value="'key'"
+                :interval="50"
+                :marks="true"
+                :hide-label="true"
+                :tooltip="'always'"
+                @drag-end="rangeSearch"
+                v-model="query_dates"></vue-slider>
+        </div>
     </div>
 
     <hr>
 
     <h4>Refine your search further
         <span 
-            class="sup-icon" 
-            data-toggle="tooltip" 
-            title="After expanding the list of filters by clicking on 'More filters', click on a filter label to expand it and see the sub-filters. Click on 'Add all' to apply all the sub-filters or click on the sub-filter label to only apply that. The number in the badge indicates how many records are available if that filter is applied.">
+                class="sup-icon" 
+                data-toggle="tooltip" 
+                title="After expanding the list of filters by clicking on 'More filters', click on a filter label to expand it and see the sub-filters. Click on 'Add all' to apply all the sub-filters or click on the sub-filter label to only apply that. The number in the badge indicates how many records are available if that filter is applied.">
             {% include "svgs/solid/info-circle.svg" %}
         </span>
     </h4>
 
-    <button aria-expanded="false" class="btn-group btn btn-sm filter toggler" data-toggle="collapse" data-target=".secondary-filters" type="button">&nbsp;More filters</button>
+    <button
+        aria-expanded="false"
+        class="btn-group btn btn-sm filter toggler"
+        data-toggle="collapse"
+        data-target=".secondary-filters"
+        type="button">&nbsp;More filters</button>
 
     <div class="secondary-filters alert collapse">
         <div
@@ -65,11 +112,6 @@
                 <span class="badge badge-secondary">{[ getFacetCount(facet.buckets) ]}</span>
                 <span class="sr-only">records</span>
             </button>
-            <button
-                v-if="facet.range"
-                class="btn btn-outline-dark btn-sm"
-                type="button">{[ facet.display[0] ]}–{[ facet.display[1] ]}
-            </button>
         </div>
 
         <div
@@ -78,35 +120,17 @@
             v-bind:id="facet.name"
             class="alert collapse"
             data-parent="#filters">
-            <template v-if="facet.range">
-                <bar-chart
-                    :chart-data="facet.chartData"
-                    :height="50"
-                    :click-handler="handleChartClick"></bar-chart>
-                <vue-slider
-                    :data="facet.buckets"
-                    :data-label="'key'"
-                    :data-value="'key'"
-                    :interval="50"
-                    :marks="true"
-                    :hide-label="true"
-                    :tooltip="'always'"
-                    @drag-end="rangeSearch"
-                    v-model="query_dates"></vue-slider>
-            </template>
-            <template v-else>
-                <template v-for="bucket in facet.buckets">
-                    <button
-                        v-if="getBucketValue(bucket) !== 'any'"
-                        v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
-                        v-bind:class="hasFilter([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
-                        class="filter btn"
-                        type="button">
-                        {[ getBucketValue(bucket) ]} 
-                        <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
-                        <span class="sr-only">records</span>
-                    </button>
-                </template>
+            <template v-for="bucket in facet.buckets">
+                <button
+                    v-if="getBucketValue(bucket) !== 'any'"
+                    v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
+                    v-bind:class="hasFilter([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+                    class="filter btn"
+                    type="button">
+                    {[ getBucketValue(bucket) ]} 
+                    <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
+                    <span class="sr-only">records</span>
+                </button>
             </template>
         </div>
     </div>

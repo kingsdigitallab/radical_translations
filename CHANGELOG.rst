@@ -32,6 +32,7 @@ Changed
 * `Source text` and `translation` moved to top level filters.
 * Split filters view into main and secondary.
 * Translation facet label to Translation Terms.
+* Move year facet to main filters section.
 
 Fixed
 ~~~~~
