@@ -9285,8 +9285,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   margin-left: 2rem; }
 
 .search-results-list {
-  padding-left: 16px;
-  padding-left: 1rem; }
+  margin-left: 16px;
+  margin-left: 1rem;
+  padding-left: 32px;
+  padding-left: 2rem; }
 
 .spacing {
   margin-bottom: 4px;
