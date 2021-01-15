@@ -31,10 +31,11 @@ Changed
 * Exclude the original/source text terms from being indexed with the translation terms.
 * `Source text` and `translation` moved to top level filters.
 * Split filters view into main and secondary.
+* Translation facet label to Translation Terms.
 
 Fixed
 ~~~~~
-* Reset pagination when filtering by year.
+* Reset pagination when filtering by year or updating filters.
 
 
 [0.10.3] - 2021-01-12

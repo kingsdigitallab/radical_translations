@@ -83,6 +83,7 @@ new Vue({
       this.data = await this.search()
     },
     filters: async function (newFilters, oldFilters) {
+      this.page = 1
       this.data = await this.search()
     }
   },
