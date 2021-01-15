@@ -31,6 +31,7 @@ Changed
 * Exclude the original/source text terms from being indexed with the translation terms.
 * `Source text` and `translation` moved to top level filters.
 * Split filters view into main and secondary.
+* Translation facet label to Translation Terms.
 
 Fixed
 ~~~~~

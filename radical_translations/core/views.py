@@ -64,7 +64,7 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "translation": {
+        "translation_terms": {
             "field": "classifications_translation.edition.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
@@ -137,7 +137,7 @@ class ResourceViewSet(DocumentViewSet):
         "printing_and_publishing": (
             "classifications_printing_publishing.edition.label.raw"
         ),
-        "translation": "classifications_translation.edition.label.raw",
+        "translation_terms": "classifications_translation.edition.label.raw",
         "contributor": "contributions.agent.name.raw",
         "contributor_role": "contributions.roles.label.raw",
         "year": "year",
