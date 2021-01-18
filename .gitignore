@@ -283,3 +283,5 @@ django-geonames-place/
 django_kdl_edtf
 geonames_place
 python-edtf
+
+package-lock.json
