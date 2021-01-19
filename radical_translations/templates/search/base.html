@@ -35,20 +35,54 @@
 
                 {% include 'vue/pagination.html' %}
 
-                <button @click="map.show = !map.show">Toggle map</button>
+                <ul class="nav nav-tabs" id="result-views" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a
+                            @click="map.show = false"
+                            class="nav-link active"
+                            id="list-view-tab"
+                            data-toggle="tab"
+                            href="#list-view"
+                            role="tab"
+                            aria-controls="list"
+                            aria-selected="true">
+                            <span class="small-icon">
+                                {% include "svgs/solid/list.svg" %}
+                            </span>
+                            List
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a
+                            @click="map.show = true"
+                            class="nav-link"
+                            id="map-view-tab"
+                            data-toggle="tab"
+                            href="#map-view"
+                            role="tab"
+                            aria-controls="map"
+                            aria-selected="false">
+                            <span class="small-icon">
+                                {% include "svgs/solid/map-marker.svg" %}
+                            </span>
+                            Map
+                        </a>
+                    </li>
+                </ul>
 
-                <template v-if="map.show">
-                    {% include 'vue/search_results_map.html' %}
-                </template>
-                <template v-else>
-                    {% include 'vue/search_results.html' %}
-                </template>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
+                        {% include 'vue/search_results.html' %}
+                    </div>
+                    <div class="tab-pane" id="map-view" role="tabpanel" aria-labelledby="map-view-tab">
+                        {% include 'vue/search_results_map.html' %}
+                    </div>
+                </div>
 
                 {% include 'vue/pagination.html' %}
             </div>
         </div>
     </div>
-    <div id="map"></div>
 </div>
 {% endblock search_body %}
 {% endblock main %}
