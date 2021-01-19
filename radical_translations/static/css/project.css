@@ -9279,6 +9279,18 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   border-color: #00548b;
   color: white; }
 
+/* Adjusting map display: rendering map at height: 70vh */
+.map-results {
+  width: 100%;
+  height: 100%;
+  display: block; }
+
+#map-view {
+  display: block;
+  height: 70vh;
+  width: 100%; }
+
+/* End map styling */
 .search-result dd {
   margin-bottom: 0;
   margin-left: 32px;
