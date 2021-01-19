@@ -17,4 +17,19 @@ $(function () {
 
   // enable tooltips
   $('[data-toggle="tooltip"]').tooltip()
+
+  // modals
+  $('.modal-toggle').on('click', function () {
+    const url = $(this).data('href')
+
+    if (url) {
+      const modalId = $(this).data('target')
+      $(`${modalId} .modal-body`).load(
+        `${window.location.origin}${url}`,
+        function () {
+          $(`${modalId}`).modal({ show: true })
+        }
+      )
+    }
+  })
 })

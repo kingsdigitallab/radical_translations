@@ -36,10 +36,10 @@
             {% endif %}
 
             {% if object.place_birth or object.date_birth or object.date_death or object.place_death %}
-            {% if object.place_birth %}{{ object.place_birth.address }}{% endif %}
+            {% if object.place_birth %}{% include 'geonames_place/includes/place.html' with place=object.place_birth place_type='birth' %}{% endif %}
             {% if object.date_birth %}{{ object.date_birth }}{% endif %} –
             {% if object.date_death %}{{ object.date_death }}{% endif %}
-            {% if object.place_death %}{{ object.place_death.address }}{% endif %}
+            {% if object.place_death %}{% include 'geonames_place/includes/place.html' with place=object.place_death place_type='death' %}{% endif %}
             {% endif %}
         </span>
 
@@ -59,7 +59,7 @@
             {% include "svgs/solid/map-marker-alt.svg" %}
             Main: 
             {% for place in object.based_near.all %}
-            <span class="badge badge-primary">{{ place.address }}</span>
+            <span class="badge badge-primary">{% include 'geonames_place/includes/place.html' with place=place place_type='main' %}</span>
             {% endfor %}
         </span>
         {% endif %}
@@ -70,7 +70,7 @@
             {% include "svgs/solid/map-marker-alt.svg" %}
             Other:
             {% for place in object.main_places.all %}
-            {{ place.address }}{% if not forloop.last %}, {% endif %}
+            {% include 'geonames_place/includes/place.html' with place=place place_type='other' %}{% if not forloop.last %}, {% endif %}
             {% endfor %}
         </span>
         {% endif %}
