@@ -8674,6 +8674,12 @@ h4, h5, h6,
   padding-left: 32px;
   padding-left: 2rem; }
 
+.modal-toggle {
+  border-bottom: 1px solid #222222; }
+  .modal-toggle:hover {
+    border-bottom: 1px solid #9b2923;
+    cursor: pointer; }
+
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;

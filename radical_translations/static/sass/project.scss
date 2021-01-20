@@ -283,6 +283,17 @@ h4, h5, h6,
   padding-left: 2rem;
 }
 
+// Modals
+
+.modal-toggle {
+  border-bottom: 1px solid $dark-gray;
+
+  &:hover {
+    border-bottom: 1px solid $radical-red;
+    cursor: pointer;
+  }
+}
+
 // Navigation
 
 nav,
