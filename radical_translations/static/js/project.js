@@ -24,12 +24,12 @@ $(function () {
 
     if (url) {
       const modalId = $(this).data('target')
-      $(`${modalId} .modal-body`).load(
-        `${window.location.origin}${url}`,
-        function () {
-          $(`${modalId}`).modal({ show: true })
-        }
-      )
+      const bodyId = `${modalId} .modal-body`
+
+      if (!$.trim($(bodyId).html())) {
+        $(bodyId).load(url, function () {})
+      }
+      $(modalId).modal({ show: true })
     }
   })
 })
