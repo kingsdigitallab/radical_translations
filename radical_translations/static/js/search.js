@@ -88,6 +88,10 @@ new Vue({
     filters: async function (newFilters, oldFilters) {
       this.page = 1
       this.data = await this.search()
+    },
+    'map.show': async function (newShow, oldShow) {
+      // this.$refs.map.mapObject.invalidateSize()
+      window.dispatchEvent(new Event("resize"));
     }
   },
   created: async function () {

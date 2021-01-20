@@ -3,7 +3,8 @@
         :center="map.center"
         :options="map.options"
         :zoom="map.zoom"
-        ref="map">
+        ref="map"
+        @shown="reloadMap()">
         <l-tile-layer
             :attribution="map.attribution"
             :url="map.url"></l-tile-layer>
