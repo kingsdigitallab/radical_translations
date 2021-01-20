@@ -90,7 +90,9 @@ new Vue({
       this.data = await this.search()
     },
     'map.show': function (newShow, oldShow) {
-      this.$refs.map.mapObject.invalidateSize()
+      if (newShow) {
+        window.dispatchEvent(new Event('resize'))
+      }
     }
   },
   created: async function () {
