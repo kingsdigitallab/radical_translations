@@ -9285,7 +9285,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   height: 100%;
   display: block; }
 
-#map-view {
+#map-view.active {
   display: block;
   height: 70vh;
   width: 100%; }
