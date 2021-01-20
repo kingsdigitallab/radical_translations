@@ -52,7 +52,7 @@
     {# Font Awesome map-marker-alt icon #}
     {% include "svgs/solid/map-marker-alt.svg" %}
     {% for place in object.places.all %}
-    {% include 'geonames_place/includes/place.html' place=place %}{% if not forloop.last %}, {% endif %}
+    {% include 'geonames_place/includes/place.html' with place=place place_type='publication' %}{% if not forloop.last %}, {% endif %}
     {% endfor %}
 </span>
 {% endif %}
