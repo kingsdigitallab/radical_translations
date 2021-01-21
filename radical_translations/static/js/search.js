@@ -69,7 +69,7 @@ new Vue({
       },
       center: window.L.latLng(53.3439, 0),
       show: false,
-      zoom: 3,
+      zoom: 4,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
