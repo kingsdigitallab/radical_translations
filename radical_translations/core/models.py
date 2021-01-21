@@ -676,6 +676,9 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
         help_text="Related resource.",
     )
 
+    class Meta:
+        ordering = ["related_to__date", "relationship_type", "resource__title"]
+
     def __str__(self) -> str:
         return f"{self.resource} -> {self.relationship_type.label} -> {self.related_to}"
 
