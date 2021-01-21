@@ -6,71 +6,71 @@
 <h1>{{ object.title }}</h1>
 
 <p class="metadata">
-{% with date=object.get_date %}
-{% if date %}
-<span class="metadata-block">
-    {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
-    <span{% if date.date_radical %} class="radical"{% endif %}>
-        {# Font Awesome Mars icon #}
-        {% include "svgs/solid/calendar.svg" %}
-        {{ date }}
+    {% with date=object.get_date %}
+    {% if date %}
+    <span class="metadata-block">
+        {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
+        <span{% if date.date_radical %} class="radical"{% endif %}>
+            {# Font Awesome Mars icon #}
+            {% include "svgs/solid/calendar.svg" %}
+            {{ date }}
+        </span>
     </span>
-</span>
-{% endif %}
-{% endwith %}
-<span class="metadata-block">
-    {% for subject in object.subjects.all %}
-    {{ subject.label }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</span>
-{% if object.edition_enumeration %}
-<span class="metadata-block">
-    {{ object.edition_enumeration }}
-</span>
-{% endif %}
-<span class="metadata-block">
-    {% for classification in object.classifications.all %}
-    {% with edition=classification.edition %}
-    <a
-        {% if edition.description %}
-        href="#"
-        data-toggle="tooltip"
-        title="{{ edition.description }}"
-        {% endif %}>{{ edition.label }}</a>
+    {% endif %}
     {% endwith %}
-    {% endfor %}
-</span>
-<span class="metadata-block">
-    {# Custom language icon "language2.svg" #}
-    {% include "svgs/solid/language3.svg" %}
-    {% for language in object.languages.all %}
-    {{ language }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</span>
-{% if object.places.all %}
-<span class="metadata-block">
-    {# Font Awesome map-marker-alt icon #}
-    {% include "svgs/solid/map-marker-alt.svg" %}
-    {% for place in object.places.all %}
-    {% include 'geonames_place/includes/place.html' with place=place.place place_type='publication' %}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</span>
-{% endif %}
-{% if object.electronic_locator %}
-<span class="metadata-block">
-    {# Font Awesome map-marker-alt icon #}
-    {% include "svgs/solid/external-link-alt.svg" %}
-    <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
-</span>
-{% endif %}
+    <span class="metadata-block">
+        {% for subject in object.subjects.all %}
+        {{ subject.label }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% if object.edition_enumeration %}
+    <span class="metadata-block">
+        {{ object.edition_enumeration }}
+    </span>
+    {% endif %}
+    <span class="metadata-block">
+        {% for classification in object.classifications.all %}
+        {% with edition=classification.edition %}
+        <a
+            {% if edition.description %}
+            href="#"
+            data-toggle="tooltip"
+            title="{{ edition.description }}"
+            {% endif %}>{{ edition.label }}</a>
+        {% endwith %}
+        {% endfor %}
+    </span>
+    <span class="metadata-block">
+        {# Custom language icon "language3.svg" #}
+        {% include "svgs/solid/language3.svg" %}
+        {% for language in object.languages.all %}
+        {{ language }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% if object.places.all %}
+    <span class="metadata-block">
+        {# Font Awesome map-marker-alt icon #}
+        {% include "svgs/solid/map-marker-alt.svg" %}
+        {% for place in object.places.all %}
+        {% include 'geonames_place/includes/place.html' with place=place.place place_type='publication' %}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% endif %}
+    {% if object.electronic_locator %}
+    <span class="metadata-block">
+        {# Font Awesome map-marker-alt icon #}
+        {% include "svgs/solid/external-link-alt.svg" %}
+        <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
+    </span>
+    {% endif %}
 </p>
 
 {% if object.is_translation %}
 <h2>Authors of source text</h2>
 <p>
-{% for author in object.get_authors_source_text %}
-<a href="{% url 'agent-detail' author.pk %}">{{ author.name }}</a>
-{% endfor %}
+    {% for author in object.get_authors_source_text %}
+    <a href="{% url 'agent-detail' author.pk %}">{{ author.name }}</a>
+    {% endfor %}
 </p>
 {% endif %}
 
