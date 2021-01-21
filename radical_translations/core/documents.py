@@ -140,8 +140,15 @@ class ResourceDocument(Document):
         if instance.is_original():
             return "source texts"
 
+        meta = []
+
+        if instance.get_paratext():
+            meta.append("paratexts")
+
         if instance.is_translation():
-            return "translations"
+            meta.append("translations")
+
+        return meta
 
     def prepare_title(self, instance):
         titles = [str(instance.title)]
