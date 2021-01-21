@@ -38,7 +38,7 @@
 <script src="{% static 'vue2-leaflet/dist/vue2-leaflet.min.js' %}"></script>
 
 <script>
-    const GEO = {lon: {{ object.geo.lon }}, lat: {{ object.geo.lat }}}
+    GEO = {lon: {{ object.geo.lon }}, lat: {{ object.geo.lat }}}
 </script>
 <script src="{% static 'js/place.js' %}"></script>
 {% endblock javascript %}

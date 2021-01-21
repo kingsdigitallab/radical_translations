@@ -19,5 +19,8 @@ new Vue({
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }
+  },
+  mounted: function () {
+      setTimeout(function() { window.dispatchEvent(new Event('resize')) }, 250)
   }
 })
