@@ -13,14 +13,15 @@ new Vue({
         zoomSnap: 0.5
       },
       center: GEO,
-      show: false,
-      zoom: 3,
+      zoom: 5,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }
   },
   mounted: function () {
-      setTimeout(function() { window.dispatchEvent(new Event('resize')) }, 250)
+    setTimeout(function () {
+      window.dispatchEvent(new Event('resize'))
+    }, 250)
   }
 })
