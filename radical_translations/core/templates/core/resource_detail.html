@@ -18,16 +18,19 @@
     </span>
     {% endif %}
     {% endwith %}
+    {% if object.subjects.all %}
     <span class="metadata-block">
         {% for subject in object.subjects.all %}
         {{ subject.label }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
     </span>
+    {% endif %}
     {% if object.edition_enumeration %}
     <span class="metadata-block">
         {{ object.edition_enumeration }}
     </span>
     {% endif %}
+    {% if object.classifications.all %}
     <span class="metadata-block">
         {% for classification in object.classifications.all %}
         {% with edition=classification.edition %}
@@ -40,6 +43,8 @@
         {% endwith %}
         {% endfor %}
     </span>
+    {% endif %}
+    {% if object.languages.all %}
     <span class="metadata-block">
         {# Custom language icon "language2.svg" #}
         {% include "svgs/solid/language3.svg" %}
@@ -47,6 +52,7 @@
         {{ language }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
     </span>
+    {% endif %}
     {% if object.places.all %}
     <span class="metadata-block">
         {# Font Awesome map-marker-alt icon #}
