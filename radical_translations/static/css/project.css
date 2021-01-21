@@ -8491,7 +8491,7 @@ body {
 .badge {
   border-radius: 0;
   font-family: 'Oswald', sans-serif;
-  font-size: .9125em;
+  font-size: .9375em;
   padding: .125em .4em .25em; }
 
 .btn {
@@ -8550,8 +8550,8 @@ footer {
 
 .metadata {
   font-family: 'Oswald', sans-serif;
-  font-size: 14.6px;
-  font-size: .9125rem; }
+  font-size: 15px;
+  font-size: .9375rem; }
   .metadata .author::before,
   .metadata .date::before {
     display: inline-block;
