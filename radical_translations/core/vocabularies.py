@@ -158,7 +158,7 @@ class VocabularyTranslationTerms(VocabularyBaseList):
                 "translation of a translation",
             ],
             ["Integral", "Integral"],
-            ["Original", "Original"],
+            ["Source-text", "Source-text"],
             [
                 "Partial",
                 "Partial",

@@ -37,6 +37,7 @@ Changed
 * Translation facet label to Translation Terms.
 * Move year facet to main filters section.
 * Order related resources by date, relationship and title.
+* Change `Original` to `Source text`.
 
 Fixed
 ~~~~~
