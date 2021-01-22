@@ -9,7 +9,7 @@
 {% if object.based_near.count %}
 <span class="metadata-block">
   {% for place in object.based_near.all %}
-  {% include 'geonames_place/includes/place.html' %}{% if not forloop.last %}, {% endif %}
+  {% include 'geonames_place/includes/place.html' with place=place %}{% if not forloop.last %}, {% endif %}
   {% endfor %}
 </span>
 {% endif %}
