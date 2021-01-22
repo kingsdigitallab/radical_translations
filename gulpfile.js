@@ -35,7 +35,7 @@ function pathsConfig(appName) {
       `${vendorsRoot}/popper.js/dist/umd/popper.js`,
       `${vendorsRoot}/bootstrap/dist/js/bootstrap.js`,
       `${vendorsRoot}/lodash/lodash.js`,
-      `${vendorsRoot}/vue/dist/vue.js`
+      `${vendorsRoot}/vue/dist/vue.min.js`
     ],
 
     app: this.app,
