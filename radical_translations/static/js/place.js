@@ -1,29 +1,16 @@
-new Vue({
-  el: '#app',
-  components: {
-    'l-map': window.Vue2Leaflet.LMap,
-    'l-marker': window.Vue2Leaflet.LMarker,
-    'l-tile-layer': window.Vue2Leaflet.LTileLayer
-  },
-  delimiters: ['{[', ']}'],
-  data: {
-    geo: GEO,
-    map: {
-      options: {
-        zoomSnap: 0.5
-      },
-      center: GEO,
-      zoom: 5,
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }
-  },
-  methods: {
-    handleMapReady: function () {
-      setTimeout(() => {
-        this.$refs.map.mapObject.invalidateSize()
-      }, 250)
-    }
-  }
+$(function () {
+  const map = L.map('map').setView(GEO, 5)
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map)
+
+  L.marker(GEO).addTo(map)
+
+  map.whenReady(function () {
+    setTimeout(() => {
+      map.invalidateSize()
+    }, 250)
+  })
 })
