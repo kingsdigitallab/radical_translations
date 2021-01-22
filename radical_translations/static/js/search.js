@@ -1,3 +1,4 @@
+const YEAR_MIN = 1516
 const YEAR_MAX = 1820
 
 const META_FACETS = ['meta']
