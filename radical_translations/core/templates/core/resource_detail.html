@@ -65,29 +65,30 @@
     </span>
     {% endif %}
     {% if object.languages.all %}
-<span class="metadata-block">
-    {# Custom language icon "language3.svg" #}
-    {% include "svgs/solid/language3.svg" %}
-    {% for language in object.languages.all %}
-    {{ language }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</span>
-{% if object.places.all %}
-<span class="metadata-block">
-    {# Font Awesome map-marker-alt icon #}
-    {% include "svgs/solid/map-marker-alt.svg" %}
-    {% for place in object.places.all %}
-    {% include 'geonames_place/includes/place.html'%}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</span>
-{% endif %}
-{% if object.electronic_locator %}
-<span class="metadata-block">
-    {# Font Awesome map-marker-alt icon #}
-    {% include "svgs/solid/external-link-alt.svg" %}
-    <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
-</span>
-{% endif %}
+    <span class="metadata-block">
+        {# Custom language icon "language3.svg" #}
+        {% include "svgs/solid/language3.svg" %}
+        {% for language in object.languages.all %}
+        {{ language }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% endif %}
+    {% if object.places.all %}
+    <span class="metadata-block">
+        {# Font Awesome map-marker-alt icon #}
+        {% include "svgs/solid/map-marker-alt.svg" %}
+        {% for place in object.places.all %}
+        {% include 'geonames_place/includes/place.html'%}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    {% endif %}
+    {% if object.electronic_locator %}
+    <span class="metadata-block">
+        {# Font Awesome map-marker-alt icon #}
+        {% include "svgs/solid/external-link-alt.svg" %}
+        <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
+    </span>
+    {% endif %}
 </p>
 
 {% if object.is_translation %}
