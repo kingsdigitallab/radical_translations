@@ -16,9 +16,9 @@
 {% block footer %}{% endblock footer %}
 
 {% block main %}
-<h1>{{ object.address }}, {{ object.country.name }}</h1>
+<h2>{{ object.address }}, {{ object.country.name }}</h2>
 <div id="app">
-    <div style="height: 500px; width: 100%">
+    <div class="map-modal">
         <l-map
             :center="map.center"
             :options="map.options"

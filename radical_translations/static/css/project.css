@@ -8674,11 +8674,31 @@ h4, h5, h6,
   padding-left: 32px;
   padding-left: 2rem; }
 
+.modal-body main,
+.modal-body .main {
+  padding: 0; }
+
 .modal-toggle {
   border-bottom: 1px solid #222222; }
   .modal-toggle:hover {
     border-bottom: 1px solid #9b2923;
     cursor: pointer; }
+
+#place-modal .close {
+  font-size: 48px;
+  font-size: 3rem;
+  padding: 4px 16px;
+  padding: .25rem 1rem; }
+
+#place-modal .place-modal {
+  padding: 8px 16px 4px;
+  padding: .5rem 1rem .25rem; }
+
+#place-modal .modal-body,
+#place-modal .modal-footer,
+#place-modal .modal-header {
+  padding: 8px 16px;
+  padding: .5rem 1rem; }
 
 nav,
 .main-menu {
@@ -9291,10 +9311,16 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   height: 100%;
   display: block; }
 
+.map-modal,
 #map-view.active {
   display: block;
-  height: 70vh;
   width: 100%; }
+
+.map-modal {
+  height: 50vh; }
+
+#map-view.active {
+  height: 70vh; }
 
 /* End map styling */
 .search-result dd {
