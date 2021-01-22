@@ -283,6 +283,41 @@ h4, h5, h6,
   padding-left: 2rem;
 }
 
+// Modals
+
+.modal-body {
+  main,
+  .main {
+    padding: 0;
+  }
+}
+
+.modal-toggle {
+  border-bottom: 1px solid $dark-gray;
+
+  &:hover {
+    border-bottom: 1px solid $radical-red;
+    cursor: pointer;
+  }
+}
+
+#place-modal {
+  .close {
+    font-size: 3rem;
+    padding: .25rem 1rem;
+  }
+
+  .place-modal {
+    padding: .5rem 1rem .25rem;
+  }
+
+  .modal-body,
+  .modal-footer,
+  .modal-header {
+    padding: .5rem 1rem;
+  }
+}
+
 // Navigation
 
 nav,
@@ -1200,10 +1235,18 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   display: block;
 }
 
+.map-modal,
 #map-view.active {
   display: block;
-  height: 70vh;
   width: 100%;
+}
+
+.map-modal {
+  height: 50vh;
+}
+
+#map-view.active {
+  height: 70vh;
 }
 
 /* End map styling */

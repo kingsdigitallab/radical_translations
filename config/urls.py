@@ -18,6 +18,7 @@ urlpatterns = [
     path("database/agents/", include("radical_translations.agents.urls")),
     path("database/events/", include("radical_translations.events.urls")),
     path("database/resources/", include("radical_translations.core.urls")),
+    path("database/other/", include("radical_translations.utils.urls")),
     # Wagtail
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),

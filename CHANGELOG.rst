@@ -25,6 +25,7 @@ Added
 * Map view to the search results.
 * Tag to `source text` search results.
 * `Paratext` search filter.
+* Modal view for `Place` references.
 
 Changed
 ~~~~~~~

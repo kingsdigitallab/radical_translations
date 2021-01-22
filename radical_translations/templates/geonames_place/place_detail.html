@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}{{ object.address }}{% endblock title %}
+
+{% block css %}
+{{ block.super }}
+<link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block header %}{% endblock header %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block footer %}{% endblock footer %}
+
+{% block main %}
+<h2>{{ object.address }}, {{ object.country.name }}</h2>
+<div id="app">
+  <div class="map-modal">
+    <l-map
+      :center="map.center"
+      :options="map.options"
+      :zoom="map.zoom"
+      @ready="handleMapReady"
+      ref="map">
+      <l-tile-layer :attribution="map.attribution" :url="map.url"></l-tile-layer>
+      <l-marker :lat-lng="geo"></l-marker>
+    </l-map>
+  </div>
+</div>
+{% endblock main %}
+
+{% block javascript %}
+<script src="{% static 'leaflet/dist/leaflet.js' %}"></script>
+<script src="{% static 'vue2-leaflet/dist/vue2-leaflet.min.js' %}"></script>
+
+<script>
+  GEO = {lon: {{ object.geo.lon }}, lat: {{ object.geo.lat }}}
+</script>
+<script src="{% static 'js/place.js' %}"></script>
+{% endblock javascript %}

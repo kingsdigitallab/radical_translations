@@ -1,4 +1,7 @@
 /* Project specific Javascript goes here. */
+const dispatchWindowResizeEvent = function () {
+  window.dispatchEvent(new Event('resize'))
+}
 
 $(function () {
   // highlight active tab and allow permalink for bibliography and record pages
@@ -17,4 +20,22 @@ $(function () {
 
   // enable tooltips
   $('[data-toggle="tooltip"]').tooltip()
+
+  // modals
+  $('.modal-toggle').on('click', function () {
+    const url = $(this).data('href')
+
+    if (url) {
+      const modalId = '#place-modal'
+      const bodyId = `${modalId} .modal-body`
+
+      $(bodyId).load(url, function () {
+        $(modalId)
+          .modal({ show: true })
+          .on('shown.bs.modal', function () {
+            dispatchWindowResizeEvent()
+          })
+      })
+    }
+  })
 })
