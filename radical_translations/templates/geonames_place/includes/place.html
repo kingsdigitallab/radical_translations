@@ -1,8 +1,3 @@
-{% with modal_id=place.id|stringformat:'d'|add:'-'|add:place_type|add:'-modal' %}
-<a
-    class="button modal-toggle"
-    data-href="{% url 'place-detail' place.id %}"
-    data-target="#{{ modal_id }}">
-    {{ place.address }}
+<a class="button modal-toggle" data-href="{% url 'place-detail' place.id %}">
+  {{ place.address }}
 </a>
-{% endwith %}

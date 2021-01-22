@@ -8,97 +8,110 @@
 <!-- Bio / Record tabs -->
 {% if object.biographies.count %}
 <nav>
-    <ul class="nav nav-tabs" id="bio-record" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="record-tab" data-toggle="tab" href="#record-details" role="tab" aria-controls="record-details" aria-selected="true">Record details</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab" aria-controls="bio" aria-selected="false">Biography</a>
-        </li>
-    </ul>
+  <ul class="nav nav-tabs" id="bio-record" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link active"
+        id="record-tab"
+        data-toggle="tab"
+        href="#record-details"
+        role="tab"
+        aria-controls="record-details"
+        aria-selected="true">Record details</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link"
+         id="bio-tab"
+         data-toggle="tab"
+         href="#bio"
+         role="tab"
+         aria-controls="bio"
+         aria-selected="false">Biography</a>
+    </li>
+  </ul>
 </nav>
 {% endif %}
 
 <!-- Tab panes -->
 <div class="tab-content">
-    <p class="metadata">
-    <span class="metadata-block">
-        {% include "agents/includes/noble.html" %}
-        {% if object.gender == "m" %}
-        {# Font Awesome mars icon #}
-        {% include "svgs/solid/mars.svg" %}
-        {% elif object.gender == "f" %}
-        {# Font Awesome venus icon #}
-        {% include "svgs/solid/venus.svg" %}
-        {% else %}
-        {# Font Awesome question mark icon #}
-        {% include "svgs/solid/question.svg" %}
-        {% endif %}
-
-        {% if object.place_birth or object.date_birth or object.date_death or object.place_death %}
-        {% if object.place_birth %}{% include 'geonames_place/includes/place.html' with place=object.place_birth place_type='birth' %}{% endif %}
-        {% if object.date_birth %}{{ object.date_birth }}{% endif %} –
-        {% if object.date_death %}{{ object.date_death }}{% endif %}
-        {% if object.place_death %}{% include 'geonames_place/includes/place.html' with place=object.place_death place_type='death' %}{% endif %}
-        {% endif %}
-    </span>
-
-    {% if object.languages.count %}
-    <span class="metadata-block">
-        {# Custom language icon "language3.svg" #}
-        {% include "svgs/solid/language3.svg" %}
-        {% for language in object.languages.all %}
-        {{ language.label }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </span>
+  <p class="metadata">
+  <span class="metadata-block">
+    {% include "agents/includes/noble.html" %}
+    {% if object.gender == "m" %}
+    {# Font Awesome mars icon #}
+    {% include "svgs/solid/mars.svg" %}
+    {% elif object.gender == "f" %}
+    {# Font Awesome venus icon #}
+    {% include "svgs/solid/venus.svg" %}
+    {% else %}
+    {# Font Awesome question mark icon #}
+    {% include "svgs/solid/question.svg" %}
     {% endif %}
 
-    {% if object.based_near.count %}
-    <span class="metadata-block">
-        {# Font Awesome map-marker-alt icon #}
-        {% include "svgs/solid/map-marker-alt.svg" %}
-        Main: 
-        {% for place in object.based_near.all %}
-        <span class="badge badge-primary">{% include 'geonames_place/includes/place.html' with place=place place_type='main' %}</span>
-        {% endfor %}
-    </span>
+    {% if object.place_birth or object.date_birth or object.date_death or object.place_death %}
+    {% if object.place_birth %}{% include 'geonames_place/includes/place.html' %}{% endif %}
+    {% if object.date_birth %}{{ object.date_birth }}{% endif %} –
+    {% if object.date_death %}{{ object.date_death }}{% endif %}
+    {% if object.place_death %}{% include 'geonames_place/includes/place.html' %}{% endif %}
     {% endif %}
+  </span>
 
-    {% if object.main_places.count %}
-    <span class="metadata-block">
-        {# Font Awesome map-marker-alt icon #}
-        {% include "svgs/solid/map-marker-alt.svg" %}
-        Other:
-        {% for place in object.main_places.all %}
-        {% include 'geonames_place/includes/place.html' with place=place place_type='other' %}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </span>
-    {% endif %}
+  {% if object.languages.count %}
+  <span class="metadata-block">
+    {# Custom language icon "language3.svg" #}
+    {% include "svgs/solid/language3.svg" %}
+    {% for language in object.languages.all %}
+    {{ language.label }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+  </span>
+  {% endif %}
 
-    <span class="metadata-block">
-        {% include "agents/includes/roles.html" %}
-    </span>
-    {% include "agents/includes/pages.html" %}
-    </p>
+  {% if object.based_near.count %}
+  <span class="metadata-block">
+    {# Font Awesome map-marker-alt icon #}
+    {% include "svgs/solid/map-marker-alt.svg" %}
+    Main: 
+    {% for place in object.based_near.all %}
+    <span class="badge badge-primary">{% include 'geonames_place/includes/place.html' %}</span>
+    {% endfor %}
+  </span>
+  {% endif %}
 
-    <div class="tab-pane active" id="record-details" role="tabpanel" aria-labelledby="record-tab">
-        {% include "agents/includes/contributed_to.html" %}
+  {% if object.main_places.count %}
+  <span class="metadata-block">
+    {# Font Awesome map-marker-alt icon #}
+    {% include "svgs/solid/map-marker-alt.svg" %}
+    Other:
+    {% for place in object.main_places.all %}
+    {% include 'geonames_place/includes/place.html' %}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+  </span>
+  {% endif %}
 
-        {% include "agents/includes/agents.html" with title='Knows' agents=object.knows %}
+  <span class="metadata-block">
+    {% include "agents/includes/roles.html" %}
+  </span>
+  {% include "agents/includes/pages.html" %}
+  </p>
 
-        {% include "agents/includes/agents.html" with title='Member of' agents=object.member_of %}
+  <div class="tab-pane active" id="record-details" role="tabpanel" aria-labelledby="record-tab">
+    {% include "agents/includes/contributed_to.html" %}
 
-        {% include "includes/object_notes.html" %}
-    </div>
+    {% include "agents/includes/agents.html" with title='Knows' agents=object.knows %}
 
-    {% if object.biographies.count %}
-    <div class="tab-pane" id="bio" role="tabpanel" aria-labelledby="bio-tab">
-        <h2>Biography</h2>
-        {% for page in object.biographies.all %}
-        {% include "cms/includes/biography.html" %}
-        {% endfor %}
-    </div>
-    {% endif %}
+    {% include "agents/includes/agents.html" with title='Member of' agents=object.member_of %}
+
+    {% include "includes/object_notes.html" %}
+  </div>
+
+  {% if object.biographies.count %}
+  <div class="tab-pane" id="bio" role="tabpanel" aria-labelledby="bio-tab">
+    <h2>Biography</h2>
+    {% for page in object.biographies.all %}
+    {% include "cms/includes/biography.html" %}
+    {% endfor %}
+  </div>
+  {% endif %}
 </div>
 {% endblock main %}
 
