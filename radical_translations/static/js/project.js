@@ -29,12 +29,10 @@ $(function () {
       const modalId = '#place-modal'
       const bodyId = `${modalId} .modal-body`
 
-      $(`${modalId} .modal-title`).html('Loading...')
       $(bodyId).load(url, function () {
         $(modalId)
           .modal({ show: true })
           .on('shown.bs.modal', function () {
-            $(`${modalId} .modal-title`).html($(`${bodyId} h1`).html())
             dispatchWindowResizeEvent()
           })
       })

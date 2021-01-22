@@ -18,19 +18,17 @@
 {% block main %}
 <h2>{{ object.address }}, {{ object.country.name }}</h2>
 <div id="app">
-    <div class="map-modal">
-        <l-map
-            :center="map.center"
-            :options="map.options"
-            :zoom="map.zoom"
-            @ready="handleMapReady"
-            ref="map">
-            <l-tile-layer
-                :attribution="map.attribution"
-                :url="map.url"></l-tile-layer>
-            <l-marker :lat-lng="geo"></l-marker>
-        </l-map>
-    </div>
+  <div class="map-modal">
+    <l-map
+      :center="map.center"
+      :options="map.options"
+      :zoom="map.zoom"
+      @ready="handleMapReady"
+      ref="map">
+      <l-tile-layer :attribution="map.attribution" :url="map.url"></l-tile-layer>
+      <l-marker :lat-lng="geo"></l-marker>
+    </l-map>
+  </div>
 </div>
 {% endblock main %}
 
@@ -39,7 +37,7 @@
 <script src="{% static 'vue2-leaflet/dist/vue2-leaflet.min.js' %}"></script>
 
 <script>
-    GEO = {lon: {{ object.geo.lon }}, lat: {{ object.geo.lat }}}
+  GEO = {lon: {{ object.geo.lon }}, lat: {{ object.geo.lat }}}
 </script>
 <script src="{% static 'js/place.js' %}"></script>
 {% endblock javascript %}
