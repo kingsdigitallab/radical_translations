@@ -148,10 +148,7 @@
 {% include "includes/object_notes.html" %}
 {% endblock main %}
 
+{% endblock modal %}
 {% block modal %}
-{% if object.places.all %}
-{% for place in object.places.all %}
-{% include 'geonames_place/includes/place_modal.html' with place=place.place place_type='publication' %}
-{% endfor %}
-{% endif %}
+{% include 'geonames_place/includes/place_modal.html' %}
 {% endblock modal %}

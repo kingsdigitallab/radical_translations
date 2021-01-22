@@ -1,4 +1,3 @@
-const YEAR_MIN = 1516
 const YEAR_MAX = 1820
 
 const META_FACETS = ['meta']
@@ -91,7 +90,7 @@ new Vue({
     },
     'map.show': function (newShow, oldShow) {
       if (newShow) {
-        window.dispatchEvent(new Event('resize'))
+        dispatchWindowResizeEvent()
       }
     }
   },

@@ -1,4 +1,7 @@
 /* Project specific Javascript goes here. */
+const dispatchWindowResizeEvent = function () {
+  window.dispatchEvent(new Event('resize'))
+}
 
 $(function () {
   // highlight active tab and allow permalink for bibliography and record pages
@@ -23,13 +26,18 @@ $(function () {
     const url = $(this).data('href')
 
     if (url) {
-      const modalId = $(this).data('target')
+      const modalId = '#place-modal'
       const bodyId = `${modalId} .modal-body`
 
-      if (!$.trim($(bodyId).html())) {
-        $(bodyId).load(url, function () {})
-      }
-      $(modalId).modal({ show: true })
+      $(`${modalId} .modal-title`).html('Loading...')
+      $(bodyId).load(url, function () {
+        $(modalId)
+          .modal({ show: true })
+          .on('shown.bs.modal', function () {
+            $(`${modalId} .modal-title`).html($(`${bodyId} h1`).html())
+            dispatchWindowResizeEvent()
+          })
+      })
     }
   })
 })

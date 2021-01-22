@@ -23,6 +23,7 @@
             :center="map.center"
             :options="map.options"
             :zoom="map.zoom"
+            @ready="handleMapReady"
             ref="map">
             <l-tile-layer
                 :attribution="map.attribution"
