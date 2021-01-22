@@ -1,5 +1,4 @@
 $(function () {
-  L.Icon.Default.imagePath = '/static/leaflet/dist/images/'
   const map = L.map('map').setView(GEO, 5)
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
