@@ -231,7 +231,7 @@ class ResourceDocument(Document):
             for item in instance.classifications.filter(
                 edition__vocabulary__prefix=prefix
             )
-            if item.edition.label.lower() not in ["original", "source text"]
+            if item.edition.label.lower() not in ["original", "source-text"]
         ]
 
         for relationship in instance.get_paratext():

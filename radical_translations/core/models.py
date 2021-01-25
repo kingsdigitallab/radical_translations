@@ -231,7 +231,7 @@ class Resource(TimeStampedModel):
     def is_original(self) -> bool:
         return any(
             term in self.get_classification_edition().lower()
-            for term in ["original", "source text"]
+            for term in ["original", "source-text"]
         )
 
     is_original.boolean = True  # type: ignore
