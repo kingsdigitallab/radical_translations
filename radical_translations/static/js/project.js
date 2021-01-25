@@ -4,6 +4,8 @@ const dispatchWindowResizeEvent = function () {
 }
 
 $(function () {
+  L.Icon.Default.imagePath = '/static/leaflet/dist/images/'
+
   // highlight active tab and allow permalink for bibliography and record pages
   const hash = window.location.hash
 

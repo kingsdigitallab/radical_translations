@@ -35,7 +35,11 @@ function pathsConfig(appName) {
       `${vendorsRoot}/popper.js/dist/umd/popper.js`,
       `${vendorsRoot}/bootstrap/dist/js/bootstrap.js`,
       `${vendorsRoot}/lodash/lodash.js`,
-      `${vendorsRoot}/vue/dist/vue.min.js`
+      `${vendorsRoot}/chart.js/dist/Chart.min.js`,
+      `${vendorsRoot}/leaflet/dist/leaflet.js`,
+      `${vendorsRoot}/vue/dist/vue.min.js`,
+      `${vendorsRoot}/vue-chartjs/dist/vue-chartjs.min.js`,
+      `${vendorsRoot}/vue-slider-component/dist/vue-slider-component.umd.min.js`
     ],
 
     app: this.app,

@@ -47,7 +47,7 @@ services:
     volumes:
       - .:/app
       # http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
-      - /app/node_modules
+      - ./node_modules:/app/node_modules
     command: npm run dev
     ports:
       - '3000:3000'

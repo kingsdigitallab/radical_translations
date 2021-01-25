@@ -8491,8 +8491,8 @@ body {
 .badge {
   border-radius: 0;
   font-family: 'Oswald', sans-serif;
-  font-size: .9375em;
-  padding: .125em .4em .25em; }
+  font-size: 0.9375em;
+  padding: 0.125em 0.4em 0.25em; }
 
 .btn {
   border-radius: 0;
@@ -8518,7 +8518,7 @@ strong {
           filter: invert(100%);
   height: 12px;
   width: 12px;
-  margin-left: .5em;
+  margin-left: 0.5em;
   vertical-align: -0.1875em; }
 
 footer {
@@ -8551,7 +8551,7 @@ footer {
 .metadata {
   font-family: 'Oswald', sans-serif;
   font-size: 15px;
-  font-size: .9375rem; }
+  font-size: 0.9375rem; }
   .metadata .author::before,
   .metadata .date::before {
     display: inline-block;
@@ -8583,8 +8583,8 @@ footer {
 .sup-icon svg {
   color: #808080;
   fill: #808080;
-  height: .6125em;
-  margin-top: -.5em; }
+  height: 0.6125em;
+  margin-top: -0.5em; }
   .sup-icon:hover,
   .sup-icon svg:hover {
     cursor: pointer; }
@@ -8618,8 +8618,12 @@ footer {
 .tooltip-inner {
   text-align: left; }
 
-h1, h2, h3,
-h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .card-header {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 100, 'wght' 700;
@@ -8688,17 +8692,17 @@ h4, h5, h6,
   font-size: 48px;
   font-size: 3rem;
   padding: 4px 16px;
-  padding: .25rem 1rem; }
+  padding: 0.25rem 1rem; }
 
 #place-modal .place-modal {
   padding: 8px 16px 4px;
-  padding: .5rem 1rem .25rem; }
+  padding: 0.5rem 1rem 0.25rem; }
 
 #place-modal .modal-body,
 #place-modal .modal-footer,
 #place-modal .modal-header {
   padding: 8px 16px;
-  padding: .5rem 1rem; }
+  padding: 0.5rem 1rem; }
 
 nav,
 .main-menu {
@@ -8908,14 +8912,14 @@ figure img {
 
 .attribution,
 .caption {
-  font-size: .875em;
+  font-size: 0.875em;
   font-style: italic; }
 
 .attribution::before {
   content: '\00a9'; }
 
 .caption {
-  margin-top: .5em; }
+  margin-top: 0.5em; }
 
 .float-center,
 .float-left,
@@ -9140,7 +9144,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .site-title {
     font-size: 2.25rem;
     line-height: 1.125;
-    margin-top: .5rem; } }
+    margin-top: 0.5rem; } }
 
 .sections section {
   font-size: 1.25em;
@@ -9285,21 +9289,21 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 #filters button[aria-expanded]::before {
   display: inline-block; }
 
-#filters button[aria-expanded="false"]::before {
+#filters button[aria-expanded='false']::before {
   content: url("/static/fontawesome/svgs/solid/caret-right.svg");
   width: 5px; }
 
-#filters button[aria-expanded="true"] {
+#filters button[aria-expanded='true'] {
   background: #9b2923;
   color: white; }
-  #filters button[aria-expanded="true"]::before {
+  #filters button[aria-expanded='true']::before {
     content: url("/static/fontawesome/svgs/solid/caret-down.svg");
     width: 8px; }
 
 #filters .btn-group {
   border: 5px solid #d9d9d9;
   margin: 4px;
-  margin: .25rem; }
+  margin: 0.25rem; }
 
 #filters .btn-info {
   border-color: #00548b;
@@ -9337,17 +9341,3 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .spacing {
   margin-bottom: 4px;
   margin-right: 4px; }
-
-/* Cookies disclaimer box */
-.cookies-box {
-  background: #eae9da;
-  bottom: 0;
-  left: 0;
-  margin: 0;
-  opacity: 0.95;
-  padding-top: 16px;
-  padding-top: 1rem;
-  position: fixed;
-  text-align: center;
-  width: 100%;
-  z-index: 1001; }
