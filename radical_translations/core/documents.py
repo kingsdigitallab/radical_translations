@@ -265,7 +265,7 @@ class ResourceDocument(Document):
                 },
                 "roles": [
                     {
-                        "label": f"{role.label} of paratext"
+                        "label": f"{role.label} of translation paratext"
                         if instance.is_paratext()
                         else role.label
                         for role in item.roles.all()
