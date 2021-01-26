@@ -55,7 +55,7 @@ class TestClassification:
         assert Classification.get_or_create(resource, None) is None
         assert Classification.get_or_create(None, "adapted") is None
 
-        assert Classification.get_or_create(resource, "original") is not None
+        assert Classification.get_or_create(resource, "source-text") is not None
         assert Classification.get_or_create(resource, "unknown") is not None
         assert Classification.get_or_create(resource, "adapted") is not None
 
@@ -225,7 +225,7 @@ class TestResource:
         entry_translation: Dict[str, Dict[str, str]],
     ):
         resource = Resource.from_gsx_entry(entry_original)
-        assert resource.get_classification_edition().lower() == "original"
+        assert resource.get_classification_edition().lower() == "source-text"
 
         resource = Resource.from_gsx_entry(entry_translation)
         assert resource.get_classification_edition().lower() == "integral"
