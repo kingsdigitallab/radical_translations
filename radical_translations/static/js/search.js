@@ -170,7 +170,7 @@ new Vue({
           let buckets = this.data.facets[f][name]['buckets']
           let chartData = {
             labels: [],
-            datasets: [{ label: name, backgroundColor: '#9b2923', data: [] }]
+            datasets: [{ label: 'Resources', backgroundColor: '#9b2923', data: [] }]
           }
 
           if (range) {
