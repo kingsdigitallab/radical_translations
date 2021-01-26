@@ -216,7 +216,7 @@ class VocabularyParatextTerms(VocabularyBaseList):
             ["Epigraph", "Epigraph"],
             ["False imprint date", "False imprint date"],
             ["False imprint", "False imprint"],
-            ["Ficticious imprint", "Ficticious imprint"],
+            ["Ficticious imprint", "Fictitious imprint"],
             [
                 "Hermeneutical",
                 "Hermeneutical",
