@@ -8550,8 +8550,8 @@ footer {
 
 .metadata {
   font-family: 'Oswald', sans-serif;
-  font-size: 15px;
-  font-size: 0.9375rem; }
+  font-size: 18px;
+  font-size: 1.125rem; }
   .metadata .author::before,
   .metadata .date::before {
     display: inline-block;
