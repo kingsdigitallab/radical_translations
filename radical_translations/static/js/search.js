@@ -27,6 +27,7 @@ new Vue({
       { key: '-year', value: 'Year descending' }
     ],
     page: 1,
+    page_size: PAGE_SIZE !== undefined ? PAGE_SIZE : 50,
     rangeMarks: (v) => v % 10 === 0,
     data: [],
     data_suggest: [],
@@ -131,7 +132,6 @@ new Vue({
         events.datasets.push(dataset)
       })
 
-      console.log(events)
       return events
     }
   },
@@ -253,6 +253,12 @@ new Vue({
         params.delete(key)
       }
 
+      key = 'page_size'
+      if (params.has(key)) {
+        this.page_size = params.get(key)
+        params.delete(key)
+      }
+
       key = 'search'
       if (params.has(key)) {
         this.query = params.get(key)
@@ -298,6 +304,7 @@ new Vue({
       }
 
       params.append('page', this.page)
+      params.append('page_size', this.page_size)
 
       if (this.ordering !== this.ordering_default) {
         params.append('ordering', this.ordering)
