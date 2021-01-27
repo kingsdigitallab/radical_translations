@@ -279,6 +279,7 @@ radical_translations/media/
 !.envs/.local/
 .volumes
 
+package-lock.json
 /controlled_vocabulary
 /django-controlled-vocabulary
 /django-geonames-place
