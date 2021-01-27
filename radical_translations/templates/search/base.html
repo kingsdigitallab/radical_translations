@@ -41,7 +41,9 @@
           </div>
         </div>
 
+        {% block pagination-top %}
         {% include 'vue/pagination.html' %}
+        {% endblock pagination-top %}
 
         <ul class="nav nav-tabs" id="result-views" role="tablist">
           <li class="nav-item" role="presentation">
@@ -92,7 +94,9 @@
         </div>
         {% endblock results %}
 
+        {% block pagination-bottom %}
         {% include 'vue/pagination.html' %}
+        {% endblock pagination-bottom %}
       </div>
     </div>
   </div>
