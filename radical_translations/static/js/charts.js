@@ -47,10 +47,19 @@ Vue.component('bubble-chart', {
       },
       tooltips: {
         callbacks: {
+          title: function (tooltipItem, data) {
+            const meta =
+              data.datasets[tooltipItem[0].datasetIndex].data[
+                tooltipItem[0].index
+              ].meta
+            return `${meta.date} ${meta.title}`
+          },
           label: function (tooltipItem, data) {
-            const item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+            const meta =
+              data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+                .meta
 
-            return `${item.x}, ${item.title}: ${item.resources}`
+            return `${meta.place}; ${meta.resources} resources`
           }
         }
       },
