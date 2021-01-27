@@ -125,8 +125,12 @@ new Vue({
               x: item.year,
               y: idx,
               r: item.related_to.length + 10,
-              title: item.title,
-              resources: item.related_to.length
+              meta: {
+                title: item.title,
+                date: item.date,
+                place: item.place.address,
+                resources: item.related_to.length
+              }
             })
           }
         })
