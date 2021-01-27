@@ -58,12 +58,18 @@ class EventViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "classification": {
+            "field": "classification.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
     }
 
     filter_fields = {
         "year": "year",
         "place": "place.address.raw",
         "country": "place.country.name.raw",
+        "classification": "classification.label.raw",
     }
 
     ordering_fields = {

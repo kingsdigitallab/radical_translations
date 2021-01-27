@@ -5,13 +5,19 @@ from controlled_vocabulary.models import ControlledTerm
 from geonames_place.models import Place
 from radical_translations.core.models import Resource
 from radical_translations.events.models import Event
-from radical_translations.utils.documents import get_place_field, get_resource_field
+from radical_translations.utils.documents import (
+    get_controlled_term_field,
+    get_place_field,
+    get_resource_field,
+)
 from radical_translations.utils.models import Date
 
 
 @registry.register_document
 class EventDocument(Document):
     title = fields.TextField()
+
+    classification = get_controlled_term_field()
 
     date_earliest = fields.DateField()
     date_latest = fields.DateField()
