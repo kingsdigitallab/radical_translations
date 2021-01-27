@@ -16,6 +16,7 @@ from radical_translations.utils.models import Date
 @registry.register_document
 class EventDocument(Document):
     title = fields.TextField()
+    date = fields.TextField()
 
     classification = get_controlled_term_field()
 
@@ -43,6 +44,9 @@ class EventDocument(Document):
 
         if isinstance(related_instance, (ControlledTerm, Place, Resource)):
             return related_instance.events.all()
+
+    def prepare_date(self, instance):
+        return str(instance.date)
 
     def prepare_date_earliest(self, instance):
         if instance.date and instance.date.date_earliest:
