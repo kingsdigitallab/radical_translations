@@ -25,14 +25,14 @@ Vue.component('bar-chart', {
   }
 })
 
-Vue.component('scatter-chart', {
+Vue.component('bubble-chart', {
   extends: VueChartJs.Bubble,
   props: ['clickHandler'],
   mixins: [VueChartJs.mixins.reactiveProp],
   mounted() {
     const self = this
     this.renderChart(this.chartData, {
-      legend: { display: false },
+      legend: { display: true },
       scales: {
         yAxes: [
           {
@@ -44,6 +44,15 @@ Vue.component('scatter-chart', {
             }
           }
         ]
+      },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, data) {
+            const item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+
+            return `${item.x}, ${item.title}: ${item.resources}`
+          }
+        }
       },
       onClick: function (evt, item) {
         if (item.length > 0) {

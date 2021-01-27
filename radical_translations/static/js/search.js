@@ -124,7 +124,9 @@ new Vue({
             dataset.data.push({
               x: item.year,
               y: idx,
-              r: item.related_to.length + 10
+              r: item.related_to.length + 10,
+              title: item.title,
+              resources: item.related_to.length
             })
           }
         })
