@@ -5,6 +5,7 @@
     "autoprefixer": "^9.4.7",
     "bootstrap": "4.3.1",
     "browser-sync": "^2.14.0",
+    "chart.js": "^2.9.4",
     "cssnano": "^4.1.10",
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
@@ -20,21 +21,18 @@
     "pixrem": "^5.0.0",
     "popper.js": "1.14.7",
     "vue": "^2.6.12",
-    "vue2-leaflet": "^2.6.0"
+    "vue-chartjs": "^3.5.1",
+    "vue-slider-component": "^3.2.11"
   },
   "engines": {
     "node": ">=8"
   },
-  "browserslist": [
-    "last 2 versions"
-  ],
+  "browserslist": ["last 2 versions"],
   "scripts": {
     "dev": "gulp",
     "build": "gulp generate-assets"
   },
   "dependencies": {
-    "chart.js": "^2.9.4",
-    "vue-chartjs": "^3.5.1",
-    "vue-slider-component": "^3.2.11"
+    "vue2-leaflet": "^2.6.0"
   }
 }
