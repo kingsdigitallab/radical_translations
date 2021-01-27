@@ -1,43 +1,41 @@
-<div style="height: 500px; width: 100%">
-    <l-map
-        :center="map.center"
-        :options="map.options"
-        :zoom="map.zoom"
-        ref="map">
-        <l-tile-layer
-            :attribution="map.attribution"
-            :url="map.url"></l-tile-layer>
-        <template v-for="item in data.results">
-            <l-marker-cluster>
-            <template v-if="item.places.length > 0">
-                <template v-for="place in item.places">
-                        <l-marker
-                            v-if="place.place.address !== 'any'"
-                            :lat-lng="place.place.geo">
-                            <l-popup>
-                                <p class="title">
-                                <a v-bind:href="item.id">
-                                    <span
-                                        v-if="'title' in item.highlight"
-                                        v-html="item.highlight['title'][0]"></span>
-                                    <span v-else>{[ item.title[0] ]}</span>
-                                </a>
-                                <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
-                                </p>
-                                <template v-if="item.date_display">
-                                    <span v-if="item.has_date_radical" class="sr-only">Radical date</span>
-                                    <span
-                                        v-bind:class="{'radical': item.has_date_radical}"
-                                        class="small-icon">{% include "svgs/solid/calendar.svg" %}</span>
-                                    {[ item.date_display ]}<br>
-                                </template>
-                                <span class="small-icon">{% include "svgs/solid/map-marker-alt.svg" %}</span>
-                                {[ place.place.address ]}
-                            </l-popup>
-                        </l-marker>
-                </template>
-            </template>
-        </l-marker-cluster>
+<div class="map-results">
+  <l-map
+    :center="map.center"
+    :options="map.options"
+    :zoom="map.zoom"
+    ref="map">
+    <l-tile-layer
+      :attribution="map.attribution"
+      :url="map.url"></l-tile-layer>
+    <template v-for="item in data.results">
+      <template v-if="item.places.length > 0">
+        <template v-for="place in item.places">
+          <l-marker
+            v-if="place.place.address !== 'any'"
+            :lat-lng="place.place.geo">
+            <l-popup>
+              <p class="title">
+              <a v-bind:href="item.id">
+                <span
+                  v-if="'title' in item.highlight"
+                  v-html="item.highlight['title'][0]"></span>
+                <span v-else>{[ item.title[0] ]}</span>
+              </a>
+              <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
+              </p>
+              <template v-if="item.date_display">
+                <span v-if="item.has_date_radical" class="sr-only">Radical date</span>
+                <span
+                  v-bind:class="{'radical': item.has_date_radical}"
+                  class="small-icon">{% include "svgs/solid/calendar.svg" %}</span>
+                {[ item.date_display ]}<br>
+              </template>
+              <span class="small-icon">{% include "svgs/solid/map-marker-alt.svg" %}</span>
+              {[ place.place.address ]}
+            </l-popup>
+          </l-marker>
         </template>
-    </l-map>
+      </template>
+    </template>
+  </l-map>
 </div>

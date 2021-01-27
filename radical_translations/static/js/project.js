@@ -1,6 +1,11 @@
 /* Project specific Javascript goes here. */
+const dispatchWindowResizeEvent = function () {
+  window.dispatchEvent(new Event('resize'))
+}
 
 $(function () {
+  L.Icon.Default.imagePath = '/static/leaflet/dist/images/'
+
   // highlight active tab and allow permalink for bibliography and record pages
   const hash = window.location.hash
 
@@ -18,19 +23,21 @@ $(function () {
   // enable tooltips
   $('[data-toggle="tooltip"]').tooltip()
 
-  // Commenting cookie disclaimer.
-  // Re-enable if we start using cookies.
+  // modals
+  $('.modal-toggle').on('click', function () {
+    const url = $(this).data('href')
 
-  // if (!Cookies.get('radical-translations-cookie')) {
-  //     $("#cookie-disclaimer").removeClass('hidden');
-  // }
-  // // Set cookie and hide the box
-  // $('#cookie-disclaimer .btn-success').on("click", function() {
-  //     Cookies.set('radical-translations-cookie', 'radical-translations-cookie-set', { expires: 30 });
-  //     $("#cookie-disclaimer").addClass('hidden');
-  // });
-  // // Hide the box don't set the cookie
-  // $('#cookie-disclaimer .close').on("click", function() {
-  //     $("#cookie-disclaimer").addClass('hidden');
-  // });
+    if (url) {
+      const modalId = '#place-modal'
+      const bodyId = `${modalId} .modal-body`
+
+      $(bodyId).load(url, function () {
+        $(modalId)
+          .modal({ show: true })
+          .on('shown.bs.modal', function () {
+            dispatchWindowResizeEvent()
+          })
+      })
+    }
+  })
 })

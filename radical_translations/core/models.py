@@ -229,9 +229,13 @@ class Resource(TimeStampedModel):
         return False
 
     def is_original(self) -> bool:
-        return "original" in self.get_classification_edition().lower()
+        return any(
+            term in self.get_classification_edition().lower()
+            for term in ["original", "source-text"]
+        )
 
     is_original.boolean = True  # type: ignore
+    is_original.short_description = "Is source text"
 
     def is_paratext(self) -> bool:
         return (
@@ -671,6 +675,9 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
         related_name="related_to",
         help_text="Related resource.",
     )
+
+    class Meta:
+        ordering = ["related_to__date", "relationship_type", "resource__title"]
 
     def __str__(self) -> str:
         return f"{self.resource} -> {self.relationship_type.label} -> {self.related_to}"

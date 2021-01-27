@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}{{ object.address }}{% endblock title %}
+
+{% block css %}
+<link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet">
+{{ block.super }}
+{% endblock css %}
+
+{% block header %}{% endblock header %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block footer %}{% endblock footer %}
+
+{% block main %}
+<h2>{{ object.address }}, {{ object.country.name }}</h2>
+<div id="map" style="height: 400px; width: 100%"></div>
+{% endblock main %}
+
+{% block javascript %}
+<script>
+  GEO = {lon: {{ object.geo.lon }}, lat: {{ object.geo.lat }}}
+</script>
+<script src="{% static 'js/place.js' %}"></script>
+{% endblock javascript %}

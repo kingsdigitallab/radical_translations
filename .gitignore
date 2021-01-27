@@ -115,6 +115,8 @@ build/Release
 node_modules/
 jspm_packages/
 
+package-lock.json
+
 # Typescript v1 declaration files
 typings/
 
@@ -277,11 +279,12 @@ radical_translations/media/
 !.envs/.local/
 .volumes
 
-controlled_vocabulary
-django-controlled-vocabulary/
-django-geonames-place/
-django_kdl_edtf
-geonames_place
-python-edtf
-
 package-lock.json
+/controlled_vocabulary
+/django-controlled-vocabulary
+/django-geonames-place
+/django_kdl_edtf
+/django-kdl-wagtail
+/geonames_place
+/kdl_wagtail
+/python-edtf

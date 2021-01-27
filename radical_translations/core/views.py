@@ -64,7 +64,7 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "translation": {
+        "translation_terms": {
             "field": "classifications_translation.edition.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
@@ -129,6 +129,7 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "meta": {"field": "meta", "enabled": True, "options": ES_FACET_OPTIONS},
     }
 
     filter_fields = {
@@ -136,7 +137,7 @@ class ResourceViewSet(DocumentViewSet):
         "printing_and_publishing": (
             "classifications_printing_publishing.edition.label.raw"
         ),
-        "translation": "classifications_translation.edition.label.raw",
+        "translation_terms": "classifications_translation.edition.label.raw",
         "contributor": "contributions.agent.name.raw",
         "contributor_role": "contributions.roles.label.raw",
         "year": "year",
@@ -150,6 +151,7 @@ class ResourceViewSet(DocumentViewSet):
         "event": "events.title.raw",
         "event_place": "events.place.address.raw",
         "radical_date": "has_date_radical",
+        "meta": "meta",
     }
 
     highlight_fields = {

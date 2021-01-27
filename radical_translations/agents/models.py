@@ -21,6 +21,10 @@ class Agent(PolymorphicModel, TimeStampedModel):
     """Entity having a role in a resource, such as a person or organization."""
 
     name = models.CharField(max_length=512, help_text="The agent name.")
+    radical = models.BooleanField(
+        default=False,
+        help_text="Wether this person was considered a radical or not.",
+    )
 
     based_near = models.ManyToManyField(
         Place,
@@ -168,6 +172,9 @@ class Person(Agent):
             "interaction between the parties)."
         ),
     )
+
+    class Meta:
+        ordering = ["family_name", "given_name", "name"]
 
     def get_main_places_names(self) -> str:
         return "; ".join([place.address for place in self.main_places.all()])

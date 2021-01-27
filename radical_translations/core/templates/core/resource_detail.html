@@ -6,128 +6,140 @@
 <h1>{{ object.title }}</h1>
 
 <p class="metadata">
-    {% with date=object.get_date %}
-    {% if date %}
-    <span class="metadata-block">
-        {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
-        <span{% if date.date_radical %} class="radical"{% endif %}>
-            {# Font Awesome Mars icon #}
-            {% include "svgs/solid/calendar.svg" %}
-            {{ date }}
-        </span>
-    </span>
-    {% endif %}
-    {% endwith %}
-    <span class="metadata-block">
-        {% for subject in object.subjects.all %}
-        {{ subject.label }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </span>
-    {% if object.edition_enumeration %}
-    <span class="metadata-block">
-        {{ object.edition_enumeration }}
-    </span>
-    {% endif %}
-    <span class="metadata-block">
-        {% for classification in object.classifications.all %}
-        {% with edition=classification.edition %}
-        <a
-            {% if edition.description %}
-            href="#"
-            data-toggle="tooltip"
-            title="{{ edition.description }}"
-            {% endif %}>{{ edition.label }}</a>
-        {% endwith %}
-        {% endfor %}
-    </span>
-    <span class="metadata-block">
-        {# Custom language icon "language2.svg" #}
-        {% include "svgs/solid/language3.svg" %}
-        {% for language in object.languages.all %}
-        {{ language }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </span>
-    {% if object.places.all %}
-    <span class="metadata-block">
-        {# Font Awesome map-marker-alt icon #}
-        {% include "svgs/solid/map-marker-alt.svg" %}
-        {% for place in object.places.all %}
-        {{ place }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </span>
-    {% endif %}
-    {% if object.electronic_locator %}
-    <span class="metadata-block">
-        {# Font Awesome map-marker-alt icon #}
-        {% include "svgs/solid/external-link-alt.svg" %}
-        <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
-    </span>
-    {% endif %}
+{% with date=object.get_date %}
+{% if date %}
+<span class="metadata-block">
+  {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
+  <span{% if date.date_radical %} class="radical"{% endif %}>
+    {# Font Awesome Mars icon #}
+    {% include "svgs/solid/calendar.svg" %}
+    {{ date }}
+  </span>
+</span>
+{% endif %}
+{% endwith %}
+
+{% if object.subjects.all %}
+<span class="metadata-block">
+  {% for subject in object.subjects.all %}
+  {{ subject.label }}{% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</span>
+{% endif %}
+
+{% if object.edition_enumeration %}
+<span class="metadata-block">
+  {{ object.edition_enumeration }}
+</span>
+{% endif %}
+
+{% if object.classifications.all %}
+<span class="metadata-block">
+  {% for classification in object.classifications.all %}
+  {% with edition=classification.edition %}
+  <a
+    {% if edition.description %}
+    href="#"
+    data-toggle="tooltip"
+    title="{{ edition.description }}"
+    {% endif %}>{{ edition.label }}</a>
+  {% endwith %}
+  {% endfor %}
+</span>
+{% endif %}
+
+{% if object.languages.all %}
+<span class="metadata-block">
+  {# Custom language icon "language3.svg" #}
+  {% include "svgs/solid/language3.svg" %}
+  {% for language in object.languages.all %}
+  {{ language }}{% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</span>
+{% endif %}
+
+{% if object.places.all %}
+<span class="metadata-block">
+  {# Font Awesome map-marker-alt icon #}
+  {% include "svgs/solid/map-marker-alt.svg" %}
+  {% for place in object.places.all %}
+  {% include 'geonames_place/includes/place.html' with place=place.place %}{% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</span>
+{% endif %}
+
+{% if object.electronic_locator %}
+<span class="metadata-block">
+  {# Font Awesome map-marker-alt icon #}
+  {% include "svgs/solid/external-link-alt.svg" %}
+  <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
+</span>
+{% endif %}
 </p>
 
 {% if object.is_translation %}
 <h2>Authors of source text</h2>
 <p>
-    {% for author in object.get_authors_source_text %}
-    <a href="{% url 'agent-detail' author.pk %}">{{ author.name }}</a>
-    {% endfor %}
+{% for author in object.get_authors_source_text %}
+<a href="{% url 'agent-detail' author.pk %}">{{ author.name }}</a>
+{% endfor %}
 </p>
 {% endif %}
 
 {% if object.contributions.count %}
 <h2>Contributions</h2>
 <dl>
-    {% for contribution in object.contributions.all %}
-    <dt>
-        {% for classification in contribution.classification.all %}
-        {% if classification.label == "uncertainty" %}
-        {# Font Awesome question icon #}
-        <span class="small-icon uncertainty">
-            <span class="sr-only">Uncertain</span>
-        </span>
-        {% endif %}
-        {% endfor %}
-        <a href="{% url 'agent-detail' contribution.agent.pk %}">
-            {{ contribution.agent.name }}
-        </a>
-    </dt>
-    {% for role in contribution.roles.all %}
-    <dd>{{ role.label }}</dd>
-    {% endfor %}
-    {% for classification in contribution.classification.all %}
-    {% if classification.label != "uncertainty" %}
-    <dd class="{{ classification.label }}">{{ classification.label }}</dd>
-    {% endif %}
-    {% endfor %}
-    {% endfor %}
+  {% for contribution in object.contributions.all %}
+  <dt>
+  {% for classification in contribution.classification.all %}
+  {% if classification.label == "uncertainty" %}
+  {# Font Awesome question icon #}
+  <span class="small-icon uncertainty">
+    <span class="sr-only">Uncertain</span>
+  </span>
+  {% endif %}
+  {% endfor %}
+  <a href="{% url 'agent-detail' contribution.agent.pk %}">
+    {{ contribution.agent.name }}
+  </a>
+  </dt>
+  {% for role in contribution.roles.all %}
+  <dd>{{ role.label }}</dd>
+  {% endfor %}
+  {% for classification in contribution.classification.all %}
+  {% if classification.label != "uncertainty" %}
+  <dd class="{{ classification.label }}">{{ classification.label }}</dd>
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
 </dl>
 {% endif %}
 
 {% if object.relationships.count or object.related_to.count %}
 <h2>Related resources</h2>
 <dl>
-    {% if object.relationships.count %}
-    {% for relationship in object.relationships.all %}
-    {% include "core/includes/relationship.html" with direct=True label=relationship.relationship_type.label related=relationship.related_to %}
-    {% endfor %}
-    {% endif %}
+  {% if object.relationships.count %}
+  {% for relationship in object.relationships.all %}
+  {% include "core/includes/relationship.html" with direct=True label=relationship.relationship_type.label related=relationship.related_to %}
+  {% endfor %}
+  {% endif %}
 
-    {% if object.related_to.count %}
-    {% for relationship in object.related_to.all %}
-    {% include "core/includes/relationship.html" with label=relationship.relationship_type.label related=relationship.resource %}
-    {% endfor %}
-    {% endif %}
+  {% if object.related_to.count %}
+  {% for relationship in object.related_to.all %}
+  {% include "core/includes/relationship.html" with label=relationship.relationship_type.label related=relationship.resource %}
+  {% endfor %}
+  {% endif %}
 </dl>
 {% endif %}
 
 {% if object.events.count %}
 <h2>Events</h2>
 <ul>
-    {% for event in object.events.all %}
-    <li>
-        <a href="{% url 'event-detail' event.pk %}">{{ event }}</a>
-    </li>
-    {% endfor %}
+  {% for event in object.events.all %}
+  <li>
+    <a href="{% url 'event-detail' event.pk %}">{{ event }}</a>
+  </li>
+  {% endfor %}
 </ul>
 {% endif %}
 
@@ -139,11 +151,15 @@
 {% if object.held_by.count %}
 <h2>Held by</h2>
 <ul>
-    {% for agent in object.held_by.all %}
-    <li><a href="{% url 'agent-detail' agent.pk %}">{{ agent.name }}</a></li>
-    {% endfor %}
+  {% for agent in object.held_by.all %}
+  <li><a href="{% url 'agent-detail' agent.pk %}">{{ agent.name }}</a></li>
+  {% endfor %}
 </ul>
 {% endif %}
 
 {% include "includes/object_notes.html" %}
 {% endblock main %}
+
+{% block modal %}
+{% include 'geonames_place/includes/place_modal.html' %}
+{% endblock modal %}

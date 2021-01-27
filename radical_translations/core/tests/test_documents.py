@@ -168,8 +168,8 @@ class TestResourceDocument:
 
         resource = Resource.from_gsx_entry(entry_original)
 
-        assert len(doc._get_subjects(resource, "fast-forms")) == 0
-        assert len(doc._get_subjects(resource, "fast-topic")) == 2
+        assert len(doc._get_subjects(resource, ["fast-forms"])) == 0
+        assert len(doc._get_subjects(resource, ["fast-topic"])) == 2
 
     @pytest.mark.usefixtures("entry_original")
     def test_prepare_subjects(self, entry_original):

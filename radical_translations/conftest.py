@@ -72,7 +72,7 @@ def entry_original() -> Dict[str, Dict[str, str]]:
     return {
         "gsx$title": {"$t": "Les ruines ou Méditation sur les révolutions des Empires"},
         "gsx$authors": {"$t": "Constantin-François Volney"},
-        "gsx$status": {"$t": "Original"},
+        "gsx$status": {"$t": "Source-text"},
         "gsx$statussource": {"$t": ""},
         "gsx$translationof": {"$t": ""},
         "gsx$editionof": {"$t": ""},
@@ -165,7 +165,7 @@ def entry_search() -> Dict[str, Dict[str, str]]:
     return {
         "gsx$title": {"$t": "Les ruines de la search :)"},
         "gsx$authors": {"$t": "search test"},
-        "gsx$status": {"$t": "Original"},
+        "gsx$status": {"$t": "Source-text"},
         "gsx$statussource": {"$t": ""},
         "gsx$translationof": {"$t": ""},
         "gsx$editionof": {"$t": ""},

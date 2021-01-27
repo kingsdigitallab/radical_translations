@@ -11,6 +11,39 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+Added
+~~~~~
+* Data migration to merge duplicate libraries (`Organisation`).
+* Field `radical` to `Agent`.
+* Data migration to merge duplicate paratext terms.
+* State management to search.
+* Help text to both filter types (main and secondary).
+* Help text to remove applied filters.
+* Map view to the search results.
+* Tag to `source text` search results.
+* `Paratext` search filter.
+* Modal view for `Place` references.
+
+Changed
+~~~~~~~
+* `is_original` to include resources that are marked both as `original` and
+`source text`.
+* Exclude the original/source text terms from being indexed with the translation terms.
+* `Source text` and `translation` moved to top level filters.
+* Split filters view into main and secondary.
+* Translation facet label to Translation Terms.
+* Move year facet to main filters section.
+* Order related resources by date, relationship and title.
+* Change `Original` to `Source text`.
+
+Fixed
+~~~~~
+* Reset pagination when filtering by year or updating filters.
+
+
 [0.10.3] - 2021-01-12
 --------------------
 
