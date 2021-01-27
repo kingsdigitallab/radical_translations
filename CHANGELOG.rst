@@ -14,6 +14,9 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Events visualisation.
 
 [1.0.0] - 2021-01-27
 --------------------
