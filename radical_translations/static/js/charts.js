@@ -48,18 +48,19 @@ Vue.component('bubble-chart', {
       tooltips: {
         callbacks: {
           title: function (tooltipItem, data) {
-            const meta =
+            const item =
               data.datasets[tooltipItem[0].datasetIndex].data[
                 tooltipItem[0].index
-              ].meta
-            return `${meta.date} ${meta.title}`
+              ]
+
+            return `${item.meta.place}, ${item.x}`
           },
           label: function (tooltipItem, data) {
             const meta =
               data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
                 .meta
 
-            return `${meta.place}; ${meta.resources} resources`
+            return `${meta.date} ${meta.title}; ${meta.resources} resources`
           }
         }
       },
