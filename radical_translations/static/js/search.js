@@ -104,6 +104,35 @@ new Vue({
       }
 
       return suggestions
+    },
+    eventsChartData: function () {
+      if (!this.data || !this.data.results) {
+        return {}
+      }
+
+      const labels = this.data.facets._filter_country.country.buckets.map(
+        (f) => f.key
+      )
+
+      events = { labels: labels, datasets: [] }
+
+      labels.forEach((label, idx) => {
+        let dataset = { label: label, data: [] }
+        this.data.results.forEach((item) => {
+          if (item.place.country.name === label) {
+            dataset.data.push({
+              x: item.year,
+              y: idx,
+              r: item.related_to.length + 10
+            })
+          }
+        })
+
+        events.datasets.push(dataset)
+      })
+
+      console.log(events)
+      return events
     }
   },
   methods: {
