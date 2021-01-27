@@ -1,36 +1,3 @@
-const YEAR_MIN = 1516
-const YEAR_MAX = 1820
-
-const META_FACETS = ['meta']
-const RANGE_FACETS = ['year']
-
-Vue.component('bar-chart', {
-  extends: VueChartJs.Bar,
-  props: ['clickHandler'],
-  mixins: [VueChartJs.mixins.reactiveProp],
-  mounted() {
-    const self = this
-    this.renderChart(this.chartData, {
-      legend: { display: false },
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true
-            }
-          }
-        ]
-      },
-      onClick: function (evt, item) {
-        if (item.length > 0) {
-          const year = item[0]['_model'].label
-          self.clickHandler(year, year)
-        }
-      }
-    })
-  }
-})
-
 new Vue({
   el: '#app',
   components: {
@@ -170,7 +137,9 @@ new Vue({
           let buckets = this.data.facets[f][name]['buckets']
           let chartData = {
             labels: [],
-            datasets: [{ label: 'Resources', backgroundColor: '#9b2923', data: [] }]
+            datasets: [
+              { label: YEAR_CHART_LABEL, backgroundColor: '#9b2923', data: [] }
+            ]
           }
 
           if (range) {

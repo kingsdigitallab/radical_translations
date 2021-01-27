@@ -15,6 +15,7 @@ class EventDocument(Document):
 
     date_earliest = fields.DateField()
     date_latest = fields.DateField()
+    year = fields.IntegerField()
 
     place = get_place_field()
 
@@ -44,3 +45,19 @@ class EventDocument(Document):
     def prepare_date_latest(self, instance):
         if instance.date and instance.date.date_latest:
             return instance.date.get_date_latest()
+
+    def prepare_year(self, instance):
+        if instance.date:
+            date_earliest = instance.date.get_date_earliest()
+            date_latest = instance.date.get_date_latest()
+
+            if date_earliest and date_latest:
+                return [
+                    year for year in range(date_earliest.year, date_latest.year + 1)
+                ]
+
+            if date_earliest:
+                return date_earliest.year
+
+            if date_latest:
+                return date_latest.year
