@@ -31,44 +31,27 @@ Vue.component('scatter-chart', {
   mixins: [VueChartJs.mixins.reactiveProp],
   mounted() {
     const self = this
-    labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
-    this.renderChart(
-      {
-        datasets: [
+    this.renderChart(this.chartData, {
+      legend: { display: false },
+      scales: {
+        yAxes: [
           {
-            label: 'My First dataset',
-            backgroundColor: 'red',
-            data: this.generateData()
-          },
-          {
-            label: 'My Second dataset',
-            backgroundColor: 'blue',
-            data: this.generateData()
+            ticks: {
+              beginAtZero: true,
+              callback: function (value, index, values) {
+                return self.chartData.labels[value]
+              }
+            }
           }
         ]
       },
-      {
-        legend: { display: true },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                callback: function (value, index, values) {
-                  return labels[value]
-                }
-              }
-            }
-          ]
-        },
-        onClick: function (evt, item) {
-          if (item.length > 0) {
-            const year = item[0]['_model'].label
-            self.clickHandler(year, year)
-          }
+      onClick: function (evt, item) {
+        if (item.length > 0) {
+          const year = item[0]['_model'].label
+          self.clickHandler(year, year)
         }
       }
-    )
+    })
   },
   methods: {
     generateData: function () {

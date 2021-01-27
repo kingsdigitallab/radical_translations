@@ -27,6 +27,7 @@ new Vue({
       { key: '-year', value: 'Year descending' }
     ],
     page: 1,
+    page_size: PAGE_SIZE !== undefined ? PAGE_SIZE : 50,
     rangeMarks: (v) => v % 10 === 0,
     data: [],
     data_suggest: [],
@@ -104,6 +105,34 @@ new Vue({
       }
 
       return suggestions
+    },
+    eventsChartData: function () {
+      if (!this.data || !this.data.results) {
+        return {}
+      }
+
+      const labels = this.data.facets._filter_country.country.buckets.map(
+        (f) => f.key
+      )
+
+      events = { labels: labels, datasets: [] }
+
+      labels.forEach((label, idx) => {
+        let dataset = { label: label, data: [] }
+        this.data.results.forEach((item) => {
+          if (item.place.country.name === label) {
+            dataset.data.push({
+              x: item.year,
+              y: idx,
+              r: item.related_to.length + 10
+            })
+          }
+        })
+
+        events.datasets.push(dataset)
+      })
+
+      return events
     }
   },
   methods: {
@@ -224,6 +253,12 @@ new Vue({
         params.delete(key)
       }
 
+      key = 'page_size'
+      if (params.has(key)) {
+        this.page_size = params.get(key)
+        params.delete(key)
+      }
+
       key = 'search'
       if (params.has(key)) {
         this.query = params.get(key)
@@ -269,6 +304,7 @@ new Vue({
       }
 
       params.append('page', this.page)
+      params.append('page_size', this.page_size)
 
       if (this.ordering !== this.ordering_default) {
         params.append('ordering', this.ordering)
