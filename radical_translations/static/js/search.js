@@ -1,36 +1,3 @@
-const YEAR_MIN = 1516
-const YEAR_MAX = 1820
-
-const META_FACETS = ['meta']
-const RANGE_FACETS = ['year']
-
-Vue.component('bar-chart', {
-  extends: VueChartJs.Bar,
-  props: ['clickHandler'],
-  mixins: [VueChartJs.mixins.reactiveProp],
-  mounted() {
-    const self = this
-    this.renderChart(this.chartData, {
-      legend: { display: false },
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true
-            }
-          }
-        ]
-      },
-      onClick: function (evt, item) {
-        if (item.length > 0) {
-          const year = item[0]['_model'].label
-          self.clickHandler(year, year)
-        }
-      }
-    })
-  }
-})
-
 new Vue({
   el: '#app',
   components: {
@@ -60,6 +27,7 @@ new Vue({
       { key: '-year', value: 'Year descending' }
     ],
     page: 1,
+    page_size: PAGE_SIZE !== undefined ? PAGE_SIZE : 50,
     rangeMarks: (v) => v % 10 === 0,
     data: [],
     data_suggest: [],
@@ -137,6 +105,40 @@ new Vue({
       }
 
       return suggestions
+    },
+    eventsChartData: function () {
+      if (!this.data || !this.data.results) {
+        return {}
+      }
+
+      const labels = this.data.facets._filter_country.country.buckets.map(
+        (f) => f.key
+      )
+
+      events = { labels: labels, datasets: [] }
+
+      labels.forEach((label, idx) => {
+        let dataset = { label: label, data: [] }
+        this.data.results.forEach((item) => {
+          if (item.place.country.name === label) {
+            dataset.data.push({
+              x: item.year,
+              y: idx,
+              r: item.related_to.length + 10,
+              meta: {
+                title: item.title,
+                date: item.date,
+                place: item.place.address,
+                resources: item.related_to.length
+              }
+            })
+          }
+        })
+
+        events.datasets.push(dataset)
+      })
+
+      return events
     }
   },
   methods: {
@@ -170,7 +172,9 @@ new Vue({
           let buckets = this.data.facets[f][name]['buckets']
           let chartData = {
             labels: [],
-            datasets: [{ label: 'Resources', backgroundColor: '#9b2923', data: [] }]
+            datasets: [
+              { label: YEAR_CHART_LABEL, backgroundColor: '#9b2923', data: [] }
+            ]
           }
 
           if (range) {
@@ -255,6 +259,12 @@ new Vue({
         params.delete(key)
       }
 
+      key = 'page_size'
+      if (params.has(key)) {
+        this.page_size = params.get(key)
+        params.delete(key)
+      }
+
       key = 'search'
       if (params.has(key)) {
         this.query = params.get(key)
@@ -300,6 +310,7 @@ new Vue({
       }
 
       params.append('page', this.page)
+      params.append('page_size', this.page_size)
 
       if (this.ordering !== this.ordering_default) {
         params.append('ordering', this.ordering)

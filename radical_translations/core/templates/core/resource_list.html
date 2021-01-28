@@ -2,3 +2,19 @@
 
 {% block search_header %}Resources{% endblock search_header %}
 {% block title %}Resources{% endblock title %}
+
+{% block results_default %}
+{% include 'vue/resources/search_results.html' %}
+{% endblock results_default %}
+
+{% block javascript %}
+<script>
+  const META_FACETS = ['meta']
+const RANGE_FACETS = ['year']
+
+const YEAR_CHART_LABEL = 'Resources'
+const YEAR_MIN = 1516
+const YEAR_MAX = 1820
+</script>
+{{ block.super }}
+{% endblock javascript %}

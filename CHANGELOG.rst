@@ -14,6 +14,16 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Events visualisation.
+
+Changed
+~~~~~~~
+* Add profiles_ to the `pa11y`, `mongo` and `kibana` services in `local.yml`.
+
+.. _profiles: https://docs.docker.com/compose/profiles/
+
 
 [1.0.0] - 2021-01-27
 --------------------
