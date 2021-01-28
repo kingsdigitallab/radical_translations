@@ -122,35 +122,37 @@ new Vue({
       events = { labels: labels, datasets: [] }
 
       marker_color = [
-                      'rgba(34, 116, 165, 0.4)',
-                      'rgba(187, 133, 136, 0.4)',
-                      'rgba(84, 13, 110, 0.4)',
-                      'rgba(230, 175, 46, 0.4)',
-                      'rgba(99, 43, 48, 0.4)',
-                      'rgba(11, 3, 45, 0.4)',
-                      'rgba(169, 210, 213, 0.4)',
-                      'rgba(103, 148, 54, 0.4)'
-                      ]
+        'rgba(34, 116, 165, 0.4)',
+        'rgba(187, 133, 136, 0.4)',
+        'rgba(84, 13, 110, 0.4)',
+        'rgba(230, 175, 46, 0.4)',
+        'rgba(99, 43, 48, 0.4)',
+        'rgba(11, 3, 45, 0.4)',
+        'rgba(169, 210, 213, 0.4)',
+        'rgba(103, 148, 54, 0.4)'
+      ]
 
       labels.forEach((label, idx) => {
         let dataset = {
           label: label,
           backgroundColor: marker_color[idx],
-          borderColor:marker_color[idx],
+          borderColor: marker_color[idx],
           data: []
         }
         this.data.results.forEach((item) => {
-          if (item.place.country.name === label) {
-            dataset.data.push({
-              x: item.year,
-              y: idx,
-              r: item.related_to.length + 10,
-              meta: {
-                title: item.title,
-                date: item.date,
-                place: item.place.address,
-                resources: item.related_to.length
-              }
+          if (item.place.country.name === label && item.year) {
+            item.year.forEach((year) => {
+              dataset.data.push({
+                x: year,
+                y: idx,
+                r: item.related_to.length + 10,
+                meta: {
+                  title: item.title,
+                  date: item.date,
+                  place: item.place.address,
+                  resources: item.related_to.length
+                }
+              })
             })
           }
         })
