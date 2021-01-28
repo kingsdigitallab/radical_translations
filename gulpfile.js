@@ -31,7 +31,7 @@ function pathsConfig(appName) {
   return {
     bootstrapSass: `${vendorsRoot}/bootstrap/scss`,
     vendorsJs: [
-      `${vendorsRoot}/jquery/dist/jquery.min.js`,
+      `${vendorsRoot}/jquery/dist/jquery.slim.min.js`,
       `${vendorsRoot}/popper.js/dist/umd/popper.js`,
       `${vendorsRoot}/bootstrap/dist/js/bootstrap.js`,
       `${vendorsRoot}/lodash/lodash.js`,
