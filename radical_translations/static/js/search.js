@@ -1,10 +1,6 @@
 new Vue({
   el: '#app',
   components: {
-    'l-map': window.Vue2Leaflet.LMap,
-    'l-marker': window.Vue2Leaflet.LMarker,
-    'l-popup': window.Vue2Leaflet.LPopup,
-    'l-tile-layer': window.Vue2Leaflet.LTileLayer,
     'vue-slider': window['vue-slider-component']
   },
   delimiters: ['{[', ']}'],
@@ -32,6 +28,7 @@ new Vue({
     data: [],
     data_suggest: [],
     map: {
+      mapObject: null,
       options: {
         zoomSnap: 0.5
       },
@@ -48,24 +45,31 @@ new Vue({
       await this.getSuggestions()
     }, 250),
     page: _.debounce(async function () {
-      this.data = await this.search()
+      await this.search()
     }, 250),
     ordering: async function (newOrdering, oldOrdering) {
-      this.data = await this.search()
+      await this.search()
     },
     filters: async function (newFilters, oldFilters) {
       this.page = 1
-      this.data = await this.search()
+      await this.search()
     },
-    'map.show': function (newShow, oldShow) {
+    'map.show': async function (newShow, oldShow) {
       if (newShow) {
-        dispatchWindowResizeEvent()
+        this.page = 1
+        this.page_size = 1000
+        await this.search()
+        this.renderMap()
+      } else {
+        this.page_size = PAGE_SIZE
+        await this.search()
       }
     }
   },
   created: async function () {
     this.loadSearchParams()
-    this.data = await this.search()
+    await this.search()
+    this.initMap()
   },
   computed: {
     facets: function () {
@@ -289,9 +293,12 @@ new Vue({
     },
     rangeSearch: async function () {
       this.page = 1
-      this.data = await this.search()
+      await this.search()
     },
     search: async function () {
+      this.data = await this.doSearch()
+    },
+    doSearch: async function () {
       const params = new URLSearchParams()
 
       if (this.query) {
@@ -336,7 +343,7 @@ new Vue({
         this.query = text
       }
 
-      this.data = await this.search()
+      await this.search()
     },
     updateFilters: function (filter) {
       if (this.hasFilter(filter)) {
@@ -346,6 +353,56 @@ new Vue({
       } else {
         this.filters.push(filter)
       }
+    },
+    initMap: async function () {
+      const map = L.map('map').setView(this.map.center, this.map.zoom)
+
+      L.tileLayer(this.map.url, {
+        attribution: this.map.attribution
+      }).addTo(map)
+      this.map.mapObject = map
+    },
+    renderMap: function () {
+      const map = this.map.mapObject
+
+      const cluster = L.markerClusterGroup()
+
+      this.data.results.forEach((item) =>
+        item.places.forEach((place) => {
+          if (place.place.geo !== undefined) {
+            cluster.addLayer(
+              L.marker(place.place.geo).bindPopup(
+                this.mapPopupContent(item, place.place)
+              )
+            )
+          }
+        })
+      )
+
+      map.addLayer(cluster)
+
+      map.whenReady(function () {
+        map.invalidateSize()
+      })
+    },
+    mapPopupContent(item, place) {
+      let popup = '<p class="title">'
+      popup += `<a href="${item.id}"><span>${item.title[0]}</span></a> `
+      if (item.is_original) {
+        popup += '<span class="badge badge-secondary">Original</span>'
+      }
+      if (item.is_translation) {
+        popup += '<span class="badge badge-secondary">Translation</span>'
+      }
+      popup += '</p>'
+
+      if (item.date_display) {
+        popup += `${item.date_display} `
+      }
+
+      popup += `${place.address}, ${place.country.name}`
+
+      return popup
     }
   }
 })
