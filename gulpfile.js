@@ -37,7 +37,7 @@ function pathsConfig(appName) {
       `${vendorsRoot}/lodash/lodash.js`,
       `${vendorsRoot}/chart.js/dist/Chart.min.js`,
       `${vendorsRoot}/leaflet/dist/leaflet.js`,
-      `${vendorsRoot}/vue/dist/vue.min.js`,
+      `${vendorsRoot}/vue/dist/vue.js`,
       `${vendorsRoot}/vue-chartjs/dist/vue-chartjs.min.js`,
       `${vendorsRoot}/vue-slider-component/dist/vue-slider-component.umd.min.js`
     ],

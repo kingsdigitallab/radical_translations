@@ -18,8 +18,12 @@
       <div class="col">
         <div class="row alert alert-secondary">
           <div class="col">
+            {% block query %}
             {% include 'vue/search_query.html' %}
+            {% endblock query %}
+            {% block facets %}
             {% include 'vue/search_facets.html' %}
+            {% endblock facets %}
           </div>
         </div>
       </div>
@@ -28,23 +32,29 @@
       <div class="col">
         <div class="row">
           <div class="col">
+            {% block summary %}
             {% include 'vue/search_summary.html' %}
+            {% endblock summary %}
+            {% block ordering %}
             {% include 'vue/search_ordering.html' %}
+            {% endblock ordering %}
           </div>
         </div>
 
+        {% block pagination-top %}
         <template v-if="!map.show">
           {% include 'vue/pagination.html' %}
         </template>
+        {% endblock pagination-top %}
 
         <ul class="nav nav-tabs" id="result-views" role="tablist">
           <li class="nav-item" role="presentation">
             <a
               @click="map.show = false"
               class="nav-link active"
-              id="list-view-tab"
+              id="default-view-tab"
               data-toggle="tab"
-              href="#list-view"
+              href="#default-view"
               role="tab"
               aria-controls="list"
               aria-selected="true">
@@ -72,18 +82,25 @@
           </li>
         </ul>
 
+        {% block results %}
         <div class="tab-content">
-          <div class="tab-pane active" id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
-            {% include 'vue/search_results.html' %}
+          <div class="tab-pane active" id="default-view" role="tabpanel" aria-labelledby="default-view-tab">
+            {% block results_default %}
+            {% endblock results_default %}
           </div>
+          {% block results_map %}
           <div class="tab-pane" id="map-view" role="tabpanel" aria-labelledby="map-view-tab">
             {% include 'vue/search_results_map.html' %}
           </div>
+          {% endblock results_map %}
         </div>
+        {% endblock results %}
 
+        {% block pagination-bottom %}
         <template v-if="!map.show">
           {% include 'vue/pagination.html' %}
         </template>
+        {% endblock pagination-bottom %}
       </div>
     </div>
   </div>
@@ -95,5 +112,6 @@
 {{ block.super }}
 
 <script src="{% static 'vue2-leaflet/dist/vue2-leaflet.min.js' %}"></script>
+<script src="{% static 'js/charts.js' %}"></script>
 <script src="{% static 'js/search.js' %}"></script>
 {% endblock javascript %}

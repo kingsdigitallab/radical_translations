@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Events visualisation.
+
 Changed
 ~~~~~~~
 * Add profiles_ to the `pa11y`, `mongo` and `kibana` services in `local.yml`.
