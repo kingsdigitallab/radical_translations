@@ -355,6 +355,8 @@ new Vue({
       }
     },
     initMap: async function () {
+      if (!document.getElementById('map')) return
+
       const map = L.map('map').setView(this.map.center, this.map.zoom)
 
       L.tileLayer(this.map.url, {
@@ -363,6 +365,8 @@ new Vue({
       this.map.mapObject = map
     },
     renderMap: function () {
+      if (!this.map.mapObject) return
+
       const map = this.map.mapObject
 
       const cluster = L.markerClusterGroup()
