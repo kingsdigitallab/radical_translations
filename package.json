@@ -17,6 +17,7 @@
     "gulp-uglify-es": "^1.0.4",
     "jquery": "^3.5.0",
     "leaflet": "^1.7.1",
+    "leaflet.markercluster": "^1.4.1",
     "lodash": "^4.17.20",
     "pixrem": "^5.0.0",
     "popper.js": "1.14.7",
@@ -27,12 +28,11 @@
   "engines": {
     "node": ">=8"
   },
-  "browserslist": ["last 2 versions"],
+  "browserslist": [
+    "last 2 versions"
+  ],
   "scripts": {
     "dev": "gulp",
     "build": "gulp generate-assets"
-  },
-  "dependencies": {
-    "vue2-leaflet": "^2.6.0"
   }
 }

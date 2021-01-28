@@ -4,6 +4,8 @@
 {% block css %}
 {{ block.super }}
 <link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet">
+<link href="{% static 'leaflet.markercluster/dist/MarkerCluster.css' %}" rel="stylesheet">
+<link href="{% static 'leaflet.markercluster/dist/MarkerCluster.Default.css' %}" rel="stylesheet">
 <link href="{% static 'vue-slider-component/theme/default.css' %}" rel="stylesheet">
 {% endblock css %}
 
@@ -42,7 +44,9 @@
         </div>
 
         {% block pagination-top %}
-        {% include 'vue/pagination.html' %}
+        <template v-if="!map.show">
+          {% include 'vue/pagination.html' %}
+        </template>
         {% endblock pagination-top %}
 
         <ul class="nav nav-tabs" id="result-views" role="tablist">
@@ -94,7 +98,9 @@
         {% endblock results %}
 
         {% block pagination-bottom %}
-        {% include 'vue/pagination.html' %}
+        <template v-if="!map.show">
+          {% include 'vue/pagination.html' %}
+        </template>
         {% endblock pagination-bottom %}
       </div>
     </div>
@@ -106,7 +112,6 @@
 {% block javascript %}
 {{ block.super }}
 
-<script src="{% static 'vue2-leaflet/dist/vue2-leaflet.min.js' %}"></script>
 <script src="{% static 'js/charts.js' %}"></script>
 <script src="{% static 'js/search.js' %}"></script>
 {% endblock javascript %}
