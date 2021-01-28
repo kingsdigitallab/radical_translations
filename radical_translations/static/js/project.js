@@ -31,13 +31,18 @@ $(function () {
       const modalId = '#place-modal'
       const bodyId = `${modalId} .modal-body`
 
-      $(bodyId).load(url, function () {
-        $(modalId)
-          .modal({ show: true })
-          .on('shown.bs.modal', function () {
-            dispatchWindowResizeEvent()
-          })
-      })
+      fetch(url)
+        .then((response) => {
+          return response.text()
+        })
+        .then((html) => {
+          $(bodyId).html(html)
+          $(modalId)
+            .modal({ show: true })
+            .on('shown.bs.modal', function () {
+              dispatchWindowResizeEvent()
+            })
+        })
     }
   })
 })

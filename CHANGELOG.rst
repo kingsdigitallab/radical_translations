@@ -17,6 +17,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Events visualisation.
+* Map clustering.
 
 Changed
 ~~~~~~~
