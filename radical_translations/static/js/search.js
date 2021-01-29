@@ -185,13 +185,16 @@ new Vue({
         }))
     },
     getFacets: function () {
+      return this.getFacetsCache(this.data)
+    },
+    getFacetsCache: _.memoize(function (data) {
       let facets = []
 
-      if (this.data.facets !== undefined) {
-        Object.keys(this.data.facets).forEach((f) => {
+      if (data.facets !== undefined) {
+        Object.keys(data.facets).forEach((f) => {
           const name = f.replace('_filter_', '')
           const range = name === 'year' ? true : false
-          let buckets = this.data.facets[f][name]['buckets']
+          let buckets = data.facets[f][name]['buckets']
           let chartData = {
             labels: [],
             datasets: [
@@ -236,7 +239,7 @@ new Vue({
       })
 
       return facets
-    },
+    }),
     getFacetCount: function (buckets) {
       return buckets
         .map((el) => el.doc_count)
