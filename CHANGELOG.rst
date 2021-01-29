@@ -11,6 +11,22 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+Added
+~~~~~
+* Events visualisation.
+* Map clustering.
+
+Changed
+~~~~~~~
+* Add profiles_ to the `pa11y`, `mongo` and `kibana` services in `local.yml`.
+* Docs: update data models and architecture diagrams.
+
+.. _profiles: https://docs.docker.com/compose/profiles/
+
+
 [1.0.0] - 2021-01-27
 --------------------
 
