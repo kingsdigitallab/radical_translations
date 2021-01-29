@@ -22,6 +22,7 @@ Added
 Changed
 ~~~~~~~
 * Add profiles_ to the `pa11y`, `mongo` and `kibana` services in `local.yml`.
+* Docs: update data models and architecture diagrams.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
 
