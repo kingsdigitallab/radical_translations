@@ -41,7 +41,7 @@ object type) and Events, and based on FOAF_ for Agents (Persons, Organisations).
 The data model graph was generated with the `django-extensions graph_models`_
 command::
 
-    $ ./bake.py manage graph_models -X TimeStampedModel,PolymorphicModel -o models.png agents core events utils
+    $ fab django "graph_models -X TimeStampedModel,PolymorphicModel -o models.png agents core events utils"
 
 
 Conceptual model frameworks:
