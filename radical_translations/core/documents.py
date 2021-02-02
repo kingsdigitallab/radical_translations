@@ -3,6 +3,7 @@ from django_elasticsearch_dsl.registries import registry
 from elasticsearch_dsl import analyzer, normalizer
 
 from controlled_vocabulary.models import ControlledTerm
+from controlled_vocabulary.utils import search_term_or_none
 from radical_translations.core.models import (
     Classification,
     Contribution,
@@ -248,7 +249,16 @@ class ResourceDocument(Document):
         return self._get_classifications(instance, "rt-tt")
 
     def prepare_classifications_paratext(self, instance):
-        return self._get_classifications(instance, "rt-pt")
+        classifications = self._get_classifications(instance, "rt-pt")
+
+        if instance.has_date_radical:
+            vocabulary = "rt-pt"
+            label = "Revolutionary calendar used"
+            term = search_term_or_none(vocabulary, label)
+            if term:
+                classifications.append({"edition": {"label": term.label}})
+
+        return classifications
 
     def prepare_contributions(self, instance):
         contributions = [
