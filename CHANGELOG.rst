@@ -23,6 +23,7 @@ Changed
 ~~~~~~~
 * Add profiles_ to the `pa11y`, `mongo` and `kibana` services in `local.yml`.
 * Docs: update data models and architecture diagrams.
+* Add paratext term `Revolutionary calendar use` to `Resources` that have a radical date.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
 
