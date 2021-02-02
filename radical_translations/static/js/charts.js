@@ -66,23 +66,12 @@ Vue.component('bubble-chart', {
       },
       onClick: function (evt, item) {
         if (item.length > 0) {
-          const year = item[0]['_model'].label
-          self.clickHandler(year, year)
+          const meta =
+            self.chartData.datasets[item[0]._datasetIndex].data[item[0]._index]
+              .meta
+          location.href = meta.id
         }
       }
     })
-  },
-  methods: {
-    generateData: function () {
-      var data = []
-      for (var i = 0; i < 7; i++) {
-        data.push({
-          x: i + i,
-          y: i,
-          r: i
-        })
-      }
-      return data
-    }
   }
 })

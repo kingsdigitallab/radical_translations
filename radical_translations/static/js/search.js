@@ -147,6 +147,7 @@ new Vue({
                 y: idx,
                 r: item.related_to.length + 10,
                 meta: {
+                  id: item.id,
                   title: item.title,
                   date: item.date,
                   place: item.place.address,
