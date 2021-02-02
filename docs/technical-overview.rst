@@ -102,7 +102,6 @@ TODO: data processing & editorial workflows
 
 Architecture
 ^^^^^^^^^^^^
-TODO: Extract high level description from PQ
 
 .. figure:: _images/docker-local.png
     :align: center
