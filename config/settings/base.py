@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "wagtail.contrib.forms",
     "wagtail.contrib.modeladmin",
+    "wagtail.contrib.routable_page",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
     "wagtail.contrib.table_block",

@@ -1,7 +1,11 @@
+{% load wagtailroutablepage_tags %}
+
 {% if page.tags.count > 0 %}
 <ul class="tags">
-    {% for tag in page.tags.all %}
-    <li class="tag">{{ tag }}</li>
-    {% endfor %}
+  {% for tag in page.tags.all %}
+  <li class="tag">
+    <a href="{% routablepageurl page.get_parent.specific "posts_by_tag" tag=tag.slug %}">{{ tag }}</a>
+  </li>
+  {% endfor %}
 </ul>
 {% endif %}
