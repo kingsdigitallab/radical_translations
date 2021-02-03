@@ -40,6 +40,7 @@ class BlogIndexPage(RoutablePageMixin, BaseIndexPage):
             request, self.get_template(request), {"children": self.children()}
         )
 
+    @route(r"^tag/")
     @route(r"^tag/(?P<tag>[\w\s\-]+)/$", name="posts_by_tag")
     def posts_by_tag(self, request, tag=None):
         if not tag:
