@@ -20,6 +20,7 @@ Added
 * Map clustering.
 * Docs: data workflow diagram.
 * Blog tags navigation.
+* Radical markers to `Resource` detail view.
 
 Changed
 ~~~~~~~
