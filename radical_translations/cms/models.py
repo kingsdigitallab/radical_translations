@@ -1,18 +1,13 @@
 from django.conf import settings
 from django.db import models
 from django.http import HttpRequest
+from django.shortcuts import render
 from django.urls import reverse
-from kdl_wagtail.core.models import (
-    BaseIndexPage,
-    BasePage,
-    BaseRichTextPage,
-    BaseStreamPage,
-    IndexPage,
-)
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel, StreamFieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page, Site
@@ -20,16 +15,42 @@ from wagtail.core.query import PageQuerySet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 
+from kdl_wagtail.core.models import (
+    BaseIndexPage,
+    BasePage,
+    BaseRichTextPage,
+    BaseStreamPage,
+    IndexPage,
+)
 from radical_translations.agents.models import Person
 from radical_translations.core.models import Resource
 
 
-class BlogIndexPage(BaseIndexPage):
+class BlogIndexPage(RoutablePageMixin, BaseIndexPage):
     subpage_types = ["BlogPost"]
 
     def children(self) -> PageQuerySet:
         return (
             BlogPost.objects.descendant_of(self).live().order_by("-first_published_at")
+        )
+
+    @route(r"^$")
+    def all_posts(self, request):
+        return render(
+            request, self.get_template(request), {"children": self.children()}
+        )
+
+    @route(r"^tag/(?P<tag>[\w\s\-]+)/$", name="posts_by_tag")
+    def posts_by_tag(self, request, tag=None):
+        if not tag:
+            return self.all_posts(request)
+
+        posts = self.children().filter(tags__slug=tag)
+
+        return render(
+            request,
+            self.get_template(request),
+            {"page": self, "children": posts, "filter_type": "tag", "filter": tag},
         )
 
 

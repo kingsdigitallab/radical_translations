@@ -19,6 +19,7 @@ Added
 * Events visualisation.
 * Map clustering.
 * Docs: data workflow diagram.
+* Blog tags navigation.
 
 Changed
 ~~~~~~~
