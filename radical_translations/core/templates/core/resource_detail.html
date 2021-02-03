@@ -22,7 +22,7 @@
 {% if object.subjects.all %}
 <span class="metadata-block">
   {% for subject in object.subjects.all %}
-  {{ subject.label }}{% if not forloop.last %}, {% endif %}
+  <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
   {% endfor %}
 </span>
 {% endif %}
@@ -36,8 +36,9 @@
 {% if object.classifications.all %}
 <span class="metadata-block">
   {% for classification in object.classifications.all %}
-  {% with edition=classification.edition %}
+  {% with edition=classification.edition tags=classification.classification.all %}
   <a
+    {% if tags %}class="{% for tag in tags %}{{ tag.label }}{% endfor %}"{% endif %}
     {% if edition.description %}
     href="#"
     data-toggle="tooltip"
@@ -92,12 +93,10 @@
   {% for contribution in object.contributions.all %}
   <dt>
   {% for classification in contribution.classification.all %}
-  {% if classification.label == "uncertainty" %}
   {# Font Awesome question icon #}
-  <span class="small-icon uncertainty">
-    <span class="sr-only">Uncertain</span>
+  <span class="small-icon {{ classification.label }}">
+    <span class="sr-only">{{ classification.label }}</span>
   </span>
-  {% endif %}
   {% endfor %}
   <a href="{% url 'agent-detail' contribution.agent.pk %}">
     {{ contribution.agent.name }}
@@ -105,11 +104,6 @@
   </dt>
   {% for role in contribution.roles.all %}
   <dd>{{ role.label }}</dd>
-  {% endfor %}
-  {% for classification in contribution.classification.all %}
-  {% if classification.label != "uncertainty" %}
-  <dd class="{{ classification.label }}">{{ classification.label }}</dd>
-  {% endif %}
   {% endfor %}
   {% endfor %}
 </dl>
