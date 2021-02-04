@@ -98,11 +98,17 @@ Translations data model:
 Workflows
 ^^^^^^^^^
 
-TODO: data processing & editorial workflows
+.. figure:: _images/data-workflow.jpg
+    :align: center
+    :alt: Data workflow
+    :figclass: align-center
+    :width: 100%
+
+    Data workflow
+
 
 Architecture
 ^^^^^^^^^^^^
-TODO: Extract high level description from PQ
 
 .. figure:: _images/docker-local.png
     :align: center

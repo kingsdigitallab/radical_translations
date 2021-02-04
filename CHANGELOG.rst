@@ -18,11 +18,19 @@ Added
 ~~~~~
 * Events visualisation.
 * Map clustering.
+* Docs: data workflow diagram.
+* Blog tags navigation.
+* Radical markers to `Resource` detail view.
 
 Changed
 ~~~~~~~
 * Add profiles_ to the `pa11y`, `mongo` and `kibana` services in `local.yml`.
 * Docs: update data models and architecture diagrams.
+* Add paratext term `Revolutionary calendar use` to `Resources` that have a radical date.
+
+Fixed
+~~~~~
+* Validation errors in `CHANGELOG`.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
 
@@ -45,8 +53,7 @@ Added
 
 Changed
 ~~~~~~~
-* `is_original` to include resources that are marked both as `original` and
-`source text`.
+* `is_original` to include resources that are marked both as `original` and `source text`.
 * Exclude the original/source text terms from being indexed with the translation terms.
 * `Source text` and `translation` moved to top level filters.
 * Split filters view into main and secondary.
@@ -61,7 +68,7 @@ Fixed
 
 
 [0.10.3] - 2021-01-12
---------------------
+---------------------
 
 Added
 ~~~~~
@@ -201,7 +208,6 @@ Fixed
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
 .. _Django email: https://docs.djangoproject.com/en/3.0/topics/email/
 .. _Wagtail: https://wagtail.io/
-.. _Fabric: https://fabfile.org/
 .. _Controlled Vocabulary: https://github.com/kingsdigitallab/django-controlled-vocabulary/
 
 
@@ -217,7 +223,7 @@ Added
 * Fabric_ script for remote task automation.
 * Zotero_ integration_ to harvest bibliographic data from Zotero.
 
-.. _Fabric: https://www.fabfile.org/
+.. _Fabric: https://fabfile.org/
 .. _Zotero: https://www.zotero.org/
 .. _integration: https://django-kdl-wagtail.readthedocs.io/en/latest/readme.html#features
 
@@ -314,7 +320,7 @@ Changed
 
 
 [0.10.0] - 2020-12-07
---------------------
+---------------------
 
 Added
 ~~~~~
@@ -424,7 +430,6 @@ Fixed
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
 .. _Django email: https://docs.djangoproject.com/en/3.0/topics/email/
 .. _Wagtail: https://wagtail.io/
-.. _Fabric: https://fabfile.org/
 .. _Controlled Vocabulary: https://github.com/kingsdigitallab/django-controlled-vocabulary/
 
 
@@ -440,7 +445,7 @@ Added
 * Fabric_ script for remote task automation.
 * Zotero_ integration_ to harvest bibliographic data from Zotero.
 
-.. _Fabric: https://www.fabfile.org/
+.. _Fabric: https://fabfile.org/
 .. _Zotero: https://www.zotero.org/
 .. _integration: https://django-kdl-wagtail.readthedocs.io/en/latest/readme.html#features
 
@@ -557,8 +562,7 @@ Changed
 
 Fixed
 ~~~~~
-* Constraint on unique titles, it potentially caused duplicate entries under race
-conditions.
+* Constraint on unique titles, it potentially caused duplicate entries under race conditions.
 
 
 [0.3.0] - 2020-05-11
