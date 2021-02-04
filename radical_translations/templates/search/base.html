@@ -58,7 +58,7 @@
               data-toggle="tab"
               href="#default-view"
               role="tab"
-              aria-controls="list"
+              aria-controls="default-view"
               aria-selected="true">
               <span class="small-icon">
                 {% include "svgs/solid/list.svg" %}
@@ -74,7 +74,7 @@
               data-toggle="tab"
               href="#map-view"
               role="tab"
-              aria-controls="map"
+              aria-controls="map-view"
               aria-selected="false">
               <span class="small-icon">
                 {% include "svgs/solid/map-marker.svg" %}
@@ -83,7 +83,6 @@
             </a>
           </li>
         </ul>
-
         {% block results %}
         <div class="tab-content">
           <div class="tab-pane active" id="default-view" role="tabpanel" aria-labelledby="default-view-tab">
