@@ -8521,6 +8521,9 @@ strong {
   margin-left: 0.5em;
   vertical-align: -0.1875em; }
 
+.collapsed-bottom {
+  margin-bottom: 0; }
+
 footer {
   background: white;
   border-top: 15px solid #222222;
@@ -9351,6 +9354,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   margin-left: 1rem;
   padding-left: 32px;
   padding-left: 2rem; }
+  .search-results-list li {
+    border-bottom: 1px solid #c3c1a8;
+    margin: 16px 0 0 8px;
+    margin: 1rem 0 0 .5rem; }
+  .search-results-list .title {
+    margin-bottom: 8px;
+    margin-bottom: .5rem; }
 
 .spacing {
   margin-bottom: 4px;

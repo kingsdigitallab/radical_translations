@@ -3,32 +3,38 @@
      class="search-results-list">
   <li v-for="item in data.results" :key="item.id">
     <p class="title">
-    <a v-bind:href="item.id">
-      <span
-        v-if="'title' in item.highlight"
-        v-html="item.highlight['title'][0]"></span>
-      <span v-else>{[ item.title[0] ]}</span>
-    </a>
-    <span class="badge badge-secondary" v-if="item.is_original">Source text</span>
-    <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
+      <a v-bind:href="item.id">
+        <span
+          v-if="'title' in item.highlight"
+          v-html="item.highlight['title'][0]"></span>
+        <span v-else>{[ item.title[0] ]}</span>
+      </a>
+      <span class="badge badge-secondary" v-if="item.is_original">Source text</span>
+      <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
     </p>
     <p v-if="'content' in item.highlight">
-    <span
-      v-for="frag in item.highlight['content']"
-      v-html="`${frag}... `"
-      class="fragment"></span>
+      <span
+        v-for="frag in item.highlight['content']"
+        v-html="`${frag}... `"
+        class="fragment"></span>
+    </p>
+    <p class="collapsed-bottom">
+      <template v-if="item.radical_markers > 0">
+        <template v-for="n in item.radical_markers">
+          <span class="sr-only">Radical markers attached to this resource: {[ item.radical_markers ]}</span>
+          {# Custom phrygian cap icon #}
+          <span class="small-icon radical"></span>
+        </template>
+        <br>
+      </template>
     </p>
     <div class="row">
       <div class="col col-md-3">
-        <template v-if="item.radical_markers > 0">
-          <template v-for="n in item.radical_markers">
-            <span class="sr-only">Radical marker</span>
-            {# Font Awesome calendar icon #}
-            <span class="small-icon radical"></span>
-          </template>
-          <br>
-        </template>
         <template v-if="item.date_display">
+          {# Font Awesome calendar icon #}
+          <span class="small-icon">
+            {% include "svgs/solid/calendar.svg" %}
+          </span>
           {[ item.date_display ]}<br>
         </template>
         <template v-if="item.places.length > 0">
