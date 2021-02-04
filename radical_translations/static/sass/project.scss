@@ -87,6 +87,10 @@ strong {
   }
 }
 
+.collapsed-bottom {
+  margin-bottom: 0;
+}
+
 footer {
   background: white;
   border-top: 15px solid $dark-gray;
@@ -1286,6 +1290,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .search-results-list {
   margin-left: 1rem;
   padding-left: 2rem;
+
+  li {
+    border-bottom: 1px solid $kaki;
+    margin: 1rem 0 0 .5rem;
+  }
+
+  .title {
+    margin-bottom: .5rem;
+  }
 }
 
 .spacing {
