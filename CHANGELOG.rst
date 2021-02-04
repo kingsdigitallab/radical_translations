@@ -21,6 +21,7 @@ Added
 * Docs: data workflow diagram.
 * Blog tags navigation.
 * Radical markers to `Resource` detail view.
+* Radical markers to the search index and search results.
 
 Changed
 ~~~~~~~
