@@ -9328,6 +9328,18 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 #map-view.active {
   height: 70vh; }
 
+.vue-slider-dot-tooltip-text,
+.vue-slider-dot-tooltip-inner {
+  background-color: #00548b !important;
+  border-color: #00548b !important; }
+
+.vue-slider-process {
+  background-color: #00548b !important; }
+
+.vue-slider-dot:focus,
+.vue-slider-dot-handle-focus:focus {
+  border: 1px solid #9b2923 !important; }
+
 /* End map styling */
 .search-result dd {
   margin-bottom: 0;

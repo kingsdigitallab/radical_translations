@@ -1255,6 +1255,25 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   height: 70vh;
 }
 
+// Adjusting colour contrast for accessibility purpose
+.vue-slider-dot-tooltip-text,
+.vue-slider-dot-tooltip-inner {
+  background-color: $prussian-blue !important;
+  border-color: $prussian-blue !important;
+}
+
+.vue-slider-process {
+  background-color: $prussian-blue !important;
+}
+
+// Adding focus status to slider handle to make it accessible
+.vue-slider-dot,
+.vue-slider-dot-handle-focus {
+  &:focus {
+    border: 1px solid $radical-red !important;
+  }
+}
+
 /* End map styling */
 
 .search-result {
