@@ -1,8 +1,4 @@
 /* Project specific Javascript goes here. */
-const dispatchWindowResizeEvent = function () {
-  window.dispatchEvent(new Event('resize'))
-}
-
 $(function () {
   L.Icon.Default.imagePath = '/static/leaflet/dist/images/'
 
@@ -31,18 +27,17 @@ $(function () {
       const modalId = '#place-modal'
       const bodyId = `${modalId} .modal-body`
 
-      fetch(url)
-        .then((response) => {
-          return response.text()
-        })
-        .then((html) => {
-          $(bodyId).html(html)
-          $(modalId)
-            .modal({ show: true })
-            .on('shown.bs.modal', function () {
-              dispatchWindowResizeEvent()
-            })
-        })
+      $(bodyId).load(url, function () {
+        $(modalId)
+          .modal({ show: true })
+          .on('shown.bs.modal', function () {
+            dispatchWindowResizeEvent()
+          })
+      })
     }
   })
+
+  const dispatchWindowResizeEvent = function () {
+    window.dispatchEvent(new Event('resize'))
+  }
 })
