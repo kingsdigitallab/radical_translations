@@ -22,6 +22,7 @@ Added
 * Blog tags navigation.
 * Radical markers to `Resource` detail view.
 * Radical markers to the search index and search results.
+* Add search options to the settings.
 
 Changed
 ~~~~~~~
