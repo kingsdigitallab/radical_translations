@@ -1259,6 +1259,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   height: 70vh;
 }
 
+#map-popup-container {
+  display: none;
+}
+
 // Adjusting colour contrast for accessibility purpose
 .vue-slider-dot-tooltip-text,
 .vue-slider-dot-tooltip-inner {
@@ -1293,11 +1297,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   li {
     border-bottom: 1px solid $kaki;
-    margin: 1rem 0 0 .5rem;
+    margin: 1rem 0 0 0.5rem;
   }
 
   .title {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 }
 

@@ -37,7 +37,11 @@ new Vue({
       zoom: 4,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      popup: {
+        item: null,
+        place: null
+      }
     }
   },
   watch: {
@@ -58,6 +62,8 @@ new Vue({
       if (newShow) {
         this.page = 1
         this.page_size = 1000
+        this.map.mapObject.invalidateSize()
+        dispatchWindowResizeEvent()
         await this.search()
         this.renderMap()
       } else {
@@ -361,28 +367,40 @@ new Vue({
     initMap: async function () {
       if (!document.getElementById('map')) return
 
-      const map = L.map('map').setView(this.map.center, this.map.zoom)
+      const map = L.map('map')
+      map.setView(this.map.center, this.map.zoom)
 
       L.tileLayer(this.map.url, {
         attribution: this.map.attribution
       }).addTo(map)
+
       this.map.mapObject = map
     },
     renderMap: function () {
       if (!this.map.mapObject) return
 
       const map = this.map.mapObject
-
       const cluster = L.markerClusterGroup()
 
+      const vue = this
       this.data.results.forEach((item) =>
         item.places.forEach((place) => {
           if (place.place.geo !== undefined) {
             cluster.addLayer(
-              // TODO check if popup can be created on click
-              L.marker(place.place.geo).bindPopup(
-                this.mapPopupContent(item, place.place)
-              )
+              L.marker(place.place.geo).on('click', function () {
+                const marker = this
+
+                vue.map.popup.item = item
+                vue.map.popup.place = place.place
+
+                vue.$nextTick(() =>
+                  marker
+                    .bindPopup(
+                      document.getElementById('map-popup-container').innerHTML
+                    )
+                    .openPopup()
+                )
+              })
             )
           }
         })
@@ -390,28 +408,9 @@ new Vue({
 
       map.addLayer(cluster)
 
-      map.whenReady(function () {
+      map.whenReady(() => {
         map.invalidateSize()
       })
-    },
-    mapPopupContent(item, place) {
-      let popup = '<p class="title">'
-      popup += `<a href="${item.id}"><span>${item.title[0]}</span></a> `
-      if (item.is_original) {
-        popup += '<span class="badge badge-secondary">Original</span>'
-      }
-      if (item.is_translation) {
-        popup += '<span class="badge badge-secondary">Translation</span>'
-      }
-      popup += '</p>'
-
-      if (item.date_display) {
-        popup += `${item.date_display} `
-      }
-
-      popup += `${place.address}, ${place.country.name}`
-
-      return popup
     }
   }
 })

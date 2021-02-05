@@ -33,6 +33,7 @@ Changed
 Fixed
 ~~~~~
 * Validation errors in `CHANGELOG`.
+* Search results map loading delay.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
 

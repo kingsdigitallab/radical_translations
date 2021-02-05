@@ -36,8 +36,8 @@ $(function () {
       })
     }
   })
-
-  const dispatchWindowResizeEvent = function () {
-    window.dispatchEvent(new Event('resize'))
-  }
 })
+
+const dispatchWindowResizeEvent = function () {
+  window.dispatchEvent(new Event('resize'))
+}
