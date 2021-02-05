@@ -53,7 +53,8 @@
           <li class="nav-item" role="presentation">
             <a
               @click="map.show = false"
-              class="nav-link active"
+              :class="{active: !map.show}"
+              class="nav-link"
               id="default-view-tab"
               data-toggle="tab"
               href="#default-view"
@@ -69,6 +70,7 @@
           <li class="nav-item" role="presentation">
             <a
               @click="map.show = true"
+              :class="{active: map.show}"
               class="nav-link"
               id="map-view-tab"
               data-toggle="tab"
@@ -85,13 +87,27 @@
         </ul>
         {% block results %}
         <div class="tab-content">
-          <div class="tab-pane active" id="default-view" role="tabpanel" aria-labelledby="default-view-tab">
+          <div
+            :class="{active: !map.show}"
+            class="tab-pane"
+            id="default-view"
+            role="tabpanel"
+            aria-labelledby="default-view-tab">
             {% block results_default %}
             {% endblock results_default %}
           </div>
           {% block results_map %}
-          <div class="tab-pane" id="map-view" role="tabpanel" aria-labelledby="map-view-tab">
+          <div
+            :class="{active: map.show}"
+            class="tab-pane"
+            id="map-view"
+            role="tabpanel"
+            aria-labelledby="map-view-tab">
             {% include 'vue/search_results_map.html' %}
+            <div id="map-popup-container">
+              {% block results_map_popup %}
+              {% endblock results_map_popup %}
+            </div>
           </div>
           {% endblock results_map %}
         </div>

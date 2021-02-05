@@ -338,3 +338,25 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 50,
     "ORDERING_PARAM": "ordering",
 }
+
+
+# Search
+# ------------------------------------------------------------------------------
+SEARCH_OPTIONS = {
+    "resources": {
+        "label": "Resources",
+        "page_size": 50,
+        "meta_facets": ["meta"],
+        "range_facets": ["year"],
+        "year_min": 1516,
+        "year_max": 1820,
+    },
+    "events": {
+        "label": "Events",
+        "page_size": 500,
+        "meta_facets": [],
+        "range_facets": ["year"],
+        "year_min": 1780,
+        "year_max": 1820,
+    }
+}
