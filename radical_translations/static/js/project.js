@@ -34,24 +34,38 @@ $(function () {
             .modal({ show: true })
             .on('shown.bs.modal', function () {
               $(`${bodyId} h2`).html(`${place.address}, ${place.country.name}`)
-              pointMap(place)
+              pointMap('modal-map', place)
             })
         })
     }
   })
 })
 
-const pointMap = (point) => {
-  const map = L.map('modal-map').setView(point, 5)
+const project = { maps: {} }
+
+const pointMap = (element, place) => {
+  const map = getMap(element)
+
+  map.setView(place, 5)
+
+  L.marker(place).addTo(map)
+
+  map.whenReady(() => map.invalidateSize())
+}
+
+const getMap = (element) => {
+  if (project.maps[element] !== undefined) {
+    project.maps[element].remove()
+  }
+
+  const map = L.map(element)
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map)
 
-  L.marker(point).addTo(map)
-
-  map.whenReady(() => map.invalidateSize())
+  return (project.maps[element] = map)
 }
 
 const dispatchWindowResizeEvent = () => {
