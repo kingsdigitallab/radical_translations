@@ -62,7 +62,6 @@ new Vue({
       if (newShow) {
         this.page = 1
         this.page_size = 1000
-        this.map.mapObject.invalidateSize()
         dispatchWindowResizeEvent()
         await this.search()
         this.renderMap()
@@ -408,9 +407,7 @@ new Vue({
 
       map.addLayer(cluster)
 
-      map.whenReady(() => {
-        map.invalidateSize()
-      })
+      map.whenReady(() => map.invalidateSize())
     }
   }
 })

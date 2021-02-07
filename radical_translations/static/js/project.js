@@ -27,17 +27,33 @@ $(function () {
       const modalId = '#place-modal'
       const bodyId = `${modalId} .modal-body`
 
-      $(bodyId).load(url, function () {
-        $(modalId)
-          .modal({ show: true })
-          .on('shown.bs.modal', function () {
-            dispatchWindowResizeEvent()
-          })
-      })
+      fetch(url)
+        .then((response) => response.json())
+        .then((place) => {
+          $(modalId)
+            .modal({ show: true })
+            .on('shown.bs.modal', function () {
+              $(`${bodyId} h2`).html(`${place.address}, ${place.country.name}`)
+              pointMap(place)
+            })
+        })
     }
   })
 })
 
-const dispatchWindowResizeEvent = function () {
+const pointMap = (point) => {
+  const map = L.map('modal-map').setView(point, 5)
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map)
+
+  L.marker(point).addTo(map)
+
+  map.whenReady(() => map.invalidateSize())
+}
+
+const dispatchWindowResizeEvent = () => {
   window.dispatchEvent(new Event('resize'))
 }
