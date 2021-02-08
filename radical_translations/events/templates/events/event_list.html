@@ -20,14 +20,7 @@
 
 {% block javascript %}
 <script>
-  const PAGE_SIZE = 500
-
-const META_FACETS = []
-const RANGE_FACETS = ['year']
-
-const YEAR_CHART_LABEL = 'Events'
-const YEAR_MIN = 1780
-const YEAR_MAX = 1820
+  const options = {{ ds.SEARCH_OPTIONS.events|safe }}
 </script>
 {{ block.super }}
 {% endblock javascript %}

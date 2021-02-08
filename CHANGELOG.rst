@@ -22,16 +22,24 @@ Added
 * Blog tags navigation.
 * Radical markers to `Resource` detail view.
 * Radical markers to the search index and search results.
+* Add search options to the settings.
+* `Place` API view.
 
 Changed
 ~~~~~~~
 * Add profiles_ to the `pa11y`, `mongo` and `kibana` services in `local.yml`.
 * Docs: update data models and architecture diagrams.
 * Add paratext term `Revolutionary calendar use` to `Resources` that have a radical date.
+* Modal map view uses an API call to get `Place` information rather than loading a Django view.
 
 Fixed
 ~~~~~
 * Validation errors in `CHANGELOG`.
+* Search results map loading delay.
+
+Removed
+~~~~~~~
+* `Place` detail view.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
 

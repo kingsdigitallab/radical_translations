@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        {% block title %}{{ page.title }}{% endblock title %} | {{ ds.WAGTAIL_SITE_NAME }}
+      {% block title %}{{ page.title }}{% endblock title %} | {{ ds.WAGTAIL_SITE_NAME }}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The Transfer of Revolutionary Culture between Britain, France and Italy (1789-1815)">
@@ -20,6 +20,7 @@
 
     {% block css %}
     <!-- Your stuff: Third-party CSS libraries go here -->
+    <link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet">
     <!-- This file stores project-specific CSS -->
     <link href="{% static 'css/project.min.css' %}" rel="stylesheet">
     {% endblock %}
@@ -39,8 +40,9 @@
         {% if messages %}
         {% for message in messages %}
         <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
-          {{ message }}<button type="button" class="close" data-dismiss="alert"
-            aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert"
+                                              aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         {% endfor %}
         {% endif %}
@@ -48,7 +50,7 @@
         {% block content %}
         {# TODO: if not homepage show breadcrumbs #}
         {% block main %}
-          <p>Use this document as a way to quick start any new project.</p>
+        <p>Use this document as a way to quick start any new project.</p>
         {% endblock main %}
         {% endblock content %}
 
@@ -62,18 +64,18 @@
     {% endblock footer %}
 
     <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    {% block javascript %}
-    <!-- Vendor dependencies bundled as one file-->
-    <script src="{% static 'js/vendors.js' %}"></script>
-    <!-- place project specific Javascript in this file -->
-    <script src="{% static 'js/project.js' %}"></script>
-    {% if not ds.DEBUG %}
-    <!-- Cloudflare Web Analytics -->
-    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2b284c30731e4c719f7944d89e542220"}'></script>
-    <!-- End Cloudflare Web Analytics -->
-    {% endif %}
-    {% endblock javascript %}
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      {% block javascript %}
+      <!-- Vendor dependencies bundled as one file-->
+      <script src="{% static 'js/vendors.js' %}"></script>
+      <!-- place project specific Javascript in this file -->
+      <script src="{% static 'js/project.js' %}"></script>
+      {% if not ds.DEBUG %}
+      <!-- Cloudflare Web Analytics -->
+      <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2b284c30731e4c719f7944d89e542220"}'></script>
+      <!-- End Cloudflare Web Analytics -->
+      {% endif %}
+      {% endblock javascript %}
   </body>
 </html>
