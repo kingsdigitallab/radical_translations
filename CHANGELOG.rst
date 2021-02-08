@@ -18,6 +18,7 @@ Added
 ~~~~~
 * Events visualisation.
 * Map clustering.
+* GitHub action for CI.
 
 Changed
 ~~~~~~~
