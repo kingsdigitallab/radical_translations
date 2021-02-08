@@ -25,6 +25,7 @@ Added
 * Add search options to the settings.
 * `Place` API view.
 * Load analytics setting.
+* GitHub action for CI.
 
 Changed
 ~~~~~~~
