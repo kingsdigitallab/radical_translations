@@ -24,6 +24,7 @@ Added
 * Radical markers to the search index and search results.
 * Add search options to the settings.
 * `Place` API view.
+* Load analytics setting.
 
 Changed
 ~~~~~~~
