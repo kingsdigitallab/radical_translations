@@ -48,7 +48,7 @@ django-filter==2.4.0
     # via wagtail
 django-geonames-place==0.7.0
     # via -r requirements/base.in
-django-kdl-wagtail==0.9.6
+django-kdl-wagtail==0.9.7
     # via -r requirements/base.in
 django-model-utils==4.0.0
     # via
