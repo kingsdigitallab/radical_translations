@@ -48,4 +48,4 @@ jobs:
         run: docker-compose -f local.yml run django coverage run -m pytest -s
 
       - name: Tear down the Stack
-        run: docker-compose down
+        run: docker-compose -f local.yml down
