@@ -24,6 +24,8 @@ Added
 * Radical markers to the search index and search results.
 * Add search options to the settings.
 * `Place` API view.
+* Load analytics setting.
+* GitHub action for CI.
 
 Changed
 ~~~~~~~
@@ -31,17 +33,22 @@ Changed
 * Docs: update data models and architecture diagrams.
 * Add paratext term `Revolutionary calendar use` to `Resources` that have a radical date.
 * Modal map view uses an API call to get `Place` information rather than loading a Django view.
+* Upgrade Wagtail_ to version 2.12.
+* `Bump pillow to 7.1`_. 
+* Exclude libraries from the list of `Organisations`.
 
 Fixed
 ~~~~~
 * Validation errors in `CHANGELOG`.
 * Search results map loading delay.
+* Date interval parsing issues.
 
 Removed
 ~~~~~~~
 * `Place` detail view.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
+.. _Bump pillow to 7.1: https://github.com/kingsdigitallab/radical_translations/pull/5
 
 
 [1.0.0] - 2021-01-27
