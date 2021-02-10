@@ -71,9 +71,11 @@
       <script src="{% static 'js/vendors.js' %}"></script>
       <!-- place project specific Javascript in this file -->
       <script src="{% static 'js/project.js' %}"></script>
-      {% if not ds.DEBUG %}
+      {% if ds.LOAD_ANALYTICS %}
       <!-- Cloudflare Web Analytics -->
-      <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2b284c30731e4c719f7944d89e542220"}'></script>
+      <script defer
+        src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "2b284c30731e4c719f7944d89e542220"}'></script>
       <!-- End Cloudflare Web Analytics -->
       {% endif %}
       {% endblock javascript %}

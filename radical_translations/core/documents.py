@@ -253,7 +253,7 @@ class ResourceDocument(Document):
     def prepare_classifications_paratext(self, instance):
         classifications = self._get_classifications(instance, "rt-pt")
 
-        if instance.has_date_radical:
+        if instance.has_date_radical():
             vocabulary = "rt-pt"
             label = "Revolutionary calendar used"
             term = search_term_or_none(vocabulary, label)
