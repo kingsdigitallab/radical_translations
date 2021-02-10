@@ -6,7 +6,7 @@ from radical_translations.events.models import Event
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     autocomplete_fields = ["date", "place", "related_to"]
-    list_display = ["date", "place", "title"]
+    list_display = ["date", "place", "title", "get_classification"]
     list_filter = [("place", admin.RelatedOnlyFieldListFilter)]
     search_fields = [
         "date__date_display",
