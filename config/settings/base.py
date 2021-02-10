@@ -162,7 +162,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "wagtail.core.middleware.SiteMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
@@ -359,5 +358,5 @@ SEARCH_OPTIONS = {
         "range_facets": ["year"],
         "year_min": 1780,
         "year_max": 1820,
-    }
+    },
 }
