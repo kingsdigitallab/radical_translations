@@ -35,6 +35,7 @@ Changed
 * Modal map view uses an API call to get `Place` information rather than loading a Django view.
 * Upgrade Wagtail_ to version 2.12.
 * `Bump pillow to 7.1`_. 
+* Exclude libraries from the list of `Organisations`.
 
 Fixed
 ~~~~~
