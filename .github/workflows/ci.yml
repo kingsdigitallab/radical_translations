@@ -31,7 +31,7 @@ jobs:
           pip install flake8
 
       - name: Lint with flake8
-        run: flake8 --exclude edtf
+        run: flake8
 
   pytest:
     runs-on: ubuntu-latest
