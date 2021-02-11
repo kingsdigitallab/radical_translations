@@ -43,8 +43,7 @@ body {
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 100, 'wght' 400;
 
-  background: url('../images/rt-bg.svg') no-repeat top left
-    lighten($old-yellow, 30%);
+  background: url('../images/rt-bg.svg') no-repeat top left lighten($old-yellow, 30%);
   background-size: 135% auto;
 }
 
@@ -1308,4 +1307,80 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .spacing {
   margin-bottom: 4px;
   margin-right: 4px;
+}
+
+/* Events timeline */
+
+.timeline {
+  font-family: Lora, serif;
+
+  .chart-grid {
+    fill: none;
+    stroke: $medium-gray;
+    stroke-miterlimit: 10;
+  }
+
+  .font-16 {
+    font-size: 1rem;
+  }
+
+  .font-20 {
+    font-size: 1.25rem;
+  }
+
+  .font-24 {
+    font-size: 1.5rem;
+  }
+
+  .key {
+    fill: $dark-gray;
+    stroke: $dark-gray;
+    stroke-miterlimit: 10;
+  }
+
+  .lora-reg {
+    font-variation-settings: 'wdth' 100, 'wght' 400;
+  }
+
+  .lora-bold {
+    font-variation-settings: 'wdth' 100, 'wght' 700;    
+  }
+
+  .opacity-70 {
+    opacity: .7;
+  }
+
+  // Country colours
+
+  .country {
+    stroke-miterlimit: 10;
+  }
+
+  .empty {
+    fill: transparent !important;
+  }
+
+  .egypt {
+
+  }
+
+  .france {
+    fill: #6F51B9;
+    stroke: #6F51B9;
+  }
+
+  .ireland {
+    fill: #8B2E4A;
+    stroke: #8B2E4A;
+  }
+
+  .uk {
+    fill: #FB4811;
+    stroke: #FB4811;
+  }
+
+  .us {
+    fill: #51B788;
+    stroke: #51B788;
+  }
 }
