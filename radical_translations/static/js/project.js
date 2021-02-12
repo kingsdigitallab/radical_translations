@@ -78,9 +78,16 @@ const dispatchWindowResizeEvent = () => {
  * TO DELETE once implemented */
 
 $(function() {
-  // Show contextual information
+  // Toggle contextual information
   $('.country').on('click', function () {
     $('.info').toggleClass('hidden');
+
+    return false;
+  });
+
+  // Toggle key
+  $('.key-button').on('click', function () {
+    $('.key-info').toggleClass('hidden');
 
     return false;
   });

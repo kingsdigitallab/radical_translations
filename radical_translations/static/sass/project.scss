@@ -1314,6 +1314,23 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .timeline {
   font-family: Lora, serif;
 
+  .bkg {
+    fill: $white;
+  }
+
+  .chart-button {
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.country {
+      &:hover {
+        opacity: .9;
+        stroke-width: 10px;
+      }
+    }
+  }
+
   .chart-grid {
     fill: none;
     stroke: $medium-gray;
@@ -1332,6 +1349,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     font-size: 1.5rem;
   }
 
+  .info {
+
+  }
+
   .key {
     fill: $dark-gray;
     stroke: $dark-gray;
@@ -1346,19 +1367,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     font-variation-settings: 'wdth' 100, 'wght' 700;    
   }
 
-  .opacity-70 {
-    opacity: .7;
-  }
-
   // Country colours
 
   .country {
+    opacity: .7;
     stroke-miterlimit: 10;
     stroke-opacity: 0.5;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   .empty {

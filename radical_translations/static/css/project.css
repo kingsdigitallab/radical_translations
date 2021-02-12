@@ -9372,6 +9372,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 /* Events timeline */
 .timeline {
   font-family: Lora, serif; }
+  .timeline .bkg {
+    fill: #fff; }
+  .timeline .chart-button:hover {
+    cursor: pointer; }
+  .timeline .chart-button.country:hover {
+    opacity: .9;
+    stroke-width: 10px; }
   .timeline .chart-grid {
     fill: none;
     stroke: #808080;
@@ -9393,13 +9400,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     font-variation-settings: 'wdth' 100, 'wght' 400; }
   .timeline .lora-bold {
     font-variation-settings: 'wdth' 100, 'wght' 700; }
-  .timeline .opacity-70 {
-    opacity: .7; }
   .timeline .country {
+    opacity: .7;
     stroke-miterlimit: 10;
     stroke-opacity: 0.5; }
-    .timeline .country:hover {
-      cursor: pointer; }
   .timeline .empty {
     fill: transparent !important; }
   .timeline .france {
