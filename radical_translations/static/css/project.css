@@ -9368,3 +9368,49 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .spacing {
   margin-bottom: 4px;
   margin-right: 4px; }
+
+/* Events timeline */
+.timeline {
+  font-family: Lora, serif; }
+  .timeline .chart-grid {
+    fill: none;
+    stroke: #808080;
+    stroke-miterlimit: 10; }
+  .timeline .font-16 {
+    font-size: 16px;
+    font-size: 1rem; }
+  .timeline .font-20 {
+    font-size: 20px;
+    font-size: 1.25rem; }
+  .timeline .font-24 {
+    font-size: 24px;
+    font-size: 1.5rem; }
+  .timeline .key {
+    fill: #222222;
+    stroke: #222222;
+    stroke-miterlimit: 10; }
+  .timeline .lora-reg {
+    font-variation-settings: 'wdth' 100, 'wght' 400; }
+  .timeline .lora-bold {
+    font-variation-settings: 'wdth' 100, 'wght' 700; }
+  .timeline .opacity-70 {
+    opacity: .7; }
+  .timeline .country {
+    stroke-miterlimit: 10;
+    stroke-opacity: 0.5; }
+    .timeline .country:hover {
+      cursor: pointer; }
+  .timeline .empty {
+    fill: transparent !important; }
+  .timeline .france {
+    fill: #6F51B9;
+    stroke: #6F51B9; }
+  .timeline .ireland {
+    fill: #8B2E4A;
+    stroke: #8B2E4A; }
+  .timeline .uk {
+    fill: #FB4811;
+    stroke: #FB4811; }
+  .timeline .us {
+    fill: #51B788;
+    stroke: #51B788; }
