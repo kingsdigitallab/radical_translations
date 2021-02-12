@@ -3,14 +3,16 @@ Radical Translations
 
 .. image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :target: https://opensource.org/licenses/MIT
-    :alt: MIT
-.. image:: https://travis-ci.org/kingsdigitallab/radical_translations.svg
-    :target: https://travis-ci.org/kingsdigitallab/radical_translations
+    :alt: MIT license
+.. image:: https://github.com/kingsdigitallab/radical_translations/workflows/CI/badge.svg?branch=develop
+    :target: https://github.com/kingsdigitallab/radical_translations/actions?query=workflow%3ACI
+    :alt: Build status
 .. image:: https://coveralls.io/repos/github/kingsdigitallab/radical_translations/badge.svg
     :target: https://coveralls.io/github/kingsdigitallab/radical_translations
+    :alt: Coverage status
 .. image:: https://readthedocs.org/projects/radical-translations/badge/?version=latest
     :target: https://radical-translations.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
+    :alt: Documentation status
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
     :target: https://github.com/kingsdigitallab/cookiecutter-django/
     :alt: Built with Cookiecutter Django
