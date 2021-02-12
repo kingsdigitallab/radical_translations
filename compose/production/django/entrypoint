@@ -46,12 +46,12 @@ python << END
 import sys
 
 from elasticsearch_dsl import connections
+from elasticsearch.exceptions import ConnectionError
 
 try:
     c = connections.create_connection(hosts=["${ELASTICSEARCH_HOST}"], timeout=10)
     c.info()
-except (ConnectionError) as e:
-    print('Elasticsearch not available...')
+except (ConnectionError, ConnectionRefusedError) as e:
     sys.exit(-1)
 
 sys.exit(0)
