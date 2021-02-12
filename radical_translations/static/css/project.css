@@ -9396,7 +9396,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .timeline .opacity-70 {
     opacity: .7; }
   .timeline .country {
-    stroke-miterlimit: 10; }
+    stroke-miterlimit: 10;
+    stroke-opacity: 0.5; }
+    .timeline .country:hover {
+      cursor: pointer; }
   .timeline .empty {
     fill: transparent !important; }
   .timeline .france {

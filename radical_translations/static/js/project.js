@@ -71,3 +71,17 @@ const getMap = (element) => {
 const dispatchWindowResizeEvent = () => {
   window.dispatchEvent(new Event('resize'))
 }
+
+
+
+/* UI for static timeline mockup
+ * TO DELETE once implemented */
+
+$(function() {
+  // Show contextual information
+  $('.country').on('click', function () {
+    $('.info').toggleClass('hidden');
+
+    return false;
+  });
+});

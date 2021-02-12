@@ -6,6 +6,15 @@
 <h2>Timeline Mockup</h2>
 <div class="timeline">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+        {% comment %}
+            Title and description to improve SVG accessibility
+        {% endcomment %}
+
+        <title>Events timeline (1780-1820)</title>
+        <desc>
+          This chart shows clusters of events by Country over the years examined and the number of resources associated to that cluster.
+          Clicking on such cluster will display the list of events and the number of resources per event.
+        </desc>
 
         <!-- Key -->
         <text transform="matrix(1 0 0 1 31.7302 37.1763)" class="lora-bold font-20">Key</text>
@@ -139,6 +148,7 @@
         <!-- .End chart grid -->
 
         <!-- Data plotted on chart -->
+        {# This first <g> is the range shape #}
         <g class="opacity-70">
             <path class="us country" d="M647.5,359.5c-2.7,0-55.4-2.5-86.8-3.9c-15.1-0.7-23-1.1-23.2-1.1c-2.5,0-4.5-2-4.5-4.5s2-4.5,4.5-4.5
                 c0.2,0,8.1-0.4,23.2-1.1c31.5-1.5,84.1-3.9,86.8-3.9c5.2,0,9.5,4.3,9.5,9.5S652.7,359.5,647.5,359.5z"/>
@@ -158,18 +168,12 @@
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="317.5" cy="850" r="34.5"/>
-            <path class="france country" d="M317.5,816c18.7,0,34,15.3,34,34s-15.3,34-34,34s-34-15.3-34-34S298.8,816,317.5,816 M317.5,815
-                c-19.3,0-35,15.7-35,35s15.7,35,35,35s35-15.7,35-35S336.8,815,317.5,815L317.5,815z"/>
         </g>
         <g class="opacity-70">
             <circle class="ireland country" cx="125" cy="650" r="4.5"/>
-            <path class="ireland country" d="M125,646c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S122.8,646,125,646 M125,645c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S127.8,645,125,645L125,645z"/>
         </g>
         <g class="opacity-70">
             <circle class="uk country" cx="125" cy="450" r="9.5"/>
-            <path class="uk country" d="M125,441c5,0,9,4,9,9s-4,9-9,9c-5,0-9-4-9-9S120,441,125,441 M125,440c-5.5,0-10,4.5-10,10s4.5,10,10,10
-                c5.5,0,10-4.5,10-10S130.5,440,125,440L125,440z"/>
         </g>
         <!-- .End data plotted on chart -->
 
@@ -177,148 +181,95 @@
         <text transform="matrix(1 0 0 1 301.7849 803.9482)" class="lora-reg font-16">7/32</text>
         <text transform="matrix(1 0 0 1 526.0481 332.0527)" class="lora-reg font-16">1/0</text>
         <text transform="matrix(1 0 0 1 635.8372 332.0527)" class="lora-reg font-16">2/0</text>
+        <text transform="matrix(1 0 0 1 113.3387 636.3753)" class="lora-reg font-16">1/0</text>
+        <text transform="matrix(1 0 0 1 112.1277 431.3753)" class="lora-reg font-16">2/0</text>
         <!-- .End bubble labels -->
 
+        <g class="info hidden">
         <!-- Resources (Content for UI) -->
         <g class="opacity-70">
             <circle class="france country" cx="1414" cy="624" r="4.5"/>
-            <path class="france country" d="M1414,620c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1411.8,620,1414,620 M1414,619c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1416.8,619,1414,619L1414,619z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1427.3" cy="624" r="4.5"/>
-            <path class="france country" d="M1427.3,620c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1425.1,620,1427.3,620 M1427.3,619c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1430.1,619,1427.3,619L1427.3,619z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1440.7" cy="624" r="4.5"/>
-            <path class="france country" d="M1440.7,620c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1438.5,620,1440.7,620 M1440.7,619c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1443.4,619,1440.7,619L1440.7,619z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1414" cy="637" r="4.5"/>
-            <path class="france country" d="M1414,633c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1411.8,633,1414,633 M1414,632c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1416.8,632,1414,632L1414,632z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1427.3" cy="637" r="4.5"/>
-            <path class="france country" d="M1427.3,633c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1425.1,633,1427.3,633 M1427.3,632c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1430.1,632,1427.3,632L1427.3,632z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1440.7" cy="637" r="4.5"/>
-            <path class="france country" d="M1440.7,633c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1438.5,633,1440.7,633 M1440.7,632c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1443.4,632,1440.7,632L1440.7,632z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1454" cy="624" r="4.5"/>
-            <path class="france country" d="M1454,620c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1451.8,620,1454,620 M1454,619c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1456.8,619,1454,619L1454,619z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1414" cy="729" r="4.5"/>
-            <path class="france country" d="M1414,725c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1411.8,725,1414,725 M1414,724c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1416.8,724,1414,724L1414,724z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1427.3" cy="729" r="4.5"/>
-            <path class="france country" d="M1427.3,725c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1425.1,725,1427.3,725 M1427.3,724c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1430.1,724,1427.3,724L1427.3,724z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1440.7" cy="729" r="4.5"/>
-            <path class="france country" d="M1440.7,725c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1438.5,725,1440.7,725 M1440.7,724c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1443.4,724,1440.7,724L1440.7,724z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1414" cy="742" r="4.5"/>
-            <path class="france country" d="M1414,738c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1411.8,738,1414,738 M1414,737c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1416.8,737,1414,737L1414,737z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1427.3" cy="742" r="4.5"/>
-            <path class="france country" d="M1427.3,738c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1425.1,738,1427.3,738 M1427.3,737c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1430.1,737,1427.3,737L1427.3,737z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1454" cy="729" r="4.5"/>
-            <path class="france country" d="M1454,725c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1451.8,725,1454,725 M1454,724c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1456.8,724,1454,724L1454,724z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1414" cy="778" r="4.5"/>
-            <path class="france country" d="M1414,774c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1411.8,774,1414,774 M1414,773c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1416.8,773,1414,773L1414,773z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1427.3" cy="778" r="4.5"/>
-            <path class="france country" d="M1427.3,774c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1425.1,774,1427.3,774 M1427.3,773c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1430.1,773,1427.3,773L1427.3,773z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1440.7" cy="778" r="4.5"/>
-            <path class="france country" d="M1440.7,774c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1438.5,774,1440.7,774 M1440.7,773c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1443.4,773,1440.7,773L1440.7,773z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1414" cy="791" r="4.5"/>
-            <path class="france country" d="M1414,787c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1411.8,787,1414,787 M1414,786c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1416.8,786,1414,786L1414,786z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1427.3" cy="791" r="4.5"/>
-            <path class="france country" d="M1427.3,787c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1425.1,787,1427.3,787 M1427.3,786c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1430.1,786,1427.3,786L1427.3,786z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1454" cy="778" r="4.5"/>
-            <path class="france country" d="M1454,774c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1451.8,774,1454,774 M1454,773c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1456.8,773,1454,773L1454,773z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1440.7" cy="791" r="4.5"/>
-            <path class="france country" d="M1440.7,787c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1438.5,787,1440.7,787 M1440.7,786c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1443.4,786,1440.7,786L1440.7,786z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1414" cy="804" r="4.5"/>
-            <path class="france country" d="M1414,800c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1411.8,800,1414,800 M1414,799c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1416.8,799,1414,799L1414,799z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1427.3" cy="804" r="4.5"/>
-            <path class="france country" d="M1427.3,800c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1425.1,800,1427.3,800 M1427.3,799c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1430.1,799,1427.3,799L1427.3,799z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1454" cy="791" r="4.5"/>
-            <path class="france country" d="M1454,787c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1451.8,787,1454,787 M1454,786c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1456.8,786,1454,786L1454,786z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1440.7" cy="804" r="4.5"/>
-            <path class="france country" d="M1440.7,800c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1438.5,800,1440.7,800 M1440.7,799c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1443.4,799,1440.7,799L1440.7,799z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1440.7" cy="817" r="4.5"/>
-            <path class="france country" d="M1440.7,813c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1438.5,813,1440.7,813 M1440.7,812c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1443.4,812,1440.7,812L1440.7,812z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1414" cy="817" r="4.5"/>
-            <path class="france country" d="M1414,813c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1411.8,813,1414,813 M1414,812c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1416.8,812,1414,812L1414,812z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1427.3" cy="817" r="4.5"/>
-            <path class="france country" d="M1427.3,813c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1425.1,813,1427.3,813 M1427.3,812c-2.8,0-5,2.2-5,5
-                s2.2,5,5,5c2.8,0,5-2.2,5-5S1430.1,812,1427.3,812L1427.3,812z"/>
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1454" cy="804" r="4.5"/>
-            <path class="france country" d="M1454,800c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1451.8,800,1454,800 M1454,799c-2.8,0-5,2.2-5,5s2.2,5,5,5
-                s5-2.2,5-5S1456.8,799,1454,799L1454,799z"/>
         </g>
         <g class="opacity-70">
             <path class="france country" d="M1436.5,671.2c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1434.3,671.2,1436.5,671.2 M1436.5,670.2
@@ -330,8 +281,6 @@
         </g>
         <g class="opacity-70">
             <circle class="france country" cx="1356" cy="777" r="34.5"/>
-            <path class="france country" d="M1356,743c18.7,0,34,15.3,34,34s-15.3,34-34,34s-34-15.3-34-34S1337.3,743,1356,743 M1356,742
-                c-19.3,0-35,15.7-35,35s15.7,35,35,35s35-15.7,35-35S1375.3,742,1356,742L1356,742z"/>
         </g>
         <text transform="matrix(1 0 0 1 1340.2849 730.9482)" class="lora-reg font-16">7/32</text>
         <text transform="matrix(1 0 0 1 1335.7703 842.9482)"><tspan x="0" y="0" class="lora-bold font-20">1789</tspan><tspan x="-12.4" y="24" class="lora-bold font-20">France</tspan></text>
@@ -361,10 +310,6 @@
         </g>
         <g class="opacity-70">
             <circle class="ireland country" cx="1356" cy="503.3" r="4.5"/>
-            <g>
-                <path class="ireland country" d="M1356,499.3c2.2,0,4,1.8,4,4c0,2.2-1.8,4-4,4s-4-1.8-4-4C1352,501.1,1353.8,499.3,1356,499.3 M1356,498.3
-                    c-2.8,0-5,2.2-5,5s2.2,5,5,5s5-2.2,5-5S1358.8,498.3,1356,498.3L1356,498.3z"/>
-            </g>
         </g>
         <text transform="matrix(1 0 0 1 1344.2751 486.9482)" class="lora-reg font-16">1/0</text>
         <text transform="matrix(1 0 0 1 1336.2 538.9482)"><tspan x="0" y="0" class="lora-bold font-20">1782</tspan><tspan x="-14.9" y="24" class="lora-bold font-20">Ireland</tspan></text>
@@ -379,10 +324,6 @@
         </g>
         <g class="opacity-70">
             <circle class="uk country" cx="1356" cy="356.3" r="4.5"/>
-            <g>
-                <path class="uk country" d="M1356,352.3c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1353.8,352.3,1356,352.3 M1356,351.3c-2.8,0-5,2.2-5,5
-                    s2.2,5,5,5s5-2.2,5-5S1358.8,351.3,1356,351.3L1356,351.3z"/>
-            </g>
         </g>
         <text transform="matrix(1 0 0 1 1343.0642 339.9482)" class="lora-reg font-16">2/0</text>
         <text transform="matrix(1 0 0 1 1336.2 391.9482)"><tspan x="0" y="0" class="lora-bold font-20">1782</tspan><tspan x="-12.9" y="24" class="lora-bold font-20">United</tspan><tspan x="-23.3" y="48" class="lora-bold font-20">Kingdom</tspan></text>
@@ -391,8 +332,6 @@
         <text transform="matrix(1 0 0 1 1472.5959 384.524)" class="lora-bold font-16">0</text>
         <text transform="matrix(1 0 0 1 1493.2244 384.7062)" class="lora-reg font-16">1782 Constitution of 1782</text>
 
-        <text transform="matrix(1 0 0 1 113.3387 636.3753)" class="lora-reg font-16">1/0</text>
-        <text transform="matrix(1 0 0 1 112.1277 431.3753)" class="lora-reg font-16">2/0</text>
         <rect x="1431.5" y="373.5" class="uk country empty" width="10" height="10"/>
         <g class="opacity-70">
             <g>
@@ -402,10 +341,6 @@
         </g>
         <g class="opacity-70">
             <circle class="us country" cx="1356" cy="178.3" r="4.5"/>
-            <g>
-                <path class="us country" d="M1356,174.3c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1353.8,174.3,1356,174.3 M1356,173.3c-2.8,0-5,2.2-5,5
-                    s2.2,5,5,5s5-2.2,5-5S1358.8,173.3,1356,173.3L1356,173.3z"/>
-            </g>
         </g>
         <text transform="matrix(1 0 0 1 1344.2751 161.9482)" class="lora-reg font-16">1/0</text>
         <text transform="matrix(1 0 0 1 1336.8 213.9482)"><tspan x="0" y="0" class="lora-bold font-20">1797</tspan><tspan x="-13.5" y="24" class="lora-bold font-20">United</tspan><tspan x="-10.5" y="48" class="lora-bold font-20">States</tspan></text>
@@ -416,6 +351,7 @@
         <text transform="matrix(1 0 0 1 1697.2244 384.7059)" class="lora-reg font-16">Happened in Ireland</text>
         <g class="opacity-70">
             <g>
+                <!-- This should be a circle... -->
                 <path class="ireland country" d="M1686,374.5c2.2,0,4,1.8,4,4s-1.8,4-4,4s-4-1.8-4-4S1683.8,374.5,1686,374.5 M1686,373.5c-2.8,0-5,2.2-5,5
                     s2.2,5,5,5s5-2.2,5-5S1688.8,373.5,1686,373.5L1686,373.5z"/>
             </g>
@@ -431,6 +367,8 @@
         </g>
         <g class="opacity-70">
             <rect x="1310" y="273" class="us country" width="590" height="10"/>
+        </g>
+        <!-- .End Resources -->
         </g>
     </svg>
 </div>
