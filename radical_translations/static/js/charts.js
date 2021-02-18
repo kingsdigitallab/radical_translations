@@ -29,14 +29,19 @@ Vue.component('bar-chart', {
   }
 })
 
-Vue.component('bubble-chart', {
+Vue.component('events-chart', {
   extends: VueChartJs.Bubble,
   props: ['clickHandler'],
   mixins: [VueChartJs.mixins.reactiveProp],
   data: function () {
     return {
       options: {
-        legend: { display: true },
+        layout: {
+          padding: {
+            top: 50
+          }
+        },
+        legend: { display: false },
         scales: {
           yAxes: [
             {
@@ -64,7 +69,7 @@ Vue.component('bubble-chart', {
                 data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
                   .meta
 
-              return `${meta.date} ${meta.title}; ${meta.resources} resources`
+              return `${meta.n} events/${meta.resources} resources`
             }
           }
         },
@@ -73,13 +78,31 @@ Vue.component('bubble-chart', {
             const meta = this.chart.data.datasets[item[0]._datasetIndex].data[
               item[0]._index
             ].meta
-            location.href = meta.id
+            console.log('event onclick')
           }
+        },
+        plugins: {
+          datalabels: {
+            align: 'top',
+            color: '#212529',
+            formatter: function (value, context) {
+              const meta =
+                context.chart.data.datasets[context.datasetIndex].data[
+                  context.dataIndex
+                ].meta
+
+              return `${meta.n}/${meta.resources}`
+            }
+          }
+        },
+        annotation: {
+          annotations: Object.values(this.chartData.annotations)
         }
       }
     }
   },
   mounted() {
+    this.addPlugin(ChartDataLabels)
     this.renderChart(this.chartData, this.options)
   }
 })

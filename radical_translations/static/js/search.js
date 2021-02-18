@@ -125,48 +125,90 @@ new Vue({
         (f) => f.key
       )
 
-      events = { labels: labels, datasets: [] }
+      events = { labels: labels, datasets: [], annotations: {} }
 
-      marker_color = [
-        'rgba(34, 116, 165, 0.4)',
-        'rgba(187, 133, 136, 0.4)',
-        'rgba(84, 13, 110, 0.4)',
-        'rgba(230, 175, 46, 0.4)',
-        'rgba(99, 43, 48, 0.4)',
-        'rgba(11, 3, 45, 0.4)',
-        'rgba(169, 210, 213, 0.4)',
-        'rgba(215, 38, 56, 0.4)',
-        'rgba(103, 148, 54, 0.4)',
-        'rgba(255, 87, 10, 0.4)',
-        'rgba(207, 238, 158, 0.4)',
-        'rgba(88, 123, 127, 0.4)'
-      ]
+      colours = {
+        Czechia: 'rgba(34, 116, 165, 0.4)',
+        Egypt: 'rgba(187, 133, 136, 0.4)',
+        France: 'rgba(84, 13, 110, 0.4)',
+        Germany: 'rgba(230, 175, 46, 0.4)',
+        Ireland: 'rgba(99, 43, 48, 0.4)',
+        Italy: 'rgba(11, 3, 45, 0.4)',
+        Spain: 'rgba(169, 210, 213, 0.4)',
+        'United Kingdom': 'rgba(215, 38, 56, 0.4)',
+        'United States': 'rgba(103, 148, 54, 0.4)'
+      }
 
+      // for each country
       labels.forEach((label, idx) => {
+        const colour = colours[label]
+
         let dataset = {
           label: label,
-          backgroundColor: marker_color[idx],
-          borderColor: marker_color[idx],
+          backgroundColor: colour,
+          borderColor: colour,
           data: []
         }
+
         this.data.results.forEach((item) => {
+          // for each event in the country
           if (item.place.country.name === label && item.year) {
             item.year.forEach((year) => {
               dataset.data.push({
                 x: year,
                 y: idx,
-                r: item.related_to.length + 10,
+                r: 5,
                 meta: {
                   id: item.id,
-                  title: item.title,
-                  date: item.date,
                   place: item.place.address,
+                  n: 1,
                   resources: item.related_to.length
                 }
               })
             })
           }
         })
+
+        // keep only the first and last items of multi-year events and add annotations
+        dataset.data = dataset.data.reduce((acc, cur) => {
+          if (acc.filter((item) => item.meta.id === cur.meta.id).length === 2) {
+            const start = acc[acc.length - 2]
+            acc[acc.length - 1] = cur
+
+            events.annotations[cur.meta.id] = {
+              type: 'box',
+              display: true,
+              xScaleID: 'x-axis-0',
+              yScaleID: 'y-axis-0',
+              xMin: start.x,
+              yMin: cur.y - 0.1,
+              xMax: cur.x,
+              yMax: cur.y + 0.1,
+              backgroundColor: colour,
+              borderWidth: 1
+            }
+
+            return acc
+          }
+
+          acc.push(cur)
+
+          return acc
+        }, [])
+
+        // group the events by year
+        dataset.data = dataset.data.reduce((acc, cur) => {
+          if (acc.some((item) => item.x === cur.x)) {
+            const last = acc.length - 1
+            acc[last].r += 2
+            acc[last].meta.n += 1
+            return acc
+          }
+
+          acc.push(cur)
+
+          return acc
+        }, [])
 
         events.datasets.push(dataset)
       })
