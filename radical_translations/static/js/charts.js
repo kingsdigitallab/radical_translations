@@ -36,15 +36,11 @@ Vue.component('events-chart', {
   data: function () {
     return {
       options: {
-        layout: {
-          padding: {
-            top: 50
-          }
-        },
         legend: { display: false },
         scales: {
           yAxes: [
             {
+              offset: true,
               ticks: {
                 beginAtZero: true,
                 callback: function (value, index, values) {
@@ -96,13 +92,25 @@ Vue.component('events-chart', {
           }
         },
         annotation: {
-          annotations: Object.values(this.chartData.annotations)
+          drawTime: 'afterDatasetsDraw',
+          annotations: this.getAnnotations()
         }
       }
+    }
+  },
+  watch: {
+    chartData: function () {
+      this.options.annotation.annotations = this.getAnnotations()
+      this.renderChart(this.chartData, this.options)
     }
   },
   mounted() {
     this.addPlugin(ChartDataLabels)
     this.renderChart(this.chartData, this.options)
+  },
+  methods: {
+    getAnnotations: function () {
+      return Object.values(this.chartData.annotations)
+    }
   }
 })
