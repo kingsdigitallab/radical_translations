@@ -3,6 +3,8 @@ Vue.component('bar-chart', {
   props: ['clickHandler'],
   mixins: [VueChartJs.mixins.reactiveProp],
   data: function () {
+    const self = this
+
     return {
       options: {
         legend: { display: false },
@@ -18,7 +20,7 @@ Vue.component('bar-chart', {
         onClick: function (evt, item) {
           if (item.length > 0) {
             const year = item[0]['_model'].label
-            this.clickHandler(year, year)
+            self.clickHandler(year, year)
           }
         }
       }
@@ -34,6 +36,8 @@ Vue.component('events-chart', {
   props: ['clickHandler'],
   mixins: [VueChartJs.mixins.reactiveProp],
   data: function () {
+    const self = this
+
     return {
       options: {
         legend: { display: false },
@@ -53,12 +57,12 @@ Vue.component('events-chart', {
         tooltips: {
           callbacks: {
             title: function (tooltipItem, data) {
-              const item =
+              const meta =
                 data.datasets[tooltipItem[0].datasetIndex].data[
                   tooltipItem[0].index
-                ]
+                ].meta
 
-              return `${item.meta.place}, ${item.x}`
+              return `${meta.place}, ${meta.year}`
             },
             label: function (tooltipItem, data) {
               const meta =
@@ -74,7 +78,7 @@ Vue.component('events-chart', {
             const meta = this.chart.data.datasets[item[0]._datasetIndex].data[
               item[0]._index
             ].meta
-            console.log('event onclick')
+            self.clickHandler(meta.place, meta.year)
           }
         },
         plugins: {

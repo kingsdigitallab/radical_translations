@@ -42,7 +42,8 @@ new Vue({
         item: null,
         place: null
       }
-    }
+    },
+    events: {country: null, year: null, data: []}
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -160,6 +161,7 @@ new Vue({
                 r: 5,
                 meta: {
                   id: item.id,
+                  year: year,
                   place: item.place.address,
                   n: 1,
                   resources: item.related_to.length
@@ -202,6 +204,7 @@ new Vue({
             const last = acc.length - 1
             acc[last].r += 2
             acc[last].meta.n += 1
+            acc[last].meta.resources += cur.meta.resources
             return acc
           }
 
@@ -473,6 +476,23 @@ new Vue({
       map.addLayer(cluster)
 
       map.whenReady(() => map.invalidateSize())
+    },
+    handleEventClick: function (place, year) {
+      this.events.country = place
+      this.events.year = year
+
+      const params = new URLSearchParams()
+      params.append('country__term', place)
+      params.append('year', year)
+
+      const url = this.url
+      url.search = params.toString()
+
+      const data = fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          this.events.data = data.results
+        })
     }
   }
 })
