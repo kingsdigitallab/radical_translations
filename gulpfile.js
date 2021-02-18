@@ -36,6 +36,8 @@ function pathsConfig(appName) {
       `${vendorsRoot}/bootstrap/dist/js/bootstrap.js`,
       `${vendorsRoot}/lodash/lodash.js`,
       `${vendorsRoot}/chart.js/dist/Chart.min.js`,
+      `${vendorsRoot}/chartjs-plugin-annotation/chartjs-plugin-annotation.min.js`,
+      `${vendorsRoot}/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js`,
       `${vendorsRoot}/leaflet/dist/leaflet.js`,
       `${vendorsRoot}/leaflet.markercluster/dist/leaflet.markercluster.js`,
       `${vendorsRoot}/vue/dist/vue.js`,
