@@ -82,5 +82,6 @@ class EventViewSet(DocumentViewSet):
 
     pagination_class = PageNumberPagination
 
+
 class TimelineMockupPageView(TemplateView):
     template_name = "events/timeline_mockup.html"
