@@ -41,7 +41,7 @@ jobs:
         run: docker-compose -f local.yml up -d --build
 
       - name: Run Django Tests
-        run: docker-compose -f local.yml run django coverage run -m pytest -s
+        run: docker-compose -f local.yml run django coverage run -m pytest radical_translations
 
       - name: Tear down the Stack
         run: docker-compose -f local.yml down
