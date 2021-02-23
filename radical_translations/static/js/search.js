@@ -43,7 +43,7 @@ new Vue({
         place: null
       }
     },
-    events: {country: null, year: null, data: []}
+    events: { country: null, year: null, data: [] }
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -179,6 +179,7 @@ new Vue({
 
             events.annotations[cur.meta.id] = {
               type: 'box',
+              id: `${cur.meta.id}`,
               display: true,
               xScaleID: 'x-axis-0',
               yScaleID: 'y-axis-0',
