@@ -42,6 +42,7 @@ Fixed
 * Validation errors in `CHANGELOG`.
 * Search results map loading delay.
 * Date interval parsing issues.
+* Search results map not updating.
 
 Removed
 ~~~~~~~

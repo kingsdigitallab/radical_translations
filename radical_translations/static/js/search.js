@@ -375,6 +375,9 @@ new Vue({
     },
     search: async function () {
       this.data = await this.doSearch()
+      if (this.map.show) {
+        this.renderMap()
+      }
     },
     doSearch: async function () {
       const params = new URLSearchParams()
