@@ -1307,6 +1307,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 /* Events timeline */
 
+.mock {
+  position: relative !important;
+}
+
 #bubble-chart {
   display: block;
   padding-top: 2rem;
@@ -1364,10 +1368,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .font-24 {
     font-size: 1.5rem;
-  }
-
-  .info {
-
   }
 
   .key {
