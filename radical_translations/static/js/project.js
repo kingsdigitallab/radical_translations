@@ -93,8 +93,16 @@ $(function () {
   // Toggle key
   $('.key-button').on('click', function () {
     $('.key-info').toggleClass('hidden')
-    $('#events-key-svg').attr('viewBox', '0 0 1920 300')
+    // $('#events-key-svg').attr('viewBox', '0 0 1920 100' ? '0 0 1920 300' : '0 0 1920 100')
+    $('#events-key-svg').attr('viewBox', $('#events-key-svg').attr('viewBox') === '0 0 1920 100' ? '0 0 1920 300' : '0 0 1920 100')
 
+    return false
+  })
+
+  // Close event info box
+  $('.close-event').on('click', function () {
+    console.log('Chiudi!')
+    alert('Chiudi!')
     return false
   })
 })
