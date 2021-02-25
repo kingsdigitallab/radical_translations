@@ -212,12 +212,8 @@ footer {
 
 // Headings
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3,
+h4, h5, h6,
 .card-header {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 100, 'wght' 700;
@@ -1311,17 +1307,38 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 /* Events timeline */
 
-.timeline {
+#bubble-chart {
+  display: block;
+  padding-top: 2rem;
+}
+
+.event-info {
+  background: $secondary;
+  border: 1px solid $light-gray;
+  box-shadow: 2px 2px 2px 2px $medium-gray;
+  max-height: 50vh;
+  max-width: 500px;
+  padding: 1rem;
+  position: absolute;
+  right: 10px;
+  top: 140px;
+  overflow-y: scroll;
+}
+
+.events-key {
+  display: block;
   font-family: Lora, serif;
+  position: absolute;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   .bkg {
     fill: $white;
   }
 
   .chart-button {
-    &:hover {
-      cursor: pointer;
-    }
 
     &.country {
       &:hover {

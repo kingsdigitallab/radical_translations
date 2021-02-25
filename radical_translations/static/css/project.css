@@ -8621,12 +8621,8 @@ footer {
 .tooltip-inner {
   text-align: left; }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3,
+h4, h5, h6,
 .card-header {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 100, 'wght' 700;
@@ -9370,51 +9366,72 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   margin-right: 4px; }
 
 /* Events timeline */
-.timeline {
-  font-family: Lora, serif; }
-  .timeline .bkg {
-    fill: #fff; }
-  .timeline .chart-button:hover {
+#bubble-chart {
+  display: block;
+  padding-top: 32px;
+  padding-top: 2rem; }
+
+.event-info {
+  background: #eae9da;
+  border: 1px solid #d9d9d9;
+  -webkit-box-shadow: 2px 2px 2px 2px #808080;
+          box-shadow: 2px 2px 2px 2px #808080;
+  max-height: 50vh;
+  max-width: 500px;
+  padding: 16px;
+  padding: 1rem;
+  position: absolute;
+  right: 10px;
+  top: 140px;
+  overflow-y: scroll; }
+
+.events-key {
+  display: block;
+  font-family: Lora, serif;
+  position: absolute; }
+  .events-key:hover {
     cursor: pointer; }
-  .timeline .chart-button.country:hover {
+  .events-key .bkg {
+    fill: #fff; }
+  .events-key .chart-button.country:hover {
     opacity: .9;
     stroke-width: 10px; }
-  .timeline .chart-grid {
+  .events-key .chart-grid {
     fill: none;
     stroke: #808080;
     stroke-miterlimit: 10; }
-  .timeline .font-16 {
+  .events-key .font-16 {
     font-size: 16px;
     font-size: 1rem; }
-  .timeline .font-20 {
+  .events-key .font-20 {
     font-size: 20px;
     font-size: 1.25rem; }
-  .timeline .font-24 {
+  .events-key .font-24 {
     font-size: 24px;
     font-size: 1.5rem; }
-  .timeline .key {
+  .events-key .key {
     fill: #222222;
     stroke: #222222;
     stroke-miterlimit: 10; }
-  .timeline .lora-reg {
+  .events-key .lora-reg {
     font-variation-settings: 'wdth' 100, 'wght' 400; }
-  .timeline .lora-bold {
+  .events-key .lora-bold {
     font-variation-settings: 'wdth' 100, 'wght' 700; }
-  .timeline .country {
+  .events-key .country {
     opacity: .7;
     stroke-miterlimit: 10;
     stroke-opacity: 0.5; }
-  .timeline .empty {
+  .events-key .empty {
     fill: transparent !important; }
-  .timeline .france {
+  .events-key .france {
     fill: #6F51B9;
     stroke: #6F51B9; }
-  .timeline .ireland {
+  .events-key .ireland {
     fill: #8B2E4A;
     stroke: #8B2E4A; }
-  .timeline .uk {
+  .events-key .uk {
     fill: #FB4811;
     stroke: #FB4811; }
-  .timeline .us {
+  .events-key .us {
     fill: #51B788;
     stroke: #51B788; }
