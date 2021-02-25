@@ -22,7 +22,10 @@ Vue.component('bar-chart', {
             const year = item[0]['_model'].label
             self.clickHandler(year, year)
           }
-        }
+        },
+        onHover: (evt, item) => {
+          evt.target.style.cursor = item[0] ? 'pointer' : 'default';
+        },
       }
     }
   },
@@ -80,6 +83,9 @@ Vue.component('events-chart', {
             ].meta
             self.clickHandler(meta.place, meta.year)
           }
+        },
+        onHover: (evt, item) => {
+          evt.target.style.cursor = item[0] ? 'pointer' : 'default';
         },
         plugins: {
           datalabels: {
