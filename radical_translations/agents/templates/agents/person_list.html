@@ -1,1 +1,26 @@
-{% extends "agents/agent_list.html" %}
+{% extends "search/base.html" %}
+
+{% load staticfiles %}
+
+{% block search_header %}Persons{% endblock search_header %}
+{% block title %}Persons{% endblock title %}
+
+{% block query %}{% endblock query %}
+{% block ordering %}{% endblock ordering %}
+
+{% block results_default %}
+{% include 'vue/agents/search_results.html' %}
+{% endblock results_default %}
+
+{% block pagination-top %}
+{% endblock pagination-top %}
+{% block results_map %}{% endblock results_map %}
+{% block pagination-bottom %}
+{% endblock pagination-bottom %}
+
+{% block javascript %}
+<script>
+  const options = {{ ds.SEARCH_OPTIONS.agents|safe }}
+</script>
+{{ block.super }}
+{% endblock javascript %}

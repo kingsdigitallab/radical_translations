@@ -15,7 +15,7 @@ from radical_translations.utils.models import Date
 
 
 class AgentDocument(Document):
-    name = fields.TextField()
+    name = fields.TextField(fields={"sort": fields.KeywordField()})
     based_near = get_place_field()
     roles = get_controlled_term_field()
     sources = get_resource_field()
@@ -26,9 +26,6 @@ class AgentDocument(Document):
             "roles": get_controlled_term_field(),
         }
     )
-
-    class Index:
-        name = "rt-agents"
 
     class Django:
         fields = ["id", "notes"]
@@ -44,9 +41,9 @@ class PersonDocument(AgentDocument):
     noble = fields.BooleanField()
 
     main_places = get_place_field()
-    year_birth = fields.IntegerField()
+    year = fields.IntegerField()
+    date_display = fields.TextField()
     place_birth = get_place_field()
-    year_death = fields.IntegerField()
     place_death = get_place_field()
 
     languages = get_controlled_term_field()
@@ -54,8 +51,12 @@ class PersonDocument(AgentDocument):
     knows = get_agent_field()
     member_of = get_agent_field()
 
+    class Index:
+        name = "rt-persons"
+
     class Django:
         model = Person
+        fields = ["id", "notes"]
 
     def get_queryset(self):
         return (
@@ -81,24 +82,48 @@ class PersonDocument(AgentDocument):
         if isinstance(related_instance, (ControlledTerm, Place)):
             return related_instance.persons.all()
 
-    def prepare_year_birth(self, instance):
-        db = instance.date_birth
+    def prepare_year(self, instance):
+        date_birth = instance.date_birth
+        year_birth = None
 
-        if db and db.date_earliest:
-            if db.get_date_earliest() is not None:
-                return db.get_date_earliest().year
+        if date_birth and date_birth.get_date_earliest():
+            year_birth = date_birth.get_date_earliest().year
 
-    def prepare_year_death(self, instance):
-        dd = instance.date_death
+        date_death = instance.date_death
+        year_death = None
 
-        if dd and dd.date_latest:
-            if dd.get_date_latest() is not None:
-                return dd.get_date_latest().year
+        if date_death and date_death.get_date_latest():
+            year_death = date_death.get_date_latest().year
+
+        if year_birth and year_death:
+            return [year for year in range(year_birth, year_death + 1)]
+
+        if year_birth:
+            return year_birth
+
+        if year_death:
+            return year_death
+
+    def prepare_date_display(self, instance):
+        date_birth = instance.date_birth
+        date_death = instance.date_death
+
+        if date_birth and date_death:
+            return "{} – {}".format(str(date_birth), str(date_death))
+
+        if date_birth:
+            return "{} – ?".format(str(date_birth))
+
+        if date_death:
+            return "? – {}".format(str(date_death))
 
 
 @registry.register_document
 class OrganisationDocument(AgentDocument):
     members = get_agent_field()
+
+    class Index:
+        name = "rt-organisations"
 
     class Django:
         model = Organisation

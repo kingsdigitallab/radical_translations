@@ -359,4 +359,12 @@ SEARCH_OPTIONS = {
         "year_min": 1780,
         "year_max": 1820,
     },
+    "agents": {
+        "label": "Agents",
+        "page_size": 50,
+        "meta_facets": [],
+        "range_facets": ["year"],
+        "year_min": 1450,
+        "year_max": 1900,
+    },
 }
