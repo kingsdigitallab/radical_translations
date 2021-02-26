@@ -1,18 +1,12 @@
 import pytest
 
-from radical_translations.agents.documents import OrganisationDocument, PersonDocument
-from radical_translations.agents.models import Organisation, Person
+from radical_translations.agents.documents import AgentDocument
+from radical_translations.agents.models import Agent
 
 pytestmark = pytest.mark.django_db
 
 
-class TestPersonDocument:
+class TestAgentDocument:
     def test_get_queryset(self):
-        qs = PersonDocument().get_queryset()
-        assert qs.model == Person
-
-
-class TestOrganisationDocument:
-    def test_get_queryset(self):
-        qs = OrganisationDocument().get_queryset()
-        assert qs.model == Organisation
+        qs = AgentDocument().get_queryset()
+        assert qs.model == Agent
