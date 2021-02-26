@@ -36,13 +36,7 @@ def get_object_crumbs(context) -> list:
 
     obj = context.get("object")
     if obj:
-        if "agents" in path:
-            crumbs[-1]["path"] = f"{crumbs[-1]['path']}{obj.agent_type}s/"
-
         last_crumb["title"] = getattr(obj, "title", str(obj))
-    else:
-        if "agents" in path:
-            crumbs[-1]["path"] = ""
 
     crumbs.append(last_crumb)
 
