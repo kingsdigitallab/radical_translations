@@ -71,6 +71,14 @@ class Agent(PolymorphicModel, TimeStampedModel):
         return self.polymorphic_ctype.name
 
     @property
+    def is_organisation(self) -> bool:
+        return self.agent_type == 'organisation'
+
+    @property
+    def is_person(self) -> bool:
+        return self.agent_type == 'person'
+
+    @property
     def title(self) -> str:
         return self.name
 

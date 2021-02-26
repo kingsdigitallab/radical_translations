@@ -1,7 +1,11 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
+from django_elasticsearch_dsl_drf.constants import (
+    SUGGESTER_COMPLETION,
+    SUGGESTER_PHRASE,
+    SUGGESTER_TERM,
+)
 from django_elasticsearch_dsl_drf.filter_backends import (
     CompoundSearchFilterBackend,
     DefaultOrderingFilterBackend,
@@ -13,17 +17,10 @@ from django_elasticsearch_dsl_drf.filter_backends import (
 )
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
 
-from radical_translations.agents.documents import PersonDocument
-from radical_translations.agents.models import Agent, Organisation
-from radical_translations.agents.serializers import PersonDocumentSerializer
+from radical_translations.agents.documents import AgentDocument
+from radical_translations.agents.models import Agent
+from radical_translations.agents.serializers import AgentDocumentSerializer
 from radical_translations.utils.search import PageNumberPagination
-
-# from django_elasticsearch_dsl_drf.constants import (
-# SUGGESTER_COMPLETION,
-# SUGGESTER_PHRASE,
-# SUGGESTER_TERM,
-# )
-
 
 ES_FACET_OPTIONS = settings.ES_FACET_OPTIONS
 ES_FUZZINESS_OPTIONS = settings.ES_FUZZINESS_OPTIONS
@@ -33,28 +30,13 @@ class AgentDetailView(DetailView):
     model = Agent
 
 
-class OrganisationListView(ListView):
-    model = Organisation
-    paginate_by = 50
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Organisations"
-        return context
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.exclude(roles__label="library")
-        return queryset
+def agent_list(request):
+    return render(request, "agents/agent_list.html")
 
 
-def person_list(request):
-    return render(request, "agents/person_list.html")
-
-
-class PersonViewSet(DocumentViewSet):
-    document = PersonDocument
-    serializer_class = PersonDocumentSerializer
+class AgentViewSet(DocumentViewSet):
+    document = AgentDocument
+    serializer_class = AgentDocumentSerializer
 
     filter_backends = [
         FilteringFilterBackend,
@@ -70,6 +52,7 @@ class PersonViewSet(DocumentViewSet):
     lookup_field = "id"
 
     faceted_search_fields = {
+        "meta": {"field": "meta", "enabled": True, "options": ES_FACET_OPTIONS},
         "year": {
             "field": "year",
             "enabled": True,
@@ -81,12 +64,12 @@ class PersonViewSet(DocumentViewSet):
             "options": ES_FACET_OPTIONS,
         },
         "place_birth": {
-            "field": "place_birth.place.address.raw",
+            "field": "place_birth.address.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
         "place_death": {
-            "field": "place_death.place.address.raw",
+            "field": "place_death.address.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -96,12 +79,12 @@ class PersonViewSet(DocumentViewSet):
             "options": ES_FACET_OPTIONS,
         },
         "based_near": {
-            "field": "based_near.place.address.raw",
+            "field": "based_near.address.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
         "main_place": {
-            "field": "main_places.place.address.raw",
+            "field": "main_places.address.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -118,7 +101,15 @@ class PersonViewSet(DocumentViewSet):
     }
 
     filter_fields = {
+        "meta": "meta",
         "year": "year",
+        "gender": "gender",
+        "place_birth": "place_birth.address.raw",
+        "place_death": "place_death.address.raw",
+        "noble": "noble",
+        "based_near": "based_near.address.raw",
+        "main_place": "main_places.address.raw",
+        "language": "languages.label.raw",
     }
 
     ordering_fields = {
@@ -133,11 +124,11 @@ class PersonViewSet(DocumentViewSet):
         "name": ES_FUZZINESS_OPTIONS,
     }
 
-    # suggester_fields = {
-    # "suggest_field": {
-    # "field": "authors.person.name.suggest",
-    # "suggesters": [SUGGESTER_COMPLETION, SUGGESTER_PHRASE, SUGGESTER_TERM],
-    # "default_suggester": SUGGESTER_COMPLETION,
-    # "options": {"skip_duplicates": True, "size": 20},
-    # },
-    # }
+    suggester_fields = {
+        "suggest_field": {
+            "field": "name.suggest",
+            "suggesters": [SUGGESTER_COMPLETION, SUGGESTER_PHRASE, SUGGESTER_TERM],
+            "default_suggester": SUGGESTER_COMPLETION,
+            "options": {"skip_duplicates": True, "size": 20},
+        },
+    }

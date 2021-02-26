@@ -1,19 +1,13 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from radical_translations.agents.views import (
-    AgentDetailView,
-    OrganisationListView,
-    PersonViewSet,
-    person_list,
-)
+from radical_translations.agents.views import AgentDetailView, AgentViewSet, agent_list
 
 router = DefaultRouter()
-router.register("persons/api", basename="person-api", viewset=PersonViewSet)
+router.register("api", basename="agent-api", viewset=AgentViewSet)
 
 
 urlpatterns = [
-    path("organisations/", OrganisationListView.as_view(), name="organisation-list"),
-    path("persons/", person_list, name="person-list"),
+    path("", agent_list, name="agent-list"),
     path("<int:pk>/", AgentDetailView.as_view(), name="agent-detail"),
 ] + router.urls

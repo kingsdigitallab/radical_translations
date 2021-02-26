@@ -2,21 +2,16 @@
 
 {% load staticfiles %}
 
-{% block search_header %}Persons{% endblock search_header %}
-{% block title %}Persons{% endblock title %}
+{% block search_header %}Agents{% endblock search_header %}
+{% block title %}Agents{% endblock title %}
 
 {% block query %}{% endblock query %}
-{% block ordering %}{% endblock ordering %}
 
 {% block results_default %}
 {% include 'vue/agents/search_results.html' %}
 {% endblock results_default %}
 
-{% block pagination-top %}
-{% endblock pagination-top %}
 {% block results_map %}{% endblock results_map %}
-{% block pagination-bottom %}
-{% endblock pagination-bottom %}
 
 {% block javascript %}
 <script>
