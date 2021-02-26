@@ -61,7 +61,7 @@ new Vue({
     'map.show': async function (newShow, oldShow) {
       if (newShow) {
         this.page = 1
-        this.page_size = 1000
+        this.page_size = 2000
         dispatchWindowResizeEvent()
         await this.search()
         this.renderMap()
@@ -386,14 +386,16 @@ new Vue({
 
       const vue = this
       this.data.results.forEach((item) =>
-        item.places.forEach((place) => {
-          if (place.place.geo !== undefined) {
+        item[options.map_field].forEach((p) => {
+          const place = p.place !== undefined ? p.place : p
+
+          if (place !== undefined) {
             cluster.addLayer(
-              L.marker(place.place.geo).on('click', function () {
+              L.marker(place.geo).on('click', function () {
                 const marker = this
 
                 vue.map.popup.item = item
-                vue.map.popup.place = place.place
+                vue.map.popup.place = place
 
                 vue.$nextTick(() =>
                   marker
