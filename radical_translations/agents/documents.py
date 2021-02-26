@@ -57,6 +57,9 @@ class AgentDocument(Document):
         model = Agent
         fields = ["id", "notes"]
 
+    def get_queryset(self):
+        return super().get_queryset().exclude(roles__label="library")
+
     def get_instances_from_related(self, related_instance):
         if isinstance(related_instance, Contribution):
             return related_instance.agent
