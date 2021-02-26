@@ -26,6 +26,7 @@ Added
 * `Place` API view.
 * Load analytics setting.
 * GitHub action for CI.
+* `Agents` search.
 
 Changed
 ~~~~~~~

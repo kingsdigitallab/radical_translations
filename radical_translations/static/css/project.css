@@ -8621,12 +8621,8 @@ footer {
 .tooltip-inner {
   text-align: left; }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3,
+h4, h5, h6,
 .card-header {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 100, 'wght' 700;
@@ -9368,3 +9364,77 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .spacing {
   margin-bottom: 4px;
   margin-right: 4px; }
+
+/* Events timeline */
+.mock {
+  position: relative !important; }
+
+#bubble-chart {
+  display: block;
+  padding-top: 32px;
+  padding-top: 2rem; }
+
+.event-info {
+  background: #eae9da;
+  border: 1px solid #d9d9d9;
+  -webkit-box-shadow: 2px 2px 2px 2px #808080;
+          box-shadow: 2px 2px 2px 2px #808080;
+  max-height: 50vh;
+  max-width: 500px;
+  padding: 16px;
+  padding: 1rem;
+  position: absolute;
+  right: 10px;
+  top: 140px;
+  overflow-y: scroll; }
+
+.events-key {
+  display: block;
+  font-family: Lora, serif;
+  position: absolute; }
+  .events-key:hover {
+    cursor: pointer; }
+  .events-key .bkg {
+    fill: #fff; }
+  .events-key .chart-button.country:hover {
+    opacity: .9;
+    stroke-width: 10px; }
+  .events-key .chart-grid {
+    fill: none;
+    stroke: #808080;
+    stroke-miterlimit: 10; }
+  .events-key .font-16 {
+    font-size: 16px;
+    font-size: 1rem; }
+  .events-key .font-20 {
+    font-size: 20px;
+    font-size: 1.25rem; }
+  .events-key .font-24 {
+    font-size: 24px;
+    font-size: 1.5rem; }
+  .events-key .key {
+    fill: #222222;
+    stroke: #222222;
+    stroke-miterlimit: 10; }
+  .events-key .lora-reg {
+    font-variation-settings: 'wdth' 100, 'wght' 400; }
+  .events-key .lora-bold {
+    font-variation-settings: 'wdth' 100, 'wght' 700; }
+  .events-key .country {
+    opacity: .7;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0.5; }
+  .events-key .empty {
+    fill: transparent !important; }
+  .events-key .france {
+    fill: #6F51B9;
+    stroke: #6F51B9; }
+  .events-key .ireland {
+    fill: #8B2E4A;
+    stroke: #8B2E4A; }
+  .events-key .uk {
+    fill: #FB4811;
+    stroke: #FB4811; }
+  .events-key .us {
+    fill: #51B788;
+    stroke: #51B788; }

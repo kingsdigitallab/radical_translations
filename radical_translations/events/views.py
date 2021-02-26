@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django_elasticsearch_dsl_drf.filter_backends import (
     CompoundSearchFilterBackend,
@@ -80,3 +81,7 @@ class EventViewSet(DocumentViewSet):
     ordering = ["_score", "date_earliest", "date_latest"]
 
     pagination_class = PageNumberPagination
+
+
+class TimelineMockupPageView(TemplateView):
+    template_name = "events/timeline_mockup.html"

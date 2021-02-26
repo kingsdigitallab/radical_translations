@@ -42,7 +42,8 @@ new Vue({
         item: null,
         place: null
       }
-    }
+    },
+    events: { country: null, year: null, data: [] }
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -125,25 +126,93 @@ new Vue({
         (f) => f.key
       )
 
-      events = { labels: labels, datasets: [] }
+      events = { labels: labels, datasets: [], annotations: {} }
 
+      colours = {
+        Czechia: 'rgba(34, 116, 165, 0.4)',
+        Egypt: 'rgba(187, 133, 136, 0.4)',
+        France: 'rgba(84, 13, 110, 0.4)',
+        Germany: 'rgba(230, 175, 46, 0.4)',
+        Ireland: 'rgba(99, 43, 48, 0.4)',
+        Italy: 'rgba(11, 3, 45, 0.4)',
+        Spain: 'rgba(169, 210, 213, 0.4)',
+        'United Kingdom': 'rgba(215, 38, 56, 0.4)',
+        'United States': 'rgba(103, 148, 54, 0.4)'
+      }
+
+      // for each country
       labels.forEach((label, idx) => {
-        let dataset = { label: label, data: [] }
+        const colour = colours[label]
+
+        let dataset = {
+          label: label,
+          backgroundColor: colour,
+          borderColor: colour,
+          data: []
+        }
+
         this.data.results.forEach((item) => {
-          if (item.place.country.name === label) {
-            dataset.data.push({
-              x: item.year,
-              y: idx,
-              r: item.related_to.length + 10,
-              meta: {
-                title: item.title,
-                date: item.date,
-                place: item.place.address,
-                resources: item.related_to.length
-              }
+          // for each event in the country
+          if (item.place.country.name === label && item.year) {
+            item.year.forEach((year) => {
+              dataset.data.push({
+                x: year,
+                y: idx,
+                r: 5,
+                meta: {
+                  id: item.id,
+                  year: year,
+                  place: item.place.address,
+                  n: 1,
+                  resources: item.related_to.length
+                }
+              })
             })
           }
         })
+
+        // keep only the first and last items of multi-year events and add annotations
+        dataset.data = dataset.data.reduce((acc, cur) => {
+          if (acc.filter((item) => item.meta.id === cur.meta.id).length === 2) {
+            const start = acc[acc.length - 2]
+            acc[acc.length - 1] = cur
+
+            events.annotations[cur.meta.id] = {
+              type: 'box',
+              id: `${cur.meta.id}`,
+              display: true,
+              xScaleID: 'x-axis-0',
+              yScaleID: 'y-axis-0',
+              xMin: start.x,
+              yMin: cur.y - 0.1,
+              xMax: cur.x,
+              yMax: cur.y + 0.1,
+              backgroundColor: colour,
+              borderWidth: 1
+            }
+
+            return acc
+          }
+
+          acc.push(cur)
+
+          return acc
+        }, [])
+
+        // group the events by year
+        dataset.data = dataset.data.reduce((acc, cur) => {
+          if (acc.some((item) => item.x === cur.x)) {
+            const last = acc.length - 1
+            acc[last].r += 2
+            acc[last].meta.n += 1
+            acc[last].meta.resources += cur.meta.resources
+            return acc
+          }
+
+          acc.push(cur)
+
+          return acc
+        }, [])
 
         events.datasets.push(dataset)
       })
@@ -413,6 +482,23 @@ new Vue({
       map.addLayer(cluster)
 
       map.whenReady(() => map.invalidateSize())
+    },
+    handleEventClick: function (place, year) {
+      this.events.country = place
+      this.events.year = year
+
+      const params = new URLSearchParams()
+      params.append('country__term', place)
+      params.append('year', year)
+
+      const url = this.url
+      url.search = params.toString()
+
+      const data = fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          this.events.data = data.results
+        })
     }
   }
 })

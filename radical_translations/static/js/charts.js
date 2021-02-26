@@ -4,6 +4,7 @@ Vue.component('bar-chart', {
   mixins: [VueChartJs.mixins.reactiveProp],
   data: function () {
     const self = this
+
     return {
       options: {
         legend: { display: false },
@@ -21,6 +22,9 @@ Vue.component('bar-chart', {
             const year = item[0]['_model'].label
             self.clickHandler(year, year)
           }
+        },
+        onHover: (evt, item) => {
+          evt.target.style.cursor = item[0] ? 'pointer' : 'default'
         }
       }
     }
@@ -30,17 +34,20 @@ Vue.component('bar-chart', {
   }
 })
 
-Vue.component('bubble-chart', {
+Vue.component('events-chart', {
   extends: VueChartJs.Bubble,
   props: ['clickHandler'],
   mixins: [VueChartJs.mixins.reactiveProp],
   data: function () {
+    const self = this
+
     return {
       options: {
-        legend: { display: true },
+        legend: { display: false },
         scales: {
           yAxes: [
             {
+              offset: true,
               ticks: {
                 beginAtZero: true,
                 callback: function (value, index, values) {
@@ -53,19 +60,19 @@ Vue.component('bubble-chart', {
         tooltips: {
           callbacks: {
             title: function (tooltipItem, data) {
-              const item =
+              const meta =
                 data.datasets[tooltipItem[0].datasetIndex].data[
                   tooltipItem[0].index
-                ]
+                ].meta
 
-              return `${item.meta.place}, ${item.x}`
+              return `${meta.place}, ${meta.year}`
             },
             label: function (tooltipItem, data) {
               const meta =
                 data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
                   .meta
 
-              return `${meta.date} ${meta.title}; ${meta.resources} resources`
+              return `${meta.n} events/${meta.resources} resources`
             }
           }
         },
@@ -74,13 +81,46 @@ Vue.component('bubble-chart', {
             const meta = this.chart.data.datasets[item[0]._datasetIndex].data[
               item[0]._index
             ].meta
-            location.href = meta.id
+            self.clickHandler(meta.place, meta.year)
           }
+        },
+        onHover: (evt, item) => {
+          evt.target.style.cursor = item[0] ? 'pointer' : 'default'
+        },
+        plugins: {
+          datalabels: {
+            align: 'top',
+            color: '#212529',
+            formatter: function (value, context) {
+              const meta =
+                context.chart.data.datasets[context.datasetIndex].data[
+                  context.dataIndex
+                ].meta
+
+              return `${meta.n}/${meta.resources}`
+            }
+          }
+        },
+        annotation: {
+          drawTime: 'afterDatasetsDraw',
+          annotations: this.getAnnotations()
         }
       }
     }
   },
+  watch: {
+    chartData: function () {
+      this.options.annotation.annotations = this.getAnnotations()
+      this.renderChart(this.chartData, this.options)
+    }
+  },
   mounted() {
+    this.addPlugin(ChartDataLabels)
     this.renderChart(this.chartData, this.options)
+  },
+  methods: {
+    getAnnotations: function () {
+      return Object.values(this.chartData.annotations)
+    }
   }
 })
