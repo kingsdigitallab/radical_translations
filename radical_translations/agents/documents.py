@@ -38,7 +38,7 @@ class AgentDocument(Document):
     )
 
     gender = fields.KeywordField()
-    noble = fields.BooleanField()
+    noble = fields.KeywordField()
     main_places = get_place_field()
     year = fields.IntegerField()
     date_display = fields.TextField()
@@ -78,11 +78,11 @@ class AgentDocument(Document):
 
     def prepare_gender(self, instance):
         if instance.is_person:
-            return instance.gender
+            return instance.get_gender_display()
 
     def prepare_noble(self, instance):
         if instance.is_person:
-            return instance.noble
+            return "yes" if instance.noble else "no"
 
     def prepare_main_places(self, instance):
         if instance.is_organisation:
