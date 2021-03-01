@@ -109,6 +109,7 @@ class AgentViewSet(DocumentViewSet):
         "noble": "noble",
         "based_near": "based_near.address.raw",
         "main_place": "main_places.address.raw",
+        "role": "roles.label.raw",
         "language": "languages.label.raw",
     }
 
