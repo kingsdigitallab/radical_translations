@@ -141,30 +141,30 @@ new Vue({
       }
 
       // for each country
-      labels.forEach((label, idx) => {
-        const colour = colours[label]
+      labels.forEach((country, idx) => {
+        const colour = colours[country]
 
         let dataset = {
-          label: label,
+          label: country,
           backgroundColor: colour,
           borderColor: colour,
           data: []
         }
 
-        this.data.results.forEach((item) => {
+        this.data.results.forEach((evt) => {
           // for each event in the country
-          if (item.place.country.name === label && item.year) {
-            item.year.forEach((year) => {
+          if (evt.year && evt.place.country.name === country) {
+            evt.year.forEach((year) => {
               dataset.data.push({
                 x: year,
                 y: idx,
                 r: 5,
                 meta: {
-                  id: item.id,
+                  id: evt.id,
                   year: year,
-                  place: item.place.address,
+                  place: evt.place.address,
                   n: 1,
-                  resources: item.related_to.length
+                  resources: evt.related_to.length
                 }
               })
             })
