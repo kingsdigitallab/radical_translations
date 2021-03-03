@@ -36,14 +36,20 @@
 </div>
 
 <events-chart
-   v-if="rangeFacets.length > 0"
-   :chart-data="eventsChartData"
-   :height="200"
-   :click-handler="handleEventClick">
+               v-if="rangeFacets.length > 0"
+               :chart-data="eventsChartData"
+               :height="200"
+               :click-handler="handleEventClick">
 </events-chart>
 
-<div class="event-info" v-if="events.data.length > 0">
-  <button type="button" class="close close-event" aria-label="Close">
+<div
+      :class="{'hidden': !events.show }"
+      class="event-info">
+  <button
+    v-on:click="events.show = false"
+    class="close close-event"
+    type="button"
+    aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
   <h3>{[ events.country ]} in {[ events.year ]}</h3>

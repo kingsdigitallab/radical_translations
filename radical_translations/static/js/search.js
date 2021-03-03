@@ -43,7 +43,7 @@ new Vue({
         place: null
       }
     },
-    events: { country: null, year: null, data: [] }
+    events: { country: null, year: null, data: [], show: false }
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -162,7 +162,7 @@ new Vue({
                 meta: {
                   id: evt.id,
                   year: year,
-                  place: evt.place.address,
+                  place: evt.place.country.name,
                   n: 1,
                   resources: evt.related_to.length
                 }
@@ -502,6 +502,7 @@ new Vue({
         .then((response) => response.json())
         .then((data) => {
           this.events.data = data.results
+          this.events.show = true
         })
     }
   }
