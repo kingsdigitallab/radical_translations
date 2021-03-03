@@ -162,7 +162,7 @@ new Vue({
                 meta: {
                   id: evt.id,
                   year: year,
-                  place: evt.place.address,
+                  place: evt.place.country.name,
                   n: 1,
                   resources: evt.related_to.length
                 }
