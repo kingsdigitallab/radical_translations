@@ -43,7 +43,7 @@ new Vue({
         place: null
       }
     },
-    events: { country: null, year: null, data: [] }
+    events: { country: null, year: null, data: [], show: false }
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -500,6 +500,7 @@ new Vue({
         .then((response) => response.json())
         .then((data) => {
           this.events.data = data.results
+          this.events.show = true
         })
     }
   }

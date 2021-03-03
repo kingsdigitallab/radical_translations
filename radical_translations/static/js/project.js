@@ -78,31 +78,3 @@ const getMap = (element) => {
 const dispatchWindowResizeEvent = () => {
   window.dispatchEvent(new Event('resize'))
 }
-
-/* UI for static timeline mockup
- * TO DELETE once implemented */
-
-$(function () {
-  // Toggle contextual information
-  $('.country').on('click', function () {
-    $('.info').toggleClass('hidden')
-
-    return false
-  })
-
-  // Toggle key
-  $('.key-button').on('click', function () {
-    $('.key-info').toggleClass('hidden')
-    $('#events-key-svg').attr('viewBox', $('#events-key-svg').attr('viewBox') 
-      === '0 0 1920 100' ? '0 0 1920 300' : '0 0 1920 100')
-
-    return false
-  })
-
-  // Close event info box
-  $('.close-event').on('click', function () {
-    console.log('Chiudi!')
-    alert('Chiudi!')
-    return false
-  })
-})
