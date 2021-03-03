@@ -489,6 +489,10 @@ new Vue({
       params.append('country__term', place)
       params.append('year', year)
 
+      this.filters.forEach((filter) =>
+        params.append(`${filter[0]}__term`, filter[1])
+      )
+
       const url = this.url
       url.search = params.toString()
 
