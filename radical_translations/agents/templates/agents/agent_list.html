@@ -7,18 +7,18 @@
 
 {% include "includes/list_view_pagination.html" %}
 <ol start="{{ page_obj.start_index }}">
-    {% for object in object_list %}
-    <li>
-        {% with agent_type=object.agent_type %}
-        <a href="{% url 'agent-detail' object.pk %}">
-            {% include "agents/includes/noble.html" %}
-            {{ object.name }}
-        </a>
+  {% for object in object_list %}
+  <li>
+    {% with agent_type=object.agent_type %}
+    <a href="{% url 'agent-detail' object.pk %}">
+      {% include "agents/includes/noble.html" %}
+      {{ object.name }}
+    </a>
 
-        {% include "agents/includes/roles.html" %}
-        {% endwith %}
-    </li>
-    {% endfor %}
+    {% include "agents/includes/roles.html" %}
+    {% endwith %}
+  </li>
+  {% endfor %}
 </ol>
 {% include "includes/list_view_pagination.html" %}
 
