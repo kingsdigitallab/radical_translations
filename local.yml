@@ -82,6 +82,7 @@ services:
       dockerfile: ./compose/local/pa11y/Dockerfile
     image: radical_translations_local_pa11y
     depends_on:
+      - django
       - mongo
     command: node index.js
     ports:

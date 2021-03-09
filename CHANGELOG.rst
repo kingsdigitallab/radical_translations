@@ -16,7 +16,6 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 
 Added
 ~~~~~
-* Events visualisation.
 * Map clustering.
 * Docs: data workflow diagram.
 * Blog tags navigation.
@@ -43,6 +42,7 @@ Fixed
 * Search results map loading delay.
 * Date interval parsing issues.
 * Search results map not updating.
+* Error when trying to add a map link to a publication place that is only a fictional place.
 
 Removed
 ~~~~~~~
