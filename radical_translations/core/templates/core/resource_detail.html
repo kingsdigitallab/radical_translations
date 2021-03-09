@@ -19,9 +19,19 @@
   {% endif %}
   {% endwith %}
 
-  {% if object.subjects.all %}
+  {% if object.get_subjects_topic %}
   <span class="metadata-block">
-    {% for subject in object.subjects.all %}
+    <span {% if object.is_radical %}class="radicalism"{% endif %}>Topics:</span>
+    {% for subject in object.get_subjects_topic %}
+    <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+  </span>
+  {% endif %}
+
+  {% if object.get_subjects_other %}
+  <span class="metadata-block">
+    <span>Form/Genre: </span>
+    {% for subject in object.get_subjects_other %}
     <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
     {% endfor %}
   </span>

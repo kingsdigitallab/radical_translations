@@ -222,6 +222,16 @@ class Resource(TimeStampedModel):
 
     get_place_names.short_description = "Places"  # type: ignore
 
+    def get_subjects_topic(self) -> List[ControlledTerm]:
+        return self.subjects.filter(vocabulary__prefix="fast-topic").order_by("label")
+
+    def get_subjects_other(self) -> List[ControlledTerm]:
+        return (
+            self.subjects.exclude(vocabulary__prefix="fast-topic")
+            .exclude(label="radicalism")
+            .order_by("label")
+        )
+
     def has_date_radical(self) -> bool:
         if self.date:
             return self.date.is_radical
@@ -244,6 +254,9 @@ class Resource(TimeStampedModel):
         )
 
     is_paratext.boolean = True  # type: ignore
+
+    def is_radical(self) -> bool:
+        return self.subjects.filter(label__iexact="radicalism").count() == 1
 
     def is_translation(self) -> bool:
         return (

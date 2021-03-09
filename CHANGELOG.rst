@@ -35,6 +35,7 @@ Changed
 * Upgrade Wagtail_ to version 2.12.
 * `Bump pillow to 7.1`_. 
 * Exclude libraries from the list of `Organisations`.
+* Exclude radicalism from the subject filter.
 
 Fixed
 ~~~~~
