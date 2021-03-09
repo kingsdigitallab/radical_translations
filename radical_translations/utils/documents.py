@@ -39,6 +39,7 @@ def get_event_field(options: Optional[Dict] = {}) -> fields.ObjectField:
 def get_place_field(options: Optional[Dict] = {}) -> fields.ObjectField:
     return fields.ObjectField(
         properties={
+            "id": fields.IntegerField(),
             "address": fields.TextField(
                 fields={"raw": fields.KeywordField()}, **options
             ),
