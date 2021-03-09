@@ -53,6 +53,11 @@ class AgentViewSet(DocumentViewSet):
 
     faceted_search_fields = {
         "meta": {"field": "meta", "enabled": True, "options": ES_FACET_OPTIONS},
+        "radical": {
+            "field": "radical",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
         "year": {
             "field": "year",
             "enabled": True,
@@ -78,12 +83,12 @@ class AgentViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "based_near": {
+        "main_place": {
             "field": "based_near.address.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "main_place": {
+        "other_places": {
             "field": "main_places.address.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
@@ -102,12 +107,13 @@ class AgentViewSet(DocumentViewSet):
 
     filter_fields = {
         "meta": "meta",
+        "radical": "radical",
         "year": "year",
         "gender": "gender",
         "place_birth": "place_birth.address.raw",
         "place_death": "place_death.address.raw",
         "noble": "noble",
-        "based_near": "based_near.address.raw",
+        "other_places": "based_near.address.raw",
         "main_place": "main_places.address.raw",
         "role": "roles.label.raw",
         "language": "languages.label.raw",

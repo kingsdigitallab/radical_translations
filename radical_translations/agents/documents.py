@@ -26,6 +26,7 @@ class AgentDocument(Document):
             "suggest": fields.CompletionField(),
         }
     )
+    radical = fields.KeywordField()
     based_near = get_place_field()
     roles = get_controlled_term_field()
     sources = get_resource_field()
@@ -75,6 +76,9 @@ class AgentDocument(Document):
 
     def prepare_meta(self, instance):
         return [instance.agent_type]
+
+    def prepare_radical(self, instance):
+        return "yes" if instance.radical else "no"
 
     def prepare_gender(self, instance):
         if instance.is_person:
