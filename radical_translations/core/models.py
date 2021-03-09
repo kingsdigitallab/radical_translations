@@ -222,6 +222,44 @@ class Resource(TimeStampedModel):
 
     get_place_names.short_description = "Places"  # type: ignore
 
+    def get_radical_markers_range(self) -> List[int]:
+        return range(0, self.get_radical_markers())
+
+    def get_radical_markers(self) -> int:
+        markers = 0
+
+        if self.has_date_radical():
+            markers = markers + 1
+
+        markers = markers + self._get_radical_markers()
+
+        return markers
+
+    def _get_radical_markers(self) -> int:
+        markers = 0
+
+        for subject in self.subjects.all():
+            if self._is_radical_label(subject.label):
+                markers = markers + 1
+
+        for classification in self.classifications.all():
+            for tag in classification.classification.all():
+                if self._is_radical_label(tag.label):
+                    markers = markers + 1
+
+        for contribution in self.contributions.all():
+            for classification in contribution.classification.all():
+                if self._is_radical_label(classification.label):
+                    markers = markers + 1
+
+        for relationship in self.get_paratext():
+            markers = markers + relationship.resource._get_radical_markers()
+
+        return markers
+
+    def _is_radical_label(self, label):
+        return "radical" in label
+
     def get_subjects_topic(self) -> List[ControlledTerm]:
         return self.subjects.filter(vocabulary__prefix="fast-topic").order_by("label")
 

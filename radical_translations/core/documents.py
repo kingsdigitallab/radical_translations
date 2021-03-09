@@ -386,36 +386,4 @@ class ResourceDocument(Document):
         return events
 
     def prepare_radical_markers(self, instance):
-        markers = 0
-
-        if instance.has_date_radical():
-            markers = markers + 1
-
-        markers = markers + self._prepare_radical_markers(instance)
-
-        return markers
-
-    def _prepare_radical_markers(self, instance):
-        markers = 0
-
-        for subject in instance.subjects.all():
-            if self._is_radical_label(subject.label):
-                markers = markers + 1
-
-        for classification in instance.classifications.all():
-            for tag in classification.classification.all():
-                if self._is_radical_label(tag.label):
-                    markers = markers + 1
-
-        for contribution in instance.contributions.all():
-            for classification in contribution.classification.all():
-                if self._is_radical_label(classification.label):
-                    markers = markers + 1
-
-        for relationship in instance.get_paratext():
-            markers = markers + self._prepare_radical_markers(relationship.resource)
-
-        return markers
-
-    def _is_radical_label(self, label):
-        return "radical" in label
+        return instance.get_radical_markers()
