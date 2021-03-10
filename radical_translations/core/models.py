@@ -228,7 +228,7 @@ class Resource(TimeStampedModel):
     def get_radical_markers(self) -> int:
         markers = 0
 
-        if self.has_date_radical():
+        if not self.is_paratext() and self.has_date_radical():
             markers = markers + 1
 
         markers = markers + self._get_radical_markers()
@@ -732,6 +732,9 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
 
     def __str__(self) -> str:
         return f"{self.resource} -> {self.relationship_type.label} -> {self.related_to}"
+
+    def get_classification(self) -> List[ControlledTerm]:
+        return self.classification.exclude(label="radicalism")
 
     @staticmethod
     def get_or_create(
