@@ -8557,6 +8557,7 @@ footer {
   font-size: 1.125rem; }
   .metadata .author::before,
   .metadata .date::before,
+  .metadata .form::before,
   .metadata .topic::before {
     display: inline-block;
     margin-right: 4px;
