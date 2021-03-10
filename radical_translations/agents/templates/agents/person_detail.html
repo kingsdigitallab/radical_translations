@@ -64,6 +64,12 @@
   </span>
   {% endif %}
 
+  <span class="metadata-block">
+    {% include "agents/includes/roles.html" %}
+  </span>
+  {% include "agents/includes/pages.html" %}
+  </p>
+
   {% if object.main_places.count %}
   <span class="metadata-block">
     {# Font Awesome map-marker-alt icon #}
