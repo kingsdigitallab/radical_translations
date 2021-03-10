@@ -228,7 +228,7 @@ class Resource(TimeStampedModel):
     def get_radical_markers(self) -> int:
         markers = 0
 
-        if self.has_date_radical():
+        if not self.is_paratext() and self.has_date_radical():
             markers = markers + 1
 
         markers = markers + self._get_radical_markers()
