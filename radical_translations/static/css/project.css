@@ -8556,16 +8556,19 @@ footer {
   font-size: 18px;
   font-size: 1.125rem; }
   .metadata .author::before,
-  .metadata .date::before {
+  .metadata .date::before,
+  .metadata .topic::before {
     display: inline-block;
-    height: 10px;
     margin-right: 4px;
-    margin-right: 0.25rem;
-    width: 10px; }
+    margin-right: 0.25rem; }
   .metadata .author::before {
     content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
   .metadata .date::before {
     content: url("/static/fontawesome/svgs/solid/calendar.svg"); }
+  .metadata .topic::before {
+    content: url("/static/fontawesome/svgs/solid/tags.svg");
+    height: 16px;
+    width: 16px; }
   .metadata svg {
     fill: #222222;
     height: 16px;
