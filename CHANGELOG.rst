@@ -26,6 +26,7 @@ Added
 * Load analytics setting.
 * GitHub action for CI.
 * `Agents` search.
+* Command to export `Resources` to a CSV file.
 
 Changed
 ~~~~~~~

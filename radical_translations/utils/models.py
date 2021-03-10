@@ -5,12 +5,12 @@ from typing import Dict, Optional
 
 from convertdate import french_republican
 from django.db import models
-from edtf import parse_edtf
-from edtf.fields import EDTFField
-from edtf.parser.edtf_exceptions import EDTFParseException
 from model_utils.models import TimeStampedModel
 
 from controlled_vocabulary.models import ControlledTermsField
+from edtf import parse_edtf
+from edtf.fields import EDTFField
+from edtf.parser.edtf_exceptions import EDTFParseException
 from geonames_place.models import Place
 
 
@@ -105,6 +105,31 @@ class Date(TimeStampedModel):
             return None
 
         return date
+
+
+def date_to_dict(date: Date) -> Dict:
+    if not date:
+        return {
+            "date.date_display": "",
+            "date.date_display_classification": "",
+            "date.date_radical": "",
+            "date.date_radical_classification": "",
+        }
+
+    return {
+        "date.date_display": date.date_display,
+        "date.date_display_classification": get_controlled_terms_str(
+            date.date_display_classification.all()
+        ),
+        "date.date_radical": date.date_radical,
+        "date.date_radical_classification": get_controlled_terms_str(
+            date.date_radical_classification.all()
+        ),
+    }
+
+
+def get_controlled_terms_str(terms) -> str:
+    return "; ".join([ct.label for ct in terms])
 
 
 class EditorialClassificationModel(models.Model):

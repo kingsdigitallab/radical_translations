@@ -11,7 +11,7 @@
   <span class="metadata-block">
     {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
     <span{% if date.date_radical %} class="radical"{% endif %}>
-      {# Font Awesome Mars icon #}
+      {# Font Awesome calendar icon #}
       {% include "svgs/solid/calendar.svg" %}
       {{ date }}
     </span>
@@ -21,9 +21,15 @@
 
   {% if object.get_subjects_topic %}
   <span class="metadata-block">
-    <span class="topic{% if object.is_radical %} radicalism{% endif %}"><strong>Topics: </strong></span>
+    <span class="topic">
+      {% if object.is_radical %}
+      {% include "svgs/solid/phrygian-cap.svg" %} 
+      {% endif %}
+      <strong>Topics: </strong>
+    </span>
     {% for subject in object.get_subjects_topic %}
-    <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
+    <span class="{{ subject.label }}">{{ subject.label }}</span>
+    {% if not forloop.last %}, {% endif %}
     {% endfor %}
   </span>
   {% endif %}
@@ -32,7 +38,8 @@
   <span class="metadata-block">
     <span class="form"><strong>Forms: </strong></span>
     {% for subject in object.get_subjects_other %}
-    <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
+    <span class="{{ subject.label }}">{{ subject.label }}</span>
+    {% if not forloop.last %}, {% endif %}
     {% endfor %}
   </span>
   {% endif %}
