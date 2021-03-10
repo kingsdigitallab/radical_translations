@@ -733,6 +733,9 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     def __str__(self) -> str:
         return f"{self.resource} -> {self.relationship_type.label} -> {self.related_to}"
 
+    def get_classification(self) -> List[ControlledTerm]:
+        return self.classification.exclude(label="radicalism")
+
     @staticmethod
     def get_or_create(
         resource: Resource, relationship: str, related_to: Resource

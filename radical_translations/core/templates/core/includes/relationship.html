@@ -10,6 +10,6 @@
 <a href="{% url 'resource-detail' related.pk %}">{{ related.title }}</a>
 {% include "core/includes/type.html" with resource=related %}
 </dd>
-{% for classification in relationship.classification.all %}
+{% for classification in relationship.get_classification %}
 <dd class="{{ classification.label }}">{{ classification.label }}</dd>
 {% endfor %}
