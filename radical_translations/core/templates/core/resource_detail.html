@@ -21,7 +21,7 @@
 
   {% if object.get_subjects_topic %}
   <span class="metadata-block">
-    <span class="topic{% if object.is_radical %} radicalism{% endif %}">Topics:</span>
+    <span class="topic{% if object.is_radical %} radicalism{% endif %}"><strong>Topics: </strong></span>
     {% for subject in object.get_subjects_topic %}
     <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
     {% endfor %}
@@ -30,9 +30,9 @@
 
   {% if object.get_subjects_other %}
   <span class="metadata-block">
-    <span>Forms: </span>
+    <span class="form"><strong>Forms: </strong></span>
     {% for subject in object.get_subjects_other %}
-    <span class="form {{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
+    <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
     {% endfor %}
   </span>
   {% endif %}

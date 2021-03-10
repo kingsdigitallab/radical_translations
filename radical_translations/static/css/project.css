@@ -8557,6 +8557,7 @@ footer {
   font-size: 1.125rem; }
   .metadata .author::before,
   .metadata .date::before,
+  .metadata .form::before,
   .metadata .topic::before {
     display: inline-block;
     margin-right: 4px;
@@ -8565,6 +8566,10 @@ footer {
     content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
   .metadata .date::before {
     content: url("/static/fontawesome/svgs/solid/calendar.svg"); }
+  .metadata .form::before {
+    content: url("/static/fontawesome/svgs/solid/mail-bulk.svg");
+    height: 16px;
+    width: 16px; }
   .metadata .topic::before {
     content: url("/static/fontawesome/svgs/solid/tags.svg");
     height: 16px;
