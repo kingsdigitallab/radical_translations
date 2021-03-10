@@ -15,6 +15,8 @@ from radical_translations.agents.models import Agent, Organisation, Person
 from radical_translations.utils.models import (
     Date,
     EditorialClassificationModel,
+    date_to_dict,
+    get_controlled_terms_str,
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
 )
@@ -49,6 +51,9 @@ class Title(TimeStampedModel):
             return f"{self.main_title}: {self.subtitle}"
 
         return self.main_title
+
+    def to_dict(self) -> Dict:
+        return {"title.main_title": self.main_title, "title.subtitle": self.subtitle}
 
     @staticmethod
     def get_or_create(
@@ -329,6 +334,31 @@ class Resource(TimeStampedModel):
 
         return self.date
 
+    def to_dict(self) -> Dict:
+        return {
+            "id": self.id,
+            **self.title.to_dict(),
+            **date_to_dict(self.date),
+            "is_original": self.is_original(),
+            "is_paratext": self.is_paratext(),
+            "is_translation": self.is_translation(),
+            "is_radical": self.is_radical(),
+            "subjects.topics": get_controlled_terms_str(self.get_subjects_topic()),
+            "subjects.form_genre": get_controlled_terms_str(self.get_subjects_other()),
+            "edition_enumeration": self.edition_enumeration,
+            "classifications": "; ".join([str(c) for c in self.classifications.all()]),
+            "contributions": "; ".join([str(c) for c in self.contributions.all()]),
+            "languages": "; ".join([str(lang) for lang in self.languages.all()]),
+            "places": "; ".join([str(rp) for rp in self.places.all()]),
+            "relationships": "; ".join(
+                [r.get_relationship() for r in self.relationships.all()]
+            ),
+            "held_by": "; ".join([str(lib) for lib in self.held_by.all()]),
+            "electronic_locator": self.electronic_locator,
+            "summary": self.summary,
+            "notes": self.notes,
+        }
+
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Resource"]:
         """Gets or creates a new `Resource` from a Google Spreadsheet dictionary
@@ -594,7 +624,7 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
         if self.published_as:
             agent = f"{self.published_as} ({agent})"
 
-        return f"{agent}"
+        return f"[{'; '.join([r.label for r in self.roles.all()])}] {agent}"
 
     @staticmethod
     def from_gsx_entry(
@@ -736,6 +766,12 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     def get_classification(self) -> List[ControlledTerm]:
         return self.classification.exclude(label="radicalism")
 
+    def get_relationship(self) -> str:
+        return (
+            f"[{'; '.join([c.label for c in self.classification.all()])}] "
+            f"[{self.relationship_type.label}] {self.id}: {self.related_to}"
+        )
+
     @staticmethod
     def get_or_create(
         resource: Resource, relationship: str, related_to: Resource
@@ -750,5 +786,4 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
         rr, _ = ResourceRelationship.objects.get_or_create(
             resource=resource, relationship_type=term, related_to=related_to
         )
-
         return rr
