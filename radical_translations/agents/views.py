@@ -53,11 +53,6 @@ class AgentViewSet(DocumentViewSet):
 
     faceted_search_fields = {
         "meta": {"field": "meta", "enabled": True, "options": ES_FACET_OPTIONS},
-        "radical": {
-            "field": "radical",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
         "year": {
             "field": "year",
             "enabled": True,
@@ -107,7 +102,6 @@ class AgentViewSet(DocumentViewSet):
 
     filter_fields = {
         "meta": "meta",
-        "radical": "radical",
         "year": "year",
         "gender": "gender",
         "place_birth": "place_birth.address.raw",
