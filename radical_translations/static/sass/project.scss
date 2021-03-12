@@ -125,12 +125,12 @@ footer {
   font-size: 1.125rem;
 
   .author,
-  .date {
+  .date,
+  .form,
+  .topic {
     &::before {
       display: inline-block;
-      height: 10px;
       margin-right: 0.25rem;
-      width: 10px;
     }
   }
 
@@ -143,6 +143,22 @@ footer {
   .date {
     &::before {
       content: url('/static/fontawesome/svgs/solid/calendar.svg');
+    }
+  }
+
+  .form {
+    &::before {
+      content: url('/static/fontawesome/svgs/solid/mail-bulk.svg');
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  .topic {
+    &::before {
+      content: url('/static/fontawesome/svgs/solid/tags.svg');
+      height: 16px;
+      width: 16px;
     }
   }
 

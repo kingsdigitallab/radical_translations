@@ -25,6 +25,7 @@ Added
 * `Place` API view.
 * Load analytics setting.
 * GitHub action for CI.
+* Command to export `Resources` to a CSV file.
 
 Changed
 ~~~~~~~
