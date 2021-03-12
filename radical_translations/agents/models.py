@@ -1,5 +1,6 @@
 from typing import Dict, Optional
 
+from django.conf import settings
 from django.db import models
 from model_utils.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
@@ -12,6 +13,8 @@ from radical_translations.utils.models import (
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
 )
+
+csv_field_sep = settings.EXPORT_FIELD_SEPARATOR
 
 # These models are based on the BIBFRAME 2.0 Agent Model, which is based on FOAF
 # http://xmlns.com/foaf/spec/#term_Agent
@@ -83,6 +86,9 @@ class Agent(PolymorphicModel, TimeStampedModel):
         return "; ".join([role.label for role in self.roles.all()])
 
     get_role_names.short_description = "Roles"  # type: ignore
+
+    def to_dict_value(self) -> str:
+        return f"{self.agent_type}{csv_field_sep}{self.id}{csv_field_sep}{self.name}"
 
 
 class Person(Agent):
@@ -299,5 +305,4 @@ class Organisation(Agent):
             org.based_near.add(place)
 
         org.save()
-
         return org

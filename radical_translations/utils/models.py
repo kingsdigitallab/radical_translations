@@ -4,6 +4,7 @@ from time import mktime, struct_time
 from typing import Dict, Optional
 
 from convertdate import french_republican
+from django.conf import settings
 from django.db import models
 from model_utils.models import TimeStampedModel
 
@@ -129,7 +130,9 @@ def date_to_dict(date: Date) -> Dict:
 
 
 def get_controlled_terms_str(terms) -> str:
-    return "; ".join([ct.label for ct in terms])
+    return f"{settings.EXPORT_MULTIVALUE_SEPARATOR} ".join(
+        [f"{ct.label} ({ct.vocabulary.label})" for ct in terms]
+    )
 
 
 class EditorialClassificationModel(models.Model):

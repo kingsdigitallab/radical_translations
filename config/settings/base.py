@@ -360,3 +360,8 @@ SEARCH_OPTIONS = {
         "year_max": 1820,
     },
 }
+
+# Export
+# ------------------------------------------------------------------------------
+EXPORT_FIELD_SEPARATOR = "::"
+EXPORT_MULTIVALUE_SEPARATOR = ";"

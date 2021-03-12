@@ -1,5 +1,6 @@
 from typing import Dict, List, Optional
 
+from django.conf import settings
 from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.models import TimeStampedModel
@@ -20,6 +21,9 @@ from radical_translations.utils.models import (
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
 )
+
+csv_field_sep = settings.EXPORT_FIELD_SEPARATOR
+csv_multi_sep = settings.EXPORT_MULTIVALUE_SEPARATOR
 
 # These models are based on the BIBFRAME 2.0 Model
 # https://www.loc.gov/bibframe/docs/bibframe2-model.html
@@ -339,21 +343,27 @@ class Resource(TimeStampedModel):
             "id": self.id,
             **self.title.to_dict(),
             **date_to_dict(self.date),
-            "is_original": self.is_original(),
-            "is_paratext": self.is_paratext(),
-            "is_translation": self.is_translation(),
-            "is_radical": self.is_radical(),
             "subjects.topics": get_controlled_terms_str(self.get_subjects_topic()),
             "subjects.form_genre": get_controlled_terms_str(self.get_subjects_other()),
             "edition_enumeration": self.edition_enumeration,
-            "classifications": "; ".join([str(c) for c in self.classifications.all()]),
-            "contributions": "; ".join([str(c) for c in self.contributions.all()]),
-            "languages": "; ".join([str(lang) for lang in self.languages.all()]),
-            "places": "; ".join([str(rp) for rp in self.places.all()]),
-            "relationships": "; ".join(
-                [r.get_relationship() for r in self.relationships.all()]
+            "classifications": f"{csv_multi_sep} ".join(
+                [c.to_dict_value() for c in self.classifications.all()]
             ),
-            "held_by": "; ".join([str(lib) for lib in self.held_by.all()]),
+            "contributions": f"{csv_multi_sep} ".join(
+                [c.to_dict_value() for c in self.contributions.all()]
+            ),
+            "languages": f"{csv_multi_sep} ".join(
+                [str(lang) for lang in self.languages.all()]
+            ),
+            "places": f"{csv_multi_sep} ".join(
+                [rp.to_dict_value() for rp in self.places.all()]
+            ),
+            "relationships": f"{csv_multi_sep} ".join(
+                [r.to_dict_value() for r in self.relationships.all()]
+            ),
+            "held_by": f"{csv_multi_sep} ".join(
+                [lib.to_dict_value() for lib in self.held_by.all()]
+            ),
             "electronic_locator": self.electronic_locator,
             "summary": self.summary,
             "notes": self.notes,
@@ -565,6 +575,9 @@ class Classification(TimeStampedModel, EditorialClassificationModel):
     def __str__(self) -> str:
         return self.edition.label
 
+    def to_dict_value(self) -> str:
+        return f"{self.edition.label} ({self.edition.vocabulary.label})"
+
     @staticmethod
     def get_or_create(resource: Resource, term: str) -> Optional["Classification"]:
         if not resource or not term:
@@ -625,6 +638,16 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
             agent = f"{self.published_as} ({agent})"
 
         return f"[{'; '.join([r.label for r in self.roles.all()])}] {agent}"
+
+    def to_dict_value(self) -> str:
+        agent = self.agent.to_dict_value()
+        if self.published_as:
+            agent = f"{self.published_as} ({agent})"
+
+        return (
+            f"{f'{csv_multi_sep} '.join([r.label for r in self.roles.all()])}"
+            f"{csv_field_sep}{agent}"
+        )
 
     @staticmethod
     def from_gsx_entry(
@@ -736,6 +759,20 @@ class ResourcePlace(TimeStampedModel, EditorialClassificationModel):
 
         return self.place.address
 
+    def to_dict_value(self) -> str:
+        if not self.place:
+            return self.fictional_place
+
+        place = (
+            f"{self.id}{csv_field_sep}{self.place.address}"
+            f"{csv_field_sep}{self.place.country.name}"
+        )
+
+        if self.fictional_place:
+            return f"{self.fictional_place} ({place})"
+
+        return place
+
 
 class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     """Any relationship between resources."""
@@ -766,10 +803,11 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     def get_classification(self) -> List[ControlledTerm]:
         return self.classification.exclude(label="radicalism")
 
-    def get_relationship(self) -> str:
+    def to_dict_value(self) -> str:
         return (
-            f"[{'; '.join([c.label for c in self.classification.all()])}] "
-            f"[{self.relationship_type.label}] {self.id}: {self.related_to}"
+            f"{f'{csv_multi_sep} '.join([c.label for c in self.classification.all()])}"
+            f"{csv_field_sep}{self.relationship_type.label}{csv_field_sep}{self.id}"
+            f"{csv_field_sep}{self.related_to}"
         )
 
     @staticmethod
