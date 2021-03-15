@@ -20,6 +20,7 @@ from radical_translations.utils.models import (
     get_controlled_terms_str,
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
+    place_to_dict_value,
 )
 
 csv_field_sep = settings.EXPORT_FIELD_SEPARATOR
@@ -368,6 +369,9 @@ class Resource(TimeStampedModel):
             "summary": self.summary,
             "notes": self.notes,
         }
+
+    def to_dict_value(self) -> str:
+        return f"{self.id}{csv_field_sep}{self.title}"
 
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Resource"]:
@@ -763,10 +767,7 @@ class ResourcePlace(TimeStampedModel, EditorialClassificationModel):
         if not self.place:
             return self.fictional_place
 
-        place = (
-            f"{self.id}{csv_field_sep}{self.place.address}"
-            f"{csv_field_sep}{self.place.country.name}"
-        )
+        place = place_to_dict_value(self.place)
 
         if self.fictional_place:
             return f"{self.fictional_place} ({place})"

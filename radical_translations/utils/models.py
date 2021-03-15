@@ -108,31 +108,25 @@ class Date(TimeStampedModel):
         return date
 
 
-def date_to_dict(date: Date) -> Dict:
+def date_to_dict(date: Date, label: Optional[str] = "date") -> Dict:
     if not date:
         return {
-            "date.date_display": "",
-            "date.date_display_classification": "",
-            "date.date_radical": "",
-            "date.date_radical_classification": "",
+            f"{label}.date_display": "",
+            f"{label}.date_display_classification": "",
+            f"{label}.date_radical": "",
+            f"{label}.date_radical_classification": "",
         }
 
     return {
-        "date.date_display": date.date_display,
-        "date.date_display_classification": get_controlled_terms_str(
+        f"{label}.date_display": date.date_display,
+        f"{label}.date_display_classification": get_controlled_terms_str(
             date.date_display_classification.all()
         ),
-        "date.date_radical": date.date_radical,
-        "date.date_radical_classification": get_controlled_terms_str(
+        f"{label}.date_radical": date.date_radical,
+        f"{label}.date_radical_classification": get_controlled_terms_str(
             date.date_radical_classification.all()
         ),
     }
-
-
-def get_controlled_terms_str(terms) -> str:
-    return f"{settings.EXPORT_MULTIVALUE_SEPARATOR} ".join(
-        [f"{ct.label} ({ct.vocabulary.label})" for ct in terms]
-    )
 
 
 class EditorialClassificationModel(models.Model):
@@ -204,3 +198,19 @@ def get_geonames_place_from_gsx_place(name: str) -> Optional[Place]:
     address = matches.group("address").strip()
     country_code = matches.group("country_code")
     return Place.get_or_create_from_geonames(address, country_code=country_code)
+
+
+def get_controlled_terms_str(terms) -> str:
+    return f"{settings.EXPORT_MULTIVALUE_SEPARATOR} ".join(
+        [f"{ct.label} ({ct.vocabulary.label})" for ct in terms]
+    )
+
+
+def place_to_dict_value(place) -> str:
+    if not place:
+        return
+
+    if place.country:
+        return f"{place.address}{settings.EXPORT_FIELD_SEPARATOR}{place.country.name}"
+
+    return place.address

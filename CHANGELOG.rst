@@ -26,6 +26,7 @@ Added
 * Load analytics setting.
 * GitHub action for CI.
 * Command to export `Resources` to a CSV file.
+* Command to export `Organisations` and `Persons` to CSV files.
 
 Changed
 ~~~~~~~
