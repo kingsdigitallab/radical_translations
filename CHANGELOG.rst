@@ -27,6 +27,7 @@ Added
 * GitHub action for CI.
 * Command to export `Resources` to a CSV file.
 * Command to export `Organisations` and `Persons` to CSV files.
+* Command to export `Events` to a CSV file.
 
 Changed
 ~~~~~~~
