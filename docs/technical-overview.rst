@@ -43,6 +43,13 @@ command::
 
     $ fab django "graph_models -X TimeStampedModel,PolymorphicModel -o models.png agents core events utils"
 
+The following table shows the names of the fields in the data model and how they are
+being labelled for the search and detail views.
+
+.. csv-table:: Data model fields concordance
+    :file: _static/concordance.csv
+    :header-rows: 1
+    :stub-columns: 1
 
 Conceptual model frameworks:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -105,7 +112,6 @@ Workflows
     :width: 100%
 
     Data workflow
-
 
 Architecture
 ^^^^^^^^^^^^
