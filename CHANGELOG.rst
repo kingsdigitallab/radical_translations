@@ -28,6 +28,7 @@ Added
 * Command to export `Resources` to a CSV file.
 * Command to export `Organisations` and `Persons` to CSV files.
 * Command to export `Events` to a CSV file.
+* Docs: data model fields concordance.
 
 Changed
 ~~~~~~~
