@@ -12,6 +12,7 @@ new Vue({
     query: '',
     query_text: '',
     query_dates: [options.year_min, options.year_max],
+    has_date_query: false,
     filters: [],
     ordering_default: 'score',
     ordering: 'score',
@@ -300,8 +301,11 @@ new Vue({
         this.updateFilters([key.replace('__term', ''), params.get(key)])
       }
     },
-    rangeSearch: async function () {
+    rangeSearch: async function (reset = false) {
       this.page = 1
+      if (reset) {
+        this.query_dates = [options.year_min, options.year_max]
+      }
       await this.search()
     },
     search: async function () {
@@ -322,6 +326,12 @@ new Vue({
       }
       if (this.query_dates[1] !== options.year_max) {
         params.append('year__lte', this.query_dates[1])
+      }
+
+      if (params.has('year__gte') || params.has('year__lte')) {
+        this.has_date_query = true
+      } else {
+        this.has_date_query = false
       }
 
       if (!this.page || this.page > this.numberOfPages) {
