@@ -1,0 +1,40 @@
+Model,Field,Search,Detail
+Resource,title,,
+,title_variant,,
+,subjects,subject; form/genre,topics; form/genre
+,date,Year slider,
+,edition_enumeration,,
+,summary,,summary
+,held_by,,held_by
+,electronic_locator,,URL
+,notes,,notes
+,classification,printing and publishing; paratext; translation terms,
+,contribution,contributor; contributor role,contributions
+,language,language,
+,place,publication country; publication place,
+,relationship,,related resources
+,relationship.relationship_type,status,
+Agent,name,,
+,radical,radical,
+,based_near,main place  ,main
+,page,,
+,roles,role,
+,sources,,
+,notes,,notes
+Organisation,members,,members
+Person,given_name,,
+,family_name,,
+,gender,gender,
+,noble,noble,
+,main_places,other places,other
+,date_birth,year slider,
+,place_birth,,
+,date_death,year slider,
+,place_death,,
+,languages,language,
+,knows,,knows
+,member of,,member of
+Event,title,,
+,date,year slider,
+,place,country,
+,related_to,,related resources

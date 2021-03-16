@@ -1,6 +1,6 @@
 <h2>Results: <span class="badge badge-secondary">{[ data.count ]}</span> records</h2>
 
-<h3 v-if="query || filters.length > 0">
+<h3 v-if="query || has_date_query || filters.length > 0">
     Current filters
     <span 
         class="sup-icon" 
@@ -14,6 +14,12 @@
     v-on:click="textSearch()"
     class="btn btn-info btn-sm spacing closeable"
     type="button">{[ query ]}
+</button>
+<button
+    v-if="has_date_query"
+    v-on:click="rangeSearch(true)"
+    class="btn btn-info btn-sm spacing closeable"
+    type="button">{[ query_dates[0] ]}–{[ query_dates[1] ]}
 </button>
 <button
     v-for="filter in filters"

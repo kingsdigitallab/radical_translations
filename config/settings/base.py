@@ -370,3 +370,8 @@ SEARCH_OPTIONS = {
         "map_field": "based_near",
     },
 }
+
+# Export
+# ------------------------------------------------------------------------------
+EXPORT_FIELD_SEPARATOR = "::"
+EXPORT_MULTIVALUE_SEPARATOR = ";"
