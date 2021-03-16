@@ -3,6 +3,8 @@ Vue.component('bar-chart', {
   props: ['clickHandler'],
   mixins: [VueChartJs.mixins.reactiveProp],
   data: function () {
+    const self = this
+
     return {
       options: {
         legend: { display: false },
@@ -18,7 +20,7 @@ Vue.component('bar-chart', {
         onClick: function (evt, item) {
           if (item.length > 0) {
             const year = item[0]['_model'].label
-            this.clickHandler(year, year)
+            self.clickHandler(year, year)
           }
         }
       }
