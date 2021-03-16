@@ -12,7 +12,7 @@ class Command(BaseCommand):
         self.stdout.write(
             "Exporting Resources into CSV file resources.csv ...", ending=" "
         )
-        resources = [r.to_dict() for r in Resource.objects.all()]
+        resources = [resource.to_dict() for resource in Resource.objects.all()]
 
         if not resources:
             self.stderr.write(self.style.NOTICE("No resources found!"))

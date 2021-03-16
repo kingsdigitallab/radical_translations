@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write("Exporting Events into CSV file events.csv ...", ending=" ")
-        events = [r.to_dict() for r in Event.objects.all()]
+        events = [event.to_dict() for event in Event.objects.all()]
 
         if not events:
             self.stderr.write(self.style.NOTICE("No events found!"))

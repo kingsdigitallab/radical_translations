@@ -206,11 +206,29 @@ def get_controlled_terms_str(terms) -> str:
     )
 
 
+def place_to_dict(place) -> Dict:
+    if not place:
+        return
+
+    return {
+        "geonames_id": place.geonames_id,
+        "address": place.address,
+        "class_description": place.class_description,
+        "country": place.country.name if place.country else "",
+        "feature_class": place.feature_class,
+        "lat": place.lat,
+        "lon": place.lon,
+    }
+
+
 def place_to_dict_value(place) -> str:
     if not place:
         return
 
     if place.country:
-        return f"{place.address}{settings.EXPORT_FIELD_SEPARATOR}{place.country.name}"
+        return (
+            f"{place.geonames_id}{settings.EXPORT_FIELD_SEPARATOR}{place.address}"
+            f"{settings.EXPORT_FIELD_SEPARATOR}{place.country.name}"
+        )
 
     return place.address
