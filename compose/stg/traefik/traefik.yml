@@ -17,7 +17,7 @@ http:
       service: django
 
     web-media-router:
-      rule: 'Host(`radicalt-stg.kdl.kcl.ac.uk`) && PathPrefix(`/media/`)'
+      rule: 'Host(`radicalt-stg.kdl.kcl.ac.uk`) && PathPrefix(`/media/`) || PathPrefix(`/robots.txt`)'
       entryPoints:
         - web
       middlewares:
