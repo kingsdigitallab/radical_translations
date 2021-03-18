@@ -1,2 +1,7 @@
 User-agent: *
-Disallow: /
+crawl-delay: 10
+Disallow: /api
+Disallow: /*/api
+Disallow: /cms
+Disallow: /media 
+Disallow: /static
