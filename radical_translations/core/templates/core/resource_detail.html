@@ -6,100 +6,100 @@
 <h1>{{ object.title }}</h1>
 
 <p class="metadata">
-  {% with date=object.get_date %}
-  {% if date %}
-  <span class="metadata-block">
-    {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
-    <span{% if date.date_radical %} class="radical"{% endif %}>
-      {# Font Awesome calendar icon #}
-      {% include "svgs/solid/calendar.svg" %}
-      {{ date }}
-    </span>
+{% with date=object.get_date %}
+{% if date %}
+<span class="metadata-block">
+  {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
+  <span{% if date.date_radical %} class="radical"{% endif %}>
+    {# Font Awesome calendar icon #}
+    {% include "svgs/solid/calendar.svg" %}
+    {{ date }}
   </span>
-  {% endif %}
-  {% endwith %}
+</span>
+{% endif %}
+{% endwith %}
 
-  {% if object.get_subjects_topic %}
-  <span class="metadata-block">
-    <span class="topic">
-      {% if object.is_radical %}
-      {% include "svgs/solid/phrygian-cap.svg" %} 
-      {% endif %}
-      <strong>Topics: </strong>
-    </span>
-    {% for subject in object.get_subjects_topic %}
-    <span class="{{ subject.label }}">{{ subject.label }}</span>
-    {% if not forloop.last %}, {% endif %}
-    {% endfor %}
-  </span>
-  {% endif %}
-
-  {% if object.get_subjects_other %}
-  <span class="metadata-block">
-    <span class="form"><strong>Forms: </strong></span>
-    {% for subject in object.get_subjects_other %}
-    <span class="{{ subject.label }}">{{ subject.label }}</span>
-    {% if not forloop.last %}, {% endif %}
-    {% endfor %}
-  </span>
-  {% endif %}
-
-  {% if object.edition_enumeration %}
-  <span class="metadata-block">
-    {{ object.edition_enumeration }}
-  </span>
-  {% endif %}
-
-  {% if object.classifications.all %}
-  <span class="metadata-block">
-    {% for classification in object.classifications.all %}
-    {% with edition=classification.edition tags=classification.classification.all %}
-    <a
-      {% if tags %}class="{% for tag in tags %}{{ tag.label }}{% endfor %}"{% endif %}
-      {% if edition.description %}
-      href="#"
-      data-toggle="tooltip"
-      title="{{ edition.description }}"
-      {% endif %}>{{ edition.label }}</a>
-    {% endwith %}
-    {% endfor %}
-  </span>
-  {% endif %}
-
-  {% if object.languages.all %}
-  <span class="metadata-block">
-    {# Custom language icon "language3.svg" #}
-    {% include "svgs/solid/language3.svg" %}
-    {% for language in object.languages.all %}
-    {{ language }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-  </span>
-  {% endif %}
-
-  {% if object.places.all %}
-  <span class="metadata-block">
-    {# Font Awesome map-marker-alt icon #}
-    {% include "svgs/solid/map-marker-alt.svg" %}
-    {% spaceless %}
-    {% for place in object.places.all %}
-    {% if place.place.id %}
-    {% include 'geonames_place/includes/place.html' with place=place.place %}
-    {% else %}
-    <span>{{ place }}</span>
+{% if object.get_subjects_topic %}
+<span class="metadata-block">
+  <span class="topic">
+    {% if object.is_radical %}
+    {% include "svgs/solid/phrygian-cap.svg" %} 
     {% endif %}
-    {% if not forloop.last %}<span>, </span>{% endif %}
-    {% endfor %}
-    {% endspaceless %}
+    <strong>Topics: </strong>
   </span>
-  {% endif %}
+  {% for subject in object.get_subjects_topic %}
+  <span class="{{ subject.label }}">{{ subject.label }}</span>
+  {% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</span>
+{% endif %}
 
-  {% if object.electronic_locator %}
-  <span class="metadata-block">
-    {# Font Awesome map-marker-alt icon #}
-    {% include "svgs/solid/external-link-alt.svg" %}
-    <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
-  </span>
+{% if object.get_subjects_other %}
+<span class="metadata-block">
+  <span class="form"><strong>Forms: </strong></span>
+  {% for subject in object.get_subjects_other %}
+  <span class="{{ subject.label }}">{{ subject.label }}</span>
+  {% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</span>
+{% endif %}
+
+{% if object.edition_enumeration %}
+<span class="metadata-block">
+  {{ object.edition_enumeration }}
+</span>
+{% endif %}
+
+{% if object.classifications.all %}
+<span class="metadata-block">
+  {% for classification in object.classifications.all %}
+  {% with edition=classification.edition tags=classification.classification.all %}
+  <a
+    {% if tags %}class="{% for tag in tags %}{{ tag.label }}{% endfor %}"{% endif %}
+    {% if edition.description %}
+    href="#"
+    data-toggle="tooltip"
+    title="{{ edition.description }}"
+    {% endif %}>{{ edition.label }}</a>
+  {% endwith %}
+  {% endfor %}
+</span>
+{% endif %}
+
+{% if object.languages.all %}
+<span class="metadata-block">
+  {# Custom language icon "language3.svg" #}
+  {% include "svgs/solid/language3.svg" %}
+  {% for language in object.languages.all %}
+  {{ language }}{% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</span>
+{% endif %}
+
+{% if object.places.all %}
+<span class="metadata-block">
+  {# Font Awesome map-marker-alt icon #}
+  {% include "svgs/solid/map-marker-alt.svg" %}
+  {% spaceless %}
+  {% for place in object.places.all %}
+  {% if place.place.id %}
+  {% include 'geonames_place/includes/place.html' with place=place.place %}
+  {% else %}
+  <span>{{ place }}</span>
   {% endif %}
+  {% if not forloop.last %}<span>, </span>{% endif %}
+  {% endfor %}
+  {% endspaceless %}
+</span>
+{% endif %}
+
+{% if object.electronic_locator %}
+<span class="metadata-block">
+  {# Font Awesome map-marker-alt icon #}
+  {% include "svgs/solid/external-link-alt.svg" %}
+  <a class="badge badge-info" href="{{ object.electronic_locator }}">URL</a>
+</span>
+{% endif %}
 </p>
 
 {% if object.is_translation %}
@@ -123,7 +123,11 @@
   </span>
   {% endfor %}
   <a href="{% url 'agent-detail' contribution.agent.pk %}">
+    {% if contribution.published_as %}
+    {{ contribution.published_as }} ({{ contribution.agent.name }})
+    {% else %}
     {{ contribution.agent.name }}
+    {% endif %}
   </a>
   </dt>
   {% for role in contribution.roles.all %}
@@ -143,7 +147,7 @@
   {% endif %}
 
   {% if object.related_to.count %}
-  {% for relationship in object.related_to.all %}
+  {% for relationship in object.get_related_resources %}
   {% include "core/includes/relationship.html" with label=relationship.relationship_type.label related=relationship.resource %}
   {% endfor %}
   {% endif %}

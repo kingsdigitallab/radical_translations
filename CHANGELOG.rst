@@ -50,6 +50,7 @@ Fixed
 * Date interval parsing issues.
 * Search results map not updating.
 * Error when trying to add a map link to a publication place that is only a fictional place.
+* The ordering of reverse relationships.
 
 Removed
 ~~~~~~~
