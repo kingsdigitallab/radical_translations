@@ -270,6 +270,11 @@ class Resource(TimeStampedModel):
     def _is_radical_label(self, label):
         return "radical" in label
 
+    def get_related_resources(self):
+        return self.related_to.order_by(
+            "resource__date", "relationship_type", "resource__title"
+        )
+
     def get_subjects_topic(self) -> List[ControlledTerm]:
         return self.subjects.filter(vocabulary__prefix="fast-topic").order_by("label")
 
