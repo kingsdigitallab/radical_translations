@@ -60,7 +60,7 @@ class Date(TimeStampedModel):
     )
 
     class Meta:
-        ordering = ["date_sort_ascending", "date_sort_descending"]
+        ordering = ["date_sort_ascending"]
 
     def __str__(self) -> str:
         if self.date_radical:
