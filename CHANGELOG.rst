@@ -41,6 +41,7 @@ Changed
 * `Bump pillow to 7.1`_. 
 * Exclude libraries from the list of `Organisations`.
 * Exclude radicalism from the subject filter.
+* Order/display `Resources` contributor filter by `family name, given name`.
 
 Fixed
 ~~~~~
