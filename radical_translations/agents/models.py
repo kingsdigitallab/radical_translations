@@ -89,6 +89,9 @@ class Agent(PolymorphicModel, TimeStampedModel):
     def title(self) -> str:
         return self.name
 
+    def get_index_name(self) -> str:
+        return self.name
+
     def get_place_names(self) -> str:
         return "; ".join([place.address for place in self.based_near.all()])
 
@@ -208,6 +211,18 @@ class Person(Agent):
 
     class Meta:
         ordering = ["family_name", "given_name", "name"]
+
+    def get_index_name(self) -> str:
+        if self.family_name and self.given_name:
+            return f"{self.family_name}, {self.given_name}"
+
+        if self.family_name:
+            return self.family_name
+
+        if self.given_name:
+            return self.given_name
+
+        return super().get_index_name()
 
     def get_main_places_names(self) -> str:
         return "; ".join([place.address for place in self.main_places.all()])
