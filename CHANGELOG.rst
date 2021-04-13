@@ -42,6 +42,7 @@ Changed
 * Exclude libraries from the list of `Organisations`.
 * Exclude radicalism from the subject filter.
 * Order/display `Resources` contributor filter by `family name, given name`.
+* Order/display of `Contributions`.
 
 Fixed
 ~~~~~
