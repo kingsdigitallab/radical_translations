@@ -342,6 +342,15 @@ REST_FRAMEWORK = {
 
 # Search
 # ------------------------------------------------------------------------------
+CONTRIBUTION_MAIN_ROLES = ["author", "translator"]
+
+CONTRIBUTION_OTHER_ROLES = [
+    "journalist",
+    "editor",
+    "publisher",
+    "bookseller",
+]
+
 SEARCH_OPTIONS = {
     "resources": {
         "label": "Resources",

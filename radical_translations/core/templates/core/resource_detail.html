@@ -114,7 +114,7 @@
 {% if object.contributions.count %}
 <h2>Contributions</h2>
 <dl>
-  {% for contribution in object.contributions.all %}
+  {% for contribution in object.get_contributions %}
   <dt>
   {% for classification in contribution.classification.all %}
   {# Font Awesome question icon #}
