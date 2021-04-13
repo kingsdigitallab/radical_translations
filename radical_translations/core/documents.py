@@ -274,7 +274,7 @@ class ResourceDocument(Document):
                     else (
                         "Anonymous"
                         if item.agent.name.startswith("Anon")
-                        else item.agent.name
+                        else item.agent.get_index_name()
                     ),
                 },
                 "roles": [
