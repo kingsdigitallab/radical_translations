@@ -222,6 +222,46 @@ class Resource(TimeStampedModel):
 
     get_classification_edition.short_description = "Edition"  # type: ignore
 
+    def get_contributions(
+        self, include_paratext: bool = False
+    ) -> Optional[List["Contribution"]]:
+        contributions = []
+
+        for role in settings.CONTRIBUTION_MAIN_ROLES:
+            contributions.extend(self.get_contributions_by_role(role))
+
+        for role in settings.CONTRIBUTION_MAIN_ROLES:
+            contributions.extend(
+                self.get_contributions_by_role(
+                    role, include_resource=False, include_paratext=include_paratext
+                )
+            )
+
+        for role in settings.CONTRIBUTION_OTHER_ROLES:
+            contributions.extend(
+                self.get_contributions_by_role(role, include_paratext=include_paratext)
+            )
+
+        return contributions
+
+    def get_contributions_by_role(
+        self, role: str, include_resource: bool = True, include_paratext: bool = False
+    ) -> Optional[List["Contribution"]]:
+        contributions = []
+
+        if include_resource:
+            contributions = list(self.contributions.filter(roles__label=role))
+
+        if include_paratext:
+            for relationship in self.get_paratext():
+                contributions.extend(
+                    relationship.resource.get_contributions_by_role(
+                        role, include_paratext
+                    )
+                )
+
+        return contributions
+
     def get_language_names(self) -> str:
         return "; ".join([rl.language.label for rl in self.languages.all()])
 

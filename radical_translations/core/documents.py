@@ -280,17 +280,17 @@ class ResourceDocument(Document):
                 "roles": [
                     {
                         "label": f"{role.label} of translation paratext"
-                        if instance.is_paratext()
+                        if item.resource.is_paratext()
                         else role.label
                         for role in item.roles.all()
                     }
                 ],
             }
-            for item in instance.contributions.all()
+            for item in instance.get_contributions(include_paratext=True)
         ]
 
-        for relationship in instance.get_paratext():
-            contributions.extend(self.prepare_contributions(relationship.resource))
+        # for relationship in instance.get_paratext():
+        # contributions.extend(self.prepare_contributions(relationship.resource))
 
         if contributions:
             contributions.append(
