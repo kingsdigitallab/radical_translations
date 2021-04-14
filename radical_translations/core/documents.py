@@ -289,9 +289,6 @@ class ResourceDocument(Document):
             for item in instance.get_contributions(include_paratext=True)
         ]
 
-        # for relationship in instance.get_paratext():
-        # contributions.extend(self.prepare_contributions(relationship.resource))
-
         if contributions:
             contributions.append(
                 {"agent": {"name": "any"}, "roles": [{"label": "any"}]}

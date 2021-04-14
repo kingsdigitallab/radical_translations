@@ -83,7 +83,7 @@
   {% spaceless %}
   {% for place in object.places.all %}
   {% if place.place.id %}
-  {% include 'geonames_place/includes/place.html' with place=place.place %}
+  {% include 'geonames_place/includes/place.html' with place=place.place tags=place.classification.all %}
   {% else %}
   <span>{{ place }}</span>
   {% endif %}

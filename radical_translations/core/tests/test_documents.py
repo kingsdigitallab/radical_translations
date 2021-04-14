@@ -314,8 +314,12 @@ class TestResourceDocument:
         person.name = "Anonymous Badger"
         person.save()
 
-        paratext.contributions.add(Contribution(agent=person), bulk=False)
-        assert len(doc.prepare_contributions(resource)) == 5
+        contribution = Contribution(resource=resource, agent=person)
+        contribution.save()
+        contribution.roles.add(search_term_or_none("wikidata", "bookseller"))
+
+        paratext.contributions.add(contribution, bulk=False)
+        assert len(doc.prepare_contributions(resource)) == 4
 
         contribution = doc.prepare_contributions(resource)[2]
         assert contribution["agent"]["name"] == "Anonymous"
