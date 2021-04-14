@@ -1109,7 +1109,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .false {
   &::after {
     content: url('/static/fontawesome/svgs/solid/no-veracity.svg');
+    // content: url('/static/fontawesome/svgs/solid/no-veracity-2.svg');
     display: inline-block;
+    filter: invert(0.8);
     padding-left: 4px;
     width: 18px;
   }
