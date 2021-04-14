@@ -81,15 +81,17 @@
 
   {% spaceless %}
   {% for place in object.places.all %}
+  {% with tags=place.classification.all %}
   {% if place.fictional_place %}
-  <span class="fictional">{{ place }} </span>
+  <span class="fictional{% for tag in tags %} {{ tag.label|lower }}{% endfor %}">{{ place }} </span>
   {% endif %}
 
   {% if place.place.id %}
-  {% include 'geonames_place/includes/place.html' with place=place.place tags=place.classification.all %}
+  {% include 'geonames_place/includes/place.html' with place=place.place tags=tags %}
   {% endif %}
 
   {% if not forloop.last %}<span>, </span>{% endif %}
+  {% endwith %}
   {% endfor %}
   {% endspaceless %}
 </span>
@@ -120,7 +122,7 @@
   <dt>
   {% for classification in contribution.classification.all %}
   {# Font Awesome question icon #}
-  <span class="small-icon {{ classification.label }}">
+  <span class="small-icon {{ classification.label|lower }}">
     <span class="sr-only">{{ classification.label }}</span>
   </span>
   {% endfor %}

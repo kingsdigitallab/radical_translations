@@ -682,7 +682,6 @@ figure {
   & + p {
     padding-top: 1rem;
     margin-bottom: 1rem;
-    // margin-top: 1rem;
   }
 }
 
@@ -834,7 +833,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
-  // Images ind Draftail text editor
+  // Images in Draftail text editor
 
   .left,
   .right {
@@ -1102,6 +1101,28 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 /* Agents / Persons */
 
+.false,
+.fictional {
+  &::after {
+    display: inline-block;
+    filter: invert(0.2);
+    padding-left: 4px;
+    width: 18px;
+  }  
+}
+
+.false {
+  &::after {
+    content: url('/static/fontawesome/svgs/solid/no-veracity.svg');
+  }
+}
+
+.fictional {
+  &::after {
+    content: url('/static/fontawesome/svgs/solid/map-marker-plus.svg');
+  }
+}
+
 .noble {
   svg {
     height: 16px;
@@ -1157,6 +1178,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 // Events timeline
+
 .events {
   background: lighten($radical-red, 40%);
   border-bottom-right-radius: 4px;
@@ -1209,6 +1231,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 // Search
+
 .filter {
   text-align: left;
 }
