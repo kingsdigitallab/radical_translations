@@ -9221,7 +9221,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .false::after {
   content: url("/static/fontawesome/svgs/solid/no-veracity.svg");
   display: inline-block;
-  padding-right: 4px;
+  padding-left: 4px;
   width: 18px; }
 
 .noble svg {
