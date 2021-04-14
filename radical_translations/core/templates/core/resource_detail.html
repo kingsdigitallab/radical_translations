@@ -28,8 +28,7 @@
     <strong>Topics: </strong>
   </span>
   {% for subject in object.get_subjects_topic %}
-  <span class="{{ subject.label }}">{{ subject.label }}</span>
-  {% if not forloop.last %}, {% endif %}
+  <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
   {% endfor %}
 </span>
 {% endif %}
@@ -38,8 +37,7 @@
 <span class="metadata-block">
   <span class="form"><strong>Forms: </strong></span>
   {% for subject in object.get_subjects_other %}
-  <span class="{{ subject.label }}">{{ subject.label }}</span>
-  {% if not forloop.last %}, {% endif %}
+  <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
   {% endfor %}
 </span>
 {% endif %}
@@ -80,13 +78,17 @@
 <span class="metadata-block">
   {# Font Awesome map-marker-alt icon #}
   {% include "svgs/solid/map-marker-alt.svg" %}
+
   {% spaceless %}
   {% for place in object.places.all %}
+  {% if place.fictional_place %}
+  <span class="fictional">{{ place }} </span>
+  {% endif %}
+
   {% if place.place.id %}
   {% include 'geonames_place/includes/place.html' with place=place.place tags=place.classification.all %}
-  {% else %}
-  <span>{{ place }}</span>
   {% endif %}
+
   {% if not forloop.last %}<span>, </span>{% endif %}
   {% endfor %}
   {% endspaceless %}
