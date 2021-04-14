@@ -1106,14 +1106,25 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 /* Agents / Persons */
 
+.false,
+.fictional {
+  &::after {
+    display: inline-block;
+    filter: invert(0.2);
+    padding-left: 4px;
+    width: 18px;
+  }  
+}
+
 .false {
   &::after {
     content: url('/static/fontawesome/svgs/solid/no-veracity.svg');
-    // content: url('/static/fontawesome/svgs/solid/no-veracity-2.svg');
-    display: inline-block;
-    filter: invert(0.8);
-    padding-left: 4px;
-    width: 18px;
+  }
+}
+
+.fictional {
+  &::after {
+    content: url('/static/fontawesome/svgs/solid/map-marker-plus.svg');
   }
 }
 

@@ -9218,13 +9218,19 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   display: grid; }
 
 /* Agents / Persons */
-.false::after {
-  content: url("/static/fontawesome/svgs/solid/no-veracity.svg");
+.false::after,
+.fictional::after {
   display: inline-block;
-  -webkit-filter: invert(0.8);
-          filter: invert(0.8);
+  -webkit-filter: invert(0.2);
+          filter: invert(0.2);
   padding-left: 4px;
   width: 18px; }
+
+.false::after {
+  content: url("/static/fontawesome/svgs/solid/no-veracity.svg"); }
+
+.fictional::after {
+  content: url("/static/fontawesome/svgs/solid/map-marker-plus.svg"); }
 
 .noble svg {
   height: 16px;
