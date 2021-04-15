@@ -730,14 +730,19 @@ figure {
 
         &::after {
           content: url('/static/fontawesome/svgs/solid/times.svg');
-          padding-left: 8px;
+          padding-left: 10px;
         }
       }
     }
   }
 
   .key-icons {
+    margin-bottom: 0;
     padding: 16px;
+  }
+
+  ul {
+    padding-left: 10px;
   }
 }
 

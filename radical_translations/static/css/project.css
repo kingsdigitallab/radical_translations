@@ -8987,9 +8987,12 @@ figure img {
       width: 100%; }
       .key button[aria-expanded="true"] .heading::after {
         content: url("/static/fontawesome/svgs/solid/times.svg");
-        padding-left: 8px; }
+        padding-left: 10px; }
   .key .key-icons {
+    margin-bottom: 0;
     padding: 16px; }
+  .key ul {
+    padding-left: 10px; }
 
 /* Homepage */
 /*
