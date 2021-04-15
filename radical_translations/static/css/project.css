@@ -9221,8 +9221,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .false::after,
 .fictional::after {
   display: inline-block;
-  -webkit-filter: invert(0.2);
-          filter: invert(0.2);
   padding-left: 4px;
   width: 18px; }
 
