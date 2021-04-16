@@ -8561,7 +8561,8 @@ footer {
   .metadata .topic::before {
     display: inline-block;
     margin-right: 4px;
-    margin-right: 0.25rem; }
+    margin-right: 0.25rem;
+    width: 16px; }
   .metadata .author::before {
     content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
   .metadata .date::before {
