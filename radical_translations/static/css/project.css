@@ -8991,8 +8991,13 @@ figure img {
   .key .key-icons {
     margin-bottom: 0;
     padding: 16px; }
+  .key li {
+    border-bottom: 1px solid #fff;
+    list-style: none; }
   .key ul {
-    padding-left: 10px; }
+    padding-left: 0; }
+  .key .small-icon svg {
+    fill: #000; }
 
 /* Homepage */
 /*

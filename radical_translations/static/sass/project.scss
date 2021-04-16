@@ -741,8 +741,19 @@ figure {
     padding: 16px;
   }
 
+  li {
+    border-bottom: 1px solid $white;
+    list-style: none;
+  }
+
   ul {
-    padding-left: 10px;
+    padding-left: 0;
+  }
+
+  .small-icon {
+    svg {
+      fill: $black;
+    }
   }
 }
 
