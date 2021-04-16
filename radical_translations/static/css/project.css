@@ -8961,7 +8961,8 @@ figure img {
   background: #c3c1a8;
   position: absolute;
   right: 0;
-  top: 10px; }
+  top: 10px;
+  z-index: 1000; }
   .key button {
     background: #222222;
     border: 0;
