@@ -690,6 +690,73 @@ figure {
   }
 }
 
+// Resources key
+
+.key {
+  background: $kaki;
+  position: absolute;
+  right: 0;
+  top: 10px;
+
+  button {
+    background: $dark-gray;
+    border: 0;
+    color: $dirt;
+    margin-right: -10px;
+    padding: 10px 20px 20px 10px;
+    transform: rotate(-90deg);
+
+    .heading {
+      font-size: 18px;
+      &::after,
+      &::before {
+        display: inline-block;
+        filter: invert(1);
+        width: 20px;
+      }
+
+      &::before {
+        content: url('/static/fontawesome/svgs/solid/key-skeleton.svg');
+        padding-right: 6px;
+      }
+    }
+
+    &[aria-expanded="true"] {
+      padding-bottom: 5px;
+      transform: rotate(0);
+      width: 100%;
+
+      .heading {
+
+        &::after {
+          content: url('/static/fontawesome/svgs/solid/times.svg');
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+
+  .key-icons {
+    margin-bottom: 0;
+    padding: 16px;
+  }
+
+  li {
+    border-bottom: 1px solid $white;
+    list-style: none;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  .small-icon {
+    svg {
+      fill: $black;
+    }
+  }
+}
+
 /* Homepage */
 
 /*
