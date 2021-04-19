@@ -54,7 +54,7 @@ class ResourceViewSet(DocumentViewSet):
     lookup_field = "id"
 
     faceted_search_fields = {
-        "paratext_functions": {
+        "paratext_terms": {
             "field": "classifications_paratext.edition.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
@@ -133,7 +133,7 @@ class ResourceViewSet(DocumentViewSet):
     }
 
     filter_fields = {
-        "paratext_functions": "classifications_paratext.edition.label.raw",
+        "paratext_terms": "classifications_paratext.edition.label.raw",
         "printing_and_publishing_status": (
             "classifications_printing_publishing.edition.label.raw"
         ),
