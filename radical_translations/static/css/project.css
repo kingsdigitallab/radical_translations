@@ -8561,7 +8561,8 @@ footer {
   .metadata .topic::before {
     display: inline-block;
     margin-right: 4px;
-    margin-right: 0.25rem; }
+    margin-right: 0.25rem;
+    width: 16px; }
   .metadata .author::before {
     content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
   .metadata .date::before {
@@ -8953,6 +8954,49 @@ figure img {
   margin-bottom: 16px;
   margin-bottom: 1rem; }
 
+.key {
+  background: #c3c1a8;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  z-index: 1000; }
+  .key button {
+    background: #222222;
+    border: 0;
+    color: #eae9da;
+    margin-right: -10px;
+    padding: 10px 20px 20px 10px;
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg); }
+    .key button .heading {
+      font-size: 18px; }
+      .key button .heading::after, .key button .heading::before {
+        display: inline-block;
+        -webkit-filter: invert(1);
+                filter: invert(1);
+        width: 20px; }
+      .key button .heading::before {
+        content: url("/static/fontawesome/svgs/solid/key-skeleton.svg");
+        padding-right: 6px; }
+    .key button[aria-expanded="true"] {
+      padding-bottom: 5px;
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+      width: 100%; }
+      .key button[aria-expanded="true"] .heading::after {
+        content: url("/static/fontawesome/svgs/solid/times.svg");
+        padding-left: 10px; }
+  .key .key-icons {
+    margin-bottom: 0;
+    padding: 16px; }
+  .key li {
+    border-bottom: 1px solid #fff;
+    list-style: none; }
+  .key ul {
+    padding-left: 0; }
+  .key .small-icon svg {
+    fill: #000; }
+
 /* Homepage */
 /*
 Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
@@ -9217,8 +9261,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .false::after,
 .fictional::after {
   display: inline-block;
-  -webkit-filter: invert(0.2);
-          filter: invert(0.2);
   padding-left: 4px;
   width: 18px; }
 
