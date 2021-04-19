@@ -621,6 +621,9 @@ class Classification(TimeStampedModel, EditorialClassificationModel):
         ),
     )
 
+    class Meta:
+        ordering = ["edition__vocabulary", "edition__label"]
+
     def __str__(self) -> str:
         return self.edition.label
 
