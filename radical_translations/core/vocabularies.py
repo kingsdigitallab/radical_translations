@@ -7,8 +7,8 @@ from controlled_vocabulary.vocabularies.base_http import VocabularyHTTP
 class VocabularyPrintingPublishingTerms(VocabularyBaseList):
     base_url = "http://rbms.info/vocabularies/printing-publishing/alphabetical_list.htm"
     concept = "wikidata:Q324254:ontology"
-    description = "Printing and Publishing Terms (in addition to FAST topic/forms)"
-    label = "Printing and Publishing Terms"
+    description = "Printing and Publishing Status (in addition to FAST topic/forms)"
+    label = "Printing and Publishing Status"
     prefix = "rt-ppt"
 
     def _get_searchable_terms(self) -> List:
@@ -119,8 +119,8 @@ class VocabularyAdditionalGenreTerms(VocabularyBaseList):
 
 class VocabularyTranslationTerms(VocabularyBaseList):
     concept = "wikidata:Q324254:ontology"
-    description = "Translation terms"
-    label = "Translation terms"
+    description = "Translation Status"
+    label = "Translation Status"
     prefix = "rt-tt"
 
     def _get_searchable_terms(self) -> List:
@@ -200,8 +200,8 @@ class VocabularyTranslationTerms(VocabularyBaseList):
 
 class VocabularyParatextTerms(VocabularyBaseList):
     concept = "wikidata:Q324254:ontology"
-    description = "Paratext terms (adapted from Nottingham-Martin and Batchelor)"
-    label = "Paratext terms"
+    description = "Paratext functions (adapted from Nottingham-Martin and Batchelor)"
+    label = "Paratext functions"
     prefix = "rt-pt"
 
     def _get_searchable_terms(self) -> List:
