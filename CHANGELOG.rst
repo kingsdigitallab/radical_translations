@@ -44,6 +44,7 @@ Changed
 * Exclude radicalism from the subject filter.
 * Order/display `Resources` contributor filter by `family name, given name`.
 * Order/display of `Contributions`.
+* Labels and descriptions of the classification vocabularies.
 
 Fixed
 ~~~~~

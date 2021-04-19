@@ -49,19 +49,24 @@
 {% endif %}
 
 {% if object.classifications.all %}
+{% regroup object.classifications.all by edition.vocabulary as classifications %}
+
+{% for classification in classifications %}
 <span class="metadata-block">
-  {% for classification in object.classifications.all %}
-  {% with edition=classification.edition tags=classification.classification.all %}
+  <strong>{{ classification.grouper }}:</strong>
+  {% for item in classification.list %}
+  {% with edition=item.edition tags=item.classification.all %}
   <a
     {% if tags %}class="{% for tag in tags %}{{ tag.label }}{% endfor %}"{% endif %}
     {% if edition.description %}
     href="#"
     data-toggle="tooltip"
     title="{{ edition.description }}"
-    {% endif %}>{{ edition.label }}</a>
+    {% endif %}>{{ edition.label }}</a>{% if not forloop.last %}, {% endif %}
   {% endwith %}
   {% endfor %}
 </span>
+{% endfor %}
 {% endif %}
 
 {% if object.languages.all %}
