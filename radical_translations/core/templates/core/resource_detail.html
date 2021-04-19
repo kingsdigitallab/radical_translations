@@ -176,7 +176,7 @@
 
 {% if object.summary %}
 <h2>Summary</h2>
-<p>{{ object.summary }}</p>
+<p>{{ object.summary|urlize }}</p>
 {% endif %}
 
 {% if object.held_by.count %}

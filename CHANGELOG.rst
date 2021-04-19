@@ -30,6 +30,7 @@ Added
 * Command to export `Events` to a CSV file.
 * Docs: data model fields concordance.
 * Command to export `Places` to a CSV file.
+* Convert notes and summary URLs into clickable links.
 
 Changed
 ~~~~~~~
