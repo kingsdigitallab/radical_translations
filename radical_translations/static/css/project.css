@@ -8486,7 +8486,8 @@ body {
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 100, 'wght' 400;
   background: url("../images/rt-bg.svg") no-repeat top left #fdf9ef;
-  background-size: 135% auto; }
+  background-size: 135% auto;
+  overflow-wrap: break-word; }
 
 .badge {
   border-radius: 0;

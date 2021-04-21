@@ -46,6 +46,7 @@ body {
   background: url('../images/rt-bg.svg') no-repeat top left
     lighten($old-yellow, 30%);
   background-size: 135% auto;
+  overflow-wrap: break-word;
 }
 
 .badge {
