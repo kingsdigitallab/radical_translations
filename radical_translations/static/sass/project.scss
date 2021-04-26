@@ -123,6 +123,8 @@ footer {
 .metadata {
   font-family: 'Oswald', sans-serif;
   font-size: 1.125rem;
+  margin: 0;
+  padding: 0;
 
   .author,
   .date,
@@ -168,6 +170,12 @@ footer {
     height: 16px;
     margin-top: -4px;
     width: 16px;
+  }
+}
+
+.metadata-block {
+  .badge {
+    margin-right: 4px;
   }
 }
 
@@ -934,6 +942,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .metadata-block {
     &::after {
       content: '|';
+      margin: 0 .25rem;
     }
 
     &:last-child {
@@ -1400,6 +1409,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   li {
     border-bottom: 1px solid $kaki;
     margin: 1rem 0 0 0.5rem;
+    padding-bottom: .25rem
   }
 
   .title {

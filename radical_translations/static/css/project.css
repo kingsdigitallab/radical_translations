@@ -8554,7 +8554,9 @@ footer {
 .metadata {
   font-family: 'Oswald', sans-serif;
   font-size: 18px;
-  font-size: 1.125rem; }
+  font-size: 1.125rem;
+  margin: 0;
+  padding: 0; }
   .metadata .author::before,
   .metadata .date::before,
   .metadata .form::before,
@@ -8580,6 +8582,9 @@ footer {
     height: 16px;
     margin-top: -4px;
     width: 16px; }
+
+.metadata-block .badge {
+  margin-right: 4px; }
 
 .small-icon,
 .small-icon svg {
@@ -9108,7 +9113,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .right + p {
       margin: 0 1rem 1rem 0; }
   .metadata-block::after {
-    content: '|'; }
+    content: '|';
+    margin: 0 .25rem; }
   .metadata-block:last-child::after {
     content: ''; }
   .sections {
@@ -9420,7 +9426,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .search-results-list li {
     border-bottom: 1px solid #c3c1a8;
     margin: 16px 0 0 8px;
-    margin: 1rem 0 0 0.5rem; }
+    margin: 1rem 0 0 0.5rem;
+    padding-bottom: 4px;
+    padding-bottom: .25rem; }
   .search-results-list .title {
     margin-bottom: 8px;
     margin-bottom: 0.5rem; }
