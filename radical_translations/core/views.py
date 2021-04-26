@@ -182,9 +182,14 @@ class ResourceViewSet(DocumentViewSet):
 
     pagination_class = PageNumberPagination
 
+    title_search_options = ES_FUZZINESS_OPTIONS
+    title_search_options["boost"] = 4
+    author_search_options = ES_FUZZINESS_OPTIONS
+    author_search_options["boost"] = 2
+
     search_fields = {
-        "title": ES_FUZZINESS_OPTIONS,
-        "authors.person.name": ES_FUZZINESS_OPTIONS,
+        "title": title_search_options,
+        "authors.person.name": author_search_options,
         "content": ES_FUZZINESS_OPTIONS,
     }
 
