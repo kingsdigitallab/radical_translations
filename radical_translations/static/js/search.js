@@ -6,6 +6,9 @@ new Vue({
   delimiters: ['{[', ']}'],
   data: {
     url: new URL(`${window.location.origin}${window.location.pathname}api/`),
+    url_resources: new URL(
+      `${window.location.origin}${window.location.pathname}../resources/api-simple/`
+    ),
     url_suggest: new URL(
       `${window.location.origin}${window.location.pathname}api/suggest/`
     ),
@@ -44,7 +47,8 @@ new Vue({
         place: null
       }
     },
-    events: { country: null, year: null, data: [], show: false }
+    events: { country: null, year: null, data: [], show: false },
+    eventsResources: []
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -161,9 +165,10 @@ new Vue({
                 y: idx,
                 r: 5,
                 meta: {
+                  type: 'event',
                   id: evt.id,
                   year: year,
-                  place: evt.place.country.name,
+                  place: country,
                   n: 1,
                   resources: evt.related_to.length
                 }
@@ -217,6 +222,88 @@ new Vue({
 
         events.datasets.push(dataset)
       })
+
+      if (this.eventsResources && this.eventsResources.facets) {
+        const resourcesLabels = this.eventsResources.facets._filter_country.country.buckets
+          .map((f) => f.key)
+          .filter((f) => f !== 'any')
+
+        resourcesLabels.forEach((country, idx) => {
+          let dataset = {
+            label: `${country} resources`,
+            data: []
+          }
+
+          this.eventsResources.results.forEach((res) => {
+            const has_country = res.places.filter((place) => {
+              return place.place.country !== undefined
+                ? place.place.country.name === country
+                : false
+            })
+            if (res.year && has_country.length > 0) {
+              res.year.forEach((year) => {
+                dataset.data.push({
+                  x: year,
+                  y: idx + labels.length + 1,
+                  r: 5,
+                  meta: {
+                    type: 'resource',
+                    id: res.id,
+                    year: year,
+                    place: country,
+                    n: 1
+                  }
+                })
+              })
+            }
+          })
+
+          // keep only the first and last items of multi-year resources and add annotations
+          dataset.data = dataset.data.reduce((acc, cur) => {
+            if (
+              acc.filter((item) => item.meta.id === cur.meta.id).length === 2
+            ) {
+              const start = acc[acc.length - 2]
+              acc[acc.length - 1] = cur
+
+              events.annotations[cur.meta.id] = {
+                type: 'box',
+                id: `${cur.meta.id}`,
+                display: true,
+                xScaleID: 'x-axis-0',
+                yScaleID: 'y-axis-0',
+                xMin: start.x,
+                yMin: cur.y - 0.1,
+                xMax: cur.x,
+                yMax: cur.y + 0.1,
+                borderWidth: 1
+              }
+
+              return acc
+            }
+
+            acc.push(cur)
+
+            return acc
+          }, [])
+
+          // group the resources by year
+          dataset.data = dataset.data.reduce((acc, cur) => {
+            if (acc.some((item) => item.x === cur.x)) {
+              const last = acc.length - 1
+              acc[last].r += 2
+              acc[last].meta.n += 1
+              return acc
+            }
+
+            acc.push(cur)
+
+            return acc
+          }, [])
+
+          events.datasets.push(dataset)
+        })
+      }
 
       return events
     }
@@ -379,22 +466,36 @@ new Vue({
     },
     search: async function () {
       this.data = await this.doSearch()
+
+      if (options.resources) {
+        this.eventsResources = await this.doSearch(
+          this.url_resources,
+          1500,
+          1750,
+          1850
+        )
+      }
       if (this.map.show) {
         this.renderMap()
       }
     },
-    doSearch: async function () {
+    doSearch: async function (
+      url = this.url,
+      page_size = this.page_size,
+      year_from = this.query_dates[0],
+      year_to = this.query_dates[1]
+    ) {
       const params = new URLSearchParams()
 
       if (this.query) {
         params.append('search', this.query)
       }
 
-      if (this.query_dates[0] !== options.year_min) {
-        params.append('year__gte', this.query_dates[0])
+      if (year_from !== options.year_min) {
+        params.append('year__gte', year_from)
       }
-      if (this.query_dates[1] !== options.year_max) {
-        params.append('year__lte', this.query_dates[1])
+      if (year_to !== options.year_max) {
+        params.append('year__lte', year_to)
       }
 
       if (params.has('year__gte') || params.has('year__lte')) {
@@ -408,7 +509,7 @@ new Vue({
       }
 
       params.append('page', this.page)
-      params.append('page_size', this.page_size)
+      params.append('page_size', page_size)
 
       if (this.ordering !== this.ordering_default) {
         params.append('ordering', this.ordering)
@@ -418,10 +519,10 @@ new Vue({
         params.append(`${filter[0]}__term`, filter[1])
       )
 
-      this.url.search = params.toString()
-      window.history.pushState({}, '', this.url.search)
+      url.search = params.toString()
+      window.history.pushState({}, '', url.search)
 
-      const response = await fetch(this.url)
+      const response = await fetch(url)
 
       return response.json()
     },
