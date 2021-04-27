@@ -20,7 +20,10 @@ from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
 
 from radical_translations.core.documents import ResourceDocument
 from radical_translations.core.models import Resource
-from radical_translations.core.serializers import ResourceDocumentSerializer
+from radical_translations.core.serializers import (
+    ResourceDocumentSerializer,
+    SimpleResourceDocumentSerializer,
+)
 from radical_translations.utils.search import PageNumberPagination
 
 ES_FACET_OPTIONS = settings.ES_FACET_OPTIONS
@@ -124,11 +127,6 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "radical_markers": {
-            "field": "radical_markers",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
         "meta": {"field": "meta", "enabled": True, "options": ES_FACET_OPTIONS},
     }
 
@@ -150,7 +148,6 @@ class ResourceViewSet(DocumentViewSet):
         "subject": "subjects.label.raw",
         "event": "events.title.raw",
         "event_place": "events.place.address.raw",
-        "radical_markers": "radical_markers",
         "meta": "meta",
     }
 
@@ -200,4 +197,43 @@ class ResourceViewSet(DocumentViewSet):
             "default_suggester": SUGGESTER_COMPLETION,
             "options": {"skip_duplicates": True, "size": 20},
         },
+    }
+
+
+class SimpleResourceViewSet(DocumentViewSet):
+    document = ResourceDocument
+    serializer_class = SimpleResourceDocumentSerializer
+
+    filter_backends = [
+        FilteringFilterBackend,
+        FacetedSearchFilterBackend,
+        OrderingFilterBackend,
+        DefaultOrderingFilterBackend,
+        SearchFilterBackend,
+    ]
+
+    lookup_field = "id"
+
+    faceted_search_fields = {
+        "country": {
+            "field": "places.place.country.name.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+    }
+
+    filter_fields = {
+        "country": "places.place.country.name.raw",
+        "year": "year",
+    }
+
+    ordering_fields = {
+        "year": "year",
+    }
+    ordering = ["year"]
+
+    pagination_class = PageNumberPagination
+
+    search_fields = {
+        "content": ES_FUZZINESS_OPTIONS,
     }

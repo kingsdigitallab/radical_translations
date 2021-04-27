@@ -71,8 +71,15 @@ Vue.component('events-chart', {
               const meta =
                 data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
                   .meta
+              const label = `${meta.n} ${meta.type}${meta.n !== 1 ? 's' : ''}`
 
-              return `${meta.n} events/${meta.resources} resources`
+              if (meta.resources) {
+                return `${label}/${meta.resources} resource${
+                  meta.resources !== 1 ? 's' : ''
+                }`
+              }
+
+              return label
             }
           }
         },
@@ -96,8 +103,13 @@ Vue.component('events-chart', {
                 context.chart.data.datasets[context.datasetIndex].data[
                   context.dataIndex
                 ].meta
+              const label = meta.n
 
-              return `${meta.n}/${meta.resources}`
+              if (meta.resources !== undefined) {
+                return `${label}/${meta.resources}`
+              }
+
+              return label
             }
           }
         },

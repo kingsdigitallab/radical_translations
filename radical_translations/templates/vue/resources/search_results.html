@@ -18,15 +18,6 @@
       v-html="`${frag}... `"
       class="fragment"></span>
     </p>
-    <p class="collapsed-bottom">
-    <template v-if="item.radical_markers > 0">
-      <span class="sr-only">Radical markers attached to this resource: {[ item.radical_markers ]}</span>
-      <template v-for="n in item.radical_markers">
-        {# Custom phrygian cap icon #}
-        <span class="small-icon radical"></span>
-      </template>
-    </template>
-    </p>
     <div class="row">
       <div class="col col-md-3">
         <template v-if="item.date_display">

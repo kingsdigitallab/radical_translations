@@ -368,6 +368,7 @@ SEARCH_OPTIONS = {
         "range_facets": ["year"],
         "year_min": 1780,
         "year_max": 1820,
+        "resources": 1,
     },
     "agents": {
         "label": "Agents",
