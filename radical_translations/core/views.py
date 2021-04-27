@@ -127,11 +127,6 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "radical_markers": {
-            "field": "radical_markers",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
         "meta": {"field": "meta", "enabled": True, "options": ES_FACET_OPTIONS},
     }
 
@@ -153,7 +148,6 @@ class ResourceViewSet(DocumentViewSet):
         "subject": "subjects.label.raw",
         "event": "events.title.raw",
         "event_place": "events.place.address.raw",
-        "radical_markers": "radical_markers",
         "meta": "meta",
     }
 
