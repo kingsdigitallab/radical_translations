@@ -200,8 +200,8 @@ class VocabularyTranslationTerms(VocabularyBaseList):
 
 class VocabularyParatextTerms(VocabularyBaseList):
     concept = "wikidata:Q324254:ontology"
-    description = "Paratext Terms (adapted from Nottingham-Martin and Batchelor)"
-    label = "Paratext Terms"
+    description = "Paratext Forms (adapted from Nottingham-Martin and Batchelor)"
+    label = "Paratext Forms"
     prefix = "rt-pt"
 
     def _get_searchable_terms(self) -> List:
