@@ -612,7 +612,7 @@ class Classification(TimeStampedModel, EditorialClassificationModel):
     )
 
     edition = ControlledTermField(
-        ["rt-ppt", "rt-tt", "rt-pt"],
+        ["rt-ppt", "rt-tt", "rt-pt", "rt-ptf"],
         on_delete=models.CASCADE,
         related_name="classifications",
         help_text=(
