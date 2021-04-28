@@ -207,29 +207,11 @@ class VocabularyParatextTerms(VocabularyBaseList):
     def _get_searchable_terms(self) -> List:
         return [
             ["Appendix", "Appendix"],
-            [
-                "Community-building",
-                "Community-building",
-                "referencing groups of readers (imaginary or actual)",
-            ],
             ["Dedication", "Dedication"],
             ["Epigraph", "Epigraph"],
             ["False imprint date", "False imprint date"],
             ["False imprint", "False imprint"],
             ["Ficticious imprint", "Fictitious imprint"],
-            [
-                "Hermeneutical",
-                "Hermeneutical",
-                "presenting an in-depth commentary and interpretation of ST",
-            ],
-            [
-                "Meta-communicative",
-                "Meta-communicative",
-                (
-                    "reflecting on the conditions and constraints of communication "
-                    "and translation"
-                ),
-            ],
             [
                 "Misattributed",
                 "Misattributed",
@@ -252,6 +234,35 @@ class VocabularyParatextTerms(VocabularyBaseList):
                 "e.g. printer’s motto or marks - specify in Notes",
             ],
             ["Revolutionary calendar used", "Revolutionary calendar used"],
+        ]
+
+
+class VocabularyParatextFunctions(VocabularyBaseList):
+    concept = "wikidata:Q324254:ontology"
+    description = "Paratext Functions (adapted from Nottingham-Martin and Batchelor)"
+    label = "Paratext Functions"
+    prefix = "rt-ptf"
+
+    def _get_searchable_terms(self) -> List:
+        return [
+            [
+                "Community-building",
+                "Community-building",
+                "referencing groups of readers (imaginary or actual)",
+            ],
+            [
+                "Hermeneutical",
+                "Hermeneutical",
+                "presenting an in-depth commentary and interpretation of ST",
+            ],
+            [
+                "Meta-communicative",
+                "Meta-communicative",
+                (
+                    "reflecting on the conditions and constraints of communication "
+                    "and translation"
+                ),
+            ],
             [
                 "Text-activating",
                 "Text-activating",

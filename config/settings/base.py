@@ -358,7 +358,7 @@ SEARCH_OPTIONS = {
         "meta_facets": ["meta"],
         "range_facets": ["year"],
         "year_min": 1516,
-        "year_max": 1820,
+        "year_max": 1900,
         "map_field": "places",
     },
     "events": {

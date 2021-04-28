@@ -62,6 +62,11 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "paratext_functions": {
+            "field": "classifications_paratext_functions.edition.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
         "printing_and_publishing_status": {
             "field": "classifications_printing_publishing.edition.label.raw",
             "enabled": True,
@@ -132,6 +137,7 @@ class ResourceViewSet(DocumentViewSet):
 
     filter_fields = {
         "paratext_forms": "classifications_paratext.edition.label.raw",
+        "paratext_functions": "classifications_paratext_functions.edition.label.raw",
         "printing_and_publishing_status": (
             "classifications_printing_publishing.edition.label.raw"
         ),
