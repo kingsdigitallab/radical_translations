@@ -32,6 +32,7 @@ Added
 * Command to export `Places` to a CSV file.
 * Convert notes and summary URLs into clickable links.
 * Badge for related resources that have a paratext.
+* Paratext functions vocabulary.
 
 Changed
 ~~~~~~~
@@ -46,6 +47,7 @@ Changed
 * Order/display `Resources` contributor filter by `family name, given name`.
 * Order/display of `Contributions`.
 * Labels and descriptions of the classification vocabularies.
+* Split paratext terms vocabulary in two, paratext forms and paratext functions.
 
 
 Fixed

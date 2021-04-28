@@ -60,6 +60,9 @@ class ResourceDocument(Document):
     classifications_paratext = fields.ObjectField(
         properties={"edition": get_controlled_term_field(options=copy_to_content)}
     )
+    classifications_paratext_functions = fields.ObjectField(
+        properties={"edition": get_controlled_term_field(options=copy_to_content)}
+    )
     contributions = fields.ObjectField(
         properties={
             "agent": get_agent_field(options=copy_to_content),
@@ -263,6 +266,9 @@ class ResourceDocument(Document):
                 classifications.append({"edition": {"label": term.label}})
 
         return classifications
+
+    def prepare_classifications_paratext_functions(self, instance):
+        return self._get_classifications(instance, "rt-ptf")
 
     def prepare_contributions(self, instance):
         contributions = [
