@@ -8636,8 +8636,12 @@ footer {
 .tooltip-inner {
   text-align: left; }
 
-h1, h2, h3,
-h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .card-header {
   font-family: Oswald, sans-serif;
   font-variation-settings: 'wdth' 100, 'wght' 700;
@@ -8984,12 +8988,12 @@ figure img {
       .key button .heading::before {
         content: url("/static/fontawesome/svgs/solid/key-skeleton.svg");
         padding-right: 6px; }
-    .key button[aria-expanded="true"] {
+    .key button[aria-expanded='true'] {
       padding-bottom: 5px;
       -webkit-transform: rotate(0);
               transform: rotate(0);
       width: 100%; }
-      .key button[aria-expanded="true"] .heading::after {
+      .key button[aria-expanded='true'] .heading::after {
         content: url("/static/fontawesome/svgs/solid/times.svg");
         padding-left: 10px; }
   .key .key-icons {
@@ -9470,7 +9474,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .events-key .bkg {
     fill: #fff; }
   .events-key .chart-button.country:hover {
-    opacity: .9;
+    opacity: 0.9;
     stroke-width: 10px; }
   .events-key .chart-grid {
     fill: none;
@@ -9494,20 +9498,58 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .events-key .lora-bold {
     font-variation-settings: 'wdth' 100, 'wght' 700; }
   .events-key .country {
-    opacity: .7;
+    opacity: 0.7;
     stroke-miterlimit: 10;
     stroke-opacity: 0.5; }
   .events-key .empty {
     fill: transparent !important; }
   .events-key .france {
-    fill: #6F51B9;
-    stroke: #6F51B9; }
+    fill: #6f51b9;
+    stroke: #6f51b9; }
   .events-key .ireland {
-    fill: #8B2E4A;
-    stroke: #8B2E4A; }
+    fill: #8b2e4a;
+    stroke: #8b2e4a; }
   .events-key .uk {
-    fill: #FB4811;
-    stroke: #FB4811; }
+    fill: #fb4811;
+    stroke: #fb4811; }
   .events-key .us {
-    fill: #51B788;
-    stroke: #51B788; }
+    fill: #51b788;
+    stroke: #51b788; }
+
+.viz-container {
+  overflow-x: scroll; }
+
+.content td {
+  border-bottom: 1px solid #d8d8d8; }
+
+.content td:nth-child(even) {
+  background: #f0f0f0; }
+
+.event.big,
+.resource.big {
+  height: 16px;
+  width: 16px;
+  margin-right: 4px; }
+
+.hidden {
+  display: none; }
+
+.event,
+.resource {
+  display: inline-block;
+  float: left;
+  height: 8px;
+  margin: 1px;
+  width: 8px; }
+
+.event {
+  background: #60495a;
+  border-radius: 50%; }
+
+.resource {
+  background: #729ea1; }
+
+.year td {
+  padding-top: 8px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg); }

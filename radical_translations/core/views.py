@@ -226,6 +226,11 @@ class SimpleResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "year": {
+            "field": "year",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
     }
 
     filter_fields = {

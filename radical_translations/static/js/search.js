@@ -1,3 +1,8 @@
+let baseURL = `${window.location.origin}${window.location.pathname}`
+if (window.viewBaseURL) {
+  baseURL = viewBaseURL
+}
+
 new Vue({
   el: '#app',
   components: {
@@ -5,13 +10,9 @@ new Vue({
   },
   delimiters: ['{[', ']}'],
   data: {
-    url: new URL(`${window.location.origin}${window.location.pathname}api/`),
-    url_resources: new URL(
-      `${window.location.origin}${window.location.pathname}../resources/api-simple/`
-    ),
-    url_suggest: new URL(
-      `${window.location.origin}${window.location.pathname}api/suggest/`
-    ),
+    url: new URL(`${baseURL}api/`),
+    urlResources: new URL(`${baseURL}../resources/api-simple/`),
+    urlSuggest: new URL(`${baseURL}api/suggest/`),
     query: '',
     query_text: '',
     query_dates: [options.year_min, options.year_max],
@@ -306,6 +307,84 @@ new Vue({
       }
 
       return events
+    },
+    timelineData: function () {
+      const timeline = {}
+      let years = []
+      let countries = []
+      let events = {}
+      let resources = {}
+
+      if (this.data && this.data.facets) {
+        years = this.data.facets._filter_year.year.buckets.map((f) => f.key)
+
+        countries = this.data.facets._filter_country.country.buckets.map(
+          (f) => f.key
+        )
+
+        this.data.results.forEach((r) => {
+          if (r.place.country) {
+            const country = r.place.country.name
+            if (r.year) {
+              r.year.forEach((year) => {
+                if (!events[country]) {
+                  events[country] = {}
+                }
+                if (!events[country][year]) {
+                  events[country][year] = []
+                }
+                events[country][year].push({
+                  id: r.id,
+                  title: r.title,
+                  date: r.date,
+                  classification: r.classification
+                })
+              })
+            }
+          }
+        })
+      }
+
+      if (this.eventsResources && this.eventsResources.facets) {
+        years = years.concat(
+          this.eventsResources.facets._filter_year.year.buckets.map(
+            (f) => f.key
+          )
+        )
+        countries = countries.concat(
+          this.eventsResources.facets._filter_country.country.buckets
+            .map((f) => f.key)
+            .filter((f) => f !== 'any')
+        )
+
+        this.eventsResources.results.forEach((r) => {
+          r.places.forEach((place) => {
+            if (place.place.country) {
+              const country = place.place.country.name
+              r.year.forEach((year) => {
+                if (!resources[country]) {
+                  resources[country] = {}
+                }
+                if (!resources[country][year]) {
+                  resources[country][year] = []
+                }
+                resources[country][year].push({
+                  id: r.id,
+                  title: r.title,
+                  date: r.date_display
+                })
+              })
+            }
+          })
+        })
+      }
+
+      timeline.years = [...new Set(years)].sort()
+      timeline.countries = [...new Set(countries)].sort()
+      timeline.events = events
+      timeline.resources = resources
+
+      return timeline
     }
   },
   methods: {
@@ -399,8 +478,8 @@ new Vue({
       const params = new URLSearchParams()
       params.append('suggest_field', this.query_text)
 
-      this.url_suggest.search = params.toString()
-      this.data_suggest = await fetch(this.url_suggest).then((response) =>
+      this.urlSuggest.search = params.toString()
+      this.data_suggest = await fetch(this.urlSuggest).then((response) =>
         response.json()
       )
     },
@@ -469,10 +548,10 @@ new Vue({
 
       if (options.resources) {
         this.eventsResources = await this.doSearch(
-          this.url_resources,
+          this.urlResources,
           1500,
           1750,
-          1850
+          1900
         )
       }
       if (this.map.show) {

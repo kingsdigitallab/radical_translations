@@ -28,6 +28,10 @@ def event_list(request):
     return render(request, "events/event_list.html")
 
 
+def event_grid(request):
+    return render(request, "events/event_grid.html")
+
+
 class EventViewSet(DocumentViewSet):
     document = EventDocument
     serializer_class = EventDocumentSerializer
