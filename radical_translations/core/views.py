@@ -1,3 +1,7 @@
+import igraph as ig
+
+# import pandas as pd
+import plotly.graph_objects as go
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
@@ -17,9 +21,15 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     SuggesterFilterBackend,
 )
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
+from plotly.offline import plot
 
+from radical_translations.agents.models import Agent, Person
 from radical_translations.core.documents import ResourceDocument
-from radical_translations.core.models import Resource
+from radical_translations.core.models import (
+    Contribution,
+    Resource,
+    ResourceRelationship,
+)
 from radical_translations.core.serializers import ResourceDocumentSerializer
 from radical_translations.utils.search import PageNumberPagination
 
@@ -201,3 +211,139 @@ class ResourceViewSet(DocumentViewSet):
             "options": {"skip_duplicates": True, "size": 20},
         },
     }
+
+
+def network(request):
+    g = ig.Graph(directed=True)
+
+    for resource in Resource.objects.exclude(
+        relationships__relationship_type__label="paratext of"
+    ):
+        group = 1
+        g.add_vertex(name=f"resource-{resource.id}", title=str(resource), group=group)
+
+    for agent in Agent.objects.exclude(roles__label="library"):
+        group = 3 if agent.agent_type == "organisation" else 2
+        g.add_vertex(name=f"agent-{agent.id}", title=str(agent), group=group)
+
+    for contribution in Contribution.objects.all():
+        resource = contribution.resource
+        while resource.is_paratext():
+            next_resource = resource.paratext_of()
+            if next_resource.id == resource.id:
+                resource = None
+                break
+
+            resource = next_resource
+
+        if resource:
+            for role in contribution.roles.all():
+                g.add_edge(
+                    f"agent-{contribution.agent.id}",
+                    f"resource-{resource.id}",
+                    label=role.label,
+                )
+
+    for relationship in ResourceRelationship.objects.exclude(
+        relationship_type__label="paratext of"
+    ):
+        resource = relationship.resource
+        while resource.is_paratext():
+            next_resource = resource.paratext_of()
+            if next_resource.id == resource.id:
+                resource = None
+                break
+
+            resource = next_resource
+
+        related_to = relationship.related_to
+        while related_to.is_paratext():
+            next_resource = related_to.paratext_of()
+            if next_resource.id == related_to.id:
+                related_to = None
+                break
+
+            related_to = next_resource
+
+        if resource and related_to:
+            g.add_edge(
+                f"resource-{resource.id}",
+                f"resource-{related_to.id}",
+                label=relationship.relationship_type.label,
+            )
+
+    for person in Person.objects.all():
+        for knows in person.knows.all():
+            g.add_edge(f"agent-{person.id}", f"agent-{knows.id}", label="knows")
+
+        for org in person.member_of.all():
+            g.add_edge(f"agent-{person.id}", f"agent-{org.id}", label="member of")
+
+    node_labels = g.vs["title"]
+    node_groups = g.vs["group"]
+    edge_labels = g.es["label"]
+    # edge_groups = pd.Series(edge_labels).astype("category").cat.codes.values.tolist()
+
+    layout = g.layout_graphopt()
+
+    # nodes coordinates
+    range_n = range(len(node_labels))
+    nodes_x = [layout[i][0] for i in range_n]
+    nodes_y = [layout[i][1] for i in range_n]
+
+    # edges coordinates
+    edges_x = []
+    edges_y = []
+    for e in g.get_edgelist():
+        edges_x += [layout[e[0]][0], layout[e[1]][0], None]
+        edges_y += [layout[e[0]][1], layout[e[1]][1], None]
+
+    nodes_scatter = go.Scatter(
+        x=nodes_x,
+        y=nodes_y,
+        mode="markers",
+        marker=dict(
+            symbol=node_groups,
+            size=5,
+            color=node_groups,
+            colorscale="Viridis",
+            line=dict(color="rgb(50,50,50)", width=0.5),
+        ),
+        text=node_labels,
+        hoverinfo="text",
+    )
+
+    edges_scatter = go.Scatter(
+        x=edges_x,
+        y=edges_y,
+        mode="lines",
+        line=dict(width=1),
+        line_shape="spline",
+        marker=dict(color="rgb(125,125,125)"),
+        text=edge_labels,
+        hoverinfo="text",
+    )
+
+    axis = dict(
+        showline=False,
+        zeroline=False,
+        showgrid=False,
+        showticklabels=False,
+        title="",
+    )
+
+    go_layout = go.Layout(
+        font=dict(size=12),
+        autosize=False,
+        width=1000,
+        height=1000,
+        hovermode="closest",
+        xaxis=dict(axis),
+        yaxis=dict(axis),
+    )
+
+    fig = go.Figure(data=[edges_scatter, nodes_scatter], layout=go_layout)
+
+    plot_div = plot(fig, output_type="div", include_plotlyjs=False)
+
+    return render(request, "core/network.html", context={"plot_div": plot_div})
