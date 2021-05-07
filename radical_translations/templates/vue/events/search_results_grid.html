@@ -1,0 +1,65 @@
+<div class="viz-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody class="content">
+      <tr v-for="country in timelineData.countries">
+        <td>{[ country ]}</td>
+        <td v-for="year in timelineData.years">
+          <template
+            v-if="timelineData.events[country] && timelineData.events[country][year]"
+          >
+            <span
+              v-for="e in timelineData.events[country][year]"
+              class="event"
+            ></span>
+          </template>
+          <template
+            v-if="timelineData.resources[country] && timelineData.resources[country][year]"
+          >
+            <span
+              v-for="r in timelineData.resources[country][year]"
+              :class="`${r.id}`"
+              class="resource"
+            ></span>
+          </template>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="year">
+        <td></td>
+        <td v-for="year in timelineData.years">{[ year ]}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div :class="{ hidden: !events.show }" class="event-info">
+  <button
+    v-on:click="events.show = false"
+    class="close close-event"
+    type="button"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3>{[ events.country ]} in {[ events.year ]}</h3>
+  <div v-for="event in events.data" :key="event.id">
+    <p class="title">
+      {[ event.related_to.length ]} {[ event.date ]}
+      <a :href="`${event.id}/`">{[ event.title ]}</a>
+    </p>
+    <ul v-if="event.related_to.length > 0">
+      <li v-for="resource in event.related_to" :key="resource.id">
+        <a :href="`{% url 'resource-detail' 0 %}../${resource.id}/`"
+          >{[ resource.title.main_title ]}</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
