@@ -72,11 +72,10 @@ class EventViewSet(DocumentViewSet):
     }
 
     ordering_fields = {
-        "date_earliest": "date_earliest",
-        "date_latest": "date_latest",
+        "country": "place.country.name.raw",
         "year": "year",
     }
-    ordering = ["_score", "date_earliest", "date_latest"]
+    ordering = ["country", "year"]
 
     pagination_class = PageNumberPagination
 

@@ -49,7 +49,8 @@ new Vue({
       }
     },
     events: { country: null, year: null, data: [], show: false },
-    eventsResources: []
+    eventsResources: [],
+    hover: null
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -308,81 +309,80 @@ new Vue({
 
       return events
     },
-    timelineData: function () {
+    timeline: function () {
       const timeline = {}
-      let years = []
-      let countries = []
-      let events = {}
-      let resources = {}
 
-      if (this.data && this.data.facets) {
-        years = this.data.facets._filter_year.year.buckets.map((f) => f.key)
+      if (!this.data || !this.data.results) {
+        return timeline
+      }
 
-        countries = this.data.facets._filter_country.country.buckets.map(
-          (f) => f.key
-        )
-
-        this.data.results.forEach((r) => {
-          if (r.place.country) {
-            const country = r.place.country.name
-            if (r.year) {
-              r.year.forEach((year) => {
-                if (!events[country]) {
-                  events[country] = {}
-                }
-                if (!events[country][year]) {
-                  events[country][year] = []
-                }
-                events[country][year].push({
-                  id: r.id,
-                  title: r.title,
-                  date: r.date,
-                  classification: r.classification
-                })
-              })
-            }
+      const events = this.data.results.flatMap((r) =>
+        r.year.map((year) => {
+          return {
+            country: r.place.country.name,
+            year: year,
+            id: r.id,
+            type: 'event',
+            title: r.title,
+            date: r.date
           }
         })
-      }
+      )
 
-      if (this.eventsResources && this.eventsResources.facets) {
-        years = years.concat(
-          this.eventsResources.facets._filter_year.year.buckets.map(
-            (f) => f.key
-          )
-        )
-        countries = countries.concat(
-          this.eventsResources.facets._filter_country.country.buckets
-            .map((f) => f.key)
-            .filter((f) => f !== 'any')
-        )
+      let resources = []
 
-        this.eventsResources.results.forEach((r) => {
-          r.places.forEach((place) => {
-            if (place.place.country) {
-              const country = place.place.country.name
-              r.year.forEach((year) => {
-                if (!resources[country]) {
-                  resources[country] = {}
-                }
-                if (!resources[country][year]) {
-                  resources[country][year] = []
-                }
-                resources[country][year].push({
+      if (this.eventsResources && this.eventsResources.results) {
+        resources = this.eventsResources.results.flatMap((r) => {
+          return r.places
+            .filter(
+              (place) =>
+                place.place.country && place.place.country.name !== 'any'
+            )
+            .map((place) => place.place.country.name)
+            .flatMap((country) => {
+              return r.year.map((year) => {
+                return {
+                  country: country,
+                  year: year,
                   id: r.id,
-                  title: r.title,
+                  type: 'resource',
+                  title: r.title ? r.title[0] : 'No title!',
                   date: r.date_display
-                })
+                }
               })
-            }
-          })
+            })
         })
       }
 
-      timeline.years = [...new Set(years)].sort()
-      timeline.countries = [...new Set(countries)].sort()
-      timeline.events = events
-      timeline.resources = resources
+      let data = events.concat(resources).sort((a, b) => {
+        const ca = a.country.toLowerCase(),
+          cb = b.country.toLowerCase()
+
+        if (ca < cb) {
+          return -1
+        }
+        if (ca > cb) {
+          return 1
+        }
+        return 0
+      })
+
+      const years = [...new Set(data.map((d) => d.year))].sort()
+
+      data = data.reduce((acc, curr) => {
+        const country = curr.country
+        const year = curr.year
+
+        if (!acc[country]) acc[country] = {}
+        if (!acc[country][year]) acc[country][year] = []
+
+        acc[country][year].push(curr)
+
+        return acc
+      }, {})
+
+      timeline.years = years
+      timeline.data = data
 
       return timeline
     }
