@@ -239,9 +239,10 @@ class SimpleResourceViewSet(DocumentViewSet):
     }
 
     ordering_fields = {
+        "country": "places.place.country.name.raw",
         "year": "year",
     }
-    ordering = ["year"]
+    ordering = ["country", "year"]
 
     pagination_class = PageNumberPagination
 

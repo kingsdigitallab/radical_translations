@@ -1546,8 +1546,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .event.big,
 .resource.big {
-  height: 16px;
-  width: 16px;
+  height: 12px;
+  width: 12px;
   margin-right: 4px;
 }
 
@@ -1562,6 +1562,16 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   height: 8px;
   margin: 1px;
   width: 8px;
+
+  &.active {
+    background: yellow;
+  }
+}
+
+.event:hover,
+.resource:hover {
+  background: yellow;
+  cursor: pointer;
 }
 
 .event {
@@ -1571,13 +1581,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .resource {
   background: #729ea1;
-
-  &.active {
-    background: yellow;
-  }
 }
 
-.year td {
-  padding-top: 8px;
+.year {
+  display: inline-block;
+  margin-top: 1.5rem;
   transform: rotate(-45deg);
+  transform-origin: 0% 0%;
 }
