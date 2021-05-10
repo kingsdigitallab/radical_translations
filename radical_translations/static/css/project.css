@@ -9548,6 +9548,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .resource {
   background: #729ea1; }
+  .resource.active {
+    background: yellow; }
 
 .year td {
   padding-top: 8px;
