@@ -8597,6 +8597,9 @@ footer {
 .small-icon img {
   vertical-align: text-top; }
 
+.small-text {
+  font-size: 12px; }
+
 .sup-icon,
 .sup-icon svg {
   color: #808080;
@@ -9517,22 +9520,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     stroke: #51b788; }
 
 .viz-container {
+  font-size: 12px;
   overflow-x: scroll; }
 
 .content td {
   border-bottom: 1px solid #d8d8d8; }
-
-.content td:nth-child(even) {
-  background: #f0f0f0; }
-
-.event.big,
-.resource.big {
-  height: 12px;
-  width: 12px;
-  margin-right: 4px; }
-
-.hidden {
-  display: none; }
+  .content td:nth-child(even) {
+    background: #f0f0f0; }
 
 .event,
 .resource {
@@ -9541,14 +9535,29 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   height: 8px;
   margin: 1px;
   width: 8px; }
+  .event.big,
+  .resource.big {
+    height: 12px;
+    width: 12px;
+    margin-right: 4px; }
+  .event:hover,
+  .resource:hover {
+    background: yellow;
+    cursor: pointer; }
   .event.active,
   .resource.active {
     background: yellow; }
 
-.event:hover,
-.resource:hover {
-  background: yellow;
-  cursor: pointer; }
+tbody th,
+thead th:first-child,
+thead th:nth-child(2) {
+  background: #eae9da;
+  left: 0;
+  padding: 8px;
+  position: sticky; }
+
+thead th:nth-child(2) {
+  left: 100px; }
 
 .event {
   background: #60495a;

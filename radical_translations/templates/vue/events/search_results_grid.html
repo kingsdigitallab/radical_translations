@@ -1,4 +1,4 @@
-<ul>
+<ul class="small-text">
   <li><span class="resource big"></span> resource</li>
   <li><span class="event big"></span> event</li>
 </ul>
@@ -19,11 +19,13 @@
     </thead>
     <tbody class="content">
       <tr v-for="(value, country, index) in timeline.data">
-        <td>{[ country ]}</td>
+        <th>{[ country ]}</th>
         <td v-for="year in timeline.years">
           <span
             v-for="item in timeline.data[country][year]"
-            :class="`${item.type}`">
+            :class="[`${item.type}`, { active: highlight === item.record }]"
+            @mouseover="highlight = item.record"
+            @mouseleave="highlight = null">
           </span>
         </td>
       </tr>
