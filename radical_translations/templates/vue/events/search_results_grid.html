@@ -23,7 +23,9 @@
         <td v-for="year in timeline.years">
           <span
             v-for="item in timeline.data[country][year]"
-            :class="`${item.type}`">
+            :class="[`${item.type}`, { active: highlight === item.record }]"
+            @mouseover="highlight = item.record"
+            @mouseleave="highlight = null">
           </span>
         </td>
       </tr>

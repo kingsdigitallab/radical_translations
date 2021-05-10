@@ -50,7 +50,7 @@ new Vue({
     },
     events: { country: null, year: null, data: [], show: false },
     eventsResources: [],
-    hover: null
+    highlight: null
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -323,6 +323,7 @@ new Vue({
             year: year,
             id: r.id,
             type: 'event',
+            record: `event-${r.id}`,
             title: r.title,
             date: r.date
           }
@@ -346,6 +347,7 @@ new Vue({
                   year: year,
                   id: r.id,
                   type: 'resource',
+                  record: `resource-${r.id}`,
                   title: r.title ? r.title[0] : 'No title!',
                   date: r.date_display
                 }

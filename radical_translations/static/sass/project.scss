@@ -1563,15 +1563,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   margin: 1px;
   width: 8px;
 
+  &:hover {
+    background: yellow;
+    cursor: pointer;
+  }
+
   &.active {
     background: yellow;
   }
-}
-
-.event:hover,
-.resource:hover {
-  background: yellow;
-  cursor: pointer;
 }
 
 .event {
