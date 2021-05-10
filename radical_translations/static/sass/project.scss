@@ -1571,6 +1571,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .resource {
   background: #729ea1;
+
+  &.active {
+    background: yellow;
+  }
 }
 
 .year td {
