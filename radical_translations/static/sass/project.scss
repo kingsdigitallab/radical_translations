@@ -187,6 +187,10 @@ footer {
   }
 }
 
+.small-text {
+  font-size: 12px;
+}
+
 .sup-icon,
 .sup-icon svg {
   color: $medium-gray;
@@ -1531,28 +1535,19 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-// timeline
+// Timeline visualisation
+
 .viz-container {
+  font-size: 12px;
   overflow-x: scroll;
 }
 
 .content td {
   border-bottom: 1px solid #d8d8d8;
-}
 
-.content td:nth-child(even) {
-  background: #f0f0f0;
-}
-
-.event.big,
-.resource.big {
-  height: 12px;
-  width: 12px;
-  margin-right: 4px;
-}
-
-.hidden {
-  display: none;
+  &:nth-child(even) {
+    background: #f0f0f0;
+  }
 }
 
 .event,
@@ -1566,12 +1561,30 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   &.active {
     background: yellow;
   }
+
+  &.big {
+    height: 12px;
+    width: 12px;
+    margin-right: 4px;
+  }
+
+  &:hover {
+    background: yellow;
+    cursor: pointer; 
+  }
 }
 
-.event:hover,
-.resource:hover {
-  background: yellow;
-  cursor: pointer;
+tbody th,
+thead th:first-child,
+thead th:nth-child(2) {
+  background: $secondary;
+  left: 0;
+  padding: 8px;
+  position: sticky;
+}
+
+thead th:nth-child(2) {
+  left: 100px;
 }
 
 .event {
