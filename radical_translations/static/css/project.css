@@ -9116,7 +9116,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .right + p {
       margin: 0 1rem 1rem 0; }
   .metadata-block::after {
+<<<<<<< Updated upstream
     content: '|'; }
+=======
+    content: '|';
+    margin: 0 0.25rem; }
+>>>>>>> Stashed changes
   .metadata-block:last-child::after {
     content: ''; }
   .sections {
@@ -9428,7 +9433,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .search-results-list li {
     border-bottom: 1px solid #c3c1a8;
     margin: 16px 0 0 8px;
+<<<<<<< Updated upstream
     margin: 1rem 0 0 0.5rem; }
+=======
+    margin: 1rem 0 0 0.5rem;
+    padding-bottom: 4px;
+    padding-bottom: 0.25rem; }
+>>>>>>> Stashed changes
   .search-results-list .title {
     margin-bottom: 8px;
     margin-bottom: 0.5rem; }
@@ -9538,7 +9549,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     cursor: pointer; }
   .event.active,
   .resource.active {
-    background: yellow; }
+    background: yellow;
+    cursor: pointer; }
 
 tbody th,
 thead th:first-child,

@@ -943,6 +943,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .metadata-block {
     &::after {
       content: '|';
+<<<<<<< Updated upstream
+=======
+      margin: 0 0.25rem;
+>>>>>>> Stashed changes
     }
 
     &:last-child {
@@ -1409,6 +1413,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   li {
     border-bottom: 1px solid $kaki;
     margin: 1rem 0 0 0.5rem;
+<<<<<<< Updated upstream
+=======
+    padding-bottom: 0.25rem;
+>>>>>>> Stashed changes
   }
 
   .title {
@@ -1571,6 +1579,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   &.active {
     background: yellow;
+    cursor: pointer;
   }
 }
 

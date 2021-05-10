@@ -50,7 +50,7 @@ new Vue({
     },
     events: { country: null, year: null, data: [], show: false },
     eventsResources: [],
-    highlight: null
+    timeline: {}
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -308,85 +308,6 @@ new Vue({
       }
 
       return events
-    },
-    timeline: function () {
-      const timeline = {}
-
-      if (!this.data || !this.data.results) {
-        return timeline
-      }
-
-      const events = this.data.results.flatMap((r) =>
-        r.year.map((year) => {
-          return {
-            country: r.place.country.name,
-            year: year,
-            id: r.id,
-            type: 'event',
-            record: `event-${r.id}`,
-            title: r.title,
-            date: r.date
-          }
-        })
-      )
-
-      let resources = []
-
-      if (this.eventsResources && this.eventsResources.results) {
-        resources = this.eventsResources.results.flatMap((r) => {
-          return r.places
-            .filter(
-              (place) =>
-                place.place.country && place.place.country.name !== 'any'
-            )
-            .map((place) => place.place.country.name)
-            .flatMap((country) => {
-              return r.year.map((year) => {
-                return {
-                  country: country,
-                  year: year,
-                  id: r.id,
-                  type: 'resource',
-                  record: `resource-${r.id}`,
-                  title: r.title ? r.title[0] : 'No title!',
-                  date: r.date_display
-                }
-              })
-            })
-        })
-      }
-
-      let data = events.concat(resources).sort((a, b) => {
-        const ca = a.country.toLowerCase(),
-          cb = b.country.toLowerCase()
-
-        if (ca < cb) {
-          return -1
-        }
-        if (ca > cb) {
-          return 1
-        }
-        return 0
-      })
-
-      const years = [...new Set(data.map((d) => d.year))].sort()
-
-      data = data.reduce((acc, curr) => {
-        const country = curr.country
-        const year = curr.year
-
-        if (!acc[country]) acc[country] = {}
-        if (!acc[country][year]) acc[country][year] = []
-
-        acc[country][year].push(curr)
-
-        return acc
-      }, {})
-
-      timeline.years = years
-      timeline.data = data
-
-      return timeline
     }
   },
   methods: {
@@ -555,6 +476,7 @@ new Vue({
           1750,
           1900
         )
+        this.timeline = this.getTimeline()
       }
       if (this.map.show) {
         this.renderMap()
@@ -694,6 +616,97 @@ new Vue({
           this.events.data = data.results
           this.events.show = true
         })
+    },
+    getTimeline: function () {
+      const timeline = {}
+
+      if (!this.data || !this.data.results) {
+        return timeline
+      }
+
+      const events = this.data.results.flatMap((r) =>
+        r.year.map((year) => {
+          const record = `event-${r.id}`
+          return {
+            country: r.place.country.name,
+            year: year,
+            id: r.id,
+            type: 'event',
+            record: record,
+            title: r.title,
+            date: r.date
+          }
+        })
+      )
+
+      let resources = []
+
+      if (this.eventsResources && this.eventsResources.results) {
+        resources = this.eventsResources.results.flatMap((r) => {
+          return r.places
+            .filter(
+              (place) =>
+                place.place.country && place.place.country.name !== 'any'
+            )
+            .map((place) => place.place.country.name)
+            .flatMap((country) => {
+              return r.year.map((year) => {
+                record = `resource-${r.id}`
+                return {
+                  country: country,
+                  year: year,
+                  id: r.id,
+                  type: 'resource',
+                  record: record,
+                  title: r.title ? r.title[0] : 'No title!',
+                  date: r.date_display
+                }
+              })
+            })
+        })
+      }
+
+      const raw = events.concat(resources).sort((a, b) => {
+        const ca = a.country.toLowerCase(),
+          cb = b.country.toLowerCase()
+
+        if (ca < cb) {
+          return -1
+        }
+        if (ca > cb) {
+          return 1
+        }
+        return 0
+      })
+      timeline.raw = raw
+
+      const years = [...new Set(raw.map((d) => d.year))].sort()
+      timeline.years = years
+
+      timeline.data = this.prepareTimelineData(raw)
+
+      return timeline
+    },
+    prepareTimelineData: function (raw) {
+      return raw.reduce((acc, curr) => {
+        const country = curr.country
+        const year = curr.year
+
+        if (!acc[country]) acc[country] = {}
+        if (!acc[country][year]) acc[country][year] = []
+
+        acc[country][year].push(curr)
+
+        return acc
+      }, {})
+    },
+    highlight: function (record) {
+      if (this.timeline) {
+        this.timeline.raw = this.timeline.raw.map((t) =>
+          t.record === record ? { ...t, active: true } : { ...t, active: false }
+        )
+        this.timeline.data = this.prepareTimelineData(this.timeline.raw)
+      }
     }
   }
 })
