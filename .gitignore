@@ -290,3 +290,5 @@ package-lock.json
 /python-edtf
 
 events.json
+
+radical_translations/static/viz/
