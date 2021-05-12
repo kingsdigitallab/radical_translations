@@ -3,7 +3,7 @@
   <li><span class="event big"></span> event</li>
 </ul>
 
-<div class="viz-container">
+<div class="viz-grid">
   <table>
     <thead>
       <tr>
@@ -12,17 +12,24 @@
       </tr>
       <tr>
         <td></td>
-        <td v-for="year in timeline.years">
+        <td
+          v-for="year in timeline.years"
+          :key="year">
           <span class="year">{[ year ]}</span>
         </td>
       </tr>
     </thead>
     <tbody class="content">
-      <tr v-for="(value, country, index) in timeline.data">
+      <tr
+        v-for="(value, country, index) in timeline.data"
+        :key="country">
         <th>{[ country ]}</th>
-        <td v-for="year in timeline.years">
+        <td
+          v-for="year in timeline.years"
+          :key="year">
           <span
             v-for="item in timeline.data[country][year]"
+            :key="item.uid"
             :class="[`${item.type}`, { active: item.active }]"
             @mouseenter="highlight(item.record)"
             @mouseleave="highlight(null)">
@@ -33,7 +40,9 @@
     <tfoot>
       <tr>
         <td></td>
-        <td v-for="year in timeline.years">
+        <td
+          v-for="year in timeline.years"
+          :key="year">
           <span class="year">{[ year ]}</span>
         </td>
       </tr>

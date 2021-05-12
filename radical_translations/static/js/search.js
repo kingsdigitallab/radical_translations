@@ -626,9 +626,12 @@ new Vue({
 
       const events = this.data.results.flatMap((r) =>
         r.year.map((year) => {
+          const country = r.place.country.name
           const record = `event-${r.id}`
+          const uid = `${record}-${country}-${year}`
+
           return {
-            country: r.place.country.name,
+            country: country,
             year: year,
             id: r.id,
             type: 'event',
@@ -651,7 +654,9 @@ new Vue({
             .map((place) => place.place.country.name)
             .flatMap((country) => {
               return r.year.map((year) => {
-                record = `resource-${r.id}`
+                const record = `resource-${r.id}`
+                const uid = `${record}-${country}-${year}`
+
                 return {
                   country: country,
                   year: year,
@@ -684,6 +689,8 @@ new Vue({
       timeline.years = years
 
       timeline.data = this.prepareTimelineData(raw)
+
+      console.log(timeline)
 
       return timeline
     },
