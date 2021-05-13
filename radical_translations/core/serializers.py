@@ -20,4 +20,4 @@ class ResourceDocumentSerializer(DocumentSerializer):
 class SimpleResourceDocumentSerializer(DocumentSerializer):
     class Meta:
         document = ResourceDocument
-        fields = ["id", "title", "year", "places"]
+        fields = ["id", "title", "year", "places", "is_original", "is_translation"]

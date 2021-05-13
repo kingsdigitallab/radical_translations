@@ -1,9 +1,11 @@
-<ul class="small-text">
-  <li><span class="resource big"></span> resource</li>
-  <li><span class="event big"></span> event</li>
-</ul>
-
 <div class="viz-grid">
+  <ul class="breadcrumbs">
+    <li><span class="resource big"></span> resource</li>
+    <li><span class="resource original big"></span> source text</li>
+    <li><span class="resource translation big"></span> translation</li>
+    <li><span class="event big"></span> event</li>
+  </ul>
+
   <table>
     <thead>
       <tr>
@@ -27,13 +29,17 @@
         <td
           v-for="year in timeline.years"
           :key="year">
-          <span
+          <a
             v-for="item in timeline.data[country][year]"
             :key="item.uid"
-            :class="[`${item.type}`, { active: item.active }]"
-            @mouseenter="highlight(item.record)"
-            @mouseleave="highlight(null)">
-          </span>
+            :href="`../../${item.type}s/${item.id}/`">
+            <span
+              :class="[`${item.type}`, item.tags, { active: item.active }]"
+              :title="`${country}, ${year}\n${item.title}`"
+              @mouseenter="highlight(item.record)"
+              @mouseleave="highlight(null)">
+            </span>
+          </a>
         </td>
       </tr>
     </tbody>

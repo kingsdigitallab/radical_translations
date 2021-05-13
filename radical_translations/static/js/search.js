@@ -470,12 +470,7 @@ new Vue({
       this.data = await this.doSearch()
 
       if (options.resources) {
-        this.eventsResources = await this.doSearch(
-          this.urlResources,
-          1500,
-          1750,
-          1900
-        )
+        this.eventsResources = await this.doSearch(this.urlResources, 1500)
         this.timeline = this.getTimeline()
       }
       if (this.map.show) {
@@ -624,22 +619,23 @@ new Vue({
         return timeline
       }
 
-      const events = this.data.results.flatMap((r) =>
-        r.year.map((year) => {
-          const country = r.place.country.name
-          const record = `event-${r.id}`
-          const uid = `${record}-${country}-${year}`
+      const events = this.data.results.flatMap((r) => 
+          !r.year ? [] : r.year.map((year) => {
+            const country = r.place.country.name
+            const record = `event-${r.id}`
+            const uid = `${record}-${country}-${year}`
 
-          return {
-            country: country,
-            year: year,
-            id: r.id,
-            type: 'event',
-            record: record,
-            title: r.title,
-            date: r.date
-          }
-        })
+            return {
+              country: country,
+              year: year,
+              id: r.id,
+              type: 'event',
+              record: record,
+              title: r.title,
+              date: r.date,
+              tags: []
+            }
+          })
       )
 
       let resources = []
@@ -653,20 +649,26 @@ new Vue({
             )
             .map((place) => place.place.country.name)
             .flatMap((country) => {
-              return r.year.map((year) => {
-                const record = `resource-${r.id}`
-                const uid = `${record}-${country}-${year}`
+              return !r.year
+                ? []
+                : r.year.map((year) => {
+                    const record = `resource-${r.id}`
+                    const uid = `${record}-${country}-${year}`
 
-                return {
-                  country: country,
-                  year: year,
-                  id: r.id,
-                  type: 'resource',
-                  record: record,
-                  title: r.title ? r.title[0] : 'No title!',
-                  date: r.date_display
-                }
-              })
+                    return {
+                      country: country,
+                      year: year,
+                      id: r.id,
+                      type: 'resource',
+                      record: record,
+                      title: r.title ? r.title[0] : 'No title!',
+                      date: r.date_display,
+                      tags: [
+                        r.is_original ? 'original' : '',
+                        r.is_translation ? 'translation' : ''
+                      ]
+                    }
+                  })
             })
         })
       }
@@ -689,8 +691,6 @@ new Vue({
       timeline.years = years
 
       timeline.data = this.prepareTimelineData(raw)
-
-      console.log(timeline)
 
       return timeline
     },
