@@ -1545,71 +1545,87 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-// Timeline visualisation
+// Timeline visualisations
 
-.viz-container {
+$hl: #114b5f;
+$size: 7px;
+
+.viz-grid {
+  background: $secondary;
   font-size: 12px;
   overflow-x: scroll;
-}
 
-.content td {
-  border-bottom: 1px solid #d8d8d8;
+  .content td {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 3px;
 
-  &:nth-child(even) {
-    background: #f0f0f0;
-  }
-}
-
-.event,
-.resource {
-  display: inline-block;
-  float: left;
-  height: 8px;
-  margin: 1px;
-  width: 8px;
-
-  &.big {
-    height: 12px;
-    width: 12px;
-    margin-right: 4px;
+    &:nth-child(even) {
+      background: #f0f0f0;
+    }
   }
 
-  &:hover {
-    background: yellow;
-    cursor: pointer;
+  .content tr {
+    vertical-align: bottom;
   }
 
-  &.active {
-    background: yellow;
-    cursor: pointer;
+  .event {
+    background: #60495a;
+    border-radius: 50%;
   }
-}
 
-tbody th,
-thead th:first-child,
-thead th:nth-child(2) {
-  background: $secondary;
-  left: 0;
-  padding: 8px;
-  position: sticky;
-}
+  .resource {
+    background: #729ea1;
 
-thead th:nth-child(2) {
-  left: 100px;
-}
+    &.original {
+      background: #f4d06f;
+    }
+    &.translation {
+      background: #ec9192;
+    }
+  }
 
-.event {
-  background: #60495a;
-  border-radius: 50%;
-}
+  .year {
+    display: inline-block;
+    margin-top: 1.5rem;
+    transform: rotate(-45deg);
+    transform-origin: 0% 0%;
+  }
 
-.resource {
-  background: #729ea1;
-}
+  .event,
+  .resource {
+    display: inline-block;
+    float: left;
+    height: $size;
+    margin: 0.5px;
+    width: $size;
 
-.year {
-  display: inline-block;
-  margin-top: 1.5rem;
-  transform: rotate(-45deg);
-  transform-origin: 0% 0%;
+    &.big {
+      height: 12px;
+      width: 12px;
+      margin-right: 4px;
+    }
+
+    &:hover {
+      background: $hl;
+      cursor: pointer;
+    }
+
+    &.active {
+      background: $hl;
+      cursor: pointer;
+    }
+  }
+
+  tbody th,
+  thead th:first-child,
+  thead th:nth-child(2) {
+    background: $secondary;
+    left: 0;
+    padding: 8px;
+    position: sticky;
+  }
+
+  thead th:nth-child(2) {
+    left: 100px;
+  }
 }

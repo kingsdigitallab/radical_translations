@@ -1,9 +1,11 @@
-<ul class="small-text">
-  <li><span class="resource big"></span> resource</li>
-  <li><span class="event big"></span> event</li>
-</ul>
+<div class="viz-grid">
+  <ul class="breadcrumbs">
+    <li><span class="resource big"></span> resource</li>
+    <li><span class="resource original big"></span> source text</li>
+    <li><span class="resource translation big"></span> translation</li>
+    <li><span class="event big"></span> event</li>
+  </ul>
 
-<div class="viz-container">
   <table>
     <thead>
       <tr>
@@ -12,28 +14,41 @@
       </tr>
       <tr>
         <td></td>
-        <td v-for="year in timeline.years">
+        <td
+          v-for="year in timeline.years"
+          :key="year">
           <span class="year">{[ year ]}</span>
         </td>
       </tr>
     </thead>
     <tbody class="content">
-      <tr v-for="(value, country, index) in timeline.data">
+      <tr
+        v-for="(value, country, index) in timeline.data"
+        :key="country">
         <th>{[ country ]}</th>
-        <td v-for="year in timeline.years">
-          <span
+        <td
+          v-for="year in timeline.years"
+          :key="year">
+          <a
             v-for="item in timeline.data[country][year]"
-            :class="[`${item.type}`, { active: item.active }]"
-            @mouseenter="highlight(item.record)"
-            @mouseleave="highlight(null)">
-          </span>
+            :key="item.uid"
+            :href="`../../${item.type}s/${item.id}/`">
+            <span
+              :class="[`${item.type}`, item.tags, { active: item.active }]"
+              :title="`${country}, ${year}\n${item.title}`"
+              @mouseenter="highlight(item.record)"
+              @mouseleave="highlight(null)">
+            </span>
+          </a>
         </td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
         <td></td>
-        <td v-for="year in timeline.years">
+        <td
+          v-for="year in timeline.years"
+          :key="year">
           <span class="year">{[ year ]}</span>
         </td>
       </tr>
