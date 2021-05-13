@@ -1547,7 +1547,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 // Timeline visualisations
 
-$hl: #f4d06f;
+$hl: #114b5f;
 $size: 5px;
 
 .viz-grid {
@@ -1577,7 +1577,7 @@ $size: 5px;
     background: #729ea1;
 
     &.original {
-      background: #114b5f;
+      background: #f4d06f;
     }
     &.translation {
       background: #ec9192;

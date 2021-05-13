@@ -9536,7 +9536,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .viz-grid .resource {
     background: #729ea1; }
     .viz-grid .resource.original {
-      background: #114b5f; }
+      background: #f4d06f; }
     .viz-grid .resource.translation {
       background: #ec9192; }
   .viz-grid .year {
@@ -9561,11 +9561,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       margin-right: 4px; }
     .viz-grid .event:hover,
     .viz-grid .resource:hover {
-      background: #f4d06f;
+      background: #114b5f;
       cursor: pointer; }
     .viz-grid .event.active,
     .viz-grid .resource.active {
-      background: #f4d06f;
+      background: #114b5f;
       cursor: pointer; }
   .viz-grid tbody th,
   .viz-grid thead th:first-child,
