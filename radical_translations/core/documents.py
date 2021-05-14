@@ -3,7 +3,6 @@ from django_elasticsearch_dsl.registries import registry
 from elasticsearch_dsl import analyzer, normalizer
 
 from controlled_vocabulary.models import ControlledTerm
-from controlled_vocabulary.utils import search_term_or_none
 from radical_translations.core.models import (
     Classification,
     Contribution,
@@ -88,14 +87,12 @@ class ResourceDocument(Document):
     is_original = fields.BooleanField()
     is_translation = fields.BooleanField()
 
-    has_date_radical = fields.BooleanField()
+    has_date_radical = fields.KeywordField()
 
     authors = fields.ObjectField(
         attr="get_authors_source_text",
         properties={"person": get_agent_field(options=copy_to_content)},
     )
-
-    radical_markers = fields.IntegerField()
 
     class Index:
         name = "rt-resources"
@@ -256,16 +253,7 @@ class ResourceDocument(Document):
         return self._get_classifications(instance, "rt-tt")
 
     def prepare_classifications_paratext(self, instance):
-        classifications = self._get_classifications(instance, "rt-pt")
-
-        if instance.has_date_radical():
-            vocabulary = "rt-pt"
-            label = "Revolutionary calendar used"
-            term = search_term_or_none(vocabulary, label)
-            if term:
-                classifications.append({"edition": {"label": term.label}})
-
-        return classifications
+        return self._get_classifications(instance, "rt-pt")
 
     def prepare_classifications_paratext_functions(self, instance):
         return self._get_classifications(instance, "rt-ptf")
@@ -388,5 +376,8 @@ class ResourceDocument(Document):
 
         return events
 
-    def prepare_radical_markers(self, instance):
-        return instance.get_radical_markers()
+    def prepare_has_date_radical(self, instance):
+        if instance.has_date_radical():
+            return "yes"
+
+        return "no"

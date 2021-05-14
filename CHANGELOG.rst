@@ -33,6 +33,7 @@ Added
 * Convert notes and summary URLs into clickable links.
 * Badge for related resources that have a paratext.
 * Paratext functions vocabulary.
+* Radical date filter.
 
 Changed
 ~~~~~~~
@@ -49,7 +50,6 @@ Changed
 * Labels and descriptions of the classification vocabularies.
 * Split paratext terms vocabulary in two, paratext forms and paratext functions.
 
-
 Fixed
 ~~~~~
 * Validation errors in `CHANGELOG`.
@@ -64,6 +64,7 @@ Removed
 * `Place` detail view.
 * Radical marker from dates.
 * Radical markers filter from the search.
+* Revolutionary calendar used filter from paratext filters.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
 .. _Bump pillow to 7.1: https://github.com/kingsdigitallab/radical_translations/pull/5
