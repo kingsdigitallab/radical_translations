@@ -206,7 +206,7 @@ urllib3==1.25.9
     #   django-controlled-vocabulary
     #   elasticsearch
     #   requests
-wagtail==2.12
+wagtail==2.12.4
     # via
     #   -r requirements/./base.in
     #   django-kdl-wagtail

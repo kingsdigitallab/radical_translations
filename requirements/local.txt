@@ -400,7 +400,7 @@ urllib3==1.25.9
     #   requests
 virtualenv==20.0.21
     # via pre-commit
-wagtail==2.12
+wagtail==2.12.4
     # via
     #   -r requirements/./base.in
     #   django-kdl-wagtail
