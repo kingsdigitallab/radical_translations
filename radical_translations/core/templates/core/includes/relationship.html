@@ -1,8 +1,15 @@
 <dt>{% if direct %}is {{ label }}{% else %}has {{ label|cut:' of' }}{% endif %}</dt>
 <dd>
+{% if related.get_radical_markers %}
+{% for m in related.get_radical_markers_range %}
+{# Custom phrygian cap icon #}
+<span class="small-icon radical"></span>
+{% endfor %}
+{% endif %}
+
 <a href="{% url 'resource-detail' related.pk %}">{{ related.title }}</a>
 {% include "core/includes/type.html" with resource=related %}
 </dd>
-{% for classification in relationship.classification.all %}
+{% for classification in relationship.get_classification %}
 <dd class="{{ classification.label }}">{{ classification.label }}</dd>
 {% endfor %}

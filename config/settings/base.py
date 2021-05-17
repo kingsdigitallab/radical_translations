@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "wagtail.contrib.forms",
     "wagtail.contrib.modeladmin",
+    "wagtail.contrib.routable_page",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
     "wagtail.contrib.table_block",
@@ -161,7 +162,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "wagtail.core.middleware.SiteMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
@@ -304,6 +304,7 @@ HOMEPAGE_SECTION_BLOCK_COUNTS = {"min_number": 4, "max_num": 4}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+LOAD_ANALYTICS = env.bool("LOAD_ANALYTICS", default=False)
 
 # django-controlled-vocabulary
 # ------------------------------------------------------------------------------
@@ -337,3 +338,39 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 50,
     "ORDERING_PARAM": "ordering",
 }
+
+
+# Search
+# ------------------------------------------------------------------------------
+CONTRIBUTION_MAIN_ROLES = ["author", "translator"]
+
+CONTRIBUTION_OTHER_ROLES = [
+    "journalist",
+    "editor",
+    "publisher",
+    "bookseller",
+]
+
+SEARCH_OPTIONS = {
+    "resources": {
+        "label": "Resources",
+        "page_size": 50,
+        "meta_facets": ["meta"],
+        "range_facets": ["year"],
+        "year_min": 1516,
+        "year_max": 1900,
+    },
+    "events": {
+        "label": "Events",
+        "page_size": 500,
+        "meta_facets": [],
+        "range_facets": ["year"],
+        "year_min": 1780,
+        "year_max": 1820,
+    },
+}
+
+# Export
+# ------------------------------------------------------------------------------
+EXPORT_FIELD_SEPARATOR = "::"
+EXPORT_MULTIVALUE_SEPARATOR = ";"

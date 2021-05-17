@@ -4,6 +4,8 @@
 {% block css %}
 {{ block.super }}
 <link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet">
+<link href="{% static 'leaflet.markercluster/dist/MarkerCluster.css' %}" rel="stylesheet">
+<link href="{% static 'leaflet.markercluster/dist/MarkerCluster.Default.css' %}" rel="stylesheet">
 <link href="{% static 'vue-slider-component/theme/default.css' %}" rel="stylesheet">
 {% endblock css %}
 
@@ -11,78 +13,114 @@
 
 {% block search_body %}
 <div id="app">
-    <div class="container">
-        <h1>{% block search_header %}{% endblock search_header %}</h1>
+  <div class="container">
+    <h1>{% block search_header %}{% endblock search_header %}</h1>
 
-        <div class="row">
-            <div class="col">
-                <div class="row alert alert-secondary">
-                    <div class="col">
-                        {% include 'vue/search_query.html' %}
-                        {% include 'vue/search_facets.html' %}
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+      <div class="col">
+        <div class="row alert alert-secondary">
+          <div class="col">
+            {% block query %}
+            {% include 'vue/search_query.html' %}
+            {% endblock query %}
+            {% block facets %}
+            {% include 'vue/search_facets.html' %}
+            {% endblock facets %}
+          </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        {% include 'vue/search_summary.html' %}
-                        {% include 'vue/search_ordering.html' %}
-                    </div>
-                </div>
-
-                {% include 'vue/pagination.html' %}
-
-                <ul class="nav nav-tabs" id="result-views" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a
-                            @click="map.show = false"
-                            class="nav-link active"
-                            id="list-view-tab"
-                            data-toggle="tab"
-                            href="#list-view"
-                            role="tab"
-                            aria-controls="list"
-                            aria-selected="true">
-                            <span class="small-icon">
-                                {% include "svgs/solid/list.svg" %}
-                            </span>
-                            List
-                        </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a
-                            @click="map.show = true"
-                            class="nav-link"
-                            id="map-view-tab"
-                            data-toggle="tab"
-                            href="#map-view"
-                            role="tab"
-                            aria-controls="map"
-                            aria-selected="false">
-                            <span class="small-icon">
-                                {% include "svgs/solid/map-marker.svg" %}
-                            </span>
-                            Map
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="tab-content">
-                    <div class="tab-pane active" id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
-                        {% include 'vue/search_results.html' %}
-                    </div>
-                    <div class="tab-pane" id="map-view" role="tabpanel" aria-labelledby="map-view-tab">
-                        {% include 'vue/search_results_map.html' %}
-                    </div>
-                </div>
-
-                {% include 'vue/pagination.html' %}
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            {% block summary %}
+            {% include 'vue/search_summary.html' %}
+            {% endblock summary %}
+            {% block ordering %}
+            {% include 'vue/search_ordering.html' %}
+            {% endblock ordering %}
+          </div>
+        </div>
+
+        {% block pagination-top %}
+        <template v-if="!map.show">
+          {% include 'vue/pagination.html' %}
+        </template>
+        {% endblock pagination-top %}
+
+        <ul class="nav nav-tabs" id="result-views" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a
+              @click="map.show = false"
+              :class="{active: !map.show}"
+              class="nav-link"
+              id="default-view-tab"
+              data-toggle="tab"
+              href="#default-view"
+              role="tab"
+              aria-controls="default-view"
+              aria-selected="true">
+              <span class="small-icon">
+                {% include "svgs/solid/list.svg" %}
+              </span>
+              List
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              @click="map.show = true"
+              :class="{active: map.show}"
+              class="nav-link"
+              id="map-view-tab"
+              data-toggle="tab"
+              href="#map-view"
+              role="tab"
+              aria-controls="map-view"
+              aria-selected="false">
+              <span class="small-icon">
+                {% include "svgs/solid/map-marker.svg" %}
+              </span>
+              Map
+            </a>
+          </li>
+        </ul>
+        {% block results %}
+        <div class="tab-content">
+          <div
+            :class="{active: !map.show}"
+            class="tab-pane"
+            id="default-view"
+            role="tabpanel"
+            aria-labelledby="default-view-tab">
+            {% block results_default %}
+            {% endblock results_default %}
+          </div>
+          {% block results_map %}
+          <div
+            :class="{active: map.show}"
+            class="tab-pane"
+            id="map-view"
+            role="tabpanel"
+            aria-labelledby="map-view-tab">
+            {% include 'vue/search_results_map.html' %}
+            <div id="map-popup-container">
+              {% block results_map_popup %}
+              {% endblock results_map_popup %}
+            </div>
+          </div>
+          {% endblock results_map %}
+        </div>
+        {% endblock results %}
+
+        {% block pagination-bottom %}
+        <template v-if="!map.show">
+          {% include 'vue/pagination.html' %}
+        </template>
+        {% endblock pagination-bottom %}
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock search_body %}
 {% endblock main %}
@@ -90,6 +128,6 @@
 {% block javascript %}
 {{ block.super }}
 
-<script src="{% static 'vue2-leaflet/dist/vue2-leaflet.min.js' %}"></script>
+<script src="{% static 'js/charts.js' %}"></script>
 <script src="{% static 'js/search.js' %}"></script>
 {% endblock javascript %}

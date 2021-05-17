@@ -31,13 +31,14 @@ function pathsConfig(appName) {
   return {
     bootstrapSass: `${vendorsRoot}/bootstrap/scss`,
     vendorsJs: [
-      `${vendorsRoot}/jquery/dist/jquery.min.js`,
+      `${vendorsRoot}/jquery/dist/jquery.slim.min.js`,
       `${vendorsRoot}/popper.js/dist/umd/popper.js`,
       `${vendorsRoot}/bootstrap/dist/js/bootstrap.js`,
       `${vendorsRoot}/lodash/lodash.js`,
       `${vendorsRoot}/chart.js/dist/Chart.min.js`,
       `${vendorsRoot}/leaflet/dist/leaflet.js`,
-      `${vendorsRoot}/vue/dist/vue.min.js`,
+      `${vendorsRoot}/leaflet.markercluster/dist/leaflet.markercluster.js`,
+      `${vendorsRoot}/vue/dist/vue.js`,
       `${vendorsRoot}/vue-chartjs/dist/vue-chartjs.min.js`,
       `${vendorsRoot}/vue-slider-component/dist/vue-slider-component.umd.min.js`
     ],

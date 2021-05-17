@@ -7,8 +7,8 @@ from controlled_vocabulary.vocabularies.base_http import VocabularyHTTP
 class VocabularyPrintingPublishingTerms(VocabularyBaseList):
     base_url = "http://rbms.info/vocabularies/printing-publishing/alphabetical_list.htm"
     concept = "wikidata:Q324254:ontology"
-    description = "Printing and Publishing Terms (in addition to FAST topic/forms)"
-    label = "Printing and Publishing Terms"
+    description = "Printing and Publishing Status (in addition to FAST topic/forms)"
+    label = "Printing and Publishing Status"
     prefix = "rt-ppt"
 
     def _get_searchable_terms(self) -> List:
@@ -119,8 +119,8 @@ class VocabularyAdditionalGenreTerms(VocabularyBaseList):
 
 class VocabularyTranslationTerms(VocabularyBaseList):
     concept = "wikidata:Q324254:ontology"
-    description = "Translation terms"
-    label = "Translation terms"
+    description = "Translation Status"
+    label = "Translation Status"
     prefix = "rt-tt"
 
     def _get_searchable_terms(self) -> List:
@@ -200,36 +200,18 @@ class VocabularyTranslationTerms(VocabularyBaseList):
 
 class VocabularyParatextTerms(VocabularyBaseList):
     concept = "wikidata:Q324254:ontology"
-    description = "Paratext terms (adapted from Nottingham-Martin and Batchelor)"
-    label = "Paratext terms"
+    description = "Paratext Forms (adapted from Nottingham-Martin and Batchelor)"
+    label = "Paratext Forms"
     prefix = "rt-pt"
 
     def _get_searchable_terms(self) -> List:
         return [
             ["Appendix", "Appendix"],
-            [
-                "Community-building",
-                "Community-building",
-                "referencing groups of readers (imaginary or actual)",
-            ],
             ["Dedication", "Dedication"],
             ["Epigraph", "Epigraph"],
             ["False imprint date", "False imprint date"],
             ["False imprint", "False imprint"],
             ["Ficticious imprint", "Fictitious imprint"],
-            [
-                "Hermeneutical",
-                "Hermeneutical",
-                "presenting an in-depth commentary and interpretation of ST",
-            ],
-            [
-                "Meta-communicative",
-                "Meta-communicative",
-                (
-                    "reflecting on the conditions and constraints of communication "
-                    "and translation"
-                ),
-            ],
             [
                 "Misattributed",
                 "Misattributed",
@@ -252,6 +234,35 @@ class VocabularyParatextTerms(VocabularyBaseList):
                 "e.g. printer’s motto or marks - specify in Notes",
             ],
             ["Revolutionary calendar used", "Revolutionary calendar used"],
+        ]
+
+
+class VocabularyParatextFunctions(VocabularyBaseList):
+    concept = "wikidata:Q324254:ontology"
+    description = "Paratext Functions (adapted from Nottingham-Martin and Batchelor)"
+    label = "Paratext Functions"
+    prefix = "rt-ptf"
+
+    def _get_searchable_terms(self) -> List:
+        return [
+            [
+                "Community-building",
+                "Community-building",
+                "referencing groups of readers (imaginary or actual)",
+            ],
+            [
+                "Hermeneutical",
+                "Hermeneutical",
+                "presenting an in-depth commentary and interpretation of ST",
+            ],
+            [
+                "Meta-communicative",
+                "Meta-communicative",
+                (
+                    "reflecting on the conditions and constraints of communication "
+                    "and translation"
+                ),
+            ],
             [
                 "Text-activating",
                 "Text-activating",

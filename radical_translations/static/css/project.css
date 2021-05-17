@@ -8486,7 +8486,8 @@ body {
   font-family: Lora, serif;
   font-variation-settings: 'wdth' 100, 'wght' 400;
   background: url("../images/rt-bg.svg") no-repeat top left #fdf9ef;
-  background-size: 135% auto; }
+  background-size: 135% auto;
+  overflow-wrap: break-word; }
 
 .badge {
   border-radius: 0;
@@ -8521,6 +8522,9 @@ strong {
   margin-left: 0.5em;
   vertical-align: -0.1875em; }
 
+.collapsed-bottom {
+  margin-bottom: 0; }
+
 footer {
   background: white;
   border-top: 15px solid #222222;
@@ -8553,16 +8557,25 @@ footer {
   font-size: 18px;
   font-size: 1.125rem; }
   .metadata .author::before,
-  .metadata .date::before {
+  .metadata .date::before,
+  .metadata .form::before,
+  .metadata .topic::before {
     display: inline-block;
-    height: 10px;
     margin-right: 4px;
     margin-right: 0.25rem;
-    width: 10px; }
+    width: 16px; }
   .metadata .author::before {
     content: url("/static/fontawesome/svgs/solid/pencil-alt.svg"); }
   .metadata .date::before {
     content: url("/static/fontawesome/svgs/solid/calendar.svg"); }
+  .metadata .form::before {
+    content: url("/static/fontawesome/svgs/solid/mail-bulk.svg");
+    height: 16px;
+    width: 16px; }
+  .metadata .topic::before {
+    content: url("/static/fontawesome/svgs/solid/tags.svg");
+    height: 16px;
+    width: 16px; }
   .metadata svg {
     fill: #222222;
     height: 16px;
@@ -8946,6 +8959,49 @@ figure img {
   margin-bottom: 16px;
   margin-bottom: 1rem; }
 
+.key {
+  background: #c3c1a8;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  z-index: 1000; }
+  .key button {
+    background: #222222;
+    border: 0;
+    color: #eae9da;
+    margin-right: -10px;
+    padding: 10px 20px 20px 10px;
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg); }
+    .key button .heading {
+      font-size: 18px; }
+      .key button .heading::after, .key button .heading::before {
+        display: inline-block;
+        -webkit-filter: invert(1);
+                filter: invert(1);
+        width: 20px; }
+      .key button .heading::before {
+        content: url("/static/fontawesome/svgs/solid/key-skeleton.svg");
+        padding-right: 6px; }
+    .key button[aria-expanded="true"] {
+      padding-bottom: 5px;
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+      width: 100%; }
+      .key button[aria-expanded="true"] .heading::after {
+        content: url("/static/fontawesome/svgs/solid/times.svg");
+        padding-left: 10px; }
+  .key .key-icons {
+    margin-bottom: 0;
+    padding: 16px; }
+  .key li {
+    border-bottom: 1px solid #fff;
+    list-style: none; }
+  .key ul {
+    padding-left: 0; }
+  .key .small-icon svg {
+    fill: #000; }
+
 /* Homepage */
 /*
 Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
@@ -9207,11 +9263,24 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   display: grid; }
 
 /* Agents / Persons */
+.false::after,
+.fictional::after {
+  display: inline-block;
+  padding-left: 4px;
+  width: 18px; }
+
+.false::after {
+  content: url("/static/fontawesome/svgs/solid/no-veracity.svg"); }
+
+.fictional::after {
+  content: url("/static/fontawesome/svgs/solid/map-marker-plus.svg"); }
+
 .noble svg {
   height: 16px;
   width: 16px; }
 
 .radical::before,
+.radicalism::before,
 .uncertain::before,
 .uncertainty::before,
 .unknown::before {
@@ -9220,7 +9289,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   margin-right: 4px;
   width: 10px; }
 
-.radical::before {
+.radical::before,
+.radicalism::before {
   content: url("/static/images/phrygian-cap.svg");
   height: 16px;
   width: 16px; }
@@ -9326,6 +9396,21 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 #map-view.active {
   height: 70vh; }
 
+#map-popup-container {
+  display: none; }
+
+.vue-slider-dot-tooltip-text,
+.vue-slider-dot-tooltip-inner {
+  background-color: #00548b !important;
+  border-color: #00548b !important; }
+
+.vue-slider-process {
+  background-color: #00548b !important; }
+
+.vue-slider-dot:focus,
+.vue-slider-dot-handle-focus:focus {
+  border: 1px solid #9b2923 !important; }
+
 /* End map styling */
 .search-result dd {
   margin-bottom: 0;
@@ -9337,6 +9422,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   margin-left: 1rem;
   padding-left: 32px;
   padding-left: 2rem; }
+  .search-results-list li {
+    border-bottom: 1px solid #c3c1a8;
+    margin: 16px 0 0 8px;
+    margin: 1rem 0 0 0.5rem; }
+  .search-results-list .title {
+    margin-bottom: 8px;
+    margin-bottom: 0.5rem; }
 
 .spacing {
   margin-bottom: 4px;

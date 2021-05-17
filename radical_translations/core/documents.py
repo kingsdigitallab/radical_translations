@@ -59,6 +59,9 @@ class ResourceDocument(Document):
     classifications_paratext = fields.ObjectField(
         properties={"edition": get_controlled_term_field(options=copy_to_content)}
     )
+    classifications_paratext_functions = fields.ObjectField(
+        properties={"edition": get_controlled_term_field(options=copy_to_content)}
+    )
     contributions = fields.ObjectField(
         properties={
             "agent": get_agent_field(options=copy_to_content),
@@ -84,7 +87,7 @@ class ResourceDocument(Document):
     is_original = fields.BooleanField()
     is_translation = fields.BooleanField()
 
-    has_date_radical = fields.BooleanField()
+    has_date_radical = fields.KeywordField()
 
     authors = fields.ObjectField(
         attr="get_authors_source_text",
@@ -166,7 +169,9 @@ class ResourceDocument(Document):
     def _get_subjects(self, instance, prefix):
         subjects = [
             {"label": item.label}
-            for item in instance.subjects.filter(vocabulary__prefix__in=prefix)
+            for item in instance.subjects.filter(vocabulary__prefix__in=prefix).exclude(
+                label__iexact="radicalism"
+            )
         ]
 
         for relationship in instance.get_paratext():
@@ -250,6 +255,9 @@ class ResourceDocument(Document):
     def prepare_classifications_paratext(self, instance):
         return self._get_classifications(instance, "rt-pt")
 
+    def prepare_classifications_paratext_functions(self, instance):
+        return self._get_classifications(instance, "rt-ptf")
+
     def prepare_contributions(self, instance):
         contributions = [
             {
@@ -260,23 +268,20 @@ class ResourceDocument(Document):
                     else (
                         "Anonymous"
                         if item.agent.name.startswith("Anon")
-                        else item.agent.name
+                        else item.agent.get_index_name()
                     ),
                 },
                 "roles": [
                     {
                         "label": f"{role.label} of translation paratext"
-                        if instance.is_paratext()
+                        if item.resource.is_paratext()
                         else role.label
                         for role in item.roles.all()
                     }
                 ],
             }
-            for item in instance.contributions.all()
+            for item in instance.get_contributions(include_paratext=True)
         ]
-
-        for relationship in instance.get_paratext():
-            contributions.extend(self.prepare_contributions(relationship.resource))
 
         if contributions:
             contributions.append(
@@ -370,3 +375,9 @@ class ResourceDocument(Document):
             )
 
         return events
+
+    def prepare_has_date_radical(self, instance):
+        if instance.has_date_radical():
+            return "yes"
+
+        return "no"

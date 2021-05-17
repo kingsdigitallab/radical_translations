@@ -2,3 +2,25 @@
 
 {% block search_header %}Resources{% endblock search_header %}
 {% block title %}Resources{% endblock title %}
+
+{% block results_default %}
+{% include 'vue/resources/search_results.html' %}
+{% endblock results_default %}
+
+{% block results_map_popup %}
+<p v-if="map.popup.item" class="title">
+  <a :href="map.popup.item.id"><span>{[ map.popup.item.title[0] ]}</span></a>
+  <span v-if="map.popup.item.is_original" class="badge badge-secondary">Original</span>
+  <span v-if="map.popup.item.is_translation" class="badge badge-secondary">Translation</span>
+  <br>
+  <span v-if="map.popup.item.date_display">{[ map.popup.item.date_display ]}</span>
+  <span>{[ map.popup.place.address ]}, {[ map.popup.place.country.name ]}</span>
+</p>
+{% endblock results_map_popup %}
+
+{% block javascript %}
+<script>
+  const options = {{ ds.SEARCH_OPTIONS.resources|safe }}
+</script>
+{{ block.super }}
+{% endblock javascript %}

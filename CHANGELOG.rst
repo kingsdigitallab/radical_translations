@@ -11,7 +11,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
-[Unreleased] - yyyy-mm-dd
+[Unreleased] - 2021-05-17
 --------------------
 
 Added
@@ -19,13 +19,58 @@ Added
 * Events visualisation.
 * Map clustering.
 * GitHub action for CI.
+* Map clustering.
+* Docs: data workflow diagram.
+* Blog tags navigation.
+* Radical markers to `Resource` detail view.
+* Radical markers to the search index and search results.
+* Add search options to the settings.
+* `Place` API view.
+* Load analytics setting.
+* GitHub action for CI.
+* Command to export `Resources` to a CSV file.
+* Command to export `Organisations` and `Persons` to CSV files.
+* Command to export `Events` to a CSV file.
+* Docs: data model fields concordance.
+* Command to export `Places` to a CSV file.
+* Convert notes and summary URLs into clickable links.
+* Badge for related resources that have a paratext.
+* Paratext functions vocabulary.
+* Radical date filter.
 
 Changed
 ~~~~~~~
 * Add profiles_ to the `pa11y`, `mongo` and `kibana` services in `local.yml`.
 * Docs: update data models and architecture diagrams.
+* Add paratext term `Revolutionary calendar use` to `Resources` that have a radical date.
+* Modal map view uses an API call to get `Place` information rather than loading a Django view.
+* Upgrade Wagtail_ to version 2.12.
+* `Bump pillow to 7.1`_. 
+* Exclude libraries from the list of `Organisations`.
+* Exclude radicalism from the subject filter.
+* Order/display `Resources` contributor filter by `family name, given name`.
+* Order/display of `Contributions`.
+* Labels and descriptions of the classification vocabularies.
+* Split paratext terms vocabulary in two, paratext forms and paratext functions.
+
+Fixed
+~~~~~
+* Validation errors in `CHANGELOG`.
+* Search results map loading delay.
+* Date interval parsing issues.
+* Search results map not updating.
+* Error when trying to add a map link to a publication place that is only a fictional place.
+* The ordering of reverse relationships.
+
+Removed
+~~~~~~~
+* `Place` detail view.
+* Radical marker from dates.
+* Radical markers filter from the search.
+* Revolutionary calendar used filter from paratext filters.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
+.. _Bump pillow to 7.1: https://github.com/kingsdigitallab/radical_translations/pull/5
 
 
 [1.0.0] - 2021-01-27
@@ -46,8 +91,7 @@ Added
 
 Changed
 ~~~~~~~
-* `is_original` to include resources that are marked both as `original` and
-`source text`.
+* `is_original` to include resources that are marked both as `original` and `source text`.
 * Exclude the original/source text terms from being indexed with the translation terms.
 * `Source text` and `translation` moved to top level filters.
 * Split filters view into main and secondary.
@@ -62,7 +106,7 @@ Fixed
 
 
 [0.10.3] - 2021-01-12
---------------------
+---------------------
 
 Added
 ~~~~~
@@ -202,7 +246,6 @@ Fixed
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
 .. _Django email: https://docs.djangoproject.com/en/3.0/topics/email/
 .. _Wagtail: https://wagtail.io/
-.. _Fabric: https://fabfile.org/
 .. _Controlled Vocabulary: https://github.com/kingsdigitallab/django-controlled-vocabulary/
 
 
@@ -218,7 +261,7 @@ Added
 * Fabric_ script for remote task automation.
 * Zotero_ integration_ to harvest bibliographic data from Zotero.
 
-.. _Fabric: https://www.fabfile.org/
+.. _Fabric: https://fabfile.org/
 .. _Zotero: https://www.zotero.org/
 .. _integration: https://django-kdl-wagtail.readthedocs.io/en/latest/readme.html#features
 
@@ -315,7 +358,7 @@ Changed
 
 
 [0.10.0] - 2020-12-07
---------------------
+---------------------
 
 Added
 ~~~~~
@@ -425,7 +468,6 @@ Fixed
 .. _Docker Compose: https://docs.docker.com/compose/compose-file/#restart
 .. _Django email: https://docs.djangoproject.com/en/3.0/topics/email/
 .. _Wagtail: https://wagtail.io/
-.. _Fabric: https://fabfile.org/
 .. _Controlled Vocabulary: https://github.com/kingsdigitallab/django-controlled-vocabulary/
 
 
@@ -441,7 +483,7 @@ Added
 * Fabric_ script for remote task automation.
 * Zotero_ integration_ to harvest bibliographic data from Zotero.
 
-.. _Fabric: https://www.fabfile.org/
+.. _Fabric: https://fabfile.org/
 .. _Zotero: https://www.zotero.org/
 .. _integration: https://django-kdl-wagtail.readthedocs.io/en/latest/readme.html#features
 
@@ -558,8 +600,7 @@ Changed
 
 Fixed
 ~~~~~
-* Constraint on unique titles, it potentially caused duplicate entries under race
-conditions.
+* Constraint on unique titles, it potentially caused duplicate entries under race conditions.
 
 
 [0.3.0] - 2020-05-11

@@ -46,6 +46,7 @@ body {
   background: url('../images/rt-bg.svg') no-repeat top left
     lighten($old-yellow, 30%);
   background-size: 135% auto;
+  overflow-wrap: break-word;
 }
 
 .badge {
@@ -87,6 +88,10 @@ strong {
   }
 }
 
+.collapsed-bottom {
+  margin-bottom: 0;
+}
+
 footer {
   background: white;
   border-top: 15px solid $dark-gray;
@@ -122,12 +127,13 @@ footer {
   font-size: 1.125rem;
 
   .author,
-  .date {
+  .date,
+  .form,
+  .topic {
     &::before {
       display: inline-block;
-      height: 10px;
       margin-right: 0.25rem;
-      width: 10px;
+      width: 16px;
     }
   }
 
@@ -140,6 +146,22 @@ footer {
   .date {
     &::before {
       content: url('/static/fontawesome/svgs/solid/calendar.svg');
+    }
+  }
+
+  .form {
+    &::before {
+      content: url('/static/fontawesome/svgs/solid/mail-bulk.svg');
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  .topic {
+    &::before {
+      content: url('/static/fontawesome/svgs/solid/tags.svg');
+      height: 16px;
+      width: 16px;
     }
   }
 
@@ -667,7 +689,74 @@ figure {
   & + p {
     padding-top: 1rem;
     margin-bottom: 1rem;
-    // margin-top: 1rem;
+  }
+}
+
+// Resources key
+
+.key {
+  background: $kaki;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  z-index: 1000;
+
+  button {
+    background: $dark-gray;
+    border: 0;
+    color: $dirt;
+    margin-right: -10px;
+    padding: 10px 20px 20px 10px;
+    transform: rotate(-90deg);
+
+    .heading {
+      font-size: 18px;
+      &::after,
+      &::before {
+        display: inline-block;
+        filter: invert(1);
+        width: 20px;
+      }
+
+      &::before {
+        content: url('/static/fontawesome/svgs/solid/key-skeleton.svg');
+        padding-right: 6px;
+      }
+    }
+
+    &[aria-expanded="true"] {
+      padding-bottom: 5px;
+      transform: rotate(0);
+      width: 100%;
+
+      .heading {
+
+        &::after {
+          content: url('/static/fontawesome/svgs/solid/times.svg');
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+
+  .key-icons {
+    margin-bottom: 0;
+    padding: 16px;
+  }
+
+  li {
+    border-bottom: 1px solid $white;
+    list-style: none;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  .small-icon {
+    svg {
+      fill: $black;
+    }
   }
 }
 
@@ -819,7 +908,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
-  // Images ind Draftail text editor
+  // Images in Draftail text editor
 
   .left,
   .right {
@@ -1087,6 +1176,27 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 /* Agents / Persons */
 
+.false,
+.fictional {
+  &::after {
+    display: inline-block;
+    padding-left: 4px;
+    width: 18px;
+  }  
+}
+
+.false {
+  &::after {
+    content: url('/static/fontawesome/svgs/solid/no-veracity.svg');
+  }
+}
+
+.fictional {
+  &::after {
+    content: url('/static/fontawesome/svgs/solid/map-marker-plus.svg');
+  }
+}
+
 .noble {
   svg {
     height: 16px;
@@ -1095,6 +1205,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .radical,
+.radicalism,
 .uncertain,
 .uncertainty,
 .unknown {
@@ -1106,7 +1217,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-.radical {
+.radical,
+.radicalism {
   &::before {
     content: url('/static/images/phrygian-cap.svg');
     height: 16px;
@@ -1140,6 +1252,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 // Events timeline
+
 .events {
   background: lighten($radical-red, 40%);
   border-bottom-right-radius: 4px;
@@ -1192,6 +1305,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 // Search
+
 .filter {
   text-align: left;
 }
@@ -1253,6 +1367,29 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   height: 70vh;
 }
 
+#map-popup-container {
+  display: none;
+}
+
+// Adjusting colour contrast for accessibility purpose
+.vue-slider-dot-tooltip-text,
+.vue-slider-dot-tooltip-inner {
+  background-color: $prussian-blue !important;
+  border-color: $prussian-blue !important;
+}
+
+.vue-slider-process {
+  background-color: $prussian-blue !important;
+}
+
+// Adding focus status to slider handle to make it accessible
+.vue-slider-dot,
+.vue-slider-dot-handle-focus {
+  &:focus {
+    border: 1px solid $radical-red !important;
+  }
+}
+
 /* End map styling */
 
 .search-result {
@@ -1265,6 +1402,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .search-results-list {
   margin-left: 1rem;
   padding-left: 2rem;
+
+  li {
+    border-bottom: 1px solid $kaki;
+    margin: 1rem 0 0 0.5rem;
+  }
+
+  .title {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .spacing {

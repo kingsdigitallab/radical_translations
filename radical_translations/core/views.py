@@ -54,17 +54,22 @@ class ResourceViewSet(DocumentViewSet):
     lookup_field = "id"
 
     faceted_search_fields = {
-        "paratext": {
+        "paratext_forms": {
             "field": "classifications_paratext.edition.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "printing_and_publishing": {
+        "paratext_functions": {
+            "field": "classifications_paratext_functions.edition.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+        "printing_and_publishing_status": {
             "field": "classifications_printing_publishing.edition.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "translation_terms": {
+        "translations_status": {
             "field": "classifications_translation.edition.label.raw",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
@@ -133,11 +138,12 @@ class ResourceViewSet(DocumentViewSet):
     }
 
     filter_fields = {
-        "paratext": "classifications_paratext.edition.label.raw",
-        "printing_and_publishing": (
+        "paratext_forms": "classifications_paratext.edition.label.raw",
+        "paratext_functions": "classifications_paratext_functions.edition.label.raw",
+        "printing_and_publishing_status": (
             "classifications_printing_publishing.edition.label.raw"
         ),
-        "translation_terms": "classifications_translation.edition.label.raw",
+        "translations_status": "classifications_translation.edition.label.raw",
         "contributor": "contributions.agent.name.raw",
         "contributor_role": "contributions.roles.label.raw",
         "year": "year",
@@ -182,9 +188,14 @@ class ResourceViewSet(DocumentViewSet):
 
     pagination_class = PageNumberPagination
 
+    title_search_options = ES_FUZZINESS_OPTIONS
+    title_search_options["boost"] = 4
+    author_search_options = ES_FUZZINESS_OPTIONS
+    author_search_options["boost"] = 2
+
     search_fields = {
-        "title": ES_FUZZINESS_OPTIONS,
-        "authors.person.name": ES_FUZZINESS_OPTIONS,
+        "title": title_search_options,
+        "authors.person.name": author_search_options,
         "content": ES_FUZZINESS_OPTIONS,
     }
 

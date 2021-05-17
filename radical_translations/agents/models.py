@@ -1,5 +1,6 @@
 from typing import Dict, Optional
 
+from django.conf import settings
 from django.db import models
 from model_utils.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
@@ -9,9 +10,15 @@ from controlled_vocabulary.utils import search_term_or_none
 from geonames_place.models import Place
 from radical_translations.utils.models import (
     Date,
+    date_to_dict,
+    get_controlled_terms_str,
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
+    place_to_dict_value,
 )
+
+csv_field_sep = settings.EXPORT_FIELD_SEPARATOR
+csv_multi_sep = settings.EXPORT_MULTIVALUE_SEPARATOR
 
 # These models are based on the BIBFRAME 2.0 Agent Model, which is based on FOAF
 # http://xmlns.com/foaf/spec/#term_Agent
@@ -74,6 +81,9 @@ class Agent(PolymorphicModel, TimeStampedModel):
     def title(self) -> str:
         return self.name
 
+    def get_index_name(self) -> str:
+        return self.name
+
     def get_place_names(self) -> str:
         return "; ".join([place.address for place in self.based_near.all()])
 
@@ -83,6 +93,24 @@ class Agent(PolymorphicModel, TimeStampedModel):
         return "; ".join([role.label for role in self.roles.all()])
 
     get_role_names.short_description = "Roles"  # type: ignore
+
+    def to_dict(self) -> str:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "based_near": f"{csv_multi_sep} ".join(
+                [place_to_dict_value(p) for p in self.based_near.all()]
+            ),
+            "page": get_controlled_terms_str(self.page.all()),
+            "roles": get_controlled_terms_str(self.roles.all()),
+            "sources": f"{csv_multi_sep} ".join(
+                [r.to_dict_value() for r in self.sources.all()]
+            ),
+            "notes": self.notes,
+        }
+
+    def to_dict_value(self) -> str:
+        return f"{self.agent_type}{csv_field_sep}{self.id}{csv_field_sep}{self.name}"
 
 
 class Person(Agent):
@@ -176,10 +204,42 @@ class Person(Agent):
     class Meta:
         ordering = ["family_name", "given_name", "name"]
 
+    def get_index_name(self) -> str:
+        if self.family_name and self.given_name:
+            return f"{self.family_name}, {self.given_name}"
+
+        if self.family_name:
+            return self.family_name
+
+        if self.given_name:
+            return self.given_name
+
+        return super().get_index_name()
+
     def get_main_places_names(self) -> str:
         return "; ".join([place.address for place in self.main_places.all()])
 
     get_main_places_names.short_description = "Main places"  # type: ignore
+
+    def to_dict(self) -> Dict:
+        return {
+            **super().to_dict(),
+            "given_name": self.given_name,
+            "family_name": self.family_name,
+            "gender": self.gender,
+            "noble": self.noble,
+            "main_places": f"{csv_multi_sep} ".join(
+                [place_to_dict_value(p) for p in self.main_places.all()]
+            ),
+            **date_to_dict(self.date_birth, label="date_birth"),
+            "place_birth": place_to_dict_value(self.place_birth),
+            "place_death": place_to_dict_value(self.place_death),
+            **date_to_dict(self.date_death, label="date_death"),
+            "languages": get_controlled_terms_str(self.languages.all()),
+            "knows": f"{csv_multi_sep} ".join(
+                [agent.to_dict_value() for agent in self.knows.all()]
+            ),
+        }
 
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Person"]:
@@ -275,6 +335,14 @@ class Organisation(Agent):
         help_text="Members of this organisation",
     )
 
+    def to_dict(self) -> Dict:
+        return {
+            **super().to_dict(),
+            "members": f"{csv_multi_sep} ".join(
+                [agent.to_dict_value() for agent in self.members.all()]
+            ),
+        }
+
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Organisation"]:
         """Gets or creates a new `Organisation` from a Google Spreadsheet dictionary
@@ -299,5 +367,4 @@ class Organisation(Agent):
             org.based_near.add(place)
 
         org.save()
-
         return org

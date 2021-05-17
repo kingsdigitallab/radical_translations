@@ -9,20 +9,32 @@
 {% with date=object.get_date %}
 {% if date %}
 <span class="metadata-block">
-  {% if date.date_radical %}<span class="sr-only">Radical date</span>{% endif %}
-  <span{% if date.date_radical %} class="radical"{% endif %}>
-    {# Font Awesome Mars icon #}
-    {% include "svgs/solid/calendar.svg" %}
-    {{ date }}
-  </span>
+  {# Font Awesome calendar icon #}
+  {% include "svgs/solid/calendar.svg" %}
+  {{ date }}
 </span>
 {% endif %}
 {% endwith %}
 
-{% if object.subjects.all %}
+{% if object.get_subjects_topic %}
 <span class="metadata-block">
-  {% for subject in object.subjects.all %}
-  {{ subject.label }}{% if not forloop.last %}, {% endif %}
+  <span class="topic">
+    {% if object.is_radical %}
+    {% include "svgs/solid/phrygian-cap.svg" %} 
+    {% endif %}
+    <strong>Topics: </strong>
+  </span>
+  {% for subject in object.get_subjects_topic %}
+  <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</span>
+{% endif %}
+
+{% if object.get_subjects_other %}
+<span class="metadata-block">
+  <span class="form"><strong>Forms: </strong></span>
+  {% for subject in object.get_subjects_other %}
+  <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}
   {% endfor %}
 </span>
 {% endif %}
@@ -34,18 +46,24 @@
 {% endif %}
 
 {% if object.classifications.all %}
+{% regroup object.classifications.all by edition.vocabulary as classifications %}
+
+{% for classification in classifications %}
 <span class="metadata-block">
-  {% for classification in object.classifications.all %}
-  {% with edition=classification.edition %}
+  <strong>{{ classification.grouper }}:</strong>
+  {% for item in classification.list %}
+  {% with edition=item.edition tags=item.classification.all %}
   <a
+    {% if tags %}class="{% for tag in tags %}{{ tag.label }}{% endfor %}"{% endif %}
     {% if edition.description %}
     href="#"
     data-toggle="tooltip"
     title="{{ edition.description }}"
-    {% endif %}>{{ edition.label }}</a>
+    {% endif %}>{{ edition.label }}</a>{% if not forloop.last %}, {% endif %}
   {% endwith %}
   {% endfor %}
 </span>
+{% endfor %}
 {% endif %}
 
 {% if object.languages.all %}
@@ -62,9 +80,22 @@
 <span class="metadata-block">
   {# Font Awesome map-marker-alt icon #}
   {% include "svgs/solid/map-marker-alt.svg" %}
+
+  {% spaceless %}
   {% for place in object.places.all %}
-  {% include 'geonames_place/includes/place.html' with place=place.place %}{% if not forloop.last %}, {% endif %}
+  {% with tags=place.classification.all %}
+  {% if place.fictional_place %}
+  <span class="fictional{% for tag in tags %} {{ tag.label|lower }}{% endfor %}">{{ place }} </span>
+  {% endif %}
+
+  {% if place.place.id %}
+  {% include 'geonames_place/includes/place.html' with place=place.place tags=tags %}
+  {% endif %}
+
+  {% if not forloop.last %}<span>, </span>{% endif %}
+  {% endwith %}
   {% endfor %}
+  {% endspaceless %}
 </span>
 {% endif %}
 
@@ -89,27 +120,24 @@
 {% if object.contributions.count %}
 <h2>Contributions</h2>
 <dl>
-  {% for contribution in object.contributions.all %}
+  {% for contribution in object.get_contributions %}
   <dt>
   {% for classification in contribution.classification.all %}
-  {% if classification.label == "uncertainty" %}
   {# Font Awesome question icon #}
-  <span class="small-icon uncertainty">
-    <span class="sr-only">Uncertain</span>
+  <span class="small-icon {{ classification.label|lower }}">
+    <span class="sr-only">{{ classification.label }}</span>
   </span>
-  {% endif %}
   {% endfor %}
   <a href="{% url 'agent-detail' contribution.agent.pk %}">
+    {% if contribution.published_as %}
+    {{ contribution.published_as }} ({{ contribution.agent.name }})
+    {% else %}
     {{ contribution.agent.name }}
+    {% endif %}
   </a>
   </dt>
   {% for role in contribution.roles.all %}
   <dd>{{ role.label }}</dd>
-  {% endfor %}
-  {% for classification in contribution.classification.all %}
-  {% if classification.label != "uncertainty" %}
-  <dd class="{{ classification.label }}">{{ classification.label }}</dd>
-  {% endif %}
   {% endfor %}
   {% endfor %}
 </dl>
@@ -125,7 +153,7 @@
   {% endif %}
 
   {% if object.related_to.count %}
-  {% for relationship in object.related_to.all %}
+  {% for relationship in object.get_related_resources %}
   {% include "core/includes/relationship.html" with label=relationship.relationship_type.label related=relationship.resource %}
   {% endfor %}
   {% endif %}
@@ -145,7 +173,7 @@
 
 {% if object.summary %}
 <h2>Summary</h2>
-<p>{{ object.summary }}</p>
+<p>{{ object.summary|urlize }}</p>
 {% endif %}
 
 {% if object.held_by.count %}

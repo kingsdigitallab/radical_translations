@@ -1,5 +1,6 @@
 from typing import Dict, List, Optional
 
+from django.conf import settings
 from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.models import TimeStampedModel
@@ -15,9 +16,15 @@ from radical_translations.agents.models import Agent, Organisation, Person
 from radical_translations.utils.models import (
     Date,
     EditorialClassificationModel,
+    date_to_dict,
+    get_controlled_terms_str,
     get_geonames_place_from_gsx_place,
     get_gsx_entry_value,
+    place_to_dict_value,
 )
+
+csv_field_sep = settings.EXPORT_FIELD_SEPARATOR
+csv_multi_sep = settings.EXPORT_MULTIVALUE_SEPARATOR
 
 # These models are based on the BIBFRAME 2.0 Model
 # https://www.loc.gov/bibframe/docs/bibframe2-model.html
@@ -49,6 +56,9 @@ class Title(TimeStampedModel):
             return f"{self.main_title}: {self.subtitle}"
 
         return self.main_title
+
+    def to_dict(self) -> Dict:
+        return {"title.main_title": self.main_title, "title.subtitle": self.subtitle}
 
     @staticmethod
     def get_or_create(
@@ -212,6 +222,46 @@ class Resource(TimeStampedModel):
 
     get_classification_edition.short_description = "Edition"  # type: ignore
 
+    def get_contributions(
+        self, include_paratext: bool = False
+    ) -> Optional[List["Contribution"]]:
+        contributions = []
+
+        for role in settings.CONTRIBUTION_MAIN_ROLES:
+            contributions.extend(self.get_contributions_by_role(role))
+
+        for role in settings.CONTRIBUTION_MAIN_ROLES:
+            contributions.extend(
+                self.get_contributions_by_role(
+                    role, include_resource=False, include_paratext=include_paratext
+                )
+            )
+
+        for role in settings.CONTRIBUTION_OTHER_ROLES:
+            contributions.extend(
+                self.get_contributions_by_role(role, include_paratext=include_paratext)
+            )
+
+        return contributions
+
+    def get_contributions_by_role(
+        self, role: str, include_resource: bool = True, include_paratext: bool = False
+    ) -> Optional[List["Contribution"]]:
+        contributions = []
+
+        if include_resource:
+            contributions = list(self.contributions.filter(roles__label=role))
+
+        if include_paratext:
+            for relationship in self.get_paratext():
+                contributions.extend(
+                    relationship.resource.get_contributions_by_role(
+                        role, include_paratext
+                    )
+                )
+
+        return contributions
+
     def get_language_names(self) -> str:
         return "; ".join([rl.language.label for rl in self.languages.all()])
 
@@ -221,6 +271,59 @@ class Resource(TimeStampedModel):
         return "; ".join([str(rp) for rp in self.places.all()])
 
     get_place_names.short_description = "Places"  # type: ignore
+
+    def get_radical_markers_range(self) -> List[int]:
+        return range(0, self.get_radical_markers())
+
+    def get_radical_markers(self) -> int:
+        markers = 0
+
+        if not self.is_paratext() and self.has_date_radical():
+            markers = markers + 1
+
+        markers = markers + self._get_radical_markers()
+
+        return markers
+
+    def _get_radical_markers(self) -> int:
+        markers = 0
+
+        for subject in self.subjects.all():
+            if self._is_radical_label(subject.label):
+                markers = markers + 1
+
+        for classification in self.classifications.all():
+            for tag in classification.classification.all():
+                if self._is_radical_label(tag.label):
+                    markers = markers + 1
+
+        for contribution in self.contributions.all():
+            for classification in contribution.classification.all():
+                if self._is_radical_label(classification.label):
+                    markers = markers + 1
+
+        for relationship in self.get_paratext():
+            markers = markers + relationship.resource._get_radical_markers()
+
+        return markers
+
+    def _is_radical_label(self, label):
+        return "radical" in label
+
+    def get_related_resources(self):
+        return self.related_to.order_by(
+            "resource__date", "relationship_type", "resource__title"
+        )
+
+    def get_subjects_topic(self) -> List[ControlledTerm]:
+        return self.subjects.filter(vocabulary__prefix="fast-topic").order_by("label")
+
+    def get_subjects_other(self) -> List[ControlledTerm]:
+        return (
+            self.subjects.exclude(vocabulary__prefix="fast-topic")
+            .exclude(label="radicalism")
+            .order_by("label")
+        )
 
     def has_date_radical(self) -> bool:
         if self.date:
@@ -244,6 +347,9 @@ class Resource(TimeStampedModel):
         )
 
     is_paratext.boolean = True  # type: ignore
+
+    def is_radical(self) -> bool:
+        return self.subjects.filter(label__iexact="radicalism").count() == 1
 
     def is_translation(self) -> bool:
         return (
@@ -277,6 +383,40 @@ class Resource(TimeStampedModel):
                 return relationship.related_to.date
 
         return self.date
+
+    def to_dict(self) -> Dict:
+        return {
+            "id": self.id,
+            **self.title.to_dict(),
+            **date_to_dict(self.date),
+            "subjects.topics": get_controlled_terms_str(self.get_subjects_topic()),
+            "subjects.form_genre": get_controlled_terms_str(self.get_subjects_other()),
+            "edition_enumeration": self.edition_enumeration,
+            "classifications": f"{csv_multi_sep} ".join(
+                [c.to_dict_value() for c in self.classifications.all()]
+            ),
+            "contributions": f"{csv_multi_sep} ".join(
+                [c.to_dict_value() for c in self.contributions.all()]
+            ),
+            "languages": f"{csv_multi_sep} ".join(
+                [str(lang) for lang in self.languages.all()]
+            ),
+            "places": f"{csv_multi_sep} ".join(
+                [rp.to_dict_value() for rp in self.places.all()]
+            ),
+            "relationships": f"{csv_multi_sep} ".join(
+                [r.to_dict_value() for r in self.relationships.all()]
+            ),
+            "held_by": f"{csv_multi_sep} ".join(
+                [lib.to_dict_value() for lib in self.held_by.all()]
+            ),
+            "electronic_locator": self.electronic_locator,
+            "summary": self.summary,
+            "notes": self.notes,
+        }
+
+    def to_dict_value(self) -> str:
+        return f"{self.id}{csv_field_sep}{self.title}"
 
     @staticmethod
     def from_gsx_entry(entry: Dict[str, Dict[str, str]]) -> Optional["Resource"]:
@@ -472,7 +612,7 @@ class Classification(TimeStampedModel, EditorialClassificationModel):
     )
 
     edition = ControlledTermField(
-        ["rt-ppt", "rt-tt", "rt-pt"],
+        ["rt-ppt", "rt-tt", "rt-pt", "rt-ptf"],
         on_delete=models.CASCADE,
         related_name="classifications",
         help_text=(
@@ -481,8 +621,14 @@ class Classification(TimeStampedModel, EditorialClassificationModel):
         ),
     )
 
+    class Meta:
+        ordering = ["edition__vocabulary", "edition__label"]
+
     def __str__(self) -> str:
         return self.edition.label
+
+    def to_dict_value(self) -> str:
+        return f"{self.edition.label} ({self.edition.vocabulary.label})"
 
     @staticmethod
     def get_or_create(resource: Resource, term: str) -> Optional["Classification"]:
@@ -543,7 +689,17 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
         if self.published_as:
             agent = f"{self.published_as} ({agent})"
 
-        return f"{agent}"
+        return f"[{'; '.join([r.label for r in self.roles.all()])}] {agent}"
+
+    def to_dict_value(self) -> str:
+        agent = self.agent.to_dict_value()
+        if self.published_as:
+            agent = f"{self.published_as} ({agent})"
+
+        return (
+            f"{f'{csv_multi_sep} '.join([r.label for r in self.roles.all()])}"
+            f"{csv_field_sep}{agent}"
+        )
 
     @staticmethod
     def from_gsx_entry(
@@ -655,6 +811,17 @@ class ResourcePlace(TimeStampedModel, EditorialClassificationModel):
 
         return self.place.address
 
+    def to_dict_value(self) -> str:
+        if not self.place:
+            return self.fictional_place
+
+        place = place_to_dict_value(self.place)
+
+        if self.fictional_place:
+            return f"{self.fictional_place} ({place})"
+
+        return place
+
 
 class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     """Any relationship between resources."""
@@ -682,6 +849,16 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     def __str__(self) -> str:
         return f"{self.resource} -> {self.relationship_type.label} -> {self.related_to}"
 
+    def get_classification(self) -> List[ControlledTerm]:
+        return self.classification.exclude(label="radicalism")
+
+    def to_dict_value(self) -> str:
+        return (
+            f"{f'{csv_multi_sep} '.join([c.label for c in self.classification.all()])}"
+            f"{csv_field_sep}{self.relationship_type.label}{csv_field_sep}{self.id}"
+            f"{csv_field_sep}{self.related_to}"
+        )
+
     @staticmethod
     def get_or_create(
         resource: Resource, relationship: str, related_to: Resource
@@ -696,5 +873,4 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
         rr, _ = ResourceRelationship.objects.get_or_create(
             resource=resource, relationship_type=term, related_to=related_to
         )
-
         return rr

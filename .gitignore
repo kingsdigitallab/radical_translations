@@ -288,3 +288,7 @@ package-lock.json
 /geonames_place
 /kdl_wagtail
 /python-edtf
+
+events.json
+
+radical_translations/static/viz/

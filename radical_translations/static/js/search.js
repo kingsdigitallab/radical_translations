@@ -1,43 +1,6 @@
-const YEAR_MIN = 1516
-const YEAR_MAX = 1820
-
-const META_FACETS = ['meta']
-const RANGE_FACETS = ['year']
-
-Vue.component('bar-chart', {
-  extends: VueChartJs.Bar,
-  props: ['clickHandler'],
-  mixins: [VueChartJs.mixins.reactiveProp],
-  mounted() {
-    const self = this
-    this.renderChart(this.chartData, {
-      legend: { display: false },
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true
-            }
-          }
-        ]
-      },
-      onClick: function (evt, item) {
-        if (item.length > 0) {
-          const year = item[0]['_model'].label
-          self.clickHandler(year, year)
-        }
-      }
-    })
-  }
-})
-
 new Vue({
   el: '#app',
   components: {
-    'l-map': window.Vue2Leaflet.LMap,
-    'l-marker': window.Vue2Leaflet.LMarker,
-    'l-popup': window.Vue2Leaflet.LPopup,
-    'l-tile-layer': window.Vue2Leaflet.LTileLayer,
     'vue-slider': window['vue-slider-component']
   },
   delimiters: ['{[', ']}'],
@@ -48,7 +11,8 @@ new Vue({
     ),
     query: '',
     query_text: '',
-    query_dates: [YEAR_MIN, YEAR_MAX],
+    query_dates: [options.year_min, options.year_max],
+    has_date_query: false,
     filters: [],
     ordering_default: 'score',
     ordering: 'score',
@@ -60,10 +24,12 @@ new Vue({
       { key: '-year', value: 'Year descending' }
     ],
     page: 1,
+    page_size: options.page_size !== undefined ? options.page_size : 50,
     rangeMarks: (v) => v % 10 === 0,
     data: [],
     data_suggest: [],
     map: {
+      mapObject: null,
       options: {
         zoomSnap: 0.5
       },
@@ -72,7 +38,11 @@ new Vue({
       zoom: 4,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      popup: {
+        item: null,
+        place: null
+      }
     }
   },
   watch: {
@@ -80,34 +50,43 @@ new Vue({
       await this.getSuggestions()
     }, 250),
     page: _.debounce(async function () {
-      this.data = await this.search()
+      await this.search()
     }, 250),
     ordering: async function (newOrdering, oldOrdering) {
-      this.data = await this.search()
+      await this.search()
     },
     filters: async function (newFilters, oldFilters) {
       this.page = 1
-      this.data = await this.search()
+      await this.search()
     },
-    'map.show': function (newShow, oldShow) {
+    'map.show': async function (newShow, oldShow) {
       if (newShow) {
+        this.page = 1
+        this.page_size = 1000
         dispatchWindowResizeEvent()
+        await this.search()
+        this.renderMap()
+      } else {
+        this.page_size = options.page_size
+        await this.search()
       }
     }
   },
   created: async function () {
     this.loadSearchParams()
-    this.data = await this.search()
+    await this.search()
+    this.initMap()
   },
   computed: {
     facets: function () {
       return this.getFacets().filter(
-        (f) => ![...META_FACETS, ...RANGE_FACETS].includes(f.name)
+        (f) =>
+          ![...options.meta_facets, ...options.range_facets].includes(f.name)
       )
     },
     metaFacets: function () {
       const facets = this.getFacets().filter((f) =>
-        META_FACETS.includes(f.name)
+        options.meta_facets.includes(f.name)
       )
       if (facets.length == 1) {
         return facets[0]
@@ -117,7 +96,7 @@ new Vue({
     },
     rangeFacets: function () {
       const facets = this.getFacets().filter((f) =>
-        RANGE_FACETS.includes(f.name)
+        options.range_facets.includes(f.name)
       )
 
       return facets
@@ -137,6 +116,40 @@ new Vue({
       }
 
       return suggestions
+    },
+    eventsChartData: function () {
+      if (!this.data || !this.data.results) {
+        return {}
+      }
+
+      const labels = this.data.facets._filter_country.country.buckets.map(
+        (f) => f.key
+      )
+
+      events = { labels: labels, datasets: [] }
+
+      labels.forEach((label, idx) => {
+        let dataset = { label: label, data: [] }
+        this.data.results.forEach((item) => {
+          if (item.place.country.name === label) {
+            dataset.data.push({
+              x: item.year,
+              y: idx,
+              r: item.related_to.length + 10,
+              meta: {
+                title: item.title,
+                date: item.date,
+                place: item.place.address,
+                resources: item.related_to.length
+              }
+            })
+          }
+        })
+
+        events.datasets.push(dataset)
+      })
+
+      return events
     }
   },
   methods: {
@@ -147,7 +160,7 @@ new Vue({
       this.filters = []
       this.page = 1
       this.query = ''
-      this.query_dates = [YEAR_MIN, YEAR_MAX]
+      this.query_dates = [options.year_min, options.year_max]
     },
     getBucketValue: function (bucket) {
       return bucket.key_as_string ? bucket.key_as_string : bucket.key
@@ -161,25 +174,30 @@ new Vue({
         }))
     },
     getFacets: function () {
+      return this.getFacetsCache(this.data)
+    },
+    getFacetsCache: _.memoize(function (data) {
       let facets = []
 
-      if (this.data.facets !== undefined) {
-        Object.keys(this.data.facets).forEach((f) => {
+      if (data.facets !== undefined) {
+        Object.keys(data.facets).forEach((f) => {
           const name = f.replace('_filter_', '')
           const range = name === 'year' ? true : false
-          let buckets = this.data.facets[f][name]['buckets']
+          let buckets = data.facets[f][name]['buckets']
           let chartData = {
             labels: [],
-            datasets: [{ label: 'Resources', backgroundColor: '#9b2923', data: [] }]
+            datasets: [
+              { label: options.label, backgroundColor: '#9b2923', data: [] }
+            ]
           }
 
           if (range) {
             //buckets = buckets.flatMap((b) => Array(b.doc_count).fill(b.key))
-            buckets.findIndex((b) => b.key === YEAR_MIN) === -1
-              ? buckets.unshift({ key: YEAR_MIN, count: 0 })
+            buckets.findIndex((b) => b.key === options.year_min) === -1
+              ? buckets.unshift({ key: options.year_min, count: 0 })
               : buckets
-            buckets.findIndex((b) => b.key === YEAR_MAX) === -1
-              ? buckets.push({ key: YEAR_MAX })
+            buckets.findIndex((b) => b.key === options.year_max) === -1
+              ? buckets.push({ key: options.year_max })
               : buckets
             chartData.labels = buckets.map((b) => b.key)
             chartData.datasets[0].data = buckets.map((b) => b.doc_count)
@@ -210,7 +228,7 @@ new Vue({
       })
 
       return facets
-    },
+    }),
     getFacetCount: function (buckets) {
       return buckets
         .map((el) => el.doc_count)
@@ -255,6 +273,12 @@ new Vue({
         params.delete(key)
       }
 
+      key = 'page_size'
+      if (params.has(key)) {
+        this.page_size = params.get(key)
+        params.delete(key)
+      }
+
       key = 'search'
       if (params.has(key)) {
         this.query = params.get(key)
@@ -277,22 +301,37 @@ new Vue({
         this.updateFilters([key.replace('__term', ''), params.get(key)])
       }
     },
-    rangeSearch: async function () {
+    rangeSearch: async function (reset = false) {
       this.page = 1
-      this.data = await this.search()
+      if (reset) {
+        this.query_dates = [options.year_min, options.year_max]
+      }
+      await this.search()
     },
     search: async function () {
+      this.data = await this.doSearch()
+      if (this.map.show) {
+        this.renderMap()
+      }
+    },
+    doSearch: async function () {
       const params = new URLSearchParams()
 
       if (this.query) {
         params.append('search', this.query)
       }
 
-      if (this.query_dates[0] !== YEAR_MIN) {
+      if (this.query_dates[0] !== options.year_min) {
         params.append('year__gte', this.query_dates[0])
       }
-      if (this.query_dates[1] !== YEAR_MAX) {
+      if (this.query_dates[1] !== options.year_max) {
         params.append('year__lte', this.query_dates[1])
+      }
+
+      if (params.has('year__gte') || params.has('year__lte')) {
+        this.has_date_query = true
+      } else {
+        this.has_date_query = false
       }
 
       if (!this.page || this.page > this.numberOfPages) {
@@ -300,6 +339,7 @@ new Vue({
       }
 
       params.append('page', this.page)
+      params.append('page_size', this.page_size)
 
       if (this.ordering !== this.ordering_default) {
         params.append('ordering', this.ordering)
@@ -325,7 +365,7 @@ new Vue({
         this.query = text
       }
 
-      this.data = await this.search()
+      await this.search()
     },
     updateFilters: function (filter) {
       if (this.hasFilter(filter)) {
@@ -335,6 +375,52 @@ new Vue({
       } else {
         this.filters.push(filter)
       }
+    },
+    initMap: async function () {
+      if (!document.getElementById('map')) return
+
+      const map = L.map('map')
+      map.setView(this.map.center, this.map.zoom)
+
+      L.tileLayer(this.map.url, {
+        attribution: this.map.attribution
+      }).addTo(map)
+
+      this.map.mapObject = map
+    },
+    renderMap: function () {
+      if (!this.map.mapObject) return
+
+      const map = this.map.mapObject
+      const cluster = L.markerClusterGroup()
+
+      const vue = this
+      this.data.results.forEach((item) =>
+        item.places.forEach((place) => {
+          if (place.place.geo !== undefined) {
+            cluster.addLayer(
+              L.marker(place.place.geo).on('click', function () {
+                const marker = this
+
+                vue.map.popup.item = item
+                vue.map.popup.place = place.place
+
+                vue.$nextTick(() =>
+                  marker
+                    .bindPopup(
+                      document.getElementById('map-popup-container').innerHTML
+                    )
+                    .openPopup()
+                )
+              })
+            )
+          }
+        })
+      )
+
+      map.addLayer(cluster)
+
+      map.whenReady(() => map.invalidateSize())
     }
   }
 })

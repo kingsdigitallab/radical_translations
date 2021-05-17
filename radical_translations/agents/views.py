@@ -17,6 +17,11 @@ class OrganisationListView(ListView):
         context["title"] = "Organisations"
         return context
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.exclude(roles__label="library")
+        return queryset
+
 
 class PersonListView(ListView):
     model = Person
