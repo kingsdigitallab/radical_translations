@@ -7,7 +7,7 @@
 anyascii==0.1.7
     # via wagtail
 argon2-cffi==19.2.0
-    # via -r requirements/base.in
+    # via -r base.in
 beautifulsoup4==4.8.2
     # via wagtail
 bibtexparser==1.2.0
@@ -23,9 +23,9 @@ chardet==3.0.4
 click==7.1.2
     # via geocoder
 convertdate==2.3.0
-    # via -r requirements/base.in
+    # via -r base.in
 coreapi==2.3.3
-    # via -r requirements/base.in
+    # via -r base.in
 coreschema==0.0.4
     # via coreapi
 decorator==4.4.2
@@ -33,42 +33,42 @@ decorator==4.4.2
 django-cogwheels==0.3
     # via wagtailmenus
 django-controlled-vocabulary==0.8
-    # via -r requirements/base.in
+    # via -r base.in
 django-crispy-forms==1.8.1
-    # via -r requirements/base.in
+    # via -r base.in
 django-elasticsearch-dsl-drf==0.20.8
-    # via -r requirements/base.in
+    # via -r base.in
 django-elasticsearch-dsl==7.1.4
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   django-elasticsearch-dsl-drf
 django-environ==0.4.5
-    # via -r requirements/base.in
+    # via -r base.in
 django-filter==2.4.0
     # via wagtail
 django-geonames-place==0.7.0
-    # via -r requirements/base.in
+    # via -r base.in
 django-kdl-wagtail==0.9.7
-    # via -r requirements/base.in
+    # via -r base.in
 django-model-utils==4.0.0
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   django-geonames-place
 django-modelcluster==5.1
     # via wagtail
 django-nine==0.2.3
     # via django-elasticsearch-dsl-drf
 django-polymorphic==2.1.2
-    # via -r requirements/base.in
+    # via -r base.in
 django-redis==4.11.0
-    # via -r requirements/base.in
+    # via -r base.in
 django-taggit==1.3.0
     # via wagtail
 django-treebeard==4.3.1
     # via wagtail
-django==2.2.10
+django==2.2.20
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   django-controlled-vocabulary
     #   django-filter
     #   django-model-utils
@@ -80,16 +80,16 @@ django==2.2.10
     #   wagtail
 djangorestframework==3.12.2
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   django-elasticsearch-dsl-drf
     #   wagtail
 draftjs-exporter==2.1.7
     # via wagtail
 edtf==4.0.1
-    # via -r requirements/base.in
+    # via -r base.in
 elasticsearch-dsl==7.2.1
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   django-elasticsearch-dsl
     #   django-elasticsearch-dsl-drf
 elasticsearch==7.7.1
@@ -126,7 +126,7 @@ pathlib==1.0.1
     # via pyzotero
 pillow==7.2.0
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   wagtail
 pycparser==2.20
     # via cffi
@@ -141,7 +141,7 @@ python-dateutil==2.8.1
     #   edtf
     #   elasticsearch-dsl
 python-slugify==4.0.0
-    # via -r requirements/base.in
+    # via -r base.in
 pytz==2019.3
     # via
     #   convertdate
@@ -150,12 +150,12 @@ pytz==2019.3
     #   l18n
     #   pyzotero
 pyzotero==1.4.16
-    # via -r requirements/base.in
+    # via -r base.in
 ratelim==0.1.6
     # via geocoder
 redis==3.4.1
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   django-redis
 requests==2.23.0
     # via
@@ -191,14 +191,14 @@ urllib3==1.25.9
     #   requests
 wagtail==2.12
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   django-kdl-wagtail
 wagtailmenus==3.0.1
-    # via -r requirements/base.in
+    # via -r base.in
 webencodings==0.5.1
     # via html5lib
 whitenoise==5.0.1
-    # via -r requirements/base.in
+    # via -r base.in
 willow==1.4
     # via wagtail
 xlrd==2.0.1
