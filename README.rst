@@ -4,7 +4,7 @@ Radical Translations
 .. image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :target: https://opensource.org/licenses/MIT
     :alt: MIT license
-.. image:: https://github.com/kingsdigitallab/radical_translations/workflows/CI/badge.svg?branch=develop
+.. image:: https://github.com/kingsdigitallab/radical_translations/workflows/CI/badge.svg?branch=master
     :target: https://github.com/kingsdigitallab/radical_translations/actions?query=workflow%3ACI
     :alt: Build status
 .. image:: https://coveralls.io/repos/github/kingsdigitallab/radical_translations/badge.svg

@@ -14,8 +14,15 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+
+[1.1.0] - 2021-05-17
+--------------------
+
 Added
 ~~~~~
+* Events visualisation.
+* Map clustering.
+* GitHub action for CI.
 * Map clustering.
 * Docs: data workflow diagram.
 * Blog tags navigation.
