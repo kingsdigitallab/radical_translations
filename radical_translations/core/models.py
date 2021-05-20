@@ -355,6 +355,8 @@ class Resource(TimeStampedModel):
         return (
             self.relationships.filter(relationship_type__label="translation of").count()
             > 0
+            or self.classifications.filter(edition__label="Self-translation").count()
+            > 0
         )
 
     is_translation.boolean = True  # type: ignore
