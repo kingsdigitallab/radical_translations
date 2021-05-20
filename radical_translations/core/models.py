@@ -687,14 +687,14 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
     def __str__(self) -> str:
         agent = self.agent
         if self.published_as:
-            agent = f"{self.published_as} ({agent})"
+            agent = f"{agent} ({self.published_as})"
 
         return f"[{'; '.join([r.label for r in self.roles.all()])}] {agent}"
 
     def to_dict_value(self) -> str:
         agent = self.agent.to_dict_value()
         if self.published_as:
-            agent = f"{self.published_as} ({agent})"
+            agent = f"{agent} ({self.published_as})"
 
         return (
             f"{f'{csv_multi_sep} '.join([r.label for r in self.roles.all()])}"

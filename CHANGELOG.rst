@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Changed
+~~~~~~~
+* Pseudonyms and 'published as anonymous' display in brackets after the author's name.
+
 
 [1.1.0] - 2021-05-17
 --------------------
