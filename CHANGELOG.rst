@@ -14,8 +14,15 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+
+[1.1.0] - 2021-05-17
+--------------------
+
 Added
 ~~~~~
+* Events visualisation.
+* Map clustering.
+* GitHub action for CI.
 * Map clustering.
 * Docs: data workflow diagram.
 * Blog tags navigation.
@@ -33,6 +40,7 @@ Added
 * Convert notes and summary URLs into clickable links.
 * Badge for related resources that have a paratext.
 * Paratext functions vocabulary.
+* Radical date filter.
 
 Changed
 ~~~~~~~
@@ -49,7 +57,6 @@ Changed
 * Labels and descriptions of the classification vocabularies.
 * Split paratext terms vocabulary in two, paratext forms and paratext functions.
 
-
 Fixed
 ~~~~~
 * Validation errors in `CHANGELOG`.
@@ -64,6 +71,7 @@ Removed
 * `Place` detail view.
 * Radical marker from dates.
 * Radical markers filter from the search.
+* Revolutionary calendar used filter from paratext filters.
 
 .. _profiles: https://docs.docker.com/compose/profiles/
 .. _Bump pillow to 7.1: https://github.com/kingsdigitallab/radical_translations/pull/5
