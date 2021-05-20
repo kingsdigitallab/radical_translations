@@ -14,9 +14,14 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Published as filter.
+
 Changed
 ~~~~~~~
 * Pseudonyms and 'published as anonymous' display in brackets after the author's name.
+* Index contributions by agent's name not pseudonyms.
 
 
 [1.1.0] - 2021-05-17

@@ -68,6 +68,7 @@ class ResourceDocument(Document):
             "roles": get_controlled_term_field(),
         }
     )
+    published_as = fields.KeywordField()
     languages = get_controlled_term_field(options=copy_to_content)
     places = fields.ObjectField(
         properties={
@@ -263,13 +264,9 @@ class ResourceDocument(Document):
             {
                 "agent": {
                     "id": item.agent.id,
-                    "name": f"{item.published_as} ({item.agent.name})"
-                    if item.published_as
-                    else (
-                        "Anonymous"
-                        if item.agent.name.startswith("Anon")
-                        else item.agent.get_index_name()
-                    ),
+                    "name": "Anonymous"
+                    if item.agent.name.startswith("Anon")
+                    else item.agent.get_index_name(),
                 },
                 "roles": [
                     {
@@ -289,6 +286,18 @@ class ResourceDocument(Document):
             )
 
         return contributions
+
+    def prepare_published_as(self, instance):
+        published_as = []
+
+        for item in instance.get_contributions(include_paratext=True):
+            if item.published_as:
+                published_as.append(item.published_as)
+
+        if published_as:
+            published_as.append("any")
+
+        return published_as
 
     def prepare_languages(self, instance):
         languages = [
