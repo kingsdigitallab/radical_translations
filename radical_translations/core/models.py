@@ -392,6 +392,26 @@ class Resource(TimeStampedModel):
 
         return self.date
 
+    def get_labels(self) -> Optional[List[str]]:
+        labels = []
+
+        if self.is_translation():
+            labels.append("translation")
+
+        if self.related_to.filter(relationship_type__label="translation of"):
+            labels.append("has translation")
+
+        if self.is_paratext():
+            labels.append("paratext")
+
+        if self.get_paratext():
+            labels.append("has paratext")
+
+        if self.related_to.filter(relationship_type__label="other edition"):
+            labels.append("has other edition")
+
+        return labels
+
     def to_dict(self) -> Dict:
         return {
             "id": self.id,
