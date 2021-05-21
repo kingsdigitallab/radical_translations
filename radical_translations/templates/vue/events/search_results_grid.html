@@ -36,7 +36,7 @@
             :href="`../../${item.type}s/${item.id}/`">
             <span
               :class="['record', `${item.type}`, item.tags, { active: item.active }]"
-              :title="`${country}, ${date}\n${item.title}`"
+              :title="`${country}, ${item.date}\n${item.title}`"
               @mouseenter="highlight(item.record)"
               @mouseleave="highlight(null)">
             </span>
