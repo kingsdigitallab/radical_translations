@@ -231,16 +231,20 @@ class Resource(TimeStampedModel):
             contributions.extend(self.get_contributions_by_role(role))
 
         for role in settings.CONTRIBUTION_MAIN_ROLES:
-            contributions.extend(
-                self.get_contributions_by_role(
-                    role, include_resource=False, include_paratext=include_paratext
-                )
+            paratext_contributions = self.get_contributions_by_role(
+                role, include_resource=False, include_paratext=include_paratext
             )
+            for contribution in paratext_contributions:
+                if contribution not in contributions:
+                    contributions.append(contribution)
 
         for role in settings.CONTRIBUTION_OTHER_ROLES:
-            contributions.extend(
-                self.get_contributions_by_role(role, include_paratext=include_paratext)
+            other_contributions = self.get_contributions_by_role(
+                role, include_paratext=include_paratext
             )
+            for contribution in other_contributions:
+                if contribution not in contributions:
+                    contributions.append(contribution)
 
         return contributions
 
@@ -354,6 +358,10 @@ class Resource(TimeStampedModel):
     def is_translation(self) -> bool:
         return (
             self.relationships.filter(relationship_type__label="translation of").count()
+            > 0
+            or self.classifications.filter(
+                edition__label__contains="translation"
+            ).count()
             > 0
         )
 
@@ -687,14 +695,14 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
     def __str__(self) -> str:
         agent = self.agent
         if self.published_as:
-            agent = f"{self.published_as} ({agent})"
+            agent = f"{agent} ({self.published_as})"
 
         return f"[{'; '.join([r.label for r in self.roles.all()])}] {agent}"
 
     def to_dict_value(self) -> str:
         agent = self.agent.to_dict_value()
         if self.published_as:
-            agent = f"{self.published_as} ({agent})"
+            agent = f"{agent} ({self.published_as})"
 
         return (
             f"{f'{csv_multi_sep} '.join([r.label for r in self.roles.all()])}"

@@ -87,6 +87,11 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "published_as": {
+            "field": "published_as",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
         "year": {
             "field": "year",
             "enabled": True,
@@ -149,6 +154,7 @@ class ResourceViewSet(DocumentViewSet):
         "translations_status": "classifications_translation.edition.label.raw",
         "contributor": "contributions.agent.name.raw",
         "contributor_role": "contributions.roles.label.raw",
+        "published_as": "published_as",
         "year": "year",
         "form_genre": "form_genre.label.raw",
         "language": "languages.label.raw",
