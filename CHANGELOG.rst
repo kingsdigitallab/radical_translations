@@ -23,6 +23,10 @@ Changed
 * Pseudonyms and 'published as anonymous' display in brackets after the author's name.
 * Index contributions by agent's name not pseudonyms.
 
+Fixed
+~~~~~
+* Display of duplicate contributions.
+
 
 [1.1.0] - 2021-05-17
 --------------------
