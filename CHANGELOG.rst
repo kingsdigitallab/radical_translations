@@ -18,6 +18,7 @@ Added
 ~~~~~
 * Published as filter.
 * Resource labels for `has translation` and `has other edition`.
+* Links to URLs in the bibliography.
 
 Changed
 ~~~~~~~
