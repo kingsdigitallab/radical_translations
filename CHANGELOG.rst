@@ -29,6 +29,10 @@ Removed
 ~~~~~~~
 * Comparative value from the events classification filter.
 
+Fixed
+~~~~~
+* Display of duplicate contributions.
+
 
 [1.1.0] - 2021-05-17
 --------------------
