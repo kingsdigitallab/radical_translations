@@ -54,12 +54,12 @@ class EventViewSet(DocumentViewSet):
             "options": ES_FACET_OPTIONS,
         },
         "country": {
-            "field": "place.country.name.raw",
+            "field": "country",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
         "classification": {
-            "field": "classification.label.raw",
+            "field": "classification",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -67,15 +67,15 @@ class EventViewSet(DocumentViewSet):
 
     filter_fields = {
         "year": "year",
-        "country": "place.country.name.raw",
-        "classification": "classification.label.raw",
+        "country": "country",
+        "classification": "classification",
     }
 
     ordering_fields = {
-        "country": "place.country.name.raw",
+        "country": "country",
         "year": "year",
     }
-    ordering = ["country", "year"]
+    ordering = ["country", "date_earliest"]
 
     pagination_class = PageNumberPagination
 

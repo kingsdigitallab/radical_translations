@@ -4,6 +4,7 @@
     <li><span class="resource original big"></span> source text</li>
     <li><span class="resource translation big"></span> translation</li>
     <li><span class="event big"></span> event</li>
+    <li><span class="event related big"></span> related event</li>
   </ul>
 
   <table>
@@ -34,8 +35,8 @@
             :key="item.uid"
             :href="`../../${item.type}s/${item.id}/`">
             <span
-              :class="[`${item.type}`, item.tags, { active: item.active }]"
-              :title="`${country}, ${year}\n${item.title}`"
+              :class="['record', `${item.type}`, item.tags, { active: item.active }]"
+              :title="`${country}, ${date}\n${item.title}`"
               @mouseenter="highlight(item.record)"
               @mouseleave="highlight(null)">
             </span>

@@ -9523,17 +9523,20 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     padding: 3px; }
     .viz-grid .content td:nth-child(even) {
       background: #f0f0f0; }
-  .viz-grid .content tr {
-    vertical-align: bottom; }
   .viz-grid .event {
-    background: #60495a;
+    background: #ff6e54;
     border-radius: 50%; }
+    .viz-grid .event.related {
+      background: none;
+      border: 2px solid #ff6e54; }
   .viz-grid .resource {
-    background: #729ea1; }
+    background: #003f5c; }
     .viz-grid .resource.original {
-      background: #f4d06f; }
+      background: #444e86; }
     .viz-grid .resource.translation {
-      background: #ec9192; }
+      background: #955196; }
+    .viz-grid .resource.serial {
+      background: #bc5090; }
   .viz-grid .year {
     display: inline-block;
     margin-top: 24px;
@@ -9546,9 +9549,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .viz-grid .resource {
     display: inline-block;
     float: left;
-    height: 5px;
+    height: 8px;
     margin: 0.5px;
-    width: 5px; }
+    width: 8px; }
     .viz-grid .event.big,
     .viz-grid .resource.big {
       height: 12px;
@@ -9556,11 +9559,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       margin-right: 4px; }
     .viz-grid .event:hover,
     .viz-grid .resource:hover {
-      background: #114b5f;
+      background: #ffa600;
       cursor: pointer; }
     .viz-grid .event.active,
     .viz-grid .resource.active {
-      background: #114b5f;
+      background: #ffa600;
+      border: 2px solid #ffa600;
       cursor: pointer; }
   .viz-grid tbody th,
   .viz-grid thead th:first-child,

@@ -619,24 +619,27 @@ new Vue({
         return timeline
       }
 
-      const events = this.data.results.flatMap((r) => 
-          !r.year ? [] : r.year.map((year) => {
-            const country = r.place.country.name
-            const record = `event-${r.id}`
-            const uid = `${record}-${country}-${year}`
+      const events = this.data.results.flatMap((r) => {
+        return r.country.flatMap((country, idx) => {
+          return !r.year
+            ? []
+            : r.year.map((year) => {
+                const record = `event-${r.id}`
+                const uid = `${record}-${country}-${year}`
 
-            return {
-              country: country,
-              year: year,
-              id: r.id,
-              type: 'event',
-              record: record,
-              title: r.title,
-              date: r.date,
-              tags: []
-            }
-          })
-      )
+                return {
+                  country: country,
+                  year: year,
+                  id: r.id,
+                  type: 'event',
+                  record: record,
+                  title: r.title,
+                  date: r.date,
+                  tags: [idx > 0 ? 'related' : '']
+                }
+              })
+        })
+      })
 
       let resources = []
 

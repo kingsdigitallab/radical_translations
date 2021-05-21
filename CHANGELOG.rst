@@ -22,6 +22,12 @@ Changed
 ~~~~~~~
 * Pseudonyms and 'published as anonymous' display in brackets after the author's name.
 * Index contributions by agent's name not pseudonyms.
+* Remove country names from the events classification filter.
+* Display related events in the events timeline.
+
+Removed
+~~~~~~~
+* Comparative value from the events classification filter.
 
 
 [1.1.0] - 2021-05-17
