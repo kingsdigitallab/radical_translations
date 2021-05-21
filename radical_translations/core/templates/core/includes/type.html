@@ -1,9 +1,3 @@
-{% if resource.is_translation %}
-<span class="badge badge-info">translation</span>
-{% endif %}
-{% if resource.is_paratext %}
-<span class="badge badge-info">paratext</span>
-{% endif %}
-{% if resource.get_paratext %}
-<span class="badge badge-info">has paratext</span>
-{% endif %}
+{% for label in resource.get_labels %}
+<span class="badge badge-info">{{ label }}</span>
+{% endfor %}
