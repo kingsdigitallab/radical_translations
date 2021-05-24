@@ -1547,41 +1547,44 @@ $size: 8px;
   background: $secondary;
   font-size: 12px;
   overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+
+  table {
+    margin: auto;
+  }
 
   .content td {
     border-bottom: 1px solid #d8d8d8;
     padding: 3px;
+    scroll-snap-align: start;
 
     &:nth-child(even) {
       background: #f0f0f0;
     }
   }
 
-  .content tr {
-    //vertical-align: bottom;
-  }
-
   .event {
-    background: #ff6e54;
+    background: #ff7c43;
     border-radius: 50%;
 
     &.related {
       background: none;
-      border: 2px solid #ff6e54;
+      border: 2px solid #ff7c43;
     }
   }
 
   .resource {
-    background: #003f5c;
+    background: #729ea1;
 
-    &.original {
-      background: #444e86;
+    &.serial-publications,
+    &.periodicals {
+      background: #bc5090;
+    }
+    &.source-text {
+      background: #f4d06f;
     }
     &.translation {
-      background: #955196;
-    }
-    &.serial {
-      background: #bc5090;
+      background: #ec9192;
     }
   }
 

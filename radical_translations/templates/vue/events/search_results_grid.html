@@ -1,8 +1,9 @@
 <div class="viz-grid">
   <ul class="breadcrumbs">
     <li><span class="resource big"></span> resource</li>
-    <li><span class="resource original big"></span> source text</li>
+    <li><span class="resource source-text big"></span> source text</li>
     <li><span class="resource translation big"></span> translation</li>
+    <li><span class="resource serial-publications big"></span> serial</li>
     <li><span class="event big"></span> event</li>
     <li><span class="event related big"></span> related event</li>
   </ul>
@@ -16,8 +17,11 @@
       <tr>
         <td></td>
         <td
-          v-for="year in timeline.years"
+          v-for="(year, index) in timeline.years"
           :key="year">
+          <span
+            v-if="Math.round(timeline.years.length / 1.75) === index"
+            :id="focusElement"></span>
           <span class="year">{[ year ]}</span>
         </td>
       </tr>
@@ -36,7 +40,7 @@
             :href="`../../${item.type}s/${item.id}/`">
             <span
               :class="['record', `${item.type}`, item.tags, { active: item.active }]"
-              :title="`${country}, ${item.date}\n${item.title}`"
+              :title="`${country}, ${item.date}\n${item.title}\n${item.tags}`"
               @mouseenter="highlight(item.record)"
               @mouseleave="highlight(null)">
             </span>
