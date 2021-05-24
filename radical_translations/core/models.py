@@ -356,11 +356,15 @@ class Resource(TimeStampedModel):
         return self.subjects.filter(label__iexact="radicalism").count() == 1
 
     def is_translation(self) -> bool:
-        return (
+        return not self.is_original() and (
             self.relationships.filter(relationship_type__label="translation of").count()
             > 0
             or self.classifications.filter(
                 edition__label__contains="translation"
+            ).count()
+            > 0
+            or self.relationships.filter(
+                relationship_type__label="other edition"
             ).count()
             > 0
         )
