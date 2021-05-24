@@ -24,6 +24,7 @@ Changed
 ~~~~~~~
 * Pseudonyms and 'published as anonymous' display in brackets after the author's name.
 * Index contributions by agent's name not pseudonyms.
+* Other editions that are not source-texts are marked as translations.
 
 Fixed
 ~~~~~
