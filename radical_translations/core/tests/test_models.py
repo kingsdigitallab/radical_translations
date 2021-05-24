@@ -186,7 +186,7 @@ class TestResource:
 
         Resource.from_gsx_entry(entry_edition)
         resource = Resource.relationships_from_gsx_entry(entry_edition)
-        assert resource.is_translation() is False
+        assert resource.is_translation() is True
 
     @pytest.mark.usefixtures("entry_original", "entry_edition")
     def test_get_authors(
