@@ -27,6 +27,7 @@ Changed
 * Other editions that are not source-texts are marked as translations.
 * Remove country names from the events classification filter.
 * Display related events in the events timeline.
+* Focus middle of the timeline.
 
 Removed
 ~~~~~~~

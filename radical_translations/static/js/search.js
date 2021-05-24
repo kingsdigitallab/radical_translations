@@ -50,7 +50,8 @@ new Vue({
     },
     events: { country: null, year: null, data: [], show: false },
     eventsResources: [],
-    timeline: {}
+    timeline: {},
+    focusElement: 'mememe'
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -81,8 +82,14 @@ new Vue({
   },
   created: async function () {
     this.loadSearchParams()
+
     await this.search()
+
     this.initMap()
+
+    if (document.getElementById(this.focusElement)) {
+      document.getElementById(this.focusElement).scrollIntoView()
+    }
   },
   computed: {
     facets: function () {
@@ -669,8 +676,16 @@ new Vue({
                       title: r.title ? r.title[0] : 'No title!',
                       date: r.date_display,
                       tags: [
-                        r.is_original ? 'original' : '',
-                        r.is_translation ? 'translation' : ''
+                        r.is_original
+                          ? 'source-text'
+                          : r.is_translation
+                          ? 'translation'
+                          : 'other',
+                        r.form_genre
+                          .filter((fr) => fr.label !== 'any')
+                          .flatMap((fr) =>
+                            fr.label.toLowerCase().replace(' ', '-')
+                          )
                       ]
                     }
                   })

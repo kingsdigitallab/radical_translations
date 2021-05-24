@@ -28,4 +28,5 @@ class SimpleResourceDocumentSerializer(DocumentSerializer):
             "places",
             "is_original",
             "is_translation",
+            "form_genre",
         ]
