@@ -24,10 +24,6 @@ class EventDetailView(DetailView):
     model = Event
 
 
-def event_list(request):
-    return render(request, "events/event_list.html")
-
-
 def event_grid(request):
     return render(request, "events/event_grid.html")
 

@@ -21,7 +21,6 @@
 {% block javascript %}
 <script>
   const options = {{ ds.SEARCH_OPTIONS.events|safe }}
-  window.viewBaseURL = `${window.location.origin}${window.location.pathname}../`
 </script>
 {{ block.super }}
 {% endblock javascript %}

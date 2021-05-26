@@ -37,7 +37,6 @@
           <a
             v-for="item in timeline.data[country][year]"
             :key="item.uid">
-            {% comment %}:href="`../../${item.type}s/${item.id}/`">{% endcomment %}
             <span
               :class="['record', item.tags, { active: item.active }]"
               :title="`${country}, ${item.date}\n${item.title}\n${item.tags}`"
