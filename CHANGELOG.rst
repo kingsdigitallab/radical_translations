@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+
+[1.1.1] - 2021-05-26
+--------------------
+
 Added
 ~~~~~
 * Published as filter.
@@ -36,6 +40,7 @@ Removed
 Fixed
 ~~~~~
 * Display of duplicate contributions.
+* Issue deleting contributions.
 
 
 [1.1.0] - 2021-05-17
