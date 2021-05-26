@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Comparative timeline to the home page.
+
 Changed
 ~~~~~~~
 * Remove country names from the events classification filter.
