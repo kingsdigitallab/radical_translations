@@ -36,11 +36,12 @@
           :key="year">
           <a
             v-for="item in timeline.data[country][year]"
-            :key="item.uid"
-            :href="`../../${item.type}s/${item.id}/`">
+            :key="item.uid">
+            {% comment %}:href="`../../${item.type}s/${item.id}/`">{% endcomment %}
             <span
-              :class="['record', `${item.type}`, item.tags, { active: item.active }]"
+              :class="['record', item.tags, { active: item.active }]"
               :title="`${country}, ${item.date}\n${item.title}\n${item.tags}`"
+              @click="getTimelineDetail(country, year, item.record)"
               @mouseenter="highlight(item.record)"
               @mouseleave="highlight(null)">
             </span>
@@ -59,4 +60,39 @@
       </tr>
     </tfoot>
   </table>
+</div>
+
+<div
+      :class="{'hidden': !timelineDetail.show }"
+      class="event-info">
+  <button
+    v-on:click="timelineDetail.show = false"
+    class="close close-event"
+    type="button"
+    aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div v-if="timelineDetail.record">
+    <h3>
+      <a
+        :href="`../../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
+        {[ timelineDetail.record.title ]} {[ timelineDetail.record.date ]}
+      </a>
+    </h3>
+    <p class="metadata">
+    <span
+      v-for="tag in timelineDetail.record.tags"
+      class="badge badge-info">{[ tag ]}</span>
+    </p>
+  </div>
+  <hr>
+  <h4>Activity in {[ timelineDetail.country ]} in {[ timelineDetail.year ]}</h4>
+  <ol>
+    <li
+      v-for="item in timelineDetail.data"
+      :key="item.uid">
+      <a :href="`../../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
+      <span class="badge badge-info">{[ item.type ]}</span>
+    </li>
+  </ol>
 </div>
