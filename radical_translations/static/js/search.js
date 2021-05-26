@@ -51,6 +51,7 @@ new Vue({
     events: { country: null, year: null, data: [], show: false },
     eventsResources: [],
     timeline: {},
+    timelineDetail: { county: null, year: null, data: [], show: false },
     focusElement: 'mememe'
   },
   watch: {
@@ -642,7 +643,12 @@ new Vue({
                   record: record,
                   title: r.title,
                   date: r.date,
-                  tags: [idx > 0 ? 'related' : '']
+                  tags: [
+                    'event',
+                    country.toLowerCase().replace(' ', '-'),
+                    `${year}`,
+                    idx > 0 ? 'related' : ''
+                  ]
                 }
               })
         })
@@ -674,17 +680,21 @@ new Vue({
                       title: r.title ? r.title[0] : 'No title!',
                       date: r.date_display,
                       tags: [
+                        'resource',
+                        country.toLowerCase().replace(' ', '-'),
+                        `${year}`,
                         r.is_original
                           ? 'source-text'
                           : r.is_translation
                           ? 'translation'
-                          : 'other',
+                          : 'other'
+                      ].concat(
                         r.form_genre
                           .filter((fr) => fr.label !== 'any')
                           .flatMap((fr) =>
                             fr.label.toLowerCase().replace(' ', '-')
                           )
-                      ]
+                      )
                     }
                   })
             })
@@ -732,6 +742,19 @@ new Vue({
         )
         this.timeline.data = this.prepareTimelineData(this.timeline.raw)
       }
+    },
+    getTimelineDetail: function (country, year, record) {
+      this.timelineDetail.country = country
+      this.timelineDetail.year = year
+      this.timelineDetail.data = this.timeline.data[country][year]
+
+      if (record) {
+        this.timelineDetail.record = this.timelineDetail.data.filter(
+          (d) => d.record === record
+        )[0]
+      }
+
+      this.timelineDetail.show = true
     }
   }
 })
