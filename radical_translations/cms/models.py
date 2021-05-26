@@ -24,6 +24,7 @@ from kdl_wagtail.core.models import (
 )
 from radical_translations.agents.models import Person
 from radical_translations.core.models import Resource
+from radical_translations.events.models import Event
 
 
 class BlogIndexPage(RoutablePageMixin, BaseIndexPage):
@@ -178,6 +179,7 @@ class HomePage(BasePage):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         if not self.id:
             self.featured_biography = (
                 BiographyPage.objects.live().order_by("-last_published_at").first()
@@ -186,3 +188,9 @@ class HomePage(BasePage):
             self.featured_blog_post = (
                 BlogPost.objects.live().order_by("-last_published_at").first()
             )
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context["events"] = Event.objects.filter(classification__label="comparative")
+
+        return context

@@ -14,6 +14,21 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Comparative timeline to the home page.
+
+Changed
+~~~~~~~
+* Remove country names from the events classification filter.
+* Display related events in the events timeline.
+* Focus middle of the timeline.
+
+Removed
+~~~~~~~
+* Comparative value from the events classification filter.
+* Scatter events timeline.
+
 
 [1.1.1] - 2021-05-26
 --------------------
@@ -29,13 +44,6 @@ Changed
 * Pseudonyms and 'published as anonymous' display in brackets after the author's name.
 * Index contributions by agent's name not pseudonyms.
 * Other editions that are not source-texts are marked as translations.
-* Remove country names from the events classification filter.
-* Display related events in the events timeline.
-* Focus middle of the timeline.
-
-Removed
-~~~~~~~
-* Comparative value from the events classification filter.
 
 Fixed
 ~~~~~

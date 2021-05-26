@@ -48,8 +48,7 @@ new Vue({
         place: null
       }
     },
-    events: { country: null, year: null, data: [], show: false },
-    eventsResources: [],
+    resources: {},
     timeline: {},
     timelineDetail: { county: null, year: null, data: [], show: false },
     focusElement: 'mememe'
@@ -131,191 +130,6 @@ new Vue({
       }
 
       return suggestions
-    },
-    eventsChartData: function () {
-      if (!this.data || !this.data.results) {
-        return {}
-      }
-
-      const labels = this.data.facets._filter_country.country.buckets.map(
-        (f) => f.key
-      )
-
-      events = { labels: labels, datasets: [], annotations: {} }
-
-      colours = {
-        Czechia: 'rgba(34, 116, 165, 0.4)',
-        Egypt: 'rgba(187, 133, 136, 0.4)',
-        France: 'rgba(84, 13, 110, 0.4)',
-        Germany: 'rgba(230, 175, 46, 0.4)',
-        Ireland: 'rgba(99, 43, 48, 0.4)',
-        Italy: 'rgba(11, 3, 45, 0.4)',
-        Spain: 'rgba(169, 210, 213, 0.4)',
-        'United Kingdom': 'rgba(215, 38, 56, 0.4)',
-        'United States': 'rgba(103, 148, 54, 0.4)'
-      }
-
-      // for each country
-      labels.forEach((country, idx) => {
-        const colour = colours[country]
-
-        let dataset = {
-          label: country,
-          backgroundColor: colour,
-          borderColor: colour,
-          data: []
-        }
-
-        this.data.results.forEach((evt) => {
-          // for each event in the country
-          if (evt.year && evt.place.country.name === country) {
-            evt.year.forEach((year) => {
-              dataset.data.push({
-                x: year,
-                y: idx,
-                r: 5,
-                meta: {
-                  type: 'event',
-                  id: evt.id,
-                  year: year,
-                  place: country,
-                  n: 1,
-                  resources: evt.related_to.length
-                }
-              })
-            })
-          }
-        })
-
-        // keep only the first and last items of multi-year events and add annotations
-        dataset.data = dataset.data.reduce((acc, cur) => {
-          if (acc.filter((item) => item.meta.id === cur.meta.id).length === 2) {
-            const start = acc[acc.length - 2]
-            acc[acc.length - 1] = cur
-
-            events.annotations[cur.meta.id] = {
-              type: 'box',
-              id: `${cur.meta.id}`,
-              display: true,
-              xScaleID: 'x-axis-0',
-              yScaleID: 'y-axis-0',
-              xMin: start.x,
-              yMin: cur.y - 0.1,
-              xMax: cur.x,
-              yMax: cur.y + 0.1,
-              backgroundColor: colour,
-              borderWidth: 1
-            }
-
-            return acc
-          }
-
-          acc.push(cur)
-
-          return acc
-        }, [])
-
-        // group the events by year
-        dataset.data = dataset.data.reduce((acc, cur) => {
-          if (acc.some((item) => item.x === cur.x)) {
-            const last = acc.length - 1
-            acc[last].r += 2
-            acc[last].meta.n += 1
-            acc[last].meta.resources += cur.meta.resources
-            return acc
-          }
-
-          acc.push(cur)
-
-          return acc
-        }, [])
-
-        events.datasets.push(dataset)
-      })
-
-      if (this.eventsResources && this.eventsResources.facets) {
-        const resourcesLabels = this.eventsResources.facets._filter_country.country.buckets
-          .map((f) => f.key)
-          .filter((f) => f !== 'any')
-
-        resourcesLabels.forEach((country, idx) => {
-          let dataset = {
-            label: `${country} resources`,
-            data: []
-          }
-
-          this.eventsResources.results.forEach((res) => {
-            const has_country = res.places.filter((place) => {
-              return place.place.country !== undefined
-                ? place.place.country.name === country
-                : false
-            })
-            if (res.year && has_country.length > 0) {
-              res.year.forEach((year) => {
-                dataset.data.push({
-                  x: year,
-                  y: idx + labels.length + 1,
-                  r: 5,
-                  meta: {
-                    type: 'resource',
-                    id: res.id,
-                    year: year,
-                    place: country,
-                    n: 1
-                  }
-                })
-              })
-            }
-          })
-
-          // keep only the first and last items of multi-year resources and add annotations
-          dataset.data = dataset.data.reduce((acc, cur) => {
-            if (
-              acc.filter((item) => item.meta.id === cur.meta.id).length === 2
-            ) {
-              const start = acc[acc.length - 2]
-              acc[acc.length - 1] = cur
-
-              events.annotations[cur.meta.id] = {
-                type: 'box',
-                id: `${cur.meta.id}`,
-                display: true,
-                xScaleID: 'x-axis-0',
-                yScaleID: 'y-axis-0',
-                xMin: start.x,
-                yMin: cur.y - 0.1,
-                xMax: cur.x,
-                yMax: cur.y + 0.1,
-                borderWidth: 1
-              }
-
-              return acc
-            }
-
-            acc.push(cur)
-
-            return acc
-          }, [])
-
-          // group the resources by year
-          dataset.data = dataset.data.reduce((acc, cur) => {
-            if (acc.some((item) => item.x === cur.x)) {
-              const last = acc.length - 1
-              acc[last].r += 2
-              acc[last].meta.n += 1
-              return acc
-            }
-
-            acc.push(cur)
-
-            return acc
-          }, [])
-
-          events.datasets.push(dataset)
-        })
-      }
-
-      return events
     }
   },
   methods: {
@@ -478,7 +292,7 @@ new Vue({
       this.data = await this.doSearch()
 
       if (options.resources) {
-        this.eventsResources = await this.doSearch(this.urlResources, 1500)
+        this.resources = await this.doSearch(this.urlResources, 1500)
         this.timeline = this.getTimeline()
       }
       if (this.map.show) {
@@ -600,28 +414,6 @@ new Vue({
 
       map.whenReady(() => map.invalidateSize())
     },
-    handleEventClick: function (place, year) {
-      this.events.country = place
-      this.events.year = year
-
-      const params = new URLSearchParams()
-      params.append('country__term', place)
-      params.append('year', year)
-
-      this.filters.forEach((filter) =>
-        params.append(`${filter[0]}__term`, filter[1])
-      )
-
-      const url = this.url
-      url.search = params.toString()
-
-      const data = fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          this.events.data = data.results
-          this.events.show = true
-        })
-    },
     getTimeline: function () {
       const timeline = {}
 
@@ -658,8 +450,8 @@ new Vue({
 
       let resources = []
 
-      if (this.eventsResources && this.eventsResources.results) {
-        resources = this.eventsResources.results.flatMap((r) => {
+      if (this.resources && this.resources.results) {
+        resources = this.resources.results.flatMap((r) => {
           return r.places
             .filter(
               (place) =>
