@@ -717,11 +717,12 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
         ordering = ["resource", "agent"]
 
     def __str__(self) -> str:
-        agent = self.agent
-        if self.published_as:
-            agent = f"{agent} ({self.published_as})"
+        agent = str(self.agent)
 
-        return f"[{'; '.join([r.label for r in self.roles.all()])}] {agent}"
+        if self.published_as:
+            return f"{agent} ({self.published_as})"
+
+        return agent
 
     def to_dict_value(self) -> str:
         agent = self.agent.to_dict_value()

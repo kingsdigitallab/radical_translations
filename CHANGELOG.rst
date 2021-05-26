@@ -29,6 +29,7 @@ Changed
 Fixed
 ~~~~~
 * Display of duplicate contributions.
+* Issue deleting contributions.
 
 
 [1.1.0] - 2021-05-17
