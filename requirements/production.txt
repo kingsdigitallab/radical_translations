@@ -131,7 +131,7 @@ openpyxl==3.0.6
     # via tablib
 pathlib==1.0.1
     # via pyzotero
-pillow==7.2.0
+pillow==8.2.0
     # via
     #   -r requirements/./base.in
     #   wagtail
