@@ -231,20 +231,19 @@ class Resource(TimeStampedModel):
             contributions.extend(self.get_contributions_by_role(role))
 
         for role in settings.CONTRIBUTION_MAIN_ROLES:
-            paratext_contributions = self.get_contributions_by_role(
-                role, include_resource=False, include_paratext=include_paratext
+            contributions.extend(
+                self.get_contributions_by_role(
+                    role, include_resource=False, include_paratext=include_paratext
+                )
             )
-            for contribution in paratext_contributions:
-                if contribution not in contributions:
-                    contributions.append(contribution)
 
         for role in settings.CONTRIBUTION_OTHER_ROLES:
-            other_contributions = self.get_contributions_by_role(
-                role, include_paratext=include_paratext
+            contributions.extend(
+                self.get_contributions_by_role(role, include_paratext=include_paratext)
             )
-            for contribution in other_contributions:
-                if contribution not in contributions:
-                    contributions.append(contribution)
+
+        # remove duplicate contributions keeping the order
+        contributions = list(dict.fromkeys(contributions).keys())
 
         return contributions
 
