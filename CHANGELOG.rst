@@ -30,6 +30,14 @@ Removed
 * Scatter events timeline.
 
 
+[1.1.2] - 2021-06-10
+--------------------
+
+Fixed
+~~~~~
+* Display of duplicate contributions.
+
+
 [1.1.1] - 2021-05-26
 --------------------
 
