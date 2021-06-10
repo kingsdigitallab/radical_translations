@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Fixed
+~~~~~
+* Display of duplicate contributions.
+
 
 [1.1.1] - 2021-05-26
 --------------------
