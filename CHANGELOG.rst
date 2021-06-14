@@ -23,6 +23,7 @@ Changed
 * Remove country names from the events classification filter.
 * Display related events in the events timeline.
 * Focus middle of the timeline.
+* Key after changes by the research team.
 
 Removed
 ~~~~~~~
