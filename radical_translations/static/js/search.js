@@ -51,7 +51,8 @@ new Vue({
     resources: {},
     timeline: {},
     timelineDetail: { county: null, year: null, data: [], show: false },
-    focusElement: 'mememe'
+    focusElement: 'mememe',
+    zoom: ''
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -549,6 +550,9 @@ new Vue({
       }
 
       this.timelineDetail.show = true
+    },
+    setZoom: function (value) {
+      this.zoom = value
     }
   }
 })

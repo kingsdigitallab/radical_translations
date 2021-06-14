@@ -9522,15 +9522,22 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .viz-grid {
   background: #eae9da;
-  font-size: 12px;
-  overflow-x: scroll;
-  -ms-scroll-snap-type: x mandatory;
-      scroll-snap-type: x mandatory; }
+  font-size: 12px; }
   .viz-grid table {
-    margin: auto; }
+    display: block;
+    margin: auto;
+    overflow-x: scroll; }
+    .viz-grid table tbody th,
+    .viz-grid table thead th:first-child,
+    .viz-grid table thead th:nth-child(2) {
+      background: #eae9da;
+      left: 0;
+      padding: 8px;
+      position: sticky; }
+    .viz-grid table thead th:nth-child(2) {
+      left: 100px; }
   .viz-grid .content td {
     border-bottom: 1px solid #d8d8d8;
-    padding: 3px;
     scroll-snap-align: start; }
     .viz-grid .content td:nth-child(even) {
       background: #f0f0f0; }
@@ -9563,11 +9570,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     height: 8px;
     margin: 0.5px;
     width: 8px; }
-    .viz-grid .event.big,
-    .viz-grid .resource.big {
-      height: 12px;
-      width: 12px;
-      margin-right: 4px; }
+    .viz-grid .event.large,
+    .viz-grid .resource.large {
+      height: calc(8px * 1.5);
+      width: calc(8px * 1.5); }
+    .viz-grid .event.small,
+    .viz-grid .resource.small {
+      height: calc(8px / 2);
+      width: calc(8px / 2); }
     .viz-grid .event:hover,
     .viz-grid .resource:hover {
       background: #ffa600;
@@ -9577,12 +9587,3 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       background: #ffa600;
       border: 2px solid #ffa600;
       cursor: pointer; }
-  .viz-grid tbody th,
-  .viz-grid thead th:first-child,
-  .viz-grid thead th:nth-child(2) {
-    background: #eae9da;
-    left: 0;
-    padding: 8px;
-    position: sticky; }
-  .viz-grid thead th:nth-child(2) {
-    left: 100px; }

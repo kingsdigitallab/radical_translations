@@ -54,7 +54,7 @@ class EventViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "classification": {
+        "type_of_event": {
             "field": "classification",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
@@ -64,7 +64,7 @@ class EventViewSet(DocumentViewSet):
     filter_fields = {
         "year": "year",
         "country": "country",
-        "classification": "classification",
+        "type_of_event": "classification",
     }
 
     ordering_fields = {
