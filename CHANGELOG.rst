@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Changed
+~~~~~~~
+* Key after changes by the research team.
+
 
 [1.1.2] - 2021-06-10
 --------------------
