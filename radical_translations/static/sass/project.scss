@@ -1606,6 +1606,16 @@ $size: 8px;
     margin-top: 1.5rem;
     transform: rotate(-45deg);
     transform-origin: 0% 0%;
+
+    &.zlarge {
+      margin-right: 1rem;
+      transform: rotate(0deg);
+      transform-origin: 0% 0%;
+    }
+    &.zsmall {
+      transform: rotate(-90deg);
+      transform-origin: 0% 0%;
+    }
   }
 
   .event,
@@ -1616,11 +1626,11 @@ $size: 8px;
     margin: 0.5px;
     width: $size;
 
-    &.large {
+    &.zlarge {
       height: calc(#{$size} * 1.5);
       width: calc(#{$size} * 1.5);
     }
-    &.small {
+    &.zsmall {
       height: calc(#{$size} / 2);
       width: calc(#{$size} / 2);
     }

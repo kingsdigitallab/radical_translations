@@ -9558,6 +9558,18 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
             transform: rotate(-45deg);
     -webkit-transform-origin: 0% 0%;
             transform-origin: 0% 0%; }
+    .viz-grid .year.zlarge {
+      margin-right: 16px;
+      margin-right: 1rem;
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%; }
+    .viz-grid .year.zsmall {
+      -webkit-transform: rotate(-90deg);
+              transform: rotate(-90deg);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%; }
   .viz-grid .event,
   .viz-grid .resource {
     display: inline-block;
@@ -9565,12 +9577,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     height: 8px;
     margin: 0.5px;
     width: 8px; }
-    .viz-grid .event.large,
-    .viz-grid .resource.large {
+    .viz-grid .event.zlarge,
+    .viz-grid .resource.zlarge {
       height: calc(8px * 1.5);
       width: calc(8px * 1.5); }
-    .viz-grid .event.small,
-    .viz-grid .resource.small {
+    .viz-grid .event.zsmall,
+    .viz-grid .resource.zsmall {
       height: calc(8px / 2);
       width: calc(8px / 2); }
     .viz-grid .event:hover,
