@@ -11,9 +11,9 @@
 
   <ul class="breadcrumbs">
     <li>Zoom:</li>
-    <li @click="setZoom('small')">Small</li>
+    <li @click="setZoom('zsmall')">Small</li>
     <li @click="setZoom('')">Medium</li>
-    <li @click="setZoom('large')">Large</li>
+    <li @click="setZoom('zlarge')">Large</li>
   </ul>
 
   <table>
@@ -30,7 +30,7 @@
           <span
             v-if="Math.round(timeline.years.length / 1.75) === index"
             :id="focusElement"></span>
-          <span class="year">{[ year ]}</span>
+          <span :class="['year', zoom]">{[ year ]}</span>
         </td>
       </tr>
     </thead>
@@ -62,7 +62,7 @@
         <td
           v-for="year in timeline.years"
           :key="year">
-          <span class="year">{[ year ]}</span>
+          <span :class="['year', zoom]">{[ year ]}</span>
         </td>
       </tr>
     </tfoot>
