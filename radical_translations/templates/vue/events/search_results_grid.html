@@ -1,11 +1,19 @@
 <div class="viz-grid">
   <ul class="breadcrumbs">
-    <li><span class="resource big"></span> resource</li>
-    <li><span class="resource source-text big"></span> source text</li>
-    <li><span class="resource translation big"></span> translation</li>
-    <li><span class="resource serial-publications big"></span> serial</li>
-    <li><span class="event big"></span> event</li>
-    <li><span class="event related big"></span> related event</li>
+    <li>Key:</li>
+    <li><span class="resource large"></span> resource</li>
+    <li><span class="resource source-text large"></span> source text</li>
+    <li><span class="resource translation large"></span> translation</li>
+    <li><span class="resource serial-publications large"></span> serial</li>
+    <li><span class="event large"></span> event</li>
+    <li><span class="event related large"></span> related event</li>
+  </ul>
+
+  <ul class="breadcrumbs">
+    <li>Zoom:</li>
+    <li @click="setZoom('small')">Small</li>
+    <li @click="setZoom('')">Medium</li>
+    <li @click="setZoom('large')">Large</li>
   </ul>
 
   <table>
@@ -38,7 +46,7 @@
             v-for="item in timeline.data[country][year]"
             :key="item.uid">
             <span
-              :class="['record', item.tags, { active: item.active }]"
+              :class="['record', zoom, item.tags, { active: item.active }]"
               :title="`${country}, ${item.date}\n${item.title}\n${item.tags}`"
               @click="getTimelineDetail(country, year, item.record)"
               @mouseenter="highlight(item.record)"

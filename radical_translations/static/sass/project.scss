@@ -1547,16 +1547,28 @@ $size: 8px;
 .viz-grid {
   background: $secondary;
   font-size: 12px;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
 
   table {
+    display: block;
     margin: auto;
+    overflow-x: scroll;
+
+    tbody th,
+    thead th:first-child,
+    thead th:nth-child(2) {
+      background: $secondary;
+      left: 0;
+      padding: 8px;
+      position: sticky;
+    }
+
+    thead th:nth-child(2) {
+      left: 100px;
+    }
   }
 
   .content td {
     border-bottom: 1px solid #d8d8d8;
-    padding: 3px;
     scroll-snap-align: start;
 
     &:nth-child(even) {
@@ -1604,10 +1616,13 @@ $size: 8px;
     margin: 0.5px;
     width: $size;
 
-    &.big {
-      height: 12px;
-      width: 12px;
-      margin-right: 4px;
+    &.large {
+      height: calc(#{$size} * 1.5);
+      width: calc(#{$size} * 1.5);
+    }
+    &.small {
+      height: calc(#{$size} / 2);
+      width: calc(#{$size} / 2);
     }
 
     &:hover {
@@ -1620,18 +1635,5 @@ $size: 8px;
       border: 2px solid $hl;
       cursor: pointer;
     }
-  }
-
-  tbody th,
-  thead th:first-child,
-  thead th:nth-child(2) {
-    background: $secondary;
-    left: 0;
-    padding: 8px;
-    position: sticky;
-  }
-
-  thead th:nth-child(2) {
-    left: 100px;
   }
 }
