@@ -49,8 +49,8 @@ new Vue({
       }
     },
     resources: {},
-    timeline: {},
-    timelineDetail: { county: null, year: null, data: [], show: false },
+    timeline: { filters: [] },
+    timelineDetail: { country: null, year: null, data: [], show: false },
     focusElement: 'mememe',
     zoom: ''
   },
@@ -414,7 +414,7 @@ new Vue({
       map.whenReady(() => map.invalidateSize())
     },
     getTimeline: function () {
-      const timeline = {}
+      const timeline = { filters: [] }
 
       if (!this.data || !this.data.results) {
         return timeline
@@ -438,10 +438,14 @@ new Vue({
                   date: r.date,
                   tags: [
                     'event',
-                    country.toLowerCase().replace(' ', '-'),
+                    this.timelineFacet(country),
                     `${year}`,
                     idx > 0 ? 'related' : ''
-                  ]
+                  ].concat(
+                    r.classification
+                      .filter((c) => c !== 'any')
+                      .flatMap((c) => this.timelineFacet(c))
+                  )
                 }
               })
         })
@@ -474,7 +478,7 @@ new Vue({
                       date: r.date_display,
                       tags: [
                         'resource',
-                        country.toLowerCase().replace(' ', '-'),
+                        this.timelineFacet(country),
                         `${year}`,
                         r.is_original
                           ? 'source-text'
@@ -484,9 +488,7 @@ new Vue({
                       ].concat(
                         r.form_genre
                           .filter((fr) => fr.label !== 'any')
-                          .flatMap((fr) =>
-                            fr.label.toLowerCase().replace(' ', '-')
-                          )
+                          .flatMap((fr) => this.timelineFacet(fr.label))
                       )
                     }
                   })
@@ -514,6 +516,9 @@ new Vue({
       timeline.data = this.prepareTimelineData(raw)
 
       return timeline
+    },
+    timelineFacet: function (text) {
+      return text.toLowerCase().replace(' ', '-')
     },
     prepareTimelineData: function (raw) {
       return raw.reduce((acc, curr) => {
@@ -551,6 +556,29 @@ new Vue({
     },
     setZoom: function (value) {
       this.zoom = value
+    },
+    filterTimeline: function (value) {
+      if (this.timeline) {
+        const index = this.timeline.filters.indexOf(value)
+
+        if (index > -1) {
+          this.timeline.filters.splice(index, 1)
+        } else {
+          this.timeline.filters.push(value)
+        }
+
+        console.log(this.timeline.filters)
+
+        this.timeline.filters.forEach(
+          (filter) =>
+            (this.timeline.raw = this.timeline.raw.map((t) =>
+              t.tags.includes(filter)
+                ? { ...t, filtered: false }
+                : { ...t, filtered: true }
+            ))
+        )
+        this.timeline.data = this.prepareTimelineData(this.timeline.raw)
+      }
     }
   }
 })

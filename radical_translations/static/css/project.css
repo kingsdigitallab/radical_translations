@@ -9594,3 +9594,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       background: #ffa600;
       border: 2px solid #ffa600;
       cursor: pointer; }
+    .viz-grid .event.filtered,
+    .viz-grid .resource.filtered {
+      background: #d9d9d9; }

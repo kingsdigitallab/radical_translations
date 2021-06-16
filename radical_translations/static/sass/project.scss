@@ -1645,5 +1645,9 @@ $size: 8px;
       border: 2px solid $hl;
       cursor: pointer;
     }
+
+    &.filtered {
+      background: $light-gray;
+    }
   }
 }
