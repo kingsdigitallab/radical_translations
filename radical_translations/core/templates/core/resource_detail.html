@@ -22,7 +22,7 @@
     {% if object.is_radical %}
     {% include "svgs/solid/phrygian-cap.svg" %}
     {% endif %}
-    <strong>Topics: </strong>
+    <strong>Subjects: </strong>
   </span>
   {% for subject in object.get_subjects_topic %}
   <span class="{{ subject.label }}">{{ subject.label }}</span>{% if not forloop.last %}, {% endif %}

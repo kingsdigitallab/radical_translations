@@ -16,6 +16,18 @@
     <li @click="setZoom('zlarge')">Large</li>
   </ul>
 
+  <ul 
+      v-for="facet in facets"
+      :key="facet.name"
+      class="breadcrumbs">
+    <li>{[ getFacetDisplayName(facet.name) ]}:</li>
+    <li 
+      v-for="bucket in facet.buckets"
+      :key="bucket.key"
+      @click="filterTimeline(timelineFacet(bucket.key))">{[ bucket.key ]}
+    </li>
+  </ul>
+
   <table>
     <thead>
       <tr>
@@ -46,7 +58,7 @@
             v-for="item in timeline.data[country][year]"
             :key="item.uid">
             <span
-              :class="['record', zoom, item.tags, { active: item.active }]"
+              :class="['record', zoom, item.tags, { active: item.active, filtered: item.filtered }]"
               :title="`${country}, ${item.date}\n${item.title}\n${item.tags}`"
               @click="getTimelineDetail(country, year, item.record)"
               @mouseenter="highlight(item.record)"
