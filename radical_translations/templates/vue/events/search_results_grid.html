@@ -1,12 +1,14 @@
 <div class="viz-grid">
   <ul class="breadcrumbs">
-    <li>Key:</li>
-    <li><span class="resource large"></span> resource</li>
-    <li><span class="resource source-text large"></span> source text</li>
-    <li><span class="resource translation large"></span> translation</li>
-    <li><span class="resource serial-publications large"></span> serial</li>
-    <li><span class="event large"></span> event</li>
-    <li><span class="event related large"></span> related event</li>
+    <li>Resources:</li>
+    <li><span class="resource source-text large"></span> Source text</li>
+    <li><span class="resource translation large"></span> Translation</li>
+    <li><span class="resource serial-publications large"></span> Serial publication</li>
+  </ul>
+  <ul class="breadcrumbs">
+    <li>Events:</li>
+    <li><span class="event large"></span> Event</li>
+    <li><span class="event related large"></span> Related event</li>
   </ul>
 
   <ul class="breadcrumbs">
@@ -31,11 +33,7 @@
   <table>
     <thead>
       <tr>
-        <th>Country</th>
-        <th>Year</th>
-      </tr>
-      <tr>
-        <th></th>
+        <th>Country/Year</th>
         <td
           v-for="(year, index) in timeline.years"
           :key="year">
@@ -95,7 +93,7 @@
     </p>
   </div>
   <hr>
-  <h4>Activity in {[ timelineDetail.country ]} in {[ timelineDetail.year ]}</h4>
+  <h4>Other activity in {[ timelineDetail.country ]} in {[ timelineDetail.year ]}</h4>
   <ol>
     <li
       v-for="item in timelineDetail.data"
