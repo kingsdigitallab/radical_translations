@@ -435,6 +435,7 @@ new Vue({
                   year: year,
                   id: r.id,
                   type: 'event',
+                  subtype: 'event',
                   record: record,
                   title: r.title,
                   date: r.date,
@@ -475,6 +476,11 @@ new Vue({
                       year: year,
                       id: r.id,
                       type: 'resource',
+                      subtype: r.is_original
+                        ? 'source-text'
+                        : r.is_translation
+                        ? 'translation'
+                        : 'other',
                       record: record,
                       title: r.title ? r.title[0] : 'No title!',
                       date: r.date_display,
@@ -558,6 +564,11 @@ new Vue({
     },
     setZoom: function (value) {
       this.zoom = value
+
+      document.getElementById(`${this.focusElement}0`).scrollIntoView()
+      this.$nextTick(() => {
+        document.getElementById(this.focusElement).scrollIntoView()
+      })
     },
     filterTimeline: function (value) {
       if (this.timeline) {

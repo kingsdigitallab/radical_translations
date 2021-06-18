@@ -9521,16 +9521,20 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     stroke: #51b788; }
 
 .viz-grid {
-  font-family: 'Oswald', sans-serif;
-  font-size: 12px; }
+  font-family: 'Oswald', sans-serif; }
   .viz-grid table {
     background: #fff;
     display: block;
     margin: auto;
     overflow-x: scroll; }
+    .viz-grid table thead {
+      text-align: center; }
+      .viz-grid table thead th {
+        color: #808080; }
     .viz-grid table td {
       border-bottom: 1px solid #808080;
       border-right: 1px dashed #d9d9d9;
+      min-width: 30px;
       scroll-snap-align: start; }
     .viz-grid table th {
       background: #fff;
@@ -9542,20 +9546,25 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     background: #222222;
     border-radius: 50%; }
     .viz-grid .event.related {
-      background: none;
+      background: radial-gradient(transparent 30%, #222222 30%);
       border: 1px solid #222222; }
   .viz-grid .resource {
     background: none;
-    border: 1px solid #222222; }
+    border: 1px solid #808080; }
     .viz-grid .resource.serial-publications, .viz-grid .resource.periodicals {
-      border-style: dashed; }
+      border-color: #222222;
+      border-style: dotted; }
     .viz-grid .resource.source-text {
-      background: radial-gradient(#00548b 30%, transparent 30%); }
+      background: radial-gradient(#00548b 40%, transparent 40%); }
     .viz-grid .resource.translation {
-      background: -webkit-gradient(linear, left top, right top, color-stop(45%, transparent), color-stop(0, #9b2923), color-stop(55%, #9b2923), color-stop(0, transparent)), -webkit-gradient(linear, left top, left bottom, color-stop(45%, transparent), color-stop(0, #9b2923), color-stop(55%, #9b2923), color-stop(0, transparent));
-      background: linear-gradient(90deg, transparent 45%, #9b2923 0, #9b2923 55%, transparent 0), linear-gradient(180deg, transparent 45%, #9b2923 0, #9b2923 55%, transparent 0); }
+      background-image: -webkit-gradient(linear, left top, right top, color-stop(35%, transparent), color-stop(0, #9b2923), color-stop(65%, #9b2923), color-stop(0, transparent)), -webkit-gradient(linear, left top, left bottom, color-stop(35%, transparent), color-stop(0, #9b2923), color-stop(65%, #9b2923), color-stop(0, transparent));
+      background-image: linear-gradient(90deg, transparent 35%, #9b2923 0, #9b2923 65%, transparent 0), linear-gradient(180deg, transparent 35%, #9b2923 0, #9b2923 65%, transparent 0);
+      background-size: 80% 80%;
+      background-position: center;
+      background-repeat: no-repeat; }
   .viz-grid .year {
     display: inline-block;
+    font-size: 10px;
     margin-top: 24px;
     margin-top: 1.5rem;
     -webkit-transform: rotate(-45deg);
@@ -9563,15 +9572,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     -webkit-transform-origin: 0% 0%;
             transform-origin: 0% 0%; }
     .viz-grid .year.zlarge {
-      margin-right: 16px;
-      margin-right: 1rem;
+      min-width: 80px;
       -webkit-transform: rotate(0deg);
               transform: rotate(0deg);
       -webkit-transform-origin: 0% 0%;
               transform-origin: 0% 0%; }
     .viz-grid .year.zsmall {
-      -webkit-transform: rotate(-90deg);
-              transform: rotate(-90deg);
+      -webkit-transform: rotate(-45deg);
+              transform: rotate(-45deg);
       -webkit-transform-origin: 0% 0%;
               transform-origin: 0% 0%; }
   .viz-grid .event,
