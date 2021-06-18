@@ -1629,11 +1629,12 @@ $viz-size: 8px;
     transform-origin: 0% 0%;
 
     &.zlarge {
+      min-width: 80px;
       transform: rotate(0deg);
       transform-origin: 0% 0%;
     }
     &.zsmall {
-      transform: rotate(-90deg);
+      transform: rotate(-45deg);
       transform-origin: 0% 0%;
     }
   }

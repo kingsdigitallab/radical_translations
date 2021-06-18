@@ -562,6 +562,11 @@ new Vue({
     },
     setZoom: function (value) {
       this.zoom = value
+
+      document.getElementById(`${this.focusElement}0`).scrollIntoView()
+      this.$nextTick(() => {
+        document.getElementById(this.focusElement).scrollIntoView()
+      })
     },
     filterTimeline: function (value) {
       if (this.timeline) {

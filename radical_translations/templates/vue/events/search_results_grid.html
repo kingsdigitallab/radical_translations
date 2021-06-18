@@ -38,6 +38,9 @@
           v-for="(year, index) in timeline.years"
           :key="year">
           <span
+            v-if="index == 0"
+            :id="`${focusElement}0`"></span>
+          <span
             v-if="Math.round(timeline.years.length / 1.75) === index"
             :id="focusElement"></span>
           <span :class="['year', zoom]">{[ year ]}</span>

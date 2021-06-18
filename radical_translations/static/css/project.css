@@ -9567,13 +9567,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     -webkit-transform-origin: 0% 0%;
             transform-origin: 0% 0%; }
     .viz-grid .year.zlarge {
+      min-width: 80px;
       -webkit-transform: rotate(0deg);
               transform: rotate(0deg);
       -webkit-transform-origin: 0% 0%;
               transform-origin: 0% 0%; }
     .viz-grid .year.zsmall {
-      -webkit-transform: rotate(-90deg);
-              transform: rotate(-90deg);
+      -webkit-transform: rotate(-45deg);
+              transform: rotate(-45deg);
       -webkit-transform-origin: 0% 0%;
               transform-origin: 0% 0%; }
   .viz-grid .event,
