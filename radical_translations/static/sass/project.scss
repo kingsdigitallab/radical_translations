@@ -1549,14 +1549,17 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 // Timeline visualisations
 // colours from https://learnui.design/tools/data-color-picker.html#palette
 
-$hl: #ffa600;
-$size: 8px;
+$viz-background: $white;
+$viz-hl: $old-yellow;
+$viz-size: 8px;
 
 .viz-grid {
-  background: $secondary;
+  background: $viz-background;
+  font-family: 'Oswald', sans-serif;
   font-size: 12px;
 
   table {
+    background: $viz-background;
     display: block;
     margin: auto;
     overflow-x: scroll;
@@ -1564,48 +1567,63 @@ $size: 8px;
     tbody th,
     thead th:first-child,
     thead th:nth-child(2) {
-      background: $secondary;
       left: 0;
       padding: 8px;
       position: sticky;
     }
 
     thead th:nth-child(2) {
-      left: 100px;
+      left: 75px;
+      padding: 0;
     }
-  }
 
-  .content td {
-    border-bottom: 1px solid #d8d8d8;
-    scroll-snap-align: start;
+    td {
+      border-bottom: 1px solid $medium-gray;
+      border-right: 1px dashed $light-gray;
+      scroll-snap-align: start;
+    }
 
-    &:nth-child(even) {
-      background: #f0f0f0;
+    th {
+      background: $viz-background;
     }
   }
 
   .event {
-    background: #ff7c43;
+    background: $dark-gray;
     border-radius: 50%;
 
     &.related {
       background: none;
-      border: 2px solid #ff7c43;
+      border: 1px solid $dark-gray;
     }
   }
 
   .resource {
-    background: #729ea1;
+    background: none;
+    border: 1px solid $dark-gray;
 
     &.serial-publications,
     &.periodicals {
-      background: #bc5090;
+      border: 1px dashed $dark-gray !important;
     }
     &.source-text {
-      background: #f4d06f;
+      background: radial-gradient($prussian-blue 30%, transparent 30%);
     }
     &.translation {
-      background: #ec9192;
+      background: linear-gradient(
+          90deg,
+          transparent 45%,
+          $radical-red 0,
+          $radical-red 55%,
+          transparent 0
+        ),
+        linear-gradient(
+          180deg,
+          transparent 45%,
+          $radical-red 0,
+          $radical-red 55%,
+          transparent 0
+        );
     }
   }
 
@@ -1630,27 +1648,26 @@ $size: 8px;
   .resource {
     display: inline-block;
     float: left;
-    height: $size;
+    height: $viz-size;
     margin: 0.5px;
-    width: $size;
+    width: $viz-size;
 
     &.zlarge {
-      height: calc(#{$size} * 1.5);
-      width: calc(#{$size} * 1.5);
+      &:before {
+        font-size: calc(#{$viz-size} * 2);
+      }
+
+      height: calc(#{$viz-size} * 1.5);
+      width: calc(#{$viz-size} * 1.5);
     }
     &.zsmall {
-      height: calc(#{$size} / 2);
-      width: calc(#{$size} / 2);
+      height: calc(#{$viz-size} / 2);
+      width: calc(#{$viz-size} / 2);
     }
 
-    &:hover {
-      background: $hl;
-      cursor: pointer;
-    }
-
+    &:hover,
     &.active {
-      background: $hl;
-      border: 2px solid $hl;
+      background-color: $viz-hl;
       cursor: pointer;
     }
 

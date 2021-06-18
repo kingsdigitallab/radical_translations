@@ -35,7 +35,7 @@
         <th>Year</th>
       </tr>
       <tr>
-        <td></td>
+        <th></th>
         <td
           v-for="(year, index) in timeline.years"
           :key="year">
@@ -68,16 +68,6 @@
         </td>
       </tr>
     </tbody>
-    <tfoot>
-      <tr>
-        <td></td>
-        <td
-          v-for="year in timeline.years"
-          :key="year">
-          <span :class="['year', zoom]">{[ year ]}</span>
-        </td>
-      </tr>
-    </tfoot>
   </table>
 </div>
 
@@ -94,7 +84,7 @@
   <div v-if="timelineDetail.record">
     <h3>
       <a
-        :href="`../../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
+        :href="`../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
         {[ timelineDetail.record.title ]} {[ timelineDetail.record.date ]}
       </a>
     </h3>
@@ -110,7 +100,7 @@
     <li
       v-for="item in timelineDetail.data"
       :key="item.uid">
-      <a :href="`../../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
+      <a :href="`../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
       <span class="badge badge-info">{[ item.type ]}</span>
     </li>
   </ol>
