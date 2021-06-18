@@ -99,7 +99,7 @@
       v-for="item in timelineDetail.data"
       :key="item.uid">
       <a :href="`../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
-      <span class="badge badge-info">{[ item.type ]}</span>
+      <span class="badge badge-info">{[ item.subtype ]}</span>
     </li>
   </ol>
 </div>
