@@ -9516,7 +9516,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     stroke: #51b788; }
 
 .viz-grid {
-  background: #fff;
   font-family: 'Oswald', sans-serif;
   font-size: 12px; }
   .viz-grid table {
@@ -9524,21 +9523,16 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     display: block;
     margin: auto;
     overflow-x: scroll; }
-    .viz-grid table tbody th,
-    .viz-grid table thead th:first-child,
-    .viz-grid table thead th:nth-child(2) {
-      left: 0;
-      padding: 8px;
-      position: sticky; }
-    .viz-grid table thead th:nth-child(2) {
-      left: 75px;
-      padding: 0; }
     .viz-grid table td {
       border-bottom: 1px solid #808080;
       border-right: 1px dashed #d9d9d9;
       scroll-snap-align: start; }
     .viz-grid table th {
-      background: #fff; }
+      background: #fff;
+      left: 0;
+      padding: 8px;
+      position: sticky;
+      z-index: 1; }
   .viz-grid .event {
     background: #222222;
     border-radius: 50%; }
@@ -9549,7 +9543,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     background: none;
     border: 1px solid #222222; }
     .viz-grid .resource.serial-publications, .viz-grid .resource.periodicals {
-      border: 1px dashed #222222 !important; }
+      border-style: dashed; }
     .viz-grid .resource.source-text {
       background: radial-gradient(#00548b 30%, transparent 30%); }
     .viz-grid .resource.translation {
@@ -9600,4 +9594,5 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       cursor: pointer; }
     .viz-grid .event.filtered,
     .viz-grid .resource.filtered {
-      background: #d9d9d9; }
+      background: #d9d9d9;
+      border-color: #d9d9d9; }

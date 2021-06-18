@@ -1546,7 +1546,6 @@ $viz-hl: $old-yellow;
 $viz-size: 8px;
 
 .viz-grid {
-  background: $viz-background;
   font-family: 'Oswald', sans-serif;
   font-size: 12px;
 
@@ -1556,19 +1555,6 @@ $viz-size: 8px;
     margin: auto;
     overflow-x: scroll;
 
-    tbody th,
-    thead th:first-child,
-    thead th:nth-child(2) {
-      left: 0;
-      padding: 8px;
-      position: sticky;
-    }
-
-    thead th:nth-child(2) {
-      left: 75px;
-      padding: 0;
-    }
-
     td {
       border-bottom: 1px solid $medium-gray;
       border-right: 1px dashed $light-gray;
@@ -1577,6 +1563,10 @@ $viz-size: 8px;
 
     th {
       background: $viz-background;
+      left: 0;
+      padding: 8px;
+      position: sticky;
+      z-index: 1;
     }
   }
 
@@ -1596,7 +1586,7 @@ $viz-size: 8px;
 
     &.serial-publications,
     &.periodicals {
-      border: 1px dashed $dark-gray !important;
+      border-style: dashed;
     }
     &.source-text {
       background: radial-gradient($prussian-blue 30%, transparent 30%);
@@ -1665,6 +1655,7 @@ $viz-size: 8px;
 
     &.filtered {
       background: $light-gray;
+      border-color: $light-gray;
     }
   }
 }
