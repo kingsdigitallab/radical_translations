@@ -94,7 +94,7 @@
   <div v-if="timelineDetail.record">
     <h3>
       <a
-        :href="`../../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
+        :href="`../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
         {[ timelineDetail.record.title ]} {[ timelineDetail.record.date ]}
       </a>
     </h3>
@@ -110,7 +110,7 @@
     <li
       v-for="item in timelineDetail.data"
       :key="item.uid">
-      <a :href="`../../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
+      <a :href="`../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
       <span class="badge badge-info">{[ item.type ]}</span>
     </li>
   </ol>
