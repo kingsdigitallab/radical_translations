@@ -16,6 +16,7 @@
   <div class="container">
     <h1>{% block search_header %}{% endblock search_header %}</h1>
 
+    {% block query-facets %}
     <div class="row">
       <div class="col">
         <div class="row alert alert-secondary">
@@ -30,8 +31,11 @@
         </div>
       </div>
     </div>
+    {% endblock query-facets %}
+
     <div class="row">
       <div class="col">
+        {% block summary-ordering %}
         <div class="row">
           <div class="col">
             {% block summary %}
@@ -42,6 +46,7 @@
             {% endblock ordering %}
           </div>
         </div>
+        {% endblock summary-ordering %}
 
         {% block pagination-top %}
         <template v-if="!map.show">
@@ -49,6 +54,7 @@
         </template>
         {% endblock pagination-top %}
 
+        {% block results-options %}
         <ul class="nav nav-tabs" id="result-views" role="tablist">
           <li class="nav-item" role="presentation">
             <a
@@ -85,6 +91,8 @@
             </a>
           </li>
         </ul>
+        {% endblock results-options %}
+
         {% block results %}
         <div class="tab-content">
           <div

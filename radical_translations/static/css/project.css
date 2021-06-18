@@ -9516,40 +9516,45 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     stroke: #51b788; }
 
 .viz-grid {
-  background: #eae9da;
+  background: #fff;
+  font-family: 'Oswald', sans-serif;
   font-size: 12px; }
   .viz-grid table {
+    background: #fff;
     display: block;
     margin: auto;
     overflow-x: scroll; }
     .viz-grid table tbody th,
     .viz-grid table thead th:first-child,
     .viz-grid table thead th:nth-child(2) {
-      background: #eae9da;
       left: 0;
       padding: 8px;
       position: sticky; }
     .viz-grid table thead th:nth-child(2) {
-      left: 100px; }
-  .viz-grid .content td {
-    border-bottom: 1px solid #d8d8d8;
-    scroll-snap-align: start; }
-    .viz-grid .content td:nth-child(even) {
-      background: #f0f0f0; }
+      left: 75px;
+      padding: 0; }
+    .viz-grid table td {
+      border-bottom: 1px solid #808080;
+      border-right: 1px dashed #d9d9d9;
+      scroll-snap-align: start; }
+    .viz-grid table th {
+      background: #fff; }
   .viz-grid .event {
-    background: #ff7c43;
+    background: #222222;
     border-radius: 50%; }
     .viz-grid .event.related {
       background: none;
-      border: 2px solid #ff7c43; }
+      border: 1px solid #222222; }
   .viz-grid .resource {
-    background: #729ea1; }
+    background: none;
+    border: 1px solid #222222; }
     .viz-grid .resource.serial-publications, .viz-grid .resource.periodicals {
-      background: #bc5090; }
+      border: 1px dashed #222222 !important; }
     .viz-grid .resource.source-text {
-      background: #f4d06f; }
+      background: radial-gradient(#00548b 30%, transparent 30%); }
     .viz-grid .resource.translation {
-      background: #ec9192; }
+      background: -webkit-gradient(linear, left top, right top, color-stop(45%, transparent), color-stop(0, #9b2923), color-stop(55%, #9b2923), color-stop(0, transparent)), -webkit-gradient(linear, left top, left bottom, color-stop(45%, transparent), color-stop(0, #9b2923), color-stop(55%, #9b2923), color-stop(0, transparent));
+      background: linear-gradient(90deg, transparent 45%, #9b2923 0, #9b2923 55%, transparent 0), linear-gradient(180deg, transparent 45%, #9b2923 0, #9b2923 55%, transparent 0); }
   .viz-grid .year {
     display: inline-block;
     margin-top: 24px;
@@ -9581,18 +9586,17 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .viz-grid .resource.zlarge {
       height: calc(8px * 1.5);
       width: calc(8px * 1.5); }
+      .viz-grid .event.zlarge:before,
+      .viz-grid .resource.zlarge:before {
+        font-size: calc(8px * 2); }
     .viz-grid .event.zsmall,
     .viz-grid .resource.zsmall {
       height: calc(8px / 2);
       width: calc(8px / 2); }
-    .viz-grid .event:hover,
-    .viz-grid .resource:hover {
-      background: #ffa600;
-      cursor: pointer; }
-    .viz-grid .event.active,
+    .viz-grid .event:hover, .viz-grid .event.active,
+    .viz-grid .resource:hover,
     .viz-grid .resource.active {
-      background: #ffa600;
-      border: 2px solid #ffa600;
+      background-color: #e9c46a;
       cursor: pointer; }
     .viz-grid .event.filtered,
     .viz-grid .resource.filtered {
