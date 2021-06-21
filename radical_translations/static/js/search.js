@@ -49,10 +49,15 @@ new Vue({
       }
     },
     resources: {},
-    timeline: { filters: [] },
+    timeline: { filters: {} },
     timelineDetail: { country: null, year: null, data: [], show: false },
     focusElement: 'mememe',
-    zoom: ''
+    zoom: '',
+    zoomLevels: [
+      { level: 'Small', style: 'zmall' },
+      { level: 'Medium', style: '' },
+      { level: 'Large', style: 'zlarge' }
+    ]
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -414,7 +419,7 @@ new Vue({
       map.whenReady(() => map.invalidateSize())
     },
     getTimeline: function () {
-      const timeline = { filters: [] }
+      const timeline = { filters: {} }
 
       if (!this.data || !this.data.results) {
         return timeline
@@ -568,26 +573,30 @@ new Vue({
         document.getElementById(this.focusElement).scrollIntoView()
       })
     },
-    filterTimeline: function (value) {
+    filterTimeline: function (facet, value) {
       if (this.timeline) {
-        const index = this.timeline.filters.indexOf(value)
+        const current = this.timeline.filters[facet]
 
-        if (index > -1) {
-          this.timeline.filters.splice(index, 1)
+        if (current === value) {
+          delete this.timeline.filters[facet]
         } else {
-          this.timeline.filters.push(value)
+          this.timeline.filters[facet] = value
         }
 
-        console.log(this.timeline.filters)
+        const values = Object.values(this.timeline.filters)
 
-        this.timeline.filters.forEach(
-          (filter) =>
-            (this.timeline.raw = this.timeline.raw.map((t) =>
-              t.tags.includes(filter)
-                ? { ...t, filtered: false }
-                : { ...t, filtered: true }
-            ))
-        )
+        if (values.length > 0) {
+          this.timeline.raw = this.timeline.raw.map((t) =>
+            values.every((v) => t.tags.includes(v))
+              ? { ...t, filtered: false }
+              : { ...t, filtered: true }
+          )
+        } else {
+          this.timeline.raw = this.timeline.raw.map((t) => {
+            return { ...t, filtered: false }
+          })
+        }
+
         this.timeline.data = this.prepareTimelineData(this.timeline.raw)
       }
     }

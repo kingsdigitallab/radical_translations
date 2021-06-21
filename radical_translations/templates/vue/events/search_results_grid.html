@@ -1,34 +1,43 @@
 <div class="viz-grid">
-  <ul class="breadcrumbs">
-    <li>Resources:</li>
-    <li><span class="resource source-text large"></span> Source text</li>
-    <li><span class="resource translation large"></span> Translation</li>
-    <li><span class="resource serial-publications large"></span> Serial publication</li>
-  </ul>
-  <ul class="breadcrumbs">
-    <li>Events:</li>
-    <li><span class="event large"></span> Event</li>
-    <li><span class="event related large"></span> Related event</li>
+  <p>The main function of this timeline is to correlate events and texts. This was only
+  done for United Kingdom, France, Italy, Ireland and the United States. The other
+  countries in the timeline  only relate to place of publication and do not have an
+  accompanying political chronology.</p>
+
+  <ul class="list-inline">
+    <li class="list-inline-item"><strong>Resources:</strong></li>
+    <li class="list-inline-item"><span class="resource source-text large"></span> Source text</li>
+    <li class="list-inline-item"><span class="resource translation large"></span> Translation</li>
+    <li class="list-inline-item"><span class="resource serial-publications large"></span> Serial publication</li>
+    <li class="list-inline-item"><strong>Events:</strong></li>
+    <li class="list-inline-item"><span class="event large"></span> Event</li>
+    <li class="list-inline-item"><span class="event related large"></span> Related event</li>
   </ul>
 
-  <ul class="breadcrumbs">
-    <li>Zoom:</li>
-    <li @click="setZoom('zsmall')">Small</li>
-    <li @click="setZoom('')">Medium</li>
-    <li @click="setZoom('zlarge')">Large</li>
-  </ul>
+  <p
+    v-for="facet in facets"
+    :key="facet.name"
+    class="timeline-filters">
+  <strong>{[ getFacetDisplayName(facet.name) ]}: </strong>
+  <button 
+    v-for="bucket in facet.buckets"
+    :key="bucket.key"
+    @click="filterTimeline(facet.name, timelineFacet(bucket.key))"
+    :class="['btn btn-sm btn-secondary', {active: timeline.filters[facet.name] === timelineFacet(bucket.key)}]"
+    type="button">{[ bucket.key ]}
+  </button>
+  </p>
 
-  <ul 
-      v-for="facet in facets"
-      :key="facet.name"
-      class="breadcrumbs">
-    <li>{[ getFacetDisplayName(facet.name) ]}:</li>
-    <li 
-      v-for="bucket in facet.buckets"
-      :key="bucket.key"
-      @click="filterTimeline(timelineFacet(bucket.key))">{[ bucket.key ]}
-    </li>
-  </ul>
+  <p>
+  <strong>Zoom: </strong>
+  <button
+    v-for="z in zoomLevels"
+    :key="z.level"
+    @click="setZoom(z.style)"
+    :class="['btn btn-sm btn-secondary', {active: zoom === z.style}]"
+    type="button"
+    >{[ z.level ]}</button>
+  </p>
 
   <table>
     <thead>
