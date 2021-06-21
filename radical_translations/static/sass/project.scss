@@ -1579,12 +1579,12 @@ $viz-size: 8px;
   }
 
   .event {
-    background: $dark-gray;
+    background: $purple;
     border-radius: 50%;
 
     &.related {
-      background: radial-gradient(transparent 30%, $dark-gray 30%);
-      border: 1px solid $dark-gray;
+      background: radial-gradient(transparent 30%, $purple 30%);
+      //border: 1px solid $purple;
     }
   }
 
@@ -1598,7 +1598,7 @@ $viz-size: 8px;
       border-style: dotted;
     }
     &.source-text {
-      background: radial-gradient($prussian-blue 40%, transparent 40%);
+      background: radial-gradient($prussian-blue 50%, transparent 50%);
     }
     &.translation {
       background-image: linear-gradient(
@@ -1615,9 +1615,6 @@ $viz-size: 8px;
           $radical-red 65%,
           transparent 0
         );
-      background-size: 80% 80%;
-      background-position: center;
-      background-repeat: no-repeat;
     }
   }
 
