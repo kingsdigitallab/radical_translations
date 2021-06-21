@@ -446,7 +446,8 @@ new Vue({
                     'event',
                     this.timelineFacet(country),
                     `${year}`,
-                    idx > 0 ? 'related' : ''
+                    idx > 0 ? 'related' : '',
+                    idx > 0 ? this.timelineFacet(r.country[0]) : ''
                   ].concat(
                     r.classification
                       .filter((c) => c !== 'any')

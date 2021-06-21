@@ -23,7 +23,7 @@
     v-for="bucket in facet.buckets"
     :key="bucket.key"
     @click="filterTimeline(facet.name, timelineFacet(bucket.key))"
-    :class="['btn btn-sm btn-secondary', {active: timeline.filters[facet.name] === timelineFacet(bucket.key)}]"
+    :class="['btn btn-sm  btn-outline-dark', {active: timeline.filters[facet.name] === timelineFacet(bucket.key)}]"
     type="button">{[ bucket.key ]}
   </button>
   </p>
