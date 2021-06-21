@@ -4,21 +4,15 @@
   countries in the timeline  only relate to place of publication and do not have an
   accompanying political chronology.</p>
 
-  <ul class="list-inline">
-    <li class="list-inline-item"><strong>Resources:</strong></li>
-    <li class="list-inline-item"><span class="resource source-text large"></span> Source text</li>
-    <li class="list-inline-item"><span class="resource translation large"></span> Translation</li>
-    <li class="list-inline-item"><span class="resource serial-publications large"></span> Serial publication</li>
-    <li class="list-inline-item"><strong>Events:</strong></li>
-    <li class="list-inline-item"><span class="event large"></span> Event</li>
-    <li class="list-inline-item"><span class="event related large"></span> Related event</li>
-  </ul>
-
+  <h3>Filter the timeline</h3>
   <p
     v-for="facet in facets"
     :key="facet.name"
     class="timeline-filters">
-  <strong>{[ getFacetDisplayName(facet.name) ]}: </strong>
+  <button
+    type="button"
+    class="btn btn-sm btn-outline-primary"
+    disabled>{[ getFacetDisplayName(facet.name) ]}</button>
   <button 
     v-for="bucket in facet.buckets"
     :key="bucket.key"
@@ -28,16 +22,28 @@
   </button>
   </p>
 
-  <p>
-  <strong>Zoom: </strong>
-  <button
-    v-for="z in zoomLevels"
-    :key="z.level"
-    @click="setZoom(z.style)"
-    :class="['btn btn-sm btn-secondary', {active: zoom === z.style}]"
-    type="button"
-    >{[ z.level ]}</button>
-  </p>
+  <div class="row">
+    <div class="col">
+      <button type="button" class="btn btn-sm" disabled>Zoom</button>
+      <button
+        v-for="z in zoomLevels"
+        :key="z.level"
+        @click="setZoom(z.style)"
+        :class="['btn btn-sm btn-secondary', {active: zoom === z.style}]"
+        type="button"
+        >{[ z.level ]}</button>
+    </div>
+    <div class="col-8 text-right">
+      <ul class="list-inline">
+        <li class="list-inline-item"><strong>Timeline key:</strong></li>
+        <li class="list-inline-item"><span class="event large"></span> Event</li>
+        <li class="list-inline-item"><span class="event related large"></span> Related event</li>
+        <li class="list-inline-item"><span class="resource source-text large"></span> Source text</li>
+        <li class="list-inline-item"><span class="resource translation large"></span> Translation</li>
+        <li class="list-inline-item"><span class="resource serial-publications large"></span> Serial publication</li>
+      </ul>
+    </div>
+  </div>
 
   <table>
     <thead>
