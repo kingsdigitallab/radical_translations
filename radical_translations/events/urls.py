@@ -1,12 +1,9 @@
 from django.urls import path
-from rest_framework.routers import DefaultRouter
+from django.views.generic.base import RedirectView
 
-from radical_translations.events.views import EventDetailView, EventViewSet, event_grid
-
-router = DefaultRouter()
-router.register("api", basename="event-api", viewset=EventViewSet)
+from radical_translations.events.views import EventDetailView
 
 urlpatterns = [
     path("<int:pk>/", EventDetailView.as_view(), name="event-detail"),
-    path("", event_grid, name="event-grid"),
-] + router.urls
+    path("", RedirectView.as_view(pattern_name="timeline")),
+]
