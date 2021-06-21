@@ -54,7 +54,7 @@ new Vue({
     focusElement: 'mememe',
     zoom: '',
     zoomLevels: [
-      { level: 'Small', style: 'zmall' },
+      { level: 'Small', style: 'zsmall' },
       { level: 'Medium', style: '' },
       { level: 'Large', style: 'zlarge' }
     ]
