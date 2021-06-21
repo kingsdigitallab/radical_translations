@@ -1676,4 +1676,8 @@ $viz-size: 8px;
       border-color: $light-gray;
     }
   }
+
+  .timeline-filters::first-letter {
+    text-transform: uppercase;
+  }
 }
