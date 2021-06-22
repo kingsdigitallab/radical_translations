@@ -470,6 +470,7 @@ new Vue({
                   fr.label === 'Periodicals'
               ).length === 0
           )
+          .filter((r) => r.is_original || r.is_translation)
           .flatMap((r) => {
             return r.places
               .filter(
@@ -489,11 +490,7 @@ new Vue({
                         year: year,
                         id: r.id,
                         type: 'resource',
-                        subtype: r.is_original
-                          ? 'source-text'
-                          : r.is_translation
-                          ? 'translation'
-                          : 'other',
+                        subtype: r.is_original ? 'source-text' : 'translation',
                         record: record,
                         title: r.title ? r.title[0] : 'No title!',
                         date: r.date_display,
@@ -501,11 +498,7 @@ new Vue({
                           'resource',
                           this.timelineFacet(country),
                           `${year}`,
-                          r.is_original
-                            ? 'source-text'
-                            : r.is_translation
-                            ? 'translation'
-                            : 'other'
+                          r.is_original ? 'source-text' : 'translation'
                         ].concat(
                           r.form_genre
                             .filter((fr) => fr.label !== 'any')
