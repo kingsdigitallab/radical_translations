@@ -542,6 +542,21 @@ new Vue({
       return text.toLowerCase().replace(' ', '-')
     },
     prepareTimelineData: function (raw) {
+      const data = {
+        France: {},
+        Ireland: {},
+        Italy: {},
+        'United Kingdom': {},
+        'United States': {},
+        Belgium: {},
+        Germany: {},
+        India: {},
+        Monaco: {},
+        Netherlands: {},
+        Spain: {},
+        Switzerland: {}
+      }
+
       return raw.reduce((acc, curr) => {
         const country = curr.country
         const year = curr.year
@@ -552,7 +567,7 @@ new Vue({
         acc[country][year].push(curr)
 
         return acc
-      }, {})
+      }, data)
     },
     highlight: function (record) {
       if (this.timeline) {

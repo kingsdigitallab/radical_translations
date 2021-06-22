@@ -1564,6 +1564,10 @@ $viz-resource-colour: $prussian-blue;
       }
     }
 
+    tr.Belgium {
+      border-top: 7px double;
+    }
+
     td {
       border-bottom: 1px solid $medium-gray;
       border-right: 1px dashed $light-gray;
@@ -1590,7 +1594,10 @@ $viz-resource-colour: $prussian-blue;
       background: $viz-resource-colour;
     }
     &.translation {
-      background: radial-gradient($viz-event-colour 30%, $viz-resource-colour 30%);
+      background: radial-gradient(
+        $viz-event-colour 30%,
+        $viz-resource-colour 30%
+      );
     }
   }
 

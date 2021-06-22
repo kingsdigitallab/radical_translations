@@ -63,7 +63,8 @@
     <tbody class="content">
       <tr
         v-for="(value, country, index) in timeline.data"
-        :key="country">
+        :key="country"
+        :class="country">
         <th>{[ country ]}</th>
         <td
           v-for="year in timeline.years"
@@ -73,7 +74,7 @@
             :key="item.uid">
             <span
               :class="['record', zoom, item.tags, { active: item.active, filtered: item.filtered }]"
-              :title="`${country}, ${item.date}\n${item.title}\n${item.tags}`"
+              :title="`${country}, ${item.date}\n${item.title}`"
               @click="getTimelineDetail(country, year, item.record)"
               @mouseenter="highlight(item.record)"
               @mouseleave="highlight(null)">
