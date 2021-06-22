@@ -461,51 +461,60 @@ new Vue({
       let resources = []
 
       if (this.resources && this.resources.results) {
-        resources = this.resources.results.flatMap((r) => {
-          return r.places
-            .filter(
-              (place) =>
-                place.place.country && place.place.country.name !== 'any'
-            )
-            .map((place) => place.place.country.name)
-            .flatMap((country) => {
-              return !r.year
-                ? []
-                : r.year.map((year) => {
-                    const record = `resource-${r.id}`
-                    const uid = `${record}-${country}-${year}`
+        resources = this.resources.results
+          .filter(
+            (r) =>
+              r.form_genre.filter(
+                (fr) =>
+                  fr.label === 'Serial publications' ||
+                  fr.label === 'Periodicals'
+              ).length === 0
+          )
+          .flatMap((r) => {
+            return r.places
+              .filter(
+                (place) =>
+                  place.place.country && place.place.country.name !== 'any'
+              )
+              .map((place) => place.place.country.name)
+              .flatMap((country) => {
+                return !r.year
+                  ? []
+                  : r.year.map((year) => {
+                      const record = `resource-${r.id}`
+                      const uid = `${record}-${country}-${year}`
 
-                    return {
-                      country: country,
-                      year: year,
-                      id: r.id,
-                      type: 'resource',
-                      subtype: r.is_original
-                        ? 'source-text'
-                        : r.is_translation
-                        ? 'translation'
-                        : 'other',
-                      record: record,
-                      title: r.title ? r.title[0] : 'No title!',
-                      date: r.date_display,
-                      tags: [
-                        'resource',
-                        this.timelineFacet(country),
-                        `${year}`,
-                        r.is_original
+                      return {
+                        country: country,
+                        year: year,
+                        id: r.id,
+                        type: 'resource',
+                        subtype: r.is_original
                           ? 'source-text'
                           : r.is_translation
                           ? 'translation'
-                          : 'other'
-                      ].concat(
-                        r.form_genre
-                          .filter((fr) => fr.label !== 'any')
-                          .flatMap((fr) => this.timelineFacet(fr.label))
-                      )
-                    }
-                  })
-            })
-        })
+                          : 'other',
+                        record: record,
+                        title: r.title ? r.title[0] : 'No title!',
+                        date: r.date_display,
+                        tags: [
+                          'resource',
+                          this.timelineFacet(country),
+                          `${year}`,
+                          r.is_original
+                            ? 'source-text'
+                            : r.is_translation
+                            ? 'translation'
+                            : 'other'
+                        ].concat(
+                          r.form_genre
+                            .filter((fr) => fr.label !== 'any')
+                            .flatMap((fr) => this.timelineFacet(fr.label))
+                        )
+                      }
+                    })
+              })
+          })
       }
 
       const raw = events.concat(resources).sort((a, b) => {

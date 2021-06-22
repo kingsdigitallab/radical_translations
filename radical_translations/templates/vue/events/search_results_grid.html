@@ -39,7 +39,6 @@
         <li class="list-inline-item"><span class="event zlarge"></span> Event</li>
         <li class="list-inline-item"><span class="resource source-text zlarge"></span> Source text</li>
         <li class="list-inline-item"><span class="resource translation zlarge"></span> Translation</li>
-        <li class="list-inline-item"><span class="resource serial-publications zlarge"></span> Serial publication</li>
       </ul>
     </div>
   </div>
@@ -55,7 +54,7 @@
             v-if="index == 0"
             :id="`${focusElement}0`"></span>
           <span
-            v-if="Math.round(timeline.years.length / 1.7) === index"
+            v-if="year === 1805"
             :id="focusElement"></span>
           <span :class="['year', zoom]">{[ year ]}</span>
         </td>

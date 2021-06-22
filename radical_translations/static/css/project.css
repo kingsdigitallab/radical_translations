@@ -9538,15 +9538,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       position: sticky;
       z-index: 1; }
   .viz-grid .event {
-    background: #9b2923;
+    background: #e9c46a;
     border-radius: 50%; }
-  .viz-grid .resource {
-    background: none;
-    border: 1px solid #808080; }
-    .viz-grid .resource.source-text {
-      background: #00548b; }
-    .viz-grid .resource.translation {
-      background: radial-gradient(#9b2923 50%, transparent 50%); }
+  .viz-grid .resource.source-text {
+    background: #00548b; }
+  .viz-grid .resource.translation {
+    background: radial-gradient(#e9c46a 30%, #00548b 30%); }
   .viz-grid .year {
     display: inline-block;
     font-size: 10px;
@@ -9589,7 +9586,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .viz-grid .event:hover, .viz-grid .event.active,
     .viz-grid .resource:hover,
     .viz-grid .resource.active {
-      background-color: #e9c46a;
+      background: #9b2923;
       cursor: pointer; }
     .viz-grid .event.filtered,
     .viz-grid .resource.filtered {

@@ -1542,9 +1542,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 // colours from https://learnui.design/tools/data-color-picker.html#palette
 
 $viz-background: $white;
-$viz-hl: $old-yellow;
+$viz-hl: $radical-red;
 $viz-size: 8px;
-$viz-event-colour: $radical-red;
+$viz-event-colour: $old-yellow;
+$viz-resource-colour: $prussian-blue;
 
 .viz-grid {
   font-family: 'Oswald', sans-serif;
@@ -1585,14 +1586,11 @@ $viz-event-colour: $radical-red;
   }
 
   .resource {
-    background: none;
-    border: 1px solid $medium-gray;
-
     &.source-text {
-      background: $prussian-blue;
+      background: $viz-resource-colour;
     }
     &.translation {
-      background: radial-gradient($viz-event-colour 50%, transparent 50%);
+      background: radial-gradient($viz-event-colour 30%, $viz-resource-colour 30%);
     }
   }
 
@@ -1638,7 +1636,7 @@ $viz-event-colour: $radical-red;
 
     &:hover,
     &.active {
-      background-color: $viz-hl;
+      background: $viz-hl;
       cursor: pointer;
     }
 
