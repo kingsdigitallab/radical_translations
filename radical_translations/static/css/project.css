@@ -9543,21 +9543,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       position: sticky;
       z-index: 1; }
   .viz-grid .event {
-    background: #7f2992;
+    background: #00548b;
     border-radius: 50%; }
-    .viz-grid .event.related {
-      background: radial-gradient(transparent 30%, #7f2992 30%); }
-  .viz-grid .resource {
-    background: none;
-    border: 1px solid #808080; }
-    .viz-grid .resource.serial-publications, .viz-grid .resource.periodicals {
-      border-color: #222222;
-      border-style: dotted; }
-    .viz-grid .resource.source-text {
-      background: radial-gradient(#00548b 50%, transparent 50%); }
-    .viz-grid .resource.translation {
-      background-image: -webkit-gradient(linear, left top, right top, color-stop(35%, transparent), color-stop(0, #9b2923), color-stop(65%, #9b2923), color-stop(0, transparent)), -webkit-gradient(linear, left top, left bottom, color-stop(35%, transparent), color-stop(0, #9b2923), color-stop(65%, #9b2923), color-stop(0, transparent));
-      background-image: linear-gradient(90deg, transparent 35%, #9b2923 0, #9b2923 65%, transparent 0), linear-gradient(180deg, transparent 35%, #9b2923 0, #9b2923 65%, transparent 0); }
+  .viz-grid .resource.source-text {
+    background: #e9c46a; }
+  .viz-grid .resource.translation {
+    border: 2px double #00548b; }
   .viz-grid .year {
     display: inline-block;
     font-size: 10px;
@@ -9568,6 +9559,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     -webkit-transform-origin: 0% 0%;
             transform-origin: 0% 0%; }
     .viz-grid .year.zlarge {
+      font-size: 16px;
       min-width: 80px;
       -webkit-transform: rotate(0deg);
               transform: rotate(0deg);
@@ -9599,7 +9591,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .viz-grid .event:hover, .viz-grid .event.active,
     .viz-grid .resource:hover,
     .viz-grid .resource.active {
-      background-color: #e9c46a;
+      border: solid #9b2923;
+      background: #9b2923;
       cursor: pointer; }
     .viz-grid .event.filtered,
     .viz-grid .resource.filtered {

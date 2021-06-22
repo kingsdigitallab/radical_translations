@@ -4,27 +4,37 @@
   countries in the timeline  only relate to place of publication and do not have an
   accompanying political chronology.</p>
 
-  <h3>Filter the timeline</h3>
-  <p
-    v-for="facet in facets"
-    :key="facet.name"
-    class="timeline-filters">
-  <button
-    type="button"
-    class="btn btn-sm btn-outline-primary"
-    disabled>{[ getFacetDisplayName(facet.name) ]}</button>
-  <button 
-    v-for="bucket in facet.buckets"
-    :key="bucket.key"
-    @click="filterTimeline(facet.name, timelineFacet(bucket.key))"
-    :class="['btn btn-sm  btn-outline-dark', {active: timeline.filters[facet.name] === timelineFacet(bucket.key)}]"
-    type="button">{[ bucket.key ]}
-  </button>
-  </p>
+  <div class="alert alert-secondary">
+    <h3>Filters</h3>
+    <p
+      v-for="facet in facets"
+      :key="facet.name"
+      class="timeline-filters btn-group">
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-primary"
+        disabled>{[ getFacetDisplayName(facet.name) ]}</button>
+      <button 
+        v-for="bucket in facet.buckets"
+        :key="bucket.key"
+        @click="filterTimeline(facet.name, timelineFacet(bucket.key))"
+        :class="['filter btn btn-sm  btn-outline-dark', {active: timeline.filters[facet.name] === timelineFacet(bucket.key)}]"
+        type="button">{[ bucket.key ]}
+      </button>
+    </p>
+  </div>
 
   <div class="row">
-    <div class="col">
-      <button type="button" class="btn btn-sm" disabled>Zoom</button>
+    <div class="col-8">
+      <ul class="list-inline">
+        <li class="list-inline-item"><strong>Markers:</strong></li>
+        <li class="list-inline-item"><span class="event zlarge"></span> Event</li>
+        <li class="list-inline-item"><span class="resource source-text zlarge"></span> Source text</li>
+        <li class="list-inline-item"><span class="resource translation zlarge"></span> Translation</li>
+      </ul>
+    </div>
+    <div class="col text-right">
+      <button type="button" class="btn btn-sm" disabled>View</button>
       <button
         v-for="z in zoomLevels"
         :key="z.level"
@@ -32,16 +42,6 @@
         :class="['btn btn-sm btn-secondary', {active: zoom === z.style}]"
         type="button"
         >{[ z.level ]}</button>
-    </div>
-    <div class="col-8 text-right">
-      <ul class="list-inline">
-        <li class="list-inline-item"><strong>Timeline key:</strong></li>
-        <li class="list-inline-item"><span class="event zlarge"></span> Event</li>
-        <li class="list-inline-item"><span class="event related zlarge"></span> Related event</li>
-        <li class="list-inline-item"><span class="resource source-text zlarge"></span> Source text</li>
-        <li class="list-inline-item"><span class="resource translation zlarge"></span> Translation</li>
-        <li class="list-inline-item"><span class="resource serial-publications zlarge"></span> Serial publication</li>
-      </ul>
     </div>
   </div>
 
@@ -56,7 +56,7 @@
             v-if="index == 0"
             :id="`${focusElement}0`"></span>
           <span
-            v-if="Math.round(timeline.years.length / 1.7) === index"
+            v-if="year === 1805"
             :id="focusElement"></span>
           <span :class="['year', zoom]">{[ year ]}</span>
         </td>
@@ -65,7 +65,8 @@
     <tbody class="content">
       <tr
         v-for="(value, country, index) in timeline.data"
-        :key="country">
+        :key="country"
+        :class="country">
         <th>{[ country ]}</th>
         <td
           v-for="year in timeline.years"
@@ -75,7 +76,7 @@
             :key="item.uid">
             <span
               :class="['record', zoom, item.tags, { active: item.active, filtered: item.filtered }]"
-              :title="`${country}, ${item.date}\n${item.title}\n${item.tags}`"
+              :title="`${item.country}, ${item.date}\n${item.title}`"
               @click="getTimelineDetail(country, year, item.record)"
               @mouseenter="highlight(item.record)"
               @mouseleave="highlight(null)">
