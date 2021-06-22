@@ -1544,8 +1544,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 $viz-background: $white;
 $viz-hl: $radical-red;
 $viz-size: 8px;
-$viz-event-colour: $old-yellow;
-$viz-resource-colour: $prussian-blue;
+$viz-event-colour: $prussian-blue;
+$viz-resource-colour: $old-yellow;
 
 .viz-grid {
   font-family: 'Oswald', sans-serif;
@@ -1590,10 +1590,7 @@ $viz-resource-colour: $prussian-blue;
       background: $viz-resource-colour;
     }
     &.translation {
-      background: radial-gradient(
-        $viz-event-colour 30%,
-        $viz-resource-colour 30%
-      );
+      border: 2px double $viz-event-colour;
     }
   }
 
@@ -1639,6 +1636,7 @@ $viz-resource-colour: $prussian-blue;
 
     &:hover,
     &.active {
+      border: solid $viz-hl;
       background: $viz-hl;
       cursor: pointer;
     }
