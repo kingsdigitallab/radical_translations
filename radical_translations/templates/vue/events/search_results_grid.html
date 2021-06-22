@@ -74,7 +74,7 @@
             :key="item.uid">
             <span
               :class="['record', zoom, item.tags, { active: item.active, filtered: item.filtered }]"
-              :title="`${country}, ${item.date}\n${item.title}`"
+              :title="`${item.country}, ${item.date}\n${item.title}`"
               @click="getTimelineDetail(country, year, item.record)"
               @mouseenter="highlight(item.record)"
               @mouseleave="highlight(null)">

@@ -535,26 +535,24 @@ new Vue({
       return text.toLowerCase().replace(' ', '-')
     },
     prepareTimelineData: function (raw) {
+      const other = 'Other'
       const data = {
         France: {},
         Ireland: {},
         Italy: {},
         'United Kingdom': {},
         'United States': {},
-        Belgium: {},
-        Germany: {},
-        India: {},
-        Monaco: {},
-        Netherlands: {},
-        Spain: {},
-        Switzerland: {}
+        Other: {}
       }
 
       return raw.reduce((acc, curr) => {
-        const country = curr.country
+        let country = curr.country
         const year = curr.year
 
-        if (!acc[country]) acc[country] = {}
+        if (!(country in acc)) {
+          country = other
+        }
+
         if (!acc[country][year]) acc[country][year] = []
 
         acc[country][year].push(curr)
