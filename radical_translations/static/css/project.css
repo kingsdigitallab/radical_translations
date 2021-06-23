@@ -9521,7 +9521,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     stroke: #51b788; }
 
 .viz-grid {
-  font-family: 'Oswald', sans-serif; }
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-size: 1rem; }
   .viz-grid table {
     background: #fff;
     display: block;
@@ -9542,16 +9544,20 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       padding: 8px;
       position: sticky;
       z-index: 1; }
-  .viz-grid .event {
-    background: #00548b;
-    border-radius: 50%; }
-  .viz-grid .resource.source-text {
-    background: #e9c46a; }
-  .viz-grid .resource.translation {
-    border: 2px double #00548b; }
+  .viz-grid .timeline-filters::first-letter {
+    text-transform: uppercase; }
+  .viz-grid .markers .event, .viz-grid .markers .resource {
+    float: none; }
+    .viz-grid .markers .event:hover, .viz-grid .markers .resource:hover {
+      pointer-events: none; }
+  .viz-grid .zlarge {
+    font-size: 19.2px;
+    font-size: 1.2rem; }
+  .viz-grid .zsmall {
+    font-size: 12.8px;
+    font-size: 0.8rem; }
   .viz-grid .year {
     display: inline-block;
-    font-size: 10px;
     margin-top: 24px;
     margin-top: 1.5rem;
     -webkit-transform: rotate(-45deg);
@@ -9559,17 +9565,19 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     -webkit-transform-origin: 0% 0%;
             transform-origin: 0% 0%; }
     .viz-grid .year.zlarge {
-      font-size: 16px;
       min-width: 80px;
       -webkit-transform: rotate(0deg);
-              transform: rotate(0deg);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%; }
+              transform: rotate(0deg); }
     .viz-grid .year.zsmall {
       -webkit-transform: rotate(-45deg);
-              transform: rotate(-45deg);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%; }
+              transform: rotate(-45deg); }
+  .viz-grid .event {
+    background: #00548b;
+    border-radius: 50%; }
+  .viz-grid .resource.source-text {
+    background: #e9c46a; }
+  .viz-grid .resource.translation {
+    border: 2px double #00548b; }
   .viz-grid .event,
   .viz-grid .resource {
     display: inline-block;
@@ -9581,9 +9589,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .viz-grid .resource.zlarge {
       height: calc(8px * 1.5);
       width: calc(8px * 1.5); }
-      .viz-grid .event.zlarge:before,
-      .viz-grid .resource.zlarge:before {
-        font-size: calc(8px * 2); }
     .viz-grid .event.zsmall,
     .viz-grid .resource.zsmall {
       height: calc(8px / 2);
@@ -9598,5 +9603,3 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .viz-grid .resource.filtered {
       background: #d9d9d9;
       border-color: #d9d9d9; }
-  .viz-grid .timeline-filters::first-letter {
-    text-transform: uppercase; }
