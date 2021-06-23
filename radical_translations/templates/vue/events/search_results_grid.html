@@ -1,9 +1,9 @@
-<div class="viz-grid">
-  <p>The main function of this timeline is to correlate events and texts. This was only
-  done for United Kingdom, France, Italy, Ireland and the United States. The other
-  countries in the timeline  only relate to place of publication and do not have an
-  accompanying political chronology.</p>
+<p>The main function of this timeline is to correlate events and texts. This was only
+done for United Kingdom, France, Italy, Ireland and the United States. The other
+countries in the timeline  only relate to place of publication and do not have an
+accompanying political chronology.</p>
 
+<div class="viz-grid">
   <div class="alert alert-secondary">
     <h3>Filters</h3>
     <div id="filters">
@@ -28,7 +28,7 @@
 
   <div class="row">
     <div class="col-8">
-      <ul class="list-inline">
+      <ul class="markers list-inline">
         <li class="list-inline-item"><strong>Markers:</strong></li>
         <li class="list-inline-item"><span class="event zlarge"></span> Event</li>
         <li class="list-inline-item"><span class="resource source-text zlarge"></span> Source text</li>
@@ -41,7 +41,7 @@
         v-for="z in zoomLevels"
         :key="z.level"
         @click="setZoom(z.style)"
-        :class="['btn btn-sm btn-secondary', {active: zoom === z.style}]"
+        :class="['btn btn-sm btn-secondary', z.style, {active: zoom === z.style}]"
         type="button"
         >{[ z.level ]}</button>
     </div>

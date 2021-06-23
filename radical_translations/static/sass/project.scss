@@ -1549,6 +1549,7 @@ $viz-resource-colour: $old-yellow;
 
 .viz-grid {
   font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
 
   table {
     background: $viz-background;
@@ -1580,6 +1581,42 @@ $viz-resource-colour: $old-yellow;
     }
   }
 
+  .timeline-filters::first-letter {
+    text-transform: uppercase;
+  }
+
+  .markers {
+    .event, .resource {
+      float: none;
+
+      &:hover {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .zlarge {
+    font-size: 1.2rem;
+  }
+  .zsmall {
+    font-size: 0.8rem;
+  }
+
+  .year {
+    display: inline-block;
+    margin-top: 1.5rem;
+    transform: rotate(-45deg);
+    transform-origin: 0% 0%;
+
+    &.zlarge {
+      min-width: 80px;
+      transform: rotate(0deg);
+    }
+    &.zsmall {
+      transform: rotate(-45deg);
+    }
+  }
+
   .event {
     background: $viz-event-colour;
     border-radius: 50%;
@@ -1594,25 +1631,6 @@ $viz-resource-colour: $old-yellow;
     }
   }
 
-  .year {
-    display: inline-block;
-    font-size: 10px;
-    margin-top: 1.5rem;
-    transform: rotate(-45deg);
-    transform-origin: 0% 0%;
-
-    &.zlarge {
-      font-size: 16px;
-      min-width: 80px;
-      transform: rotate(0deg);
-      transform-origin: 0% 0%;
-    }
-    &.zsmall {
-      transform: rotate(-45deg);
-      transform-origin: 0% 0%;
-    }
-  }
-
   .event,
   .resource {
     display: inline-block;
@@ -1622,10 +1640,6 @@ $viz-resource-colour: $old-yellow;
     width: $viz-size;
 
     &.zlarge {
-      &:before {
-        font-size: calc(#{$viz-size} * 2);
-      }
-
       height: calc(#{$viz-size} * 1.5);
       width: calc(#{$viz-size} * 1.5);
     }
@@ -1645,9 +1659,5 @@ $viz-resource-colour: $old-yellow;
       background: $light-gray;
       border-color: $light-gray;
     }
-  }
-
-  .timeline-filters::first-letter {
-    text-transform: uppercase;
   }
 }
