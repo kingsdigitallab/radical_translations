@@ -88,39 +88,71 @@ accompanying political chronology.</p>
       </tr>
     </tbody>
   </table>
-</div>
 
-<div
-      :class="{'hidden': !timelineDetail.show }"
-      class="event-info">
-  <button
-    v-on:click="timelineDetail.show = false"
-    class="close close-event"
-    type="button"
-    aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div v-if="timelineDetail.record">
-    <h3>
-      <a
-        :href="`../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
-        {[ timelineDetail.record.title ]} {[ timelineDetail.record.date ]}
-      </a>
-    </h3>
-    <p class="metadata">
-    <span
-      v-for="tag in timelineDetail.record.tags"
-      class="badge badge-info">{[ tag ]}</span>
-    </p>
+  <div
+    :class="{'hidden': !timelineDetail.show, 'show': timelineDetail.show }"
+    class="modal timeline-modal fade"
+    role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            v-on:click="timelineDetail.show = false"
+            class="close close-event"
+            type="button"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div v-if="timelineDetail.record">
+            <h3>
+              <a
+                :href="`../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
+                {[ timelineDetail.record.title ]}
+              </a>
+            </h3>
+            <p class="metadata">
+            <span class="metadata-block">
+              {% include "svgs/solid/calendar.svg" %}
+              {[ timelineDetail.record.date ]}
+            </span>
+            <span class="metadata-block">
+              {% include "svgs/solid/map-marker-alt.svg" %}
+              {[ timelineDetail.record.country ]}
+            </span>
+            <span
+              class="metadata-block">
+              <span class="form">
+                <strong v-if="timelineDetail.record.type === 'event'">Type of event: </strong>
+                <strong v-else>Forms: </strong>
+              </span>
+              <template v-for="(tag, index) in timelineDetail.record.subjects">
+                <span>{[ tag ]}</span><template
+                                        v-if="index < timelineDetail.record.subjects.length - 1">, </template>
+              </template>
+            </span>
+            </p>
+          </div>
+          <hr>
+          <h4>Other activity in {[ timelineDetail.country ]} in {[ timelineDetail.year ]}</h4>
+          <ol>
+            <li
+              v-for="item in timelineDetail.data"
+              :key="item.uid">
+              <a :href="`../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
+              <span class="badge badge-info">{[ item.subtype ]}</span>
+            </li>
+          </ol>
+        </div>
+        <div class="modal-footer">
+          <button
+            v-on:click="timelineDetail.show = false"
+            class="btn btn-sm btn-secondary"
+            type="button"
+            aria-label="Close">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <hr>
-  <h4>Other activity in {[ timelineDetail.country ]} in {[ timelineDetail.year ]}</h4>
-  <ol>
-    <li
-      v-for="item in timelineDetail.data"
-      :key="item.uid">
-      <a :href="`../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
-      <span class="badge badge-info">{[ item.subtype ]}</span>
-    </li>
-  </ol>
 </div>

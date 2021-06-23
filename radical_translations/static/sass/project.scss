@@ -1444,7 +1444,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .event-info {
-  background: $secondary;
+  //background: $secondary;
   border: 1px solid $light-gray;
   box-shadow: 2px 2px 2px 2px $medium-gray;
   max-height: 50vh;
@@ -1547,7 +1547,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 // Timeline visualisations
-// colours from https://learnui.design/tools/data-color-picker.html#palette
 
 $viz-background: $white;
 $viz-hl: $radical-red;
@@ -1594,7 +1593,8 @@ $viz-resource-colour: $old-yellow;
   }
 
   .markers {
-    .event, .resource {
+    .event,
+    .resource {
       float: none;
 
       &:hover {
@@ -1666,6 +1666,20 @@ $viz-resource-colour: $old-yellow;
     &.filtered {
       background: $light-gray;
       border-color: $light-gray;
+    }
+  }
+
+  .timeline-modal {
+    overflow-y: scroll;
+
+    &.show {
+      display: block;
+    }
+
+    .modal-body,
+    .modal-footer,
+    .modal-header {
+      padding: 0.5rem 1rem;
     }
   }
 }
