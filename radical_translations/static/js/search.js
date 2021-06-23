@@ -433,6 +433,10 @@ new Vue({
                 const record = `event-${r.id}`
                 const uid = `${record}-${country}-${year}`
 
+                const classification = r.classification
+                  .filter((c) => c !== 'any')
+                  .flatMap((c) => c)
+
                 return {
                   country: country,
                   year: year,
@@ -442,17 +446,14 @@ new Vue({
                   record: record,
                   title: r.title,
                   date: r.date,
+                  subjects: classification,
                   tags: [
                     'event',
                     this.timelineFacet(country),
                     `${year}`,
                     idx > 0 ? 'related' : '',
                     idx > 0 ? this.timelineFacet(r.country[0]) : ''
-                  ].concat(
-                    r.classification
-                      .filter((c) => c !== 'any')
-                      .flatMap((c) => this.timelineFacet(c))
-                  )
+                  ].concat(classification.map((c) => this.timelineFacet(c)))
                 }
               })
         })
@@ -479,6 +480,10 @@ new Vue({
               )
               .map((place) => place.place.country.name)
               .flatMap((country) => {
+                const subjects = r.form_genre
+                  .filter((fr) => fr.label !== 'any')
+                  .map((fr) => fr.label)
+
                 return !r.year
                   ? []
                   : r.year.map((year) => {
@@ -490,20 +495,17 @@ new Vue({
                         year: year,
                         id: r.id,
                         type: 'resource',
-                        subtype: r.is_original ? 'source-text' : 'translation',
+                        subtype: r.is_original ? 'source text' : 'translation',
                         record: record,
                         title: r.title ? r.title[0] : 'No title!',
                         date: r.date_display,
+                        subjects: subjects,
                         tags: [
                           'resource',
                           this.timelineFacet(country),
                           `${year}`,
                           r.is_original ? 'source-text' : 'translation'
-                        ].concat(
-                          r.form_genre
-                            .filter((fr) => fr.label !== 'any')
-                            .flatMap((fr) => this.timelineFacet(fr.label))
-                        )
+                        ].concat(subjects.map((s) => this.timelineFacet(s)))
                       }
                     })
               })
