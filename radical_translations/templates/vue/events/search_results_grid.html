@@ -6,22 +6,24 @@
 
   <div class="alert alert-secondary">
     <h3>Filters</h3>
-    <p
-      v-for="facet in facets"
-      :key="facet.name"
-      class="timeline-filters btn-group">
-      <button
-        type="button"
-        class="btn btn-sm btn-outline-primary"
-        disabled>{[ getFacetDisplayName(facet.name) ]}</button>
-      <button 
-        v-for="bucket in facet.buckets"
-        :key="bucket.key"
-        @click="filterTimeline(facet.name, timelineFacet(bucket.key))"
-        :class="['filter btn btn-sm  btn-outline-dark', {active: timeline.filters[facet.name] === timelineFacet(bucket.key)}]"
-        type="button">{[ bucket.key ]}
-      </button>
-    </p>
+    <div id="filters">
+      <div
+        v-for="facet in facets"
+        :key="facet.name"
+        class="timeline-filters btn-group">
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-primary"
+          disabled>{[ getFacetDisplayName(facet.name) ]}</button>
+        <button 
+          v-for="bucket in facet.buckets"
+          :key="bucket.key"
+          @click="filterTimeline(facet.name, timelineFacet(bucket.key))"
+          :class="['filter btn btn-sm  btn-outline-dark', {active: timeline.filters[facet.name] === timelineFacet(bucket.key)}]"
+          type="button">{[ bucket.key ]}
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="row">
