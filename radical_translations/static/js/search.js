@@ -452,7 +452,7 @@ new Vue({
                   title: r.title,
                   date: r.date,
                   subjects: classification,
-                  tags: ['event', this.timelineFacet(country)]
+                  tags: [this.timelineFacet(country)]
                     .concat(relatedTags)
                     .concat(classification.map((c) => this.timelineFacet(c)))
                 }
@@ -502,7 +502,6 @@ new Vue({
                         date: r.date_display,
                         subjects: subjects,
                         tags: [
-                          'resource',
                           this.timelineFacet(country),
                           r.is_original ? 'source-text' : 'translation'
                         ]
@@ -555,8 +554,11 @@ new Vue({
           country = other
         }
 
-        if (!acc[country][year]) acc[country][year] = []
+        if (acc[country]['filtered'] === undefined)
+          acc[country]['filtered'] = true
+        acc[country]['filtered'] = acc[country]['filtered'] && curr.filtered
 
+        if (!acc[country][year]) acc[country][year] = []
         acc[country][year].push(curr)
 
         return acc

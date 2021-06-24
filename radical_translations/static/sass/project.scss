@@ -1606,6 +1606,10 @@ $viz-resource-colour: $old-yellow;
       padding: 8px;
       position: sticky;
       z-index: 1;
+
+      &.filtered {
+        color: $light-gray;
+      }
     }
   }
 

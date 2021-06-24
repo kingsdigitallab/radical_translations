@@ -69,7 +69,8 @@ accompanying political chronology.</p>
         v-for="(value, country, index) in timeline.data"
         :key="country"
         :class="country">
-        <th :class="zoom">{[ country ]}</th>
+        <th
+          :class="[zoom, { filtered: timeline.data[country].filtered }]">{[ country ]}</th>
         <td
           v-for="year in timeline.years"
           :key="year">
@@ -77,7 +78,7 @@ accompanying political chronology.</p>
             v-for="item in timeline.data[country][year]"
             :key="item.uid">
             <span
-              :class="['record', zoom, item.tags, { active: item.active, filtered: item.filtered }]"
+              :class="[zoom, item.type, item.tags, { active: item.active, filtered: item.filtered }]"
               :title="`${item.country}, ${item.date}\n${item.title}`"
               @click="getTimelineDetail(country, year, item.record)"
               @mouseenter="highlight(item.record)"

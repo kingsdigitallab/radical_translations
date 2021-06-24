@@ -9557,6 +9557,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       padding: 8px;
       position: sticky;
       z-index: 1; }
+      .viz-grid table th.filtered {
+        color: #d9d9d9; }
   .viz-grid .year {
     display: inline-block;
     margin-top: 24px;
