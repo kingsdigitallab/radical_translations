@@ -439,6 +439,11 @@ new Vue({
                   .filter((c) => c !== 'any')
                   .flatMap((c) => c)
 
+                let relatedTags = []
+                if (idx > 0) {
+                  relatedTags = ['related', this.timelineFacet(r.country[0])]
+                }
+
                 return {
                   country: country,
                   year: year,
@@ -449,13 +454,9 @@ new Vue({
                   title: r.title,
                   date: r.date,
                   subjects: classification,
-                  tags: [
-                    'event',
-                    this.timelineFacet(country),
-                    `${year}`,
-                    idx > 0 ? 'related' : '',
-                    idx > 0 ? this.timelineFacet(r.country[0]) : ''
-                  ].concat(classification.map((c) => this.timelineFacet(c)))
+                  tags: [this.timelineFacet(country)]
+                    .concat(relatedTags)
+                    .concat(classification.map((c) => this.timelineFacet(c)))
                 }
               })
         })
@@ -503,11 +504,9 @@ new Vue({
                         date: r.date_display,
                         subjects: subjects,
                         tags: [
-                          'resource',
                           this.timelineFacet(country),
-                          `${year}`,
                           r.is_original ? 'source-text' : 'translation'
-                        ].concat(subjects.map((s) => this.timelineFacet(s)))
+                        ]
                       }
                     })
               })
@@ -557,8 +556,11 @@ new Vue({
           country = other
         }
 
-        if (!acc[country][year]) acc[country][year] = []
+        if (acc[country]['filtered'] === undefined)
+          acc[country]['filtered'] = true
+        acc[country]['filtered'] = acc[country]['filtered'] && curr.filtered
 
+        if (!acc[country][year]) acc[country][year] = []
         acc[country][year].push(curr)
 
         return acc

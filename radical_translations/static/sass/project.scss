@@ -1558,6 +1558,35 @@ $viz-resource-colour: $old-yellow;
   font-family: 'Oswald', sans-serif;
   font-size: 1rem;
 
+  .label {
+    color: $radical-red;
+    font-variation-settings: "wdth" 100,"wght" 700;
+    opacity: 1;
+    text-transform: uppercase;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  .markers {
+    .event,
+    .resource {
+      float: none;
+
+      &:hover {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .zlarge {
+    font-size: 1.2rem;
+  }
+  .zsmall {
+    font-size: 0.6rem;
+  }
+
   table {
     background: $viz-background;
     display: block;
@@ -1585,29 +1614,11 @@ $viz-resource-colour: $old-yellow;
       padding: 8px;
       position: sticky;
       z-index: 1;
-    }
-  }
 
-  .timeline-filters::first-letter {
-    text-transform: uppercase;
-  }
-
-  .markers {
-    .event,
-    .resource {
-      float: none;
-
-      &:hover {
-        pointer-events: none;
+      &.filtered {
+        color: $light-gray;
       }
     }
-  }
-
-  .zlarge {
-    font-size: 1.2rem;
-  }
-  .zsmall {
-    font-size: 0.8rem;
   }
 
   .year {
@@ -1635,7 +1646,8 @@ $viz-resource-colour: $old-yellow;
       background: $viz-resource-colour;
     }
     &.translation {
-      border: 2px double $viz-event-colour;
+      border: 1px solid $viz-event-colour;
+      border-radius: 50%;
     }
   }
 

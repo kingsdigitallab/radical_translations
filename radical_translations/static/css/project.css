@@ -9523,6 +9523,25 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   font-family: 'Oswald', sans-serif;
   font-size: 16px;
   font-size: 1rem; }
+  .viz-grid .label {
+    color: #9b2923;
+    font-variation-settings: "wdth" 100,"wght" 700;
+    opacity: 1;
+    text-transform: uppercase; }
+    .viz-grid .label::first-letter {
+      text-transform: uppercase; }
+  .viz-grid .markers .event,
+  .viz-grid .markers .resource {
+    float: none; }
+    .viz-grid .markers .event:hover,
+    .viz-grid .markers .resource:hover {
+      pointer-events: none; }
+  .viz-grid .zlarge {
+    font-size: 19.2px;
+    font-size: 1.2rem; }
+  .viz-grid .zsmall {
+    font-size: 9.6px;
+    font-size: 0.6rem; }
   .viz-grid table {
     background: #fff;
     display: block;
@@ -9543,20 +9562,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       padding: 8px;
       position: sticky;
       z-index: 1; }
-  .viz-grid .timeline-filters::first-letter {
-    text-transform: uppercase; }
-  .viz-grid .markers .event,
-  .viz-grid .markers .resource {
-    float: none; }
-    .viz-grid .markers .event:hover,
-    .viz-grid .markers .resource:hover {
-      pointer-events: none; }
-  .viz-grid .zlarge {
-    font-size: 19.2px;
-    font-size: 1.2rem; }
-  .viz-grid .zsmall {
-    font-size: 12.8px;
-    font-size: 0.8rem; }
+      .viz-grid table th.filtered {
+        color: #d9d9d9; }
   .viz-grid .year {
     display: inline-block;
     margin-top: 24px;
@@ -9578,7 +9585,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .viz-grid .resource.source-text {
     background: #e9c46a; }
   .viz-grid .resource.translation {
-    border: 2px double #00548b; }
+    border: 1px solid #00548b;
+    border-radius: 50%; }
   .viz-grid .event,
   .viz-grid .resource {
     display: inline-block;
