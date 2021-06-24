@@ -3,7 +3,7 @@ done for United Kingdom, France, Italy, Ireland and the United States. The other
 countries in the timeline  only relate to place of publication and do not have an
 accompanying political chronology.</p>
 
-<div class="viz-grid">
+<div class="viz-grid" id="timeline">
   <div class="alert alert-secondary">
     <h3>Filters</h3>
     <div id="filters">
@@ -37,6 +37,11 @@ accompanying political chronology.</p>
     </div>
     <div class="col text-right">
       <button type="button" class="label btn btn-sm" disabled>View:</button>
+      <button
+        @click="print('app')"
+        type="button"
+        class="btn btn-sm btn-outline-dark"
+        aria-label="Print">Print</button>
       <button
         v-for="z in zoomLevels"
         :key="z.level"
@@ -93,6 +98,7 @@ accompanying political chronology.</p>
   <div
     :class="{'hidden': !timelineDetail.show, 'show': timelineDetail.show }"
     class="modal timeline-modal fade"
+    id="timeline-detail"
     role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -148,7 +154,12 @@ accompanying political chronology.</p>
         </div>
         <div class="modal-footer">
           <button
-            v-on:click="timelineDetail.show = false"
+            @click="print('timeline-detail')"
+            class="btn btn-sm btn-secondary"
+            type="button"
+            aria-label="Print">Print</button>
+          <button
+            @click="timelineDetail.show = false"
             class="btn btn-sm btn-secondary"
             type="button"
             aria-label="Close">Close</button>

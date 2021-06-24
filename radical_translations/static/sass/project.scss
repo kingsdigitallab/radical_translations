@@ -1552,7 +1552,7 @@ $viz-resource-colour: $old-yellow;
 
   .label {
     color: $radical-red;
-    font-variation-settings: "wdth" 100,"wght" 700;
+    font-variation-settings: 'wdth' 100, 'wght' 700;
     opacity: 1;
     text-transform: uppercase;
 
@@ -1583,7 +1583,18 @@ $viz-resource-colour: $old-yellow;
     background: $viz-background;
     display: block;
     margin: auto;
-    overflow-x: scroll;
+
+    @media screen {
+      overflow-x: scroll;
+    }
+
+    @media print {
+      height: 100%;
+      overflow: auto;
+      position: fixed;
+      width: 100%;
+      z-index: 9;
+    }
 
     thead {
       text-align: center;
@@ -1631,15 +1642,27 @@ $viz-resource-colour: $old-yellow;
   .event {
     background: $viz-event-colour;
     border-radius: 50%;
+
+    @media print {
+      border: 2px solid;
+    }
   }
 
   .resource {
     &.source-text {
       background: $viz-resource-colour;
+
+      @media print {
+        border: 2px solid;
+      }
     }
     &.translation {
       border: 1px solid $viz-event-colour;
       border-radius: 50%;
+
+      @media print {
+        border: 2px dotted;
+      }
     }
   }
 
@@ -1674,10 +1697,13 @@ $viz-resource-colour: $old-yellow;
   }
 
   .timeline-modal {
-    overflow-y: scroll;
-
     &.show {
       display: block;
+    }
+
+    .modal-body {
+      max-height: 500px;
+      overflow-y: scroll;
     }
 
     .modal-body,

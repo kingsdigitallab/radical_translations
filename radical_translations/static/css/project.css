@@ -9520,7 +9520,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   font-size: 1rem; }
   .viz-grid .label {
     color: #9b2923;
-    font-variation-settings: "wdth" 100,"wght" 700;
+    font-variation-settings: 'wdth' 100, 'wght' 700;
     opacity: 1;
     text-transform: uppercase; }
     .viz-grid .label::first-letter {
@@ -9540,8 +9540,17 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .viz-grid table {
     background: #fff;
     display: block;
-    margin: auto;
-    overflow-x: scroll; }
+    margin: auto; }
+    @media screen {
+      .viz-grid table {
+        overflow-x: scroll; } }
+    @media print {
+      .viz-grid table {
+        height: 100%;
+        overflow: auto;
+        position: fixed;
+        width: 100%;
+        z-index: 9; } }
     .viz-grid table thead {
       text-align: center; }
       .viz-grid table thead th {
@@ -9577,11 +9586,20 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .viz-grid .event {
     background: #00548b;
     border-radius: 50%; }
+    @media print {
+      .viz-grid .event {
+        border: 2px solid; } }
   .viz-grid .resource.source-text {
     background: #e9c46a; }
+    @media print {
+      .viz-grid .resource.source-text {
+        border: 2px solid; } }
   .viz-grid .resource.translation {
     border: 1px solid #00548b;
     border-radius: 50%; }
+    @media print {
+      .viz-grid .resource.translation {
+        border: 2px dotted; } }
   .viz-grid .event,
   .viz-grid .resource {
     display: inline-block;
@@ -9607,12 +9625,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .viz-grid .resource.filtered {
       background: #d9d9d9;
       border-color: #d9d9d9; }
-  .viz-grid .timeline-modal {
+  .viz-grid .timeline-modal.show {
+    display: block; }
+  .viz-grid .timeline-modal .modal-body {
+    max-height: 500px;
     overflow-y: scroll; }
-    .viz-grid .timeline-modal.show {
-      display: block; }
-    .viz-grid .timeline-modal .modal-body,
-    .viz-grid .timeline-modal .modal-footer,
-    .viz-grid .timeline-modal .modal-header {
-      padding: 8px 16px;
-      padding: 0.5rem 1rem; }
+  .viz-grid .timeline-modal .modal-body,
+  .viz-grid .timeline-modal .modal-footer,
+  .viz-grid .timeline-modal .modal-header {
+    padding: 8px 16px;
+    padding: 0.5rem 1rem; }
