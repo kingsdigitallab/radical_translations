@@ -3,6 +3,10 @@ if (window.viewBaseURL) {
   baseURL = viewBaseURL
 }
 
+Vue.use(VueHtmlToPaper, {
+  styles: ['/static/css/project.min.css']
+})
+
 new Vue({
   el: '#app',
   components: {
@@ -621,6 +625,9 @@ new Vue({
 
         this.timeline.data = this.prepareTimelineData(this.timeline.raw)
       }
+    },
+    print: async function (element) {
+      this.$htmlToPaper(element)
     }
   }
 })
