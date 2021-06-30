@@ -9,7 +9,7 @@
         {% for entry in entries %}
         {% if entry.item_type != 'note' %}
         <li class="bibliography">
-            {{ entry.bib|richtext }}
+            {{ entry.bib|richtext|urlize }}
         </li>
         {% endif %}
         {% endfor %}

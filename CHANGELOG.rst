@@ -14,6 +14,39 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Changed
+~~~~~~~
+* Key after changes by the research team.
+
+
+[1.1.2] - 2021-06-10
+--------------------
+
+Fixed
+~~~~~
+* Display of duplicate contributions.
+
+
+[1.1.1] - 2021-05-26
+--------------------
+
+Added
+~~~~~
+* Published as filter.
+* Resource labels for `has translation` and `has other edition`.
+* Links to URLs in the bibliography.
+
+Changed
+~~~~~~~
+* Pseudonyms and 'published as anonymous' display in brackets after the author's name.
+* Index contributions by agent's name not pseudonyms.
+* Other editions that are not source-texts are marked as translations.
+
+Fixed
+~~~~~
+* Display of duplicate contributions.
+* Issue deleting contributions.
+
 
 [1.1.0] - 2021-05-17
 --------------------

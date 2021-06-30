@@ -242,6 +242,9 @@ class Resource(TimeStampedModel):
                 self.get_contributions_by_role(role, include_paratext=include_paratext)
             )
 
+        # remove duplicate contributions keeping the order
+        contributions = list(dict.fromkeys(contributions).keys())
+
         return contributions
 
     def get_contributions_by_role(
@@ -352,8 +355,16 @@ class Resource(TimeStampedModel):
         return self.subjects.filter(label__iexact="radicalism").count() == 1
 
     def is_translation(self) -> bool:
-        return (
+        return not self.is_original() and (
             self.relationships.filter(relationship_type__label="translation of").count()
+            > 0
+            or self.classifications.filter(
+                edition__label__contains="translation"
+            ).count()
+            > 0
+            or self.relationships.filter(
+                relationship_type__label="other edition"
+            ).count()
             > 0
         )
 
@@ -383,6 +394,26 @@ class Resource(TimeStampedModel):
                 return relationship.related_to.date
 
         return self.date
+
+    def get_labels(self) -> Optional[List[str]]:
+        labels = []
+
+        if self.is_translation():
+            labels.append("translation")
+
+        if self.related_to.filter(relationship_type__label="translation of"):
+            labels.append("has translation")
+
+        if self.is_paratext():
+            labels.append("paratext")
+
+        if self.get_paratext():
+            labels.append("has paratext")
+
+        if self.related_to.filter(relationship_type__label="other edition"):
+            labels.append("has other edition")
+
+        return labels
 
     def to_dict(self) -> Dict:
         return {
@@ -685,16 +716,17 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
         ordering = ["resource", "agent"]
 
     def __str__(self) -> str:
-        agent = self.agent
-        if self.published_as:
-            agent = f"{self.published_as} ({agent})"
+        agent = str(self.agent)
 
-        return f"[{'; '.join([r.label for r in self.roles.all()])}] {agent}"
+        if self.published_as:
+            return f"{agent} ({self.published_as})"
+
+        return agent
 
     def to_dict_value(self) -> str:
         agent = self.agent.to_dict_value()
         if self.published_as:
-            agent = f"{self.published_as} ({agent})"
+            agent = f"{agent} ({self.published_as})"
 
         return (
             f"{f'{csv_multi_sep} '.join([r.label for r in self.roles.all()])}"
