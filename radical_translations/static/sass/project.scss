@@ -1648,7 +1648,7 @@ $viz-resource-colour: $old-yellow;
   }
 
   .event {
-    background: $viz-event-colour;
+    border: 1px solid $viz-event-colour;
     border-radius: 50%;
 
     @media print {
@@ -1665,8 +1665,7 @@ $viz-resource-colour: $old-yellow;
       }
     }
     &.translation {
-      border: 1px solid $viz-event-colour;
-      border-radius: 50%;
+      background: $viz-event-colour;
 
       @media print {
         border: 2px dotted;
