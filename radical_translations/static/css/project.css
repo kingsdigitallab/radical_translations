@@ -9584,7 +9584,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       -webkit-transform: rotate(-45deg);
               transform: rotate(-45deg); }
   .viz-grid .event {
-    background: #00548b;
+    border: 1px solid #00548b;
     border-radius: 50%; }
     @media print {
       .viz-grid .event {
@@ -9595,8 +9595,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       .viz-grid .resource.source-text {
         border: 2px solid; } }
   .viz-grid .resource.translation {
-    border: 1px solid #00548b;
-    border-radius: 50%; }
+    background: #00548b; }
     @media print {
       .viz-grid .resource.translation {
         border: 2px dotted; } }
