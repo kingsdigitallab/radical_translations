@@ -24,13 +24,20 @@ Changed
 * Remove country names from the events classification filter.
 * Display related events in the events timeline.
 * Focus middle of the timeline.
-* Key after changes by the research team.
-* Upgrade `nginx` image.
 
 Removed
 ~~~~~~~
 * Comparative value from the events classification filter.
 * Scatter events timeline.
+
+
+[1.1.3] - 2021-07-06
+--------------------
+
+Changed
+~~~~~~~
+* Key after changes by the research team.
+* Upgrade `nginx` image.
 
 
 [1.1.2] - 2021-06-10
