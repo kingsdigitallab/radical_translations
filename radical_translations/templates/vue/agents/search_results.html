@@ -11,7 +11,7 @@
       v-if="item.agent_type === 'person'"
       class="metadata-block">
       <span
-        v-if="item.noble"
+        v-if="item.noble === 'yes'"
         class="noble">
         {# Font Awesome shield-alt icon #}
         {% include "svgs/solid/shield-alt.svg" %}

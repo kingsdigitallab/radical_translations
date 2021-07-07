@@ -30,6 +30,10 @@ Removed
 * Comparative value from the events classification filter.
 * Scatter events timeline.
 
+Fixed
+~~~~~
+* Display of noble status.
+
 
 [1.1.3] - 2021-07-06
 --------------------
