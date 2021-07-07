@@ -114,10 +114,10 @@ class AgentViewSet(DocumentViewSet):
     }
 
     ordering_fields = {
-        "name": "name.sort",
+        "name": "name_sort",
         "year": "year",
     }
-    ordering = ["_score", "name.sort", "year"]
+    ordering = ["_score", "name_sort", "year"]
 
     pagination_class = PageNumberPagination
 

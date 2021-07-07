@@ -22,10 +22,10 @@ class AgentDocument(Document):
     name = fields.TextField(
         fields={
             "raw": fields.KeywordField(),
-            "sort": fields.KeywordField(),
             "suggest": fields.CompletionField(),
         }
     )
+    name_sort = fields.KeywordField()
     radical = fields.KeywordField()
     based_near = get_place_field()
     roles = get_controlled_term_field()
@@ -76,6 +76,9 @@ class AgentDocument(Document):
 
     def prepare_meta(self, instance):
         return [instance.agent_type]
+
+    def prepare_name_sort(self, instance):
+        return instance.get_index_name().lower()
 
     def prepare_radical(self, instance):
         return "yes" if instance.radical else "no"
