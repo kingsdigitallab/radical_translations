@@ -24,13 +24,7 @@ new Vue({
     filters: [],
     ordering_default: 'score',
     ordering: 'score',
-    ordering_options: [
-      { key: 'score', value: 'Relevance' },
-      { key: 'title', value: 'Title ascending' },
-      { key: '-title', value: 'Title descending' },
-      { key: 'year', value: 'Year ascending' },
-      { key: '-year', value: 'Year descending' }
-    ],
+    ordering_options: options.ordering,
     page: 1,
     page_size: options.page_size !== undefined ? options.page_size : 50,
     rangeMarks: (v) => v % 10 === 0,

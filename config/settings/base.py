@@ -360,6 +360,13 @@ SEARCH_OPTIONS = {
         "year_min": 1516,
         "year_max": 1900,
         "map_field": "places",
+        "ordering": [
+            {"key": "score", "value": "Relevance"},
+            {"key": "title", "value": "Title ascending"},
+            {"key": "-title", "value": "Title descending"},
+            {"key": "year", "value": "Year ascending"},
+            {"key": "-year", "value": "Year descending"},
+        ],
     },
     "events": {
         "label": "Events",
@@ -378,6 +385,13 @@ SEARCH_OPTIONS = {
         "year_min": 1450,
         "year_max": 1900,
         "map_field": "based_near",
+        "ordering": [
+            {"key": "score", "value": "Relevance"},
+            {"key": "name", "value": "Name ascending"},
+            {"key": "-name", "value": "Name descending"},
+            {"key": "year", "value": "Year ascending"},
+            {"key": "-year", "value": "Year descending"},
+        ],
     },
 }
 
