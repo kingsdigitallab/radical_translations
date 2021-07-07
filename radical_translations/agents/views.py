@@ -107,8 +107,8 @@ class AgentViewSet(DocumentViewSet):
         "place_birth": "place_birth.address.raw",
         "place_death": "place_death.address.raw",
         "noble": "noble",
-        "other_places": "based_near.address.raw",
-        "main_place": "main_places.address.raw",
+        "other_places": "main_places.address.raw",
+        "main_place": "based_near.address.raw",
         "role": "roles.label.raw",
         "language": "languages.label.raw",
     }

@@ -33,6 +33,7 @@ Removed
 Fixed
 ~~~~~
 * Display of noble status.
+* Places filters.
 
 
 [1.1.3] - 2021-07-06
