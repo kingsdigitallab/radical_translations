@@ -160,17 +160,6 @@
 </dl>
 {% endif %}
 
-{% if object.events.count %}
-<h2>Events</h2>
-<ul>
-  {% for event in object.events.all %}
-  <li>
-    <a href="{% url 'event-detail' event.pk %}">{{ event }}</a>
-  </li>
-  {% endfor %}
-</ul>
-{% endif %}
-
 {% if object.summary %}
 <h2>Summary</h2>
 <p>{{ object.summary|urlize }}</p>
