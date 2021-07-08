@@ -78,7 +78,12 @@ class AgentDocument(Document):
         return [instance.agent_type]
 
     def prepare_name_sort(self, instance):
-        return instance.get_index_name().lower()
+        name = instance.get_index_name().lower()
+
+        if "anonymous" in name:
+            name = f"zzz_{name}"
+
+        return name
 
     def prepare_radical(self, instance):
         return "yes" if instance.radical else "no"

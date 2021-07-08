@@ -26,6 +26,7 @@ Changed
 * Display related events in the events timeline.
 * Focus middle of the timeline.
 * Sort agents by last name.
+* Sort anonymous agents last.
 
 Removed
 ~~~~~~~
