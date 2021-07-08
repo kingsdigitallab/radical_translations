@@ -18,6 +18,10 @@ Fixed
 ~~~~~
 * Missing migration.
 
+Removed
+~~~~~~~
+* `Event` fields from the `Resource` search because the data is not complete.
+
 
 [1.1.3] - 2021-07-06
 --------------------

@@ -124,16 +124,6 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "event": {
-            "field": "events.title.raw",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
-        "event_place": {
-            "field": "events.place.address.raw",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
         "radical_date": {
             "field": "has_date_radical",
             "enabled": True,
@@ -160,8 +150,6 @@ class ResourceViewSet(DocumentViewSet):
         "fictional_place_of_publication": "places.fictional_place.raw",
         "status": "relationships.relationship_type.label.raw",
         "subject": "subjects.label.raw",
-        "event": "events.title.raw",
-        "event_place": "events.place.address.raw",
         "radical_date": "has_date_radical",
         "meta": "meta",
     }
