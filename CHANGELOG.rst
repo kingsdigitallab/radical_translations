@@ -29,6 +29,11 @@ Removed
 ~~~~~~~
 * Comparative value from the events classification filter.
 * Scatter events timeline.
+* `Event` fields from the `Resource` search because the data is not complete.
+
+Fixed
+~~~~~
+* Missing migration.
 
 
 [1.1.3] - 2021-07-06
