@@ -13,43 +13,47 @@ from radical_translations.utils.documents import (
 )
 from radical_translations.utils.models import Date
 
+copy_to_content = {"copy_to": "content"}
+
 
 @registry.register_document
 class AgentDocument(Document):
     meta = fields.KeywordField()
+    content = fields.TextField(attr="name", store=True)
 
-    agent_type = fields.KeywordField()
+    agent_type = fields.KeywordField(**copy_to_content)
     name = fields.TextField(
         fields={
             "raw": fields.KeywordField(),
             "suggest": fields.CompletionField(),
-        }
+        },
+        **copy_to_content,
     )
-    name_sort = fields.KeywordField()
-    radical = fields.KeywordField()
-    based_near = get_place_field()
-    roles = get_controlled_term_field()
-    sources = get_resource_field()
+    name_sort = fields.KeywordField(**copy_to_content)
+    radical = fields.KeywordField(**copy_to_content)
+    based_near = get_place_field(options=copy_to_content)
+    roles = get_controlled_term_field(options=copy_to_content)
+    sources = get_resource_field(options=copy_to_content)
 
     contributed_to = fields.ObjectField(
         properties={
-            "resource": get_resource_field(),
-            "roles": get_controlled_term_field(),
-        }
+            "resource": get_resource_field(options=copy_to_content),
+            "roles": get_controlled_term_field(options=copy_to_content),
+        },
     )
 
-    gender = fields.KeywordField()
-    noble = fields.KeywordField()
-    main_places = get_place_field()
-    year = fields.IntegerField()
-    date_display = fields.TextField()
-    place_birth = get_place_field()
-    place_death = get_place_field()
-    languages = get_controlled_term_field()
-    knows = get_agent_field()
-    member_of = get_agent_field()
+    gender = fields.KeywordField(**copy_to_content)
+    noble = fields.KeywordField(**copy_to_content)
+    main_places = get_place_field(options=copy_to_content)
+    year = fields.IntegerField(**copy_to_content)
+    date_display = fields.TextField(**copy_to_content)
+    place_birth = get_place_field(options=copy_to_content)
+    place_death = get_place_field(options=copy_to_content)
+    languages = get_controlled_term_field(options=copy_to_content)
+    knows = get_agent_field(options=copy_to_content)
+    member_of = get_agent_field(options=copy_to_content)
 
-    members = get_agent_field()
+    members = get_agent_field(options=copy_to_content)
 
     class Index:
         name = "rt-agents"

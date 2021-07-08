@@ -121,8 +121,12 @@ class AgentViewSet(DocumentViewSet):
 
     pagination_class = PageNumberPagination
 
+    name_search_options = ES_FUZZINESS_OPTIONS
+    name_search_options["boost"] = 2
+
     search_fields = {
-        "name": ES_FUZZINESS_OPTIONS,
+        "name": name_search_options,
+        "content": ES_FUZZINESS_OPTIONS,
     }
 
     suggester_fields = {
