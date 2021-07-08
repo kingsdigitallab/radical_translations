@@ -19,6 +19,7 @@ Added
 * Comparative timeline to the home page.
 * Zoom feature to the timeline grid.
 * Sorting options to the base settings.
+* Wikidata as an option for `Agent` page.
 
 Changed
 ~~~~~~~

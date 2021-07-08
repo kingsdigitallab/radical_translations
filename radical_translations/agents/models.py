@@ -44,7 +44,9 @@ class Agent(PolymorphicModel, TimeStampedModel):
     )
 
     page = ControlledTermsField(
-        ["viaf", "cerl"], blank=True, help_text="A page or document about this Agent."
+        ["viaf", "cerl", "wikidata"],
+        blank=True,
+        help_text="A page or document about this Agent.",
     )
 
     roles = ControlledTermsField(
@@ -79,11 +81,11 @@ class Agent(PolymorphicModel, TimeStampedModel):
 
     @property
     def is_organisation(self) -> bool:
-        return self.agent_type == 'organisation'
+        return self.agent_type == "organisation"
 
     @property
     def is_person(self) -> bool:
-        return self.agent_type == 'person'
+        return self.agent_type == "person"
 
     @property
     def title(self) -> str:
