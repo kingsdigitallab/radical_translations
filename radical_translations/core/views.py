@@ -219,11 +219,19 @@ def network(request):
     for resource in Resource.objects.exclude(
         relationships__relationship_type__label="paratext of"
     ):
-        group = 1
-        g.add_vertex(name=f"resource-{resource.id}", title=str(resource), group=group)
+        group = 2
+        title = "Translation: "
+
+        if resource.is_original():
+            group = 1
+            title = "Source text: "
+
+        title = f"{title}{str(resource)}"
+
+        g.add_vertex(name=f"resource-{resource.id}", title=title, group=group)
 
     for agent in Agent.objects.exclude(roles__label="library"):
-        group = 3 if agent.agent_type == "organisation" else 2
+        group = 4 if agent.agent_type == "organisation" else 3
         g.add_vertex(name=f"agent-{agent.id}", title=str(agent), group=group)
 
     for contribution in Contribution.objects.all():
