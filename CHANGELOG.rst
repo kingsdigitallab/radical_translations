@@ -37,12 +37,9 @@ Removed
 
 Fixed
 ~~~~~
-* Missing migration.
-
-Fixed
-~~~~~
 * Display of noble status.
 * Places filters.
+* Missing migration.
 
 
 [1.1.3] - 2021-07-06
