@@ -52,19 +52,13 @@ accompanying political chronology.</p>
     </div>
   </div>
 
-  <table>
+  <table id="timeline-table">
     <thead>
       <tr>
         <th :class="['label', zoom]">Country/Year</th>
         <td
           v-for="(year, index) in timeline.years"
           :key="year">
-          <span
-            v-if="index == 0"
-            :id="`${focusElement}0`"></span>
-          <span
-            v-if="year === 1805"
-            :id="focusElement"></span>
           <span :class="['year', zoom]">{[ year ]}</span>
         </td>
       </tr>

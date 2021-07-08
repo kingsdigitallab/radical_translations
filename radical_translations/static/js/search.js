@@ -55,7 +55,6 @@ new Vue({
     resources: {},
     timeline: { filters: {} },
     timelineDetail: { country: null, year: null, data: [], show: false },
-    focusElement: 'mememe',
     zoom: '',
     zoomLevels: [
       { level: 'Small', style: 'zsmall' },
@@ -97,9 +96,7 @@ new Vue({
 
     this.initMap()
 
-    if (document.getElementById(this.focusElement)) {
-      document.getElementById(this.focusElement).scrollIntoView()
-    }
+    this.focusTimeline()
   },
   computed: {
     facets: function () {
@@ -592,10 +589,22 @@ new Vue({
     setZoom: function (value) {
       this.zoom = value
 
-      document.getElementById(`${this.focusElement}0`).scrollIntoView()
+      this.focusTimeline(true)
       this.$nextTick(() => {
-        document.getElementById(this.focusElement).scrollIntoView()
+        this.focusTimeline(false)
       })
+    },
+    focusTimeline: function (reset = false) {
+      const el = document.getElementById('timeline-table')
+
+      if (el === undefined) return
+
+      if (reset) {
+        el.scrollLeft = 0
+      } else {
+        const w = el.scrollWidth
+        el.scrollLeft = w / 2 + w / 8
+      }
     },
     filterTimeline: function (facet, value) {
       if (this.timeline) {

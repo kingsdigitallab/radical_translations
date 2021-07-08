@@ -34,6 +34,7 @@ Removed
 Fixed
 ~~~~~
 * Missing migration.
+* Centering the timeline on all browsers.
 
 
 [1.1.3] - 2021-07-06
