@@ -1,3 +1,5 @@
+import igraph as ig
+import plotly.graph_objects as go
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
@@ -16,9 +18,10 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     SuggesterFilterBackend,
 )
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
+from plotly.offline import plot
 
 from radical_translations.agents.documents import AgentDocument
-from radical_translations.agents.models import Agent
+from radical_translations.agents.models import Agent, Organisation, Person
 from radical_translations.agents.serializers import AgentDocumentSerializer
 from radical_translations.utils.search import PageNumberPagination
 
@@ -137,3 +140,97 @@ class AgentViewSet(DocumentViewSet):
             "options": {"skip_duplicates": True, "size": 20},
         },
     }
+
+
+def network(request):
+    g = ig.Graph(directed=True)
+
+    for org in Organisation.objects.exclude(roles__label__in=["archives", "library"]):
+        g.add_vertex(name=f"agent-{org.id}", title=str(org), group=1)
+
+    for person in Person.objects.all():
+        group = 2
+
+        if person.gender == "m":
+            group = 3
+        elif person.gender == "u":
+            group = 4
+
+        g.add_vertex(name=f"agent-{person.id}", title=str(person), group=group)
+
+    for person in Person.objects.all():
+        node_id = f"agent-{person.id}"
+
+        for known in person.knows.all():
+            g.add_edge(node_id, f"agent-{known.id}", label="knows")
+
+        for org in person.member_of.all():
+            g.add_edge(node_id, f"agent-{org.id}", label="member of")
+
+    node_labels = g.vs["title"]
+    node_groups = g.vs["group"]
+    edge_labels = g.es["label"]
+
+    layout = g.layout_graphopt()
+
+    # nodes coordinates
+    range_n = range(len(node_labels))
+    nodes_x = [layout[i][0] for i in range_n]
+    nodes_y = [layout[i][1] for i in range_n]
+
+    # edges coordinates
+    edges_x = []
+    edges_y = []
+    for e in g.get_edgelist():
+        edges_x += [layout[e[0]][0], layout[e[1]][0], None]
+        edges_y += [layout[e[0]][1], layout[e[1]][1], None]
+
+    nodes_scatter = go.Scatter(
+        x=nodes_x,
+        y=nodes_y,
+        mode="markers",
+        marker=dict(
+            symbol=node_groups,
+            size=5,
+            color=node_groups,
+            colorscale="Viridis",
+            line=dict(color="rgb(50,50,50)", width=0.5),
+        ),
+        text=node_labels,
+        hoverinfo="text",
+    )
+
+    edges_scatter = go.Scatter(
+        x=edges_x,
+        y=edges_y,
+        mode="lines",
+        line=dict(width=1),
+        line_shape="spline",
+        marker=dict(color="rgb(125,125,125)"),
+        text=edge_labels,
+        hoverinfo="text",
+    )
+
+    axis = dict(
+        showline=False,
+        zeroline=False,
+        showgrid=False,
+        showticklabels=False,
+        title="",
+    )
+
+    go_layout = go.Layout(
+        font=dict(size=12),
+        autosize=False,
+        width=1000,
+        height=1000,
+        hovermode="closest",
+        xaxis=dict(axis),
+        yaxis=dict(axis),
+    )
+
+    fig = go.Figure(data=[edges_scatter, nodes_scatter], layout=go_layout)
+
+    plot_div = plot(fig, output_type="div", include_plotlyjs=False)
+
+    return render(request, "agents/network.html", context={"plot_div": plot_div})
