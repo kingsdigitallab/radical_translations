@@ -15,7 +15,6 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     FilteringFilterBackend,
     HighlightBackend,
     OrderingFilterBackend,
-    SearchFilterBackend,
     SuggesterFilterBackend,
 )
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
@@ -56,7 +55,6 @@ class ResourceViewSet(DocumentViewSet):
         OrderingFilterBackend,
         DefaultOrderingFilterBackend,
         CompoundSearchFilterBackend,
-        SearchFilterBackend,
         HighlightBackend,
         # the suggester backend needs to be the last backend
         SuggesterFilterBackend,
@@ -223,7 +221,7 @@ class SimpleResourceViewSet(DocumentViewSet):
         FacetedSearchFilterBackend,
         OrderingFilterBackend,
         DefaultOrderingFilterBackend,
-        SearchFilterBackend,
+        CompoundSearchFilterBackend,
     ]
 
     lookup_field = "id"
