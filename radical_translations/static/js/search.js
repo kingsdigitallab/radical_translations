@@ -390,7 +390,7 @@ new Vue({
         item[options.map_field].forEach((p) => {
           const place = p.place !== undefined ? p.place : p
 
-          if (place !== undefined) {
+          if (place !== undefined && place.geo !== undefined) {
             cluster.addLayer(
               L.marker(place.geo).on('click', function () {
                 const marker = this
@@ -593,7 +593,7 @@ new Vue({
     focusTimeline: function (reset = false) {
       const el = document.getElementById('timeline-table')
 
-      if (el === undefined) return
+      if (el === null || el === undefined) return
 
       if (reset) {
         el.scrollLeft = 0
