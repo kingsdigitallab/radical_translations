@@ -84,6 +84,9 @@ class EventDocument(Document):
         return labels
 
     def prepare_country(self, instance):
+        if not instance.place:
+            return []
+
         countries = [instance.place.country.name]
 
         for c in instance.classification.all():
