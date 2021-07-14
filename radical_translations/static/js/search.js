@@ -75,12 +75,11 @@ new Vue({
         this.page = 1
         this.page_size = 2000
         dispatchWindowResizeEvent()
-        await this.search()
-        this.renderMap()
       } else {
         this.page_size = options.page_size
-        await this.search()
       }
+
+      await this.search()
     }
   },
   created: async function () {
@@ -88,7 +87,7 @@ new Vue({
 
     await this.search()
 
-    this.initMap()
+    this.getMap()
 
     this.focusTimeline()
   },
@@ -367,8 +366,10 @@ new Vue({
         this.filters.push(filter)
       }
     },
-    initMap: async function () {
+    getMap: function () {
       if (!document.getElementById('map')) return
+
+      if (this.map.mapObject) this.map.mapObject.remove()
 
       const map = L.map('map')
       map.setView(this.map.center, this.map.zoom)
@@ -378,11 +379,13 @@ new Vue({
       }).addTo(map)
 
       this.map.mapObject = map
+
+      return this.map.mapObject
     },
     renderMap: function () {
-      if (!this.map.mapObject) return
+      const map = this.getMap()
+      if (!map) return
 
-      const map = this.map.mapObject
       const cluster = L.markerClusterGroup()
 
       const vue = this

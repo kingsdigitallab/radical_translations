@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Fixed
+~~~~~
+* Update map view when filters change.
+
 
 [1.2.1] - 2021-07-14
 --------------------
