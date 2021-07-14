@@ -111,7 +111,7 @@ django-taggit==1.5.1
     # via wagtail
 django-treebeard==4.5.1
     # via wagtail
-django==2.2.10
+django==2.2.24
     # via
     #   -r requirements/./base.in
     #   django-controlled-vocabulary
