@@ -11,8 +11,17 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
-[Unreleased] - yyyy-mm-dd
+[Unreleased] - 2021-07-14
 --------------------
+
+Changed
+~~~~~~~
+* Bump `Django` and `Wagtail`.
+
+Fixed
+~~~~~
+* Map display.
+* Source text label on map popups.
 
 
 [1.2.0] - 2021-07-14
