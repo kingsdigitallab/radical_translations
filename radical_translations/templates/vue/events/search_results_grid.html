@@ -38,11 +38,6 @@ accompanying political chronology.</p>
     <div class="col text-right">
       <button type="button" class="label btn btn-sm" disabled>View:</button>
       <button
-        @click="print('app')"
-        type="button"
-        class="btn btn-sm btn-outline-dark"
-        aria-label="Print">Print</button>
-      <button
         v-for="z in zoomLevels"
         :key="z.level"
         @click="setZoom(z.style)"
