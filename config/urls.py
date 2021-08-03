@@ -16,6 +16,7 @@ urlpatterns = [
     path("vocabularies/", include("controlled_vocabulary.urls")),
     # Radical Translations
     path("database/agents/", include("radical_translations.agents.urls")),
+    path("database/timeline/", include("radical_translations.events.timeline_urls")),
     path("database/events/", include("radical_translations.events.urls")),
     path("database/resources/", include("radical_translations.core.urls")),
     path("database/other/", include("radical_translations.utils.urls")),

@@ -6,53 +6,65 @@
 
 {% block main %}
 <div class="sections">
-    <section class="block-section intro">
-        {{ page.introduction|richtext }}
-    </section>
+  <section class="block-section intro">
+    {{ page.introduction|richtext }}
+  </section>
 
-    {% for block in page.sections %}
-    {% with value=block.value %}
-    <section class="{{ block.block_type }}">
-        <h2>
-            <a href="{% pageurl value.page %}">{{ value.title }}</a>
-        </h2>
-        {{ value.description|richtext }}
+  {% for block in page.sections %}
+  {% with value=block.value %}
+  <section class="{{ block.block_type }}">
+    <h2>
+      <a href="{% pageurl value.page %}">{{ value.title }}</a>
+    </h2>
+    {{ value.description|richtext }}
 
-        <a href="{% pageurl value.page %}" class="btn btn-secondary btn-block">Find out more <span class="sr-only">about {{ value.title }}</span></a>
-    </section>
-    {% endwith %}
+    <a href="{% pageurl value.page %}" class="btn btn-secondary btn-block">Find out more <span class="sr-only">about {{ value.title }}</span></a>
+  </section>
+  {% endwith %}
+  {% endfor %}
+</div>
+
+<h2 class="home-heading">Events timeline</h2>
+<div class="timeline">
+  <ul class="events">
+    {% for event in events %}
+    <li class="event" data-date="{{ event.date }}">
+      <h3>
+        <a href="{% url 'event-detail' event.pk %}">{{ event.title }}</a>
+      </h3>
+      <p>
+      {% include 'geonames_place/includes/place.html' with place=event.place %}
+      </p>
+    </li>
     {% endfor %}
+  </ul>
 </div>
 
 <h2 class="home-heading">Featured</h2>
-
 <div class="features">
-    {% include "cms/includes/featured_page.html" with featured=page.featured_biography category='Biographies' %}
+  {% include "cms/includes/featured_page.html" with featured=page.featured_biography category='Biographies' %}
 
-    <section class="featured">
-        {% with resource=page.featured_resource %}
-        <div class="card">
-            <div class="card-header resources-icon">
-                Resources
-            </div>
-            {% comment %}
-            <div class="card-image">
-                <img src="{% static 'images/image-placeholder.svg' %}"
-                     class="card-img-top"
-                     alt="image placeholder for featured content">
-            </div>
-            {% endcomment %}
-            <div class="card-body">
-                <h3 class="card-title">
-                    <a class="block-link" href="{% url 'resource-detail' resource.id %}">
-                        {{ resource.title }}
-                    </a>
-                </h3>
-            </div>
-        </div>
-        {% endwith %}
-    </section>
+  <section class="featured">
+    {% with resource=page.featured_resource %}
+    <div class="card">
+      <div class="card-header resources-icon">
+        Resources
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">
+          <a class="block-link" href="{% url 'resource-detail' resource.id %}">
+            {{ resource.title }}
+          </a>
+        </h3>
+      </div>
+    </div>
+    {% endwith %}
+  </section>
 
-    {% include "cms/includes/featured_page.html" with featured=page.featured_blog_post category='Blog' %}
+  {% include "cms/includes/featured_page.html" with featured=page.featured_blog_post category='Blog' %}
 </div>
 {% endblock main %}
+
+{% block modal %}
+{% include 'geonames_place/includes/place_modal.html' %}
+{% endblock modal %}

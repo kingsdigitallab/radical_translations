@@ -10,7 +10,7 @@
 {% block results_map_popup %}
 <p v-if="map.popup.item" class="title">
   <a :href="map.popup.item.id"><span>{[ map.popup.item.title[0] ]}</span></a>
-  <span v-if="map.popup.item.is_original" class="badge badge-secondary">Original</span>
+  <span v-if="map.popup.item.is_original" class="badge badge-secondary">Source text</span>
   <span v-if="map.popup.item.is_translation" class="badge badge-secondary">Translation</span>
   <br>
   <span v-if="map.popup.item.date_display">{[ map.popup.item.date_display ]}</span>

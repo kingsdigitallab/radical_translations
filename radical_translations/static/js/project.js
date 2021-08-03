@@ -1,5 +1,12 @@
 /* Project specific Javascript goes here. */
 $(function () {
+  // The ChartDataLabels plugin registers itself globally, meaning that once imported,
+  // all charts will display labels. We only need it enabled on specific charts, we
+  // need to unregister it globally.
+  // https://chartjs-plugin-datalabels.netlify.app/guide/getting-started.html#registration
+  Chart.plugins.unregister(ChartDataLabels)
+
+  // override the default image path for leaflet
   L.Icon.Default.imagePath = '/static/leaflet/dist/images/'
 
   // highlight active tab and allow permalink for bibliography and record pages

@@ -125,6 +125,8 @@ footer {
 .metadata {
   font-family: 'Oswald', sans-serif;
   font-size: 1.125rem;
+  margin: 0;
+  padding: 0;
 
   .author,
   .date,
@@ -173,6 +175,12 @@ footer {
   }
 }
 
+.metadata-block {
+  .badge {
+    margin-right: 4px;
+  }
+}
+
 .small-icon,
 .small-icon svg {
   fill: $medium-gray;
@@ -185,6 +193,10 @@ footer {
   img {
     vertical-align: text-top;
   }
+}
+
+.small-text {
+  font-size: 12px;
 }
 
 .sup-icon,
@@ -724,13 +736,12 @@ figure {
       }
     }
 
-    &[aria-expanded="true"] {
+    &[aria-expanded='true'] {
       padding-bottom: 5px;
       transform: rotate(0);
       width: 100%;
 
       .heading {
-
         &::after {
           content: url('/static/fontawesome/svgs/solid/times.svg');
           padding-left: 10px;
@@ -940,6 +951,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .metadata-block {
     &::after {
       content: '|';
+      margin: 0 0.25rem;
     }
 
     &:last-child {
@@ -1182,7 +1194,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     display: inline-block;
     padding-left: 4px;
     width: 18px;
-  }  
+  }
 }
 
 .false {
@@ -1252,12 +1264,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 // Events timeline
+.timeline {
+  height: 300px;
+  overflow-y: scroll;
+}
 
 .events {
-  background: lighten($radical-red, 40%);
-  border-bottom-right-radius: 4px;
   border-left: 3px solid $radical-red;
-  border-top-right-radius: 4px;
   font-size: 1.03em;
   line-height: 1.4em;
   list-style: none;
@@ -1406,6 +1419,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   li {
     border-bottom: 1px solid $kaki;
     margin: 1rem 0 0 0.5rem;
+    padding-bottom: 0.25rem;
   }
 
   .title {
@@ -1416,4 +1430,293 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .spacing {
   margin-bottom: 4px;
   margin-right: 4px;
+}
+
+/* Events timeline */
+
+.mock {
+  position: relative !important;
+}
+
+#bubble-chart {
+  display: block;
+  padding-top: 2rem;
+}
+
+.event-info {
+  //background: $secondary;
+  border: 1px solid $light-gray;
+  box-shadow: 2px 2px 2px 2px $medium-gray;
+  max-height: 50vh;
+  max-width: 500px;
+  padding: 1rem;
+  position: absolute;
+  right: 10px;
+  top: 140px;
+  overflow-y: scroll;
+}
+
+.events-key {
+  display: block;
+  font-family: Lora, serif;
+  position: absolute;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .bkg {
+    fill: $white;
+  }
+
+  .chart-button {
+    &.country {
+      &:hover {
+        opacity: 0.9;
+        stroke-width: 10px;
+      }
+    }
+  }
+
+  .chart-grid {
+    fill: none;
+    stroke: $medium-gray;
+    stroke-miterlimit: 10;
+  }
+
+  .font-16 {
+    font-size: 1rem;
+  }
+
+  .font-20 {
+    font-size: 1.25rem;
+  }
+
+  .font-24 {
+    font-size: 1.5rem;
+  }
+
+  .key {
+    fill: $dark-gray;
+    stroke: $dark-gray;
+    stroke-miterlimit: 10;
+  }
+
+  .lora-reg {
+    font-variation-settings: 'wdth' 100, 'wght' 400;
+  }
+
+  .lora-bold {
+    font-variation-settings: 'wdth' 100, 'wght' 700;
+  }
+
+  // Country colours
+
+  .country {
+    opacity: 0.7;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0.5;
+  }
+
+  .empty {
+    fill: transparent !important;
+  }
+
+  .egypt {
+  }
+
+  .france {
+    fill: #6f51b9;
+    stroke: #6f51b9;
+  }
+
+  .ireland {
+    fill: #8b2e4a;
+    stroke: #8b2e4a;
+  }
+
+  .uk {
+    fill: #fb4811;
+    stroke: #fb4811;
+  }
+
+  .us {
+    fill: #51b788;
+    stroke: #51b788;
+  }
+}
+
+// Timeline visualisations
+
+$viz-background: $white;
+$viz-hl: $radical-red;
+$viz-size: 8px;
+$viz-event-colour: $prussian-blue;
+$viz-resource-colour: $old-yellow;
+
+.viz-grid {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+
+  .label {
+    color: $radical-red;
+    font-variation-settings: 'wdth' 100, 'wght' 700;
+    opacity: 1;
+    text-transform: uppercase;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  .markers {
+    .event,
+    .resource {
+      float: none;
+
+      &:hover {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .zlarge {
+    font-size: 1.2rem;
+  }
+  .zsmall {
+    font-size: 0.6rem;
+  }
+
+  table {
+    background: $viz-background;
+    display: block;
+    margin: auto;
+
+    @media screen {
+      overflow-x: scroll;
+    }
+
+    @media print {
+      height: 100%;
+      overflow: auto;
+      position: fixed;
+      width: 100%;
+      z-index: 9;
+    }
+
+    thead {
+      text-align: center;
+
+      th {
+        color: $medium-gray;
+      }
+    }
+
+    td {
+      border-bottom: 1px solid $medium-gray;
+      border-right: 1px dashed $light-gray;
+      min-width: 40px;
+      scroll-snap-align: start;
+    }
+
+    th {
+      background: $viz-background;
+      left: 0;
+      padding: 8px;
+      position: sticky;
+      z-index: 1;
+
+      &.filtered {
+        color: $light-gray;
+      }
+    }
+  }
+
+  .year {
+    display: inline-block;
+    margin-top: 1.5rem;
+    transform: rotate(-45deg);
+    transform-origin: 0% 0%;
+
+    &.zlarge {
+      min-width: 80px;
+      transform: rotate(0deg);
+    }
+    &.zsmall {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .event {
+    border: 1px solid $viz-event-colour;
+    border-radius: 50%;
+
+    @media print {
+      border: 2px solid;
+    }
+  }
+
+  .resource {
+    &.source-text {
+      background: $viz-resource-colour;
+
+      @media print {
+        border: 2px solid;
+      }
+    }
+    &.translation {
+      background: $viz-event-colour;
+
+      @media print {
+        border: 2px dotted;
+      }
+    }
+  }
+
+  .event,
+  .resource {
+    display: inline-block;
+    float: left;
+    height: $viz-size;
+    margin: 0.5px;
+    width: $viz-size;
+
+    &.zlarge {
+      height: calc(#{$viz-size} * 1.5);
+      width: calc(#{$viz-size} * 1.5);
+    }
+    &.zsmall {
+      height: calc(#{$viz-size} / 2);
+      width: calc(#{$viz-size} / 2);
+    }
+
+    &:hover,
+    &.active {
+      border: solid $viz-hl;
+      background: $viz-hl;
+      cursor: pointer;
+    }
+
+    &.filtered {
+      background: $light-gray;
+      border-color: $light-gray;
+    }
+  }
+
+  .timeline-modal {
+    &.show {
+      display: block;
+    }
+
+    .modal-body {
+      max-height: 500px;
+      overflow-y: scroll;
+    }
+
+    .modal-body,
+    .modal-footer,
+    .modal-header {
+      padding: 0.5rem 1rem;
+    }
+  }
 }

@@ -8555,7 +8555,9 @@ footer {
 .metadata {
   font-family: 'Oswald', sans-serif;
   font-size: 18px;
-  font-size: 1.125rem; }
+  font-size: 1.125rem;
+  margin: 0;
+  padding: 0; }
   .metadata .author::before,
   .metadata .date::before,
   .metadata .form::before,
@@ -8582,6 +8584,9 @@ footer {
     margin-top: -4px;
     width: 16px; }
 
+.metadata-block .badge {
+  margin-right: 4px; }
+
 .small-icon,
 .small-icon svg {
   fill: #808080;
@@ -8591,6 +8596,9 @@ footer {
 
 .small-icon img {
   vertical-align: text-top; }
+
+.small-text {
+  font-size: 12px; }
 
 .sup-icon,
 .sup-icon svg {
@@ -8983,12 +8991,12 @@ figure img {
       .key button .heading::before {
         content: url("/static/fontawesome/svgs/solid/key-skeleton.svg");
         padding-right: 6px; }
-    .key button[aria-expanded="true"] {
+    .key button[aria-expanded='true'] {
       padding-bottom: 5px;
       -webkit-transform: rotate(0);
               transform: rotate(0);
       width: 100%; }
-      .key button[aria-expanded="true"] .heading::after {
+      .key button[aria-expanded='true'] .heading::after {
         content: url("/static/fontawesome/svgs/solid/times.svg");
         padding-left: 10px; }
   .key .key-icons {
@@ -9113,7 +9121,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .right + p {
       margin: 0 1rem 1rem 0; }
   .metadata-block::after {
-    content: '|'; }
+    content: '|';
+    margin: 0 0.25rem; }
   .metadata-block:last-child::after {
     content: ''; }
   .sections {
@@ -9311,11 +9320,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   border-color: #eed3d7;
   color: #9b2923; }
 
+.timeline {
+  height: 300px;
+  overflow-y: scroll; }
+
 .events {
-  background: #eaa4a0;
-  border-bottom-right-radius: 4px;
   border-left: 3px solid #9b2923;
-  border-top-right-radius: 4px;
   font-size: 1.03em;
   line-height: 1.4em;
   list-style: none;
@@ -9425,7 +9435,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .search-results-list li {
     border-bottom: 1px solid #c3c1a8;
     margin: 16px 0 0 8px;
-    margin: 1rem 0 0 0.5rem; }
+    margin: 1rem 0 0 0.5rem;
+    padding-bottom: 4px;
+    padding-bottom: 0.25rem; }
   .search-results-list .title {
     margin-bottom: 8px;
     margin-bottom: 0.5rem; }
@@ -9433,3 +9445,197 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .spacing {
   margin-bottom: 4px;
   margin-right: 4px; }
+
+/* Events timeline */
+.mock {
+  position: relative !important; }
+
+#bubble-chart {
+  display: block;
+  padding-top: 32px;
+  padding-top: 2rem; }
+
+.event-info {
+  border: 1px solid #d9d9d9;
+  -webkit-box-shadow: 2px 2px 2px 2px #808080;
+          box-shadow: 2px 2px 2px 2px #808080;
+  max-height: 50vh;
+  max-width: 500px;
+  padding: 16px;
+  padding: 1rem;
+  position: absolute;
+  right: 10px;
+  top: 140px;
+  overflow-y: scroll; }
+
+.events-key {
+  display: block;
+  font-family: Lora, serif;
+  position: absolute; }
+  .events-key:hover {
+    cursor: pointer; }
+  .events-key .bkg {
+    fill: #fff; }
+  .events-key .chart-button.country:hover {
+    opacity: 0.9;
+    stroke-width: 10px; }
+  .events-key .chart-grid {
+    fill: none;
+    stroke: #808080;
+    stroke-miterlimit: 10; }
+  .events-key .font-16 {
+    font-size: 16px;
+    font-size: 1rem; }
+  .events-key .font-20 {
+    font-size: 20px;
+    font-size: 1.25rem; }
+  .events-key .font-24 {
+    font-size: 24px;
+    font-size: 1.5rem; }
+  .events-key .key {
+    fill: #222222;
+    stroke: #222222;
+    stroke-miterlimit: 10; }
+  .events-key .lora-reg {
+    font-variation-settings: 'wdth' 100, 'wght' 400; }
+  .events-key .lora-bold {
+    font-variation-settings: 'wdth' 100, 'wght' 700; }
+  .events-key .country {
+    opacity: 0.7;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0.5; }
+  .events-key .empty {
+    fill: transparent !important; }
+  .events-key .france {
+    fill: #6f51b9;
+    stroke: #6f51b9; }
+  .events-key .ireland {
+    fill: #8b2e4a;
+    stroke: #8b2e4a; }
+  .events-key .uk {
+    fill: #fb4811;
+    stroke: #fb4811; }
+  .events-key .us {
+    fill: #51b788;
+    stroke: #51b788; }
+
+.viz-grid {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-size: 1rem; }
+  .viz-grid .label {
+    color: #9b2923;
+    font-variation-settings: 'wdth' 100, 'wght' 700;
+    opacity: 1;
+    text-transform: uppercase; }
+    .viz-grid .label::first-letter {
+      text-transform: uppercase; }
+  .viz-grid .markers .event,
+  .viz-grid .markers .resource {
+    float: none; }
+    .viz-grid .markers .event:hover,
+    .viz-grid .markers .resource:hover {
+      pointer-events: none; }
+  .viz-grid .zlarge {
+    font-size: 19.2px;
+    font-size: 1.2rem; }
+  .viz-grid .zsmall {
+    font-size: 9.6px;
+    font-size: 0.6rem; }
+  .viz-grid table {
+    background: #fff;
+    display: block;
+    margin: auto; }
+    @media screen {
+      .viz-grid table {
+        overflow-x: scroll; } }
+    @media print {
+      .viz-grid table {
+        height: 100%;
+        overflow: auto;
+        position: fixed;
+        width: 100%;
+        z-index: 9; } }
+    .viz-grid table thead {
+      text-align: center; }
+      .viz-grid table thead th {
+        color: #808080; }
+    .viz-grid table td {
+      border-bottom: 1px solid #808080;
+      border-right: 1px dashed #d9d9d9;
+      min-width: 40px;
+      scroll-snap-align: start; }
+    .viz-grid table th {
+      background: #fff;
+      left: 0;
+      padding: 8px;
+      position: sticky;
+      z-index: 1; }
+      .viz-grid table th.filtered {
+        color: #d9d9d9; }
+  .viz-grid .year {
+    display: inline-block;
+    margin-top: 24px;
+    margin-top: 1.5rem;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%; }
+    .viz-grid .year.zlarge {
+      min-width: 80px;
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg); }
+    .viz-grid .year.zsmall {
+      -webkit-transform: rotate(-45deg);
+              transform: rotate(-45deg); }
+  .viz-grid .event {
+    border: 1px solid #00548b;
+    border-radius: 50%; }
+    @media print {
+      .viz-grid .event {
+        border: 2px solid; } }
+  .viz-grid .resource.source-text {
+    background: #e9c46a; }
+    @media print {
+      .viz-grid .resource.source-text {
+        border: 2px solid; } }
+  .viz-grid .resource.translation {
+    background: #00548b; }
+    @media print {
+      .viz-grid .resource.translation {
+        border: 2px dotted; } }
+  .viz-grid .event,
+  .viz-grid .resource {
+    display: inline-block;
+    float: left;
+    height: 8px;
+    margin: 0.5px;
+    width: 8px; }
+    .viz-grid .event.zlarge,
+    .viz-grid .resource.zlarge {
+      height: calc(8px * 1.5);
+      width: calc(8px * 1.5); }
+    .viz-grid .event.zsmall,
+    .viz-grid .resource.zsmall {
+      height: calc(8px / 2);
+      width: calc(8px / 2); }
+    .viz-grid .event:hover, .viz-grid .event.active,
+    .viz-grid .resource:hover,
+    .viz-grid .resource.active {
+      border: solid #9b2923;
+      background: #9b2923;
+      cursor: pointer; }
+    .viz-grid .event.filtered,
+    .viz-grid .resource.filtered {
+      background: #d9d9d9;
+      border-color: #d9d9d9; }
+  .viz-grid .timeline-modal.show {
+    display: block; }
+  .viz-grid .timeline-modal .modal-body {
+    max-height: 500px;
+    overflow-y: scroll; }
+  .viz-grid .timeline-modal .modal-body,
+  .viz-grid .timeline-modal .modal-footer,
+  .viz-grid .timeline-modal .modal-header {
+    padding: 8px 16px;
+    padding: 0.5rem 1rem; }

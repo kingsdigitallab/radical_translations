@@ -1,3 +1,5 @@
+import igraph as ig
+import plotly.graph_objects as go
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
@@ -13,14 +15,22 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     FilteringFilterBackend,
     HighlightBackend,
     OrderingFilterBackend,
-    SearchFilterBackend,
     SuggesterFilterBackend,
 )
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
+from plotly.offline import plot
 
+from radical_translations.agents.models import Agent, Person
 from radical_translations.core.documents import ResourceDocument
-from radical_translations.core.models import Resource
-from radical_translations.core.serializers import ResourceDocumentSerializer
+from radical_translations.core.models import (
+    Contribution,
+    Resource,
+    ResourceRelationship,
+)
+from radical_translations.core.serializers import (
+    ResourceDocumentSerializer,
+    SimpleResourceDocumentSerializer,
+)
 from radical_translations.utils.search import PageNumberPagination
 
 ES_FACET_OPTIONS = settings.ES_FACET_OPTIONS
@@ -45,7 +55,6 @@ class ResourceViewSet(DocumentViewSet):
         OrderingFilterBackend,
         DefaultOrderingFilterBackend,
         CompoundSearchFilterBackend,
-        SearchFilterBackend,
         HighlightBackend,
         # the suggester backend needs to be the last backend
         SuggesterFilterBackend,
@@ -124,16 +133,6 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "event": {
-            "field": "events.title.raw",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
-        "event_place": {
-            "field": "events.place.address.raw",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
         "radical_date": {
             "field": "has_date_radical",
             "enabled": True,
@@ -160,8 +159,6 @@ class ResourceViewSet(DocumentViewSet):
         "fictional_place_of_publication": "places.fictional_place.raw",
         "status": "relationships.relationship_type.label.raw",
         "subject": "subjects.label.raw",
-        "event": "events.title.raw",
-        "event_place": "events.place.address.raw",
         "radical_date": "has_date_radical",
         "meta": "meta",
     }
@@ -213,3 +210,192 @@ class ResourceViewSet(DocumentViewSet):
             "options": {"skip_duplicates": True, "size": 20},
         },
     }
+
+
+class SimpleResourceViewSet(DocumentViewSet):
+    document = ResourceDocument
+    serializer_class = SimpleResourceDocumentSerializer
+
+    filter_backends = [
+        FilteringFilterBackend,
+        FacetedSearchFilterBackend,
+        OrderingFilterBackend,
+        DefaultOrderingFilterBackend,
+        CompoundSearchFilterBackend,
+    ]
+
+    lookup_field = "id"
+
+    faceted_search_fields = {
+        "country": {
+            "field": "places.place.country.name.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+        "year": {
+            "field": "year",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
+    }
+
+    filter_fields = {
+        "country": "places.place.country.name.raw",
+        "year": "year",
+    }
+
+    ordering_fields = {
+        "country": "places.place.country.name.raw",
+        "year": "year",
+    }
+    ordering = ["country", "year"]
+
+    pagination_class = PageNumberPagination
+
+    search_fields = {
+        "content": ES_FUZZINESS_OPTIONS,
+    }
+
+
+def network(request):
+    g = ig.Graph(directed=True)
+
+    for resource in Resource.objects.exclude(
+        relationships__relationship_type__label="paratext of"
+    ):
+        group = 2
+        title = "Translation: "
+
+        if resource.is_original():
+            group = 1
+            title = "Source text: "
+
+        title = f"{title}{str(resource)}"
+
+        g.add_vertex(name=f"resource-{resource.id}", title=title, group=group)
+
+    for agent in Agent.objects.exclude(roles__label__in=["archives", "library"]):
+        group = 4 if agent.is_organisation else 3
+        g.add_vertex(name=f"agent-{agent.id}", title=str(agent), group=group)
+
+    for contribution in Contribution.objects.all():
+        resource = contribution.resource
+        while resource.is_paratext():
+            next_resource = resource.paratext_of()
+            if next_resource.id == resource.id:
+                resource = None
+                break
+
+            resource = next_resource
+
+        if resource:
+            for role in contribution.roles.all():
+                g.add_edge(
+                    f"agent-{contribution.agent.id}",
+                    f"resource-{resource.id}",
+                    label=role.label,
+                )
+
+    for relationship in ResourceRelationship.objects.exclude(
+        relationship_type__label="paratext of"
+    ):
+        resource = relationship.resource
+        while resource.is_paratext():
+            next_resource = resource.paratext_of()
+            if next_resource.id == resource.id:
+                resource = None
+                break
+
+            resource = next_resource
+
+        related_to = relationship.related_to
+        while related_to.is_paratext():
+            next_resource = related_to.paratext_of()
+            if next_resource.id == related_to.id:
+                related_to = None
+                break
+
+            related_to = next_resource
+
+        if resource and related_to:
+            g.add_edge(
+                f"resource-{resource.id}",
+                f"resource-{related_to.id}",
+                label=relationship.relationship_type.label,
+            )
+
+    for person in Person.objects.all():
+        for knows in person.knows.all():
+            g.add_edge(f"agent-{person.id}", f"agent-{knows.id}", label="knows")
+
+        for org in person.member_of.all():
+            g.add_edge(f"agent-{person.id}", f"agent-{org.id}", label="member of")
+
+    node_labels = g.vs["title"]
+    node_groups = g.vs["group"]
+    edge_labels = g.es["label"]
+    # edge_groups = pd.Series(edge_labels).astype("category").cat.codes.values.tolist()
+
+    layout = g.layout_graphopt()
+
+    # nodes coordinates
+    range_n = range(len(node_labels))
+    nodes_x = [layout[i][0] for i in range_n]
+    nodes_y = [layout[i][1] for i in range_n]
+
+    # edges coordinates
+    edges_x = []
+    edges_y = []
+    for e in g.get_edgelist():
+        edges_x += [layout[e[0]][0], layout[e[1]][0], None]
+        edges_y += [layout[e[0]][1], layout[e[1]][1], None]
+
+    nodes_scatter = go.Scatter(
+        x=nodes_x,
+        y=nodes_y,
+        mode="markers",
+        marker=dict(
+            symbol=node_groups,
+            size=5,
+            color=node_groups,
+            colorscale="Viridis",
+            line=dict(color="rgb(50,50,50)", width=0.5),
+        ),
+        text=node_labels,
+        hoverinfo="text",
+    )
+
+    edges_scatter = go.Scatter(
+        x=edges_x,
+        y=edges_y,
+        mode="lines",
+        line=dict(width=1),
+        line_shape="spline",
+        marker=dict(color="rgb(125,125,125)"),
+        text=edge_labels,
+        hoverinfo="text",
+    )
+
+    axis = dict(
+        showline=False,
+        zeroline=False,
+        showgrid=False,
+        showticklabels=False,
+        title="",
+    )
+
+    go_layout = go.Layout(
+        font=dict(size=12),
+        autosize=False,
+        width=1000,
+        height=1000,
+        hovermode="closest",
+        xaxis=dict(axis),
+        yaxis=dict(axis),
+    )
+
+    fig = go.Figure(data=[edges_scatter, nodes_scatter], layout=go_layout)
+
+    plot_div = plot(fig, output_type="div", include_plotlyjs=False)
+
+    return render(request, "core/network.html", context={"plot_div": plot_div})

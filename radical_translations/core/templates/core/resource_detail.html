@@ -20,7 +20,7 @@
 <span class="metadata-block">
   <span class="topic">
     {% if object.is_radical %}
-    {% include "svgs/solid/phrygian-cap.svg" %} 
+    {% include "svgs/solid/phrygian-cap.svg" %}
     {% endif %}
     <strong>Subjects: </strong>
   </span>
@@ -158,17 +158,6 @@
   {% endfor %}
   {% endif %}
 </dl>
-{% endif %}
-
-{% if object.events.count %}
-<h2>Events</h2>
-<ul>
-  {% for event in object.events.all %}
-  <li>
-    <a href="{% url 'event-detail' event.pk %}">{{ event }}</a>
-  </li>
-  {% endfor %}
-</ul>
 {% endif %}
 
 {% if object.summary %}

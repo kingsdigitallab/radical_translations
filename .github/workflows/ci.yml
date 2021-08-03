@@ -7,11 +7,9 @@ env:
 
 on:
   pull_request:
-    branches: ['master', 'develop']
     paths-ignore: ['docs/**']
 
   push:
-    branches: ['master', 'develop']
     paths-ignore: ['docs/**']
 
 jobs:

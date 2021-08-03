@@ -1,5 +1,65 @@
-<bubble-chart
-         v-if="rangeFacets.length > 0"
-         :chart-data="eventsChartData"
-         :height="200"
-         :click-handler="handleChartClick"></bubble-chart>
+<div class="events-key">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 100" id="events-key-svg">
+    <g class="key-box chart-button key-button">
+    <rect x="20" y="10" class="bkg" width="560" height="40"/>
+    <text transform="matrix(1 0 0 1 31.7302 37.1763)" class="lora-bold font-20">Key</text>
+    <g class="key-info hidden">
+    <rect x="20" y="50" class="bkg" width="560" height="230"/>
+    <g>
+    <circle class="key" cx="107.1" cy="82.3" r="9.5"/>
+    <circle class="key" cx="112" cy="152.1" r="4.8"/>
+    <circle class="key" cx="97" cy="152.1" r="4.8"/>
+    <circle class="key" cx="112" cy="167.1" r="4.8"/>
+    <circle class="key" cx="97" cy="167.1" r="4.8"/>
+    <circle class="key" cx="82" cy="152.1" r="4.8"/>
+    </g>
+    <text transform="matrix(1 0 0 1 143.7151 87.4303)" class="lora-reg font-16">Cluster of events in a year</text>
+    <text transform="matrix(1 0 0 1 143.7151 114.2921)"><tspan x="0" y="0" class="lora-reg font-16">Indicates one or more events</tspan><tspan x="0" y="16.8" class="lora-reg font-16">spanning over multiple years</tspan></text>
+    <text transform="matrix(1 0 0 1 143.7151 155.2226)"><tspan x="0" y="0" class="lora-reg font-16">Number of resources attached</tspan><tspan x="0" y="16.8" class="lora-reg font-16">to a specific event</tspan></text>
+    <g>
+    <path class="key" d="M112,192.5c2.5,0,4.5,2,4.5,4.5s-2,4.5-4.5,4.5s-4.5-2-4.5-4.5S109.5,192.5,112,192.5 M112,192 c-2.8,0-5,2.2-5,5s2.2,5,5,5s5-2.2,5-5S114.8,192,112,192L112,192z"/>
+    </g>
+    <text transform="matrix(1 0 0 1 143.7151 200.1531)"><tspan x="0" y="0" class="lora-reg font-16">No resources attached</tspan><tspan x="0" y="16.8" class="lora-reg font-16">to aspecific event</tspan></text>
+    <text transform="matrix(1 0 0 1 143.7151 240.603)" class="lora-reg font-16">Event related to the country, but happened elsewhere</text>
+    <text transform="matrix(1 0 0 1 143.7151 60.5688)" class="lora-reg font-16">Events/Resources</text>
+    <text transform="matrix(1 0 0 1 90.7437 60.5689)" class="lora-reg font-16">n/n</text>
+    <g>
+    <path class="key" d="M107.1,119.7c-2.7,0-18.4-2.5-27.8-3.9c-5.2-0.8-6.9-1.1-7.2-1.1c-2.5,0-4.5-2-4.5-4.5s2-4.5,4.5-4.5 c0.2,0,1.9-0.3,7.2-1.1c9.4-1.5,25.2-3.9,27.8-3.9c5.2,0,9.5,4.3,9.5,9.5S112.3,119.7,107.1,119.7z"/>
+
+    <path class="key" d="M107.1,101.2c5,0,9,4,9,9s-4,9-9,9c-2.6,0-19-2.5-27.8-3.9c-6-0.9-7-1.1-7.2-1.1c-2.2,0-4-1.8-4-4s1.8-4,4-4 c0.2,0,1.2-0.1,7.2-1.1C88.1,103.8,104.4,101.2,107.1,101.2 M107.1,100.2c-3.9,0-34.3,5-35,5c-2.8,0-5,2.2-5,5s2.2,5,5,5 c0.7,0,31.1,5,35,5c5.5,0,10-4.5,10-10C117.1,104.7,112.6,100.2,107.1,100.2L107.1,100.2z"/>
+
+    <path class="key" d="M116.5,232.1v9h-9v-9H116.5 M117,231.6h-10v10h10V231.6L117,231.6z"/>
+    </g>
+    </g>
+    </g>
+  </svg>
+</div>
+
+<events-chart
+               v-if="rangeFacets.length > 0"
+               :chart-data="eventsChartData"
+               :height="200"
+               :click-handler="handleEventClick">
+</events-chart>
+
+<div
+      :class="{'hidden': !events.show }"
+      class="event-info">
+  <button
+    v-on:click="events.show = false"
+    class="close close-event"
+    type="button"
+    aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3>{[ events.country ]} in {[ events.year ]}</h3>
+  <div v-for="event in events.data" :key="event.id">
+    <p class="title">{[ event.related_to.length ]} {[ event.date ]}
+    <a :href="`${event.id}/`">{[ event.title ]}</a></p>
+    <ul v-if="event.related_to.length > 0">
+      <li v-for="resource in event.related_to" :key="resource.id">
+        <a :href="`{% url 'resource-detail' 0 %}../${resource.id}/`">{[ resource.title.main_title ]}</a>
+      </li>
+    </ul>
+  </div>
+</div>

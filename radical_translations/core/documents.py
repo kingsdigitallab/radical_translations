@@ -15,7 +15,6 @@ from radical_translations.core.models import (
 from radical_translations.utils.documents import (
     get_agent_field,
     get_controlled_term_field,
-    get_event_field,
     get_place_field,
     get_resource_field,
 )
@@ -83,7 +82,7 @@ class ResourceDocument(Document):
         }
     )
 
-    events = get_event_field(options=copy_to_content)
+    # events = get_event_field(options=copy_to_content)
 
     is_original = fields.BooleanField()
     is_translation = fields.BooleanField()

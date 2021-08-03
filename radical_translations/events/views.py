@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django_elasticsearch_dsl_drf.filter_backends import (
     CompoundSearchFilterBackend,
@@ -7,7 +8,6 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     FacetedSearchFilterBackend,
     FilteringFilterBackend,
     OrderingFilterBackend,
-    SearchFilterBackend,
 )
 from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
 
@@ -23,8 +23,8 @@ class EventDetailView(DetailView):
     model = Event
 
 
-def event_list(request):
-    return render(request, "events/event_list.html")
+def event_grid(request):
+    return render(request, "events/event_grid.html")
 
 
 class EventViewSet(DocumentViewSet):
@@ -37,7 +37,6 @@ class EventViewSet(DocumentViewSet):
         OrderingFilterBackend,
         DefaultOrderingFilterBackend,
         CompoundSearchFilterBackend,
-        SearchFilterBackend,
     ]
 
     lookup_field = "id"
@@ -48,18 +47,13 @@ class EventViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "place": {
-            "field": "place.address.raw",
-            "enabled": True,
-            "options": ES_FACET_OPTIONS,
-        },
         "country": {
-            "field": "place.country.name.raw",
+            "field": "country",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
-        "classification": {
-            "field": "classification.label.raw",
+        "type_of_event": {
+            "field": "classification",
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
@@ -67,16 +61,18 @@ class EventViewSet(DocumentViewSet):
 
     filter_fields = {
         "year": "year",
-        "place": "place.address.raw",
-        "country": "place.country.name.raw",
-        "classification": "classification.label.raw",
+        "country": "country",
+        "type_of_event": "classification",
     }
 
     ordering_fields = {
-        "date_earliest": "date_earliest",
-        "date_latest": "date_latest",
+        "country": "country",
         "year": "year",
     }
-    ordering = ["_score", "date_earliest", "date_latest"]
+    ordering = ["country", "date_earliest"]
 
     pagination_class = PageNumberPagination
+
+
+class TimelineMockupPageView(TemplateView):
+    template_name = "events/timeline_mockup.html"

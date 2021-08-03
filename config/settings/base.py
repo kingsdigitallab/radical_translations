@@ -359,6 +359,14 @@ SEARCH_OPTIONS = {
         "range_facets": ["year"],
         "year_min": 1516,
         "year_max": 1900,
+        "map_field": "places",
+        "ordering": [
+            {"key": "score", "value": "Relevance"},
+            {"key": "title", "value": "Title ascending"},
+            {"key": "-title", "value": "Title descending"},
+            {"key": "year", "value": "Year ascending"},
+            {"key": "-year", "value": "Year descending"},
+        ],
     },
     "events": {
         "label": "Events",
@@ -367,6 +375,23 @@ SEARCH_OPTIONS = {
         "range_facets": ["year"],
         "year_min": 1780,
         "year_max": 1820,
+        "resources": 1,
+    },
+    "agents": {
+        "label": "Agents",
+        "page_size": 50,
+        "meta_facets": ["meta"],
+        "range_facets": ["year"],
+        "year_min": 1450,
+        "year_max": 1900,
+        "map_field": "based_near",
+        "ordering": [
+            {"key": "score", "value": "Relevance"},
+            {"key": "name", "value": "Name ascending"},
+            {"key": "-name", "value": "Name descending"},
+            {"key": "year", "value": "Year ascending"},
+            {"key": "-year", "value": "Year descending"},
+        ],
     },
 }
 

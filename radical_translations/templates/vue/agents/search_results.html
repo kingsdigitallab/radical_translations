@@ -1,0 +1,90 @@
+<ol
+     v-bind:start="data.current_page * data.page_size - data.page_size + 1"
+     class="search-results-list">
+  <li v-for="item in data.results" :key="item.id">
+    <p class="title">
+    <a v-bind:href="item.id">{[ item.name ]}</a>
+    </p>
+
+    <p class="metadata">
+    <span
+      v-if="item.agent_type === 'person'"
+      class="metadata-block">
+      <span
+        v-if="item.noble === 'yes'"
+        class="noble">
+        {# Font Awesome shield-alt icon #}
+        {% include "svgs/solid/shield-alt.svg" %}
+        <span class="sr-only">Noble</span>
+      </span>
+
+      <template v-if="item.gender === 'male'">
+        {# Font Awesome mars icon #}
+        {% include "svgs/solid/mars.svg" %}
+      </template>
+      <template v-else>
+        <template v-if="item.gender === 'female'">
+          {# Font Awesome venus icon #}
+          {% include "svgs/solid/venus.svg" %}
+        </template>
+        <template v-else>
+          {# Font Awesome question mark icon #}
+          {% include "svgs/solid/question.svg" %}
+        </template>
+      </template>
+
+      <template v-if="item.place_birth">{[ item.place_birth.address ]}</template>
+      <template v-if="item.date_display">{[ item.date_display ]}</template>
+      <template v-if="item.place_death">{[ item.place_death.address ]}</template>
+    </span>
+
+    <span
+      v-if="item.languages && item.languages.length > 0"
+      class="metadata-block">
+      {# Custom language icon "language3.svg" #}
+      {% include "svgs/solid/language3.svg" %}
+      <span
+        v-for="(language, index) in item.languages"
+        :key="language.label">
+        {[ language.label ]}<template v-if="index !== item.languages.length - 1">, </template>
+      </span>
+    </span>
+
+    <span
+      v-if="item.based_near && item.based_near.length > 0"
+      class="metadata-block">
+      {# Font Awesome map-marker-alt icon #}
+      {% include "svgs/solid/map-marker-alt.svg" %}
+      Main: 
+      <span
+        v-for="(place, index) in item.based_near"
+        :key="place.address"
+        class="badge badge-primary">{[ place.address ]}<template v-if="index !== item.based_near.length - 1">, </template>
+      </span>
+    </span>
+
+    <span
+      v-if="item.main_places && item.main_places.length > 0"
+      class="metadata-block">
+      {# Font Awesome map-marker-alt icon #}
+      {% include "svgs/solid/map-marker-alt.svg" %}
+      Other: 
+      <span
+        v-for="(place, index) in item.main_places"
+        :key="place.address">{[ place.address ]}<template v-if="index !== item.main_places.length - 1">, </template>
+      </span>
+    </span>
+
+    <span
+      v-if="item.roles && item.roles.length > 0"
+      class="metadata-block">
+      {# Font Awesome file-certificate icon #}
+      <span class="small-icon">{% include "svgs/solid/file-certificate.svg" %}</span>
+      <span
+        v-for="role in _.orderBy(item.roles, 'label')"
+        :key="role.label"
+        class="badge badge-warning">{[ role.label ]}</span>
+    </span>
+    </p>
+  </li>
+</ol>

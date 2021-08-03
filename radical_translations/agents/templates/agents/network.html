@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+{% endblock main %}
+
+{% block css %}
+{{ block.super }}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock css %}

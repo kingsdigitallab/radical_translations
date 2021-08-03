@@ -1,3 +1,12 @@
+let baseURL = `${window.location.origin}${window.location.pathname}`
+if (window.viewBaseURL) {
+  baseURL = viewBaseURL
+}
+
+Vue.use(VueHtmlToPaper, {
+  styles: ['/static/css/project.min.css']
+})
+
 new Vue({
   el: '#app',
   components: {
@@ -5,10 +14,9 @@ new Vue({
   },
   delimiters: ['{[', ']}'],
   data: {
-    url: new URL(`${window.location.origin}${window.location.pathname}api/`),
-    url_suggest: new URL(
-      `${window.location.origin}${window.location.pathname}api/suggest/`
-    ),
+    url: new URL(`${baseURL}api/`),
+    urlResources: new URL(`${baseURL}../resources/api-simple/`),
+    urlSuggest: new URL(`${baseURL}api/suggest/`),
     query: '',
     query_text: '',
     query_dates: [options.year_min, options.year_max],
@@ -16,13 +24,7 @@ new Vue({
     filters: [],
     ordering_default: 'score',
     ordering: 'score',
-    ordering_options: [
-      { key: 'score', value: 'Relevance' },
-      { key: 'title', value: 'Title ascending' },
-      { key: '-title', value: 'Title descending' },
-      { key: 'year', value: 'Year ascending' },
-      { key: '-year', value: 'Year descending' }
-    ],
+    ordering_options: options.ordering,
     page: 1,
     page_size: options.page_size !== undefined ? options.page_size : 50,
     rangeMarks: (v) => v % 10 === 0,
@@ -43,7 +45,16 @@ new Vue({
         item: null,
         place: null
       }
-    }
+    },
+    resources: {},
+    timeline: { filters: {} },
+    timelineDetail: { country: null, year: null, data: [], show: false },
+    zoom: '',
+    zoomLevels: [
+      { level: 'Small', style: 'zsmall' },
+      { level: 'Medium', style: '' },
+      { level: 'Large', style: 'zlarge' }
+    ]
   },
   watch: {
     query_text: _.debounce(async function () {
@@ -62,20 +73,23 @@ new Vue({
     'map.show': async function (newShow, oldShow) {
       if (newShow) {
         this.page = 1
-        this.page_size = 1000
+        this.page_size = 2000
         dispatchWindowResizeEvent()
-        await this.search()
-        this.renderMap()
       } else {
         this.page_size = options.page_size
-        await this.search()
       }
+
+      await this.search()
     }
   },
   created: async function () {
     this.loadSearchParams()
+
     await this.search()
-    this.initMap()
+
+    this.getMap()
+
+    this.focusTimeline()
   },
   computed: {
     facets: function () {
@@ -116,40 +130,6 @@ new Vue({
       }
 
       return suggestions
-    },
-    eventsChartData: function () {
-      if (!this.data || !this.data.results) {
-        return {}
-      }
-
-      const labels = this.data.facets._filter_country.country.buckets.map(
-        (f) => f.key
-      )
-
-      events = { labels: labels, datasets: [] }
-
-      labels.forEach((label, idx) => {
-        let dataset = { label: label, data: [] }
-        this.data.results.forEach((item) => {
-          if (item.place.country.name === label) {
-            dataset.data.push({
-              x: item.year,
-              y: idx,
-              r: item.related_to.length + 10,
-              meta: {
-                title: item.title,
-                date: item.date,
-                place: item.place.address,
-                resources: item.related_to.length
-              }
-            })
-          }
-        })
-
-        events.datasets.push(dataset)
-      })
-
-      return events
     }
   },
   methods: {
@@ -243,8 +223,8 @@ new Vue({
       const params = new URLSearchParams()
       params.append('suggest_field', this.query_text)
 
-      this.url_suggest.search = params.toString()
-      this.data_suggest = await fetch(this.url_suggest).then((response) =>
+      this.urlSuggest.search = params.toString()
+      this.data_suggest = await fetch(this.urlSuggest).then((response) =>
         response.json()
       )
     },
@@ -310,22 +290,32 @@ new Vue({
     },
     search: async function () {
       this.data = await this.doSearch()
+
+      if (options.resources) {
+        this.resources = await this.doSearch(this.urlResources, 1500)
+        this.timeline = this.getTimeline()
+      }
       if (this.map.show) {
         this.renderMap()
       }
     },
-    doSearch: async function () {
+    doSearch: async function (
+      url = this.url,
+      page_size = this.page_size,
+      year_from = this.query_dates[0],
+      year_to = this.query_dates[1]
+    ) {
       const params = new URLSearchParams()
 
       if (this.query) {
         params.append('search', this.query)
       }
 
-      if (this.query_dates[0] !== options.year_min) {
-        params.append('year__gte', this.query_dates[0])
+      if (year_from !== options.year_min) {
+        params.append('year__gte', year_from)
       }
-      if (this.query_dates[1] !== options.year_max) {
-        params.append('year__lte', this.query_dates[1])
+      if (year_to !== options.year_max) {
+        params.append('year__lte', year_to)
       }
 
       if (params.has('year__gte') || params.has('year__lte')) {
@@ -339,7 +329,7 @@ new Vue({
       }
 
       params.append('page', this.page)
-      params.append('page_size', this.page_size)
+      params.append('page_size', page_size)
 
       if (this.ordering !== this.ordering_default) {
         params.append('ordering', this.ordering)
@@ -349,10 +339,10 @@ new Vue({
         params.append(`${filter[0]}__term`, filter[1])
       )
 
-      this.url.search = params.toString()
-      window.history.pushState({}, '', this.url.search)
+      url.search = params.toString()
+      window.history.pushState({}, '', url.search)
 
-      const response = await fetch(this.url)
+      const response = await fetch(url)
 
       return response.json()
     },
@@ -376,8 +366,10 @@ new Vue({
         this.filters.push(filter)
       }
     },
-    initMap: async function () {
+    getMap: function () {
       if (!document.getElementById('map')) return
+
+      if (this.map.mapObject) this.map.mapObject.remove()
 
       const map = L.map('map')
       map.setView(this.map.center, this.map.zoom)
@@ -387,23 +379,27 @@ new Vue({
       }).addTo(map)
 
       this.map.mapObject = map
+
+      return this.map.mapObject
     },
     renderMap: function () {
-      if (!this.map.mapObject) return
+      const map = this.getMap()
+      if (!map) return
 
-      const map = this.map.mapObject
       const cluster = L.markerClusterGroup()
 
       const vue = this
       this.data.results.forEach((item) =>
-        item.places.forEach((place) => {
-          if (place.place.geo !== undefined) {
+        item[options.map_field].forEach((p) => {
+          const place = p.place !== undefined ? p.place : p
+
+          if (place !== undefined && place.geo !== undefined) {
             cluster.addLayer(
-              L.marker(place.place.geo).on('click', function () {
+              L.marker(place.geo).on('click', function () {
                 const marker = this
 
                 vue.map.popup.item = item
-                vue.map.popup.place = place.place
+                vue.map.popup.place = place
 
                 vue.$nextTick(() =>
                   marker
@@ -421,6 +417,223 @@ new Vue({
       map.addLayer(cluster)
 
       map.whenReady(() => map.invalidateSize())
+    },
+    getTimeline: function () {
+      const timeline = { filters: {} }
+
+      if (!this.data || !this.data.results) {
+        return timeline
+      }
+
+      const events = this.data.results.flatMap((r) => {
+        return r.country.flatMap((country, idx) => {
+          return !r.year
+            ? []
+            : r.year.map((year) => {
+                const record = `event-${r.id}`
+                const uid = `${record}-${country}-${year}`
+
+                const classification = r.classification
+                  .filter((c) => c !== 'any')
+                  .flatMap((c) => c)
+
+                let relatedTags = []
+                if (idx > 0) {
+                  relatedTags = ['related', this.timelineFacet(r.country[0])]
+                }
+
+                return {
+                  country: country,
+                  year: year,
+                  id: r.id,
+                  type: 'event',
+                  subtype: 'event',
+                  record: record,
+                  title: r.title,
+                  date: r.date,
+                  subjects: classification,
+                  tags: [this.timelineFacet(country)]
+                    .concat(relatedTags)
+                    .concat(classification.map((c) => this.timelineFacet(c)))
+                }
+              })
+        })
+      })
+
+      let resources = []
+
+      if (this.resources && this.resources.results) {
+        resources = this.resources.results
+          .filter(
+            (r) =>
+              r.form_genre.filter(
+                (fr) =>
+                  fr.label === 'Serial publications' ||
+                  fr.label === 'Periodicals'
+              ).length === 0
+          )
+          .filter((r) => r.is_original || r.is_translation)
+          .flatMap((r) => {
+            return r.places
+              .filter(
+                (place) =>
+                  place.place.country && place.place.country.name !== 'any'
+              )
+              .map((place) => place.place.country.name)
+              .flatMap((country) => {
+                const subjects = r.form_genre
+                  .filter((fr) => fr.label !== 'any')
+                  .map((fr) => fr.label)
+
+                return !r.year
+                  ? []
+                  : r.year.map((year) => {
+                      const record = `resource-${r.id}`
+                      const uid = `${record}-${country}-${year}`
+
+                      return {
+                        country: country,
+                        year: year,
+                        id: r.id,
+                        type: 'resource',
+                        subtype: r.is_original ? 'source text' : 'translation',
+                        record: record,
+                        title: r.title ? r.title[0] : 'No title!',
+                        date: r.date_display,
+                        subjects: subjects,
+                        tags: [
+                          this.timelineFacet(country),
+                          r.is_original ? 'source-text' : 'translation'
+                        ]
+                      }
+                    })
+              })
+          })
+      }
+
+      const raw = events.concat(resources).sort((a, b) => {
+        const ca = a.country.toLowerCase(),
+          cb = b.country.toLowerCase()
+
+        if (ca < cb) {
+          return -1
+        }
+        if (ca > cb) {
+          return 1
+        }
+        return 0
+      })
+      timeline.raw = raw
+
+      const years = [...new Set(raw.map((d) => d.year))].sort()
+      timeline.years = years
+
+      timeline.data = this.prepareTimelineData(raw)
+
+      return timeline
+    },
+    timelineFacet: function (text) {
+      return text.toLowerCase().replace(' ', '-')
+    },
+    prepareTimelineData: function (raw) {
+      const other = 'Other'
+      const data = {
+        France: {},
+        Ireland: {},
+        Italy: {},
+        'United Kingdom': {},
+        'United States': {},
+        Other: {}
+      }
+
+      return raw.reduce((acc, curr) => {
+        let country = curr.country
+        const year = curr.year
+
+        if (!(country in acc)) {
+          country = other
+        }
+
+        if (acc[country]['filtered'] === undefined)
+          acc[country]['filtered'] = true
+        acc[country]['filtered'] = acc[country]['filtered'] && curr.filtered
+
+        if (!acc[country][year]) acc[country][year] = []
+        acc[country][year].push(curr)
+
+        return acc
+      }, data)
+    },
+    highlight: function (record) {
+      if (this.timeline) {
+        this.timeline.raw = this.timeline.raw.map((t) =>
+          t.record === record ? { ...t, active: true } : { ...t, active: false }
+        )
+        this.timeline.data = this.prepareTimelineData(this.timeline.raw)
+      }
+    },
+    getTimelineDetail: function (country, year, record) {
+      this.timelineDetail.country = country
+      this.timelineDetail.year = year
+      this.timelineDetail.data = this.timeline.data[country][year]
+
+      if (record) {
+        this.timelineDetail.record = this.timelineDetail.data.filter(
+          (d) => d.record === record
+        )[0]
+      }
+
+      this.timelineDetail.show = true
+    },
+    setZoom: function (value) {
+      this.zoom = value
+
+      this.focusTimeline(true)
+      this.$nextTick(() => {
+        this.focusTimeline(false)
+      })
+    },
+    focusTimeline: function (reset = false) {
+      const el = document.getElementById('timeline-table')
+
+      if (el === null || el === undefined) return
+
+      if (reset) {
+        el.scrollLeft = 0
+      } else {
+        const w = el.scrollWidth
+        el.scrollLeft = w / 2 + w / 8
+      }
+    },
+    filterTimeline: function (facet, value) {
+      if (this.timeline) {
+        const current = this.timeline.filters[facet]
+
+        if (current === value) {
+          delete this.timeline.filters[facet]
+        } else {
+          this.timeline.filters[facet] = value
+        }
+
+        const values = Object.values(this.timeline.filters)
+
+        if (values.length > 0) {
+          this.timeline.raw = this.timeline.raw.map((t) =>
+            values.every((v) => t.tags.includes(v))
+              ? { ...t, filtered: false }
+              : { ...t, filtered: true }
+          )
+        } else {
+          this.timeline.raw = this.timeline.raw.map((t) => {
+            return { ...t, filtered: false }
+          })
+        }
+
+        this.timeline.data = this.prepareTimelineData(this.timeline.raw)
+      }
+    },
+    print: async function (element) {
+      this.$htmlToPaper(element)
     }
   }
 })

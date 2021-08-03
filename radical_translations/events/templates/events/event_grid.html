@@ -1,0 +1,26 @@
+{% extends "search/base.html" %}
+
+{% load staticfiles %}
+
+{% block search_header %}Timeline{% endblock search_header %}
+{% block title %}Timeline{% endblock title %}
+
+{% block query-facets %}{% endblock query-facets %}
+{% block summary-ordering %}{% endblock summary-ordering %}
+
+{% block pagination-top %}{% endblock pagination-top %}
+{% block results-options %}{% endblock results-options %}
+
+{% block results_default %}
+{% include 'vue/events/search_results_grid.html' %}
+{% endblock results_default %}
+
+{% block results_map %}{% endblock results_map %}
+{% block pagination-bottom %}{% endblock pagination-bottom %}
+
+{% block javascript %}
+<script>
+  const options = {{ ds.SEARCH_OPTIONS.events|safe }}
+</script>
+{{ block.super }}
+{% endblock javascript %}

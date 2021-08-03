@@ -2,14 +2,10 @@ from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
 from controlled_vocabulary.models import ControlledTerm
-from geonames_place.models import Place
+from geonames_place.models import Country, Place
 from radical_translations.core.models import Resource
 from radical_translations.events.models import Event
-from radical_translations.utils.documents import (
-    get_controlled_term_field,
-    get_place_field,
-    get_resource_field,
-)
+from radical_translations.utils.documents import get_place_field, get_resource_field
 from radical_translations.utils.models import Date
 
 
@@ -18,13 +14,14 @@ class EventDocument(Document):
     title = fields.TextField()
     date = fields.TextField()
 
-    classification = get_controlled_term_field()
+    classification = fields.KeywordField()
 
     date_earliest = fields.DateField()
     date_latest = fields.DateField()
     year = fields.IntegerField()
 
     place = get_place_field()
+    country = fields.KeywordField()
 
     related_to = get_resource_field()
 
@@ -71,3 +68,30 @@ class EventDocument(Document):
 
             if date_latest:
                 return date_latest.year
+
+    def prepare_classification(self, instance):
+        labels = []
+
+        for c in instance.classification.all():
+            label = c.label
+
+            if (
+                Country.objects.filter(name=label).count() == 0
+                and label.lower() != "comparative"
+            ):
+                labels.append(label)
+
+        return labels
+
+    def prepare_country(self, instance):
+        if not instance.place:
+            return []
+
+        countries = [instance.place.country.name]
+
+        for c in instance.classification.all():
+            label = c.label
+            if Country.objects.filter(name=label).count() > 0:
+                countries.append(label)
+
+        return countries

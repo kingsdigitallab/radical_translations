@@ -15,3 +15,18 @@ class ResourceDocumentSerializer(DocumentSerializer):
             return obj.meta.highlight.__dict__["_d_"]
 
         return {}
+
+
+class SimpleResourceDocumentSerializer(DocumentSerializer):
+    class Meta:
+        document = ResourceDocument
+        fields = [
+            "id",
+            "title",
+            "date_display",
+            "year",
+            "places",
+            "is_original",
+            "is_translation",
+            "form_genre",
+        ]

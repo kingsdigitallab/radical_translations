@@ -14,9 +14,69 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+
+[1.2.2] - 2021-07-14
+--------------------
+
+Fixed
+~~~~~
+* Update map view when filters change.
+
+
+[1.2.1] - 2021-07-14
+--------------------
+
+Changed
+~~~~~~~
+* Bump `Django` and `Wagtail`.
+
+Fixed
+~~~~~
+* Map display.
+* Source text label on map popups.
+
+
+[1.2.0] - 2021-07-14
+--------------------
+
+Added
+~~~~~
+* Comparative timeline to the home page.
+* Zoom feature to the timeline grid.
+* Sorting options to the base settings.
+* Wikidata as an option for `Agent` page.
+* `Resources` network visualisation.
+* `Agents` network visualisation.
+
+Changed
+~~~~~~~
+* Remove country names from the events classification filter.
+* Display related events in the events timeline.
+* Focus middle of the timeline.
+* Sort agents by last name.
+* Sort anonymous agents last.
+
+Removed
+~~~~~~~
+* Comparative value from the events classification filter.
+* Scatter events timeline.
+* `Event` fields from the `Resource` search because the data is not complete.
+
+Fixed
+~~~~~
+* Display of noble status.
+* Places filters.
+* Missing migration.
+* Centering the timeline on all browsers.
+
+
+[1.1.3] - 2021-07-06
+--------------------
+
 Changed
 ~~~~~~~
 * Key after changes by the research team.
+* Upgrade `nginx` image.
 
 
 [1.1.2] - 2021-06-10
@@ -65,6 +125,7 @@ Added
 * `Place` API view.
 * Load analytics setting.
 * GitHub action for CI.
+* `Agents` search.
 * Command to export `Resources` to a CSV file.
 * Command to export `Organisations` and `Persons` to CSV files.
 * Command to export `Events` to a CSV file.

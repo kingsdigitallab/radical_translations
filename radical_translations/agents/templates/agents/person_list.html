@@ -1,1 +1,21 @@
-{% extends "agents/agent_list.html" %}
+{% extends "search/base.html" %}
+
+{% load staticfiles %}
+
+{% block search_header %}Agents{% endblock search_header %}
+{% block title %}Agents{% endblock title %}
+
+{% block query %}{% endblock query %}
+
+{% block results_default %}
+{% include 'vue/agents/search_results.html' %}
+{% endblock results_default %}
+
+{% block results_map %}{% endblock results_map %}
+
+{% block javascript %}
+<script>
+  const options = {{ ds.SEARCH_OPTIONS.agents|safe }}
+</script>
+{{ block.super }}
+{% endblock javascript %}
