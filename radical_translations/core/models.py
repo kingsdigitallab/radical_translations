@@ -419,7 +419,7 @@ class Resource(TimeStampedModel):
         return {
             "id": self.id,
             **self.title.to_dict(),
-            **date_to_dict(self.date),
+            **date_to_dict(self.get_date()),
             "subjects.topics": get_controlled_terms_str(self.get_subjects_topic()),
             "subjects.form_genre": get_controlled_terms_str(self.get_subjects_other()),
             "edition_enumeration": self.edition_enumeration,
