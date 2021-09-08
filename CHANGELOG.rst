@@ -21,6 +21,7 @@ Changed
 Fixed
 ~~~~~
 * Add dates from the resources to the paratexts.
+* Range search.
 
 
 [1.2.2] - 2021-07-14
