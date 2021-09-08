@@ -887,7 +887,8 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     def to_dict_value(self) -> str:
         return (
             f"{f'{csv_multi_sep} '.join([c.label for c in self.classification.all()])}"
-            f"{csv_field_sep}{self.relationship_type.label}{csv_field_sep}{self.id}"
+            f"{csv_field_sep}{self.relationship_type.label}"
+            f"{csv_field_sep}{self.related_to.id}"
             f"{csv_field_sep}{self.related_to}"
         )
 

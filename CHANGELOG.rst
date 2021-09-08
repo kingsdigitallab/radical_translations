@@ -14,6 +14,14 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Changed
+~~~~~~~
+* Do not export resource relationship ids, they are redundant.
+
+Fixed
+~~~~~
+* Add dates from the resources to the paratexts.
+
 
 [1.2.2] - 2021-07-14
 --------------------
