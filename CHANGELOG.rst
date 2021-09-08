@@ -11,7 +11,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
-[Unreleased] - 2021-09-08
+[1.2.3] - 2021-09-08
 --------------------
 
 Changed
