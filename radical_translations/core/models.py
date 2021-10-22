@@ -713,7 +713,7 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
     )
 
     class Meta:
-        ordering = ["resource", "agent"]
+        ordering = ["resource", "agent", "roles__label"]
 
     def __str__(self) -> str:
         agent = str(self.agent)
