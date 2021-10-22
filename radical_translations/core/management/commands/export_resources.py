@@ -1,5 +1,7 @@
 import csv
+import os
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from radical_translations.core.models import Resource
@@ -20,7 +22,7 @@ class Command(BaseCommand):
 
         fieldnames = resources[0].keys()
 
-        with open("resources.csv", "w") as f:
+        with open(os.path.join(settings.EXPORTS_ROOT, "resources.csv"), "w") as f:
             c = csv.DictWriter(f, fieldnames)
             c.writeheader()
             c.writerows(resources)
