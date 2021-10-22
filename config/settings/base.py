@@ -189,6 +189,12 @@ MEDIA_URL = "/media/"
 if not os.path.exists(MEDIA_ROOT):
     os.makedirs(MEDIA_ROOT)
 
+EXPORTS_ROOT = os.path.join(MEDIA_ROOT, "exports")
+
+if not os.path.exists(EXPORTS_ROOT):
+    os.makedirs(EXPORTS_ROOT)
+
+
 # TEMPLATES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates

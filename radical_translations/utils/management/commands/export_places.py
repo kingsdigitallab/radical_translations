@@ -1,5 +1,7 @@
 import csv
+import os
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from geonames_place.models import Place
@@ -29,7 +31,7 @@ class Command(BaseCommand):
 
         fieldnames = places[0].keys()
 
-        with open("places.csv", "w") as f:
+        with open(os.path.join(settings.EXPORTS_ROOT, "places.csv"), "w") as f:
             c = csv.DictWriter(f, fieldnames)
             c.writeheader()
             c.writerows(places)
