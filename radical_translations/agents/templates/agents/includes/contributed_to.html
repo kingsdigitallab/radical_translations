@@ -1,15 +1,21 @@
 {% if object.contributed_to.count %}
 <h3>Contributions</h3>
+{{ object.contributed_to.all }}
+<hr>
+{% regroup object.contributed_to.all by resource as contributions %}
+{{ contributions }}
 <ol>
-    {% for contribution in object.contributed_to.all %}
+    {% for contribution in contributions %}
     <li>
-        {% with resource=contribution.resource %}
+        {% with resource=contribution.grouper %}
         <a href="{% url 'resource-detail' resource.pk %}">{{ resource.title }}</a>
 
         {% include "core/includes/type.html" %}
         {% endwith %}
 
-        {% include "agents/includes/roles.html" with object=contribution %}
+        {{ contribution.list }}
+
+        {% include "agents/includes/roles.html" with objects=contribution.list %}
     </li>
     {% endfor %}
 </ol>

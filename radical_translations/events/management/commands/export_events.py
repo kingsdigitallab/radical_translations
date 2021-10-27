@@ -1,5 +1,7 @@
 import csv
+import os
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from radical_translations.events.models import Event
@@ -18,7 +20,7 @@ class Command(BaseCommand):
 
         fieldnames = events[0].keys()
 
-        with open("events.csv", "w") as f:
+        with open(os.path.join(settings.EXPORTS_ROOT, "events.csv"), "w") as f:
             c = csv.DictWriter(f, fieldnames)
             c.writeheader()
             c.writerows(events)

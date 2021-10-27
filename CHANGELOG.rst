@@ -14,6 +14,37 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Add command to export and compress all the data.
+
+Changed
+~~~~~~~
+* Rename the `Resource` export command to `export_resources` to make it consistent with
+  the other export commands.
+* Store the exported data in the media directory.
+
+
+[1.2.4] - 2021-09-21
+--------------------
+
+Fixed
+~~~~~
+* Agent page links.
+
+
+[1.2.3] - 2021-09-08
+--------------------
+
+Changed
+~~~~~~~
+* Do not export resource relationship ids, they are redundant.
+
+Fixed
+~~~~~
+* Add dates from the resources to the paratexts.
+* Range search.
+
 
 [1.2.2] - 2021-07-14
 --------------------

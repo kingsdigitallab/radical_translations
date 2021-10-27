@@ -1,5 +1,7 @@
 import csv
+import os
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from radical_translations.agents.models import Organisation, Person
@@ -25,7 +27,7 @@ class Command(BaseCommand):
 
         fieldnames = agents[0].keys()
 
-        with open(f"{title}.csv", "w") as f:
+        with open(os.path.join(settings.EXPORTS_ROOT, f"{title}.csv"), "w") as f:
             c = csv.DictWriter(f, fieldnames)
             c.writeheader()
             c.writerows(agents)

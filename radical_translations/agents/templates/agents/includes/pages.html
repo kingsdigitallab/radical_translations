@@ -3,7 +3,7 @@
     {# Font Awesome external-link-alt icon #}
     {% include "svgs/solid/external-link-alt.svg" %}
     {% for page in object.page.all %}
-    <a class="badge badge-info" href="{{ page.vocabulary.base_url }}{{ page.termid }}/">
+    <a class="badge badge-info" href="{{ page.vocabulary.base_url }}{{ page.termid }}">
         {{ page }}
     </a>
     {% endfor %}

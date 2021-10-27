@@ -8,13 +8,13 @@
 
 alabaster==0.7.12
     # via sphinx
-anyascii==0.2.0
+anyascii==0.3.0
     # via wagtail
 appdirs==1.4.4
     # via black
 argon2-cffi==19.2.0
     # via -r requirements/./base.in
-astroid==2.6.2
+astroid==2.7.3
     # via pylint
 attrs==21.2.0
     # via
@@ -40,9 +40,9 @@ certifi==2021.5.30
     #   requests
 cffi==1.14.6
     # via argon2-cffi
-cfgv==3.3.0
+cfgv==3.3.1
     # via pre-commit
-charset-normalizer==2.0.1
+charset-normalizer==2.0.4
     # via requests
 click==8.0.1
     # via
@@ -59,7 +59,7 @@ coverage==5.5
     # via
     #   coveralls
     #   django-coverage-plugin
-coveralls==3.1.0
+coveralls==3.2.0
     # via -r requirements/local.in
 decorator==5.0.9
     # via
@@ -96,7 +96,7 @@ django-elasticsearch-dsl==7.2.0
     # via
     #   -r requirements/./base.in
     #   django-elasticsearch-dsl-drf
-django-elasticsearch-dsl-drf==0.22.1
+django-elasticsearch-dsl-drf==0.22.2
     # via -r requirements/./base.in
 django-environ==0.4.5
     # via -r requirements/./base.in
@@ -114,7 +114,7 @@ django-model-utils==4.0.0
     #   django-geonames-place
 django-modelcluster==5.1
     # via wagtail
-django-nine==0.2.4
+django-nine==0.2.5
     # via django-elasticsearch-dsl-drf
 django-polymorphic==2.1.2
     # via -r requirements/./base.in
@@ -139,11 +139,11 @@ draftjs-exporter==2.1.7
     # via wagtail
 edtf==4.0.1
     # via -r requirements/./base.in
-elasticsearch==7.13.3
+elasticsearch==7.14.1
     # via
     #   django-elasticsearch-dsl-drf
     #   elasticsearch-dsl
-elasticsearch-dsl==7.3.0
+elasticsearch-dsl==7.4.0
     # via
     #   -r requirements/./base.in
     #   django-elasticsearch-dsl
@@ -154,7 +154,7 @@ et-xmlfile==1.1.0
     # via openpyxl
 factory-boy==2.12.0
     # via -r requirements/local.in
-faker==8.10.1
+faker==8.12.1
     # via factory-boy
 feedparser==5.2.1
     # via pyzotero
@@ -170,13 +170,13 @@ geocoder==1.38.1
     # via django-geonames-place
 html5lib==1.1
     # via wagtail
-identify==2.2.11
+identify==2.2.13
     # via pre-commit
 idna==3.2
     # via requests
 imagesize==1.2.0
     # via sphinx
-importlib-metadata==4.6.1
+importlib-metadata==4.8.1
     # via
     #   backports.entry-points-selectable
     #   click
@@ -187,11 +187,9 @@ importlib-metadata==4.6.1
     #   virtualenv
 ipdb==0.12.3
     # via -r requirements/local.in
-ipython==7.25.0
+ipython==7.27.0
     # via ipdb
-ipython-genutils==0.2.0
-    # via traitlets
-isort==5.9.2
+isort==5.9.3
     # via pylint
 itypes==1.2.0
     # via coreapi
@@ -207,13 +205,13 @@ lazy-object-proxy==1.6.0
     # via astroid
 markupsafe==2.0.1
     # via jinja2
-matplotlib-inline==0.1.2
+matplotlib-inline==0.1.3
     # via ipython
 mccabe==0.6.1
     # via
     #   flake8
     #   pylint
-more-itertools==8.8.0
+more-itertools==8.9.0
     # via pytest
 mypy==0.761
     # via
@@ -223,7 +221,7 @@ mypy-extensions==0.4.3
     # via mypy
 nodeenv==1.6.0
     # via pre-commit
-numpy==1.21.0
+numpy==1.21.2
     # via pandas
 openpyxl==3.0.7
     # via tablib
@@ -232,35 +230,37 @@ packaging==21.0
     #   pytest
     #   pytest-sugar
     #   sphinx
-pandas==1.3.0
+pandas==1.3.2
     # via -r requirements/./base.in
 parso==0.8.2
     # via jedi
 pathlib==1.0.1
     # via pyzotero
-pathspec==0.8.1
+pathspec==0.9.0
     # via black
-pep517==0.10.0
+pep517==0.11.0
     # via pip-tools
 pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pillow==8.3.1
+pillow==8.3.2
     # via
     #   -r requirements/./base.in
     #   wagtail
 pip-tools==6.2.0
     # via -r requirements/local.in
-platformdirs==2.0.2
-    # via virtualenv
-plotly==5.1.0
+platformdirs==2.3.0
+    # via
+    #   pylint
+    #   virtualenv
+plotly==5.3.1
     # via -r requirements/./base.in
 pluggy==0.13.1
     # via pytest
 pre-commit==2.1.0
     # via -r requirements/local.in
-prompt-toolkit==3.0.19
+prompt-toolkit==3.0.20
     # via ipython
 psycopg2==2.8.4
     # via -r requirements/local.in
@@ -274,13 +274,13 @@ pycparser==2.20
     # via cffi
 pyflakes==2.1.1
     # via flake8
-pygments==2.9.0
+pygments==2.10.0
     # via
     #   ipython
     #   sphinx
 pygraphviz==1.7
     # via -r requirements/local.in
-pylint==2.9.3
+pylint==2.10.2
     # via
     #   pylint-django
     #   pylint-plugin-utils
@@ -325,7 +325,7 @@ pytz==2021.1
     #   pyzotero
 pyyaml==5.4.1
     # via pre-commit
-pyzotero==1.4.24
+pyzotero==1.4.25
     # via -r requirements/./base.in
 ratelim==0.1.6
     # via geocoder
@@ -333,7 +333,7 @@ redis==3.4.1
     # via
     #   -r requirements/./base.in
     #   django-redis
-regex==2021.7.6
+regex==2021.8.28
     # via black
 requests==2.26.0
     # via
@@ -396,10 +396,11 @@ texttable==1.6.4
 toml==0.10.2
     # via
     #   black
-    #   pep517
     #   pre-commit
     #   pylint
-traitlets==5.0.5
+tomli==1.2.1
+    # via pep517
+traitlets==5.1.0
     # via
     #   ipython
     #   matplotlib-inline
@@ -408,7 +409,7 @@ typed-ast==1.4.3
     #   astroid
     #   black
     #   mypy
-typing-extensions==3.10.0.0
+typing-extensions==3.10.0.2
     # via
     #   astroid
     #   django-stubs
@@ -421,7 +422,7 @@ urllib3==1.26.6
     #   django-controlled-vocabulary
     #   elasticsearch
     #   requests
-virtualenv==20.5.0
+virtualenv==20.7.2
     # via pre-commit
 wagtail==2.13.4
     # via
@@ -429,7 +430,7 @@ wagtail==2.13.4
     #   django-kdl-wagtail
 wagtailmenus==3.0.2
     # via -r requirements/./base.in
-watchdog==2.1.3
+watchdog==2.1.5
     # via -r requirements/local.in
 wcwidth==0.2.5
     # via
@@ -439,7 +440,7 @@ webencodings==0.5.1
     # via html5lib
 werkzeug==1.0.0
     # via -r requirements/local.in
-wheel==0.36.2
+wheel==0.37.0
     # via pip-tools
 whitenoise==5.0.1
     # via -r requirements/./base.in
@@ -449,7 +450,7 @@ wrapt==1.12.1
     # via astroid
 xlrd==2.0.1
     # via tablib
-xlsxwriter==1.4.4
+xlsxwriter==1.4.5
     # via wagtail
 xlwt==1.3.0
     # via tablib

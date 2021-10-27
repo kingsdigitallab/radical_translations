@@ -419,7 +419,7 @@ class Resource(TimeStampedModel):
         return {
             "id": self.id,
             **self.title.to_dict(),
-            **date_to_dict(self.date),
+            **date_to_dict(self.get_date()),
             "subjects.topics": get_controlled_terms_str(self.get_subjects_topic()),
             "subjects.form_genre": get_controlled_terms_str(self.get_subjects_other()),
             "edition_enumeration": self.edition_enumeration,
@@ -713,7 +713,7 @@ class Contribution(TimeStampedModel, EditorialClassificationModel):
     )
 
     class Meta:
-        ordering = ["resource", "agent"]
+        ordering = ["resource", "agent", "roles__label"]
 
     def __str__(self) -> str:
         agent = str(self.agent)
@@ -887,7 +887,8 @@ class ResourceRelationship(TimeStampedModel, EditorialClassificationModel):
     def to_dict_value(self) -> str:
         return (
             f"{f'{csv_multi_sep} '.join([c.label for c in self.classification.all()])}"
-            f"{csv_field_sep}{self.relationship_type.label}{csv_field_sep}{self.id}"
+            f"{csv_field_sep}{self.relationship_type.label}"
+            f"{csv_field_sep}{self.related_to.id}"
             f"{csv_field_sep}{self.related_to}"
         )
 

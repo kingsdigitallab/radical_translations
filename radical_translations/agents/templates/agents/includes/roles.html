@@ -1,7 +1,19 @@
-{% if object.roles.count %}
+{% if objects %}
 {# Font Awesome file-certificate icon #}
 <span class="small-icon">{% include "svgs/solid/file-certificate.svg" %}</span>
-{% for role in object.roles.all|dictsort:'label' %}
+
+{% for contribution in objects %}
+|
+{% for classification in contribution.classification.all %}
+{# Font Awesome question icon #}
+<span class="small-icon {{ classification.label|lower }}">
+  <span class="sr-only">{{ classification.label }}</span>
+</span>
+{% endfor %}
+
+{% for role in contribution.roles.all|dictsort:'label' %}
 <span class="badge badge-warning">{{ role.label }}</span>
+{% endfor %}
+
 {% endfor %}
 {% endif %}
