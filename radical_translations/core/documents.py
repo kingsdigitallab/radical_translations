@@ -169,9 +169,7 @@ class ResourceDocument(Document):
     def _get_subjects(self, instance, prefix):
         subjects = [
             {"label": item.label}
-            for item in instance.subjects.filter(vocabulary__prefix__in=prefix).exclude(
-                label__iexact="radicalism"
-            )
+            for item in instance.subjects.filter(vocabulary__prefix__in=prefix)
         ]
 
         for relationship in instance.get_paratext():

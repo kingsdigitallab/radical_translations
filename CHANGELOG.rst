@@ -23,6 +23,7 @@ Changed
 * Rename the `Resource` export command to `export_resources` to make it consistent with
   the other export commands.
 * Store the exported data in the media directory.
+* Restore `radicalism` in subject filter.
 
 
 [1.2.4] - 2021-09-21
