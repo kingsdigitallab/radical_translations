@@ -89,6 +89,7 @@ class Resource(TimeStampedModel):
     """Resource reflecting a conceptual essence of a cataloging resource."""
 
     _is_paratext = models.BooleanField(default=False, editable=False)
+    is_private = models.BooleanField(default=False)
 
     title = models.ForeignKey(
         Title,

@@ -35,6 +35,8 @@ class ResourceDocument(Document):
     meta = fields.KeywordField()
     content = fields.TextField(attr="title.main_title", store=True)
 
+    is_private = fields.BooleanField()
+
     title = fields.TextField(
         analyzer=text_folding_analyzer,
         fields={

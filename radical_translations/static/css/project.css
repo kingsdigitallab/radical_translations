@@ -8616,7 +8616,8 @@ footer {
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 1;
-  padding: 0; }
+  padding: 0;
+  margin-bottom: 3px; }
   .tags::before {
     content: url("/static/fontawesome/svgs/solid/tags.svg");
     display: inline-block;

@@ -6,6 +6,12 @@
 <h1>{{ object.title }}</h1>
 
 <p class="metadata">
+{% if object.is_private %}
+<span class="metadata-block">
+  <span class="badge badge-secondary">Private</span>
+</span>
+{% endif %}
+
 {% with date=object.get_date %}
 {% if date %}
 <span class="metadata-block">

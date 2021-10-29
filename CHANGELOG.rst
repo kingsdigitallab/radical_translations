@@ -16,8 +16,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 
 Added
 ~~~~~
-* Add command to export and compress all the data.
-* Add `translated from` filter to the `Resource` search.
+* Command to export and compress all the data.
+* Filter `translated from` to the `Resource` search.
+* Toggle to mark `Resources` as private. Private resources are only visible to
+  authenticated users.
 
 Changed
 ~~~~~~~

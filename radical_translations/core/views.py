@@ -1,6 +1,7 @@
 import igraph as ig
 import plotly.graph_objects as go
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django_elasticsearch_dsl_drf.constants import (
@@ -40,12 +41,30 @@ ES_FUZZINESS_OPTIONS = settings.ES_FUZZINESS_OPTIONS
 class ResourceDetailView(DetailView):
     model = Resource
 
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+
+        if obj.is_private and not self.request.user.is_authenticated:
+            raise PermissionDenied("You don't have permissions to view this resource.")
+
+        return obj
+
 
 def resource_list(request):
     return render(request, "core/resource_list.html")
 
 
-class ResourceViewSet(DocumentViewSet):
+class BaseResourceViewSet(DocumentViewSet):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        if not self.request.user.is_authenticated:
+            queryset = queryset.filter("term", is_private=False)
+
+        return queryset
+
+
+class ResourceViewSet(BaseResourceViewSet):
     document = ResourceDocument
     serializer_class = ResourceDocumentSerializer
 
@@ -218,7 +237,7 @@ class ResourceViewSet(DocumentViewSet):
     }
 
 
-class SimpleResourceViewSet(DocumentViewSet):
+class SimpleResourceViewSet(BaseResourceViewSet):
     document = ResourceDocument
     serializer_class = SimpleResourceDocumentSerializer
 
