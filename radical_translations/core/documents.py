@@ -94,6 +94,8 @@ class ResourceDocument(Document):
         properties={"person": get_agent_field(options=copy_to_content)},
     )
 
+    translated_from = get_controlled_term_field(options=copy_to_content)
+
     class Index:
         name = "rt-resources"
 
@@ -387,3 +389,17 @@ class ResourceDocument(Document):
             return "yes"
 
         return "no"
+
+    def prepare_translated_from(self, instance):
+        languages = []
+
+        if instance.get_languages_source_text():
+            languages = [
+                {"label": language.label}
+                for language in instance.get_languages_source_text()
+            ]
+
+        if languages:
+            languages.append({"label": "any"})
+
+        return languages

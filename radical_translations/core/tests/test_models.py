@@ -225,13 +225,28 @@ class TestResource:
         entry_translation: Dict[str, Dict[str, str]],
     ):
         original = Resource.from_gsx_entry(entry_original)
-        assert original.get_sources_text() is None
+        assert original.get_source_texts() is None
 
         Resource.from_gsx_entry(entry_translation)
         translation = Resource.relationships_from_gsx_entry(entry_translation)
         source_texts = translation.get_source_texts()
         assert source_texts is not None
-        assert "Les ruines" in source_texts[0].title
+        assert "Les ruines" in source_texts[0].title.main_title
+
+    @pytest.mark.usefixtures("entry_original", "entry_translation")
+    def test_get_languages_source_text(
+        self,
+        entry_original: Dict[str, Dict[str, str]],
+        entry_translation: Dict[str, Dict[str, str]],
+    ):
+        original = Resource.from_gsx_entry(entry_original)
+        assert original.get_languages_source_text() is None
+
+        Resource.from_gsx_entry(entry_translation)
+        translation = Resource.relationships_from_gsx_entry(entry_translation)
+        languages = translation.get_languages_source_text()
+        assert languages is not None
+        assert languages[0].label == "French"
 
     @pytest.mark.usefixtures("entry_original", "entry_translation")
     def test_get_classification_edition(

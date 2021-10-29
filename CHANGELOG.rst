@@ -17,6 +17,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Add command to export and compress all the data.
+* Add `translated from` filter to the `Resource` search.
 
 Changed
 ~~~~~~~

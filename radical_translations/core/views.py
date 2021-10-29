@@ -108,6 +108,11 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "translated_from": {
+            "field": "translated_from.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
         "publication_place": {
             "field": "places.place.address.raw",
             "enabled": True,
@@ -154,6 +159,7 @@ class ResourceViewSet(DocumentViewSet):
         "year": "year",
         "form_genre": "form_genre.label.raw",
         "language": "languages.label.raw",
+        "translated_from": "translated_from.label.raw",
         "publication_place": "places.place.address.raw",
         "publication_country": "places.place.country.name.raw",
         "fictional_place_of_publication": "places.fictional_place.raw",

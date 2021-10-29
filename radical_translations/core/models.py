@@ -227,6 +227,17 @@ class Resource(TimeStampedModel):
 
         return list(set(resources))
 
+    def get_languages_source_text(self) -> Optional[List["ResourceLanguage"]]:
+        if self.is_original():
+            return None
+
+        languages = []
+
+        for resource in self.get_source_texts():
+            languages.extend([rl.language for rl in resource.languages.all()])
+
+        return list(set(languages))
+
     def get_classification_edition(self) -> str:
         return "; ".join([c.edition.label for c in self.classifications.all()])
 
