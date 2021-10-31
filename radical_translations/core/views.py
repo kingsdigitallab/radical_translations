@@ -38,23 +38,25 @@ ES_FACET_OPTIONS = settings.ES_FACET_OPTIONS
 ES_FUZZINESS_OPTIONS = settings.ES_FUZZINESS_OPTIONS
 
 
-class ResourceDetailView(DetailView):
-    model = Resource
-
+class BaseDetailView(DetailView):
     def get_object(self, queryset=None):
         obj = super().get_object()
 
         if obj.is_private and not self.request.user.is_authenticated:
-            raise PermissionDenied("You don't have permissions to view this resource.")
+            raise PermissionDenied("This item is not public yet.")
 
         return obj
+
+
+class ResourceDetailView(BaseDetailView):
+    model = Resource
 
 
 def resource_list(request):
     return render(request, "core/resource_list.html")
 
 
-class BaseResourceViewSet(DocumentViewSet):
+class BaseDocumentViewSet(DocumentViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
 
@@ -64,7 +66,7 @@ class BaseResourceViewSet(DocumentViewSet):
         return queryset
 
 
-class ResourceViewSet(BaseResourceViewSet):
+class ResourceViewSet(BaseDocumentViewSet):
     document = ResourceDocument
     serializer_class = ResourceDocumentSerializer
 
@@ -237,7 +239,7 @@ class ResourceViewSet(BaseResourceViewSet):
     }
 
 
-class SimpleResourceViewSet(BaseResourceViewSet):
+class SimpleResourceViewSet(BaseDocumentViewSet):
     document = ResourceDocument
     serializer_class = SimpleResourceDocumentSerializer
 

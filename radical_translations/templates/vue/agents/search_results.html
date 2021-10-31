@@ -4,6 +4,7 @@
   <li v-for="item in data.results" :key="item.id">
     <p class="title">
     <a v-bind:href="item.id">{[ item.name ]}</a>
+    <span class="badge badge-dark" v-if="item.is_private">Private</span>
     </p>
 
     <p class="metadata">

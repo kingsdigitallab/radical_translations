@@ -9,7 +9,7 @@
         v-html="item.highlight['title'][0]"></span>
       <span v-else>{[ item.title[0] ]}</span>
     </a>
-    <span class="badge badge-secondary" v-if="item.is_private">Private</span>
+    <span class="badge badge-dark" v-if="item.is_private">Private</span>
     <span class="badge badge-secondary" v-if="item.is_original">Source text</span>
     <span class="badge badge-secondary" v-if="item.is_translation">Translation</span>
     </p>

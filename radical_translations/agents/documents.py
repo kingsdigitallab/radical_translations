@@ -21,6 +21,8 @@ class AgentDocument(Document):
     meta = fields.KeywordField()
     content = fields.TextField(attr="name", store=True)
 
+    is_private = fields.BooleanField()
+
     agent_type = fields.KeywordField(**copy_to_content)
     name = fields.TextField(
         fields={

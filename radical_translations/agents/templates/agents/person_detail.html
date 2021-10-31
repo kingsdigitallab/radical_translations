@@ -22,6 +22,12 @@
 <!-- Tab panes -->
 <div class="tab-content">
   <p class="metadata">
+  {% if object.is_private %}
+  <span class="metadata-block">
+    <span class="badge badge-dark">Private</span>
+  </span>
+  {% endif %}
+
   <span class="metadata-block">
     {% include "agents/includes/noble.html" %}
     {% if object.gender == "m" %}
