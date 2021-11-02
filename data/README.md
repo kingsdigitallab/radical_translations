@@ -6,7 +6,7 @@ This data was exported from https://radicaltranslations.org/ on $DATE.
 
 The data is composed of several CSV files, one for each of the main data types
 (Agents, Events, Places and Resources) in the project. More information about the data
-model can be found in the [project documentation](https://radicaltranslations.org/about/tech-overview/).
+model can be found in the [project documentation](https://radical-translations.readthedocs.io/en/latest/technical-overview.html#data-model).
 
 ## License
 
