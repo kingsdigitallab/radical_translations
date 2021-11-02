@@ -134,7 +134,7 @@ new Vue({
   },
   methods: {
     getFacetDisplayName: function (name) {
-      return name.replaceAll("_", " ");
+      return name.replace(/_/g, " ");
     },
     clearFilters: function () {
       this.filters = [];

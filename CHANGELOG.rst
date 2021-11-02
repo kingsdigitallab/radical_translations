@@ -28,6 +28,7 @@ Changed
   the other export commands.
 * Store the exported data in the media directory.
 * Restore `radicalism` in subject filter.
+* Replace `replaceAll` with `replace(//g)` to increase browser support.
 
 
 [1.2.4] - 2021-09-21
