@@ -20,6 +20,7 @@ Added
 * Filter `translated from` to the `Resource` search.
 * Toggle to mark `Resources` as private. Private resources are only visible to
   authenticated users.
+* `README` file to the data export.
 
 Changed
 ~~~~~~~

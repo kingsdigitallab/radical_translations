@@ -1,5 +1,6 @@
+import datetime
 import os
-from shutil import make_archive
+import shutil
 
 from django.conf import settings
 from django.core.management import call_command
@@ -24,8 +25,18 @@ class Command(BaseCommand):
             call_command("export_places")
             call_command("export_resources")
 
+        self.stdout.write("Copying README file...")
+        readme = None
+
+        with open(os.path.join(settings.DATA_ROOT, "README.md"), "r") as f:
+            readme = f.read()
+            readme = readme.replace("$DATE", str(datetime.date.today()))
+
+        with open(os.path.join(settings.EXPORTS_ROOT, "README.md"), "w") as f:
+            f.write(readme)
+
         self.stdout.write("Compressing exported files ...", ending=" ")
-        make_archive(
+        shutil.make_archive(
             os.path.join(settings.MEDIA_ROOT, "data"),
             "zip",
             settings.EXPORTS_ROOT,

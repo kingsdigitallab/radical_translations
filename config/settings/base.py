@@ -189,6 +189,7 @@ MEDIA_URL = "/media/"
 if not os.path.exists(MEDIA_ROOT):
     os.makedirs(MEDIA_ROOT)
 
+DATA_ROOT = os.path.join(ROOT_DIR, "data")
 EXPORTS_ROOT = os.path.join(MEDIA_ROOT, "exports")
 
 if not os.path.exists(EXPORTS_ROOT):
