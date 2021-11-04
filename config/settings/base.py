@@ -341,6 +341,9 @@ KDL_WAGTAIL_ZOTERO_TOKEN = env("KDL_WAGTAIL_ZOTERO_TOKEN", default="")
 # https://github.com/encode/django-rest-framework
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 50,
     "ORDERING_PARAM": "ordering",

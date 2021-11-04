@@ -30,6 +30,10 @@ Changed
 * Restore `radicalism` in subject filter.
 * Replace `replaceAll` with `replace(//g)` to increase browser support.
 
+Fixed
+~~~~~
+* Display of private search results for non-authenticated users.
+
 
 [1.2.4] - 2021-09-21
 --------------------
