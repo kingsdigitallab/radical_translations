@@ -16,13 +16,23 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 
 Added
 ~~~~~
-* Add command to export and compress all the data.
+* Command to export and compress all the data.
+* Filter `translated from` to the `Resource` search.
+* Toggle to mark `Resources` as private. Private resources are only visible to
+  authenticated users.
+* `README` file to the data export.
 
 Changed
 ~~~~~~~
 * Rename the `Resource` export command to `export_resources` to make it consistent with
   the other export commands.
 * Store the exported data in the media directory.
+* Restore `radicalism` in subject filter.
+* Replace `replaceAll` with `replace(//g)` to increase browser support.
+
+Fixed
+~~~~~
+* Display of private search results for non-authenticated users.
 
 
 [1.2.4] - 2021-09-21

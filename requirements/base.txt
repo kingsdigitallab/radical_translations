@@ -12,15 +12,15 @@ beautifulsoup4==4.9.3
     # via wagtail
 bibtexparser==1.2.0
     # via pyzotero
-certifi==2021.5.30
+certifi==2021.10.8
     # via
     #   elasticsearch
     #   requests
-cffi==1.14.6
+cffi==1.15.0
     # via argon2-cffi
-charset-normalizer==2.0.4
+charset-normalizer==2.0.7
     # via requests
-click==8.0.1
+click==8.0.3
     # via geocoder
 convertdate==2.3.2
     # via -r requirements/base.in
@@ -28,7 +28,7 @@ coreapi==2.3.3
     # via -r requirements/base.in
 coreschema==0.0.4
     # via coreapi
-decorator==5.0.9
+decorator==5.1.0
     # via ratelim
 django==2.2.24
     # via
@@ -49,7 +49,7 @@ django-controlled-vocabulary==0.11
     # via -r requirements/base.in
 django-crispy-forms==1.8.1
     # via -r requirements/base.in
-django-elasticsearch-dsl==7.2.0
+django-elasticsearch-dsl==7.2.1
     # via
     #   -r requirements/base.in
     #   django-elasticsearch-dsl-drf
@@ -61,13 +61,13 @@ django-filter==2.4.0
     # via wagtail
 django-geonames-place==0.7.0
     # via -r requirements/base.in
-django-kdl-wagtail==0.9.7
+django-kdl-wagtail==0.10.2
     # via -r requirements/base.in
 django-model-utils==4.0.0
     # via
     #   -r requirements/base.in
     #   django-geonames-place
-django-modelcluster==5.1
+django-modelcluster==5.2
     # via wagtail
 django-nine==0.2.5
     # via django-elasticsearch-dsl-drf
@@ -88,7 +88,7 @@ draftjs-exporter==2.1.7
     # via wagtail
 edtf==4.0.1
     # via -r requirements/base.in
-elasticsearch==7.14.1
+elasticsearch==7.15.1
     # via
     #   django-elasticsearch-dsl-drf
     #   elasticsearch-dsl
@@ -99,7 +99,7 @@ elasticsearch-dsl==7.4.0
     #   django-elasticsearch-dsl-drf
 et-xmlfile==1.1.0
     # via openpyxl
-feedparser==5.2.1
+feedparser==6.0.8
     # via pyzotero
 future==0.18.2
     # via
@@ -109,27 +109,27 @@ geocoder==1.38.1
     # via django-geonames-place
 html5lib==1.1
     # via wagtail
-idna==3.2
+idna==3.3
     # via requests
+igraph==0.9.8
+    # via python-igraph
 importlib-metadata==4.8.1
     # via click
 itypes==1.2.0
     # via coreapi
-jinja2==3.0.1
+jinja2==3.0.2
     # via coreschema
 l18n==2020.6.1
     # via wagtail
 markupsafe==2.0.1
     # via jinja2
-numpy==1.21.2
+numpy==1.21.3
     # via pandas
-openpyxl==3.0.7
+openpyxl==3.0.9
     # via tablib
-pandas==1.3.2
+pandas==1.3.4
     # via -r requirements/base.in
-pathlib==1.0.1
-    # via pyzotero
-pillow==8.3.2
+pillow==8.4.0
     # via
     #   -r requirements/base.in
     #   wagtail
@@ -139,7 +139,7 @@ pycparser==2.20
     # via cffi
 pymeeus==0.5.11
     # via convertdate
-pyparsing==2.4.7
+pyparsing==3.0.4
     # via
     #   bibtexparser
     #   edtf
@@ -148,11 +148,11 @@ python-dateutil==2.8.2
     #   edtf
     #   elasticsearch-dsl
     #   pandas
-python-igraph==0.9.6
+python-igraph==0.9.8
     # via -r requirements/base.in
 python-slugify==4.0.0
     # via -r requirements/base.in
-pytz==2021.1
+pytz==2021.3
     # via
     #   convertdate
     #   django
@@ -160,7 +160,7 @@ pytz==2021.1
     #   l18n
     #   pandas
     #   pyzotero
-pyzotero==1.4.25
+pyzotero==1.4.26
     # via -r requirements/base.in
 ratelim==0.1.6
     # via geocoder
@@ -174,6 +174,8 @@ requests==2.26.0
     #   geocoder
     #   pyzotero
     #   wagtail
+sgmllib3k==1.0.0
+    # via feedparser
 six==1.16.0
     # via
     #   argon2-cffi
@@ -188,9 +190,9 @@ six==1.16.0
     #   python-dateutil
 soupsieve==2.2.1
     # via beautifulsoup4
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via django
-tablib[xls,xlsx]==3.0.0
+tablib[xls,xlsx]==3.1.0
     # via wagtail
 telepath==0.2
     # via wagtail
@@ -199,17 +201,17 @@ tenacity==8.0.1
 text-unidecode==1.3
     # via python-slugify
 texttable==1.6.4
-    # via python-igraph
+    # via igraph
 typing-extensions==3.10.0.2
     # via importlib-metadata
-uritemplate==3.0.1
+uritemplate==4.1.1
     # via coreapi
-urllib3==1.26.6
+urllib3==1.26.7
     # via
     #   django-controlled-vocabulary
     #   elasticsearch
     #   requests
-wagtail==2.13.4
+wagtail==2.13.5
     # via
     #   -r requirements/base.in
     #   django-kdl-wagtail
@@ -227,5 +229,5 @@ xlsxwriter==1.4.5
     # via wagtail
 xlwt==1.3.0
     # via tablib
-zipp==3.5.0
+zipp==3.6.0
     # via importlib-metadata

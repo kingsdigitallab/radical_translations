@@ -88,6 +88,10 @@ class Agent(PolymorphicModel, TimeStampedModel):
         return self.agent_type == "person"
 
     @property
+    def is_private(self) -> bool:
+        return self.contributed_to.exclude(resource__is_private=True).count() == 0
+
+    @property
     def title(self) -> str:
         return self.name
 

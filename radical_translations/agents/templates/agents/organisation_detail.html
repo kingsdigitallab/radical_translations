@@ -6,6 +6,11 @@
 <h1>{{ object.name }}</h1>
 
 <p class="metadata">
+{% if object.is_private %}
+<span class="metadata-block">
+  <span class="badge badge-dark">Private</span>
+</span>
+{% endif %}
 {% if object.based_near.count %}
 <span class="metadata-block">
   {% for place in object.based_near.all %}

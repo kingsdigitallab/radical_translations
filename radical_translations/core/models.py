@@ -89,6 +89,7 @@ class Resource(TimeStampedModel):
     """Resource reflecting a conceptual essence of a cataloging resource."""
 
     _is_paratext = models.BooleanField(default=False, editable=False)
+    is_private = models.BooleanField(default=False)
 
     title = models.ForeignKey(
         Title,
@@ -202,10 +203,7 @@ class Resource(TimeStampedModel):
 
         authors = []
 
-        for rel in self.relationships.filter(
-            relationship_type__label__in=["derivative of", "translation of"]
-        ):
-            resource = rel.related_to
+        for resource in self.get_source_texts():
             authors.extend(
                 [
                     c.agent
@@ -216,6 +214,30 @@ class Resource(TimeStampedModel):
             )
 
         return list(set(authors))
+
+    def get_source_texts(self) -> Optional[List["Resource"]]:
+        if self.is_original():
+            return None
+
+        resources = []
+
+        for rel in self.relationships.filter(
+            relationship_type__label__in=["derivative of", "translation of"]
+        ):
+            resources.append(rel.related_to)
+
+        return list(set(resources))
+
+    def get_languages_source_text(self) -> Optional[List["ResourceLanguage"]]:
+        if self.is_original():
+            return None
+
+        languages = []
+
+        for resource in self.get_source_texts():
+            languages.extend([rl.language for rl in resource.languages.all()])
+
+        return list(set(languages))
 
     def get_classification_edition(self) -> str:
         return "; ".join([c.edition.label for c in self.classifications.all()])

@@ -35,6 +35,8 @@ class ResourceDocument(Document):
     meta = fields.KeywordField()
     content = fields.TextField(attr="title.main_title", store=True)
 
+    is_private = fields.BooleanField()
+
     title = fields.TextField(
         analyzer=text_folding_analyzer,
         fields={
@@ -93,6 +95,8 @@ class ResourceDocument(Document):
         attr="get_authors_source_text",
         properties={"person": get_agent_field(options=copy_to_content)},
     )
+
+    translated_from = get_controlled_term_field(options=copy_to_content)
 
     class Index:
         name = "rt-resources"
@@ -169,9 +173,7 @@ class ResourceDocument(Document):
     def _get_subjects(self, instance, prefix):
         subjects = [
             {"label": item.label}
-            for item in instance.subjects.filter(vocabulary__prefix__in=prefix).exclude(
-                label__iexact="radicalism"
-            )
+            for item in instance.subjects.filter(vocabulary__prefix__in=prefix)
         ]
 
         for relationship in instance.get_paratext():
@@ -389,3 +391,17 @@ class ResourceDocument(Document):
             return "yes"
 
         return "no"
+
+    def prepare_translated_from(self, instance):
+        languages = []
+
+        if instance.get_languages_source_text():
+            languages = [
+                {"label": language.label}
+                for language in instance.get_languages_source_text()
+            ]
+
+        if languages:
+            languages.append({"label": "any"})
+
+        return languages

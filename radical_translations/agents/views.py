@@ -2,7 +2,6 @@ import igraph as ig
 import plotly.graph_objects as go
 from django.conf import settings
 from django.shortcuts import render
-from django.views.generic.detail import DetailView
 from django_elasticsearch_dsl_drf.constants import (
     SUGGESTER_COMPLETION,
     SUGGESTER_PHRASE,
@@ -16,19 +15,19 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     OrderingFilterBackend,
     SuggesterFilterBackend,
 )
-from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
 from plotly.offline import plot
 
 from radical_translations.agents.documents import AgentDocument
 from radical_translations.agents.models import Agent, Organisation, Person
 from radical_translations.agents.serializers import AgentDocumentSerializer
+from radical_translations.core.views import BaseDetailView, BaseDocumentViewSet
 from radical_translations.utils.search import PageNumberPagination
 
 ES_FACET_OPTIONS = settings.ES_FACET_OPTIONS
 ES_FUZZINESS_OPTIONS = settings.ES_FUZZINESS_OPTIONS
 
 
-class AgentDetailView(DetailView):
+class AgentDetailView(BaseDetailView):
     model = Agent
 
 
@@ -36,7 +35,7 @@ def agent_list(request):
     return render(request, "agents/agent_list.html")
 
 
-class AgentViewSet(DocumentViewSet):
+class AgentViewSet(BaseDocumentViewSet):
     document = AgentDocument
     serializer_class = AgentDocumentSerializer
 

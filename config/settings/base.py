@@ -189,6 +189,7 @@ MEDIA_URL = "/media/"
 if not os.path.exists(MEDIA_ROOT):
     os.makedirs(MEDIA_ROOT)
 
+DATA_ROOT = os.path.join(ROOT_DIR, "data")
 EXPORTS_ROOT = os.path.join(MEDIA_ROOT, "exports")
 
 if not os.path.exists(EXPORTS_ROOT):
@@ -340,6 +341,9 @@ KDL_WAGTAIL_ZOTERO_TOKEN = env("KDL_WAGTAIL_ZOTERO_TOKEN", default="")
 # https://github.com/encode/django-rest-framework
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 50,
     "ORDERING_PARAM": "ordering",

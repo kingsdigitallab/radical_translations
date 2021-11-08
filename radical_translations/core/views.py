@@ -1,6 +1,7 @@
 import igraph as ig
 import plotly.graph_objects as go
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django_elasticsearch_dsl_drf.constants import (
@@ -37,7 +38,17 @@ ES_FACET_OPTIONS = settings.ES_FACET_OPTIONS
 ES_FUZZINESS_OPTIONS = settings.ES_FUZZINESS_OPTIONS
 
 
-class ResourceDetailView(DetailView):
+class BaseDetailView(DetailView):
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+
+        if obj.is_private and not self.request.user.is_authenticated:
+            raise PermissionDenied("This item is not public yet.")
+
+        return obj
+
+
+class ResourceDetailView(BaseDetailView):
     model = Resource
 
 
@@ -45,7 +56,17 @@ def resource_list(request):
     return render(request, "core/resource_list.html")
 
 
-class ResourceViewSet(DocumentViewSet):
+class BaseDocumentViewSet(DocumentViewSet):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        if not self.request.user.is_authenticated:
+            queryset = queryset.filter("term", is_private=False)
+
+        return queryset
+
+
+class ResourceViewSet(BaseDocumentViewSet):
     document = ResourceDocument
     serializer_class = ResourceDocumentSerializer
 
@@ -108,6 +129,11 @@ class ResourceViewSet(DocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "translated_from": {
+            "field": "translated_from.label.raw",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
         "publication_place": {
             "field": "places.place.address.raw",
             "enabled": True,
@@ -154,6 +180,7 @@ class ResourceViewSet(DocumentViewSet):
         "year": "year",
         "form_genre": "form_genre.label.raw",
         "language": "languages.label.raw",
+        "translated_from": "translated_from.label.raw",
         "publication_place": "places.place.address.raw",
         "publication_country": "places.place.country.name.raw",
         "fictional_place_of_publication": "places.fictional_place.raw",
@@ -212,7 +239,7 @@ class ResourceViewSet(DocumentViewSet):
     }
 
 
-class SimpleResourceViewSet(DocumentViewSet):
+class SimpleResourceViewSet(BaseDocumentViewSet):
     document = ResourceDocument
     serializer_class = SimpleResourceDocumentSerializer
 

@@ -1,22 +1,20 @@
 {% if object.contributed_to.count %}
 <h3>Contributions</h3>
-{{ object.contributed_to.all }}
-<hr>
 {% regroup object.contributed_to.all by resource as contributions %}
-{{ contributions }}
 <ol>
-    {% for contribution in contributions %}
-    <li>
-        {% with resource=contribution.grouper %}
-        <a href="{% url 'resource-detail' resource.pk %}">{{ resource.title }}</a>
+  {% for contribution in contributions %}
+  <li>
+    {% with resource=contribution.grouper %}
+    <a href="{% url 'resource-detail' resource.pk %}">{{ resource.title }}</a>
 
-        {% include "core/includes/type.html" %}
-        {% endwith %}
+    {% if resource.is_private %}
+    <span class="badge badge-dark">private</span>
+    {% endif %}
+    {% include "core/includes/type.html" %}
+    {% endwith %}
 
-        {{ contribution.list }}
-
-        {% include "agents/includes/roles.html" with objects=contribution.list %}
-    </li>
-    {% endfor %}
+    {% include "agents/includes/roles.html" with objects=contribution.list %}
+  </li>
+  {% endfor %}
 </ol>
 {% endif %}
