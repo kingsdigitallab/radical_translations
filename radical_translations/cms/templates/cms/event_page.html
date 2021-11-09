@@ -1,0 +1,27 @@
+{% extends "kdl_wagtail_core/base_rich_text_page.html" %}
+{% load kdl_wagtail_core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block page-header %}
+<div class="page-header {% get_page_label page %}">
+  <h1>{{ page.title }}</h1>
+  <p class="metadata">
+  <span class="metadata-block">
+    {{ page.start_at }}
+    {% if page.end_at %} – {{ page.end_at }}{% endif %}
+  </span>
+  {% if page.event_url %}
+  <span class="metadata-block">
+    <a href="{{ page.event_url }}">{{ page.event_url }}</a>
+  </span>
+  {% endif %}
+  </p>
+
+  {% if page.location %}
+  <p class="metadata">{{ page.location }}</p>
+  {% endif %}
+
+  {% if page.introduction %}
+  <p class="intro">{{ page.introduction }}</p>
+  {% endif %}
+</div>
+{% endblock page-header %}

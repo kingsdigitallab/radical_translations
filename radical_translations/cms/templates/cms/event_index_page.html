@@ -1,0 +1,12 @@
+{% extends "kdl_wagtail_core/base_index_page.html" %}
+{% block title %}Events{% endblock %}
+
+{% block page-children %}
+<h2>Upcoming events</h2>
+{% include "kdl_wagtail_core/includes/page_children.html" with children=future %}
+
+<hr>
+
+<h2>Past events</h2>
+{% include "kdl_wagtail_core/includes/page_children.html" with children=past %}
+{% endblock page-children %}
