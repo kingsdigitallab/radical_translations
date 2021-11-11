@@ -3,22 +3,23 @@
 
 {% block page-header %}
 <div class="page-header {% get_page_label page %}">
+  <p class="metadata">
+    <span class="metadata-block date event">
+      {{ page.start_at }}
+      {% if page.end_at %} – {{ page.end_at }}{% endif %}
+    </span>
+  </p>
   <h1>{{ page.title }}</h1>
   <p class="metadata">
-  <span class="metadata-block date event">
-    {{ page.start_at }}
-    {% if page.end_at %} – {{ page.end_at }}{% endif %}
-  </span>
-  {% if page.event_url %}
-  <span class="metadata-block">
-    <a href="{{ page.event_url }}">{{ page.event_url }}</a>
-  </span>
-  {% endif %}
+    {% if page.location %}
+    <span class="metadata-block event place">{{ page.location }}</span>
+    {% endif %}
+    {% if page.event_url %}
+    <span class="metadata-block event">
+      <a href="{{ page.event_url }}" class="btn btn-sm btn-primary">Reserve your place</a>
+    </span>
+    {% endif %}
   </p>
-
-  {% if page.location %}
-  <p class="metadata">{{ page.location }}</p>
-  {% endif %}
   
 </div>
 {% endblock page-header %}

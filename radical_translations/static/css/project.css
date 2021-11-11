@@ -8587,6 +8587,24 @@ footer {
 .metadata-block .badge {
   margin-right: 4px; }
 
+.metadata-block.event {
+  display: block;
+  margin: 8px 0;
+  margin: .5rem 0; }
+  .metadata-block.event::after {
+    content: ""; }
+  .metadata-block.event.place::before {
+    content: url("/static/fontawesome/svgs/solid/map-marker-alt.svg");
+    display: inline-block;
+    margin-right: 4px;
+    width: 12px; }
+  .metadata-block.event.date {
+    font-size: 1.5em;
+    font-variation-settings: "wdth" 100,"wght" 700;
+    font-weight: 700; }
+    .metadata-block.event.date::before {
+      width: 24px; }
+
 .small-icon,
 .small-icon svg {
   fill: #808080;
