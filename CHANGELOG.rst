@@ -35,6 +35,10 @@ Fixed
 ~~~~~
 * Display of private search results for non-authenticated users.
 
+Removed
+~~~~~~~
+* Radical markers, they are not required by the research team anymore.
+
 
 [1.2.4] - 2021-09-21
 --------------------
