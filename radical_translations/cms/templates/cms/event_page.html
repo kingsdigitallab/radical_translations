@@ -5,7 +5,7 @@
 <div class="page-header {% get_page_label page %}">
   <h1>{{ page.title }}</h1>
   <p class="metadata">
-  <span class="metadata-block">
+  <span class="metadata-block date event">
     {{ page.start_at }}
     {% if page.end_at %} – {{ page.end_at }}{% endif %}
   </span>
@@ -19,9 +19,6 @@
   {% if page.location %}
   <p class="metadata">{{ page.location }}</p>
   {% endif %}
-
-  {% if page.introduction %}
-  <p class="intro">{{ page.introduction }}</p>
-  {% endif %}
+  
 </div>
 {% endblock page-header %}
