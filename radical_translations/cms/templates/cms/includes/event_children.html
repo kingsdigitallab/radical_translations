@@ -1,0 +1,71 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="children">
+    {% if children %}
+    <ul>
+        {% for child in children %}
+        <li class="child-page{% if child.image %} with-image{% endif %}">
+            {% if child.image %}
+            <div class="child-page-image">
+                <a href="{% pageurl child %}">
+                    {% image child.image max-600x600 %}
+                </a>
+            </div>
+            {% endif %}
+
+            <div class="child-content">
+                <h3 class="child-page-title">
+                    <p class="metadata">
+                        <span class="metadata-block date event">
+                            {{ child.start_at }}
+                            {% if child.end_at %} – {{ child.end_at }}{% endif %}
+                        </span>
+                        {% if child.location %}
+                        <span class="metadata-block event place">{{ child.location }}</span>
+                        {% endif %}
+                    </p>
+                    <a href="{% pageurl child %}">
+                        {{ child.title }}
+                    </a>
+                </h3>
+
+                {% if child.author %}
+                {% include "cms/includes/metadata.html" with page=child %}
+                {% endif %}
+
+                {% if child.search_description %}
+                <p class="child-page-introduction">
+                    <a href="{% pageurl child %}">
+                        {{ child.search_description }}
+                    </a>
+                </p>
+                {% endif %}
+
+                {% include "cms/includes/tags.html" with page=child %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% include "kdl_wagtail_core/includes/pagination.html" with items=children %}
+
+    {% else %}
+    <p>No live pages found!</p>
+    {% endif %}
+</div>
+
+
+{% comment %}
+
+{% extends "kdl_wagtail_core/base_index_page.html" %}
+{% block title %}Events{% endblock %}
+
+{% block page-children %}
+<h2>Upcoming events</h2>
+{% include "kdl_wagtail_core/includes/page_children.html" with children=future %}
+
+<h2>Past events</h2>
+{% include "kdl_wagtail_core/includes/page_children.html" with children=past %}
+{% endblock page-children %}
+
+{% endcomment %}
