@@ -21,6 +21,7 @@ Added
 * Toggle to mark `Resources` as private. Private resources are only visible to
   authenticated users.
 * `README` file to the data export.
+* Event page type.
 
 Changed
 ~~~~~~~

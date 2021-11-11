@@ -3,6 +3,7 @@ from django.db import models
 from django.http import HttpRequest
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils import timezone
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
@@ -162,6 +163,7 @@ class HomePage(BasePage):
         "kdl_wagtail_zotero.BibliographyIndexPage",
         "BlogIndexPage",
         "kdl_wagtail_core.ContactUsPage",
+        "EventIndexPage",
         "kdl_wagtail_core.IndexPage",
         "kdl_wagtail_people.PeopleIndexPage",
         "kdl_wagtail_core.RichTextPage",
@@ -194,3 +196,45 @@ class HomePage(BasePage):
         context["events"] = Event.objects.filter(classification__label="comparative")
 
         return context
+
+
+class EventIndexPage(BaseIndexPage):
+    subpage_types = ["EventPage"]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context["future"] = self.future()
+        context["past"] = self.past()
+
+        return context
+
+    def future(self) -> PageQuerySet:
+        return self.children().filter(start_at__gte=timezone.now())
+
+    def children(self) -> PageQuerySet:
+        return EventPage.objects.descendant_of(self).live().order_by("-start_at")
+
+    def past(self) -> PageQuerySet:
+        return self.children().filter(start_at__lt=timezone.now())
+
+
+class EventPage(BaseRichTextPage):
+    start_at = models.DateTimeField()
+    end_at = models.DateTimeField(blank=True, null=True)
+    location = models.TextField(blank=True)
+    event_url = models.URLField(blank=True, null=True)
+
+    parent_page_types = [EventIndexPage]
+    subpage_types = []
+
+    @property
+    def index(self) -> IndexPage:
+        return self.get_ancestors().type(IndexPage).last()
+
+    content_panels = BasePage.content_panels + [
+        FieldPanel("start_at"),
+        FieldPanel("end_at"),
+        FieldPanel("location"),
+        FieldPanel("event_url"),
+        FieldPanel("body"),
+    ]
