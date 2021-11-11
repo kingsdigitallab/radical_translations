@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+
+[1.3.0] - 2021-11-11
+--------------------
+
 Added
 ~~~~~
 * Command to export and compress all the data.
@@ -34,6 +38,10 @@ Changed
 Fixed
 ~~~~~
 * Display of private search results for non-authenticated users.
+
+Removed
+~~~~~~~
+* Radical markers, they are not required by the research team anymore.
 
 
 [1.2.4] - 2021-09-21
