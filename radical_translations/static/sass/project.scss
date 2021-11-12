@@ -1258,8 +1258,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-.radical,
-.radicalism,
+// .radical,
+// .radicalism,
 .uncertain,
 .uncertainty,
 .unknown {
@@ -1271,14 +1271,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-.radical,
-.radicalism {
-  &::before {
-    content: url('/static/images/phrygian-cap.svg');
-    height: 16px;
-    width: 16px;
-  }
-}
+// .radical,
+// .radicalism {
+//   &::before {
+//     content: url('/static/images/phrygian-cap.svg');
+//     height: 16px;
+//     width: 16px;
+//   }
+// }
 
 .uncertain,
 .uncertainty,
