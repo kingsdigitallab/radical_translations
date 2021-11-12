@@ -1,0 +1,16 @@
+{% load kdl_wagtail_core_tags wagtailcore_tags %}
+
+{% if page.get_siblings.live %}
+<div class="col-md-3">
+    <nav class="sidebar">
+        <h4>Also in this section</h4>
+        <ul>
+            {% for child in page.get_siblings.live.specific %}
+            <li>
+                <a href="{% pageurl child %}">{{ child.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>
+{% endif %}
