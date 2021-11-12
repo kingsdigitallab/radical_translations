@@ -1,46 +1,48 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="children">
-    {% if children %}
-    <ul>
-        {% for child in children %}
-        <li class="child-page{% if child.image %} with-image{% endif %}">
-            {% if child.image %}
-            <div class="child-page-image">
-                <a href="{% pageurl child %}">
-                    {% image child.image max-600x600 %}
-                </a>
-            </div>
-            {% endif %}
+<div class="children{% if class %} {{ class }}{% endif %}">
+  {% if children %}
+  <ul>
+    {% for child in children %}
+    <li class="child-page{% if child.image %} with-image{% endif %}">
+      {% if child.image %}
+      <div class="child-page-image">
+        <a href="{% pageurl child %}">
+          {% image child.image max-600x600 %}
+        </a>
+      </div>
+      {% endif %}
 
-            <div class="child-content">
-                <h2 class="child-page-title">
-                    <a href="{% pageurl child %}">
-                        {{ child.title }}
-                    </a>
-                </h2>
+      <div class="child-content">
+        {% block title %}
+        <h2 class="child-page-title">
+          <a href="{% pageurl child %}">
+            {{ child.title }}
+          </a>
+        </h2>
+        {% endblock title %}
 
-                {% if child.author %}
-                {% include "cms/includes/metadata.html" with page=child %}
-                {% endif %}
+        {% if child.author %}
+        {% include "cms/includes/metadata.html" with page=child %}
+        {% endif %}
 
-                {% if child.search_description %}
-                <p class="child-page-introduction">
-                    <a href="{% pageurl child %}">
-                        {{ child.search_description }}
-                    </a>
-                </p>
-                {% endif %}
+        {% if child.search_description %}
+        <p class="child-page-introduction">
+        <a href="{% pageurl child %}">
+          {{ child.search_description }}
+        </a>
+        </p>
+        {% endif %}
 
-                {% include "cms/includes/tags.html" with page=child %}
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+        {% include "cms/includes/tags.html" with page=child %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 
-    {% include "kdl_wagtail_core/includes/pagination.html" with items=children %}
+  {% include "kdl_wagtail_core/includes/pagination.html" with items=children %}
 
-    {% else %}
-    <p>No live pages found!</p>
-    {% endif %}
+  {% else %}
+  <p>No live pages found!</p>
+  {% endif %}
 </div>
