@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="children">
+<div class="children{% if class %} {{ class }}{% endif %}">
     {% if children %}
     <ul>
         {% for child in children %}
