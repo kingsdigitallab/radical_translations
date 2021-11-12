@@ -8552,6 +8552,21 @@ footer {
   height: auto;
   max-width: 100%; }
 
+.inactive,
+.inactive * {
+  color: #808080 !important;
+  fill: #808080 !important; }
+  .inactive ::after,
+  .inactive ::before,
+  .inactive svg,
+  .inactive * ::after,
+  .inactive * ::before,
+  .inactive * svg {
+    -webkit-filter: grayscale(1) !important;
+            filter: grayscale(1) !important;
+    -webkit-filter: opacity(0.5) !important;
+            filter: opacity(0.5) !important; }
+
 .metadata {
   font-family: 'Oswald', sans-serif;
   font-size: 18px;

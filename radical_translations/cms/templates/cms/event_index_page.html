@@ -3,10 +3,8 @@
 
 {% block page-children %}
 <h2>Upcoming events</h2>
-{% include "kdl_wagtail_core/includes/page_children.html" with children=future %}
+{% include "cms/includes/event_children.html" with children=future %}
 
-<hr>
-
-<h2>Past events</h2>
-{% include "kdl_wagtail_core/includes/page_children.html" with children=past %}
+<h2 class="inactive">Past events</h2>
+{% include "cms/includes/event_children.html" with children=past class="inactive" %}
 {% endblock page-children %}

@@ -122,6 +122,19 @@ footer {
   }
 }
 
+.inactive,
+.inactive * {
+  color: $medium-gray !important;
+  fill: $medium-gray !important;
+
+  ::after,
+  ::before,
+  svg {
+    filter: grayscale(1) !important;
+    filter: opacity(.5) !important;
+  }
+}
+
 .metadata {
   font-family: 'Oswald', sans-serif;
   font-size: 1.125rem;
