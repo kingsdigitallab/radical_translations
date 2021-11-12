@@ -1,0 +1,14 @@
+{% load kdl_wagtail_core_tags core_tags wagtailcore_tags %}
+
+<nav class="sidebar">
+    {% if page.get_children.live %}
+    <h4>In this section</h4>
+    <ul>
+        {% for child in page.get_children.live.specific %}
+        <li>
+            <a href="{% pageurl child %}">{{ child.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</nav>
