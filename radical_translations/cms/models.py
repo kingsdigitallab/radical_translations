@@ -209,13 +209,13 @@ class EventIndexPage(BaseIndexPage):
         return context
 
     def future(self) -> PageQuerySet:
-        return self.children().filter(start_at__gte=timezone.now())
+        return self.children().filter(start_at__gte=timezone.now()).order_by("start_at")
 
     def children(self) -> PageQuerySet:
-        return EventPage.objects.descendant_of(self).live().order_by("-start_at")
+        return EventPage.objects.descendant_of(self).live()
 
     def past(self) -> PageQuerySet:
-        return self.children().filter(start_at__lt=timezone.now())
+        return self.children().filter(start_at__lt=timezone.now()).order_by("-start_at")
 
 
 class EventPage(BaseRichTextPage):
