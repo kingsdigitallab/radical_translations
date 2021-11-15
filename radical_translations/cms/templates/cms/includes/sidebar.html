@@ -1,10 +1,11 @@
 {% load kdl_wagtail_core_tags wagtailcore_tags %}
 
+{% if page.depth > 3 %}
 {% with siblings=page.get_siblings.live %}
 {% if siblings %}
 <div class="col-md-3">
   <nav class="sidebar">
-    <h4>Also in this section</h4>
+    <h4>{{ page.get_parent.title }}</h4>
     <ul>
       {% for child in siblings %}
       <li>
@@ -16,3 +17,4 @@
 </div>
 {% endif %}
 {% endwith %}
+{% endif %}
