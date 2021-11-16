@@ -1090,7 +1090,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .with-image {
     grid-gap: 1rem;
     grid-template-columns: 200px auto;
-    grid-template-row: 1;
+    grid-template-rows: 1;
   }
 }
 
@@ -1591,9 +1591,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     fill: transparent !important;
   }
 
-  .egypt {
-  }
-
   .france {
     fill: #6f51b9;
     stroke: #6f51b9;
@@ -1744,7 +1741,7 @@ $viz-resource-colour: $old-yellow;
 
   .event,
   .resource {
-    display: inline-block;
+    // display: inline-block;
     float: left;
     height: $viz-size;
     margin: 0.5px;
