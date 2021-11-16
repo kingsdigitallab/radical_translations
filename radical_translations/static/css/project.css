@@ -8835,6 +8835,15 @@ nav,
 .pagination .page-link {
   border-radius: 0 !important; }
 
+.pagination li {
+  display: inline-block; }
+  .pagination li.disabled {
+    color: #808080; }
+  .pagination li .previous::before {
+    content: "<< "; }
+  .pagination li .next::after {
+    content: " >>"; }
+
 .nav-tabs {
   border-bottom: 5px solid #c3c1a8;
   margin-bottom: 16px;

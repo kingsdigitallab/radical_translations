@@ -498,6 +498,26 @@ nav,
   .page-link {
     border-radius: 0 !important;
   }
+
+  li {
+    display: inline-block;
+
+    &.disabled {
+      color: $medium-gray;
+    }
+
+    .previous {
+      &::before {
+        content: "<< ";
+      }
+    }
+
+    .next {
+      &::after {
+        content: " >>";
+      }
+    }
+  }
 }
 
 // Tabs
