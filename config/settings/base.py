@@ -311,7 +311,6 @@ HOMEPAGE_SECTION_BLOCK_COUNTS = {"min_number": 4, "max_num": 4}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-LOAD_ANALYTICS = env.bool("LOAD_ANALYTICS", default=False)
 
 # django-controlled-vocabulary
 # ------------------------------------------------------------------------------

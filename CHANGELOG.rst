@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Removed
+~~~~~~~
+* Cloudflare analytics integration.
+
 
 [1.3.1] - 2021-11-18
 --------------------
