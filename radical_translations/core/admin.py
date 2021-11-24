@@ -104,6 +104,7 @@ class ResourceAdmin(admin.ModelAdmin):
         "get_place_names",
     ]
     list_filter = [
+        "is_private",
         ("relationships__relationship_type", admin.RelatedOnlyFieldListFilter),
         ("classifications__edition", admin.RelatedOnlyFieldListFilter),
         ("subjects", admin.RelatedOnlyFieldListFilter),
