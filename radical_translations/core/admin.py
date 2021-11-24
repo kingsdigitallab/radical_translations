@@ -95,6 +95,7 @@ class ResourceAdmin(admin.ModelAdmin):
     list_display = [
         "title",
         "date",
+        "is_private",
         "is_original",
         "is_paratext",
         "get_authors",
