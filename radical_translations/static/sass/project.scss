@@ -1,6 +1,6 @@
-@import 'custom_bootstrap_vars';
-@import 'bootstrap';
-@import 'fonts';
+@import "custom_bootstrap_vars";
+@import "bootstrap";
+@import "fonts";
 
 // project specific CSS goes here
 
@@ -41,9 +41,9 @@ a {
 
 body {
   font-family: Lora, serif;
-  font-variation-settings: 'wdth' 100, 'wght' 400;
+  font-variation-settings: "wdth" 100, "wght" 400;
 
-  background: url('../images/rt-bg.svg') no-repeat top left
+  background: url("../images/rt-bg.svg") no-repeat top left
     lighten($old-yellow, 30%);
   background-size: 135% auto;
   overflow-wrap: break-word;
@@ -51,22 +51,22 @@ body {
 
 .badge {
   border-radius: 0;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 0.9375em;
   padding: 0.125em 0.4em 0.25em;
 }
 
 .btn {
   border-radius: 0;
-  font-family: 'Oswald', sans-serif;
-  font-variation-settings: 'wght' 700;
+  font-family: "Oswald", sans-serif;
+  font-variation-settings: "wght" 700;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 b,
 strong {
-  font-variation-settings: 'wdth' 100, 'wght' 700;
+  font-variation-settings: "wdth" 100, "wght" 700;
 }
 
 .close {
@@ -131,12 +131,12 @@ footer {
   ::before,
   svg {
     filter: grayscale(1) !important;
-    filter: opacity(.5) !important;
+    filter: opacity(0.5) !important;
   }
 }
 
 .metadata {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1.125rem;
   margin: 0;
   padding: 0;
@@ -154,19 +154,19 @@ footer {
 
   .author {
     &::before {
-      content: url('/static/fontawesome/svgs/solid/pencil-alt.svg');
+      content: url("/static/fontawesome/svgs/solid/pencil-alt.svg");
     }
   }
 
   .date {
     &::before {
-      content: url('/static/fontawesome/svgs/solid/calendar.svg');
+      content: url("/static/fontawesome/svgs/solid/calendar.svg");
     }
   }
 
   .form {
     &::before {
-      content: url('/static/fontawesome/svgs/solid/mail-bulk.svg');
+      content: url("/static/fontawesome/svgs/solid/mail-bulk.svg");
       height: 16px;
       width: 16px;
     }
@@ -174,7 +174,7 @@ footer {
 
   .topic {
     &::before {
-      content: url('/static/fontawesome/svgs/solid/tags.svg');
+      content: url("/static/fontawesome/svgs/solid/tags.svg");
       height: 16px;
       width: 16px;
     }
@@ -195,7 +195,7 @@ footer {
 
   &.event {
     display: block;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
 
     &::after {
       content: "";
@@ -203,7 +203,7 @@ footer {
 
     &.place {
       &::before {
-        content: url('/static/fontawesome/svgs/solid/map-marker-alt.svg');
+        content: url("/static/fontawesome/svgs/solid/map-marker-alt.svg");
         display: inline-block;
         margin-right: 4px;
         width: 12px;
@@ -212,9 +212,9 @@ footer {
 
     &.date {
       font-size: 1.5em;
-      font-variation-settings: "wdth" 100,"wght" 700;
+      font-variation-settings: "wdth" 100, "wght" 700;
       font-weight: 700;
-      
+
       &::before {
         width: 24px;
       }
@@ -254,14 +254,14 @@ footer {
 
 .tags {
   display: block;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 0.75rem;
   line-height: 1;
   padding: 0;
   margin-bottom: 3px;
 
   &::before {
-    content: url('/static/fontawesome/svgs/solid/tags.svg');
+    content: url("/static/fontawesome/svgs/solid/tags.svg");
     display: inline-block;
     height: 16px;
     margin-right: 0.25rem;
@@ -293,7 +293,7 @@ h5,
 h6,
 .card-header {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 100, 'wght' 700;
+  font-variation-settings: "wdth" 100, "wght" 700;
   font-weight: 700;
 }
 
@@ -304,7 +304,7 @@ h6,
 .title {
   font-family: Oswald, sans-serif;
   font-size: 1.25rem;
-  font-variation-settings: 'wdth' 100, 'wght' 700;
+  font-variation-settings: "wdth" 100, "wght" 700;
 }
 
 .site-title {
@@ -404,7 +404,7 @@ h6,
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 100, 'wght' 400;
+  font-variation-settings: "wdth" 100, "wght" 400;
 
   a {
     text-decoration: none;
@@ -434,9 +434,9 @@ nav,
 
 .brand {
   display: block;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 4rem;
-  font-variation-settings: 'wdth' 100, 'wght' 600;
+  font-variation-settings: "wdth" 100, "wght" 600;
   line-height: 1;
   margin: 0;
   min-width: 280px;
@@ -612,7 +612,7 @@ nav,
     display: inline-block;
 
     &::after {
-      content: '/';
+      content: "/";
     }
 
     &:first-child {
@@ -623,7 +623,7 @@ nav,
 
     &:last-child {
       &::after {
-        content: '';
+        content: "";
       }
     }
   }
@@ -643,7 +643,7 @@ main,
 }
 
 main {
-  background: url('/static/images/liberta-eguaglianza.svg') center 3rem
+  background: url("/static/images/liberta-eguaglianza.svg") center 3rem
     no-repeat;
   background-size: 100%;
   min-height: 30vh;
@@ -726,7 +726,7 @@ figure {
 
 .attribution {
   &::before {
-    content: '\00a9';
+    content: "\00a9";
   }
 }
 
@@ -793,19 +793,19 @@ figure {
       }
 
       &::before {
-        content: url('/static/fontawesome/svgs/solid/key-skeleton.svg');
+        content: url("/static/fontawesome/svgs/solid/key-skeleton.svg");
         padding-right: 6px;
       }
     }
 
-    &[aria-expanded='true'] {
+    &[aria-expanded="true"] {
       padding-bottom: 5px;
       transform: rotate(0);
       width: 100%;
 
       .heading {
         &::after {
-          content: url('/static/fontawesome/svgs/solid/times.svg');
+          content: url("/static/fontawesome/svgs/solid/times.svg");
           padding-left: 10px;
         }
       }
@@ -906,19 +906,19 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
       &.biographies-icon {
         &::before {
-          content: url('/static/fontawesome/svgs/solid/users.svg');
+          content: url("/static/fontawesome/svgs/solid/users.svg");
         }
       }
 
       &.blog-icon {
         &::before {
-          content: url('/static/fontawesome/svgs/solid/pencil-alt.svg');
+          content: url("/static/fontawesome/svgs/solid/pencil-alt.svg");
         }
       }
 
       &.resources-icon {
         &::before {
-          content: url('/static/fontawesome/svgs/solid/copy.svg');
+          content: url("/static/fontawesome/svgs/solid/copy.svg");
         }
       }
     }
@@ -1012,13 +1012,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .metadata-block {
     &::after {
-      content: '|';
+      content: "|";
       margin: 0 0.25rem;
     }
 
     &:last-child {
       &::after {
-        content: '';
+        content: "";
       }
     }
   }
@@ -1268,13 +1268,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .false {
   &::after {
-    content: url('/static/fontawesome/svgs/solid/no-veracity.svg');
+    content: url("/static/fontawesome/svgs/solid/no-veracity.svg");
   }
 }
 
 .fictional {
   &::after {
-    content: url('/static/fontawesome/svgs/solid/map-marker-plus.svg');
+    content: url("/static/fontawesome/svgs/solid/map-marker-plus.svg");
   }
 }
 
@@ -1311,7 +1311,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .uncertainty,
 .unknown {
   &::before {
-    content: url('/static/fontawesome/svgs/solid/question.svg');
+    content: url("/static/fontawesome/svgs/solid/question.svg");
   }
 }
 
@@ -1378,7 +1378,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     background: $white;
     border-radius: 50%;
     box-shadow: 0 0 0 3px $radical-red;
-    content: '';
+    content: "";
     height: 9px;
     left: -55.8px;
     top: 5px;
@@ -1399,19 +1399,19 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
-  button[aria-expanded='false'] {
+  button[aria-expanded="false"] {
     &::before {
-      content: url('/static/fontawesome/svgs/solid/caret-right.svg');
+      content: url("/static/fontawesome/svgs/solid/caret-right.svg");
       width: 5px;
     }
   }
 
-  button[aria-expanded='true'] {
+  button[aria-expanded="true"] {
     background: $primary;
     color: white;
 
     &::before {
-      content: url('/static/fontawesome/svgs/solid/caret-down.svg');
+      content: url("/static/fontawesome/svgs/solid/caret-down.svg");
       width: 8px;
     }
   }
@@ -1572,11 +1572,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 
   .lora-reg {
-    font-variation-settings: 'wdth' 100, 'wght' 400;
+    font-variation-settings: "wdth" 100, "wght" 400;
   }
 
   .lora-bold {
-    font-variation-settings: 'wdth' 100, 'wght' 700;
+    font-variation-settings: "wdth" 100, "wght" 700;
   }
 
   // Country colours
@@ -1624,12 +1624,12 @@ $viz-event-colour: $prussian-blue;
 $viz-resource-colour: $old-yellow;
 
 .viz-grid {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1rem;
 
   .label {
     color: $radical-red;
-    font-variation-settings: 'wdth' 100, 'wght' 700;
+    font-variation-settings: "wdth" 100, "wght" 700;
     opacity: 1;
     text-transform: uppercase;
 
@@ -1788,4 +1788,8 @@ $viz-resource-colour: $old-yellow;
       padding: 0.5rem 1rem;
     }
   }
+}
+
+.notes {
+  white-space: pre-wrap;
 }

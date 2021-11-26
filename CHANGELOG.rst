@@ -14,6 +14,11 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Filter for private resources in the admin.
+* Style to preserve line breaks in notes.
+
 Removed
 ~~~~~~~
 * Cloudflare analytics integration.
