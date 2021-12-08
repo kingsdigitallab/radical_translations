@@ -23,6 +23,10 @@ Removed
 ~~~~~~~
 * Cloudflare analytics integration.
 
+Fixed
+~~~~~
+* Roles not displaying for agents.
+
 
 [1.3.1] - 2021-11-18
 --------------------

@@ -1,9 +1,11 @@
-{% if objects %}
+{% if objects or object.roles.count %}
 {# Font Awesome file-certificate icon #}
 <span class="small-icon">{% include "svgs/solid/file-certificate.svg" %}</span>
+{% endif %}
+
+{% if objects %}
 
 {% for contribution in objects %}
-|
 {% for classification in contribution.classification.all %}
 {# Font Awesome question icon #}
 <span class="small-icon {{ classification.label|lower }}">
@@ -16,4 +18,17 @@
 {% endfor %}
 
 {% endfor %}
+{% endif %}
+
+{% if object.roles.count %}
+{% for role in object.roles.all|dictsort:'label' %}
+<span class="badge badge-warning">{{ role.label }}</span>
+{% endfor %}
+
+{% elif object.roles.count %}
+
+{% for role in object.roles.all|dictsort:'label' %}
+<span class="badge badge-warning">{{ role.label }}</span>
+{% endfor %}
+
 {% endif %}
