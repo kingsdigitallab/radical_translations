@@ -19,6 +19,10 @@ Added
 * Filter for private resources in the admin.
 * Style to preserve line breaks in notes.
 
+Changed
+~~~~~~~
+* Don't mark as private Organisations that have members.
+
 Removed
 ~~~~~~~
 * Cloudflare analytics integration.
