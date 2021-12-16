@@ -30,6 +30,7 @@ Removed
 Fixed
 ~~~~~
 * Roles not displaying for agents.
+* Duplicate contribution roles.
 
 
 [1.3.1] - 2021-11-18
