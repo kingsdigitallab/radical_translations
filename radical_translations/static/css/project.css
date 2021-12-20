@@ -9213,7 +9213,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .with-image {
     grid-gap: 1rem;
     grid-template-columns: 200px auto;
-    grid-template-row: 1; } }
+    grid-template-rows: 1; } }
 
 @media (max-width: 767.98px) {
   .brand svg {
@@ -9646,7 +9646,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
         border: 2px dotted; } }
   .viz-grid .event,
   .viz-grid .resource {
-    display: inline-block;
     float: left;
     height: 8px;
     margin: 0.5px;

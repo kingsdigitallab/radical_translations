@@ -9,7 +9,6 @@
 $black: #000;
 $dark-gray: #222222;
 $dark-pink: #eed3d7;
-// $mint-green: #d6e9c6;
 $dirt: #eae9da;
 $green-italian-flag: rgba(0, 146, 70, 1);
 $kaki: #c3c1a8;
@@ -360,7 +359,6 @@ h6,
   fill: $dark-gray;
   height: 10px;
   margin: 0 auto;
-  // opacity: 0.2;
   padding-left: 2rem;
 }
 
@@ -1090,7 +1088,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .with-image {
     grid-gap: 1rem;
     grid-template-columns: 200px auto;
-    grid-template-row: 1;
+    grid-template-rows: 1;
   }
 }
 
@@ -1285,8 +1283,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
-// .radical,
-// .radicalism,
 .uncertain,
 .uncertainty,
 .unknown {
@@ -1297,15 +1293,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     width: 10px;
   }
 }
-
-// .radical,
-// .radicalism {
-//   &::before {
-//     content: url('/static/images/phrygian-cap.svg');
-//     height: 16px;
-//     width: 16px;
-//   }
-// }
 
 .uncertain,
 .uncertainty,
@@ -1513,7 +1500,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .event-info {
-  //background: $secondary;
   border: 1px solid $light-gray;
   box-shadow: 2px 2px 2px 2px $medium-gray;
   max-height: 50vh;
@@ -1589,9 +1575,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
   .empty {
     fill: transparent !important;
-  }
-
-  .egypt {
   }
 
   .france {
@@ -1744,7 +1727,6 @@ $viz-resource-colour: $old-yellow;
 
   .event,
   .resource {
-    display: inline-block;
     float: left;
     height: $viz-size;
     margin: 0.5px;
