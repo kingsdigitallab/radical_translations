@@ -26,6 +26,7 @@ Changed
 Removed
 ~~~~~~~
 * Cloudflare analytics integration.
+* Phrygian cap from topics.
 
 Fixed
 ~~~~~
