@@ -25,9 +25,6 @@
 {% if object.get_subjects_topic %}
 <span class="metadata-block">
   <span class="topic">
-    {% if object.is_radical %}
-    {% include "svgs/solid/phrygian-cap.svg" %}
-    {% endif %}
     <strong>Subjects: </strong>
   </span>
   {% for subject in object.get_subjects_topic %}
