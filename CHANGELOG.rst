@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Fixed
+~~~~~
+* Read the docs build issue.
+
 
 [1.4.0] - 2021-12-20
 --------------------
