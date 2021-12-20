@@ -9572,6 +9572,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
       text-transform: uppercase; }
   .viz-grid .markers .event,
   .viz-grid .markers .resource {
+    display: inline-block;
     float: none; }
     .viz-grid .markers .event:hover,
     .viz-grid .markers .resource:hover {
