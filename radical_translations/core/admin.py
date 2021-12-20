@@ -95,6 +95,7 @@ class ResourceAdmin(admin.ModelAdmin):
     list_display = [
         "title",
         "date",
+        "is_private",
         "is_original",
         "is_paratext",
         "get_authors",
@@ -103,6 +104,7 @@ class ResourceAdmin(admin.ModelAdmin):
         "get_place_names",
     ]
     list_filter = [
+        "is_private",
         ("relationships__relationship_type", admin.RelatedOnlyFieldListFilter),
         ("classifications__edition", admin.RelatedOnlyFieldListFilter),
         ("subjects", admin.RelatedOnlyFieldListFilter),

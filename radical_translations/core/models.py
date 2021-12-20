@@ -171,7 +171,7 @@ class Resource(TimeStampedModel):
     )
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["title", "date"]
         unique_together = ["title", "date", "_is_paratext"]
 
     def __str__(self) -> str:
@@ -222,7 +222,11 @@ class Resource(TimeStampedModel):
         resources = []
 
         for rel in self.relationships.filter(
-            relationship_type__label__in=["derivative of", "translation of"]
+            relationship_type__label__in=[
+                "derivative of",
+                "other edition",
+                "translation of",
+            ]
         ):
             resources.append(rel.related_to)
 

@@ -14,6 +14,24 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Filter for private resources in the admin.
+* Style to preserve line breaks in notes.
+
+Changed
+~~~~~~~
+* Don't mark as private Organisations that have members.
+
+Removed
+~~~~~~~
+* Cloudflare analytics integration.
+
+Fixed
+~~~~~
+* Roles not displaying for agents.
+* Duplicate contribution roles.
+
 
 [1.3.1] - 2021-11-18
 --------------------

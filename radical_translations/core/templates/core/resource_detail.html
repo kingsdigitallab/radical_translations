@@ -114,7 +114,7 @@
 {% endif %}
 </p>
 
-{% if object.is_translation %}
+{% if object.is_translation and object.get_authors_source_text %}
 <h2>Authors of source text</h2>
 <p>
 {% for author in object.get_authors_source_text %}

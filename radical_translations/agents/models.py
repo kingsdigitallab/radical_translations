@@ -349,6 +349,10 @@ class Organisation(Agent):
         help_text="Members of this organisation",
     )
 
+    @property
+    def is_private(self) -> bool:
+        return super().is_private and self.members.count() == 0
+
     def to_dict(self) -> Dict:
         return {
             **super().to_dict(),

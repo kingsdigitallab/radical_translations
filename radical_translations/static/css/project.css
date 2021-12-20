@@ -8484,27 +8484,27 @@ a {
 
 body {
   font-family: Lora, serif;
-  font-variation-settings: 'wdth' 100, 'wght' 400;
+  font-variation-settings: "wdth" 100, "wght" 400;
   background: url("../images/rt-bg.svg") no-repeat top left #fdf9ef;
   background-size: 135% auto;
   overflow-wrap: break-word; }
 
 .badge {
   border-radius: 0;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 0.9375em;
   padding: 0.125em 0.4em 0.25em; }
 
 .btn {
   border-radius: 0;
-  font-family: 'Oswald', sans-serif;
-  font-variation-settings: 'wght' 700;
+  font-family: "Oswald", sans-serif;
+  font-variation-settings: "wght" 700;
   font-weight: 700;
   text-transform: uppercase; }
 
 b,
 strong {
-  font-variation-settings: 'wdth' 100, 'wght' 700; }
+  font-variation-settings: "wdth" 100, "wght" 700; }
 
 .close.btn-sm, .btn-group-sm > .close.btn {
   font-size: 16px;
@@ -8568,7 +8568,7 @@ footer {
             filter: opacity(0.5) !important; }
 
 .metadata {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 18px;
   font-size: 1.125rem;
   margin: 0;
@@ -8605,7 +8605,7 @@ footer {
 .metadata-block.event {
   display: block;
   margin: 8px 0;
-  margin: .5rem 0; }
+  margin: 0.5rem 0; }
   .metadata-block.event::after {
     content: ""; }
   .metadata-block.event.place::before {
@@ -8615,7 +8615,7 @@ footer {
     width: 12px; }
   .metadata-block.event.date {
     font-size: 1.5em;
-    font-variation-settings: "wdth" 100,"wght" 700;
+    font-variation-settings: "wdth" 100, "wght" 700;
     font-weight: 700; }
     .metadata-block.event.date::before {
       width: 24px; }
@@ -8645,7 +8645,7 @@ footer {
 
 .tags {
   display: block;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 1;
@@ -8681,7 +8681,7 @@ h5,
 h6,
 .card-header {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 100, 'wght' 700;
+  font-variation-settings: "wdth" 100, "wght" 700;
   font-weight: 700; }
 
 .home-heading {
@@ -8692,7 +8692,7 @@ h6,
   font-family: Oswald, sans-serif;
   font-size: 20px;
   font-size: 1.25rem;
-  font-variation-settings: 'wdth' 100, 'wght' 700; }
+  font-variation-settings: "wdth" 100, "wght" 700; }
 
 .site-title {
   line-height: 1.25;
@@ -8762,7 +8762,7 @@ h6,
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;
-  font-variation-settings: 'wdth' 100, 'wght' 400; }
+  font-variation-settings: "wdth" 100, "wght" 400; }
   nav a,
   .main-menu a {
     text-decoration: none; }
@@ -8786,10 +8786,10 @@ nav,
 
 .brand {
   display: block;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 64px;
   font-size: 4rem;
-  font-variation-settings: 'wdth' 100, 'wght' 600;
+  font-variation-settings: "wdth" 100, "wght" 600;
   line-height: 1;
   margin: 0;
   min-width: 280px;
@@ -8901,11 +8901,11 @@ nav,
   .breadcrumbs li {
     display: inline-block; }
     .breadcrumbs li::after {
-      content: '/'; }
+      content: "/"; }
     .breadcrumbs li:first-child a {
       text-decoration: none; }
     .breadcrumbs li:last-child::after {
-      content: ''; }
+      content: ""; }
   .breadcrumbs svg {
     height: 16px;
     width: 16px; }
@@ -8980,7 +8980,7 @@ figure img {
   font-style: italic; }
 
 .attribution::before {
-  content: '\00a9'; }
+  content: "\00a9"; }
 
 .caption {
   margin-top: 0.5em; }
@@ -9034,12 +9034,12 @@ figure img {
       .key button .heading::before {
         content: url("/static/fontawesome/svgs/solid/key-skeleton.svg");
         padding-right: 6px; }
-    .key button[aria-expanded='true'] {
+    .key button[aria-expanded="true"] {
       padding-bottom: 5px;
       -webkit-transform: rotate(0);
               transform: rotate(0);
       width: 100%; }
-      .key button[aria-expanded='true'] .heading::after {
+      .key button[aria-expanded="true"] .heading::after {
         content: url("/static/fontawesome/svgs/solid/times.svg");
         padding-left: 10px; }
   .key .key-icons {
@@ -9164,10 +9164,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     .right + p {
       margin: 0 1rem 1rem 0; }
   .metadata-block::after {
-    content: '|';
+    content: "|";
     margin: 0 0.25rem; }
   .metadata-block:last-child::after {
-    content: ''; }
+    content: ""; }
   .sections {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr; }
@@ -9397,7 +9397,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     border-radius: 50%;
     -webkit-box-shadow: 0 0 0 3px #9b2923;
             box-shadow: 0 0 0 3px #9b2923;
-    content: '';
+    content: "";
     height: 9px;
     left: -55.8px;
     top: 5px;
@@ -9409,14 +9409,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 #filters button[aria-expanded]::before {
   display: inline-block; }
 
-#filters button[aria-expanded='false']::before {
+#filters button[aria-expanded="false"]::before {
   content: url("/static/fontawesome/svgs/solid/caret-right.svg");
   width: 5px; }
 
-#filters button[aria-expanded='true'] {
+#filters button[aria-expanded="true"] {
   background: #9b2923;
   color: white; }
-  #filters button[aria-expanded='true']::before {
+  #filters button[aria-expanded="true"]::before {
     content: url("/static/fontawesome/svgs/solid/caret-down.svg");
     width: 8px; }
 
@@ -9537,9 +9537,9 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     stroke: #222222;
     stroke-miterlimit: 10; }
   .events-key .lora-reg {
-    font-variation-settings: 'wdth' 100, 'wght' 400; }
+    font-variation-settings: "wdth" 100, "wght" 400; }
   .events-key .lora-bold {
-    font-variation-settings: 'wdth' 100, 'wght' 700; }
+    font-variation-settings: "wdth" 100, "wght" 700; }
   .events-key .country {
     opacity: 0.7;
     stroke-miterlimit: 10;
@@ -9560,12 +9560,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     stroke: #51b788; }
 
 .viz-grid {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 16px;
   font-size: 1rem; }
   .viz-grid .label {
     color: #9b2923;
-    font-variation-settings: 'wdth' 100, 'wght' 700;
+    font-variation-settings: "wdth" 100, "wght" 700;
     opacity: 1;
     text-transform: uppercase; }
     .viz-grid .label::first-letter {
@@ -9678,3 +9678,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .viz-grid .timeline-modal .modal-header {
     padding: 8px 16px;
     padding: 0.5rem 1rem; }
+
+.notes {
+  white-space: pre-wrap; }
