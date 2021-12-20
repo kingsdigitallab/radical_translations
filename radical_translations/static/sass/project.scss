@@ -1624,6 +1624,7 @@ $viz-resource-colour: $old-yellow;
   .markers {
     .event,
     .resource {
+      display: inline-block;
       float: none;
 
       &:hover {
