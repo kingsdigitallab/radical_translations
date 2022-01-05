@@ -224,7 +224,6 @@ class Resource(TimeStampedModel):
         for rel in self.relationships.filter(
             relationship_type__label__in=[
                 "derivative of",
-                "other edition",
                 "translation of",
             ]
         ):

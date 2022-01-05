@@ -11,7 +11,15 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
-[Unreleased] - 2021-12-20
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+Fixed
+~~~~~
+* Remove `other edition` relationships from source texts (it was added as a test).
+
+
+[1.4.2] - 2021-12-20
 --------------------
 
 Fixed
