@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Fixed
+~~~~~
+* Ensure all resources are plotted on the timeline.
+
 
 [1.4.3] - 2022-01-05
 --------------------

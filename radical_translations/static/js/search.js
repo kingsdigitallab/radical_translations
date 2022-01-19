@@ -292,7 +292,13 @@ new Vue({
       this.data = await this.doSearch();
 
       if (options.resources) {
-        this.resources = await this.doSearch(this.urlResources, 1500);
+        this.resources = await this.doSearch(
+          this.urlResources,
+          this.page_size,
+          this.query_dates[0],
+          this.query_dates[1],
+          true
+        );
         this.timeline = this.getTimeline();
       }
       if (this.map.show) {
@@ -303,7 +309,8 @@ new Vue({
       url = this.url,
       page_size = this.page_size,
       year_from = this.query_dates[0],
-      year_to = this.query_dates[1]
+      year_to = this.query_dates[1],
+      all = false
     ) {
       const params = new URLSearchParams();
 
@@ -342,9 +349,17 @@ new Vue({
       url.search = params.toString();
       window.history.pushState({}, "", url.search);
 
-      const response = await fetch(url);
+      let json = {};
+      do {
+        let response = await fetch(url);
+        _.mergeWith(json, await response.json(), (objValue, srcValue) =>
+          _.isArray(objValue) ? objValue.concat(srcValue) : srcValue
+        );
 
-      return response.json();
+        url = json.next;
+      } while (url && all);
+
+      return json;
     },
     textSearch: async function (text) {
       this.page = 1;
