@@ -294,7 +294,7 @@ new Vue({
       if (options.resources) {
         this.resources = await this.doSearch(
           this.urlResources,
-          this.page_size,
+          1000,
           this.query_dates[0],
           this.query_dates[1],
           true
