@@ -189,7 +189,7 @@ importlib-metadata==4.10.0
     #   virtualenv
 ipdb==0.12.3
     # via -r requirements/local.in
-ipython==7.30.1
+ipython==7.31.1
     # via ipdb
 isort==5.10.1
     # via pylint
