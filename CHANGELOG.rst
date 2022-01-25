@@ -14,6 +14,14 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Option to duplicate `Resource` records.
+
+Fixed
+~~~~~
+* Protocol headers not reaching Django/DRF.
+
 
 [1.4.4] - 2022-01-20
 --------------------

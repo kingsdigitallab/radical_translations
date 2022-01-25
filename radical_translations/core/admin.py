@@ -118,6 +118,8 @@ class ResourceAdmin(admin.ModelAdmin):
         "title_variant__main_title",
         "title_variant__subtitle",
     ]
+    save_as = True
+    save_on_top = True
 
     class Media:
         css = {"all": ("css/admin.css",)}
