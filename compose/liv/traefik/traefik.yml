@@ -4,12 +4,14 @@ log:
 entryPoints:
   web:
     # http
-    address: ':80'
+    address: ":80"
+    forwardedHeaders:
+      insecure: true
 
 http:
   routers:
     web-router:
-      rule: 'Host(`radicaltranslations.org`)'
+      rule: "Host(`radicaltranslations.org`)"
       entryPoints:
         - web
       middlewares:
@@ -17,7 +19,7 @@ http:
       service: django
 
     web-media-router:
-      rule: 'Host(`radicaltranslations.org`) && PathPrefix(`/media/`) || PathPrefix(`/robots.txt`)'
+      rule: "Host(`radicaltranslations.org`) && PathPrefix(`/media/`) || PathPrefix(`/robots.txt`)"
       entryPoints:
         - web
       middlewares:
@@ -29,7 +31,7 @@ http:
       # https://docs.traefik.io/master/middlewares/headers/#hostsproxyheaders
       # https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
       headers:
-        hostsProxyHeaders: ['X-CSRFToken']
+        hostsProxyHeaders: ["X-CSRFToken"]
 
   services:
     django:
