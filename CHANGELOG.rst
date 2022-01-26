@@ -17,6 +17,7 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Option to duplicate `Resource` records.
+* Authors of source text to other editions.
 
 Fixed
 ~~~~~

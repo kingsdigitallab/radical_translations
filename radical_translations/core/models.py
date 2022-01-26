@@ -229,6 +229,9 @@ class Resource(TimeStampedModel):
         ):
             resources.append(rel.related_to)
 
+        for rel in self.relationships.filter(relationship_type__label="other edition"):
+            resources.extend(rel.related_to.get_source_texts())
+
         return list(set(resources))
 
     def get_languages_source_text(self) -> Optional[List["ResourceLanguage"]]:
