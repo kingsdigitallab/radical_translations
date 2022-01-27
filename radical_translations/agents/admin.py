@@ -12,7 +12,13 @@ from radical_translations.core.models import Contribution
 @admin.register(Agent)
 class AgentAdmin(PolymorphicParentModelAdmin):
     child_models = [Organisation, Person]
-    list_display = ["name", "agent_type", "get_role_names", "get_place_names"]
+    list_display = [
+        "name",
+        "agent_type",
+        "is_private",
+        "get_role_names",
+        "get_place_names",
+    ]
     list_filter = [
         PolymorphicChildModelFilter,
         ("roles", admin.RelatedOnlyFieldListFilter),
@@ -39,7 +45,7 @@ class ContributionInline(admin.TabularInline):
 class AgentChildAdmin(PolymorphicChildModelAdmin):
     autocomplete_fields = ["based_near", "sources"]
     inlines = [ContributionInline]
-    list_display = ["name", "get_role_names", "get_place_names"]
+    list_display = ["name", "is_private", "get_role_names", "get_place_names"]
     list_filter = [
         ("roles", admin.RelatedOnlyFieldListFilter),
         ("based_near", admin.RelatedOnlyFieldListFilter),
@@ -74,6 +80,7 @@ class PersonAdmin(AgentChildAdmin):
     inlines = AgentChildAdmin.inlines + [OrganisationInline]
     list_display = [
         "name",
+        "is_private",
         "gender",
         "date_birth",
         "place_birth",
