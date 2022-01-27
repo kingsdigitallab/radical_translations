@@ -98,6 +98,7 @@ class ResourceAdmin(admin.ModelAdmin):
         "is_private",
         "is_original",
         "is_paratext",
+        "get_connections",
         "get_authors",
         "get_classification_edition",
         "get_language_names",

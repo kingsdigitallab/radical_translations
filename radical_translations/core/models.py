@@ -443,6 +443,11 @@ class Resource(TimeStampedModel):
 
         return labels
 
+    def get_connections(self) -> int:
+        return self.relationships.count() + self.related_to.count()
+
+    get_connections.short_description = "Connections"  # type: ignore
+
     def to_dict(self) -> Dict:
         return {
             "id": self.id,
