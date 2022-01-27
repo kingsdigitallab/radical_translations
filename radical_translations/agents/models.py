@@ -161,6 +161,7 @@ class Person(Agent):
         Place,
         blank=True,
         related_name="agents_main_places",
+        verbose_name="other places",
         help_text=(
             "Main places this Person is associated with (places of residence, etc.)."
         ),
