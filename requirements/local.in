@@ -34,4 +34,4 @@ pytest-django==3.8.0  # https://github.com/pytest-dev/pytest-djang
 
 # Radical Translations
 # ------------------------------------------------------------------------------
-pygraphviz  # https://pygraphviz.github.io/
+pygraphviz==1.6  # https://pygraphviz.github.io/
