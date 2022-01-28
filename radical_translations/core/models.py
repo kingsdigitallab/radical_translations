@@ -203,7 +203,11 @@ class Resource(TimeStampedModel):
 
         authors = []
 
-        for resource in self.get_source_texts():
+        source_texts = self.get_source_texts()
+        if not source_texts:
+            return None
+
+        for resource in source_texts:
             authors.extend(
                 [
                     c.agent
@@ -230,7 +234,9 @@ class Resource(TimeStampedModel):
             resources.append(rel.related_to)
 
         for rel in self.relationships.filter(relationship_type__label="other edition"):
-            resources.extend(rel.related_to.get_source_texts())
+            source_texts = rel.related_to.get_source_texts()
+            if source_texts:
+                resources.extend(source_texts)
 
         return list(set(resources))
 
