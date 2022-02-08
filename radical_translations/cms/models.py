@@ -167,6 +167,7 @@ class HomePage(BasePage):
         "kdl_wagtail_core.IndexPage",
         "kdl_wagtail_people.PeopleIndexPage",
         "kdl_wagtail_core.RichTextPage",
+        "kdl_wagtail_core.SearchPage",
         "kdl_wagtail_core.SitemapPage",
         "kdl_wagtail_core.StreamPage",
     ]

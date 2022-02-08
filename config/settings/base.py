@@ -76,6 +76,7 @@ THIRD_PARTY_APPS = [
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
     "wagtail.contrib.table_block",
+    "wagtail.search",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -308,6 +309,12 @@ WAGTAIL_SITE_NAME = "Radical Translations"
 
 HOMEPAGE_RICHTEXT_FEATURES = ["bold", "italic", "link"]
 HOMEPAGE_SECTION_BLOCK_COUNTS = {"min_number": 4, "max_num": 4}
+
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.db",
+    }
+}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
