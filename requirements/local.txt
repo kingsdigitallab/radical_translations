@@ -88,7 +88,7 @@ django-coverage-plugin==1.8.0
     # via -r requirements/local.in
 django-crispy-forms==1.8.1
     # via -r requirements/./base.in
-django-debug-toolbar==2.2
+django-debug-toolbar==2.2.1
     # via -r requirements/local.in
 django-elasticsearch-dsl==7.2.2
     # via
