@@ -30,6 +30,7 @@ new Vue({
     rangeMarks: (v) => v % 10 === 0,
     data: [],
     data_suggest: [],
+    resultsElement: "result-views",
     map: {
       mapObject: null,
       options: {
@@ -380,6 +381,7 @@ new Vue({
       } else {
         this.filters.push(filter);
       }
+      document.getElementById(this.resultsElement).scrollIntoView();
     },
     getMap: function () {
       if (!document.getElementById("map")) return;

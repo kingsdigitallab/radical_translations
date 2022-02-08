@@ -17,10 +17,12 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Added
 ~~~~~
 * Filter for `anonymous` Agents.
+* Wagtail_ search page type.
 
 Changed
 ~~~~~~~
 * `Agent` display name in the search results to the format `family_name, given_name`.
+* Scroll to results after interacting with filters.
 
 
 [1.5.0] - 2022-02-08
