@@ -14,6 +14,10 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Filter for `anonymous` Agents.
+
 Changed
 ~~~~~~~
 * `Agent` display name in the search results to the format `family_name, given_name`.

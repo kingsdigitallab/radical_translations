@@ -98,6 +98,11 @@ class AgentViewSet(BaseDocumentViewSet):
             "enabled": True,
             "options": ES_FACET_OPTIONS,
         },
+        "anonymous": {
+            "field": "anonymous",
+            "enabled": True,
+            "options": ES_FACET_OPTIONS,
+        },
     }
 
     filter_fields = {
@@ -111,6 +116,7 @@ class AgentViewSet(BaseDocumentViewSet):
         "main_place": "based_near.address.raw",
         "role": "roles.label.raw",
         "language": "languages.label.raw",
+        "anonymous": "anonymous",
     }
 
     ordering_fields = {

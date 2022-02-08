@@ -58,6 +58,8 @@ class AgentDocument(Document):
 
     members = get_agent_field(options=copy_to_content)
 
+    anonymous = fields.KeywordField(**copy_to_content)
+
     class Index:
         name = "rt-agents"
 
@@ -197,3 +199,11 @@ class AgentDocument(Document):
             return
 
         return [self._prepare_agent(person) for person in instance.members.all()]
+
+    def prepare_anonymous(self, instance):
+        name = instance.get_index_name().lower()
+
+        if "anonymous" in name:
+            return "yes"
+
+        return "no"

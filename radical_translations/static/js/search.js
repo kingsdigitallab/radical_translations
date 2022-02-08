@@ -21,7 +21,7 @@ new Vue({
     query_text: "",
     query_dates: [options.year_min, options.year_max],
     has_date_query: false,
-    filters: [],
+    filters: options.filters || [],
     ordering_default: "score",
     ordering: "score",
     ordering_options: options.ordering,

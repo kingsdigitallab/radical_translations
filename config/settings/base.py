@@ -394,6 +394,7 @@ SEARCH_OPTIONS = {
         "year_min": 1450,
         "year_max": 1900,
         "map_field": "based_near",
+        "filters": [["anonymous", "no"]],
         "ordering": [
             {"key": "score", "value": "Relevance"},
             {"key": "name", "value": "Name ascending"},
