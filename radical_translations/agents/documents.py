@@ -31,6 +31,7 @@ class AgentDocument(Document):
         },
         **copy_to_content,
     )
+    name_index = fields.KeywordField(attr="get_index_name")
     name_sort = fields.KeywordField(**copy_to_content)
     radical = fields.KeywordField(**copy_to_content)
     based_near = get_place_field(options=copy_to_content)

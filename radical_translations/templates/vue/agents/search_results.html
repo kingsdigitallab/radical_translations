@@ -3,7 +3,7 @@
      class="search-results-list">
   <li v-for="item in data.results" :key="item.id">
     <p class="title">
-    <a v-bind:href="item.id">{[ item.name ]}</a>
+    <a v-bind:href="item.id">{[ item.name_index ]}</a>
     <span class="badge badge-dark" v-if="item.is_private">Private</span>
     </p>
 
