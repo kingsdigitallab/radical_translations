@@ -18,6 +18,7 @@ Added
 ~~~~~
 * Filter for `anonymous` Agents.
 * Wagtail_ search page type.
+* Inputs to the date slider.
 
 Changed
 ~~~~~~~

@@ -17,6 +17,7 @@ new Vue({
     url: new URL(`${baseURL}api/`),
     urlResources: new URL(`${baseURL}../resources/api-simple/`),
     urlSuggest: new URL(`${baseURL}api/suggest/`),
+    options: options,
     query: "",
     query_text: "",
     query_dates: [options.year_min, options.year_max],
