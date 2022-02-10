@@ -65,7 +65,7 @@ decorator==5.1.1
     #   ratelim
 distlib==0.3.4
     # via virtualenv
-django==2.2.26
+django==2.2.27
     # via
     #   -r requirements/./base.in
     #   django-controlled-vocabulary
