@@ -26,6 +26,14 @@ Changed
 * Scroll to results after interacting with filters.
 
 
+[1.5.1] - 2022-02-22
+--------------------
+
+Fixed
+~~~~~
+* All `Person` agents being marked as private.
+
+
 [1.5.0] - 2022-02-08
 --------------------
 
