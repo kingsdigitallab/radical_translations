@@ -11,6 +11,14 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - 2022-02-22
+--------------------
+
+Fixed
+~~~~~
+* All `Person` agents being marked as private.
+
+
 [1.5.0] - 2022-02-08
 --------------------
 
