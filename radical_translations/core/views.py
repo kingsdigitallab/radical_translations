@@ -42,7 +42,7 @@ class BaseDetailView(DetailView):
     def get_object(self, queryset=None):
         obj = super().get_object()
 
-        if obj.is_private() and not self.request.user.is_authenticated:
+        if obj.is_private and not self.request.user.is_authenticated:
             raise PermissionDenied("This item is not public yet.")
 
         return obj
