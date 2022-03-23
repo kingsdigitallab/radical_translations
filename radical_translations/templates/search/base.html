@@ -40,15 +40,15 @@
             {% block summary %}
             {% include 'vue/search_summary.html' %}
             {% endblock summary %}
-            {% block ordering %}
-            {% include 'vue/search_ordering.html' %}
-            {% endblock ordering %}
           </div>
         </div>
         {% endblock summary-ordering %}
 
         {% block pagination-top %}
         <template v-if="!map.show">
+          {% block ordering %}
+          {% include 'vue/search_ordering.html' %}
+          {% endblock ordering %}
           {% include 'vue/pagination.html' %}
         </template>
         {% endblock pagination-top %}
