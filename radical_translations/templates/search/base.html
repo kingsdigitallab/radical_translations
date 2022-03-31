@@ -98,7 +98,11 @@
             role="tabpanel"
             aria-labelledby="default-view-tab">
             {% block ordering %}
-            {% include 'vue/search_ordering.html' %}
+            <div class="row justify-content-end">
+              <div class="col col-lg-6">
+                {% include 'vue/search_ordering.html' %}
+              </div>
+            </div>
             {% endblock ordering %}
             {% block results_default %}
             {% endblock results_default %}
