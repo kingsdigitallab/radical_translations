@@ -40,9 +40,6 @@
             {% block summary %}
             {% include 'vue/search_summary.html' %}
             {% endblock summary %}
-            {% block ordering %}
-            {% include 'vue/search_ordering.html' %}
-            {% endblock ordering %}
           </div>
         </div>
         {% endblock summary-ordering %}
@@ -100,6 +97,13 @@
             id="default-view"
             role="tabpanel"
             aria-labelledby="default-view-tab">
+            {% block ordering %}
+            <div class="row justify-content-end">
+              <div class="col col-lg-6">
+                {% include 'vue/search_ordering.html' %}
+              </div>
+            </div>
+            {% endblock ordering %}
             {% block results_default %}
             {% endblock results_default %}
           </div>
