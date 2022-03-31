@@ -46,9 +46,6 @@
 
         {% block pagination-top %}
         <template v-if="!map.show">
-          {% block ordering %}
-          {% include 'vue/search_ordering.html' %}
-          {% endblock ordering %}
           {% include 'vue/pagination.html' %}
         </template>
         {% endblock pagination-top %}
@@ -100,6 +97,9 @@
             id="default-view"
             role="tabpanel"
             aria-labelledby="default-view-tab">
+            {% block ordering %}
+            {% include 'vue/search_ordering.html' %}
+            {% endblock ordering %}
             {% block results_default %}
             {% endblock results_default %}
           </div>
