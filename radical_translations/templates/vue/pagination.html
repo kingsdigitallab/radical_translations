@@ -1,9 +1,9 @@
 <nav aria-label="Page navigation for search results">
     <ul class="pagination justify-content-end">
         <li v-bind:class="{ disabled: !data.previous }" class="page-item">
-            <button type="button" class="page-link" v-on:click="page--">
+            <a class="page-link" v-on:click="page--">
                 &laquo; Previous
-            </button>
+            </a>
         </li>
         <li class="page-item">
             <div class="input-group mb-3">
@@ -24,9 +24,9 @@
             </div>
         </li>
         <li v-bind:class="{ disabled: !data.next }" class="page-item">
-            <button type="button" class="page-link" v-on:click="page++">
+            <a class="page-link" v-on:click="page++">
                 Next &raquo;
-            </button>
+            </a>
         </li>
     </ul>
 </nav>
