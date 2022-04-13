@@ -3,6 +3,6 @@
     <span class="author">{{ page.author }}</span><br>
     {% endif %}
     {% if page.first_published_at %}
-    <time class="date">{{ page.first_published_at }}</time>
+    <time class="date" datetime="{{ page.first_published_at.isoformat }}">{{ page.first_published_at }}</time>
     {% endif %}
 </p>
