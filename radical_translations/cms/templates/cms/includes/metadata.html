@@ -3,6 +3,7 @@
     <span class="author">{{ page.author }}</span><br>
     {% endif %}
     {% if page.first_published_at %}
-    <time class="date" datetime="{{ page.first_published_at.isoformat }}">{{ page.first_published_at }}</time>
+    {# Sliced the at 16 chars to get date and time only and pass the validator #}
+    <time class="date" datetime="{{ page.first_published_at.isoformat|slice:16 }}">{{ page.first_published_at }}</time>
     {% endif %}
 </p>
