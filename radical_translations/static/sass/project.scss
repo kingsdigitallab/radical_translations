@@ -1118,15 +1118,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     }
   }
 
-  .pagination {
-    display: grid;
-    grid-template-columns: repeat(9, auto);
-
-    .page-link {
-      width: 100%;
-    }
-  }
-
   .people {
     .with-image {
       .child-page-image {
@@ -1775,4 +1766,19 @@ $viz-resource-colour: $old-yellow;
 
 .notes {
   white-space: pre-wrap;
+}
+
+/* Print */
+
+// Hide Key button when collapsed
+@media print {
+  .key {
+    button {
+      display: none;
+    }
+  }
+
+  #key {
+    border: 1px solid #000;
+  }
 }

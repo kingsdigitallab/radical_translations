@@ -9226,11 +9226,6 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   img.left, img.right {
     height: auto;
     width: 100%; }
-  .pagination {
-    display: grid;
-    grid-template-columns: repeat(9, auto); }
-    .pagination .page-link {
-      width: 100%; }
   .people .with-image .child-page-image {
     height: 300px; }
     .people .with-image .child-page-image img {
@@ -9682,3 +9677,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
 .notes {
   white-space: pre-wrap; }
+
+/* Print */
+@media print {
+  .key button {
+    display: none; }
+  #key {
+    border: 1px solid #000; } }
