@@ -39,7 +39,9 @@ class BlogIndexPage(RoutablePageMixin, BaseIndexPage):
     @route(r"^$")
     def all_posts(self, request):
         return render(
-            request, self.get_template(request), {"children": self.children()}
+            request,
+            self.get_template(request),
+            {"page": self, "children": self.children()},
         )
 
     @route(r"^tag/")
