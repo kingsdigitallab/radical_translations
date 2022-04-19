@@ -2,18 +2,18 @@
 
 {% block main %}
 <div class="row">
-{% block sidebar %}
-{% include "cms/includes/sidebar.html" %}
-{% endblock sidebar %}
+    {% block sidebar %}
+    {% include "cms/includes/sidebar.html" %}
+    {% endblock sidebar %}
 
-<div class="col">
-{% block page-header %}
-{% include "kdl_wagtail_core/includes/page_header.html" %}
-{% endblock page-header %}
+    <div class="col">
+        {% block page-header %}
+        {% include "kdl_wagtail_core/includes/page_header.html" %}
+        {% endblock page-header %}
 
-{% block page-body %}
-{% endblock page-body %}
-</div>
+        {% block page-body %}
+        {% endblock page-body %}
+    </div>
 </div>
 
 {% endblock main %}
