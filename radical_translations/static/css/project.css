@@ -8913,8 +8913,7 @@ nav,
 /* Main content area */
 main,
 .main {
-  display: block;
-  overflow: hidden; }
+  display: block; }
 
 main {
   background: url("/static/images/liberta-eguaglianza.svg") center 48px no-repeat;
@@ -9011,16 +9010,25 @@ figure img {
   margin-bottom: 16px;
   margin-bottom: 1rem; }
 
-.key {
-  background: #c3c1a8;
-  padding: 5px;
-  position: absolute;
+.stick {
+  position: sticky;
   right: 0;
-  top: 50px;
+  top: 0;
+  width: 100%;
   z-index: 1000; }
+
+#key {
+  background: #e2e1d5;
+  border-top: 0;
+  border: 1px dotted #c3c1a8;
+  text-align: left; }
+
+.key {
+  padding: 5px;
+  text-align: right; }
   .key button {
     background: #222222;
-    border: 0;
+    border: 5px solid #c3c1a8;
     color: #eae9da;
     padding: 5px 5px 0; }
     .key button .heading {
