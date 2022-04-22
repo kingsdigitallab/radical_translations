@@ -9431,6 +9431,16 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   border-color: #00548b;
   color: white; }
 
+.timeline-filters .active {
+  padding-right: 10px; }
+  .timeline-filters .active::after {
+    content: "x";
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    margin-left: 3px;
+    vertical-align: middle; }
+
 /* Adjusting map display: rendering map at height: 70vh */
 .map-results {
   width: 100%;
