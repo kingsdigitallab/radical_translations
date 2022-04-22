@@ -3,6 +3,7 @@
 {% block title %}{{ object.title|truncatewords:10 }}{% endblock title %}
 
 {% block main %}
+{% include "core/includes/key.html" %}
 <h1>{{ object.title }}</h1>
 
 <p class="metadata">

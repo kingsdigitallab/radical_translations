@@ -3,6 +3,7 @@
 {% block title %}{{ object.name }}{% endblock title %}
 
 {% block main %}
+{% include "core/includes/key.html" %}
 <h1>{{ object.name }}</h1>
 
 <p class="metadata">
@@ -40,7 +41,6 @@
 {% endif %}
 
 {% include "includes/object_notes.html" %}
-{% include "core/includes/key.html" %}
 {% endblock main %}
 
 {% block modal %}

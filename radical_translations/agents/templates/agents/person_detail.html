@@ -3,6 +3,7 @@
 {% block title %}{{ object.name }}{% endblock title %}
 
 {% block main %}
+{% include "core/includes/key.html" %}
 <h1>{{ object.name }}</h1>
 
 <!-- Bio / Record tabs -->
@@ -107,7 +108,6 @@
   </div>
   {% endif %}
 </div>
-{% include "core/includes/key.html" %}
 {% endblock main %}
 
 {% block modal %}
