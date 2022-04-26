@@ -8933,6 +8933,10 @@ main {
   .main h1 small {
     display: block; }
 
+.twitter {
+  margin-top: 16px;
+  margin-top: 1rem; }
+
 .card,
 .card-header,
 .card-img-top,
