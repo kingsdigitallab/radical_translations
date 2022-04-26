@@ -6,9 +6,19 @@
 {% block title %}Events{% endblock %}
 
 {% block page-children %}
-<h2>Upcoming events</h2>
-{% include "cms/includes/event_children.html" with children=future %}
+<div class="row">
+    <div class="col-lg-8">
+        <h2>Upcoming events</h2>
+        {% include "cms/includes/event_children.html" with children=future %}
 
-<h2 class="inactive">Past events</h2>
-{% include "cms/includes/event_children.html" with children=past class="inactive" %}
+        <h2 class="inactive">Past events</h2>
+        {% include "cms/includes/event_children.html" with children=past class="inactive" %}
+    </div>
+    <div class="col">
+        <div class="twitter">
+            <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/rt_1789?ref_src=twsrc%5Etfw">Tweets by rt_1789</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+    </div>
+</div>
 {% endblock page-children %}
