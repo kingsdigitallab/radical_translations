@@ -1443,6 +1443,22 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 }
 
+.site-search-form {
+  margin: .5rem auto 0;
+  max-width: 500px;
+  padding: 0 1rem;
+
+  button {
+    padding: 0 .5rem;
+
+    svg {
+      fill: white;
+      height: 20px;
+      margin-top: -5px;
+    }
+  }
+}
+
 /* Adjusting map display: rendering map at height: 70vh */
 
 .map-results {
