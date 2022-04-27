@@ -9445,6 +9445,20 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     margin-left: 3px;
     vertical-align: middle; }
 
+.site-search-form {
+  margin: 8px auto 0;
+  margin: .5rem auto 0;
+  max-width: 500px;
+  padding: 0 16px;
+  padding: 0 1rem; }
+  .site-search-form button {
+    padding: 0 8px;
+    padding: 0 .5rem; }
+    .site-search-form button svg {
+      fill: white;
+      height: 20px;
+      margin-top: -5px; }
+
 /* Adjusting map display: rendering map at height: 70vh */
 .map-results {
   width: 100%;
