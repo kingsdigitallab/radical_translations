@@ -68,18 +68,16 @@
         :tooltip="'always'"
         @drag-end="rangeSearch"
         v-model="query_dates"></vue-slider>
-      <input
-        v-model="query_dates[0]"
-        @change="rangeSearch"
-        :min="options.year_min"
-        :max="options.year_max"
-        type="number" />
-      <input
-        v-model="query_dates[1]"
-        @change="rangeSearch"
-        :min="options.year_min"
-        :max="options.year_max"
-        type="number"  />
+      <div class="row">
+        <div class="col col-md-6 col-lg-4">
+          <label for="from">From:</label>
+          <input id="from" v-model="query_dates[0]" @change="rangeSearch" :min="options.year_min" :max="options.year_max" type="number">
+        </div>
+        <div class="col">
+          <label for="to">To:</label>
+          <input id="to" v-model="query_dates[1]" @change="rangeSearch" :min="options.year_min" :max="options.year_max" type="number">
+        </div>
+      </div>
     </div>
   </div>
 
