@@ -9602,6 +9602,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     text-transform: uppercase; }
     .viz-grid .label::first-letter {
       text-transform: uppercase; }
+  .viz-grid .markers .btn:hover, .viz-grid .markers .btn.active {
+    border: 1px solid #222222; }
   .viz-grid .markers .event,
   .viz-grid .markers .resource {
     display: inline-block;

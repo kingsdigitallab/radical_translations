@@ -1668,6 +1668,12 @@ $viz-resource-colour: $old-yellow;
   }
 
   .markers {
+    .btn {
+      &:hover,
+      &.active {
+        border: 1px solid $dark-gray;
+      }
+    }
     .event,
     .resource {
       display: inline-block;
