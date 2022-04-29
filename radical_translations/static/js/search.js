@@ -470,7 +470,7 @@ new Vue({
                   title: r.title,
                   date: r.date,
                   subjects: classification,
-                  tags: [this.timelineFacet(country)]
+                  tags: ["event", this.timelineFacet(country)]
                     .concat(relatedTags)
                     .concat(classification.map((c) => this.timelineFacet(c))),
                 };

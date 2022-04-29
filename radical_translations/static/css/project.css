@@ -9435,9 +9435,11 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   border-color: #00548b;
   color: white; }
 
-.timeline-filters .active {
+.timeline-filters .active,
+.markers .active {
   padding-right: 10px; }
-  .timeline-filters .active::after {
+  .timeline-filters .active::after,
+  .markers .active::after {
     content: "x";
     font-family: 'Arial', sans-serif;
     font-size: 10px;

@@ -8,8 +8,8 @@ accompanying political chronology.</p>
     <h3>Filters</h3>
     <div id="filters">
       <div
-        v-for="facet in facets"
-        :key="facet.name">
+          v-for="facet in facets"
+          :key="facet.name">
         <button type="button" class="label btn btn-sm" disabled>{[ getFacetDisplayName(facet.name) ]}:</button>
         <div class="timeline-filters btn-group">
           <button 
@@ -30,20 +30,38 @@ accompanying political chronology.</p>
         <li class="list-inline-item">
           <button type="button" class="label btn btn-sm" disabled>Markers:</button>
         </li>
-        <li class="list-inline-item"><span class="event zlarge"></span> Event</li>
-        <li class="list-inline-item"><span class="resource source-text zlarge"></span> Source text</li>
-        <li class="list-inline-item"><span class="resource translation zlarge"></span> Translation</li>
+        <li class="list-inline-item">
+          <button 
+            @click="filterTimeline('subtype', timelineFacet('event'))"
+            :class="['btn', {active: timeline.filters['subtype'] === timelineFacet('event')}]">
+            <span class="event zlarge"></span> Event
+          </button>
+        </li>
+        <li class="list-inline-item">
+          <button 
+            @click="filterTimeline('subtype', timelineFacet('source text'))"
+            :class="['btn', {active: timeline.filters['subtype'] === timelineFacet('source text')}]">
+            <span class="resource source-text zlarge"></span> Source text
+          </button>
+        </li>
+        <li class="list-inline-item">
+          <button 
+            @click="filterTimeline('subtype', timelineFacet('translation'))"
+            :class="['btn', {active: timeline.filters['subtype'] === timelineFacet('translation')}]">
+            <span class="resource translation zlarge"></span> Translation
+          </button>
+        </li>
       </ul>
     </div>
     <div class="col text-right">
       <button type="button" class="label btn btn-sm" disabled>View:</button>
       <button
-        v-for="z in zoomLevels"
-        :key="z.level"
-        @click="setZoom(z.style)"
-        :class="['btn btn-sm btn-outline-dark', z.style, {active: zoom === z.style}]"
-        type="button"
-        >{[ z.level ]}</button>
+          v-for="z in zoomLevels"
+          :key="z.level"
+          @click="setZoom(z.style)"
+          :class="['btn btn-sm btn-outline-dark', z.style, {active: zoom === z.style}]"
+          type="button"
+          >{[ z.level ]}</button>
     </div>
   </div>
 
@@ -52,31 +70,31 @@ accompanying political chronology.</p>
       <tr>
         <th :class="['label', zoom]">Country/Year</th>
         <td
-          v-for="(year, index) in timeline.years"
-          :key="year">
+            v-for="(year, index) in timeline.years"
+            :key="year">
           <span :class="['year', zoom]">{[ year ]}</span>
         </td>
       </tr>
     </thead>
     <tbody class="content">
       <tr
-        v-for="(value, country, index) in timeline.data"
-        :key="country"
-        :class="country">
+          v-for="(value, country, index) in timeline.data"
+          :key="country"
+          :class="country">
         <th
-          :class="[zoom, { filtered: timeline.data[country].filtered }]">{[ country ]}</th>
+            :class="[zoom, { filtered: timeline.data[country].filtered }]">{[ country ]}</th>
         <td
-          v-for="year in timeline.years"
-          :key="year">
+            v-for="year in timeline.years"
+            :key="year">
           <a
-            v-for="item in timeline.data[country][year]"
-            :key="item.uid">
+              v-for="item in timeline.data[country][year]"
+              :key="item.uid">
             <span
-              :class="[zoom, item.type, item.tags, { active: item.active, filtered: item.filtered }]"
-              :title="`${item.country}, ${item.date}\n${item.title}`"
-              @click="getTimelineDetail(country, year, item.record)"
-              @mouseenter="highlight(item.record)"
-              @mouseleave="highlight(null)">
+                :class="[zoom, item.type, item.tags, { active: item.active, filtered: item.filtered }]"
+                :title="`${item.country}, ${item.date}\n${item.title}`"
+                @click="getTimelineDetail(country, year, item.record)"
+                @mouseenter="highlight(item.record)"
+                @mouseleave="highlight(null)">
             </span>
           </a>
         </td>
@@ -85,18 +103,18 @@ accompanying political chronology.</p>
   </table>
 
   <div
-    :class="{'hidden': !timelineDetail.show, 'show': timelineDetail.show }"
-    class="modal timeline-modal fade"
-    id="timeline-detail"
-    role="dialog">
+      :class="{'hidden': !timelineDetail.show, 'show': timelineDetail.show }"
+      class="modal timeline-modal fade"
+      id="timeline-detail"
+      role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button
-            v-on:click="timelineDetail.show = false"
-            class="close close-event"
-            type="button"
-            aria-label="Close">
+              v-on:click="timelineDetail.show = false"
+              class="close close-event"
+              type="button"
+              aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -104,7 +122,7 @@ accompanying political chronology.</p>
           <div v-if="timelineDetail.record">
             <h3>
               <a
-                :href="`../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
+                  :href="`../${timelineDetail.record.type}s/${timelineDetail.record.id}/`">
                 {[ timelineDetail.record.title ]}
               </a>
             </h3>
@@ -118,14 +136,14 @@ accompanying political chronology.</p>
               {[ timelineDetail.record.country ]}
             </span>
             <span
-              class="metadata-block">
+                class="metadata-block">
               <span class="form">
                 <strong v-if="timelineDetail.record.type === 'event'">Type of event: </strong>
                 <strong v-else>Forms: </strong>
               </span>
               <template v-for="(tag, index) in timelineDetail.record.subjects">
                 <span>{[ tag ]}</span><template
-                                        v-if="index < timelineDetail.record.subjects.length - 1">, </template>
+                                          v-if="index < timelineDetail.record.subjects.length - 1">, </template>
               </template>
             </span>
             </p>
@@ -134,8 +152,8 @@ accompanying political chronology.</p>
           <h4>Other activity in {[ timelineDetail.country ]} in {[ timelineDetail.year ]}</h4>
           <ol>
             <li
-              v-for="item in timelineDetail.data"
-              :key="item.uid">
+                v-for="item in timelineDetail.data"
+                :key="item.uid">
               <a :href="`../${item.type}s/${item.id}/`">{[ item.title ]} {[ item.date ]}</a>
               <span class="badge badge-info">{[ item.subtype ]}</span>
             </li>
@@ -143,15 +161,15 @@ accompanying political chronology.</p>
         </div>
         <div class="modal-footer">
           <button
-            @click="print('timeline-detail')"
-            class="btn btn-sm btn-secondary"
-            type="button"
-            aria-label="Print">Print</button>
+              @click="print('timeline-detail')"
+              class="btn btn-sm btn-secondary"
+              type="button"
+              aria-label="Print">Print</button>
           <button
-            @click="timelineDetail.show = false"
-            class="btn btn-sm btn-secondary"
-            type="button"
-            aria-label="Close">Close</button>
+              @click="timelineDetail.show = false"
+              class="btn btn-sm btn-secondary"
+              type="button"
+              aria-label="Close">Close</button>
         </div>
       </div>
     </div>
