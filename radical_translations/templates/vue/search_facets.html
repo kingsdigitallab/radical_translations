@@ -101,51 +101,44 @@
 
   <div class="secondary-filters alert collapse">
     <template v-for="facet in facets">
-      <div
-        v-if="getFacetCount(facet.buckets) > 0"
-        class="btn-group"
-        role="group"
-        :aria-label="'Grouped filters for ' + getFacetDisplayName(facet.name)">
-        <button
-          v-bind:aria-controls="facet.name" 
-          v-bind:class="hasFilter([facet.name]) ? 'btn-info' : ''"
-          v-bind:data-target="'#' + facet.name"
-          aria-expanded="false"
-          class="btn btn-outline-primary btn-sm toggler"
-          data-toggle="collapse"
-          type="button">
-          {[ getFacetDisplayName(facet.name) ]} 
-        </button>
-        <button
-          v-if="hasAny(facet)"
-          v-on:click="updateFilters([facet.name, 'any'])"
-          v-bind:class="hasFilter([facet.name, 'any']) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
-          class="btn btn-outline-primary btn-sm"
-          type="button">Add all
-          <span class="badge badge-secondary">{[ getFacetCount(facet.buckets) ]}</span>
-          <span class="sr-only">records</span>
-        </button>
+      <div class="float-md-left">
+        <div
+          v-if="getFacetCount(facet.buckets) > 0"
+          class="btn-group"
+          role="group"
+          :aria-label="'Grouped filters for ' + getFacetDisplayName(facet.name)">
+          <button
+            v-bind:aria-controls="facet.name" 
+            v-bind:class="hasFilter([facet.name]) ? 'btn-info' : ''"
+            v-bind:data-target="'#' + facet.name"
+            aria-expanded="false"
+            class="btn btn-outline-primary btn-sm toggler"
+            data-toggle="collapse"
+            type="button">
+            {[ getFacetDisplayName(facet.name) ]} 
+          </button>
+          <button
+            v-if="hasAny(facet)"
+            v-on:click="updateFilters([facet.name, 'any'])"
+            v-bind:class="hasFilter([facet.name, 'any']) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+            class="btn btn-outline-primary btn-sm"
+            type="button">Add all
+            <span class="badge badge-secondary">{[ getFacetCount(facet.buckets) ]}</span>
+            <span class="sr-only">records</span>
+          </button>
+        </div>
+        <div :key="facet.name + 'buckets'" v-bind:id="facet.name" class="alert collapse">
+          <template v-for="bucket in facet.buckets">
+            <button v-if="getBucketValue(bucket) !== 'any'" v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
+              v-bind:class="hasFilter([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
+              class="filter btn" type="button">
+              {[ getBucketValue(bucket) ]}
+              <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
+              <span class="sr-only">records</span>
+            </button>
+          </template>
+        </div>
       </div>
     </template>
-
-    <div
-      v-for="facet in facets"
-      :key="facet.name + 'buckets'"
-      v-bind:id="facet.name"
-      class="alert collapse"
-      data-parent="#filters">
-      <template v-for="bucket in facet.buckets">
-        <button
-          v-if="getBucketValue(bucket) !== 'any'"
-          v-on:click="updateFilters([facet.name, getBucketValue(bucket)])"
-          v-bind:class="hasFilter([facet.name, getBucketValue(bucket)]) ? 'btn-info btn-sm' : 'btn-outline-dark btn-sm'"
-          class="filter btn"
-          type="button">
-          {[ getBucketValue(bucket) ]} 
-          <span class="badge badge-secondary">{[ bucket.doc_count ]}</span>
-          <span class="sr-only">records</span>
-        </button>
-      </template>
-    </div>
   </div>
 </div>
