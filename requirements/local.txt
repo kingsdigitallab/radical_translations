@@ -67,7 +67,7 @@ dill==0.3.4
     # via pylint
 distlib==0.3.4
     # via virtualenv
-django==2.2.27
+django==2.2.28
     # via
     #   -r requirements/./base.in
     #   django-controlled-vocabulary
