@@ -1,2 +1,12 @@
 {% extends "kdl_wagtail_core/base_index_page.html" %}
 {% block title %}Blog{% endblock %}
+
+{% block page-body %}
+<p>
+    We also have a dedicated series on 
+    <a href="/blog/tag/lives-in-translation/" class="btn btn-outline-primary btn-sm">
+        Lives in Translation
+    </a> that you can check out.
+</p>
+{{ block.super }}
+{% endblock %}
