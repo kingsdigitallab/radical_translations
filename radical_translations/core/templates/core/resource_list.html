@@ -1,6 +1,13 @@
 {% extends "search/base.html" %}
 
-{% block search_header %}Resources{% endblock search_header %}
+{% block search_header %}
+Resources
+{% endblock search_header %}
+{% block search_header_results%}
+<div class="col-md text-md-right">
+  {% include "includes/see-results.html" %}
+</div>
+{% endblock search_header_results %}
 {% block title %}Resources{% endblock title %}
 
 {% block results_default %}

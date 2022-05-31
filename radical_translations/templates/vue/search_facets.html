@@ -83,14 +83,21 @@
 
   <hr>
 
-  <h4>Refine your search further
-    <span 
-        class="sup-icon" 
-        data-toggle="tooltip" 
-        title="After expanding the list of filters by clicking on 'More filters', click on a filter label to expand it and see the sub-filters. Click on 'Add all' to apply all the sub-filters or click on the sub-filter label to only apply that. The number in the badge indicates how many records are available if that filter is applied.">
-      {% include "svgs/solid/info-circle.svg" %}
-    </span>
-  </h4>
+  <div class="row">
+    <div class="col-md">
+      <h4>Refine your search further
+        <span 
+            class="sup-icon" 
+            data-toggle="tooltip" 
+            title="After expanding the list of filters by clicking on 'More filters', click on a filter label to expand it and see the sub-filters. Click on 'Add all' to apply all the sub-filters or click on the sub-filter label to only apply that. The number in the badge indicates how many records are available if that filter is applied.">
+          {% include "svgs/solid/info-circle.svg" %}
+        </span>
+      </h4>
+    </div>
+    <div class="col-md text-md-right">
+      {% include "includes/see-results.html" %}
+    </div>
+  </div>
 
   <button
     aria-expanded="false"
