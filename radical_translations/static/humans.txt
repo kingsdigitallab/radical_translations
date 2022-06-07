@@ -12,6 +12,9 @@ Site: https://www.kdl.kcl.ac.uk/who-we-are/arianna-ciula/
 Research Software UI/UX Designer: Ginestra Ferraro
 Site: https://www.kdl.kcl.ac.uk/who-we-are/ginestra-ferraro/
 
+Research Software UI/UX Designer: Tiffany Ong
+Site: https://www.kdl.kcl.ac.uk/who-we-are/tiffany-ong/
+
 Research Software Engineer: Miguel Vieira
 Site: https://www.kdl.kcl.ac.uk/who-we-are/miguel-vieira/
 
