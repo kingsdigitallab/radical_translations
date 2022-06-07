@@ -31,7 +31,7 @@ new Vue({
     rangeMarks: (v) => v % 10 === 0,
     data: [],
     data_suggest: [],
-    resultsElement: "result-views",
+    // resultsElement: "result-views",
     map: {
       mapObject: null,
       options: {

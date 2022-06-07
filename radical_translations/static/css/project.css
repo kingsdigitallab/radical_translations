@@ -9435,6 +9435,13 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   border-color: #00548b;
   color: white; }
 
+.btn.jump-to {
+  margin-right: -8px;
+  margin-right: -.5rem;
+  margin-top: 12px;
+  margin-top: .75rem;
+  text-decoration: none; }
+
 .timeline-filters .active,
 .markers .active {
   padding-right: 10px; }

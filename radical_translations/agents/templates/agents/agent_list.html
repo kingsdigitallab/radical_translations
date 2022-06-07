@@ -3,6 +3,13 @@
 {% load staticfiles %}
 
 {% block search_header %}Agents{% endblock search_header %}
+
+{% block search_header_results%}
+<div class="col-md text-md-right">
+  {% include "includes/see-results.html" %}
+</div>
+{% endblock search_header_results %}
+
 {% block title %}Agents{% endblock title %}
 
 {% block results_default %}
