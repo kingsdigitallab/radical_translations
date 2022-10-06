@@ -11,6 +11,13 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
+[Unreleased] - yyyy-mm-dd
+--------------------
+
+Fixed
+~~~~~
+* Issue with https urls not being returned by the API for pagination.
+
 [1.6.0] - 2022-05-20
 --------------------
 
