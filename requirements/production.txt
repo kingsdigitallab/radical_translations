@@ -32,7 +32,7 @@ coreschema==0.0.4
     # via coreapi
 decorator==5.1.1
     # via ratelim
-django==2.2.27
+django==2.2.28
     # via
     #   -r requirements/./base.in
     #   django-auth-ldap
