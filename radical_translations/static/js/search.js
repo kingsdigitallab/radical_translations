@@ -359,6 +359,7 @@ new Vue({
         );
 
         url = json.next;
+        url = url.indexOf("radicalt") ? url.replace("http:", "https:") : url
       } while (url && all);
 
       return json;
