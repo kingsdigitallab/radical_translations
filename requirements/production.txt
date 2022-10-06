@@ -130,7 +130,7 @@ l18n==2021.3
     # via wagtail
 markupsafe==2.1.1
     # via jinja2
-numpy==1.21.5
+numpy==1.22.0
     # via pandas
 openpyxl==3.0.9
     # via tablib
