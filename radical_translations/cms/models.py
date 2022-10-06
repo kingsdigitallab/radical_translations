@@ -215,7 +215,9 @@ class EventIndexPage(BaseIndexPage):
         return self.children().filter(start_at__gte=timezone.now()).order_by("start_at")
 
     def children(self) -> PageQuerySet:
-        return EventPage.objects.descendant_of(self).live()
+        return (
+            EventPage.objects.descendant_of(self).live().order_by("-first_published_at")
+        )
 
     def past(self) -> PageQuerySet:
         return self.children().filter(start_at__lt=timezone.now()).order_by("-start_at")
