@@ -443,7 +443,7 @@ webencodings==0.5.1
     # via html5lib
 werkzeug==1.0.0
     # via -r requirements/local.in
-wheel==0.37.1
+wheel==0.38.1
     # via pip-tools
 whitenoise==5.0.1
     # via -r requirements/./base.in
