@@ -441,7 +441,7 @@ wcwidth==0.2.5
     #   pytest
 webencodings==0.5.1
     # via html5lib
-werkzeug==1.0.0
+werkzeug==2.2.3
     # via -r requirements/local.in
 wheel==0.37.1
     # via pip-tools
