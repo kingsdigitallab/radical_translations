@@ -239,7 +239,7 @@ The same approach is applied to specific components of the site, like the search
 .. _mobile first approach: https://xd.adobe.com/ideas/process/ui-design/what-is-mobile-first-design/
 
 Qualitative usability testing
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Usability testing focused on the Database section of the site.
 
 A set of tasks was created to test specific areas of the digital platform:
