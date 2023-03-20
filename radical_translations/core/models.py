@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.models import TimeStampedModel
+from markdownx.models import MarkdownxField
 
 from controlled_vocabulary.models import (
     ControlledTerm,
@@ -161,7 +162,7 @@ class Resource(TimeStampedModel):
         help_text="Electronic location from which the resource is available.",
     )
 
-    notes = models.TextField(
+    notes = MarkdownxField(
         blank=True,
         null=True,
         help_text=(

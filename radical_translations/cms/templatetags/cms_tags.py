@@ -1,4 +1,5 @@
 from django import template
+from markdownx.utils import markdownify
 from wagtail.core.models import Page
 
 register = template.Library()
@@ -41,3 +42,8 @@ def get_object_crumbs(context) -> list:
     crumbs.append(last_crumb)
 
     return crumbs
+
+
+@register.filter()
+def md(content):
+    return markdownify(content)
