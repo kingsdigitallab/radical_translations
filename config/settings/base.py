@@ -96,6 +96,7 @@ THIRD_PARTY_APPS = [
     "polymorphic",
     "django_elasticsearch_dsl",
     "django_elasticsearch_dsl_drf",
+    "markdownx",
 ]
 
 LOCAL_APPS = [

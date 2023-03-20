@@ -1,4 +1,5 @@
 from django.contrib import admin
+from markdownx.admin import MarkdownxModelAdmin
 
 from radical_translations.core.models import (
     Classification,
@@ -74,7 +75,7 @@ class TitleAdmin(admin.ModelAdmin):
 
 
 @admin.register(Resource)
-class ResourceAdmin(admin.ModelAdmin):
+class ResourceAdmin(MarkdownxModelAdmin):
     autocomplete_fields = [
         "date",
         "subjects",

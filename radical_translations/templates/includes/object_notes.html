@@ -1,4 +1,6 @@
+{% load cms_tags %}
+
 {% if object.notes %}
 <h3>Notes</h3>
-<p class="notes">{{ object.notes|urlize }}</p>
+<p class="notes">{{ object.notes|md|safe }}</p>
 {% endif %}
