@@ -292,3 +292,4 @@ package-lock.json
 events.json
 
 radical_translations/static/viz/
+.vscode

@@ -149,22 +149,22 @@ It consists of four phases with often multiple iterations happening within each 
 
 Phase 1 – Discover
 ^^^^^^^^^^^^^^^^^^
-During this phase we discussed the project details and objectives with the research team. Understanding the data, contributing to the definition of the data model, defining and surveying potential audiences. Design workshops are also held to explore options and expectations at different point in the projects to.
+During this phase we discussed the project details and objectives with the research team. Understanding the data, contributing to the definition of the data model, defining and surveying potential audiences. Design workshops were also held to explore options and expectations at different points in the project and plan further design iterations.
 
 Phase 2 – Define
 ^^^^^^^^^^^^^^^^
-The outcomes (e.g., reports) are aligned with the project requirements and tasks to start development are created (iteratively, following increments).
+The outcomes (e.g., reports) were aligned with the project requirements and tasks to start development were created (iteratively, following increments).
 
 Phase 3 – Develop
 ^^^^^^^^^^^^^^^^^
-Different solutions are offered (e.g., static and interactive mock-ups) to realise the vision of the projects, component by component.
+Different solutions were offered (e.g., static and interactive mock-ups) to realise the vision of the project, component by component.
 
 Phase 4 – Deploy
 ^^^^^^^^^^^^^^^^
-Usability testing and final implementation take place. Further adjustments happen in this phase to accommodate reactions from the wider audience interacting with the digital platform.
+Usability testing and final implementation took place. Further adjustments happened in this phase to accommodate reactions from the wider audience interacting with the digital platform.
 
-Design Workshops
-^^^^^^^^^^^^^^^^^
+Design Workshops and User Research
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 **Purpose:** align high level requirements to use cases to drive data model definition and development (use cases lead to identification of usability testing units later in the evolutionary development cycle).
 
 Mapping the data 
@@ -183,7 +183,7 @@ User types, scenarios and cases
 
 Identify audiences and user types: anonymous survey sent to identified groups of interest and data collected over a 1-month period.
 
-A report of the survey outcome is shared within the team.
+A report of the survey outcome was shared within the team.
 
 .. figure:: _images/questionnaire-screenshot.png
     :align: center
@@ -193,18 +193,20 @@ A report of the survey outcome is shared within the team.
 
     *A screenshot of the survey partial results*
 
-KDL and the research team will collaboratively define use cases and user scenarios.
+KDL and the research team collaboratively defined use cases and user scenarios.
 
-The scenarios are mainly focused on the search and retrieval of information in the search and browse section of the site (database).
+The scenarios mainly focused on the search and retrieval of information in the search and browse section of the site (database_).
+
+.. _database: https://radicaltranslations.org/database/
 
 Research
 ~~~~~~~~
-Work on the look and feel starts. Iconographic research, colour palette and imagery are collected to study and drive the creating of a design style that matches and reinforces the message and information the content is conveying. 
+At this point KDL started work on the look and feel. Iconographic research, colour palette and imagery were collected to study and drive the creation of a design style that matched and reinforced the message and information the content is conveying. 
 
 Mock-ups
 ^^^^^^^^
 
-Rounds of mock-ups are created. Following the `mobile first approach`_, the focus is on prioritising content and interaction, rather than style.
+Next rounds of mock-ups were created. Following the `mobile first approach`_, the focus was on prioritising content and interaction, rather than style.
 
 .. figure:: _images/mock-ups-round-one.png
     :align: center
@@ -214,9 +216,9 @@ Rounds of mock-ups are created. Following the `mobile first approach`_, the focu
 
     *First round of mock-ups*
 
-**Content guidelines** have also been provided to support the research team generate accessible, and web suitable, content.
+**Content guidelines** were also provided to support the research team generate accessible, and web suitable, content.
 
-Adjustments are made based on comments and feedback.
+Adjustments were made based on comments and feedback.
 
 .. figure:: _images/mock-ups-round-two.png
     :align: center
@@ -226,7 +228,7 @@ Adjustments are made based on comments and feedback.
 
     *Second round of mock-ups*
 
-The same approach is applied to specific components of the site, like the search and timeline visualisation.
+The same approach was applied to specific components of the site, like the search and timeline visualisation.
 
 .. figure:: _images/timeline-progression.jpg
     :align: center
@@ -235,6 +237,8 @@ The same approach is applied to specific components of the site, like the search
     :width: 100%
 
     *Design iterations over the timeline component*
+
+More information on the process to create the timeline visualisation can be found in the paper "Small Data and Process in Data Visualization: The Radical Translations Case Study" published by the research team and available at: https://arxiv.org/ftp/arxiv/papers/2110/2110.09349.pdf.
 
 .. _mobile first approach: https://xd.adobe.com/ideas/process/ui-design/what-is-mobile-first-design/
 
@@ -249,5 +253,5 @@ A set of tasks was created to test specific areas of the digital platform:
 #. Search and Browse (Agents and Resources)
 #. Timeline (Interactive visualisation)
 
-Five testers where selected and interviews took place both in person and remotely.
+Five testers were selected and interviews took place both in person and remotely.
 Findings where then shared with the team and further improvements were implemented based on the testing outcomes.
