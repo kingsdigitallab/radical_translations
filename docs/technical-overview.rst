@@ -238,7 +238,7 @@ The same approach was applied to specific components of the site, like the searc
 
     *Design iterations over the timeline component*
 
-More information on the process to create the timeline visualisation is available 
+More information on the process to create the timeline visualisation can be found in the paper "Small Data and Process in Data Visualization: The Radical Translations Case Study" published by the research team and available at: https://arxiv.org/ftp/arxiv/papers/2110/2110.09349.pdf.
 
 .. _mobile first approach: https://xd.adobe.com/ideas/process/ui-design/what-is-mobile-first-design/
 
