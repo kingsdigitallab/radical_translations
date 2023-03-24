@@ -14,6 +14,12 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 [Unreleased] - yyyy-mm-dd
 --------------------
 
+Added
+~~~~~
+* Mardown editing support for notes.
+* Design technical documentation.
+* ISBN to the footer.
+
 Fixed
 ~~~~~
 * Issue with https urls not being returned by the API for pagination.
