@@ -58,6 +58,7 @@ class VocabularyAdditionalGenreTerms(VocabularyBaseList):
     def _get_searchable_terms(self) -> List:
 
         return [
+            ["Article in periodical", "Article in periodical", "use for Periodicals"],
             [
                 "Banned works",
                 "Banned works",
