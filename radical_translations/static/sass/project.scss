@@ -1699,6 +1699,7 @@ $viz-resource-colour: $old-yellow;
     background: $viz-background;
     display: block;
     margin: auto;
+    overflow-y: auto;
 
     @media screen {
       overflow-x: scroll;

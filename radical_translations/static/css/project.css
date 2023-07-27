@@ -9884,7 +9884,8 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   .viz-grid table {
     background: #fff;
     display: block;
-    margin: auto; }
+    margin: auto;
+    overflow-y: auto; }
     @media screen {
       .viz-grid table {
         overflow-x: scroll; } }
