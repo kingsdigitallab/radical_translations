@@ -24,30 +24,20 @@
   {% endfor %}
 </div>
 
-<div class="row">
-  <div class="col-md-7 col-lg-8">
-    <h2 class="home-heading">Events timeline</h2>
-    <div class="timeline">
-      <ul class="events">
-        {% for event in events %}
-        <li class="event" data-date="{{ event.date }}">
-          <h3>
-            <a href="{% url 'event-detail' event.pk %}">{{ event.title }}</a>
-          </h3>
-          <p>
-            {% include 'geonames_place/includes/place.html' with place=event.place %}
-          </p>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-  <div class="col">
-    <div class="twitter">
-      <a class="twitter-timeline" data-dnt="true" data-height="400" href="https://twitter.com/rt_1789?ref_src=twsrc%5Etfw">Tweets by rt_1789</a>
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
-  </div>
+<h2 class="home-heading">Events timeline</h2>
+<div class="timeline">
+  <ul class="events">
+    {% for event in events %}
+    <li class="event" data-date="{{ event.date }}">
+      <h3>
+        <a href="{% url 'event-detail' event.pk %}">{{ event.title }}</a>
+      </h3>
+      <p>
+        {% include 'geonames_place/includes/place.html' with place=event.place %}
+      </p>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 
 <h2 class="home-heading">Featured</h2>
