@@ -1,10 +1,7 @@
 {% extends "kdl_wagtail_core/base_search_page.html" %}
-
-{% block search-form %}
-{% endblock %}
-
+{% block search-form %}{% endblock %}
 {% block search-summary %}
-<h3>
+  <h2>
     {{ hits.paginator.count }} pages found for <span class="highlight">{{ search_phrase }}</span>
-</h3>
+  </h2>
 {% endblock search-summary %}
