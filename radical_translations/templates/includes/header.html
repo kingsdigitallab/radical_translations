@@ -23,19 +23,11 @@
       <path d="M236.69,353.73c0-.34,0-.67,0-1a25.24,25.24,0,0,0-50.48,0c0,.34,0,.67,0,1Z" transform="translate(-24.98 -62.71)" class="cap" />
       <rect y="306.19" width="467.47" height="61.09" rx="5.61" class="cap" />
     </svg>
-    <
     {% if page.url == "/" %}
-      h1
+      <h1 class="site-title">{{ ds.WAGTAIL_SITE_NAME }}</h1>
     {% else %}
-      p
+      <p class="site-title">{{ ds.WAGTAIL_SITE_NAME }}</p>
     {% endif %}
-    class="site-title">{{ ds.WAGTAIL_SITE_NAME }}</
-    {% if page.url == "/" %}
-      h1
-    {% else %}
-      p
-    {% endif %}
-    >
   </a>
   {% include 'includes/navigation.html' %}
 </header>
