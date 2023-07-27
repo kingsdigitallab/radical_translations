@@ -1,5 +1,4 @@
 {% load kdl_wagtail_core_tags menu_tags staticfiles %}
-
 <footer>
   <div class="container-fluid">
     <div class="row">
@@ -7,7 +6,7 @@
         <h2>{{ ds.WAGTAIL_SITE_NAME }}</h2>
         <p class="small">ISBN: 978-1-912466-27-6</p>
         <p class="social-media">
-          <a href="//twitter.com/rt_1789">
+          <a href="//twitter.com/rt_1789" aria-label="Twitter">
             {# Font Awesome Twitter icon #}
             {% include "svgs/brands/twitter.svg" %}
           </a>
@@ -16,22 +15,26 @@
       </div>
       <div class="col-sm partners-funders">
         <h2>Partners and Funders</h2>
-
         <a href="//kcl.ac.uk/" class="one-quarter">
-          <img src="{% static 'images/logos/kings-logo-red.svg' %}" alt="King's College London website.">
+          <img src="{% static 'images/logos/kings-logo-red.svg' %}"
+               alt="King's College London website.">
         </a>
-
         <a href="//www.unimib.it" class="one-quarter">
-          <img src="{% static 'images/logos/logo-universita-bicocca-milano.svg' %}" alt="Univeristà degli Studi di Milano Bicocca">
+          <img src="{% static 'images/logos/logo-universita-bicocca-milano.svg' %}"
+               alt="Univeristà degli Studi di Milano Bicocca">
         </a>
-
         <a href="//ahrc.ukri.org/" class="half">
-          <img src="{% static 'images/logos/UKRI_AHR_Council-Logo_Horiz-RGB.svg' %}" alt="UKRI AHRC">
+          <img src="{% static 'images/logos/UKRI_AHR_Council-Logo_Horiz-RGB.svg' %}"
+               alt="UKRI AHRC">
         </a>
       </div>
       <div class="col-sm text-right">
-        <p><a href="/accessibility-statement/">Accessibility statement</a></p>
-        <p><a href="/cookies-policy/">Cookies and privacy policy</a></p>
+        <p>
+          <a href="/accessibility-statement/">Accessibility statement</a>
+        </p>
+        <p>
+          <a href="/cookies-policy/">Cookies and privacy policy</a>
+        </p>
       </div>
     </div>
     <div class="row">

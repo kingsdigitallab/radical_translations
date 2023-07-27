@@ -1,7 +1,8 @@
 <header class="top-header">
   <div class="login">
-    <a href="/cms/" class="btn btn-sm">
-      <span class="hidden">Font Awesome user icon</span>
+    <a href="/cms/"
+       class="btn btn-sm"
+       aria-label="{% if reques.user.is_authenticated %}Log out{% else %}Log in{% endif %}">
       {% include "svgs/solid/user.svg" %}
       {% if request.user.is_authenticated %}<small>{{ user.username }}</small>{% endif %}
     </a>
@@ -16,8 +17,7 @@
       </small>
     </a>
   </div>
-  <a class="brand" href="/">
-    <span class="hidden">Custom Phrygian cap icon</span>
+  <a class="brand" href="/" aria-label="Home page">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 467.47 367.29">
       <path d="M163.24,352.72a48.24,48.24,0,0,1,96.48,0c0,.34,0,.67,0,1H477.31S452.5,217.2,327.21,120.55C216.64,35.25,141.45,63.8,104.6,84.43c-28.55,16-56,68.72-36.81,95.25C83.15,201,128.34,167,132.63,188.52c3,14.74-35.87,44.84-67.79,104.64s-23.79,60.57-23.79,60.57H163.26C163.26,353.39,163.24,353.06,163.24,352.72Z" transform="translate(-24.98 -62.71)" class="cap" />
       <path d="M236.69,353.73c0-.34,0-.67,0-1a25.24,25.24,0,0,0-50.48,0c0,.34,0,.67,0,1Z" transform="translate(-24.98 -62.71)" class="cap" />
