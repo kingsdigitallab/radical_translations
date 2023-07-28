@@ -11,7 +11,14 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 .. _Keep a Changelog: https://keepachangelog.com/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html
 
-[1.7.0] - yyyy-mm-dd
+[1.8.0] - 2023-07-28
+--------------------
+
+Fixed
+~~~~~
+* Accessibility issues.
+
+[1.7.0] - 2023-03-24
 --------------------
 
 Added
@@ -309,7 +316,7 @@ Changed
 * Add paratext term `Revolutionary calendar use` to `Resources` that have a radical date.
 * Modal map view uses an API call to get `Place` information rather than loading a Django view.
 * Upgrade Wagtail_ to version 2.12.
-* `Bump pillow to 7.1`_. 
+* `Bump pillow to 7.1`_.
 * Exclude libraries from the list of `Organisations`.
 * Exclude radicalism from the subject filter.
 * Order/display `Resources` contributor filter by `family name, given name`.
