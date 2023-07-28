@@ -1,20 +1,19 @@
 {% load kdl_wagtail_core_tags wagtailcore_tags %}
-
 {% if page.depth > 3 %}
-{% with siblings=page.get_siblings.live %}
-{% if siblings %}
-<div class="col-md-3">
-  <nav class="sidebar">
-    <h4>{{ page.get_parent.title }}</h4>
-    <ul>
-      {% for child in siblings %}
-      <li>
-        <a href="{% pageurl child %}">{{ child.title }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </nav>
-</div>
-{% endif %}
-{% endwith %}
+  {% with siblings=page.get_siblings.live %}
+    {% if siblings %}
+      <div class="col-md-3">
+        <nav class="sidebar" aria-label="Side navigation">
+          <h4>{{ page.get_parent.title }}</h4>
+          <ul>
+            {% for child in siblings %}
+              <li>
+                <a href="{% pageurl child %}">{{ child.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+    {% endif %}
+  {% endwith %}
 {% endif %}

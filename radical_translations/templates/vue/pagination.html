@@ -1,32 +1,29 @@
-<nav aria-label="Page navigation for search results">
-    <ul class="pagination justify-content-end">
-        <li v-bind:class="{ disabled: !data.previous }" class="page-item">
-            <a class="page-link" v-on:click="page--">
-                &laquo; Previous
-            </a>
-        </li>
-        <li class="page-item">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend rounded-0">
-                    <span class="input-group-text">page</span>
-                </div>
-                <input
-                    v-model="page"
-                    v-bind:max="numberOfPages"
-                    aria-label="Choose page number"
-                    class="form-control"
-                    min="1"
-                    size="1"
-                    type="number">
-                <div class="input-group-append">
-                    <span class="input-group-text">of {[ numberOfPages ]}</span>
-                </div>
-            </div>
-        </li>
-        <li v-bind:class="{ disabled: !data.next }" class="page-item">
-            <a class="page-link" v-on:click="page++">
-                Next &raquo;
-            </a>
-        </li>
-    </ul>
+<nav aria-label="{{ position }} page navigation for search results">
+  <ul class="pagination justify-content-end">
+    <li v-bind:class="{ disabled: !data.previous }" class="page-item">
+      <a class="page-link" v-on:click="page--"> &laquo; Previous </a>
+    </li>
+    <li class="page-item">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend rounded-0">
+          <span class="input-group-text">page</span>
+        </div>
+        <input
+          v-model="page"
+          v-bind:max="numberOfPages"
+          aria-label="Choose page number"
+          class="form-control"
+          min="1"
+          size="1"
+          type="number"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">of {[ numberOfPages ]}</span>
+        </div>
+      </div>
+    </li>
+    <li v-bind:class="{ disabled: !data.next }" class="page-item">
+      <a class="page-link" v-on:click="page++"> Next &raquo; </a>
+    </li>
+  </ul>
 </nav>

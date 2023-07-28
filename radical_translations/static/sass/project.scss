@@ -1419,11 +1419,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     border-color: $prussian-blue;
     color: white;
   }
+
+  label {
+    color: $black;
+  }
 }
 
 .btn.jump-to {
-  margin-right: -.5rem;
-  margin-top: .75rem;
+  margin-right: -0.5rem;
+  margin-top: 0.75rem;
   text-decoration: none;
 }
 
@@ -1434,7 +1438,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
     &::after {
       content: "x";
-      font-family: 'Arial', sans-serif;
+      font-family: "Arial", sans-serif;
       font-size: 10px;
       font-weight: 400;
       margin-left: 3px;
@@ -1444,12 +1448,12 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 }
 
 .site-search-form {
-  margin: .5rem auto 0;
+  margin: 0.5rem auto 0;
   max-width: 500px;
   padding: 0 1rem;
 
   button {
-    padding: 0 .5rem;
+    padding: 0 0.5rem;
 
     svg {
       fill: white;
@@ -1695,6 +1699,7 @@ $viz-resource-colour: $old-yellow;
     background: $viz-background;
     display: block;
     margin: auto;
+    overflow-y: auto;
 
     @media screen {
       overflow-x: scroll;
