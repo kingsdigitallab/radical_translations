@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "devDependencies": {
     "autoprefixer": "^9.4.7",
-    "bootstrap": "4.3.1",
+    "bootstrap": "^4.3.1",
     "browser-sync": "^2.26.14",
     "chartjs-plugin-annotation": "^0.5.7",
     "chartjs-plugin-datalabels": "^0.7.0",
     "cssnano": "^4.1.10",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^5.0.3",
     "gulp-plumber": "^1.2.1",
@@ -18,16 +18,17 @@
     "gulp-uglify-es": "^1.0.4",
     "jquery": "^3.5.0",
     "leaflet": "^1.7.1",
-    "leaflet.markercluster": "^1.4.1",
+    "leaflet.markercluster": "^1.5.3",
     "lodash": "^4.17.20",
     "pixrem": "^5.0.0",
-    "popper.js": "1.14.7",
+    "prettier": "^3.0.0",
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
+    "vue-html-to-paper": "^1.4.5",
     "vue-slider-component": "^3.2.11"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=16"
   },
   "browserslist": [
     "last 2 versions"
@@ -35,6 +36,5 @@
   "scripts": {
     "dev": "gulp",
     "build": "gulp generate-assets"
-  },
-  "dependencies": {}
+  }
 }
