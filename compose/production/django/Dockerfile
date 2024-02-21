@@ -1,9 +1,19 @@
-FROM node:10-stretch-slim as client-builder
+FROM --platform=linux/amd64 node:18-slim as client-builder
+
+RUN apt-get update \
+  # dependencies for building Python packages
+  && apt-get install -y build-essential git \
+  # cleaning up unused files
+  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY ./package.json /app
-RUN npm install && npm cache clean --force
+
+RUN npm install --no-optional buble && npm cache clean --force
+
 COPY . /app
+
 RUN npm run build
 
 # Python build stage

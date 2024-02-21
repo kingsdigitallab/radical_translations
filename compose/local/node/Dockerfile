@@ -1,9 +1,8 @@
-FROM node:14-slim
+FROM --platform=linux/amd64 node:18-slim
 
 RUN apt-get update \
     # dependencies for building Python packages
     && apt-get install -y build-essential git \
-    && apt-get install -y python \
     # cleaning up unused files
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*
