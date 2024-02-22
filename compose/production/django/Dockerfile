@@ -10,7 +10,7 @@ RUN apt-get update \
 WORKDIR /app
 COPY ./package.json /app
 
-RUN npm install --no-optional buble && npm cache clean --force
+RUN npm install && npm cache clean --force
 
 COPY . /app
 
