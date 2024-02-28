@@ -25,6 +25,13 @@ $link-color: $radical-red;
 
 /* Globals */
 
+a:not([href]):not([tabindex]),
+a:not([href]):not([tabindex]):focus,
+a:not([href]):not([tabindex]):hover {
+  color: inherit;
+  text-decoration: none;
+}
+
 a {
   color: $radical-red;
   text-decoration: underline;
