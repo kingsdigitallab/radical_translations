@@ -1,6 +1,6 @@
 name: "radicalt"
 
-x-var: &VIRTUAL_HOST "radicalt-os.kdl.kcl.ac.uk,radicalt.app.cch.kcl.ac.uk,localhost,127.0.0.1"
+x-var: &VIRTUAL_HOST "www.radicaltranslations.org,radicaltranslations.org,radicalt-os.kdl.kcl.ac.uk,radicalt.app.cch.kcl.ac.uk,localhost,127.0.0.1"
 
 services:
   nginx-proxy:
