@@ -13,6 +13,7 @@
     {% endif %}
 {% endif %}
 
+<div class="relationship-details">
 {% if related.get_radical_markers %}
 {% for m in related.get_radical_markers_range %}
 {# Custom phrygian cap icon #}
@@ -21,7 +22,7 @@
 {% endif %}
 
 {% if label %}<span class="label">{{ label|capfirst }}:</span>{% endif %}
-<a href="{% url 'resource-detail' related.pk %}">{{ related.title }}</a>
+<a class="resource-title level-{{ level }}" href="{% url 'resource-detail' related.pk %}" title="{{ related.title }}">{{ related.title }}</a>
 
 {% for classification in related.get_classification %}
 <span class="{{ classification.label }}">{{ classification.label }}</span>
@@ -33,6 +34,7 @@
 {% if level != 1 %}
 {% include "core/includes/type.html" with resource=related %}
 {% endif %}
+</div>
 
 {% if level < 2 %}
     {% if related.relationships.count or related.related_to.count %}

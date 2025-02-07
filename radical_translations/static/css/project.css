@@ -12314,7 +12314,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .related-resources ul.relationship-list {
   padding-left: 0;
 }
-.related-resources ul li ul li {
+.related-resources ul ul {
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  margin-top: 8px;
+  margin-top: 0.5rem;
+}
+.related-resources ul li > ul > li,
+.related-resources ul li > ul > li > ul > li {
   margin-bottom: 8px;
   margin-bottom: 0.5rem;
 }
@@ -12343,4 +12350,14 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   background: none;
   border: none;
   padding: 0;
+}
+.related-resources .relationship-details {
+  display: inline;
+}
+.related-resources .resource-title.level-1 {
+  font-variation-settings: "wdth" 100, "wght" 600;
+  font-weight: 600;
+}
+.related-resources .resource-title.level-2 {
+  color: #222222;
 }
