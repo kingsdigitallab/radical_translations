@@ -1936,6 +1936,13 @@ $viz-resource-colour: $old-yellow;
     display: inline;
   }
 
+  .label {
+    font-variation-settings:
+      "wdth" 100,
+      "wght" 600;
+    font-weight: 600;
+  }
+
   .resource-title {
     &.level-1 {
       font-variation-settings:

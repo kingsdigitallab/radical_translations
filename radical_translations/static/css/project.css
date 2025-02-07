@@ -12354,6 +12354,10 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 .related-resources .relationship-details {
   display: inline;
 }
+.related-resources .label {
+  font-variation-settings: "wdth" 100, "wght" 600;
+  font-weight: 600;
+}
 .related-resources .resource-title.level-1 {
   font-variation-settings: "wdth" 100, "wght" 600;
   font-weight: 600;
