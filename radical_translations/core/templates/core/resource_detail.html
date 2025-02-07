@@ -148,20 +148,38 @@
 {% endif %}
 
 {% if object.relationships.count or object.related_to.count %}
+<section class="related-resources">
 <h2>Related resources</h2>
-<dl>
+<ul class="relationship-list">
   {% if object.relationships.count %}
-  {% for relationship in object.relationships.all %}
-  {% include "core/includes/relationship.html" with direct=True label=relationship.relationship_type.label related=relationship.related_to %}
+  {% regroup object.relationships.all by relationship_type as relationships %}
+  {% for relationship in relationships %}
+  <li>
+    <span class="relationship-group relationship-group-label" data-toggle="collapse" href="#{{ relationship.grouper.label|slugify }}" role="button" aria-expanded="true" aria-controls="{{ relationship.grouper.label|slugify }}">{{ relationship.grouper.label|cut:' of'|capfirst }}{{relationship.list|length|pluralize}}</span>
+    <ul class="collapse show" id="{{ relationship.grouper.label|slugify }}">
+    {% for related in relationship.list %}
+    {% include "core/includes/relationship.html" with level=1 related=related.related_to %}
+    {% endfor %}
+    </ul>
+  </li>
   {% endfor %}
   {% endif %}
 
   {% if object.related_to.count %}
-  {% for relationship in object.get_related_resources %}
-  {% include "core/includes/relationship.html" with label=relationship.relationship_type.label related=relationship.resource %}
+  {% regroup object.get_related_resources by relationship_type as relationships %}
+  {% for relationship in relationships %}
+  <li>
+    <span class="relationship-group relationship-group-label" data-toggle="collapse" href="#{{ relationship.grouper.label|slugify }}" role="button" aria-expanded="true" aria-controls="{{ relationship.grouper.label|slugify }}">{{ relationship.grouper.label|cut:' of'|capfirst }}{{relationship.list|length|pluralize}}</span>
+    <ul class="collapse show" id="{{ relationship.grouper.label|slugify }}">
+    {% for related in relationship.list %}
+    {% include "core/includes/relationship.html" with level=1 related=related.resource %}
+    {% endfor %}
+    </ul>
+  </li>
   {% endfor %}
   {% endif %}
-</dl>
+</ul>
+</section>
 {% endif %}
 
 {% if object.summary %}
