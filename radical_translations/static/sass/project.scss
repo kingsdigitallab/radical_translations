@@ -1885,12 +1885,14 @@ $viz-resource-colour: $old-yellow;
       padding-left: 0;
     }
 
-    li {
-      ul {
-        li {
-          margin-bottom: 0.5rem;
-        }
-      }
+    ul {
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    li > ul > li,
+    li > ul > li > ul > li {
+      margin-bottom: 0.5rem;
     }
   }
 
@@ -1928,5 +1930,22 @@ $viz-resource-colour: $old-yellow;
     background: none;
     border: none;
     padding: 0;
+  }
+
+  .relationship-details {
+    display: inline;
+  }
+
+  .resource-title {
+    &.level-1 {
+      font-variation-settings:
+        "wdth" 100,
+        "wght" 600;
+      font-weight: 600;
+    }
+
+    &.level-2 {
+      color: $dark-gray;
+    }
   }
 }
