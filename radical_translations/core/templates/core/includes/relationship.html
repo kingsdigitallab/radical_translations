@@ -1,5 +1,18 @@
-<dt>{% if direct %}is {{ label }}{% else %}has {{ label|cut:' of' }}{% endif %}</dt>
-<dd>
+<li>
+{% if level == 1 %}
+    {% if related.relationships.count > 1 or related.related_to.count > 1 %}
+        <button
+        class="relationship-group"
+        data-toggle="collapse"
+        href="#related-{{ related.pk }}"
+        role="button"
+        aria-expanded="false"
+        aria-controls="related-{{ related.pk }}"
+        aria-label="Expand/collapse"
+        ></button>
+    {% endif %}
+{% endif %}
+
 {% if related.get_radical_markers %}
 {% for m in related.get_radical_markers_range %}
 {# Custom phrygian cap icon #}
@@ -7,9 +20,38 @@
 {% endfor %}
 {% endif %}
 
+{% if label %}<span class="label">{{ label|capfirst }}:</span>{% endif %}
 <a href="{% url 'resource-detail' related.pk %}">{{ related.title }}</a>
-{% include "core/includes/type.html" with resource=related %}
-</dd>
-{% for classification in relationship.get_classification %}
-<dd class="{{ classification.label }}">{{ classification.label }}</dd>
+
+{% for classification in related.get_classification %}
+<span class="{{ classification.label }}">{{ classification.label }}</span>
+{% if not forloop.last %}
+<span class="separator">|</span>
+{% endif %}
 {% endfor %}
+
+{% if level != 1 %}
+{% include "core/includes/type.html" with resource=related %}
+{% endif %}
+
+{% if level < 2 %}
+    {% if related.relationships.count or related.related_to.count %}
+    <ul class="collapse" id="related-{{ related.pk }}">
+        {% if related.relationships.count %}
+            {% for related_resource in related.relationships.all %}
+                {% if related_resource.related_to != object %}
+                    {% include "core/includes/relationship.html" with label=related_resource.relationship_type.label level=level|add:1 related=related_resource.related_to %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if related.related_to.count %}
+            {% for related_resource in related.get_related_resources %}
+                {% if related_resource.resource != object %}
+                    {% include "core/includes/relationship.html" with label=related_resource.relationship_type.label level=level|add:1 related=related_resource.resource %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </ul>
+    {% endif %}
+{% endif %}
+</li>

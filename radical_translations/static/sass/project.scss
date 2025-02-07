@@ -47,7 +47,9 @@ a {
 
 body {
   font-family: Lora, serif;
-  font-variation-settings: "wdth" 100, "wght" 400;
+  font-variation-settings:
+    "wdth" 100,
+    "wght" 400;
 
   background: url("../images/rt-bg.svg") no-repeat top left
     lighten($old-yellow, 30%);
@@ -72,7 +74,9 @@ body {
 
 b,
 strong {
-  font-variation-settings: "wdth" 100, "wght" 700;
+  font-variation-settings:
+    "wdth" 100,
+    "wght" 700;
 }
 
 .close {
@@ -218,7 +222,9 @@ footer {
 
     &.date {
       font-size: 1.5em;
-      font-variation-settings: "wdth" 100, "wght" 700;
+      font-variation-settings:
+        "wdth" 100,
+        "wght" 700;
       font-weight: 700;
 
       &::before {
@@ -299,7 +305,9 @@ h5,
 h6,
 .card-header {
   font-family: Oswald, sans-serif;
-  font-variation-settings: "wdth" 100, "wght" 700;
+  font-variation-settings:
+    "wdth" 100,
+    "wght" 700;
   font-weight: 700;
 }
 
@@ -310,7 +318,9 @@ h6,
 .title {
   font-family: Oswald, sans-serif;
   font-size: 1.25rem;
-  font-variation-settings: "wdth" 100, "wght" 700;
+  font-variation-settings:
+    "wdth" 100,
+    "wght" 700;
 }
 
 .site-title {
@@ -409,7 +419,9 @@ h6,
 nav,
 .main-menu {
   font-family: Oswald, sans-serif;
-  font-variation-settings: "wdth" 100, "wght" 400;
+  font-variation-settings:
+    "wdth" 100,
+    "wght" 400;
 
   a {
     text-decoration: none;
@@ -441,7 +453,9 @@ nav,
   display: block;
   font-family: "Oswald", sans-serif;
   font-size: 4rem;
-  font-variation-settings: "wdth" 100, "wght" 600;
+  font-variation-settings:
+    "wdth" 100,
+    "wght" 600;
   line-height: 1;
   margin: 0;
   min-width: 280px;
@@ -1614,11 +1628,15 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
   }
 
   .lora-reg {
-    font-variation-settings: "wdth" 100, "wght" 400;
+    font-variation-settings:
+      "wdth" 100,
+      "wght" 400;
   }
 
   .lora-bold {
-    font-variation-settings: "wdth" 100, "wght" 700;
+    font-variation-settings:
+      "wdth" 100,
+      "wght" 700;
   }
 
   // Country colours
@@ -1668,7 +1686,9 @@ $viz-resource-colour: $old-yellow;
 
   .label {
     color: $radical-red;
-    font-variation-settings: "wdth" 100, "wght" 700;
+    font-variation-settings:
+      "wdth" 100,
+      "wght" 700;
     opacity: 1;
     text-transform: uppercase;
 
@@ -1852,5 +1872,61 @@ $viz-resource-colour: $old-yellow;
 
   #key {
     border: 1px solid #000;
+  }
+}
+
+.related-resources {
+  margin-bottom: 1rem;
+
+  ul {
+    list-style: none;
+
+    &.relationship-list {
+      padding-left: 0;
+    }
+
+    li {
+      ul {
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+
+  [aria-expanded] {
+    &::before {
+      display: inline-block;
+      margin-right: 0.5rem;
+      vertical-align: text-top;
+    }
+  }
+
+  .relationship-group[aria-expanded="true"] {
+    &::before {
+      content: url("/static/fontawesome/svgs/solid/caret-down.svg");
+      width: 10px;
+    }
+  }
+  .relationship-group[aria-expanded="false"] {
+    &::before {
+      content: url("/static/fontawesome/svgs/solid/caret-right.svg");
+      width: 7px;
+    }
+  }
+
+  .relationship-group-label {
+    font-family: "Oswald", sans-serif;
+    font-size: 1.75rem;
+    font-variation-settings:
+      "wdth" 100,
+      "wght" 700;
+    font-weight: 700;
+  }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
   }
 }

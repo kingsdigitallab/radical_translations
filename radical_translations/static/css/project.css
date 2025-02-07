@@ -12304,3 +12304,43 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
     border: 1px solid #000;
   }
 }
+.related-resources {
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+.related-resources ul {
+  list-style: none;
+}
+.related-resources ul.relationship-list {
+  padding-left: 0;
+}
+.related-resources ul li ul li {
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+}
+.related-resources [aria-expanded]::before {
+  display: inline-block;
+  margin-right: 8px;
+  margin-right: 0.5rem;
+  vertical-align: text-top;
+}
+.related-resources .relationship-group[aria-expanded=true]::before {
+  content: url("/static/fontawesome/svgs/solid/caret-down.svg");
+  width: 10px;
+}
+.related-resources .relationship-group[aria-expanded=false]::before {
+  content: url("/static/fontawesome/svgs/solid/caret-right.svg");
+  width: 7px;
+}
+.related-resources .relationship-group-label {
+  font-family: "Oswald", sans-serif;
+  font-size: 28px;
+  font-size: 1.75rem;
+  font-variation-settings: "wdth" 100, "wght" 700;
+  font-weight: 700;
+}
+.related-resources button {
+  background: none;
+  border: none;
+  padding: 0;
+}
