@@ -1,6 +1,10 @@
 {% if contributions or object.roles.count %}
-{# Font Awesome file-certificate icon #}
-<span class="small-icon">{% include "svgs/solid/file-certificate.svg" %}</span>
+  {# Font Awesome file-certificate icon #}
+  {% if style == "metadata" %}
+    {% include "svgs/solid/file-certificate.svg" %}
+    {% else %}
+    <span class="small-icon">{% include "svgs/solid/file-certificate.svg" %}</span>
+  {% endif %}
 {% endif %}
 
 {% if contributions %}
