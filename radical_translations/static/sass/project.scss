@@ -1427,6 +1427,7 @@ Initial code from this Stackoverflow answer https://stackoverflow.com/a/49373879
 
     &::before {
       content: url("/static/fontawesome/svgs/solid/caret-down.svg");
+      filter: brightness(0) invert(1);
       width: 8px;
     }
   }
