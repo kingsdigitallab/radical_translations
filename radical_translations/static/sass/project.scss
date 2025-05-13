@@ -830,10 +830,6 @@ figure {
       &::before {
         content: url("/static/fontawesome/svgs/solid/key-skeleton.svg");
         padding-right: 6px;
-
-        &:hover {
-          filter: invert(0);
-        }
       }
     }
 
@@ -846,6 +842,15 @@ figure {
         &::after {
           content: url("/static/fontawesome/svgs/solid/times.svg");
           padding-left: 10px;
+        }
+      }
+    }
+
+    &:hover {
+      .heading {
+        &::before,
+        &::after {
+          filter: invert(0);
         }
       }
     }
