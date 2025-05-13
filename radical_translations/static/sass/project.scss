@@ -830,6 +830,10 @@ figure {
       &::before {
         content: url("/static/fontawesome/svgs/solid/key-skeleton.svg");
         padding-right: 6px;
+
+        &:hover {
+          filter: invert(0);
+        }
       }
     }
 
