@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:18-slim as client-builder
+FROM --platform=linux/amd64 node:18-slim AS client-builder
 
 RUN apt-get update \
   # dependencies for building Python packages
@@ -17,7 +17,7 @@ COPY . /app
 RUN npm run build
 
 # Python build stage
-FROM python:3.7-slim-buster
+FROM python:3.7-slim
 
 ENV PYTHONUNBUFFERED 1
 
@@ -30,6 +30,8 @@ RUN apt-get update \
   && apt-get install -y gettext \
   # LDAP dependencies
   && apt-get install -y libldap2-dev libsasl2-dev ldap-utils \
+  # cron for periodic reindexing
+  && apt-get install -y cron \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
@@ -53,8 +55,14 @@ RUN chmod +x /start
 RUN chown django /start
 COPY --from=client-builder --chown=django:django /app /app
 
+# Cron-based periodic reindexing
+COPY ./compose/production/django/reindex.sh /app/compose/production/django/reindex.sh
+RUN chmod +x /app/compose/production/django/reindex.sh
 
-USER django
+COPY ./compose/production/django/reindex-cron /etc/cron.d/reindex-cron
+RUN chmod 0644 /etc/cron.d/reindex-cron
+RUN crontab /etc/cron.d/reindex-cron
+RUN touch /var/log/reindex.log
 
 WORKDIR /app
 

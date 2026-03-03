@@ -1,0 +1,1 @@
+0 */8 * * * /app/compose/production/django/reindex.sh >> /var/log/reindex.log 2>&1

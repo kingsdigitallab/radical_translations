@@ -10,4 +10,8 @@ python /app/manage.py collectstatic --noinput
 python /app/manage.py vocab init
 python /app/manage.py search_index --rebuild -f &
 python /app/manage.py zotero_import --delete &
-/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:5000 --chdir=/app --timeout 180 --forwarded-allow-ips="*"
+
+# Start cron for periodic reindexing
+cron
+
+/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:5000 --chdir=/app --timeout 180 --forwarded-allow-ips="*" --user django --group django
