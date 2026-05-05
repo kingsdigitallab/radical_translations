@@ -61,8 +61,18 @@ RUN chmod +x /app/compose/production/django/reindex.sh
 
 COPY ./compose/production/django/reindex-cron /etc/cron.d/reindex-cron
 RUN chmod 0644 /etc/cron.d/reindex-cron
-RUN crontab /etc/cron.d/reindex-cron
 RUN touch /var/log/reindex.log
+
+# Cron-based periodic data export
+COPY ./compose/production/django/export.sh /app/compose/production/django/export.sh
+RUN chmod +x /app/compose/production/django/export.sh
+
+COPY ./compose/production/django/export-cron /etc/cron.d/export-cron
+RUN chmod 0644 /etc/cron.d/export-cron
+RUN touch /var/log/export.log
+
+# Load all crontabs
+RUN cat /etc/cron.d/reindex-cron /etc/cron.d/export-cron | crontab -
 
 WORKDIR /app
 

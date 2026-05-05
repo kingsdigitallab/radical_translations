@@ -1,0 +1,1 @@
+0 2 * * * /app/compose/production/django/export.sh >> /var/log/export.log 2>&1
